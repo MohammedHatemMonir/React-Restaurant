@@ -1,4 +1,14 @@
-.feedback {
+
+
+.emotions {
+  // Center & dribbble
+  min-height: 100vh;
+  display: flex;
+  font-family: "Inter", Arial;
+  justify-content: center;
+  align-items: center;
+  //   background: #181820;
+  .feedback {
     --normal: #414052;
     --normal-shadow: #313140;
     --normal-shadow-top: #4c4b60;
@@ -324,7 +334,7 @@
       }
     }
   }
-  
+
   @keyframes shake {
     30% {
       transform: perspective(240px) rotateX(var(--step-1-rx, 0deg))
@@ -340,7 +350,7 @@
       transform: perspective(240px) translateZ(4px);
     }
   }
-  
+
   @keyframes tear {
     0% {
       opacity: 0;
@@ -355,11 +365,11 @@
     }
     100% {
       opacity: 0;
-      transform: translateY(24px) translateX(4px) rotateZ(-30deg) scale(0.7, 1.1)
-        translateZ(0);
+      transform: translateY(24px) translateX(4px) rotateZ(-30deg)
+        scale(0.7, 1.1) translateZ(0);
     }
   }
-  
+
   @keyframes toggle {
     50% {
       transform: translateY(var(--middle-y, 0))
@@ -370,7 +380,7 @@
         rotate(var(--middle-r, 0deg));
     }
   }
-  
+
   @keyframes angry {
     40% {
       background: var(--active);
@@ -380,12 +390,12 @@
         inset 0 8px 10px var(--active-shadow-angry);
     }
   }
-  
+
   html {
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
   }
-  
+
   * {
     box-sizing: inherit;
     &:before,
@@ -393,26 +403,4 @@
       box-sizing: inherit;
     }
   }
-  
-  // Center & dribbble
-  
-    .emotions {
-      min-height: 100vh;
-      display: flex;
-      font-family: "Inter", Arial;
-      justify-content: center;
-      align-items: center;
-    //   background: #181820;
-      .twitter {
-        position: fixed;
-        display: block;
-        right: 12px;
-        bottom: 12px;
-        svg {
-          width: 32px;
-          height: 32px;
-          fill: #1da1f2;
-        }
-      }
-    }
-  
+}
