@@ -10,6 +10,8 @@ import Contact from "./pages/Contact";
 import Footer from "./pages/Footer";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import Test from './components/Test';
+import Emotions from "./components/Emotions";
 function App() {
   const currentYear = new Date().getFullYear();
   return (
@@ -45,8 +47,11 @@ function App() {
         <Route path="/menu" element={<Menu />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/test" element={<Test />} />
+        <Route path="/emotions" element={<Emotions />} />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
+
       {/* <footer className="bg-body-tertiary">
         <p className="p-3 m-0 text-center">Copyright &copy; {currentYear}</p>
       </footer> */}
