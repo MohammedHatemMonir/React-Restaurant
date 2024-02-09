@@ -13,6 +13,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import Test from './components/Test';
 import Emotions from "./components/Emotions";
 import Stars from './components/Stars';
+import Card from "./components/Card";
 function App() {
   const currentYear = new Date().getFullYear();
   return (
@@ -51,12 +52,13 @@ function App() {
         <Route path="/test" element={<Test />} />
         <Route path="/emotions" element={<Emotions />} />
         <Route path="/stars" element={<Stars />} />
+        <Route path="/card" element={<Card />} />
       </Routes>
       {/* <Footer /> */}
 
-      <footer className="bg-body-tertiary">
+      {/* <footer className="bg-body-tertiary">
         <p className="p-3 m-0 text-center">Copyright &copy; {currentYear}</p>
-      </footer>
+      </footer> */}
     </div>
   );
 }

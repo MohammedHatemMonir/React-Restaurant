@@ -11,6 +11,7 @@ import Person1 from "../utils/img/person1.jpg";
 import Person2 from "../utils/img/person2.jpg";
 import Person3 from "../utils/img/person3.jpg";
 import Person4 from "../utils/img/person4.jpg";
+import Emotions from "./Emotions";
 
 export function Reviews() {
   return (
