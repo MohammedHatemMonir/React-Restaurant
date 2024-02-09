@@ -4,7 +4,7 @@ import "./Stars.scss";
 const Stars = () => {
   return (
     <div className="starsRating">
-        {/* The defaultChecked in radio buttons is reversed */}
+      {/* The defaultChecked in radio buttons is reversed */}
       <div className="rating">
         <input type="radio" name="rating" id="r1" />
         <label htmlFor="r1" />

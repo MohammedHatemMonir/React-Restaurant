@@ -2,8 +2,9 @@
   @mixin star-rating(
     $filled-color: #f9bf3b,
     $empty-color: #444,
-    $size: 80px,
-    $width: 400px
+    $size: 40px,
+    // Decreased size of stars
+    $width: 200px // Adjusted width accordingly
   ) {
     $star--filled: ★;
     $star--empty: ☆;
@@ -22,7 +23,7 @@
     }
 
     label {
-      height: 40px;
+      height: 30px; // Adjusted height accordingly
       width: 20%;
       display: block;
       position: relative;
@@ -66,7 +67,7 @@
   }
 
   .rating {
-    margin: 50px auto;
+    margin: 100px auto; 
     @include star-rating();
   }
 

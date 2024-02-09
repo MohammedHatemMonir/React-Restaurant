@@ -3,21 +3,11 @@ import "./Card.scss";
 import Stars from "./Stars";
 const Card = () => {
   return (
-    <>
-      <meta charSet="UTF-8" />
-      <title>Food Order Card UI Design</title>
-      <meta
-        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
-        name="viewport"
-      />
+    <div>
       <link
         rel="stylesheet"
         type="text/css"
         href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      />
-      <link
-        rel="stylesheet"
-        href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
       />
       <style
         media="screen"
@@ -28,11 +18,8 @@ const Card = () => {
       />
       <section className="main-content">
         <div className="container">
-          <h1 className="text-center text-uppercase">Food Order Card</h1>
-          <br />
-          <br />
           <div className="row">
-            <div className="col-sm-6 col-md-6 col-lg-4">
+            <div className="col-lg-4">
               <div className="food-card bg-white rounded-lg overflow-hidden mb-4 shadow">
                 <div className="food-card_img position-relative">
                   <img
@@ -50,210 +37,11 @@ const Card = () => {
                         Double Cheese Potato Burger
                       </a>
                     </h4>
-                    <div className="d-flex justify-content-between">
-                      <a href="#!" className="food-card_author">
-                        Burger
-                      </a>
-                      <div className="rating-box">
-                        <div className="rating-stars d-inline-block position-relative mr-2">
-                          <img
-                            src="https://1.bp.blogspot.com/-6VpHaVlQ1wE/YTK-0mDjdEI/AAAAAAAACdE/AyLHXTaCyGEI4XX1ena2Axo4VSLPdzwoACNcBGAsYHQ/s0/grey-star.png"
-                            alt=""
-                          />
-                          <div
-                            className="filled-star"
-                            style={{ width: "86%" }}
-                          />
-                        </div>
-                        <a href="#!" className="text-muted">
-                          <small>2,144 Reviews</small>
-                        </a>
-                      </div>
-                    </div>
                   </div>
                   <div className="food-card_bottom-section">
                     <div className="d-flex justify-content-between">
-                      <div>
-                        <span className="fa fa-fire" /> 220 - 280 Kcal
-                      </div>
-                      <div>
-                        <span className="badge badge-success">Veg</span>
-                      </div>
-                    </div>
-                    <hr />
-                    <div className="d-flex justify-content-between">
-                      <div className="food-card_price">
-                        <span>5.99$</span>
-                      </div>
-                      <div className="food-card_order-count">
-                        <div className="input-group mb-3">
-                          <div className="input-group-prepend">
-                            <button
-                              className="btn btn-outline-secondary minus-btn"
-                              type="button"
-                              id="button-addon1"
-                            >
-                              <i className="fa fa-minus" />
-                            </button>
-                          </div>
-                          <input
-                            type="text"
-                            className="form-control input-manulator"
-                            placeholder=""
-                            aria-label="Example text with button addon"
-                            aria-describedby="button-addon1"
-                            defaultValue={0}
-                          />
-                          <div className="input-group-append">
-                            <button
-                              className="btn btn-outline-secondary add-btn"
-                              type="button"
-                              id="button-addon1"
-                            >
-                              <i className="fa fa-plus" />
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-sm-6 col-md-6 col-lg-4">
-              <div className="food-card bg-white rounded-lg overflow-hidden mb-4 shadow">
-                <div className="food-card_img position-relative">
-                  <img
-                    src="https://1.bp.blogspot.com/-uPXiep-2dHo/YTK_2JjLWjI/AAAAAAAACdM/H75eZMP9rxcZFgkJ4WsJxkz3veBeje9HACNcBGAsYHQ/s16000/food3.jpg"
-                    alt=""
-                  />
-                  <a href="#!">
-                    <i className="far fa-heart" />
-                  </a>
-                </div>
-                <div className="food-card_content">
-                  <div className="food-card_title-section overflow-hidden">
-                    <h4 className="food-card_title">
-                      <a href="#!" className="text-dark">
-                        Double Cheese Potato Burger
-                      </a>
-                    </h4>
-                    <div className="d-flex justify-content-between">
-                      <a href="#!" className="food-card_author">
-                        Burger
-                      </a>
-                      <div className="rating-box">
-                        <div className="rating-stars d-inline-block position-relative mr-2">
-                          <img
-                            src="https://1.bp.blogspot.com/-6VpHaVlQ1wE/YTK-0mDjdEI/AAAAAAAACdE/AyLHXTaCyGEI4XX1ena2Axo4VSLPdzwoACNcBGAsYHQ/s0/grey-star.png"
-                            alt=""
-                          />
-                          <div
-                            className="filled-star"
-                            style={{ width: "86%" }}
-                          />
-                        </div>
-                        <a href="#!" className="text-muted">
-                          <small>2,144 Reviews</small>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="food-card_bottom-section">
-                    <div className="d-flex justify-content-between">
-                      <div>
-                        <span className="fa fa-fire" /> 220 - 280 Kcal
-                      </div>
-                      <div>
-                        <span className="badge badge-success">Veg</span>
-                      </div>
-                    </div>
-                    <hr />
-                    <div className="d-flex justify-content-between">
-                      <div className="food-card_price">
-                        <span>5.99$</span>
-                      </div>
-                      <div className="food-card_order-count">
-                        <div className="input-group mb-3">
-                          <div className="input-group-prepend">
-                            <button
-                              className="btn btn-outline-secondary minus-btn"
-                              type="button"
-                              id="button-addon1"
-                            >
-                              <i className="fa fa-minus" />
-                            </button>
-                          </div>
-                          <input
-                            type="text"
-                            className="form-control input-manulator"
-                            placeholder=""
-                            aria-label="Example text with button addon"
-                            aria-describedby="button-addon1"
-                            defaultValue={0}
-                          />
-                          <div className="input-group-append">
-                            <button
-                              className="btn btn-outline-secondary add-btn"
-                              type="button"
-                              id="button-addon1"
-                            >
-                              <i className="fa fa-plus" />
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-sm-6 col-md-6 col-lg-4">
-              <div className="food-card bg-white rounded-lg overflow-hidden mb-4 shadow">
-                <div className="food-card_img position-relative">
-                  <img
-                    src="https://1.bp.blogspot.com/-wT1Lh2H0qRk/YTK96tlUveI/AAAAAAAACc8/FvX16uByWqg0l-6JhsvXvzk41ogXBarEgCNcBGAsYHQ/s0/food2.jpg.jpg"
-                    alt=""
-                  />
-                  <a href="#!">
-                    <i className="far fa-heart" />
-                  </a>
-                </div>
-                <div className="food-card_content">
-                  <div className="food-card_title-section overflow-hidden">
-                    <h4 className="food-card_title">
-                      <a href="#!" className="text-dark">
-                        Double Cheese Potato Burger
-                      </a>
-                    </h4>
-                    <div className="d-flex justify-content-between">
-                      <a href="#!" className="food-card_author">
-                        Burger
-                      </a>
-                      <div className="rating-box">
-                        <div className="rating-stars d-inline-block position-relative mr-2">
-                          <img
-                            src="https://1.bp.blogspot.com/-6VpHaVlQ1wE/YTK-0mDjdEI/AAAAAAAACdE/AyLHXTaCyGEI4XX1ena2Axo4VSLPdzwoACNcBGAsYHQ/s0/grey-star.png"
-                            alt=""
-                          />
-                          <div
-                            className="filled-star"
-                            style={{ width: "86%" }}
-                          />
-                        </div>
-                        <a href="#!" className="text-muted">
-                          <small>2,144 Reviews</small>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="food-card_bottom-section">
-                    <div className="d-flex justify-content-between">
-                      <div>
-                        <span className="fa fa-fire" /> 220 - 280 Kcal
-                      </div>
-                      <div>
-                        <span className="badge badge-success">Veg</span>
+                      <div className="myZoom">
+                        <Stars />
                       </div>
                     </div>
                     <hr />
@@ -299,7 +87,7 @@ const Card = () => {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 };
 
