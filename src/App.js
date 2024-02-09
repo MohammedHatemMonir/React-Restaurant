@@ -22,23 +22,22 @@ function App() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto justify-content-end w-100">
-              <Nav.Link href="/" className="active text-uppercase">
+              <Link to="/" className="nav-link active">
                 Home
-              </Nav.Link>
-              <Nav.Link href="/menu" className="text-uppercase">
+              </Link>
+              <Link to="/menu" className="nav-link">
                 Menu
-              </Nav.Link>
-              <Nav.Link href="/about" className="text-uppercase">
+              </Link>
+              <Link to="/about" className="nav-link">
                 About
-              </Nav.Link>
-              <Nav.Link href="/contact" className="text-uppercase">
+              </Link>
+              <Link to="/contact" className="nav-link">
                 Contact
-              </Nav.Link>
+              </Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
-
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/menu" element={<Menu />} />
