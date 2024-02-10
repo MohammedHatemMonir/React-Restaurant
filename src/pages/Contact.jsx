@@ -4,6 +4,7 @@ import { ContactInfo } from "../components/ContactInfo";
 import { Form } from "react-bootstrap";
 import { Reviews } from "../components/Reviews";
 
+
 function Contact() {
   return (
     <div className="contact-page">
