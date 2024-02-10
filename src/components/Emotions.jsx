@@ -1,23 +1,17 @@
 import "./Emotions.scss";
 import { v4 as uuidv4 } from "uuid";
 
-function Emotions({ id }) {
-  // Generate a random ID
+function Emotions({ id1, id2, id3, id4, id5 }) {
   const randomId1 = uuidv4();
   const randomId2 = uuidv4();
   const randomId3 = uuidv4();
   const randomId4 = uuidv4();
   const randomId5 = uuidv4();
-  console.log(randomId1);
-  console.log(randomId2);
-  console.log(randomId3);
-  console.log(randomId4);
-  console.log(randomId5);
-  const angryId = `${randomId1}`;
-  const sadId = `${randomId2}`;
-  const okId = `${randomId3}`;
-  const goodId = `${randomId4}`;
-  const happyId = `${randomId5}`;
+  const angryId = `${randomId1} +${id1}`;
+  const sadId = `${randomId2} +${id2}`;
+  const okId = `${randomId3} +${id3}`;
+  const goodId = `${randomId4} +${id4}`;
+  const happyId = `${randomId5} +${id5}`;
 
   return (
     <div className="emotions">

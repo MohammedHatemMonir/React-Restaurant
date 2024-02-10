@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Card,
   CardBody,
@@ -7,115 +7,59 @@ import {
   CardTitle,
 } from "react-bootstrap";
 import "./Reviews.scss";
-import Person1 from "../utils/img/person1.jpg";
-import Person2 from "../utils/img/person2.jpg";
-import Person3 from "../utils/img/person3.jpg";
-import Person4 from "../utils/img/person4.jpg";
 import Emotions from "./Emotions";
+import reviewsData from "../Reviews";
+import { v4 as uuidv4 } from "uuid";
+console.log(reviewsData);
 
 export function Reviews() {
+  const [reviews, setReviews] = useState([]);
 
+  useEffect(() => {
+    // Set the reviews state with the imported data
+    setReviews(reviewsData);
+  }, []);
+  // To Generate a random ID
+  const randomId1 = uuidv4();
+  const randomId2 = uuidv4();
+  const randomId3 = uuidv4();
+  const randomId4 = uuidv4();
+  const randomId5 = uuidv4();
   return (
     <div className="reviews-section container">
       <h2 className="text-center mb-5 text-uppercase fw-bold fs-1">Reviews</h2>
       <div className="row g-4">
-        <div className="col-lg-6">
-          <Card className="h-100 shadow">
-            <CardBody>
-              <div className="p-4">
-                <CardText>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Excepturi iste culpa perspiciatis. Magnam, explicabo cumque.
-                </CardText>
-              </div>
-            </CardBody>
-            <CardFooter className="d-flex align-items-center">
-              <img
-                src={Person1}
-                className="img-fluid rounded-circle mx-3 shadow"
-                alt=""
-              />
-              <CardTitle className="text-success">John Mike</CardTitle>
-              <div className="mx-auto ">
-                <Emotions/>
-              </div>
-            </CardFooter>
-          </Card>
-        </div>
-        <div className="col-lg-6">
-          {/*   <Card className="h-100 shadow">
-            <CardBody>
-              <div className="p-4">
-                <CardText>
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Dolores, mollitia?
-                </CardText>
-              </div>
-            </CardBody>
-            <CardFooter className="d-flex align-items-center">
-              <img
-                src={Person2}
-                className="img-fluid rounded-circle mx-3 shadow"
-                alt=""
-              />
-              <CardTitle className="text-success">Maria Cruz</CardTitle>
-              <div className="mx-auto ">
-                <Emotions />
-              </div>
-            </CardFooter>
-          </Card> 
-       </div>
-        <div className="col-lg-6">
-          <Card className="h-100 shadow">
-            <CardBody>
-              <div className="p-4">
-                <CardText>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam
-                  dolor itaque reprehenderit minus tempore. Iste quibusdam
-                  facilis excepturi nihil maiores!
-                </CardText>
-              </div>
-            </CardBody>
-
-            <CardFooter className="d-flex align-items-center">
-              <img
-                src={Person3}
-                className="img-fluid rounded-circle mx-3 shadow"
-                alt=""
-              />
-              <CardTitle className="text-success">Anna Gold</CardTitle>
-              <div className="mx-auto ">
-                <Emotions />
-              </div>
-            </CardFooter>
-          </Card>
-        </div>
-        <div className="col-lg-6">
-          <Card className="h-100 shadow">
-            <CardBody>
-              <div className="p-4">
-                <CardText>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Rerum et voluptate minus error suscipit officiis placeat
-                  repudiandae quibusdam officia tempora, reprehenderit, enim,
-                  quidem exercitationem laborum!
-                </CardText>
-              </div>
-            </CardBody>
-            <CardFooter className="d-flex align-items-center">
-              <img
-                src={Person4}
-                className="img-fluid rounded-circle mx-3 shadow"
-                alt=""
-              />
-              <CardTitle className="text-success">Nick Burn</CardTitle>
-              <div className="mx-auto ">
-                <Emotions />
-              </div>
-            </CardFooter>
-          </Card>*/}
-        </div>
+        {reviews.map((review) => (
+          <div key={review.id} className="col-lg-6">
+            <Card className="h-100 shadow">
+              <CardBody>
+                <div className="p-4">
+                  <CardText>{review.comment}</CardText>
+                </div>
+              </CardBody>
+              <CardFooter className="d-flex align-items-center">
+                <img
+                  src={review.img}
+                  className="img-fluid rounded-circle mx-3 shadow"
+                  alt=""
+                />
+                <CardTitle className="text-success">{review.name}</CardTitle>
+                <div className="mx-auto">
+                  <Emotions
+                    id1={randomId1}
+                    id2={randomId2}
+                    id3={randomId3}
+                    id4={randomId4}
+                    id5={randomId5}
+                  />
+                </div>
+              </CardFooter>
+            </Card>
+          </div>
+        ))}
       </div>
     </div>
   );
 }
+
+export default Reviews;
