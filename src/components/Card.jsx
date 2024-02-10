@@ -2,7 +2,7 @@ import { useSignal } from "@preact/signals-react";
 import "./Card.scss";
 import Stars from "./Stars";
 const Card = () => {
-  const count = useSignal(0);
+  const count = useSignal(1);
   return (
     <div className="my-card-styels">
       <section className="main-content">
@@ -45,8 +45,10 @@ const Card = () => {
                               className="btn btn-outline-secondary minus-btn"
                               type="button"
                               id="button-addon1"
-                              onClick={() => {
-                                count.value--;
+                              onClick={(e) => {
+                                if (count.value > 1) {
+                                  count.value--;
+                                }
                               }}
                             >
                               <i className="fa fa-minus" />
