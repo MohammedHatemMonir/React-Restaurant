@@ -1,4 +1,5 @@
 .starsRating {
+  // background-color: blue;
   @mixin star-rating(
     $filled-color: #f9bf3b,
     $empty-color: #444,
@@ -67,7 +68,7 @@
   }
 
   .rating {
-    margin: 100px auto;
+
     @include star-rating();
   }
 

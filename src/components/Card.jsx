@@ -4,16 +4,16 @@ import Stars from "./Stars";
 const Card = () => {
   return (
     <div className="my-card-styels">
-      <link
+      {/* <link
         rel="stylesheet"
         type="text/css"
         href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
       />
-   
+    */}
       <section className="main-content">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-4">
+        <div className="container  edit-container ">
+          <div className="row ">
+            <div className="col">
               <div className="food-card bg-white rounded-lg overflow-hidden mb-4 shadow">
                 <div className="food-card_img position-relative">
                   <img
@@ -27,9 +27,9 @@ const Card = () => {
                 <div className="food-card_content">
                   <div className="food-card_title-section overflow-hidden">
                     <h4 className="food-card_title">
-                      <a href="#!" className="text-dark myFont">
+                      <p className="text-dark myFont">
                         Double Cheese Potato Burger
-                      </a>
+                      </p>
                     </h4>
                   </div>
                   <div className="food-card_bottom-section">
