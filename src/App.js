@@ -8,11 +8,11 @@ import Menu from "./pages/Menu";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Footer from "./pages/Footer";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import Test from './components/Test';
+import Test from "./components/Test";
 import Emotions from "./components/Emotions";
-import Stars from './components/Stars';
+import Stars from "./components/Stars";
 import Card from "./components/Card";
 function App() {
   const currentYear = new Date().getFullYear();

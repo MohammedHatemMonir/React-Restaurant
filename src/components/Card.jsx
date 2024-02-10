@@ -1,15 +1,10 @@
-import React from "react";
+import { useSignal } from "@preact/signals-react";
 import "./Card.scss";
 import Stars from "./Stars";
 const Card = () => {
+  const count = useSignal(0);
   return (
     <div className="my-card-styels">
-      {/* <link
-        rel="stylesheet"
-        type="text/css"
-        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      />
-    */}
       <section className="main-content">
         <div className="container  edit-container ">
           <div className="row ">
@@ -50,6 +45,9 @@ const Card = () => {
                               className="btn btn-outline-secondary minus-btn"
                               type="button"
                               id="button-addon1"
+                              onClick={() => {
+                                count.value--;
+                              }}
                             >
                               <i className="fa fa-minus" />
                             </button>
@@ -60,13 +58,16 @@ const Card = () => {
                             placeholder=""
                             aria-label="Example text with button addon"
                             aria-describedby="button-addon1"
-                            defaultValue={0}
+                            value={count.value}
                           />
                           <div className="input-group-append">
                             <button
                               className="btn btn-outline-secondary add-btn"
                               type="button"
                               id="button-addon1"
+                              onClick={() => {
+                                count.value++;
+                              }}
                             >
                               <i className="fa fa-plus" />
                             </button>
