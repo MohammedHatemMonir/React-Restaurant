@@ -14,6 +14,9 @@ import Test from "./components/Test";
 import Emotions from "./components/Emotions";
 import Stars from "./components/Stars";
 import Card from "./components/Card";
+import SignUp from "./components/SignUp";
+import Login from "./components/Login";
+import ForgotPass from "./components/ForgotPass";
 function App() {
   const currentYear = new Date().getFullYear();
   return (
@@ -40,6 +43,12 @@ function App() {
               <Link to="/contact" className="nav-link">
                 Contact
               </Link>
+              <Link to="/Signup" className="nav-link">
+                Sign up
+              </Link>
+              <Link to="/Login" className="nav-link">
+                Login
+              </Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
@@ -51,11 +60,14 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/test" element={<Test />} />
         <Route path="/emotions" element={<Emotions />} />
-        <Route path="/stars" element={<Stars />} />
-        <Route path="/card" element={<Card />} />
+        <Route path="/LogIn" element={<Login />} />
+        <Route path="/ForgotPass" element={<ForgotPass />} />
+        <Route path="/SignUp" element={<SignUp />} />
+
+        {/* <Route path="/stars" element={<Stars />} />
+        <Route path="/card" element={<Card />} /> */}
       </Routes>
       {/* <Footer /> */}
-
       <footer className="bg-body-tertiary">
         <p className="p-3 m-0 text-center">Copyright &copy; {currentYear}</p>
       </footer>
