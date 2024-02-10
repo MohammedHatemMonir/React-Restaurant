@@ -10,7 +10,7 @@ import "./Reviews.scss";
 import Emotions from "./Emotions";
 import reviewsData from "../Reviews";
 import { v4 as uuidv4 } from "uuid";
-console.log(reviewsData);
+// console.log(reviewsData);
 
 export function Reviews() {
   const [reviews, setReviews] = useState([]);
