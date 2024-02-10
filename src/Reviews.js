@@ -1,7 +1,7 @@
 import person1 from "./utils/img/person1.jpg";
-import person2 from "./utils/img/person4.jpg";
-import person3 from "./utils/img/person4.jpg";
-import person4 from "./utils/img/person1.jpg";
+import person2 from "./utils/img/person2.jpg";
+import person3 from "./utils/img/person3.jpg";
+import person4 from "./utils/img/person4.jpg";
 
 const reviewsData = [
   {
@@ -14,7 +14,7 @@ const reviewsData = [
   },
   {
     id: 2,
-    name: "Maria Cruz",
+    name: "Michael Evans",
     img: person2,
     comment:
       "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, mollitia?",
@@ -22,7 +22,7 @@ const reviewsData = [
   },
   {
     id: 3,
-    name: "Anna Gold",
+    name: "Robert Johnson",
     img: person3,
     comment:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam dolor itaque reprehenderit minus tempore. Iste quibusdam facilis excepturi nihil maiores!",
