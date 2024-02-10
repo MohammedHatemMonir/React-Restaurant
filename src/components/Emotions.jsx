@@ -1,11 +1,29 @@
 import "./Emotions.scss";
+import { v4 as uuidv4 } from "uuid";
 
-function Emotions() {
+function Emotions({ id }) {
+  // Generate a random ID
+  const randomId1 = uuidv4();
+  const randomId2 = uuidv4();
+  const randomId3 = uuidv4();
+  const randomId4 = uuidv4();
+  const randomId5 = uuidv4();
+  console.log(randomId1);
+  console.log(randomId2);
+  console.log(randomId3);
+  console.log(randomId4);
+  console.log(randomId5);
+  const angryId = `${randomId1}`;
+  const sadId = `${randomId2}`;
+  const okId = `${randomId3}`;
+  const goodId = `${randomId4}`;
+  const happyId = `${randomId5}`;
+
   return (
     <div className="emotions">
       <div className="feedback">
-        <label className="angry">
-          <input type="radio" defaultValue={1} name="feedback" />
+        <label className="angry" htmlFor={angryId}>
+          <input type="radio" defaultValue={1} id={angryId} name="feedback" />
           <div>
             <svg className="eye left">
               <use xlinkHref="#eye"></use>
@@ -18,8 +36,8 @@ function Emotions() {
             </svg>
           </div>
         </label>
-        <label className="sad">
-          <input type="radio" defaultValue={2} name="feedback" />
+        <label className="sad" htmlFor={sadId}>
+          <input type="radio" defaultValue={2} id={sadId} name="feedback" />
           <div>
             <svg className="eye left">
               <use xlinkHref="#eye"></use>
@@ -32,16 +50,17 @@ function Emotions() {
             </svg>
           </div>
         </label>
-        <label className="ok">
-          <input type="radio" defaultValue={3} name="feedback" />
+        <label className="ok" htmlFor={okId}>
+          <input type="radio" defaultValue={3} id={okId} name="feedback" />
           <div />
         </label>
-        <label className="good">
+        <label className="good" htmlFor={goodId}>
           <input
             type="radio"
             defaultValue={4}
+            id={goodId}
             name="feedback"
-            defaultChecked="true"
+            defaultChecked
           />
           <div>
             <svg className="eye left">
@@ -55,8 +74,8 @@ function Emotions() {
             </svg>
           </div>
         </label>
-        <label className="happy">
-          <input type="radio" defaultValue={5} name="feedback" />
+        <label className="happy" htmlFor={happyId}>
+          <input type="radio" defaultValue={5} id={happyId} name="feedback" />
           <div>
             <svg className="eye left">
               <use xlinkHref="#eye"></use>

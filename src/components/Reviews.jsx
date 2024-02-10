@@ -14,6 +14,7 @@ import Person4 from "../utils/img/person4.jpg";
 import Emotions from "./Emotions";
 
 export function Reviews() {
+
   return (
     <div className="reviews-section container">
       <h2 className="text-center mb-5 text-uppercase fw-bold fs-1">Reviews</h2>
@@ -35,11 +36,14 @@ export function Reviews() {
                 alt=""
               />
               <CardTitle className="text-success">John Mike</CardTitle>
+              <div className="mx-auto ">
+                <Emotions/>
+              </div>
             </CardFooter>
           </Card>
         </div>
         <div className="col-lg-6">
-          <Card className="h-100 shadow">
+          {/*   <Card className="h-100 shadow">
             <CardBody>
               <div className="p-4">
                 <CardText>
@@ -55,9 +59,12 @@ export function Reviews() {
                 alt=""
               />
               <CardTitle className="text-success">Maria Cruz</CardTitle>
+              <div className="mx-auto ">
+                <Emotions />
+              </div>
             </CardFooter>
-          </Card>
-        </div>
+          </Card> 
+       </div>
         <div className="col-lg-6">
           <Card className="h-100 shadow">
             <CardBody>
@@ -69,6 +76,7 @@ export function Reviews() {
                 </CardText>
               </div>
             </CardBody>
+
             <CardFooter className="d-flex align-items-center">
               <img
                 src={Person3}
@@ -76,6 +84,9 @@ export function Reviews() {
                 alt=""
               />
               <CardTitle className="text-success">Anna Gold</CardTitle>
+              <div className="mx-auto ">
+                <Emotions />
+              </div>
             </CardFooter>
           </Card>
         </div>
@@ -98,8 +109,11 @@ export function Reviews() {
                 alt=""
               />
               <CardTitle className="text-success">Nick Burn</CardTitle>
+              <div className="mx-auto ">
+                <Emotions />
+              </div>
             </CardFooter>
-          </Card>
+          </Card>*/}
         </div>
       </div>
     </div>
