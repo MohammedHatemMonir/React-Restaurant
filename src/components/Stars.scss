@@ -67,7 +67,7 @@
   }
 
   .rating {
-    margin: 100px auto; 
+    margin: 100px auto;
     @include star-rating();
   }
 

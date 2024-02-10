@@ -1,3 +1,7 @@
+* {
+  font-family: "roboto", sans-serif;
+}
+
 .App {
   text-align: center;
   &-logo {
@@ -31,3 +35,4 @@
     transform: rotate(360deg);
   }
 }
+
