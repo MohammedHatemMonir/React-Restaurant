@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Menu.scss";
-import menuData from "../Menu";
-import Card from "./../components/Card";
+import menuData from "../../Menu";
+import Card from "../../components/Card/Card";
 
 function Menu() {
   const [inputValue, setInputValue] = useState("");

@@ -1,9 +1,9 @@
 import React from "react";
 import "./About.scss";
-import AboutChef1 from "../utils/img/about-chef1.jpg";
-import AboutChef2 from "../utils/img/about-chef2.jpg";
-import { ImageGallery } from "../components/ImageGallery";
-import { Reviews } from "../components/Reviews";
+import AboutChef1 from "../../utils/img/about-chef1.jpg";
+import AboutChef2 from "../../utils/img/about-chef2.jpg";
+import { ImageGallery } from "../../components/ImageGallery/ImageGallery";
+import Reviews from "../../components/Reviews/Reviews";
 
 function About() {
   return (

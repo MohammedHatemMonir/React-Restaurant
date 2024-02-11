@@ -1,7 +1,7 @@
 import { useSignal } from "@preact/signals-react";
 import { v4 as uuidv4 } from "uuid";
 import "./Card.scss";
-import Stars from "./Stars";
+import Stars from "../Stars/Stars";
 const Card = ({ title, img, price }) => {
   // To Generate Random ID
   const randomId = uuidv4();

@@ -1,17 +1,26 @@
 import "./Emotions.scss";
 import { v4 as uuidv4 } from "uuid";
 
-function Emotions({ id1, id2, id3, id4, id5 }) {
-  const randomId1 = uuidv4();
-  const randomId2 = uuidv4();
-  const randomId3 = uuidv4();
-  const randomId4 = uuidv4();
-  const randomId5 = uuidv4();
-  const angryId = `${randomId1 + id1}`;
-  const sadId = `${randomId2 + id2}`;
-  const okId = `${randomId3 + id3}`;
-  const goodId = `${randomId4 + id4}`;
-  const happyId = `${randomId5 + id5}`;
+// function Emotions({ id1, id2, id3, id4, id5 }) {
+function Emotions({ emotionID }) {
+  const angryId = emotionID;
+  const sadId = emotionID;
+  const okId = emotionID;
+  const goodId = emotionID;
+  const happyId = emotionID;
+
+  // const randomId1 = uuidv4();
+  // const randomId2 = uuidv4();
+  // const randomId3 = uuidv4();
+  // const randomId4 = uuidv4();
+  // const randomId5 = uuidv4();
+
+  // const angryId = `${randomId1 + id1}`;
+  // const sadId = `${randomId2 + id2}`;
+  // const okId = `${randomId3 + id3}`;
+  // const goodId = `${randomId4 + id4}`;
+  // const happyId = `${randomId5 + id5}`;
+
   // console.log(happyId);
   // console.log(angryId);
   // console.log(sadId);

@@ -1,11 +1,11 @@
 import React from "react";
-import { MenuBtn } from "../components/MenuBtn";
+import { MenuBtn } from "../../components/MenuBtn/MenuBtn";
 import "./Home.scss";
-import AboutImg from "../utils/img/about-img.jpg";
+import AboutImg from "../../utils/img/about-img.jpg";
 import { Link } from "react-router-dom";
-import { ImageGallery } from "../components/ImageGallery";
-import { ContactInfo } from "../components/ContactInfo";
-import ContactImage from "../utils/img/contact-img.jpg";
+import { ImageGallery } from "../../components/ImageGallery/ImageGallery";
+import { ContactInfo } from "../../components/ContactInfo/ContactInfo";
+import ContactImage from "../../utils/img/contact-img.jpg";
 
 function Home() {
   return (

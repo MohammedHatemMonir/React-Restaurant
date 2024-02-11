@@ -1,8 +1,8 @@
 import React from "react";
 import "./Contact.scss";
-import { ContactInfo } from "../components/ContactInfo";
+import { ContactInfo } from "../../components/ContactInfo/ContactInfo";
 import { Form } from "react-bootstrap";
-import { Reviews } from "../components/Reviews";
+import  Reviews  from "../../components/Reviews/Reviews";
 
 
 function Contact() {

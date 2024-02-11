@@ -1,10 +1,10 @@
 import React from "react";
-import Gallery1 from '../utils/img/gallery1.jpg';
-import Gallery2 from '../utils/img/gallery2.jpg';
-import Gallery3 from '../utils/img/gallery3.jpg';
-import Gallery4 from '../utils/img/gallery4.jpg';
-import Gallery5 from '../utils/img/gallery5.jpg';
-import Gallery6 from '../utils/img/gallery6.jpg';
+import Gallery1 from '../../utils/img/gallery1.jpg';
+import Gallery2 from '../../utils/img/gallery2.jpg';
+import Gallery3 from '../../utils/img/gallery3.jpg';
+import Gallery4 from '../../utils/img/gallery4.jpg';
+import Gallery5 from '../../utils/img/gallery5.jpg';
+import Gallery6 from '../../utils/img/gallery6.jpg';
 
 export function ImageGallery() {
     return (
