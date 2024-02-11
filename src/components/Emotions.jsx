@@ -12,11 +12,11 @@ function Emotions({ id1, id2, id3, id4, id5 }) {
   const okId = `${randomId3 + id3}`;
   const goodId = `${randomId4 + id4}`;
   const happyId = `${randomId5 + id5}`;
-  console.log(happyId);
-  console.log(angryId);
-  console.log(sadId);
-  console.log(okId);
-  console.log(goodId);
+  // console.log(happyId);
+  // console.log(angryId);
+  // console.log(sadId);
+  // console.log(okId);
+  // console.log(goodId);
   return (
     <div className="emotions">
       <div className="feedback">

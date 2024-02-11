@@ -17,6 +17,7 @@ import Card from "./components/Card";
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 import ForgotPass from "./components/ForgotPass";
+import Test2 from "./components/Test2";
 function App() {
   const currentYear = new Date().getFullYear();
   return (
@@ -63,11 +64,13 @@ function App() {
         <Route path="/LogIn" element={<Login />} />
         <Route path="/ForgotPass" element={<ForgotPass />} />
         <Route path="/SignUp" element={<SignUp />} />
-
-        {/* <Route path="/stars" element={<Stars />} />
-        <Route path="/card" element={<Card />} /> */}
+        <Route path="/test2" element={<Test2 />} />
       </Routes>
+      {/* <Route path="/stars" element={<Stars />} />
+        <Route path="/card" element={<Card />} /> */}
+
       {/* <Footer /> */}
+
       <footer className="bg-body-tertiary">
         <p className="p-3 m-0 text-center">Copyright &copy; {currentYear}</p>
       </footer>

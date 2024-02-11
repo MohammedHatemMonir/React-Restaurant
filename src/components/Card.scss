@@ -146,15 +146,16 @@
         width: 400px;
       }
     }
+    .myZoom {
+      margin-top: -50px;
+      margin-left: auto;
+      margin-right: auto;
+      zoom: 1.5;
+    }
+    .myFont {
+      font-size: 20px;
+    }
+  }
+  
   }
 
-  .myZoom {
-    margin-top: -50px;
-    margin-left: auto;
-    margin-right: auto;
-    zoom: 1.5;
-  }
-  .myFont {
-    font-size: 20px;
-  }
-}

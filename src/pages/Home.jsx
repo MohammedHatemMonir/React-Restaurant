@@ -9,7 +9,7 @@ import ContactImage from "../utils/img/contact-img.jpg";
 
 function Home() {
   return (
-    <div className="home-page">
+    <div className="my-home-page">
       <header className="h-100 min-vh-100 d-flex align-items-center text-light shadow">
         <div className="container">
           <div className="row">
@@ -89,7 +89,9 @@ function Home() {
               </ul>
             </div>
           </div>
+
           <MenuBtn />
+
         </div>
       </div>
 
@@ -99,7 +101,9 @@ function Home() {
         <div className="container">
           <div className="row">
             <div className="col-lg-6 d-flex flex-column align-items-center justify-content-center mb-5 mb-lg-0">
+            
               <ContactInfo />
+
             </div>
             <div className="col-lg-6 d-flex justify-content-center">
               <img src={ContactImage} className="img-fluid w-50" alt="" />

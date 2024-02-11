@@ -108,7 +108,7 @@ export default function SignUp() {
           <div className="position-relative mt-4">
             <hr className="bg-200" />
             <div className="divider-content-center  text-center">
-              OR Use Email
+              OR 
             </div>
           </div>
 
