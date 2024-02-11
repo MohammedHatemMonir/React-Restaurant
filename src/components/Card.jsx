@@ -5,7 +5,7 @@ import Stars from "./Stars";
 const Card = ({ title, img, price }) => {
   // To Generate Random ID
   const randomId = uuidv4();
-  //
+
   const count = useSignal(1);
   return (
     <div className="my-card-styels ">

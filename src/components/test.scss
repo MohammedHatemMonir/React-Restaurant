@@ -1,11 +1,9 @@
 .test-container {
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   height: 100vh; 
+   margin: 50px auto !important;
+   height: 100vh !important; 
+   text-align: center !important;
  }
- 
-//  .test {
-//    /* Add any additional styling for your test component if needed */
-//  }
+// .my-nav {
+//   display: none;
+// }
  

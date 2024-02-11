@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Card,
   CardBody,
@@ -10,7 +10,6 @@ import "./Reviews.scss";
 import Emotions from "./Emotions";
 import reviewsData from "../Reviews";
 import { v4 as uuidv4 } from "uuid";
-// console.log(reviewsData);
 
 export function Reviews() {
   const [reviews, setReviews] = useState([]);
@@ -18,13 +17,15 @@ export function Reviews() {
   useEffect(() => {
     // Set the reviews state with the imported data
     setReviews(reviewsData);
-  }, []);
+  }, []); // empty dependency array to ensure this effect runs only once after the initial render
+
   // To Generate a random ID
   const randomId1 = uuidv4();
   const randomId2 = uuidv4();
   const randomId3 = uuidv4();
   const randomId4 = uuidv4();
   const randomId5 = uuidv4();
+
   return (
     <div className="reviews-section container">
       <h2 className="text-center mb-5 text-uppercase fw-bold fs-1">Reviews</h2>

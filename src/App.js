@@ -1,5 +1,6 @@
 import "./App.scss";
 import { Link, Routes, Route } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -20,9 +21,22 @@ import ForgotPass from "./components/ForgotPass";
 import Test2 from "./components/Test2";
 function App() {
   const currentYear = new Date().getFullYear();
+
+  const location = useLocation();
+
+  // Check if the current location is the test component
+  const isTestComponent = location.pathname === "/test";
+
+  // If it's the test component, return null (don't render Navbar)
+  // if (isTestComponent) {
+  //   return null;
+  // }
+
+  // Otherwise, render the Navbar
+
   return (
     <div>
-      <Navbar expand="lg" className="fixed-top bg-body-tertiary shadow">
+      <Navbar expand="lg" className="fixed-top bg-body-tertiary shadow my-nav">
         <Container>
           <Navbar.Brand>
             <Link to="/" className="navbar-brand text-success fw-semibold">
@@ -31,7 +45,7 @@ function App() {
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto justify-content-end w-100">
+            <Nav className="me-auto justify-content-end w-100 ">
               <Link to="/" className="nav-link active">
                 Home
               </Link>
@@ -70,10 +84,10 @@ function App() {
         <Route path="/card" element={<Card />} /> */}
 
       {/* <Footer /> */}
-
+      {/* 
       <footer className="bg-body-tertiary">
         <p className="p-3 m-0 text-center">Copyright &copy; {currentYear}</p>
-      </footer>
+      </footer> */}
     </div>
   );
 }
