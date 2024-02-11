@@ -35,7 +35,7 @@ function App() {
   // Otherwise, render the Navbar
 
   return (
-    <div>
+    <div className="my-app">
       <Navbar expand="lg" className="fixed-top bg-body-tertiary shadow my-nav">
         <Container>
           <Navbar.Brand>
