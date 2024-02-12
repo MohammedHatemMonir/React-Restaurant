@@ -12,13 +12,6 @@ import reviewsData from "../../ReviewsData";
 import { v4 as uuidv4 } from "uuid";
 
 const Reviews = () => {
-  let emotion = 0;
-
-  let input1 = "";
-  let input2 = "";
-  let input3 = "";
-  let input4 = "";
-  let input5 = "";
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {

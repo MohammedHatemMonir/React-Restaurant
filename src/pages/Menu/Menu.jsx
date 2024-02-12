@@ -49,6 +49,7 @@ function Menu() {
                     id={cardID}
                     price={meal.price}
                     img={meal.img}
+                    stars={meal.stars}
                   />
                 </div>
               );

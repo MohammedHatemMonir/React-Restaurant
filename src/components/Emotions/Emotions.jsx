@@ -7,7 +7,7 @@ function Emotions({ emotion, emotionID }) {
   useEffect(() => {
     switch (emotion) {
       case 1:
-        inputRefs.current[1].disabled = false;
+        inputRefs.current[0].disabled = false;
         inputRefs.current[1].disabled = true;
         inputRefs.current[2].disabled = true;
         inputRefs.current[3].disabled = true;
@@ -42,7 +42,7 @@ function Emotions({ emotion, emotionID }) {
         inputRefs.current[4].disabled = false;
         break;
       default:
-        console.log("Error in Emotions Switch");
+        console.log("Error In Emotions Switch");
     }
   }, [emotion]);
 
