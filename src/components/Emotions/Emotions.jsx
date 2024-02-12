@@ -2,39 +2,39 @@ import "./Emotions.scss";
 import { v4 as uuidv4 } from "uuid";
 import React, { useEffect, useRef } from "react";
 function Emotions({ emotion, emotionID }) {
-  const inputRefs = useRef(Array(5).fill(null));  // Initialize as an array of length 5 with null values
+  const inputRefs = useRef(Array(5).fill(null)); // Initialize as an array of length 5 with null values
 
   useEffect(() => {
     switch (emotion) {
-      case 1:
-        inputRefs.current[0].disabled = false;
-        inputRefs.current[1].disabled = true;
+      case 1: // angey
+        inputRefs.current[0].disabled = false; // checked
+        inputRefs.current[1].disabled = true; // disabled
         inputRefs.current[2].disabled = true;
         inputRefs.current[3].disabled = true;
         inputRefs.current[4].disabled = true;
         break;
-      case 2:
+      case 2: // sad
         inputRefs.current[0].disabled = true;
         inputRefs.current[1].disabled = false;
         inputRefs.current[2].disabled = true;
         inputRefs.current[3].disabled = true;
         inputRefs.current[4].disabled = true;
         break;
-      case 3:
+      case 3: // ok
         inputRefs.current[0].disabled = true;
         inputRefs.current[1].disabled = true;
         inputRefs.current[2].disabled = false;
         inputRefs.current[3].disabled = true;
         inputRefs.current[4].disabled = true;
         break;
-      case 4:
+      case 4: // good
         inputRefs.current[0].disabled = true;
         inputRefs.current[1].disabled = true;
         inputRefs.current[2].disabled = true;
         inputRefs.current[3].disabled = false;
         inputRefs.current[4].disabled = true;
         break;
-      case 5:
+      case 5: // happy
         inputRefs.current[0].disabled = true;
         inputRefs.current[1].disabled = true;
         inputRefs.current[2].disabled = true;

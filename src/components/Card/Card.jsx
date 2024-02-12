@@ -1,8 +1,8 @@
 import { useSignal } from "@preact/signals-react";
 import { v4 as uuidv4 } from "uuid";
 import "./Card.scss";
-import Stars from "../Stars/Stars";
-const Card = ({ title, img, price, id ,stars }) => {
+import Stars1 from "../Stars/Stars";
+const Card = ({ title, img, price, id, stars }) => {
   // To Generate Random ID
   const randomId = uuidv4();
   const count = useSignal(1);
@@ -28,7 +28,7 @@ const Card = ({ title, img, price, id ,stars }) => {
                   <div className="food-card_bottom-section">
                     <div className="d-flex justify-content-between">
                       <div className="myZoom">
-                        <Stars id={randomId + id} stars={stars}/>
+                        <Stars1 id={randomId + id} stars1={stars} />
                       </div>
                     </div>
                     <hr />
