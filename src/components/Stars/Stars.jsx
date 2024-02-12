@@ -1,7 +1,7 @@
 import "./Stars.scss";
 import { v4 as uuidv4 } from "uuid";
 import React, { useEffect, useRef } from "react";
-const Stars = ({stars}) => {
+const Stars = ({ stars }) => {
   const randomName = uuidv4(); // To Generate Random Name
 
   const inputRefs = useRef(Array(5).fill(null)); // Initialize as an array of length 5 with null values
@@ -9,7 +9,7 @@ const Stars = ({stars}) => {
   useEffect(() => {
     switch (stars) {
       case 1:
-        inputRefs.current[1].disabled = false;
+        inputRefs.current[0].disabled = false;
         inputRefs.current[1].disabled = true;
         inputRefs.current[2].disabled = true;
         inputRefs.current[3].disabled = true;
