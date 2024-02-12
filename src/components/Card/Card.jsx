@@ -2,10 +2,9 @@ import { useSignal } from "@preact/signals-react";
 import { v4 as uuidv4 } from "uuid";
 import "./Card.scss";
 import Stars from "../Stars/Stars";
-const Card = ({ title, img, price , id}) => {
+const Card = ({ title, img, price, id }) => {
   // To Generate Random ID
   const randomId = uuidv4();
-
   const count = useSignal(1);
   return (
     <div className="my-card-styels ">
@@ -15,7 +14,7 @@ const Card = ({ title, img, price , id}) => {
             <div className="col">
               <div className="food-card bg-white rounded-lg overflow-hidden mb-4 shadow">
                 <div className="food-card_img position-relative">
-                  <img src={img} alt={`${title}-{$img}`} />
+                  <img src={img} alt={`${title}-Image`} />
                   <a href="#!">
                     <i className="far fa-heart" />
                   </a>

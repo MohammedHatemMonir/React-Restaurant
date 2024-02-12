@@ -1,7 +1,51 @@
 import "./Emotions.scss";
 import { v4 as uuidv4 } from "uuid";
+import React, { useEffect, useRef } from "react";
+function Emotions({ emotion, emotionID }) {
+  const inputRefs = useRef(Array(5).fill(null));  // Initialize as an array of length 5 with null values
 
-function Emotions({ emotionID , emotion}) {
+  useEffect(() => {
+    switch (emotion) {
+      case 1:
+        inputRefs.current[1].disabled = false;
+        inputRefs.current[1].disabled = true;
+        inputRefs.current[2].disabled = true;
+        inputRefs.current[3].disabled = true;
+        inputRefs.current[4].disabled = true;
+        break;
+      case 2:
+        inputRefs.current[0].disabled = true;
+        inputRefs.current[1].disabled = false;
+        inputRefs.current[2].disabled = true;
+        inputRefs.current[3].disabled = true;
+        inputRefs.current[4].disabled = true;
+        break;
+      case 3:
+        inputRefs.current[0].disabled = true;
+        inputRefs.current[1].disabled = true;
+        inputRefs.current[2].disabled = false;
+        inputRefs.current[3].disabled = true;
+        inputRefs.current[4].disabled = true;
+        break;
+      case 4:
+        inputRefs.current[0].disabled = true;
+        inputRefs.current[1].disabled = true;
+        inputRefs.current[2].disabled = true;
+        inputRefs.current[3].disabled = false;
+        inputRefs.current[4].disabled = true;
+        break;
+      case 5:
+        inputRefs.current[0].disabled = true;
+        inputRefs.current[1].disabled = true;
+        inputRefs.current[2].disabled = true;
+        inputRefs.current[3].disabled = true;
+        inputRefs.current[4].disabled = false;
+        break;
+      default:
+        console.log("Error in Emotions Switch");
+    }
+  }, [emotion]);
+
   const angryId = emotionID;
   const sadId = emotionID;
   const okId = emotionID;
@@ -18,7 +62,14 @@ function Emotions({ emotionID , emotion}) {
     <div className="emotions">
       <div className="feedback">
         <label className="angry" htmlFor={angryId}>
-          <input type="radio" defaultValue={1} id={angryId} name={randomName} />
+          <input
+            type="radio"
+            defaultValue={1}
+            id={angryId}
+            name={randomName}
+            ref={(el) => (inputRefs.current[0] = el)}
+            defaultChecked={emotion === 1}
+          />
           <div>
             <svg className="eye left">
               <use xlinkHref="#eye"></use>
@@ -32,7 +83,14 @@ function Emotions({ emotionID , emotion}) {
           </div>
         </label>
         <label className="sad" htmlFor={sadId}>
-          <input type="radio" defaultValue={2} id={sadId} name={randomName} />
+          <input
+            type="radio"
+            defaultValue={2}
+            id={sadId}
+            name={randomName}
+            ref={(el) => (inputRefs.current[1] = el)}
+            defaultChecked={emotion === 2}
+          />
           <div>
             <svg className="eye left">
               <use xlinkHref="#eye"></use>
@@ -46,7 +104,14 @@ function Emotions({ emotionID , emotion}) {
           </div>
         </label>
         <label className="ok" htmlFor={okId}>
-          <input type="radio" defaultValue={3} id={okId} name={randomName} />
+          <input
+            type="radio"
+            defaultValue={3}
+            id={okId}
+            name={randomName}
+            ref={(el) => (inputRefs.current[2] = el)}
+            defaultChecked={emotion === 3}
+          />
           <div />
         </label>
         <label className="good" htmlFor={goodId}>
@@ -55,7 +120,8 @@ function Emotions({ emotionID , emotion}) {
             defaultValue={4}
             id={goodId}
             name={randomName}
-            defaultChecked
+            ref={(el) => (inputRefs.current[3] = el)}
+            defaultChecked={emotion === 4}
           />
           <div>
             <svg className="eye left">
@@ -70,7 +136,14 @@ function Emotions({ emotionID , emotion}) {
           </div>
         </label>
         <label className="happy" htmlFor={happyId}>
-          <input type="radio" defaultValue={5} id={happyId} name={randomName} />
+          <input
+            type="radio"
+            defaultValue={5}
+            id={happyId}
+            name={randomName}
+            ref={(el) => (inputRefs.current[4] = el)}
+            defaultChecked={emotion === 5}
+          />
           <div>
             <svg className="eye left">
               <use xlinkHref="#eye"></use>
