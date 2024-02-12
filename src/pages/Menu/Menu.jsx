@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "./Menu.scss";
-import menuData from "../../Menu";
+import menuData from "../../MenuData";
 import Card from "../../components/Card/Card";
+import { v4 as uuidv4 } from "uuid";
 
 function Menu() {
   const [inputValue, setInputValue] = useState("");
@@ -23,29 +24,39 @@ function Menu() {
         </div>
       </header>
       <div className="my-menu-page">
-      <div className="menu-container ">
-        <div className="menu-input">
-          <input
-            type="text"
-            value={inputValue}
-            onChange={handleInputChange}
-            placeholder="Add New Comment"
-            className="menu-input-field"
-          />
-          <button onClick={handleButtonClick} className="menu-button">
-            Submit
-          </button>
-        </div>
-        <div className="menu-output">Output: {output}</div>
-        <div className="menu-items">
-          {menuData.map((meal) => (
-            <div key={meal.id} className="menu-item">
-              <Card title={meal.title} price={meal.price} img={meal.img} />
-            </div>
-          ))}
+        <div className="menu-container ">
+          <div className="menu-input">
+            <input
+              type="text"
+              value={inputValue}
+              onChange={handleInputChange}
+              placeholder="Add New Comment"
+              className="menu-input-field"
+            />
+            <button onClick={handleButtonClick} className="menu-button">
+              Submit
+            </button>
+          </div>
+          <div className="menu-output">Output: {output}</div>
+          <div className="menu-items">
+            {menuData.map((meal) => {
+              const cardID = uuidv4(); // To Generate unique ID for each review
+              return (
+                <div key={meal.id} className="menu-item">
+                  <Card
+                    kay={meal.id}
+                    title={meal.title}
+                    id={cardID}
+                    price={meal.price}
+                    img={meal.img}
+                  />
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
-    </div></div>
+    </div>
   );
 }
 

@@ -8,7 +8,7 @@ import {
 } from "react-bootstrap";
 import "./Reviews.scss";
 import Emotions from "../Emotions/Emotions";
-import reviewsData from "../../Reviews";
+import reviewsData from "../../ReviewsData";
 import { v4 as uuidv4 } from "uuid";
 
 const Reviews = () => {
@@ -24,7 +24,7 @@ const Reviews = () => {
       <h2 className="text-center mb-5 text-uppercase fw-bold fs-1">Reviews</h2>
       <div className="row g-4">
         {reviews.map((review) => {
-          const emotionID = uuidv4(); // Generate unique key for each review
+          const emotionID = uuidv4(); // To Generate unique key for each review
           return (
             <div key={review.id} className="col-lg-6">
               <Card className="h-100 shadow">
@@ -41,7 +41,7 @@ const Reviews = () => {
                   />
                   <CardTitle className="text-success">{review.name}</CardTitle>
                   <div className="mx-auto">
-                    <Emotions key={emotionID} />
+                    <Emotions key={emotionID} emotion={review.emotion} />
                   </div>
                 </CardFooter>
               </Card>
