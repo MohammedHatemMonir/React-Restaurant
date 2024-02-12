@@ -84,10 +84,10 @@ function App() {
         <Route path="/card" element={<Card />} /> */}
 
       {/* <Footer /> */}
-      {/* 
-      <footer className="bg-body-tertiary">
+
+      <footer className="bg-body-tertiary ">
         <p className="p-3 m-0 text-center">Copyright &copy; {currentYear}</p>
-      </footer> */}
+      </footer>
     </div>
   );
 }
