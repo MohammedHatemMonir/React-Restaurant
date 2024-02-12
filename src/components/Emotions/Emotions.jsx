@@ -45,7 +45,6 @@ function Emotions({ emotion, emotionID }) {
         console.log("Error In Emotions Switch");
     }
   }, [emotion]);
-
   const angryId = emotionID;
   const sadId = emotionID;
   const okId = emotionID;
@@ -68,7 +67,7 @@ function Emotions({ emotion, emotionID }) {
             id={angryId}
             name={randomName}
             ref={(el) => (inputRefs.current[0] = el)}
-            defaultChecked={emotion === 1}
+            checked={emotion === 1}
           />
           <div>
             <svg className="eye left">
@@ -89,7 +88,7 @@ function Emotions({ emotion, emotionID }) {
             id={sadId}
             name={randomName}
             ref={(el) => (inputRefs.current[1] = el)}
-            defaultChecked={emotion === 2}
+            checked={emotion === 2}
           />
           <div>
             <svg className="eye left">
@@ -110,7 +109,7 @@ function Emotions({ emotion, emotionID }) {
             id={okId}
             name={randomName}
             ref={(el) => (inputRefs.current[2] = el)}
-            defaultChecked={emotion === 3}
+            checked={emotion === 3}
           />
           <div />
         </label>
@@ -121,7 +120,7 @@ function Emotions({ emotion, emotionID }) {
             id={goodId}
             name={randomName}
             ref={(el) => (inputRefs.current[3] = el)}
-            defaultChecked={emotion === 4}
+            checked={emotion === 4}
           />
           <div>
             <svg className="eye left">
@@ -142,7 +141,7 @@ function Emotions({ emotion, emotionID }) {
             id={happyId}
             name={randomName}
             ref={(el) => (inputRefs.current[4] = el)}
-            defaultChecked={emotion === 5}
+            checked={emotion === 5}
           />
           <div>
             <svg className="eye left">

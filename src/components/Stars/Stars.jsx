@@ -64,7 +64,6 @@ const Stars = ({ stars1 }) => {
           id={r1}
           ref={(el) => (inputRefs.current[4] = el)}
           checked={stars1 === 5}
-          
         />
         <label htmlFor={r1} />
         <input
