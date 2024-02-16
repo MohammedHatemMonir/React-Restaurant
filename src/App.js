@@ -85,7 +85,7 @@ function App() {
 
       {/* <Footer /> */}
 
-      <footer className="bg-body-tertiary my-footer">
+      <footer className="bg-body-tertiary ">
         <p className="p-3 m-0 text-center">Copyright &copy; {currentYear}</p>
       </footer>
     </div>

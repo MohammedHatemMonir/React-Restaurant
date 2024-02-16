@@ -1,14 +1,15 @@
 import React from "react";
 import "./Login.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSignal } from "@preact/signals-react";
-
+import Handleconnect from "../../components/backend_connection/backend_connection.js"
 const Login = () => {
+  const navigate = useNavigate();
   const email = useSignal("");
   const password = useSignal("");
   const errors = useSignal({});
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
     var validationErrors = {};
 
@@ -30,6 +31,18 @@ const Login = () => {
       errors.value = validationErrors;
       // If no errors, proceed with SingUP logic
       console.log("Login SingUP goes here...");
+      try {
+        const response = await Handleconnect({"Email": email,"password": password},"api/users/test/","POST");
+        if (response.data.role==="USER"){
+          console.log(response.data)
+          navigate('/menu');
+        }
+
+        // Handle successful login (e.g., redirect to dashboard)
+  
+      } catch (error) {
+        console.log (error.message); // Display the error message
+      }
     }
   };
 
