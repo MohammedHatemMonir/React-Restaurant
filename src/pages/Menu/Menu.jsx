@@ -25,7 +25,6 @@ function Menu() {
     setInputValue(event.target.value);
   };
 
-
   return (
     <div className="menu-page">
       <header className="mt-5 my-menu-header ">

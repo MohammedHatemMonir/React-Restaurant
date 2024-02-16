@@ -36,7 +36,12 @@ const Login = () => {
         if (response.data.role==="USER"){
           console.log(response.data)
           navigate('/menu');
+        }else if(response.data.role==="ADMIN"){
+
+        }else {
+          console.log(response.data)
         }
+        
 
         // Handle successful login (e.g., redirect to dashboard)
   
@@ -45,6 +50,7 @@ const Login = () => {
       }
     }
   };
+
 
   return (
     <div className="my-login">

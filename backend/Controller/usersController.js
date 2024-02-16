@@ -8,7 +8,7 @@ const getSingleuser = async (req, res) => {
   try {
     const errors =validationResult(req)
     if(!errors.isEmpty()){
-      res.status(400).json(errors.array())
+      res.status(400).json(errors.array()[0].msg)
     }else{
       // console.log(errors)
       const Email = req.body.Email;
@@ -16,13 +16,13 @@ const getSingleuser = async (req, res) => {
       const myuser = await myusers.find({Email:Email});
       // console.log(myuser[0].password)
       if (!myuser[0]) {
-        res.status(400).send("user Not Found");
-      } else if(myuser[0].password!=password) {
-        res.status(400).send("wrong password");
+        res.status(201).send("user Not Found");
+      } else if(myuser[0].password!==password) {
+        res.status(201).send("wrong password");
         
       }else{
         console.log(myuser)
-        res.status(201).json(myuser[0]);
+        res.status(201).json({role:myuser[0].role,username:myuser[0].username});
       }
     }
 
@@ -36,9 +36,8 @@ const addNewuser = async (req, res) => {
   try {
     const errors =validationResult(req)
     if(!errors.isEmpty()){
-      res.status(400).json(errors.array())
+      res.status(400).json(errors.array()[0].msg)
     }else{
-    const username2 = req.body.username;
     const Email = req.body.Email;
     const myuser = await myusers.find({Email:Email});
     if (!myuser[0]) {
@@ -48,7 +47,7 @@ const addNewuser = async (req, res) => {
       const newuser = new myusers(req.body);
       await newuser.save();
       console.log(newuser)
-      res.status(201).json(newuser);
+      res.status(201).json({role:newuser.role,username:newuser.username});
     } else {
       res.send("USER EXEST");
     }
