@@ -78,7 +78,7 @@ const addNewuser = async (req, res) => {
 const axios = require('axios');
 
 // Replace with your Python server URL
-const serverUrl = 'http://localhost:5000/analyze';
+const serverUrl = 'http://localhost:5000/analyze2';
 
 async function analyzeText(text) {
   try {

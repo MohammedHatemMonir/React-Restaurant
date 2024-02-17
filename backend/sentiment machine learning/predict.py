@@ -25,7 +25,7 @@ def analyze_sentiment(text):
     sentiment= tweets_analising(text,cv,encoder,toke_nizer,loaded_model,model)
     return sentiment
 
-@app.route("/analyze", methods=["POST"])
+@app.route("/analyze2", methods=["POST"])
 def analyze():
     try:
         data = request.get_json()
@@ -36,6 +36,6 @@ def analyze():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host='localhost', port=5000) 
     import tensorflow as tf
 print(tf.__version__)
