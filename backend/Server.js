@@ -61,6 +61,10 @@ app.get('/Mainpage',(req,res)=>{
         res.send({text: "welcome"})
 })
 
+app.get('/TestS',(req,res)=>{
+    res.send({text: "welcome"})
+})
+
 
 app.get('/getcards',(req,res)=>{
     
