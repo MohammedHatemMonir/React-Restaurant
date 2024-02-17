@@ -1,8 +1,8 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import GlobalNavBar from './GlobalNavBar';
-import { useQuery } from 'react-query';
-import apiClient from '../Data/apiclient';
+import { useQuery } from '@tanstack/react-query';
+import {apiClient} from '../Data/apiclient';
 
 export default function GlobalLayout() {
 
@@ -22,9 +22,7 @@ export default function GlobalLayout() {
 if (q.isLoading) {
     return <div>Loading...</div>;
 }
-if(q.data?.data?.text){
-  console.log(q.data.data.text)
-}
+
 
 return(<>
  <main className="main d-flex" id="top" style={{flexDirection: "column", height: "100%", backgroundColor: "var(--my-variable)"}}>

@@ -62,7 +62,7 @@ app.get('/Mainpage',(req,res)=>{
 })
 
 app.get('/TestS',(req,res)=>{
-    res.send({text: "welcome"})
+    res.send({text: "This is a use Query test"})
 })
 
 
@@ -81,7 +81,7 @@ app.get('/getcards',(req,res)=>{
 })
 
 app.listen(5001,()=>{
-    console.log("Server Running")
+    console.log("Server Running in 5001")
 })
 
 
