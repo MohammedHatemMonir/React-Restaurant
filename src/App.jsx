@@ -11,7 +11,7 @@ function App() {
 
   return (
     <div className="my-app">
-     <TheRouter />
+      <TheRouter />
       {/* <Route path="/stars" element={<Stars />} />
         <Route path="/card" element={<Card />} /> */}
 

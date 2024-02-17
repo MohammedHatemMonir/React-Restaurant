@@ -22,7 +22,7 @@ return(
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto justify-content-end w-100 ">
                     <ThemeController />
-                    <Link to="/" className="nav-link active">
+                    <Link to="/" className="nav-link">
                             Home
                     </Link>
                     <Link to="/menu" className="nav-link">

@@ -1,8 +1,8 @@
 import React from "react";
 
 import { isDarkMode } from "./Globals";
-  import { CiLight } from "react-icons/ci";
-  import { CiDark } from "react-icons/ci";
+import { CiLight } from "react-icons/ci";
+import { CiDark } from "react-icons/ci";
 
 function ThemeController() {
 
