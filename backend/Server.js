@@ -61,7 +61,7 @@ app.get('/Mainpage',(req,res)=>{
         res.send({text: "welcome"})
 })
 
-app.get('/TestS',(req,res)=>{
+app.post('/TestS',(req,res)=>{
     res.send({text: "This is a use Query test"})
 })
 

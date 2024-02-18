@@ -76,13 +76,15 @@ const addNewuser = async (req, res) => {
 
 // /////////////////////////////////
 const axios = require('axios');
+const { json } = require("react-router-dom");
 
 // Replace with your Python server URL
-const serverUrl = 'http://localhost:5000/analyze2';
+const serverUrl = 'http://127.0.0.1:5000/analyze2';
 
 async function analyzeText(text) {
   try {
-    const response = await axios.post(serverUrl, { text });
+    const data = JSON.stringify({ "text": `${text}` });
+    const response = await axios.post(serverUrl, data, {headers: {"Content-Type": "application/json"}});
     return response.data;
   } catch (error) {
     console.error(error);

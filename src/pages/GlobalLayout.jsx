@@ -13,7 +13,7 @@ export default function GlobalLayout() {
     queryFn: async () => {
     let url = "/TestS";
 
-    var ret = await apiClient.get(url, {text: "Backend test"});
+    var ret = await apiClient.post(url, {text: "Backend test"});
 
     return ret;
     },
@@ -21,6 +21,9 @@ export default function GlobalLayout() {
 
 if (q.isLoading) {
     return <div>Loading...</div>;
+}
+if(q.data?.data){
+  console.log(q.data.data.text);
 }
 
 
