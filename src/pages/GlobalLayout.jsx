@@ -7,7 +7,7 @@ import {apiClient} from '../Data/apiclient';
 export default function GlobalLayout() {
 
   const q = useQuery({
-    queryKey: [],
+    queryKey: ["ajnaskld"],
     // cacheTime: 60000000,
     // staleTime: 60000000,
     queryFn: async () => {
@@ -22,6 +22,7 @@ export default function GlobalLayout() {
 if (q.isLoading) {
     return <div>Loading...</div>;
 }
+
 if(q.data?.data){
   console.log(q.data.data.text);
 }
