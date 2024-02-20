@@ -25,6 +25,7 @@ export default function NavbarGlobal() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
 
+            <Link to="/">Home</Link>
 
               <Link to="/tutorials">Tutorials</Link>
 
