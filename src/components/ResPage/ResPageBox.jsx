@@ -1,16 +1,12 @@
-import { useState } from "react";
-import "./RestsPage.scss";
+import "./ResPageBox.scss";
 import { Link } from "react-router-dom";
 
-const RestsPage = () => {
-
-
+export default function ResPageBox({ title, image, rating }) {
   return (
-    <div className="rests-card">
-      <h1 class="my-title">Restaurants Page</h1>
+    <div className="res-card">
       <article className="card">
         <div className="card__info">
-          <h3 className="card__title">Coffee Break</h3>
+          <h3 className="card__title">{title}</h3>
           <div
             className="card__rating"
             aria-label="Rating of five out of five stars"
@@ -97,14 +93,12 @@ const RestsPage = () => {
         <img
           className="card__img"
           alt="Image of food at Meat Hut"
-          src=""
+          src={image}
         />
         <Link to="/" className="button">
-          2 Reviews
+          {rating} Reviews
         </Link>
       </article>
     </div>
   );
-};
-
-export default RestsPage;
+}

@@ -3,20 +3,20 @@ $purple: #ac40c7;
 $off-white: #f5f2f2;
 $yellow-orange: #eb9834;
 $md-screen-size: 600px;
-
-.rests-card {
+.res-title {
+  background-color: black;
+  color: white;
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 5rem;
+  margin: 1rem;
+  text-align: center;
+}
+.res-card {
   abbr {
     text-decoration: none;
   }
-  .my-title {
-    background-color: black;
-    color: white;
-    font-weight: 700;
-    font-size: 2rem;
-    line-height: 5rem;
-    margin: 1rem;
-    text-align: center;
-  }
+
   .button {
     background-color: white;
     border-radius: 5rem;
