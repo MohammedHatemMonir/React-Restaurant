@@ -14,6 +14,7 @@ import Dashboard2 from "../Dashboard/Dashboard2";
 import Sidebar from "../Sidebar/Sidebar";
 import Home from "./Home";
 import Tutorials from "../TestComponents/Tutorials";
+import RestsPage from './../RestPage/RestsPage';
 
 export default function TheRouter() {
   return (
@@ -26,7 +27,7 @@ export default function TheRouter() {
           <Route path="dash1" element={<Dashboard1 />}></Route>
           <Route path="dash2" element={<Dashboard2 />}></Route>
           <Route path="sidebar" element={<Sidebar />}></Route>
-
+          <Route path="rests" element={<RestsPage />}></Route>
 
           <Route path="/tutorials" element={<Tutorials />}>
               <Route path="Medotest" element={<MedoTest />}></Route>
