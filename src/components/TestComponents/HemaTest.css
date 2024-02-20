@@ -1,0 +1,17 @@
+.ct-series-a {
+    background-color: blue;
+    /* Change the color of the first series */
+}
+
+.ct-series.custom-series-2 .ct-line {
+    stroke: red;
+    /* Change the color of the second series */
+}
+
+.ct-series.custom-series-3 .ct-line {
+    stroke: green;
+    /* Change the color of the third series */
+}
+
+
+/* Add more classes to change colors for additional series if needed */
