@@ -10,6 +10,7 @@
     align-items: center;
     position: relative;
     z-index: 100;
+    color: white;
   }
   header .logo {
     font-weight: bold;
@@ -32,7 +33,7 @@
       float: right;
       border: 2px #ccc solid;
       border-radius: 50%;
-      background: transparent; /* Set background to transparent */
+      background: white; /* Set background to transparent */
       background-image: url("https://www.pinclipart.com/picdir/big/485-4851736_free-png-search-icon-search-icon-free-download.png");
       background-size: 20px; /* Adjust icon size as needed */
       background-repeat: no-repeat;
