@@ -14,6 +14,7 @@ import img6 from "../../utils/meals-img/item-6.jpeg";
 import img7 from "../../utils/meals-img/item-7.jpeg";
 import img8 from "../../utils/meals-img/item-8.jpeg";
 import img9 from "../../utils/meals-img/item-9.jpeg";
+import Footer from "./Footer";
 
 export default function ResPage() {
   const [resData, setResData] = useState([
@@ -172,6 +173,7 @@ export default function ResPage() {
           </div>
         ))}
       </div>
+      <Footer />
     </section>
   );
 }
