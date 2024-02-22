@@ -20,7 +20,7 @@ const NavWithSlider = () => {
   };
 
   return (
-    <div className="nav-slider">
+    <div className="my-slider">
      
       <div className={`slider ${direction}`}>
         <div className="list">
