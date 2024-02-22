@@ -34,7 +34,7 @@ const Card = ({ title, img, price, id, stars }) => {
                     <hr />
                     <div className="d-flex justify-content-between">
                       <div className="food-card_price">
-                        <span>{price}$</span>
+                        <span>{price}</span>
                       </div>
                       <div className="food-card_order-count">
                         <div className="input-group mb-3">
