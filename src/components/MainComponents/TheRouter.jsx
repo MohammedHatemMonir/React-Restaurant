@@ -14,7 +14,7 @@ import Dashboard2 from "../Dashboard/Dashboard2";
 import Sidebar from "../Sidebar/Sidebar";
 import Home from "./Home";
 import Tutorials from "../TestComponents/Tutorials";
-import ResPage from './../ResPage/RestsPage';
+import ResPage from './../ResPage/ResPage';
 
 
 export default function TheRouter() {
