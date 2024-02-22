@@ -1,6 +1,9 @@
 import { useState } from "react";
 import ResPageBox from "./../ResPage/ResPageBox";
 import "./ResPageBox.scss";
+import "./ResPage.scss";
+import Slider from "./Slider";
+import Header from "./Header";
 export default function ResPage() {
   const [resData, setResData] = useState([
     {
@@ -79,7 +82,8 @@ export default function ResPage() {
 
   return (
     <section>
-      <h1 className="res-title">Restaurants Page</h1>
+      <Header />
+      <Slider />
       <div className="row">
         {resData.map((data) => (
           <div className="col-sm-12 col-md-3 col-lg-4" key={data.id}>

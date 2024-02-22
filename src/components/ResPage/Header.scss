@@ -1,0 +1,30 @@
+.Nav-Header {
+  header {
+    width: 1200px;
+    max-width: 90%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 50px 1fr 50px;
+    grid-template-rows: 50px;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 100;
+  }
+  header .logo {
+    font-weight: bold;
+  }
+  header .menu {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-weight: 500;
+  }
+  svg {
+    width: 25px;
+  }
+
+}
