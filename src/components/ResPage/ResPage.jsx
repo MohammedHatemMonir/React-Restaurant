@@ -20,7 +20,8 @@ export default function ResPage() {
   const [resData, setResData] = useState([
     {
       id: "res1",
-      title: "Restaurant 1",
+      title: "buttermilk pancakes",
+
       image:
         "http://image.shutterstock.com/z/stock-vector-food-restaurant-logo-icon-264413183.jpg",
       minCharge: "5.00 LE",
@@ -35,7 +36,8 @@ export default function ResPage() {
     },
     {
       id: "res2",
-      title: "Restaurant 2",
+      title: "diner double",
+
       image:
         "http://image.shutterstock.com/z/stock-vector-food-restaurant-logo-icon-264413183.jpg",
       minCharge: "10.00 LE",
@@ -50,7 +52,8 @@ export default function ResPage() {
     },
     {
       id: "res3",
-      title: "Restaurant 3",
+      title: "godzilla milkshake",
+
       image:
         "http://image.shutterstock.com/z/stock-vector-food-restaurant-logo-icon-264413183.jpg",
       minCharge: "6.00 LE",
@@ -65,7 +68,8 @@ export default function ResPage() {
     },
     {
       id: "res4",
-      title: "Restaurant 4",
+      title: "country delight",
+
       image:
         "http://image.shutterstock.com/z/stock-vector-food-restaurant-logo-icon-264413183.jpg",
       minCharge: "Free",
@@ -80,7 +84,8 @@ export default function ResPage() {
     },
     {
       id: "res5",
-      title: "Restaurant 5",
+      title: "egg attack",
+
       image:
         "http://image.shutterstock.com/z/stock-vector-food-restaurant-logo-icon-264413183.jpg",
       minCharge: "7.00 LE",
@@ -95,7 +100,8 @@ export default function ResPage() {
     },
     {
       id: "res6",
-      title: "Restaurant 6",
+      title: "oreo dream",
+
       image:
         "http://image.shutterstock.com/z/stock-vector-food-restaurant-logo-icon-264413183.jpg",
       minCharge: "16.00 LE",
@@ -110,7 +116,8 @@ export default function ResPage() {
     },
     {
       id: "res7",
-      title: "Restaurant 7",
+      title: "bacon overflow",
+
       image:
         "http://image.shutterstock.com/z/stock-vector-food-restaurant-logo-icon-264413183.jpg",
       minCharge: "9 LE",
@@ -125,7 +132,8 @@ export default function ResPage() {
     },
     {
       id: "res8",
-      title: "Restaurant 8",
+      title: "american classic",
+
       image:
         "http://image.shutterstock.com/z/stock-vector-food-restaurant-logo-icon-264413183.jpg",
       minCharge: "22.00 LE",
@@ -140,7 +148,7 @@ export default function ResPage() {
     },
     {
       id: "res9",
-      title: "Restaurant 9",
+      title: "quarantine buddy",
       image:
         "http://image.shutterstock.com/z/stock-vector-food-restaurant-logo-icon-264413183.jpg",
       minCharge: "38.00 LE",
@@ -161,7 +169,7 @@ export default function ResPage() {
       <Slider />
       <div className="row">
         {resData.map((data) => (
-          <div className="col-sm-12 col-md-3 col-lg-4" key={data.id}>
+          <div className="col-sm-12 col-md-6 col-lg-4 col-xl-3" key={data.id}>
             <Card
               title={data.title}
               price={data.minCharge}
