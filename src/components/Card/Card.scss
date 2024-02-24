@@ -6,7 +6,7 @@
 
   .edit-container {
     // background-color: red;
-    max-width: 350px;
+    max-width: 340px;
   }
   .main-content {
     padding-top: 100px;
@@ -34,7 +34,7 @@
 
       i {
         position: absolute;
-        top: 20px;
+        top: 25px;
         // right: 30px; // The heart on the right
         right: 270px; //  The heart on the left
         color: #fff;
@@ -42,7 +42,7 @@
         transition: all 0.1s;
 
         &:hover {
-          top: 18px;
+          top: 20px;
           // right: 28px; The heart on the right hover
           right: 268px; //The heart on the left hover
           font-size: 29px;
@@ -79,7 +79,7 @@
     font-weight: bold;
     margin-top: 15px;
     // margin-left: 263px;
-    margin-left: 250px;
+    margin-left: 253px;
     position: absolute;
   }
   .my-res-title {

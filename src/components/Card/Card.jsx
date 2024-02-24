@@ -1,8 +1,8 @@
-import { useSignal } from "@preact/signals-react";
+// import { useSignal } from "@preact/signals-react";
 import { v4 as uuidv4 } from "uuid";
 import "./Card.scss";
 import Stars1 from "../Stars/Stars";
-const Card = ({ title, img, id, stars, mealImg, reviewsNum }) => {
+const Card = ({ title, img, id, stars, mealImg, reviewsNum,resName }) => {
   // To Generate Random ID
   const randomId = uuidv4();
   return (
@@ -31,8 +31,8 @@ const Card = ({ title, img, id, stars, mealImg, reviewsNum }) => {
                       <div className="myZoom w-25 h-25">
                         <Stars1 id={randomId + id} stars1={stars} />
                       </div>
-                      <p className="myFont">{`${reviewsNum}`}</p>
-                      <p className="text-dark my-res-title">{title}</p>
+                      <p className="myFont">{`${reviewsNum}`}  </p>
+                      <p className="text-dark my-res-title">{resName}</p>
                     </div>
                   </div>
                 </div>
