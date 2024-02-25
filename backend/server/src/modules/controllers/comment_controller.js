@@ -1,5 +1,5 @@
 const meal = require("../../database/models/Meals_model");
-const resturant  = require("../../database/models/resturant.Model");
+const restaurant  = require("../../database/models/restaurant.Model");
 const Comment = require("../../database/models/Comments_model");
 const { validationResult } = require("express-validator");
 

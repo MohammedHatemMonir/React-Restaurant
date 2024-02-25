@@ -4,7 +4,7 @@ const app=express();
 const {connectToMongoDB} = require("./database/dbconnection")
 const userRouter = require("./modules/routes/userRoutes");
 const comment_routes = require("./modules/routes/comment_routes");
-const router = require('./modules/routes/resturant.router')
+const router = require('./modules/routes/restaurant.router')
 const MEALrouter = require('./modules/routes/meals_routes')
 // const { json } = require('react-router-dom');
 

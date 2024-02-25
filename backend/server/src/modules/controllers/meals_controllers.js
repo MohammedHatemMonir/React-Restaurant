@@ -1,5 +1,5 @@
 const meal = require("../../database/models/Meals_model");
-const resturant  = require("../../database/models/resturant.Model");
+const restaurant  = require("../../database/models/restaurant.Model");
 const { validationResult } = require("express-validator");
 
 
@@ -18,12 +18,12 @@ const addNewmeal = async (req, res) => {
         return res.status(400).json({ error: 'Invalid image format' });
         }else {
             const restaurantname = req.body.Res;
-            const resturants = await resturant.find({ResName:restaurantname});
-            if (!resturants[0]) {
+            const restaurants = await restaurant.find({ResName:restaurantname});
+            if (!restaurants[0]) {
                 res.send("RESTURAND DOSENT EXEST");
             }else{
-                // console.log(resturants[0]._id.toString())
-                req.body.ResID=resturants[0]._id.toString()
+                // console.log(restaurants[0]._id.toString())
+                req.body.ResID=restaurants[0]._id.toString()
                 const body = {
                     MealName:req.body.MealName,
                     MealImg:req.body.MealImg,
@@ -51,11 +51,11 @@ const addNewmeal = async (req, res) => {
         res.status(400).json(errors.array()[0].msg)
       }else{
         const restaurantname = req.body.Res;
-        const resturants = await resturant.find({ResName:restaurantname});
-        if (!resturants[0]) {
+        const restaurants = await restaurant.find({ResName:restaurantname});
+        if (!restaurants[0]) {
             res.send("RESTURAND DOSENT EXEST");
         }else{
-            const ResID =resturants[0]._id.toString();
+            const ResID =restaurants[0]._id.toString();
             const meals = await meal.find({ResID:ResID});
             // console.log(myuser[0].password)
             if (!meals[0]) {

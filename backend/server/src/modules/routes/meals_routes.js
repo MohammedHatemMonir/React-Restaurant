@@ -17,7 +17,7 @@ router.post('/Addmeal',
     .isNumeric().withMessage("only numpers allowd")
     .notEmpty().withMessage("Enter THE Price"),
     body("Res")
-    .notEmpty().withMessage("Enter RESTURANT NAME")
+    .notEmpty().withMessage("Enter restaurant NAME")
 ],control.addNewmeal)
-// router.delete('/deletemeal/:id',control.deleteresturant)
+// router.delete('/deletemeal/:id',control.deleterestaurant)
 module.exports = router;
