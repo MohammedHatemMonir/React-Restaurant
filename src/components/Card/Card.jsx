@@ -3,7 +3,8 @@ import { v4 as uuidv4 } from "uuid";
 import "./Card.scss";
 import Stars1 from "../Stars/Stars";
 import HeartIcon from "../../Icons/HeartIcon";
-const Card = ({ title, img, id, stars, mealImg, reviewsNum,resName }) => {
+import HeartFullIcon from "../../Icons/HeartFullIcon";
+const Card = ({ title, img, id, stars, mealImg, reviewsNum,resName, fav }) => {
   // To Generate Random ID
   const randomId = uuidv4();
   return (
@@ -16,8 +17,9 @@ const Card = ({ title, img, id, stars, mealImg, reviewsNum,resName }) => {
                 <div className="food-card_img position-relative">
                   <img src={mealImg} alt={`${title}-Image`} />
                   <a href="/" className="card-heart ">
-                  <HeartIcon  className="i"/>
-                    </a>
+                    {!fav? <HeartIcon className="MenuHeart" /> : <HeartFullIcon className="MenuHeart" color="red" />}
+
+                  </a>
                 </div>
                 <div className="food-card_content">
                   <div className="food-card_title-section overflow-hidden">

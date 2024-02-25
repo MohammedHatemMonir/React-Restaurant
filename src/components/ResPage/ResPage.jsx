@@ -16,10 +16,10 @@ import img8 from "../../utils/meals-img/item-8.jpeg";
 import img9 from "../../utils/meals-img/item-9.jpeg";
 import Footer from "./Footer";
 import SideBar from "./SideBar";
-import { Col } from "reactstrap";
+import { Col, Container } from "reactstrap";
 
 export default function ResPage() {
-  const [resData, setResData] = useState([
+  const resData = [
     {
       id: "res1",
       resName: "Restaurant 1",
@@ -34,6 +34,7 @@ export default function ResPage() {
         "https://gist.github.com/omar94hamza/95723a43bb97f21567c99948c31dc7aa/raw/d09556d7f9591c9ac36d499a48c82d0012589a03/foodcirclesmenucat.json",
       type: ["Chicken", "Meat"],
       stars: 4,
+      fav: true,
       mealImg: img1,
       reviewsNum: 443,
     },
@@ -93,6 +94,7 @@ export default function ResPage() {
         "http://image.shutterstock.com/z/stock-vector-food-restaurant-logo-icon-264413183.jpg",
       minCharge: "7.00 LE",
       rating: "2",
+      fav: true,
       titlMC: "burgerking",
       url_menucat:
         "https://gist.github.com/omar94hamza/c1e7a0220547235c515e3b073bb4e7ff/raw/e122811cf463a8f47d90a5aa7407cc3998dbb21b/burgerking.json",
@@ -162,19 +164,23 @@ export default function ResPage() {
         "https://gist.github.com/omar94hamza/9725b018f68150d3e50d9c33ec8a3e93/raw/728fddef7356572f9bb8e7608909b542983d8fd3/restaurant.json",
       type: ["Pizza"],
       stars: 3,
+      fav: true,
       mealImg: img9,
       reviewsNum: 241,
     },
-  ]);
+  ];
+
+
+
 
   return (
     <section>
-      <Header />
+
       <Slider />
+      <Container style={{width: "85%"}}>
+      <Header />
+
       <div className="row">
-        {/* <Col>
-          <SideBar />
-        </Col> */}
         {resData.map((data) => (
           <div className="col-sm-12 col-md-6 col-lg-4" key={data.id}>
             <Card
@@ -185,10 +191,12 @@ export default function ResPage() {
               mealImg={data.mealImg}
               reviewsNum={data.reviewsNum}
               resName={data.resName}
+              fav={data.fav}
             />
           </div>
         ))}
       </div>
+      </Container>
 
       <Footer />
     </section>
