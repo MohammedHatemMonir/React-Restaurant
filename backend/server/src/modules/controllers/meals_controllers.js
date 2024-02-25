@@ -13,7 +13,7 @@ const addNewmeal = async (req, res) => {
       const meals = await meal.find({MealName:MealName});
       if (!meals[0]) {
         // console.log(req.body.MealImg.split('.').pop() )
-        const allowedMimetypes = ['jpeg', 'png', 'gif'];
+        const allowedMimetypes = ['jpeg', 'png', 'gif','jpg'];
         if (!allowedMimetypes.includes(req.body.MealImg.split('.').pop())) {
         return res.status(400).json({ error: 'Invalid image format' });
         }else {

@@ -15,7 +15,7 @@ const getAllresturant=async(req,res)=>{
 const addNewresturant=async(req,res)=>{
     try {
         // console.log(req.body)
-        const allowedMimetypes = ['jpeg', 'png', 'gif'];
+        const allowedMimetypes = ['jpeg', 'png', 'gif','jpg'];
         if (!allowedMimetypes.includes(req.body.ResImg.split('.').pop())) {
         return res.status(400).json({ error: 'Invalid image format' });
         }else {
