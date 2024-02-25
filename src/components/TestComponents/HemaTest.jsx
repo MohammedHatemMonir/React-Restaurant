@@ -9,7 +9,7 @@
 //               <div className="col-sm-10 col-md-8 col-lg-5 col-xl-5 col-xxl-3"> 
 //                   <a className="d-flex flex-center text-decoration-none mb-4"> 
 //                       <div className="d-flex align-items-center fw-bolder fs-5 d-inline-block">
-//                           <img src="../../Icons/hxh.jpg" alt="phoenix" width="58" />
+//                           <img  alt="phoenix" width="58" />
 //                       </div>
 //                   </a>
 //                   <div className="text-center mb-7">
