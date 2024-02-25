@@ -1,18 +1,18 @@
 
-const restaurant  = require("../../database/models/restaurants.Model");
+const resturant  = require("../../database/models/resturant.Model");
 
 
 
-const getAllrestaurant=async(req,res)=>{
+const getAllresturant=async(req,res)=>{
     try {
-        const restaurants=await restaurant.find({})
-        res.status(200).json(restaurants)
+        const resturants=await resturant.find({})
+        res.status(200).json(resturants)
     } catch (error) {
         res.status(500).json({message:error})
     }
 }
 
-const addNewrestaurant=async(req,res)=>{
+const addNewresturant=async(req,res)=>{
     try {
         // console.log(req.body)
         const allowedMimetypes = ['jpeg', 'png', 'gif','jpg'];
@@ -20,18 +20,18 @@ const addNewrestaurant=async(req,res)=>{
         return res.status(400).json({ error: 'Invalid image format' });
         }else {
             const restaurantname = req.body.ResName;
-            const restaurants = await restaurant.find({ResName:restaurantname});
-            if (!restaurants[0]) {
+            const resturants = await resturant.find({ResName:restaurantname});
+            if (!resturants[0]) {
                 const body = {
                     ResName:req.body.ResName,
                     ResImg:req.body.ResImg,
                     Categoery:req.body.Categoery}
-                // const newrestaurant = new restaurant(req.body);
-                // await newrestaurant.save();
-                await restaurant.create(req.body)
+                // const newresturant = new resturant(req.body);
+                // await newresturant.save();
+                await resturant.create(req.body)
                 res.status(200).json(body)
             }else{
-                res.send("Restaurant Does Exist");
+                res.send("RESTURAND DOSE EXEST");
         }}
     } catch (error) {
         res.status(500).json({message:error})
@@ -41,12 +41,12 @@ const addNewrestaurant=async(req,res)=>{
 
 
 // didnt try it yet
-const deleterestaurant=async(req,res)=>{
+const deleteresturant=async(req,res)=>{
     try {
         const {id}=req.params
-        const restaurants=await restaurant.findByIdAndDelete(id)
-        if(!restaurants){
-            return res.status(404).json({message:"restaurant not found"})
+        const resturants=await resturant.findByIdAndDelete(id)
+        if(!resturants){
+            return res.status(404).json({message:"resturant not found"})
         }
         res.status(200).json({message:"Deleted successfuly"})
     } catch (error) {
@@ -56,7 +56,7 @@ const deleterestaurant=async(req,res)=>{
 
 
 module.exports = {
-    getAllrestaurant,
-    addNewrestaurant,
-    deleterestaurant,
+    getAllresturant,
+    addNewresturant,
+    deleteresturant,
   };

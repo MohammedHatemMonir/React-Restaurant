@@ -3,19 +3,19 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 const mealSchema=mongoose.Schema({
     MealName:{
         type:String,
-        require:[true,"Enter restaurant name "]
+        require:[true,"Enter resturant name "]
     },
     MealImg:{
         type:String,
-        require:[true,"Enter restaurant ResImg"]
+        require:[true,"Enter resturant ResImg"]
     },
     Description:{
         type:String,
-        require:[true,"Enter restaurant ResImg"]
+        require:[true,"Enter resturant ResImg"]
     },
     Price:{
         type:Number,
-        require:[true,"Enter restaurant ResImg"]
+        require:[true,"Enter resturant ResImg"]
     },
     ResID: { type: ObjectId, ref: 'restaurant' }
 })

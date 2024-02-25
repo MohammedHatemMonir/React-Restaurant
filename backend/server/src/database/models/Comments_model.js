@@ -3,11 +3,11 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 const commentSchema=mongoose.Schema({
     Comment:{
         type:String,
-        require:[true,"Enter restaurant ResImg"]
+        require:[true,"Enter resturant ResImg"]
     },
     commentSentmint :{
         type:Array,
-        require:[true,"Enter restaurant ResImg"]
+        require:[true,"Enter resturant ResImg"]
     },
     MealID: { type: ObjectId, ref: 'meal' }
 })
