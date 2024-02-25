@@ -34,7 +34,9 @@ const addNewresturant=async(req,res)=>{
                 res.send("RESTURAND DOSE EXEST");
         }}
     } catch (error) {
-        res.status(500).json({message:error})
+
+        console.log("Error in addNewresturant",error)
+        res.status(200).json({message:"Could not add restaurant"})
     }
 }
 
