@@ -22,7 +22,7 @@ export default function TheRouter() {
     <>
       <Routes>
         <Route path="/" element={<DefaultLayout />}>
-          <Route index element={<Home />} />
+          <Route index element={<ResPage />} />
 
           <Route path="card" element={<Card />}></Route>
           <Route path="dash1" element={<Dashboard1 />}></Route>
