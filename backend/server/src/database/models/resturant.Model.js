@@ -1,17 +1,17 @@
 const mongoose = require("mongoose");
 
 const resturantSchema=mongoose.Schema({
-    name:{
+    ResName:{
         type:String,
-        require:[true,"Enter name resturant"]
+        require:[true,"Enter resturant name "]
     },
-    address:{
+    ResImg:{
         type:String,
-        require:[true,"Enter address resturant"]
+        require:[true,"Enter resturant ResImg"]
     },
-    phone:{
+    Categoery:{
         type:String,
-        require:[true,"Enter phone resturant"]
+        require:[true,"Enter resturant Categoery"]
     }
 })
 

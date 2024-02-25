@@ -3,8 +3,9 @@ const cors=require('cors');
 const app=express();
 const {connectToMongoDB} = require("./database/dbconnection")
 const userRouter = require("./modules/routes/userRoutes");
-const pyRoutes = require("./modules/routes/pyRoutes");
+const comment_routes = require("./modules/routes/comment_routes");
 const router = require('./modules/routes/resturant.router')
+const MEALrouter = require('./modules/routes/meals_routes')
 // const { json } = require('react-router-dom');
 
 connectToMongoDB()
@@ -25,7 +26,8 @@ app.use(cors({
     preflightContinue: true
   }));
 app.use(router)
-app.use("/analyze", pyRoutes);
+app.use(MEALrouter)
+app.use("/analyze", comment_routes);
 app.use("/api/users", userRouter);
 
 

@@ -56,50 +56,7 @@ const addNewuser = async (req, res) => {
     res.status(400).json({ error: err });
   }
 };
-
-// /////////////////////////////////
-const axios = require('axios');
-const { json } = require("react-router-dom");
-
-// Replace with your Python server URL
-const serverUrl = 'http://127.0.0.1:5000/analyze2';
-
-async function analyzeText(text) {
-  try {
-    const data = JSON.stringify({ "text": `${text}` });
-    const response = await axios.post(serverUrl, data, {headers: {"Content-Type": "application/json"}});
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    throw error; // Re-throw for proper error handling
-  }
-}
-
-const analyze = async (req, res) => {
-  try {
-    const errors =validationResult(req)
-    if(!errors.isEmpty()){
-      res.status(400).json(errors.array())
-      
-    }else{
-      // console.log(errors)
-      const text = req.body.text;
-      
-      const result = await analyzeText(text);
-      res.status(200).json({Sentiment:` ${result.sentiment}`});
-    }
-
-  } catch (err) {
-    res.status(400).json({ error: err });
-  }
-};
-
-
-///////////////////////////////////
-
 module.exports = {
   getSingleuser,
   addNewuser,
-  // AddNewMember,
-  analyze,
 };

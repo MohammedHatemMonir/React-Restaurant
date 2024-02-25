@@ -1,7 +1,7 @@
 const express = require("express");
 const { body } = require("express-validator");
 const router = express.Router();
-const usersController = require("../controllers/usersController");
+const comment_controller = require("../controllers/comment_controller");
 const { Router } = require("express");
 
 router
@@ -11,8 +11,11 @@ router
             body("text")
             .notEmpty()
             .withMessage("text Is Empty"),
+            body("meal")
+            .notEmpty()
+            .withMessage("text Is Empty"),
 
         ],
-        usersController.analyze);
+        comment_controller.analyze);
     
 module.exports = router;

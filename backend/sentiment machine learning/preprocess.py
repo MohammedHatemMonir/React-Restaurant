@@ -96,18 +96,18 @@ def tweets_analising (tweets,CountVectorizer,encoder,Tokenizer,analising_model,e
 
     for numpers in new_sequence1:
         embty=True
-        testr=str(predictions[i])
+        testr=str(predictions[i][i])
+        print(testr)
         for numper in numpers:
             if  numper!=0:
                 embty=False
         if embty==True:
-            sentiment=tweets[i]+' :not positive or negative.'
+            sentiment=['not positive or negative','no emotion']
         elif predictions[i] > 0.5:
-            sentiment=tweets[i]+' :positive.'+prediction[i]+testr
-        # elif predictions[i] < 0.2:
-        #     print(tweets[i]+' :negative.'+prediction[i]+testr)
+            sentiment=['positive',prediction[i],testr]
+            # sentiment=tweets[i]+'"'':''" positive.'+prediction[i]+testr
         else:
-            sentiment=tweets[i]+' :negative.'+prediction[i]+testr
+            sentiment=['negative.',prediction[i],testr]
         i+=1
     return sentiment
 
