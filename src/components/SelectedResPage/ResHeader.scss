@@ -1,0 +1,15 @@
+.res-header {
+  .res-img {
+    width: 130px;
+    height: 130px;
+    border: 2px white solid;
+    border-radius: 50%;
+  }
+  .res-stars {
+    display: flex;
+    margin: -18px 0 0 0;
+    transform: scale(0.6);
+    //  width: fit-content;
+    // position: relative;
+  }
+}

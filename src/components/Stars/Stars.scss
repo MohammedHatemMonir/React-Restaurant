@@ -24,12 +24,12 @@
     }
 
     label {
-      height: 30px; // Adjusted height accordingly
+      // height: 30px; // Adjusted height accordingly
       width: 20%;
       display: block;
       position: relative;
       cursor: pointer;
-      @for $i from 1 through 5 {
+      @for $i from 5 through 1 {
         &:nth-of-type(#{$i}):after {
           $animation-delay: $i * 0.05s;
           animation-delay: $animation-delay;
@@ -71,5 +71,5 @@
     @include star-rating();
   }
 
-  background-color: #111;
+  // background-color: #111;
 }
