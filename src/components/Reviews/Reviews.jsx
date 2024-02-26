@@ -1,15 +1,9 @@
-import { useState, useEffect } from "react";
-import {
-  Card,
-  CardBody,
-  CardText,
-  CardFooter,
-  CardTitle,
-} from "react-bootstrap";
+import React, { useState, useEffect } from "react";
 import "./Reviews.scss";
-import Emotions from "../Emotions/Emotions";
+
 import reviewsData from "../../ReviewsData";
 import { v4 as uuidv4 } from "uuid";
+import Emotions from "../Emotions/Emotions";
 
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
@@ -21,37 +15,36 @@ const Reviews = () => {
 
   return (
     <div className="reviews-section container">
-      <h2 className="text-center mb-5 text-uppercase fw-bold fs-1">Reviews</h2>
+      <h3 className="text-center mb-5 text-uppercase fw-bold ">Reviews</h3>
       <div className="row g-4">
-        {reviews.map((review) => (
-          <div key={review.id}>
-            <title>Verified Customer section</title>
-            <div className="verified_customer_section">
-              <div className="image_review">
-                <div className="customer_image">
-                  <img src={review.img} alt="customer image" />
-                </div>
-                <div className="customer_name_review_status">
-                  <div className="customer_name">{review.name}</div>
-                  <div className="customer_review">
-                    <i className="fa-solid fa-star" />
-                    <i className="fa-solid fa-star" />
-                    <i className="fa-solid fa-star" />
-                    <i className="fa-solid fa-star" />
-                    <i className="fa-solid fa-star" />
+        {reviews.map((review) => {
+          const emotionID = uuidv4(); // To Generate unique key for each review
+          return (
+            <div key={review.id}>
+              <title>Verified Customer section</title>
+              <div className="verified_customer_section">
+                <div className="image_review">
+                  <div className="customer_image">
+                    <img src={review.img} alt="customer image" />
                   </div>
-                  <div className="customer_status">
-                    {/* Veridied Icon here */}
-                    <div className="customer_status_content">
-                      Verified Customer
+                  <div className="customer_name_review_status  ">
+                    <div className="customer_name">{review.name}</div>
+                    <div className="Emotions-Zoom">
+                      <Emotions key={emotionID} emotion={review.emotion} />
+                    </div>
+                    <div className="customer_status">
+                      {/* Verified Icon here */}
+                      <div className="customer_status_content font-weight-bold">
+                        Verified Customer
+                      </div>
                     </div>
                   </div>
                 </div>
+                <div className="customer_comment">{review.comment}</div>
               </div>
-              <div className="customer_comment">{review.comment}</div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
