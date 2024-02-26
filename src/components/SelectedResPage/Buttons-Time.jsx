@@ -40,7 +40,7 @@ const ButtonsTime = () => {
         <Col>
           <Container>Menu</Container>
         </Col>
-        <Col md={6}>
+        <Col >
           <div className="Reviews-Zoom">
             <Reviews />
           </div>

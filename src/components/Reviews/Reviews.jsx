@@ -33,15 +33,18 @@ const Reviews = () => {
                     <CardText>{review.comment}</CardText>
                   </div>
                 </CardBody>
-                <CardFooter className="d-flex align-items-center">
-                  <img
-                    src={review.img}
-                    className="img-fluid rounded-circle mx-3 shadow"
-                    alt={`${review.id}-Image`}
-                  />
-                  <CardTitle className="text-success text-sm">
-                    {review.name}
-                  </CardTitle>
+                <CardFooter className="d-flex justify-content-between align-items-center card-footer">
+                  <div className="d-flex align-items-center">
+                    <img
+                      src={review.img}
+                      className="img-fluid rounded-circle mx-3 shadow"
+                      alt={`${review.id}-Image`}
+                    />
+                    <CardTitle className="text-success ">
+                      {review.name}
+                    </CardTitle>
+                  </div>
+
                   <div className="Emotions-Zoom">
                     <Emotions key={emotionID} emotion={review.emotion} />
                   </div>

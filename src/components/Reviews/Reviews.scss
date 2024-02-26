@@ -1,7 +1,13 @@
 .reviews-section {
-
+  width: 100px;
   img {
-    width: 15%;
+    width: 60px;
+    height: 60px;
+    left: 0;
     border-width: thin;
+    object-fit: contain;
+  }
+  .card-footer {
+   
   }
 }
