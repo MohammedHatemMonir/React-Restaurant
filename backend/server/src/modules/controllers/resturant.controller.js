@@ -1,64 +1,62 @@
+const restaurant = require("../../database/models/resturant.Model");
+const { validationResult, check } = require("express-validator");
 
-const resturant  = require("../../database/models/resturant.Model");
-
-
-
-const getAllresturant=async(req,res)=>{
+const getAllresturant = async (req, res) => {
     try {
-        const resturants=await resturant.find({})
-        res.status(200).json(resturants)
+        const restaurants = await restaurant.find({});
+        res.status(200).json(restaurants);
     } catch (error) {
-        res.status(500).json({message:error})
+        res.status(500).json({ message: error });
     }
 }
 
-const addNewresturant=async(req,res)=>{
+const addNewresturant = async (req, res) => {
     try {
-        // console.log(req.body)
-        const allowedMimetypes = ['jpeg', 'png', 'gif','jpg'];
-        if (!allowedMimetypes.includes(req.body.ResImg.split('.').pop())) {
-        return res.status(400).json({ error: 'Invalid image format' });
-        }else {
-            const restaurantname = req.body.ResName;
-            const resturants = await resturant.find({ResName:restaurantname});
-            if (!resturants[0]) {
-                const body = {
-                    ResName:req.body.ResName,
-                    ResImg:req.body.ResImg,
-                    Categoery:req.body.Categoery}
-                // const newresturant = new resturant(req.body);
-                // await newresturant.save();
-                await resturant.create(req.body)
-                res.status(200).json(body)
-            }else{
-                res.send("RESTURAND DOSE EXEST");
-        }}
-    } catch (error) {
-
-        console.log("Error in addNewresturant",error)
-        res.status(200).json({message:"Could not add restaurant"})
-    }
-}
-
-
-
-// didnt try it yet
-const deleteresturant=async(req,res)=>{
-    try {
-        const {id}=req.params
-        const resturants=await resturant.findByIdAndDelete(id)
-        if(!resturants){
-            return res.status(404).json({message:"resturant not found"})
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
         }
-        res.status(200).json({message:"Deleted successfuly"})
+
+        const allowedMimetypes = ['jpeg', 'png', 'gif', 'jpg'];
+        const fileExtension = req.body.ResImg.split('.').pop().toLowerCase();
+        if (!allowedMimetypes.includes(fileExtension)) {
+            return res.status(400).json({ error: 'Invalid image format' });
+        } else {
+            const restaurantname = req.body.ResName;
+            const restaurants = await restaurant.find({ ResName: restaurantname });
+            if (!restaurants[0]) {
+                const newRestaurantData = {
+                    ResName: req.body.ResName,
+                    ResImg: req.body.ResImg,
+                    Categoery: req.body.Categoery
+                };
+                const newRestaurant = await restaurant.create(newRestaurantData);
+                res.status(200).json(newRestaurantData);
+            } else {
+                res.send("Restaurant already exists");
+            }
+        }
     } catch (error) {
-        res.status(500).json({message:error})
+        console.log("Error in addNewresturant", error);
+        res.status(500).json({ message: "Could not add restaurant" });
     }
 }
 
+const deleteresturant = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const restaurants = await restaurant.findByIdAndDelete(id);
+        if (!restaurants) {
+            return res.status(404).json({ message: "Restaurant not found" });
+        }
+        res.status(200).json({ message: "Deleted successfully" });
+    } catch (error) {
+        res.status(500).json({ message: error });
+    }
+}
 
 module.exports = {
     getAllresturant,
     addNewresturant,
     deleteresturant,
-  };
+};

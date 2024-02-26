@@ -1,21 +1,13 @@
 const express = require("express");
-const { body } = require("express-validator");
 const router = express.Router();
 const comment_controller = require("../controllers/comment_controller");
 const { Router } = require("express");
+const validateCommentsInput = require("../../middlewares/validator/validation.comments.js");
 
 router
     .route("/")
     .post(
-        [
-            body("text")
-            .notEmpty()
-            .withMessage("text Is Empty"),
-            body("meal")
-            .notEmpty()
-            .withMessage("text Is Empty"),
-
-        ],
+        validateCommentsInput,
         comment_controller.analyze);
     
 module.exports = router;
