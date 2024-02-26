@@ -1,8 +1,14 @@
 import "./SelectedResPage.scss";
 import ResHeader from "./ResHeader";
+import ButtonsTime from "./Buttons-Time";
 
 const SelectedResPage = () => {
-  return <ResHeader />;
+  return (
+    <>
+      <ResHeader />
+      <ButtonsTime />
+    </>
+  );
 };
 
 export default SelectedResPage;

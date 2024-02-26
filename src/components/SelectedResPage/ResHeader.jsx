@@ -20,7 +20,7 @@ const ResHeader = () => {
           <div className="2.1 d-flex">
             <p>American</p>
             <div className="res-stars">
-              <Stars />
+              <Stars stars1={4}/>
             </div>
             <p className="pr-1">4.5</p>
             <Link className="nav-link">( 3082 )</Link>
@@ -33,6 +33,7 @@ const ResHeader = () => {
           </div>
         </div>
       </div>
+      <hr />
     </section>
   );
 };
