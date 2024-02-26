@@ -23,36 +23,35 @@ const Reviews = () => {
     <div className="reviews-section container">
       <h2 className="text-center mb-5 text-uppercase fw-bold fs-1">Reviews</h2>
       <div className="row g-4">
-        {reviews.map((review) => {
-          const emotionID = uuidv4(); // To Generate unique key for each review
-          return (
-            <div key={review.id} className="">
-              <Card className="h-100 shadow">
-                <CardBody>
-                  <div className="p-4">
-                    <CardText>{review.comment}</CardText>
+        {reviews.map((review) => (
+          <div key={review.id}>
+            <title>Verified Customer section</title>
+            <div className="verified_customer_section">
+              <div className="image_review">
+                <div className="customer_image">
+                  <img src={review.img} alt="customer image" />
+                </div>
+                <div className="customer_name_review_status">
+                  <div className="customer_name">{review.name}</div>
+                  <div className="customer_review">
+                    <i className="fa-solid fa-star" />
+                    <i className="fa-solid fa-star" />
+                    <i className="fa-solid fa-star" />
+                    <i className="fa-solid fa-star" />
+                    <i className="fa-solid fa-star" />
                   </div>
-                </CardBody>
-                <CardFooter className="d-flex justify-content-between align-items-center card-footer">
-                  <div className="d-flex align-items-center">
-                    <img
-                      src={review.img}
-                      className="img-fluid rounded-circle mx-3 shadow"
-                      alt={`${review.id}-Image`}
-                    />
-                    <CardTitle className="text-success ">
-                      {review.name}
-                    </CardTitle>
+                  <div className="customer_status">
+                    {/* Veridied Icon here */}
+                    <div className="customer_status_content">
+                      Verified Customer
+                    </div>
                   </div>
-
-                  <div className="Emotions-Zoom">
-                    <Emotions key={emotionID} emotion={review.emotion} />
-                  </div>
-                </CardFooter>
-              </Card>
+                </div>
+              </div>
+              <div className="customer_comment">{review.comment}</div>
             </div>
-          );
-        })}
+          </div>
+        ))}
       </div>
     </div>
   );

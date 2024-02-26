@@ -1,13 +1,84 @@
 .reviews-section {
-  width: 100px;
-  img {
-    width: 60px;
-    height: 60px;
-    left: 0;
-    border-width: thin;
-    object-fit: contain;
+  .verified_customer_section {
+    display: grid;
+    grid-template-columns: 1fr;
+    border-radius: 10px;
+    border: 1px solid #746dff;
+    background-color: #746dff1a;
+    padding: 5px;
+    max-width: 540px;
+    min-height: 180px;
+    margin: auto;
   }
-  .card-footer {
-   
+
+  .image_review {
+    padding-top: 10px;
+    padding-left: 5px;
+  }
+
+  .image_review i {
+    font-size: 16px;
+    color: gold;
+    margin-left: 0;
+    margin-right: 2px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .customer_image {
+    max-width: 80px;
+    max-width: 80px;
+  }
+
+  .customer_image img {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    float: left;
+    margin-right: 10px;
+  }
+
+  .customer_name {
+    font-family: Poppins;
+    font-weight: 700;
+    font-size: 16px;
+    margin-top: 0;
+    text-align: left;
+    color: #2e2a39;
+    margin-bottom: 0;
+  }
+
+  .customer_bage {
+    float: left;
+    padding-right: 5px;
+  }
+
+  .customer_status .customer_bage img {
+    width: 12px;
+    height: 15px;
+  }
+
+  .customer_status_content {
+    padding-left: 5px;
+    margin-bottom: 0;
+    font-family: Poppins;
+    font-weight: 400;
+    font-size: 13px;
+    margin-top: 2px;
+    color: rgb(91, 191, 138);
+  }
+
+  .customer_comment {
+    padding-left: 5px;
+    padding-top: 10px;
+    margin-bottom: 0;
+    font-size: 15px;
+    color: #2e2a39;
+    margin-top: 3px;
+    font-family: Poppins;
+    font-weight: 300;
+    padding-right: 5px;
+    text-align: left;
+    font-style: italic;
   }
 }

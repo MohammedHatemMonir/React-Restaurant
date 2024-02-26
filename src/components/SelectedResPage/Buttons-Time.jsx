@@ -7,9 +7,9 @@ import Reviews from "./../Reviews/Reviews";
 
 const ButtonsTime = () => {
   const btns = [
-    { string: "Menu" },
-    { string: "About" },
-    { string: "Branches" },
+    { id: 1, string: "Menu" },
+    { id: 2, string: "About" },
+    { id: 3, string: "Branches" },
   ];
   return (
     <section className="btns-time">
@@ -17,6 +17,7 @@ const ButtonsTime = () => {
         <form>
           {btns.map((data) => (
             <input
+              key={data.id}
               type="button"
               className="btn mx-2 my-btn"
               value={data.string}
@@ -40,7 +41,7 @@ const ButtonsTime = () => {
         <Col>
           <Container>Menu</Container>
         </Col>
-        <Col >
+        <Col>
           <div className="Reviews-Zoom">
             <Reviews />
           </div>

@@ -6,29 +6,21 @@ import { Link } from "react-router-dom";
 const SideBar = () => {
   const sideBarData = [
     {
+      id: 1,
       string: "Offers",
       icon: <OfficeLogoIcon />,
     },
-    {
-      string: "Top Dishes",
-      icon: <InfoIcon />,
-    },
-    {
-      string: "Value Meals",
-    },
-    {
-      string: "Munchies",
-    },
-    {
-      string: "Beef & Dogs",
-    },
+    { id: 2, string: "Top Dishes", icon: <InfoIcon /> },
+    { id: 3, string: "Value Meals" },
+    { id: 4, string: "Munchies" },
+    { id: 5, string: "Beef & Dogs" },
   ];
 
   return (
     <div className="my-res-sidebar">
       <ul>
         {sideBarData.map((data) => (
-          <Link className="nav-link">
+          <Link className="nav-link" key={data.id}>
             <li>{data.string}</li>
           </Link>
         ))}
