@@ -2,9 +2,17 @@
   .my-btn {
     background-color: #e32207 !important;
     color: white;
-   
   }
   .my-btn:hover {
     background: #ccc !important;
+  }
+
+  .Reviews-Zoom {
+    transform: scale(0.9);
+  }
+  .Emotions-Zoom {
+    transform: scale(0.7);
+
+    // margin-left: -20px;
   }
 }

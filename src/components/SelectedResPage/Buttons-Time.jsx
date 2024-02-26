@@ -1,5 +1,9 @@
-import "./Buttons-SideBar.scss";
+import "./Buttons-Time.scss";
 import ClockIcon from "../../Icons/ClockIcon";
+import SideBar from "./SideBar";
+import { Container, Row } from "reactstrap";
+import { Col } from "react-bootstrap";
+import Reviews from "./../Reviews/Reviews";
 
 const ButtonsTime = () => {
   const btns = [
@@ -26,7 +30,25 @@ const ButtonsTime = () => {
           <p>12:00 PM - 02:00 AM</p>
         </div>
       </div>
-      {/* SidBar */}
+
+      {/* <SideBar /> */}
+
+      <Row>
+        <Col>
+          <SideBar />
+        </Col>
+        <Col>
+          <Container>Menu</Container>
+        </Col>
+        <Col md={6}>
+          <div className="Reviews-Zoom">
+            <Reviews />
+          </div>
+        </Col>
+      </Row>
+      {/* <div className="Reviews-Zoom">
+        <Reviews />
+      </div> */}
     </section>
   );
 };

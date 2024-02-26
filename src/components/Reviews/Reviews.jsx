@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   Card,
   CardBody,
@@ -26,7 +26,7 @@ const Reviews = () => {
         {reviews.map((review) => {
           const emotionID = uuidv4(); // To Generate unique key for each review
           return (
-            <div key={review.id} className="col-lg-6">
+            <div key={review.id} className="">
               <Card className="h-100 shadow">
                 <CardBody>
                   <div className="p-4">
@@ -39,8 +39,10 @@ const Reviews = () => {
                     className="img-fluid rounded-circle mx-3 shadow"
                     alt={`${review.id}-Image`}
                   />
-                  <CardTitle className="text-success">{review.name}</CardTitle>
-                  <div className="mx-auto">
+                  <CardTitle className="text-success text-sm">
+                    {review.name}
+                  </CardTitle>
+                  <div className="Emotions-Zoom">
                     <Emotions key={emotionID} emotion={review.emotion} />
                   </div>
                 </CardFooter>

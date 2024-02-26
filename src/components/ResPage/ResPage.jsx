@@ -170,32 +170,27 @@ export default function ResPage() {
     },
   ];
 
-
-
-
   return (
     <section>
-
       <Slider />
-      <Container style={{width: "85%"}}>
-      <Header />
-
-      <div className="row">
-        {resData.map((data) => (
-          <div className="col-sm-12 col-md-6 col-lg-4" key={data.id}>
-            <Card
-              title={data.title}
-              price={data.minCharge}
-              img={data.image}
-              stars={data.stars}
-              mealImg={data.mealImg}
-              reviewsNum={data.reviewsNum}
-              resName={data.resName}
-              fav={data.fav}
-            />
-          </div>
-        ))}
-      </div>
+      <Container style={{ width: "85%" }}>
+        <Header />
+        <div className="row">
+          {resData.map((data) => (
+            <div className="col-sm-12 col-md-6 col-lg-4" key={data.id}>
+              <Card
+                title={data.title}
+                price={data.minCharge}
+                img={data.image}
+                stars={data.stars}
+                mealImg={data.mealImg}
+                reviewsNum={data.reviewsNum}
+                resName={data.resName}
+                fav={data.fav}
+              />
+            </div>
+          ))}
+        </div>
       </Container>
 
       <Footer />

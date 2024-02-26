@@ -1,6 +1,6 @@
 import "./Emotions.scss";
 import { v4 as uuidv4 } from "uuid";
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 function Emotions({ emotion, emotionID }) {
   const inputRefs = useRef(Array(5).fill(null)); // Initialize as an array of length 5 with null values
 

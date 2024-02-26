@@ -1,0 +1,26 @@
+.my-res-sidebar {
+  background-color: #f0f0f0; /* Background color */
+  width: 200px; /* Width of the sidebar */
+}
+
+ul {
+  list-style-type: none; /* Remove bullet points */
+  padding: 0; /* Remove default padding */
+  margin: 0; /* Remove default margin */
+}
+
+li {
+  padding: 10px; /* Padding around each list item */
+  border-bottom: 1px solid #ccc; /* Border bottom for each item */
+}
+
+li:hover {
+  background-color: #ddd; /* Background color on hover */
+}
+
+/* Style for icons */
+.my-res-sidebar svg {
+  width: 20px; /* Adjust icon width */
+  height: 20px; /* Adjust icon height */
+  margin-right: 10px; /* Add margin between icon and text */
+}
