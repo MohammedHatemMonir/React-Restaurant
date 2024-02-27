@@ -27,7 +27,7 @@ const Reviews = () => {
                   <div className="customer_image">
                     <img src={review.img} alt="customer image" />
                   </div>
-                  <div className="customer_name_review_status  ">
+                  <div className="customer_name_review_status ">
                     <div className="customer_name">{review.name}</div>
                     <div className="Emotions-Zoom">
                       <Emotions key={emotionID} emotion={review.emotion} />

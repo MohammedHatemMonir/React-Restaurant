@@ -9,7 +9,7 @@ const reviewsData = [
     name: "John Mike",
     img: person1,
     comment:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi iste culpa perspiciatis. Magnam, explicabo cumque.",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit.  iste culpa perspiciatis. Magnam, explicabo cumque.",
     emotion: 4,
   },
   {

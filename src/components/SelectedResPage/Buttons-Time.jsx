@@ -4,6 +4,7 @@ import SideBar from "./SideBar";
 import { Container, Row } from "reactstrap";
 import { Col } from "react-bootstrap";
 import Reviews from "./../Reviews/Reviews";
+import MealCard from "./MealCard";
 
 const ButtonsTime = () => {
   const btns = [
@@ -33,20 +34,23 @@ const ButtonsTime = () => {
       </div>
 
       {/* <SideBar /> */}
-
+      {/* 
+<Container></Container> */}
+      {/* <MealCard /> */}
       <Row>
-        <Col>
+        <Col md={3}>
           <SideBar />
         </Col>
-        <Col>
-          <Container>Menu</Container>
+        <Col md={6}>
+          <MealCard />
         </Col>
-        <Col>
+        <Col md={3}>
           <div className="Reviews-Zoom">
             <Reviews />
           </div>
         </Col>
       </Row>
+
       {/* <div className="Reviews-Zoom">
         <Reviews />
       </div> */}
