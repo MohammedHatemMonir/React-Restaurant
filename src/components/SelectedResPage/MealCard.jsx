@@ -100,14 +100,18 @@ const mealsData = [
   },
 ];
 
+let hema = document.getElementById("my-id");
+// console.log(hema)
+
 const MealCard = () => {
   return (
     <div className="my-meal-card">
       {mealsData.map((data) => (
         <div className="meal-card" key={data.id}>
-          <h2>{data.type}</h2>
-
-
+          <h2 className="text-danger " id="my-id">
+            {data.type}
+          </h2>
+          <br />
           <div className="d-flex justify-content-between">
             <div className="1 d-flex">
               <div className="1.1">

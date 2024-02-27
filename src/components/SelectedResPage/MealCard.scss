@@ -1,5 +1,6 @@
 .my-meal-card {
   .meal-card {
+    cursor: pointer;
     margin-bottom: 30px;
     &:hover {
       background-color: #ccc;
