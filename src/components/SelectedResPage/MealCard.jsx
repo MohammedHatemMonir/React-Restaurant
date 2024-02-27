@@ -20,6 +20,7 @@ const mealsData = [
     img: img1,
     desc: `I'm baby woke mlkshk wolf bitters live-edge blue bottle, hammock freegan copper mug whatever cold-pressed `,
     stars: 4,
+    type: "Offers",
   },
   {
     id: 2,
@@ -38,6 +39,7 @@ const mealsData = [
     img: img3,
     desc: `ombucha chillwave fanny pack 3 wolf moon street art photo booth before they sold out organic viral.`,
     stars: 3,
+    type: "Top Dishes",
   },
   {
     id: 4,
@@ -56,6 +58,7 @@ const mealsData = [
     img: img5,
     desc: `franzen vegan pabst bicycle rights kickstarter pinterest meditation farm-to-table 90's pop-up `,
     stars: 1,
+    type: "Value Meals",
   },
   {
     id: 6,
@@ -74,6 +77,7 @@ const mealsData = [
     img: img7,
     desc: `carry jianbing normcore freegan. Viral single-origin coffee live-edge, pork belly cloud bread iceland put a bird `,
     stars: 4,
+    type: "Munchies",
   },
   {
     id: 8,
@@ -92,41 +96,43 @@ const mealsData = [
     img: img9,
     desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
     stars: 5,
+    type: "Beef & Dogs",
   },
 ];
 
 const MealCard = () => {
-    return (
-      <div className="my-meal-card">
-        <h2>Offers</h2>
-        {mealsData.map((data) => (
-          <div className="meal-card" key={data.id}> {/* Updated class name */}
-            <div className="d-flex justify-content-between">
-              <div className="1 d-flex">
-                <div className="1.1">
-                  <h3>{data.title}</h3>
-                  <h5>{data.desc}</h5>
-                  <div className="1.1.1 d-flex gap-2">
-                    <del>20</del>
-                    <p>{data.price}</p>
-                  </div>
-                </div>
-              </div>
-              <div className="2">
-                <div className="2.1">
-                  <img src={data.img} alt="meal-img" />
-                </div>
-                <div className="2.1 d-flex my-3">
-                  <AddIcon />
-                  <p>66</p>
+  return (
+    <div className="my-meal-card">
+      {mealsData.map((data) => (
+        <div className="meal-card" key={data.id}>
+          <h2>{data.type}</h2>
+
+
+          <div className="d-flex justify-content-between">
+            <div className="1 d-flex">
+              <div className="1.1">
+                <h3>{data.title}</h3>
+                <h5>{data.desc}</h5>
+                <div className="1.1.1 d-flex gap-2">
+                  <del>20</del>
+                  <p>{data.price}</p>
                 </div>
               </div>
             </div>
+            <div className="2">
+              <div className="2.1">
+                <img src={data.img} alt="meal-img" />
+              </div>
+              <div className="2.1 d-flex my-3">
+                <AddIcon />
+                <p>66</p>
+              </div>
+            </div>
           </div>
-        ))}
-      </div>
-    );
-  };
-  
+        </div>
+      ))}
+    </div>
+  );
+};
 
 export default MealCard;
