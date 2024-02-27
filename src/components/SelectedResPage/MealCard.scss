@@ -1,8 +1,14 @@
 .my-meal-card {
-  background-color: red;
+  .meal-card {
+    margin-bottom: 30px;
+    &:hover {
+      background-color: #ccc;
+    }
+  }
+
   img {
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
     object-fit: cover;
     border: none;
     outline: none;

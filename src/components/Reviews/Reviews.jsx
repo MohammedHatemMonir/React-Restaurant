@@ -32,11 +32,13 @@ const Reviews = () => {
                     <div className="Emotions-Zoom">
                       <Emotions key={emotionID} emotion={review.emotion} />
                     </div>
+
                     <div className="customer_status">
                       {/* Verified Icon here */}
                       <div className="customer_status_content font-weight-bold">
                         Verified Customer
                       </div>
+                      <hr />
                     </div>
                   </div>
                 </div>
