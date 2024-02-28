@@ -34,9 +34,9 @@ const Reviews = () => {
 
                     <div className="customer_status">
                       {/* Verified Icon here */}
-                      <div className="customer_status_content font-weight-bold">
+                      {/* <div className="customer_status_content font-weight-bold">
                         Verified Customer
-                      </div>
+                      </div> */}
                       <hr />
                     </div>
                   </div>
