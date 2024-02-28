@@ -17,24 +17,40 @@ const addNewmeal = async (req, res) => {
         if (!allowedMimetypes.includes(req.body.MealImg.split('.').pop())) {
         return res.status(400).json({ error: 'Invalid image format' });
         }else {
-            const restaurantname = req.body.Res;
-            const resturants = await resturant.find({ResName:restaurantname});
+            const Resid = req.body.Resid;
+            
+            const resturants = await resturant.find({_id:Resid});
             if (!resturants[0]) {
                 res.send("RESTURAND DOSENT EXEST");
             }else{
-                // console.log(resturants[0]._id.toString())
-                req.body.ResID=resturants[0]._id.toString()
+              const comment_num=0
+              const rating = 0
                 const body = {
-                    MealName:req.body.MealName,
-                    MealImg:req.body.MealImg,
-                    Description:req.body.Description,
-                    Price:req.body.Price,
-                    ResID:req.body.ResID}
+                  MealName:req.body.MealName,
+                  MealImg:req.body.MealImg,
+                  Description:req.body.Description,
+                  Price:req.body.Price,
+                  ResID:req.body.Resid,
+                  rating:rating,
+                  comment_num:comment_num}
                 const meals = new meal(body);
                 await meals.save();
                     // const meals=await meal.create(body)
+                    new_Meals_num=resturants[0].Meals_num+1
+                    test1=resturants[0].Meals_num+resturants[0].comment_num
+                    new_res_rating=(resturants[0].rating*(test1))/(test1+1)
+                    const res_body={
+                      ResName: resturants[0].ResName,
+                      ResImg: resturants[0].ResImg,
+                      Categoery: resturants[0].Categoery,
+                      rating:new_res_rating,
+                      Meals_num:new_Meals_num,
+                      comment_num:resturants[0].comment_num
+                  }
+                  const res_update = await resturant.updateOne({ _id: Resid },{ $set: res_body});
                 res.status(201).json(body);
                     // console.log(req.body)
+
             }}
       } else {
         res.send("MEAL EXEST");

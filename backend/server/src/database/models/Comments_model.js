@@ -9,6 +9,7 @@ const commentSchema=mongoose.Schema({
         type:Array,
         require:[true,"Enter resturant ResImg"]
     },
-    MealID: { type: ObjectId, ref: 'meal' }
+    MealID: { type: String, ref: 'meal' }
+    // MealID: { type: ObjectId, ref: 'meal' }
 })
 module.exports = mongoose.model('comment', commentSchema);

@@ -12,6 +12,18 @@ const resturantSchema=mongoose.Schema({
     Categoery:{
         type:String,
         require:[true,"Enter resturant Categoery"]
+    },
+    rating:{
+        type:Number,
+        require:[true,"Enter resturant rating"]
+    },
+    comment_num:{
+        type:Number,
+        require:[true,"Enter resturant rating"]
+    },
+    Meals_num:{
+        type:Number,
+        require:[true,"Enter resturant rating"]
     }
 })
 

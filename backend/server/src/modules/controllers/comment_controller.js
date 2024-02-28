@@ -28,23 +28,51 @@ const analyze = async (req, res) => {
       res.status(400).json(errors.array())
       
     }else{
-        const MealName = req.body.meal;
-        const meals = await meal.find({MealName:MealName});
+        const mealid = req.body.mealid;
+        const meals = await meal.find({_id:mealid});
         if (!meals[0]) {        
             res.send("STOP HACKING!!!");
-        }else{
-      // console.log(errors)
-      const text = req.body.text;
-      const result = await analyzeText(text);
-      const body = {
-        Comment:text,
-        commentSentmint:result.sentiment,
-        MealID:meals[0]._id.toString()}
-        const CommentS = new Comment(body);
-        await CommentS.save();
-      res.status(200).json({Comment:text,commentSentmint:result.sentiment,});
+          }else{
+            const text= req.body.text
+            // console.log(errors)
+            const result = await analyzeText(text);
+            const body = {
+              Comment:text,
+              commentSentmint:result.sentiment,
+              MealID:req.body.mealid}
+            const CommentS = new Comment(body);
+            await CommentS.save();
+            const Comment_rating=result.sentiment[2]*5
+            const new_comment_num=meals[0].comment_num+1
+            const new_rating=(Comment_rating+meals[0].rating*meals[0].comment_num)/new_comment_num
+
+            const meal_body = {
+              MealName:meals[0].MealName,
+              MealImg:meals[0].MealImg,
+              Description:meals[0].Description,
+              Price:meals[0].Price,
+              rating: new_rating,
+              ResID:meals[0].ResID ,
+              comment_num:new_comment_num}
+              console.log (meal_body)
+            const meal_update = await meal.updateOne({ _id: mealid },{ $set: meal_body});
+            console.log(meals[0].rating)
+            const resturants = await resturant.find({_id:meals[0].ResID});
+            console.log(resturants)
+            new_res_rating=(resturants[0].rating*(resturants[0].Meals_num+resturants[0].comment_num)+new_rating-meals[0].rating)/resturants[0].Meals_num+resturants[0].comment_num
+            
+            const res_body={
+              ResName: resturants[0].ResName,
+              ResImg: resturants[0].ResImg,
+              Categoery: resturants[0].Categoery,
+              rating:new_res_rating,
+              Meals_num:resturants[0].Meals_num,
+              comment_num:resturants[0].comment_num
+          }
+          const res_update = await resturant.updateOne({ _id: meals[0].ResID },{ $set: res_body});
+            res.status(200).json({Comment:text,commentSentmint:result.sentiment,});
         }
-    }
+    } 
 
   } catch (err) {
     res.status(400).json({ error: err });

@@ -13,7 +13,8 @@ const validateResturantInput = [
             }
             return true;
         }),
-
+    check("rating")
+        .isNumeric().withMessage("only numpers allowd"),
     check('Categoery')
         .notEmpty().withMessage('Restaurant category is required')
 ];

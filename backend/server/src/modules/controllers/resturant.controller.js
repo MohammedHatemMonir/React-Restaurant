@@ -25,13 +25,20 @@ const addNewresturant = async (req, res) => {
             const restaurantname = req.body.ResName;
             const restaurants = await restaurant.find({ ResName: restaurantname });
             if (!restaurants[0]) {
-                const newRestaurantData = {
-                    ResName: req.body.ResName,
-                    ResImg: req.body.ResImg,
-                    Categoery: req.body.Categoery
-                };
-                const newRestaurant = await restaurant.create(newRestaurantData);
-                res.status(200).json(newRestaurantData);
+                    const rating=0
+                    const Meals_num=0
+                    const comment_num=0
+                    const newRestaurantData = {
+                        ResName: req.body.ResName,
+                        ResImg: req.body.ResImg,
+                        Categoery: req.body.Categoery,
+                        rating:rating,
+                        Meals_num:Meals_num,
+                        comment_num:comment_num
+                    };
+                    const newRestaurant = await restaurant.create(newRestaurantData);
+                    res.status(200).json(newRestaurantData);
+
             } else {
                 res.send("Restaurant already exists");
             }

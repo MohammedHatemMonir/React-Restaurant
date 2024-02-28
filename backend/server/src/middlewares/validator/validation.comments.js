@@ -3,7 +3,7 @@ const validateCommentsInput=[
     body("text")
     .notEmpty()
     .withMessage("text Is Empty"),
-    body("meal")
+    body("mealid")
     .notEmpty()
     .withMessage("text Is Empty"),
 

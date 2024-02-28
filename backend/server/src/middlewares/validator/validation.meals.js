@@ -10,8 +10,8 @@ const validateMealsInput=[
     body("Price")
     .isNumeric().withMessage("only numpers allowd")
     .notEmpty().withMessage("Enter THE Price"),
-    body("Res")
-    .notEmpty().withMessage("Enter RESTURANT NAME")
+    body("Resid")
+    .notEmpty().withMessage("Enter RESTURANT NAME"),
 ]
 
 module.exports=validateMealsInput
