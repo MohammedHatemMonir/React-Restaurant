@@ -75,11 +75,7 @@ const Footer = () => {
                     <span />
                   </h5>
                   <p>Get access to your full Training and Marketing Suite.</p>
-                  <a
-                    className="btn"
-                    href="https://bit.ly/3m9avif"
-                    target="_blank"
-                  >
+                  <a className="btn my-3" href="/">
                     Subscribe Now
                   </a>
                 </div>
@@ -92,7 +88,7 @@ const Footer = () => {
                   </h5>
                   <p>
                     <a href="mailto:info@domain.com" title="glorythemes">
-                      info@domain.com
+                      info@dineMe.com
                     </a>
                   </p>
                   <ul className="social-footer2">

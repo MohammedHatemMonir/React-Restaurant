@@ -16,15 +16,17 @@ const ButtonsTime = () => {
 
   function handleClicked(e) {
     const buttonValue = e.target.value;
-    setActiveElement(
-      buttonValue === "About" ? (
-        <AboutTap />
-      ) : buttonValue === "Branches" ? (
-        <BranchesTap />
-      ) : (
-        <MealTap />
-      )
-    );
+    switch (buttonValue) {
+      case "About":
+        setActiveElement(<AboutTap />);
+        break;
+      case "Branches":
+        setActiveElement(<BranchesTap />);
+        break;
+      default:
+        setActiveElement(<MealTap />);
+        break;
+    }
   }
 
   return (

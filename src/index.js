@@ -1,34 +1,31 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-import "./index.css";
+import "./index.scss";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import "bootstrap/dist/css/bootstrap.css";
-import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/css/bootstrap.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "chartist/dist/chartist.min.css";
-import { QueryClient, QueryClientProvider } from "react-query";   
+import { QueryClient, QueryClientProvider } from "react-query";
 
-
-const queryClient = new QueryClient(
-  {
-    defaultOptions: {
-      queries: {
-        // refetchOnWindowFocus: false,
-        // refetchOnmount: false,
-        // refetchOnReconnect: false,
-        // retry: 1,
-        // staleTime: 5 * 1000,
-      },
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      // refetchOnWindowFocus: false,
+      // refetchOnmount: false,
+      // refetchOnReconnect: false,
+      // retry: 1,
+      // staleTime: 5 * 1000,
     },
-  });
-
+  },
+});
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-     <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <App />
       </BrowserRouter>
