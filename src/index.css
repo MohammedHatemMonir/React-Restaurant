@@ -1,7 +1,11 @@
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+
 .__area {
-  font-family: 'Cairo', sans-serif;
+  font-family: "Cairo", sans-serif;
   color: #7c7671;
-  margin-top: 100px
+  margin-top: 100px;
 }
 
 .__card {
@@ -27,10 +31,10 @@
   position: absolute;
   right: 15px;
   top: 8px;
-  padding: 3px 4px; 
+  padding: 3px 4px;
   font-size: 22px;
   line-height: 100%;
-  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   z-index: 1;
   border: 0;
 }
@@ -40,13 +44,13 @@
   text-decoration: none;
 }
 .__card_detail {
-  box-shadow: 0 4px 15px rgba(175,77,0,0.13);
+  box-shadow: 0 4px 15px rgba(175, 77, 0, 0.13);
   padding: 13px;
   border-radius: 8px;
   margin: -30px 10px 0;
   position: relative;
   z-index: 2;
-  background-color: #fff; 
+  background-color: #fff;
 }
 .__card_detail h4 {
   color: #474340;
@@ -87,54 +91,19 @@
   margin-left: 2px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*/////////////////////////////*/
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-
 .navbar-top {
-  font-size: .8rem;
+  font-size: 0.8rem;
   font-weight: 600;
   padding: 0;
   background: var(--phoenix-navbar-top-bg-color);
@@ -146,16 +115,16 @@ body {
 
 .search-box {
   position: relative;
-  font-size: .8rem;
+  font-size: 0.8rem;
   width: 20rem;
 }
 .navbar-expand .navbar-collapse {
-  display: flex!important;
+  display: flex !important;
   flex-basis: auto;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
@@ -168,8 +137,11 @@ code {
   justify-content: center;
 }
 
-
-.btn-phoenix-secondary, .google-map-control-btn .zoomIn, .google-map-control-btn .zoomOut, .tox .tox-dialog__footer .tox-button--secondary, .tox .tox-button-secondary {
+.btn-phoenix-secondary,
+.google-map-control-btn .zoomIn,
+.google-map-control-btn .zoomOut,
+.tox .tox-dialog__footer .tox-button--secondary,
+.tox .tox-button-secondary {
   --phoenix-btn-color: #31374a;
   --phoenix-btn-bg: #f5f7fa;
   --phoenix-btn-border-color: #e3e6ed;
@@ -186,13 +158,22 @@ code {
   --phoenix-btn-disabled-border-color: #e3e6ed;
 }
 
-button:not(:disabled), [type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled) {
+button:not(:disabled),
+[type="button"]:not(:disabled),
+[type="reset"]:not(:disabled),
+[type="submit"]:not(:disabled) {
   cursor: pointer;
 }
 
-
-
-.btn, .google-map-control-btn .zoomIn, .google-map-control-btn .zoomOut, .tox .tox-dialog__footer .tox-button:last-child, .tox .tox-dialog__footer .tox-button--secondary, .tox .tox-button-secondary, .tox .tox-button, [data-list] .page, .table-list .page {
+.btn,
+.google-map-control-btn .zoomIn,
+.google-map-control-btn .zoomOut,
+.tox .tox-dialog__footer .tox-button:last-child,
+.tox .tox-dialog__footer .tox-button--secondary,
+.tox .tox-button-secondary,
+.tox .tox-button,
+[data-list] .page,
+.table-list .page {
   --phoenix-btn-padding-x: 1.5rem;
   --phoenix-btn-padding-y: 0.625rem;
   --phoenix-btn-font-family: ;
@@ -204,9 +185,11 @@ button:not(:disabled), [type=button]:not(:disabled), [type=reset]:not(:disabled)
   --phoenix-btn-border-width: 1px;
   --phoenix-btn-border-color: transparent;
   --phoenix-btn-border-radius: 0.375rem;
-  --phoenix-btn-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0), 0 1px 1px rgba(0, 0, 0, 0);
+  --phoenix-btn-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0),
+    0 1px 1px rgba(0, 0, 0, 0);
   --phoenix-btn-disabled-opacity: 0.3;
-  --phoenix-btn-focus-box-shadow: 0 0 0 0 rgba(var(--phoenix-btn-focus-shadow-rgb), 0.5);
+  --phoenix-btn-focus-box-shadow: 0 0 0 0
+    rgba(var(--phoenix-btn-focus-shadow-rgb), 0.5);
   display: inline-block;
   padding: var(--phoenix-btn-padding-y) var(--phoenix-btn-padding-x);
   font-family: var(--phoenix-btn-font-family);
@@ -226,16 +209,23 @@ button:not(:disabled), [type=button]:not(:disabled), [type=reset]:not(:disabled)
   background-color: var(--phoenix-btn-bg);
   -webkit-box-shadow: var(--phoenix-btn-box-shadow);
   box-shadow: var(--phoenix-btn-box-shadow);
-  -webkit-transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
-  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
-  -o-transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+  -webkit-transition: color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+    -webkit-box-shadow 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+  -o-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out,
+    -webkit-box-shadow 0.15s ease-in-out;
 }
 
-
-
-:root, :root.light, :root .light {
+:root,
+:root.light,
+:root .light {
   --phoenix-gray-soft: #f5f7fa;
   --phoenix-gray-100: #eff2f6;
   --phoenix-gray-200: #e3e6ed;
@@ -388,11 +378,20 @@ button:not(:disabled), [type=button]:not(:disabled), [type=reset]:not(:disabled)
   --phoenix-black-rgb: 0, 0, 0;
   --phoenix-body-color-rgb: 49, 55, 74;
   --phoenix-body-bg-rgb: 245, 247, 250;
-  --phoenix-font-sans-serif: "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  --phoenix-font-monospace: "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  --phoenix-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+  --phoenix-font-sans-serif: "Nunito Sans", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol";
+  --phoenix-font-monospace: "SFMono-Regular", Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  --phoenix-gradient: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.15),
+    rgba(255, 255, 255, 0)
+  );
   --phoenix-scroll-margin-top: 2.5rem;
-  --phoenix-body-font-family: Nunito Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+  --phoenix-body-font-family: Nunito Sans, -apple-system, BlinkMacSystemFont,
+    Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif, Apple Color Emoji,
+    Segoe UI Emoji, Segoe UI Symbol;
   --phoenix-body-font-size: 1rem;
   --phoenix-body-font-weight: 400;
   --phoenix-body-line-height: 1.49;
@@ -493,8 +492,8 @@ button:not(:disabled), [type=button]:not(:disabled), [type=reset]:not(:disabled)
   --phoenix-kanban-column-hover-bg: var(--phoenix-white);
 }
 
-
-:host, :root {
+:host,
+:root {
   --fa-font-solid: normal 900 1em/1 "Font Awesome 6 Solid";
   --fa-font-regular: normal 400 1em/1 "Font Awesome 6 Regular";
   --fa-font-light: normal 300 1em/1 "Font Awesome 6 Light";
@@ -504,7 +503,10 @@ button:not(:disabled), [type=button]:not(:disabled), [type=reset]:not(:disabled)
 }
 .bg-200 {
   --phoenix-bg-opacity: 1;
-  background-color: rgba(var(--phoenix-200-rgb), var(--phoenix-bg-opacity)) !important;
+  background-color: rgba(
+    var(--phoenix-200-rgb),
+    var(--phoenix-bg-opacity)
+  ) !important;
 }
 hr {
   margin: 1rem 0;
@@ -536,13 +538,19 @@ hr {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
   background-color: var(--phoenix-body-bg);
-  font-family: "Nunito Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-  font-size: .8rem;
+  font-family: "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 0.8rem;
   color: var(--phoenix-gray-600);
   white-space: nowrap;
   font-weight: 700;
 }
-.btn-phoenix-secondary, .google-map-control-btn .zoomIn, .google-map-control-btn .zoomOut, .tox .tox-dialog__footer .tox-button--secondary, .tox .tox-button-secondary {
+.btn-phoenix-secondary,
+.google-map-control-btn .zoomIn,
+.google-map-control-btn .zoomOut,
+.tox .tox-dialog__footer .tox-button--secondary,
+.tox .tox-button-secondary {
   --phoenix-btn-color: #31374a;
   --phoenix-btn-bg: #f5f7fa;
   --phoenix-btn-border-color: #e3e6ed;
@@ -559,7 +567,6 @@ hr {
   --phoenix-btn-disabled-border-color: #e3e6ed;
 }
 
-
 .form-control {
   display: block;
   width: 100%;
@@ -575,11 +582,14 @@ hr {
   -moz-appearance: none;
   appearance: none;
   border-radius: 0.375rem;
-  -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0);
-  box-shadow: inset 0 1px 2px rgba(0,0,0,0);
-  -webkit-transition: border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
-  transition: border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
-  -o-transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0);
+  -webkit-transition: border-color 0.15s ease-in-out,
+    -webkit-box-shadow 0.15s ease-in-out;
+  transition: border-color 0.15s ease-in-out,
+    -webkit-box-shadow 0.15s ease-in-out;
+  -o-transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out,
+    -webkit-box-shadow 0.15s ease-in-out;
 }
