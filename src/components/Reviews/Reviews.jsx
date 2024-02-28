@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./Reviews.scss";
-
 import reviewsData from "../../ReviewsData";
 import { v4 as uuidv4 } from "uuid";
 import Emotions from "../Emotions/Emotions";
@@ -15,12 +14,12 @@ const Reviews = () => {
 
   return (
     <div className="reviews-section container">
-      <h3 className="text-center mb-5 text-uppercase fw-bold ">Reviews</h3>
+      <h3 className="text-center mb-3 text-uppercase font-bold">Reviews</h3>
       <div className="row g-4">
         {reviews.map((review) => {
           const emotionID = uuidv4(); // To Generate unique key for each review
           return (
-            <div key={review.id}>
+            <div key={review.id} className="my-3">
               <title>Verified Customer section</title>
               <div className="verified_customer_section">
                 <div className="image_review">

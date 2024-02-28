@@ -1,4 +1,3 @@
-import "./SideBar.scss";
 import OfficeLogoIcon from "./../../Icons/OfficeLogoIcon";
 import InfoIcon from "./../../Icons/InfoIcon";
 import { Link } from "react-router-dom";
@@ -31,15 +30,18 @@ const SideBar = () => {
 
   return (
     <div className="my-res-sidebar">
-      <ul>
+      <ul className="list-none">
         {sideBarData.map((data) => (
-          <Link
-            className="nav-link"
-            key={data.id}
-            onClick={() => goToType(data.targetId)}
-          >
-            <li>{data.string}</li>
-          </Link>
+          <li key={data.id} className="mb-2">
+            <Link
+              to="/"
+              className="nav-link flex items-center"
+              onClick={() => goToType(data.targetId)}
+            >
+              {data.icon && <span className="mr-2">{data.icon}</span>}
+              {data.string}
+            </Link>
+          </li>
         ))}
       </ul>
     </div>

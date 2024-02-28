@@ -1,6 +1,5 @@
 import "./MealCard.scss";
 import AddIcon from "./../../Icons/AddIcon";
-
 import img1 from "../../utils/meals-img/item-1.jpeg";
 import img2 from "../../utils/meals-img/item-2.jpeg";
 import img3 from "../../utils/meals-img/item-3.jpeg";
@@ -10,6 +9,7 @@ import img6 from "../../utils/meals-img/item-6.jpeg";
 import img7 from "../../utils/meals-img/item-7.jpeg";
 import img8 from "../../utils/meals-img/item-8.jpeg";
 import img9 from "../../utils/meals-img/item-9.jpeg";
+import Stars from "../Stars/Stars";
 
 const mealsData = [
   {
@@ -102,34 +102,32 @@ const mealsData = [
 
 let hema = document.getElementById("my-id");
 // console.log(hema)
-
 const MealCard = () => {
   return (
-    <div className="my-meal-card">
+    <div>
       {mealsData.map((data) => (
-        <div className="meal-card" key={data.id}>
-          <h2 className="text-danger " id="my-id">
-            {data.type}
-          </h2>
-          <br />
-          <div className="d-flex justify-content-between">
-            <div className="1 d-flex">
-              <div className="1.1">
-                <h3>{data.title}</h3>
-                <h5>{data.desc}</h5>
-                <div className="1.1.1 d-flex gap-2">
-                  <del>20</del>
-                  <p>{data.price}</p>
+        <div className="bg-white shadow-lg rounded-lg overflow-hidden my-3">
+          <img
+            src={data.img}
+            alt="meal-img"
+            className="w-full h-40 object-cover"
+          />
+          <div className="p-4">
+            <h3 className="text-lg font-semibold mb-2">{data.title}</h3>
+            <p className="text-gray-600 mb-4">{data.desc}</p>
+            <div className="flex justify-between items-center">
+              <div>
+                <del className="text-gray-500">$20</del>
+                <p className="text-red-600 text-lg font-semibold">
+                  ${data.price}
+                </p>
+              </div>
+              <div className="flex items-center">
+                {/* <AddIcon />
+                <p className="ml-1 text-sm ">66</p> */}
+                <div className="-mt-[55px]">
+                  <Stars stars1={4} />
                 </div>
-              </div>
-            </div>
-            <div className="2">
-              <div className="2.1">
-                <img src={data.img} alt="meal-img" />
-              </div>
-              <div className="2.1 d-flex my-3">
-                <AddIcon />
-                <p>66</p>
               </div>
             </div>
           </div>
@@ -138,5 +136,4 @@ const MealCard = () => {
     </div>
   );
 };
-
 export default MealCard;

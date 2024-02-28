@@ -1,9 +1,9 @@
 import "./Buttons-Time.scss";
 import ClockIcon from "../../Icons/ClockIcon";
-import { useState } from "react";
-import MealTap from "./MealTap";
+import MenuTap from "./MenuTap";
 import AboutTap from "./AboutTap";
 import BranchesTap from "./BranchesTap";
+import { useSignal } from "@preact/signals-react";
 
 const btns = [
   { id: 1, string: "Menu" },
@@ -12,25 +12,25 @@ const btns = [
 ];
 
 const ButtonsTime = () => {
-  const [activeElement, setActiveElement] = useState(<MealTap />); // Initial state can be null too
+  const activeElement = useSignal(<MenuTap />); // Initial value can be null too
 
   function handleClicked(e) {
     const buttonValue = e.target.value;
     switch (buttonValue) {
       case "About":
-        setActiveElement(<AboutTap />);
+        activeElement.value = <AboutTap />;
         break;
       case "Branches":
-        setActiveElement(<BranchesTap />);
+        activeElement.value = <BranchesTap />;
         break;
       default:
-        setActiveElement(<MealTap />);
+        activeElement.value = <MenuTap />;
         break;
     }
   }
 
   return (
-    <section className="btns-time">
+    <section className="btns-time my-3">
       <div className="btns-time d-flex justify-content-between flex-wrap">
         <form>
           {btns.map((data) => (
@@ -50,7 +50,7 @@ const ButtonsTime = () => {
           <p>12:00 PM - 02:00 AM</p>
         </div>
       </div>
-      <div>{activeElement}</div>
+      <div className="my-4">{activeElement}</div>
     </section>
   );
 };

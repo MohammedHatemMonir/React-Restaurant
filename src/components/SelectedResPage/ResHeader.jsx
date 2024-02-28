@@ -1,13 +1,12 @@
-import "./ResHeader.scss";
-import Stars from "./../Stars/Stars";
 import { Link } from "react-router-dom";
 import LocationDotIcon from "./../../Icons/LocationDotIcon";
-
+import Stars from "./../Stars/Stars";
+import "./ResHeader.scss";
 const ResHeader = () => {
   return (
     <section className="res-header">
-      <div className="container d-flex justify-content-start flex-wrap gap-3">
-        <div className="1 text-center">
+      <div className="container flex justify-start flex-wrap gap-3">
+        <div className="text-center">
           <img
             src="http://image.shutterstock.com/z/stock-vector-food-restaurant-logo-icon-264413183.jpg"
             alt="res-image"
@@ -15,17 +14,19 @@ const ResHeader = () => {
           />
           <p>Opens in 5 hours</p>
         </div>
-        <div className="2 mt-3">
-          <h2>Munch & Shake</h2>
-          <div className="2.1 d-flex">
+        <div className="mt-3">
+          <h2 className="text-xl font-bold">Munch & Shake</h2>
+          <div className="flex items-center">
             <p>American</p>
-            <div className="res-stars">
-              <Stars stars1={4}/>
+            <div className="res-stars scale-[0.55] -m-10 -mt-[4.5rem]">
+              <Stars stars1={4} />
             </div>
-            <p className="pr-1">4.5</p>
-            <Link className="nav-link">( 3082 )</Link>
+            <p className="p-0">4.5</p>
+            <Link to="/" className="nav-link">
+              ( 3082 )
+            </Link>
           </div>
-          <div className="2.2 d-flex">
+          <div className="flex items-center">
             <div className="pr-2">
               <LocationDotIcon />
             </div>

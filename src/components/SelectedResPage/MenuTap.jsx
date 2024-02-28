@@ -2,10 +2,10 @@ import React from "react";
 import { Container, Row, Col } from "reactstrap";
 
 import SideBar from "./SideBar";
-import Reviews from "./../Reviews/Reviews";
+import Reviews from "../Reviews/Reviews";
 import MealCard from "./MealCard";
 
-const MealTap = () => {
+const MenuTap = () => {
   return (
     <div>
       <Row>
@@ -25,4 +25,4 @@ const MealTap = () => {
   );
 };
 
-export default MealTap;
+export default MenuTap;

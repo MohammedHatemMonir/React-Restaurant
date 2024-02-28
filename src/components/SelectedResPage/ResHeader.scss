@@ -1,3 +1,4 @@
+// ResHeader.scss
 .res-header {
   .res-img {
     width: 130px;
@@ -6,9 +7,7 @@
     border-radius: 50%;
   }
   .res-stars {
-    display: flex;
-    margin: -18px 0 0 0;
-    transform: scale(0.6);
+    // transform: scale(0.6);
     //  width: fit-content;
     // position: relative;
   }
