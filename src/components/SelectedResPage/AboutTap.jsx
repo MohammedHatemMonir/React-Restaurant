@@ -3,7 +3,7 @@ import Reviews from "../Reviews/Reviews";
 
 const AboutTap = () => {
   return (
-    <div>
+    <div className="container">
       <Row>
         <Col md={9} className="bg-success">
           <h1>About goes here</h1>

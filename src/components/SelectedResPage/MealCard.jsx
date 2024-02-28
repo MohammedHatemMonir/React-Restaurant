@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import "./MealCard.scss";
 import AddIcon from "./../../Icons/AddIcon";
 import img1 from "../../utils/meals-img/item-1.jpeg";
@@ -10,6 +11,7 @@ import img7 from "../../utils/meals-img/item-7.jpeg";
 import img8 from "../../utils/meals-img/item-8.jpeg";
 import img9 from "../../utils/meals-img/item-9.jpeg";
 import Stars from "../Stars/Stars";
+import { useSignal } from "@preact/signals-react";
 
 const mealsData = [
   {
@@ -100,13 +102,16 @@ const mealsData = [
   },
 ];
 
-let hema = document.getElementById("my-id");
-// console.log(hema)
 const MealCard = () => {
+  const count = useSignal(1);
+
   return (
     <div>
       {mealsData.map((data) => (
-        <div className="bg-white shadow-lg rounded-lg overflow-hidden my-3">
+        <div
+          className="bg-white shadow-lg rounded-lg overflow-hidden my-3"
+          key={data.id}
+        >
           <img
             src={data.img}
             alt="meal-img"
@@ -123,10 +128,27 @@ const MealCard = () => {
                 </p>
               </div>
               <div className="flex items-center">
-                {/* <AddIcon />
-                <p className="ml-1 text-sm ">66</p> */}
+                <button
+                  className="bg-gray-200 text-gray-700 px-2 py-1 rounded-full mr-2"
+                  onClick={() => {
+                    if (count.value > 1) {
+                      count.value--;
+                    }
+                  }}
+                >
+                  -
+                </button>
+                <p className="mr-2">{count.value}</p>
+                <button
+                  className="bg-gray-200 text-gray-700 px-2 py-1 rounded-full mr-2"
+                  onClick={() => {
+                    count.value++;
+                  }}
+                >
+                  +
+                </button>
                 <div className="-mt-[55px]">
-                  <Stars stars1={4} />
+                  <Stars stars1={data.stars} />
                 </div>
               </div>
             </div>
@@ -136,4 +158,5 @@ const MealCard = () => {
     </div>
   );
 };
+
 export default MealCard;

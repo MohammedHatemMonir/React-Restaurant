@@ -31,7 +31,7 @@ const ButtonsTime = () => {
 
   return (
     <section className="btns-time my-3">
-      <div className="btns-time d-flex justify-content-between flex-wrap">
+      <div className="btns-time flex justify-between flex-wrap">
         <form>
           {btns.map((data) => (
             <input
@@ -43,7 +43,7 @@ const ButtonsTime = () => {
             />
           ))}
         </form>
-        <div className="d-flex gap-2 px-3">
+        <div className="flex gap-2 px-3">
           <div>
             <ClockIcon />
           </div>

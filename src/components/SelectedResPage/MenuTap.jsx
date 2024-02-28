@@ -7,7 +7,7 @@ import MealCard from "./MealCard";
 
 const MenuTap = () => {
   return (
-    <div>
+    <div className="container">
       <Row>
         <Col md={3}>
           <SideBar />
