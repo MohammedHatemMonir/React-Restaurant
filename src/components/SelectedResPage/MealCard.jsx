@@ -12,6 +12,7 @@ import img8 from "../../utils/meals-img/item-8.jpeg";
 import img9 from "../../utils/meals-img/item-9.jpeg";
 import Stars from "../Stars/Stars";
 import { useSignal } from "@preact/signals-react";
+import PopupBox from "./PopupBox";
 
 const mealsData = [
   {
@@ -105,51 +106,62 @@ const mealsData = [
 const MealCard = () => {
   const count = useSignal(1);
 
+  const isOpend = useSignal(false);
+
   return (
     <div>
       {mealsData.map((data) => (
-        <div
-          className="bg-white shadow-lg rounded-lg overflow-hidden my-3"
-          key={data.id}
-        >
-          <img
-            src={data.img}
-            alt="meal-img"
-            className="w-full h-40 object-cover"
-          />
-          <div className="p-4">
-            <h3 className="text-lg font-semibold mb-2">{data.title}</h3>
-            <p className="text-gray-600 mb-4">{data.desc}</p>
-            <div className="flex justify-between items-center">
-              <div>
-                <del className="text-gray-500">$20</del>
-                <p className="text-red-600 text-lg font-semibold">
-                  ${data.price}
-                </p>
-              </div>
-              <div className="flex items-center">
-                <button
-                  className="bg-gray-200 text-gray-700 px-2 py-1 rounded-full mr-2"
-                  onClick={() => {
-                    if (count.value > 1) {
-                      count.value--;
-                    }
-                  }}
-                >
-                  -
-                </button>
-                <p className="mr-2">{count.value}</p>
-                <button
-                  className="bg-gray-200 text-gray-700 px-2 py-1 rounded-full mr-2"
-                  onClick={() => {
-                    count.value++;
-                  }}
-                >
-                  +
-                </button>
-                <div className="-mt-[55px]">
-                  <Stars stars1={data.stars} />
+        <div>
+          <h2 className="font-bold bg-transparent text-3xl"> {data.type}</h2>
+          <div
+            className="bg-[white] shadow-lg rounded-lg overflow-hidden my-3 hover:cursor-pointer hover:bg-[#ccc]"
+            key={data.id}
+          >
+            <img
+              src={data.img}
+              alt="meal-img"
+              className="w-full h-40 object-cover"
+            />
+            <div className="p-4">
+              <h3 className="text-lg font-semibold mb-2">{data.title}</h3>
+              <p className="text-gray-600 mb-4">{data.desc}</p>
+              <div className="flex justify-between items-center">
+                <div>
+                  <del className="text-gray-500">$20</del>
+                  <p className="text-red-600 text-lg font-semibold">
+                    ${data.price}
+                  </p>
                 </div>
+                <div className="flex items-center">
+                  <button
+                    className="bg-gray-200 text-gray-700 px-2 py-1 rounded-full mr-2"
+                    onClick={() => {
+                      if (count.value > 1) {
+                        count.value--;
+                      }
+                    }}
+                  >
+                    -
+                  </button>
+                  <p className="mr-2">{count.value}</p>
+                  <button
+                    className="bg-gray-200 text-gray-700 px-2 py-1 rounded-full mr-2"
+                    onClick={() => {
+                      count.value++;
+                    }}
+                  >
+                    +
+                  </button>
+                  <div className="-mt-[55px]">
+                    <Stars stars1={data.stars} />
+                  </div>
+                  {isOpend.value && (
+                    <PopupBox
+                      onClose={() => (isOpend.value = false)}
+                    />
+                  )}
+                </div>
+                <input type="button" className="btn" value="Buy"  onClick={() => (isOpend.value = true)}/>
               </div>
             </div>
           </div>

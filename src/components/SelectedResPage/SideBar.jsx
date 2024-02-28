@@ -34,7 +34,7 @@ const SideBar = () => {
         {sideBarData.map((data) => (
           <li key={data.id} className="mb-2">
             <Link
-              to="/"
+              to=""
               className="nav-link flex items-center"
               onClick={() => goToType(data.targetId)}
             >
