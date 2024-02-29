@@ -1,14 +1,6 @@
 import "./PopupBox.scss";
 
-const PopupBox = ({
-  title,
-  img,
-  desc,
-  Oldprice,
-  newPrice,
-  stars,
-  onClose,
-}) => {
+const PopupBox = ({ title, img, desc, Oldprice, newPrice, stars, onClose }) => {
   {
     /* <h1 className="text-9xl">test</h1> */
   }
@@ -37,6 +29,7 @@ const PopupBox = ({
                   d="M6 18L18 6M6 6l12 12"
                 ></path>
               </svg>
+              {/* <p>X</p> */}
             </button>
           </div>
           <p>Content of the modal goes here...</p>
