@@ -36,18 +36,18 @@ const addNewmeal = async (req, res) => {
                 const meals = new meal(body);
                 await meals.save();
                     // const meals=await meal.create(body)
-                    new_Meals_num=resturants[0].Meals_num+1
-                    test1=resturants[0].Meals_num+resturants[0].comment_num
-                    new_res_rating=(resturants[0].rating*(test1))/(test1+1)
-                    const res_body={
-                      ResName: resturants[0].ResName,
-                      ResImg: resturants[0].ResImg,
-                      Categoery: resturants[0].Categoery,
-                      rating:new_res_rating,
-                      Meals_num:new_Meals_num,
-                      comment_num:resturants[0].comment_num
-                  }
-                  const res_update = await resturant.updateOne({ _id: Resid },{ $set: res_body});
+                  //   new_Meals_num=resturants[0].Meals_num+1
+                  //   test1=resturants[0].Meals_num+resturants[0].comment_num
+                  //   new_res_rating=(resturants[0].rating*(test1))/(test1+1)
+                  //   const res_body={
+                  //     ResName: resturants[0].ResName,
+                  //     ResImg: resturants[0].ResImg,
+                  //     Categoery: resturants[0].Categoery,
+                  //     rating:new_res_rating,
+                  //     Meals_num:new_Meals_num,
+                  //     comment_num:resturants[0].comment_num
+                  // }
+                  // const res_update = await resturant.updateOne({ _id: Resid },{ $set: res_body});
                 res.status(201).json(body);
                     // console.log(req.body)
 

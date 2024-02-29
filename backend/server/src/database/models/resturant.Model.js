@@ -20,10 +20,6 @@ const resturantSchema=mongoose.Schema({
     comment_num:{
         type:Number,
         require:[true,"Enter resturant rating"]
-    },
-    Meals_num:{
-        type:Number,
-        require:[true,"Enter resturant rating"]
     }
 })
 

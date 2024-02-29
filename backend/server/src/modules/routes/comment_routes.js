@@ -5,9 +5,14 @@ const { Router } = require("express");
 const validateCommentsInput = require("../../middlewares/validator/validation.comments.js");
 
 router
-    .route("/")
+    .route("/mealcomment")
     .post(
         validateCommentsInput,
         comment_controller.analyze);
-    
+router
+    .route("/rescomment")
+    .post(
+        // validateCommentsInput,
+        comment_controller.res_comment);
+        
 module.exports = router;

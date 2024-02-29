@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
-const ObjectId = mongoose.Schema.Types.ObjectId;
-const commentSchema=mongoose.Schema({
+const rescommentSchema=mongoose.Schema({
     Comment:{
         type:String,
         require:[true,"Enter resturant ResImg"]
@@ -9,7 +8,7 @@ const commentSchema=mongoose.Schema({
         type:Array,
         require:[true,"Enter resturant ResImg"]
     },
-    MealID: { type: String, ref: 'meal' }
+    ResID: { type: String, ref: 'meal' }
     // MealID: { type: ObjectId, ref: 'meal' }
 })
-module.exports = mongoose.model('comment', commentSchema);
+module.exports = mongoose.model('rescomment', rescommentSchema);
