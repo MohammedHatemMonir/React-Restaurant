@@ -17,10 +17,14 @@ const resturantSchema=mongoose.Schema({
         type:Number,
         require:[true,"Enter resturant rating"]
     },
+    creation_date: {
+        type: string,
+        require:[true,"creation date of restaurant"]
+    },
     comment_num:{
         type:Number,
         require:[true,"Enter resturant rating"]
-    }
+    },
 })
 
 module.exports = mongoose.model("restaurant", resturantSchema);
