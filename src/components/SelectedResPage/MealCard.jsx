@@ -156,12 +156,15 @@ const MealCard = () => {
                     <Stars stars1={data.stars} />
                   </div>
                   {isOpend.value && (
-                    <PopupBox
-                      onClose={() => (isOpend.value = false)}
-                    />
+                    <PopupBox onClose={() => (isOpend.value = false)} />
                   )}
                 </div>
-                <input type="button" className="btn" value="Buy"  onClick={() => (isOpend.value = true)}/>
+                <input
+                  type="button"
+                  className="btn"
+                  value="Buy"
+                  onClick={() => (isOpend.value = true)}
+                />
               </div>
             </div>
           </div>
