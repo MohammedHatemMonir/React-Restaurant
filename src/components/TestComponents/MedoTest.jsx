@@ -184,9 +184,9 @@ export default function MedoTest(){
                                                     <div class="tab-content no-padding">
 
                                                         <div class="container d-flex"> 
-                                                            <div class="col-3"> 
+                                                            <div class="col-3 p-0 border-right"> 
 
-                                                                            <ul id="menu-cats-sticky" className="menu-cats">
+                                                                            <ul  className="menu-cats p-0">
                                                                                 <li className="cat ">
                                                                                     <a  className="scroll-to-div">
                                                                                     Offers
