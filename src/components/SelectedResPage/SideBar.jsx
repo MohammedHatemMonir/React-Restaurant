@@ -1,7 +1,7 @@
 import OfficeLogoIcon from "./../../Icons/OfficeLogoIcon";
 import InfoIcon from "./../../Icons/InfoIcon";
 import { Link } from "react-router-dom";
-
+import "./SideBar.scss";
 const SideBar = () => {
   const sideBarData = [
     {
@@ -21,25 +21,38 @@ const SideBar = () => {
     { id: 5, string: "Beef & Dogs", targetId: "beef-dogs-section" },
   ];
 
-  function goToType(targetId) {
-    const targetElement = document.getElementById(targetId);
-    if (targetElement) {
-      targetElement.scrollIntoView({ behavior: "smooth" });
+  // function goToType(targetId) {
+  //   const targetElement = document.getElementById(targetId);
+  //   if (targetElement) {
+  //     targetElement.scrollIntoView({ behavior: "smooth" });
+  //   }
+  // }
+
+  function handleClicked(e) {
+    const inputs = document.getElementsByTagName("li");
+    // Loop through input elements to toggle class "my-btn"
+    for (let i = 0; i < inputs.length; i++) {
+      if (inputs[i].key === e.target.key) {
+        inputs[i].classList.add("res-bg");
+      } else {
+        inputs[i].classList.remove("res-bg");
+      }
     }
   }
-
+  // bg-[#e32207]
   return (
-    <div className="my-res-sidebar">
+    <div className="my-res-sidebar mx-2 text-white font-bold">
       <ul className="list-none">
         {sideBarData.map((data) => (
-          <li key={data.id} className="mb-2">
+          <li key={data.id} className="mb-2 bg-[#ccc] rounded-lg">
             <Link
               to=""
               className="nav-link flex items-center"
-              onClick={() => goToType(data.targetId)}
+              onClick={handleClicked}
+              id={data.id}
             >
-              {data.icon && <span className="mr-2">{data.icon}</span>}
-              {data.string}
+              {<span className="mr-2">{data.icon}</span>}
+              <p>{data.string}</p>
             </Link>
           </li>
         ))}

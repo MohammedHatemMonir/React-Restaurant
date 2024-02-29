@@ -15,7 +15,6 @@ import img7 from "../../utils/meals-img/item-7.jpeg";
 import img8 from "../../utils/meals-img/item-8.jpeg";
 import img9 from "../../utils/meals-img/item-9.jpeg";
 import Footer from "./Footer";
-import SideBar from "./SideBar";
 import { Col, Container } from "reactstrap";
 import { Link } from "react-router-dom";
 

@@ -21,7 +21,7 @@ const NotificationMenu = (props) => {
       <div
         key={props.index}
         index={props.index}
-        className="px-2 px-sm-3 py-3 border-300 notification-card position-relative unread border-bottom"
+        className="px-2 px-sm-3 py-3 border-300 notification-card position-relative unread border-bottom "
       >
         <div className="d-flex align-items-center justify-content-between position-relative">
           <div className="d-flex">

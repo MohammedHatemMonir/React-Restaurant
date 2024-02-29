@@ -18,7 +18,7 @@ const ButtonsTime = () => {
     </div>
   );
   const myInput = document.getElementById("Menu");
-  
+  // myInput.classList.add("my-btn");
   const activeElement = useSignal(<MenuTap />); // Initial value can be null too
   // if (activeElement === <MenuTap />) {
   //   myInput.classList.add("my-btn");
@@ -43,7 +43,7 @@ const ButtonsTime = () => {
     // Loop through input elements to toggle class "my-btn"
     for (let i = 0; i < inputs.length; i++) {
       if (inputs[i].id === e.target.id) {
-        inputs[i].classList.toggle("my-btn");
+        inputs[i].classList.add("my-btn");
       } else {
         inputs[i].classList.remove("my-btn");
       }

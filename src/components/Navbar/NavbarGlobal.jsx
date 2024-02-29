@@ -6,10 +6,7 @@ import { Link } from "react-router-dom";
 import { toggle } from "../../Globals";
 import ThemeController from "./ThemeController";
 
-
-
 export default function NavbarGlobal() {
-
   return (
     <div>
       <Navbar expand="lg" className="bg-body-tertiary">
@@ -37,9 +34,8 @@ export default function NavbarGlobal() {
             SignUp
           </Link>
 
-
           <ThemeController />
-          <div style={{color: "var(--dineme-bg)"}}>ThemeTest</div>
+          <div style={{ color: "var(--dineme-bg)" }}>ThemeTest</div>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto"></Nav>
