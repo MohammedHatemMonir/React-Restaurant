@@ -17,6 +17,7 @@ const resturantSchema=mongoose.Schema({
         type:Number,
         require:[true,"Enter resturant rating"]
     },
+    // Mshehata addition to schema
     creation_date: {
         type: string,
         require:[true,"creation date of restaurant"]
