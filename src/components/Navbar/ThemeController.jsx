@@ -1,19 +1,12 @@
+import React from "react";
 
-import {
-  useSignal,
-  useComputed,
-  batch,
-  computed,
-  signal,
-} from "@preact/signals-react";
+  import { CiLight } from "react-icons/ci";
+  import { CiDark } from "react-icons/ci";
+import { isDarkMode } from "../../Globals";
 
-
-export default function ThemeController() {
-
-  const isDarkMode = signal(false);
+function ThemeController() {
 
   // const isDarkMode = useSignal(localStorage.getItem('darkMode') === 'true')
-
 
 
   const handleToggleDarkMode = () => {
@@ -32,11 +25,12 @@ export default function ThemeController() {
   
   return (
 <>
-      <div className= {`d-flex justify-content-center align-items-center ${isDarkMode.value? "darkIcon": "lightIcon"}`} onClick={handleToggleDarkMode} style={{cursor:"pointer", userSelect:"none"}}>
-      themeController
+      <div  onClick={handleToggleDarkMode} style={{paddingRight: "10px",cursor:"pointer", userSelect:"none", transform: "scale(1)", fontSize:"1.7em"}}>
+       {isDarkMode.value? <CiDark fontSize="1.1em" /> : <CiLight fontSize="1.1em" /> }
       </div>
 
 </>
   );
 }
 
+export default ThemeController;

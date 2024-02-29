@@ -17,6 +17,7 @@ import img9 from "../../utils/meals-img/item-9.jpeg";
 import Footer from "./Footer";
 import SideBar from "./SideBar";
 import { Col, Container } from "reactstrap";
+import { Link } from "react-router-dom";
 
 export default function ResPage() {
   const resData = [
@@ -178,6 +179,7 @@ export default function ResPage() {
         <div className="row">
           {resData.map((data) => (
             <div className="col-sm-12 col-md-6 col-lg-4" key={data.id}>
+              <Link to={`/selectres`}>
               <Card
                 title={data.title}
                 price={data.minCharge}
@@ -188,6 +190,7 @@ export default function ResPage() {
                 resName={data.resName}
                 fav={data.fav}
               />
+              </Link>
             </div>
           ))}
         </div>
