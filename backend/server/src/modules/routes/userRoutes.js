@@ -3,20 +3,19 @@ const usersController = require("../controllers/usersController");
 const { Router } = require("express");
 const { validateUserInputSignUp,validateUserInputLogin} = require("../../middlewares/validator/validation.user.js");
 const router = express.Router();
-router
-    .route("/")
+
+router.post("/signup",validateUserInputSignUp,usersController.signup)
  
     // sign up
-    .post(
-        validateUserInputSignUp,
-        usersController.addNewuser
-    )
-router
-    .route("/test")
+    // .post(
+    //     validateUserInputSignUp,
+    //     usersController.signup
+    // )
+router.post("/signin",validateUserInputLogin,usersController.signin)
     // log in
-    .post(
-        validateUserInputLogin,
-        usersController.getSingleuser);
+    // .post(
+    //     validateUserInputLogin,
+    //     usersController.signin);
 
 // router
 //     .route("/:username/:password/:role/:Email")

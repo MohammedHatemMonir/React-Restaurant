@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 // Define the connection function
+
 const connectToMongoDB = async () => {
     try {
         await mongoose.connect("mongodb+srv://mahmoud:graduationproject@graduationproject.depfjap.mongodb.net/graduationproject", {
