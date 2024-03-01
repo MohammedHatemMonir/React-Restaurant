@@ -78,7 +78,8 @@ const analyze = async (req, res) => {
               ResImg: resturants[0].ResImg,
               Categoery: resturants[0].Categoery,
               rating:new_res_rating,
-              comment_num:resturants[0].comment_num
+              comment_num:resturants[0].comment_num,
+              creation_date:resturants[0].creation_date
           }
           const res_update = await resturant.updateOne({ _id: meals[0].ResID },{ $set: res_body});
             res.status(200).json({Comment:text,commentSentmint:result.sentiment,});
@@ -127,7 +128,8 @@ const res_comment = async (req, res) => {
             ResImg: resturants[0].ResImg,
             Categoery: resturants[0].Categoery,
             rating:new_rating,
-            comment_num:new_res_comment_num
+            comment_num:resturants[0].comment_num,
+            creation_date:resturants[0].creation_date
           }
           await resturant.updateOne({ _id: ResID },{ $set: res_body});
           res.status(200).json({Comment:text,commentSentmint:result.sentiment,});

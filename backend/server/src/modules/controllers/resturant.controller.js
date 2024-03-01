@@ -33,7 +33,8 @@ const addNewresturant = async (req, res) => {
                         ResImg: req.body.ResImg,
                         Categoery: req.body.Categoery,
                         rating:rating,
-                        comment_num:comment_num
+                        comment_num:comment_num,
+                        creation_date:req.body.creation_date
                     };
                     const newRestaurant = await restaurant.create(newRestaurantData);
                     res.status(200).json(newRestaurantData);
