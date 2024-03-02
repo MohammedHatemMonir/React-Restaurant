@@ -203,7 +203,7 @@ export default function MedoTest() {
                           {/* <div className="row"> */}
                           <div className="tab-content no-padding">
                             <Row className="d-flex">
-                              <Col sm={3} className="p-0 border-right">
+                              <Col sm={2} className="p-0 border-right">
                                 <ul className="menu-cats p-0">
                                   <li className="cat ">
                                     <a
@@ -298,7 +298,7 @@ export default function MedoTest() {
                                 </Container>
                               </Col>
                               {/* style={{ transform: "scale(0.9)" }} */}
-                              <Col sm={3} style={{ transform: "scale(1.05)" }}>
+                              <Col sm={4} style={{ transform: "scale(1)" }}>
                                 <Reviews />
                               </Col>
                             </Row>
