@@ -21,12 +21,8 @@ import { Col, Container } from "reactstrap";
 import { Link } from "react-router-dom";
 
 export default function ResPage() {
-
-
-
   const q = useQuery({
     queryKey: ["getAllresturant"],
-
 
     queryFn: async () => {
       let url = "/getAllresturant";
@@ -37,28 +33,30 @@ export default function ResPage() {
     },
   });
 
+  console.log(q.data?.data);
   return (
     <section>
       <Slider />
       <Container style={{ width: "85%" }}>
         <Header />
         <div className="row">
-          {!q.isLoading && q.data?.data.map((data,index) => (
-            <div className="col-sm-12 col-md-6 col-lg-4" key={index}>
-              <Link to={`/selectres`} >
-              <Card
-                title={data.title}
-                price={0}
-                img={data.ResImg}
-                stars={data.stars}
-                mealImg={data.ResImg}
-                reviewsNum={data.rating}
-                resName={data.resName}
-                fav={false}
-              />
-              </Link>
-            </div>
-          ))}
+          {!q.isLoading &&
+            q.data?.data.map((data, index) => (
+              <div className="col-sm-12 col-md-6 col-lg-4" key={index}>
+                <Link to={`/selectres`}>
+                  <Card
+                    title={data.ResName}
+                    price={0}
+                    img={img1}
+                    stars={Math.round(data.rating)}
+                    mealImg={img1}
+                    reviewsNum={data.comment_num}
+                    resName={data.ResName}
+                    fav={false}
+                  />
+                </Link>
+              </div>
+            ))}
         </div>
       </Container>
 
@@ -66,7 +64,6 @@ export default function ResPage() {
     </section>
   );
 }
-
 
 // const resData = [
 //   {
