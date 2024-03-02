@@ -11,7 +11,8 @@ export default function MedoTest() {
   const q = useQuery({
     queryKey: ["getAllresturant"],
 
-
+    // cacheTime: 60000,
+    // staleTime: 60000,
     queryFn: async () => {
       let url = "/getAllresturant";
 
