@@ -1,14 +1,7 @@
 import React from "react";
 import { useQuery } from "react-query";
 import { apiClient } from "../../Data/apiclient";
-import StarIcon from "../../Icons/StarIcon";
-import LocationArrowIcon from "../../Icons/LocationArrowIcon";
 import LocationDotIcon from "../../Icons/LocationDotIcon";
-import PhoneIcon from "../../Icons/PhoneIcon";
-import ClockIcon from "../../Icons/ClockIcon";
-import Day2DayIcon from "../../Icons/Day2DayIcon";
-import Card from "../Card/Card";
-import MealCard from "../SelectedResPage/MealCard";
 import Reviews from "../Reviews/Reviews";
 import Stars from "../Stars/Stars";
 import { Container, Row, Col } from "react-bootstrap";
@@ -16,13 +9,13 @@ import RightArrowIcon from "../../Icons/RightArrowIcon";
 
 export default function MedoTest() {
   const q = useQuery({
-    queryKey: [],
-    // cacheTime: 60000000,
-    // staleTime: 60000000,
-    queryFn: async () => {
-      let url = "/getcards";
+    queryKey: ["getAllresturant"],
 
-      var ret = await apiClient.get(url, { text: "Backend test" });
+
+    queryFn: async () => {
+      let url = "/getAllresturant";
+
+      var ret = await apiClient.get(url);
 
       return ret;
     },
@@ -301,8 +294,7 @@ export default function MedoTest() {
                               <Col sm={6}>
                                 {/* ibrahimmmm start here*/}
                                 <Container>
-                                  <TempMealCard />
-                                  <TempMealCard />
+                                  {!q.isLoading && q.data?.data?.map((item,index) => {return <TempMealCard id={item.id} name={item.ResName} key={index} />})}
                                 </Container>
                               </Col>
                               {/* style={{ transform: "scale(0.9)" }} */}
@@ -326,7 +318,7 @@ export default function MedoTest() {
   );
 }
 
-function TempMealCard() {
+function TempMealCard({id,name}) {
   return (
     <>
       <div className="mb-5">
@@ -361,7 +353,7 @@ function TempMealCard() {
                 marginBottom: "0.5rem",
               }}
             >
-              Title
+              {name}
             </h3>
             <p style={{ color: "#4b5563", marginBottom: "1rem" }}>Desc</p>
             <div
