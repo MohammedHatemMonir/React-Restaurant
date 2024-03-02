@@ -64,6 +64,7 @@ function Emotions({ emotion, emotionID }) {
           <input
             type="radio"
             defaultValue={1}
+            readOnly
             id={angryId}
             name={randomName}
             ref={(el) => (inputRefs.current[0] = el)}
@@ -85,6 +86,7 @@ function Emotions({ emotion, emotionID }) {
           <input
             type="radio"
             defaultValue={2}
+            readOnly
             id={sadId}
             name={randomName}
             ref={(el) => (inputRefs.current[1] = el)}
@@ -106,6 +108,7 @@ function Emotions({ emotion, emotionID }) {
           <input
             type="radio"
             defaultValue={3}
+            readOnly
             id={okId}
             name={randomName}
             ref={(el) => (inputRefs.current[2] = el)}
@@ -117,6 +120,7 @@ function Emotions({ emotion, emotionID }) {
           <input
             type="radio"
             defaultValue={4}
+            readOnly
             id={goodId}
             name={randomName}
             ref={(el) => (inputRefs.current[3] = el)}
@@ -139,6 +143,7 @@ function Emotions({ emotion, emotionID }) {
             type="radio"
             defaultValue={5}
             id={happyId}
+            readOnly
             name={randomName}
             ref={(el) => (inputRefs.current[4] = el)}
             checked={emotion === 5}

@@ -30,7 +30,6 @@ export default function MedoTest() {
           <img
             src="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/e7a942a5-9893-4587-8ece-07b967e44745.jpg"
             alt="cover photo"
-            onError="this.onerror=null;this.src='/public/img/default-cover.png';"
           />
         </div>
 
@@ -115,10 +114,10 @@ export default function MedoTest() {
             {/* <div className="col-sm-4 restaurant-actions"> <span><a className="circular-btn"> <PhoneIcon /> </a></span></div> */}
           </Row>
           <Row>
-            <Col sm={8} smPush={8}>
+            <Col sm={8} >
               {/* <div className="section delivery-info-section"></div> */}
             </Col>
-            <Col sm={8} smPull={8} className="tabs-header">
+            <Col sm={8}  className="tabs-header">
               <div className="nav nav-tabs">
                 <ul id="restaurant-tabs-nav" role="tablist">
                   <li
@@ -377,7 +376,7 @@ function TempMealCard({id,name}) {
               </div>
               <div style={{ display: "flex", alignItems: "center" }}>
                 <div style={{ marginTop: "-60px" }}>
-                  <Stars stars1={5} />
+                  <Stars stars1={3} />
                 </div>
               </div>
               <input type="button" className="btn" value="Buy" />

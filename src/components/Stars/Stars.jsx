@@ -64,6 +64,7 @@ const Stars = ({ stars1 }) => {
           id={r1}
           ref={(el) => (inputRefs.current[4] = el)}
           checked={stars1 === 5}
+          readOnly
         />
         <label htmlFor={r1} />
         <input
@@ -72,6 +73,7 @@ const Stars = ({ stars1 }) => {
           id={r2}
           ref={(el) => (inputRefs.current[3] = el)}
           checked={stars1 === 4}
+          readOnly
         />
         <label htmlFor={r2} />
         <input
@@ -80,6 +82,7 @@ const Stars = ({ stars1 }) => {
           id={r3}
           ref={(el) => (inputRefs.current[2] = el)}
           checked={stars1 === 3}
+          readOnly
         />
         <label htmlFor={r3} />
         <input
@@ -88,6 +91,7 @@ const Stars = ({ stars1 }) => {
           id={r4}
           ref={(el) => (inputRefs.current[1] = el)}
           checked={stars1 === 2}
+          readOnly
         />
         <label htmlFor={r4} />
         <input
@@ -96,6 +100,7 @@ const Stars = ({ stars1 }) => {
           id={r5}
           ref={(el) => (inputRefs.current[0] = el)}
           checked={stars1 === 1}
+          readOnly
         />
         <label htmlFor={r5} />
       </div>

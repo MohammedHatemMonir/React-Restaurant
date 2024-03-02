@@ -5,8 +5,10 @@ const Header = () => {
   return (
     <div className="Nav-Header ">
       <header>
+        
         <div className="logo">DineMe</div>
         <ul className="menu">
+          
           <Link to="/" className="nav-link">
             <li>Home</li>
           </Link>
