@@ -11,7 +11,6 @@ import Prototype from "../Prototypes/Prototype";
 import Card from "../Card/Card";
 import Dashboard1 from "../Dashboard/Dashboard1";
 import Dashboard2 from "../Dashboard/Dashboard2";
-import Sidebar from "../Sidebar/Sidebar";
 import Home from "./Home";
 import Tutorials from "../TestComponents/Tutorials";
 import ResPage from './../ResPage/ResPage';
@@ -50,7 +49,6 @@ export default function TheRouter() {
           <Route path="card" element={<Card />}></Route>
           <Route path="dash1" element={<Dashboard1 />}></Route>
           <Route path="dash2" element={<Dashboard2 />}></Route>
-          <Route path="sidebar" element={<Sidebar />}></Route>
           <Route path="/restaurant/:id/:resName" element={<SelectResPage />}></Route>
 
           <Route path="/tutorials" element={<Tutorials />}>

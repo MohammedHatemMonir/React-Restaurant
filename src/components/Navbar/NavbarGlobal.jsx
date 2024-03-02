@@ -3,7 +3,6 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
-import { toggle } from "../../Globals";
 import ThemeController from "./ThemeController";
 
 export default function NavbarGlobal() {
@@ -16,9 +15,6 @@ export default function NavbarGlobal() {
             id="menu-toggle"
             src="https://i.imgur.com/Afh6yfe.png"
             style={{ outline: "none" }}
-            onClick={() => {
-              toggle.value = !toggle.value;
-            }}
           />
           {/* <Link to="home">Logo</Link> */}
           <Link to="/" className="m-1">

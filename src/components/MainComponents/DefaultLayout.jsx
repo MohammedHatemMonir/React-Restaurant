@@ -1,6 +1,5 @@
 import { Link, Outlet, useParams } from "react-router-dom";
 import NavbarGlobal from "../Navbar/NavbarGlobal";
-import Sidebar from "../Sidebar/Sidebar";
 
 
 
