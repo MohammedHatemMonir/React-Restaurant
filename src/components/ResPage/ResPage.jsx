@@ -44,8 +44,8 @@ export default function ResPage() {
         <Header />
         <div className="row">
           {!q.isLoading && q.data?.data.map((data,index) => (
-            <div className="col-sm-12 col-md-6 col-lg-4" key={data.id}>
-              <Link to={`/selectres`} key={index}>
+            <div className="col-sm-12 col-md-6 col-lg-4" key={index}>
+              <Link to={`/selectres`} >
               <Card
                 title={data.title}
                 price={0}
