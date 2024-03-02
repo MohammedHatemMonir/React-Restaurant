@@ -32,7 +32,9 @@ export default function ResPage() {
       return ret;
     },
   });
-
+  if (q.isLoading) {
+    return <>Loading</>;
+  }
   console.log(q.data?.data);
   return (
     <section>
