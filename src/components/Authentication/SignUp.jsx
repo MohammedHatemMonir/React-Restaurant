@@ -158,7 +158,7 @@ export default function SignUp() {
                   Password
                 </label>
                 <input
-                  class="form-control form-icon-input"
+                  className="form-control form-icon-input"
                   id="password"
                   type="password"
                   placeholder="Password"
@@ -183,7 +183,7 @@ export default function SignUp() {
                   Confirm Password
                 </label>
                 <input
-                  class="form-control form-icon-input"
+                  className="form-control form-icon-input"
                   id="confirmPassword"
                   type="password"
                   placeholder="Confirm Password"
@@ -211,7 +211,7 @@ export default function SignUp() {
                 type="checkbox"
                 required
               />
-              <label class="form-label fs--1 text-none" for="termsService">
+              <label className="form-label fs--1 text-none" for="termsService">
                 I accept the{" "}
                 <a
                   style={{ textDecoration: "none", cursor: "pointer" }}
