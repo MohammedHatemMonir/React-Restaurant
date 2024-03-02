@@ -2265,7 +2265,6 @@ button {
 
 body {
     font-family: Gilroy,Open Sans,sans-serif;
-    padding-top: 77px
 }
 
 [dir=rtl] body {
@@ -2276,11 +2275,6 @@ body {
     overflow: hidden
 }
 
-@media (min-width: 1025px) {
-    body:not(.hide-search-row) {
-        padding-top:147px
-    }
-}
 
 @media (max-width: 1024px) {
     body {
@@ -3187,7 +3181,6 @@ form .isvalid-icon svg {
 }
 
 body:not(.hide-search-row) .page-content {
-    padding-top: 30px;
     background-color: #fff
 }
 
