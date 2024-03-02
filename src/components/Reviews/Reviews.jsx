@@ -28,7 +28,7 @@ const Reviews = () => {
                   </div>
                   <div className="customer_name_review_status ">
                     <div className="customer_name">{review.name}</div>
-                    <div style={{transform:"scale(0.4)",marginLeft:"-50px"}}>
+                    <div style={{transform:"scale(0.45)",marginLeft:"-50px"}}>
                       <Emotions key={emotionID} emotion={review.emotion} />
                     </div>
 
