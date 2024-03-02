@@ -22,6 +22,9 @@ export default function SelectResPage() {
     },
   });
 
+
+
+
   console.log("query data", q.data?.data);
 
   return (

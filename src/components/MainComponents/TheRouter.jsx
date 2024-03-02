@@ -16,13 +16,30 @@ import Home from "./Home";
 import Tutorials from "../TestComponents/Tutorials";
 import ResPage from './../ResPage/ResPage';
 import SelectResPage from './../SelectedResPage/SelectResPage';
+import  { useEffect } from 'react';
 
-
-
+import { useLocation } from "react-router-dom";
 
 export default function TheRouter() {
+
+
+  const ScrollToTop = ({ children }) => {
+    const { pathname } = useLocation();
+  
+    useEffect(() => {
+      window.scrollTo({
+
+        top: 0,
+        behavior: "instant",
+      });
+    }, [pathname]);
+  
+    return null;
+  };
+
   return (
     <>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<DefaultLayout />}>
           <Route index element={<ResPage />} />
@@ -34,7 +51,7 @@ export default function TheRouter() {
           <Route path="dash1" element={<Dashboard1 />}></Route>
           <Route path="dash2" element={<Dashboard2 />}></Route>
           <Route path="sidebar" element={<Sidebar />}></Route>
-          <Route path="selectres" element={<SelectResPage />}></Route>
+          <Route path="/restaurant/:id/:resName" element={<SelectResPage />}></Route>
 
           <Route path="/tutorials" element={<Tutorials />}>
               <Route path="Medotest" element={<MedoTest />}></Route>

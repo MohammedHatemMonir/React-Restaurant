@@ -6,14 +6,7 @@ import Slider from "./Slider";
 import Header from "./Header";
 import Card from "../Card/Card";
 import img1 from "../../utils/meals-img/item-1.jpeg";
-import img2 from "../../utils/meals-img/item-2.jpeg";
-import img3 from "../../utils/meals-img/item-3.jpeg";
-import img4 from "../../utils/meals-img/item-4.jpeg";
-import img5 from "../../utils/meals-img/item-5.jpeg";
-import img6 from "../../utils/meals-img/item-6.jpeg";
-import img7 from "../../utils/meals-img/item-7.jpeg";
 import img8 from "../../utils/meals-img/item-8.jpeg";
-import img9 from "../../utils/meals-img/item-9.jpeg";
 import Footer from "./Footer";
 import { useQuery } from "react-query";
 import { apiClient } from "../../Data/apiclient";
@@ -45,11 +38,11 @@ export default function ResPage() {
           {!q.isLoading &&
             q.data?.data.map((data, index) => (
               <div className="col-sm-12 col-md-6 col-lg-4" key={index}>
-                <Link to={`/selectres`}>
+                <Link to={`/restaurant/${data._id}/${data.ResName}`}>
                   <Card
                     title={data.ResName}
                     price={0}
-                    img={img1}
+                    img={img8}
                     stars={Math.round(data.rating)}
                     mealImg={img1}
                     reviewsNum={data.comment_num}
