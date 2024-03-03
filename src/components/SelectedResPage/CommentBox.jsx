@@ -1,15 +1,44 @@
 import { useSignal } from "@preact/signals-react";
+import { useMutation } from "react-query";
+import { apiClient } from "../../Data/apiclient";
 
-const CommentBox = () => {
+const CommentBox = ({resID}) => {
   const comment = useSignal("");
+
+
+ const m = useMutation({
+    mutationKey: [resID],
+    // cacheTime: 600000,
+    // onSuccess: onSuccess,
+    // onError: onError,
+    mutationFn: async (params) => {
+      console.log("trying to load");
+      let url = "/postRestaurantComment";
+      console.log("posting to ", url);
+      return await apiClient.post(url, params);
+    },
+  });
+
+
 
   const handleInputChange = (event) => {
     comment.value = event.target.value;
   };
 
+  async function PostRestaurantComment(props) {
+    var j = { comment: props.comment, resID: props.resID};
+        try {
+        await m.mutateAsync(j);
+        }catch(e){
+        console.log("Failed to post comment",e);
+
+          }
+        }
+
   const handleSubmit = () => {
+    PostRestaurantComment({comment: comment.value, resID: resID});
     // Mohamed Hatim add your submission logic here
-    console.log("Submitted:", comment);
+    console.log("Submitted:", comment.value);
     // Clear the input field after submission if you need
     // comment.value = "";
   };

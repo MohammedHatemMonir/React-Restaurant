@@ -6,4 +6,7 @@ const router = express.Router();
 router.get('/getAllresturant',control.getAllresturant)
 router.post('/Addresturant',validateResturantInput,control.addNewresturant)
 router.delete('/deleteresturant/:id',control.deleteresturant)
+
+router.post('/postRestaurantComment',validateResturantInput,control.postRestaurantComment)
+
 module.exports = router;

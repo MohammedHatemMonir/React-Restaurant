@@ -62,8 +62,21 @@ const deleteresturant = async (req, res) => {
     }
 }
 
+const postRestaurantComment = async (req, res) => {
+
+    try{
+        res.status(200).json({ message: "ADDED COMMENT!" });
+        console.log("Added comment!", req.body.comment);
+
+
+    }catch(e){
+        console.log("Failed to post comment",e);
+    }
+
+}
 module.exports = {
     getAllresturant,
     addNewresturant,
     deleteresturant,
+    postRestaurantComment,
 };
