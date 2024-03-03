@@ -6,6 +6,7 @@ import Reviews from "../Reviews/Reviews";
 import Stars from "../Stars/Stars";
 import { Container, Row, Col } from "react-bootstrap";
 import RightArrowIcon from "../../Icons/RightArrowIcon";
+import CommentBox from "./CommentBox";
 
 export default function SelectResPage() {
   const q = useQuery({
@@ -21,9 +22,6 @@ export default function SelectResPage() {
       return ret;
     },
   });
-
-
-
 
   console.log("query data", q.data?.data);
 
@@ -118,10 +116,10 @@ export default function SelectResPage() {
             {/* <div className="col-sm-4 restaurant-actions"> <span><a className="circular-btn"> <PhoneIcon /> </a></span></div> */}
           </Row>
           <Row>
-            <Col sm={8} >
+            <Col sm={8}>
               {/* <div className="section delivery-info-section"></div> */}
             </Col>
-            <Col sm={8}  className="tabs-header">
+            <Col sm={8} className="tabs-header">
               <div className="nav nav-tabs">
                 <ul id="restaurant-tabs-nav" role="tablist">
                   <li
@@ -211,7 +209,10 @@ export default function SelectResPage() {
                                   <li className="cat ">
                                     <a
                                       className="scroll-to-div"
-                                      style={{ cursor: "pointer" ,textDecoration: "none"}}
+                                      style={{
+                                        cursor: "pointer",
+                                        textDecoration: "none",
+                                      }}
                                     >
                                       Offers
                                       <span className="arrow-right">
@@ -222,7 +223,10 @@ export default function SelectResPage() {
                                   <li className="cat">
                                     <a
                                       className="scroll-to-div"
-                                      style={{ cursor: "pointer" ,textDecoration: "none"}}
+                                      style={{
+                                        cursor: "pointer",
+                                        textDecoration: "none",
+                                      }}
                                     >
                                       Top Dishes
                                     </a>
@@ -233,7 +237,10 @@ export default function SelectResPage() {
                                   <li className="cat">
                                     <a
                                       className="scroll-to-div"
-                                      style={{ cursor: "pointer" ,textDecoration: "none"}}
+                                      style={{
+                                        cursor: "pointer",
+                                        textDecoration: "none",
+                                      }}
                                     >
                                       Value Meals
                                     </a>
@@ -244,7 +251,10 @@ export default function SelectResPage() {
                                   <li className="cat">
                                     <a
                                       className="scroll-to-div"
-                                      style={{ cursor: "pointer" ,textDecoration: "none"}}
+                                      style={{
+                                        cursor: "pointer",
+                                        textDecoration: "none",
+                                      }}
                                     >
                                       Munchies
                                     </a>
@@ -255,7 +265,10 @@ export default function SelectResPage() {
                                   <li className="cat">
                                     <a
                                       className="scroll-to-div"
-                                      style={{ cursor: "pointer",textDecoration: "none" }}
+                                      style={{
+                                        cursor: "pointer",
+                                        textDecoration: "none",
+                                      }}
                                     >
                                       Beef &amp; Dogs
                                     </a>
@@ -266,13 +279,19 @@ export default function SelectResPage() {
                                   <li className="cat">
                                     <a
                                       className="scroll-to-div"
-                                      style={{ cursor: "pointer",textDecoration: "none" }}
+                                      style={{
+                                        cursor: "pointer",
+                                        textDecoration: "none",
+                                      }}
                                     >
                                       Chicken Sandwiches
                                     </a>
                                     <span
                                       className="arrow-right"
-                                      style={{ cursor: "pointer",textDecoration: "none" }}
+                                      style={{
+                                        cursor: "pointer",
+                                        textDecoration: "none",
+                                      }}
                                     >
                                       <RightArrowIcon />
                                     </span>
@@ -280,13 +299,19 @@ export default function SelectResPage() {
                                   <li className="cat">
                                     <a
                                       className="scroll-to-div"
-                                      style={{ cursor: "pointer",textDecoration: "none" }}
+                                      style={{
+                                        cursor: "pointer",
+                                        textDecoration: "none",
+                                      }}
                                     >
                                       Vegan Sandwiches
                                     </a>
                                     <span
                                       className="arrow-right"
-                                      style={{ cursor: "pointer" ,textDecoration: "none"}}
+                                      style={{
+                                        cursor: "pointer",
+                                        textDecoration: "none",
+                                      }}
                                     >
                                       <RightArrowIcon />
                                     </span>
@@ -297,11 +322,21 @@ export default function SelectResPage() {
                               <Col sm={6}>
                                 {/* ibrahimmmm start here*/}
                                 <Container>
-                                  {!q.isLoading && q.data?.data?.map((item,index) => {return <TempMealCard id={item.id} name={item.ResName} key={index} />})}
+                                  {!q.isLoading &&
+                                    q.data?.data?.map((item, index) => {
+                                      return (
+                                        <TempMealCard
+                                          id={item.id}
+                                          name={item.ResName}
+                                          key={index}
+                                        />
+                                      );
+                                    })}
                                 </Container>
                               </Col>
                               {/* style={{ transform: "scale(0.9)" }} */}
                               <Col sm={4} style={{ transform: "scale(1)" }}>
+                              <CommentBox />
                                 <Reviews />
                               </Col>
                             </Row>
@@ -321,7 +356,7 @@ export default function SelectResPage() {
   );
 }
 
-function TempMealCard({id,name}) {
+function TempMealCard({ id, name }) {
   return (
     <>
       <div className="mb-5">
