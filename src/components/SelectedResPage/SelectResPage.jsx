@@ -7,8 +7,12 @@ import Stars from "../Stars/Stars";
 import { Container, Row, Col } from "react-bootstrap";
 import RightArrowIcon from "../../Icons/RightArrowIcon";
 import CommentBox from "./CommentBox";
+import { useParams } from "react-router-dom";
 
 export default function SelectResPage() {
+
+  const { resID, resName } = useParams();
+  console.log("resID",resID);
   const q = useQuery({
     queryKey: ["getAllresturant"],
 
@@ -336,7 +340,7 @@ export default function SelectResPage() {
                               </Col>
                               {/* style={{ transform: "scale(0.9)" }} */}
                               <Col sm={4} style={{ transform: "scale(1)" }}>
-                              <CommentBox />
+                              <CommentBox  resID={resID}/>
                                 <Reviews />
                               </Col>
                             </Row>

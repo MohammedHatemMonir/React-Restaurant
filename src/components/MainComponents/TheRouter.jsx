@@ -49,7 +49,7 @@ export default function TheRouter() {
           <Route path="card" element={<Card />}></Route>
           <Route path="dash1" element={<Dashboard1 />}></Route>
           <Route path="dash2" element={<Dashboard2 />}></Route>
-          <Route path="/restaurant/:id/:resName" element={<SelectResPage />}></Route>
+          <Route path="/restaurant/:resID/:resName" element={<SelectResPage />}></Route>
 
           <Route path="/tutorials" element={<Tutorials />}>
               <Route path="Medotest" element={<MedoTest />}></Route>

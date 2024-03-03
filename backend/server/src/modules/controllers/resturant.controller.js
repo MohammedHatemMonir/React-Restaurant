@@ -66,7 +66,7 @@ const postRestaurantComment = async (req, res) => {
 
     try{
         res.status(200).json({ message: "ADDED COMMENT!" });
-        console.log("Added comment!", req.body.comment);
+        console.log("Added comment!", `resID: ${req.body.resID} + Comment: ${req.body.comment}`);
 
 
     }catch(e){
