@@ -8,11 +8,11 @@ import { Container, Row, Col } from "react-bootstrap";
 import RightArrowIcon from "../../Icons/RightArrowIcon";
 import CommentBox from "./CommentBox";
 import { useParams } from "react-router-dom";
+import CardBox from "./CardBox";
 
 export default function SelectResPage() {
-
   const { resID, resName } = useParams();
-  console.log("resID",resID);
+  console.log("resID", resID);
   const q = useQuery({
     queryKey: ["getAllresturant"],
 
@@ -340,7 +340,7 @@ export default function SelectResPage() {
                               </Col>
                               {/* style={{ transform: "scale(0.9)" }} */}
                               <Col sm={4} style={{ transform: "scale(1)" }}>
-                              <CommentBox  resID={resID}/>
+                                <CommentBox resID={resID} />
                                 <Reviews />
                               </Col>
                             </Row>
@@ -360,73 +360,99 @@ export default function SelectResPage() {
   );
 }
 
-function TempMealCard({ id, name }) {
+function TempMealCard({ id, name, description, price, imageUrl, stars }) {
   return (
-    <>
-      <div className="mb-5">
+    <div
+      style={{
+        backgroundColor: "#fff",
+        boxShadow:
+          "0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)",
+        borderRadius: "0.5rem",
+        overflow: "hidden",
+        margin: "0.75rem 0",
+        cursor: "pointer",
+        transition: "background-color 0.3s",
+      }}
+      className="meal-card"
+    >
+      <img
+        src="https://media.istockphoto.com/id/1295633127/photo/grilled-chicken-meat-and-fresh-vegetable-salad-of-tomato-avocado-lettuce-and-spinach-healthy.jpg?s=612x612&w=0&k=20&c=Qa3tiqUCO4VpVMQDXLXG47znCmHr_ZIdoynViJ8kW0E="
+        alt={name}
+        style={{
+          width: "100%",
+          height: "200px",
+          objectFit: "cover",
+          border: "none",
+        }}
+        className="meal-card__image"
+      />
+      <div style={{ padding: "1rem" }} className="meal-card__content">
+        <h3
+          style={{
+            fontSize: "1.125rem",
+            fontWeight: "600",
+            marginBottom: "0.5rem",
+          }}
+          className="meal-card__title"
+        >
+          {name}
+        </h3>
+        <p
+          style={{
+            color: "#4b5563",
+            marginBottom: "1rem",
+          }}
+          className="meal-card__description"
+        >
+          {description}
+        </p>
         <div
           style={{
-            backgroundColor: "#fff",
-            boxShadow:
-              "0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)",
-            borderRadius: "0.5rem",
-            overflow: "hidden",
-            margin: "0.75rem 0",
-            cursor: "pointer",
-            transition: "background-color 0.3s",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
           }}
-          key="1"
+          className="meal-card__footer"
         >
-          <img
-            src="https://media.istockphoto.com/id/1295633127/photo/grilled-chicken-meat-and-fresh-vegetable-salad-of-tomato-avocado-lettuce-and-spinach-healthy.jpg?s=612x612&w=0&k=20&c=Qa3tiqUCO4VpVMQDXLXG47znCmHr_ZIdoynViJ8kW0E="
-            alt="meal-img"
-            style={{
-              width: "100%",
-              height: "200px",
-              objectFit: "cover",
-              border: "none",
-            }}
-          />
-          <div style={{ padding: "1rem" }}>
-            <h3
+          <div>
+            <p
               style={{
+                color: "#dc2626",
                 fontSize: "1.125rem",
                 fontWeight: "600",
-                marginBottom: "0.5rem",
+                margin: "0",
               }}
+              className="meal-card__price"
             >
-              {name}
-            </h3>
-            <p style={{ color: "#4b5563", marginBottom: "1rem" }}>Desc</p>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              <div>
-                <p
-                  style={{
-                    color: "#dc2626",
-                    fontSize: "1.125rem",
-                    fontWeight: "600",
-                    margin: "0",
-                  }}
-                >
-                  $1231
-                </p>
-              </div>
-              <div style={{ display: "flex", alignItems: "center" }}>
-                <div style={{ marginTop: "-60px" }}>
-                  <Stars stars1={3} />
-                </div>
-              </div>
-              <input type="button" className="btn" value="Buy" />
-            </div>
+              1200${price}
+            </p>
           </div>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              marginTop: "-60px",
+            }}
+            className="meal-card__rating"
+          >
+            <Stars stars1={4} />
+          </div>
+          <button
+            style={{
+              backgroundColor: "#4f46e5",
+              color: "#fff",
+              border: "none",
+              padding: "0.5rem 1rem",
+              borderRadius: "0.25rem",
+              cursor: "pointer",
+              transition: "background-color 0.3s",
+            }}
+            className="btn meal-card__button"
+          >
+            Buy
+          </button>
         </div>
       </div>
-    </>
+    </div>
   );
 }
