@@ -41,9 +41,9 @@ export default function ResPage() {
                 <Link to={`/restaurant/${data._id}/${data.ResName}`}>
                   <Card
                     title={data.ResName}
-                    price={1200}
                     img={img8}
-                    stars={Math.round(data.rating)}
+                    //Math.round(data.rating)
+                    stars1={4}
                     mealImg={img1}
                     reviewsNum={data.comment_num}
                     resName={data.ResName}

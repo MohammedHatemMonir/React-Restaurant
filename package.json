@@ -39,6 +39,7 @@
         "redux-thunk": "^2.4.2",
         "sass": "^1.53.0",
         "sort-by": "^0.0.2",
+        "uuid": "^9.0.1",
         "web-vitals": "^2.1.4"
     },
     "optionalDependencies": {
@@ -70,5 +71,8 @@
             "last 1 firefox version",
             "last 1 safari version"
         ]
+    },
+    "devDependencies": {
+        "@types/uuid": "^9.0.8"
     }
 }

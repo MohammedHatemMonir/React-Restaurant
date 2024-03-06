@@ -1,10 +1,19 @@
 // import { useSignal } from "@preact/signals-react";
 import { v4 as uuidv4 } from "uuid";
 import "./Card.scss";
-import Stars1 from "../Stars/Stars";
+import Stars from "../Stars/Stars";
 import HeartIcon from "../../Icons/HeartIcon";
 import HeartFullIcon from "../../Icons/HeartFullIcon";
-const Card = ({ title, img, id, stars, mealImg, reviewsNum, resName, fav }) => {
+const Card = ({
+  title,
+  img,
+  id,
+  stars1,
+  mealImg,
+  reviewsNum,
+  resName,
+  fav,
+}) => {
   // To Generate Random ID
   const randomId = uuidv4();
   return (
@@ -34,8 +43,11 @@ const Card = ({ title, img, id, stars, mealImg, reviewsNum, resName, fav }) => {
                       />
                     </h4>
                     <div>
-                      <div className="myZoom w-25 h-25">
-                        <Stars1 id={randomId + id} stars1={stars} />
+                      <div
+                        className="myZoom w-25 h-25"
+                        style={{ marginTop: "50px" }}
+                      >
+                        <Stars id={randomId + id} stars1={5} />
                       </div>
                       <p className="myFont">{`${reviewsNum}`} </p>
                       <p className="text-dark my-res-title">{resName}</p>
