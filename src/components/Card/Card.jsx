@@ -45,9 +45,9 @@ const Card = ({
                     <div>
                       <div
                         className="myZoom w-25 h-25"
-                        style={{ marginTop: "50px" }}
+                        style={{ marginTop: "-60px" }}
                       >
-                        <Stars id={randomId + id} stars1={5} />
+                        <Stars id={randomId + id} stars1={stars1} />
                       </div>
                       <p className="myFont">{`${reviewsNum}`} </p>
                       <p className="text-dark my-res-title">{resName}</p>

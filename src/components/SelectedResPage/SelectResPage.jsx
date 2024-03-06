@@ -435,7 +435,7 @@ function TempMealCard({ id, name, description, price, imageUrl, stars }) {
             }}
             className="meal-card__rating"
           >
-            <Stars stars1={4} />
+            <Stars stars1={5} />
           </div>
           <button
             style={{

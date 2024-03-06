@@ -42,8 +42,7 @@ export default function ResPage() {
                   <Card
                     title={data.ResName}
                     img={img8}
-                    //Math.round(data.rating)
-                    stars1={4}
+                    stars1={Math.round(data.rating)}
                     mealImg={img1}
                     reviewsNum={data.comment_num}
                     resName={data.ResName}
