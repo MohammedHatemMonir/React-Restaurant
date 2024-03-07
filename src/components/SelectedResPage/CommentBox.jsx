@@ -54,6 +54,7 @@ const CommentBox = ({resID}) => {
         style={{
           padding: "10px",
           marginRight: "10px",
+          marginTop: "15px",
           borderRadius: "5px",
           border: "1px solid #ccc",
           fontSize: "16px",
