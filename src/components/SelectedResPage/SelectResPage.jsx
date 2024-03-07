@@ -380,7 +380,7 @@ function TempMealCard({ id, name, description, price, imageUrl, stars }) {
         alt={name}
         style={{
           width: "100%",
-          height: "200px",
+          height: "150px",
           objectFit: "cover",
           border: "none",
         }}
