@@ -21,7 +21,7 @@ async function analyzeText(text) {
   }
 }
 
-const analyze = async (req, res) => {
+const analyze = async (req, res) => { //{text:"",mealid: ""}
   try {
     const errors =validationResult(req)
     if(!errors.isEmpty()){
@@ -92,7 +92,7 @@ const analyze = async (req, res) => {
   }
 };
 ///////////////////////////////////
-const res_comment = async (req, res) => {
+const res_comment = async (req, res) => { // {text:"",ResID: "" }
   try {
     const errors =validationResult(req)
     if(!errors.isEmpty()){

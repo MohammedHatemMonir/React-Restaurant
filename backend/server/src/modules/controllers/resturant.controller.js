@@ -72,8 +72,9 @@ const postRestaurantComment = async (req, res) => {
     }catch(e){
         console.log("Failed to post comment",e);
     }
-
 }
+
+
 module.exports = {
     getAllresturant,
     addNewresturant,

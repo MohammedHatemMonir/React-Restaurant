@@ -13,7 +13,7 @@ const CommentBox = ({resID}) => {
     // onError: onError,
     mutationFn: async (params) => {
       console.log("trying to load");
-      let url = "/postRestaurantComment";
+      let url = "/rescomment";
       console.log("posting to ", url);
       return await apiClient.post(url, params);
     },
@@ -26,7 +26,7 @@ const CommentBox = ({resID}) => {
   };
 
   async function PostRestaurantComment(props) {
-    var j = { comment: props.comment, resID: props.resID};
+    var j = { text: props.comment, ResID: props.resID};
         try {
         await m.mutateAsync(j);
         }catch(e){
