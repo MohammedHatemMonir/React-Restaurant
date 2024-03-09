@@ -14,23 +14,23 @@ const NavWithSlider = () => {
   // Define your slider items with different images and descriptions
   const sliderItems = [
     {
-      src: img1,
+      src: "https://c4.wallpaperflare.com/wallpaper/667/630/482/burger-dinner-food-hamburger-wallpaper-preview.jpg",
       description: "Description for item 1",
     },
     {
-      src: img2,
+      src: "https://c4.wallpaperflare.com/wallpaper/234/543/684/food-pizza-wallpaper-preview.jpg",
       description: "Description for item 2",
     },
     {
-      src: img3,
+      src: "https://c4.wallpaperflare.com/wallpaper/997/408/959/tomato-leaves-vegetables-meat-beef-wallpaper-preview.jpg",
       description: "Description for item 3",
     },
     {
-      src: img4,
+      src: "https://c4.wallpaperflare.com/wallpaper/325/393/217/food-lasagna-meal-pasta-wallpaper-preview.jpg",
       description: "Description for item 4",
     },
     {
-      src: img5,
+      src: "https://c4.wallpaperflare.com/wallpaper/796/449/290/chicken-legs-close-up-three-plate-wallpaper-preview.jpg",
       description: "Description for item 5",
     },
     // Add more slider items as needed
