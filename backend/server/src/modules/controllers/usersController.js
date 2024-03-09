@@ -1,7 +1,7 @@
 const { validationResult } = require("express-validator");
 const myusers = require("../../database/models/userModel");
 const bcrypt =require('bcrypt');
-const generateToken = require("../../utils/GenerateToken.js");
+// const generateToken = require("../../utils/GenerateToken.js");
 
 const signup = async (req, res) => {
   const { name, email, password } = req.body;
@@ -42,8 +42,13 @@ const signin = async (req, res) => {
 
     const match = await bcrypt.compare(password, user.password);
     if (match) {
-      let token=generateToken({name:user.name,role:user.role,userId:user._id})
-      return res.json({ msg: `Welcome ${user.name}`, role: user.role, token });
+      // let token=generateToken({name:user.name,role:user.role,userId:user._id})
+      // return res.json({ msg: `Welcome ${user.name}`, role: user.role, token });
+        req.session.user = user;
+        console.log("Seission User!",req.session.user.role);
+        return res.json({ msg: `Welcome ${user.name}` });
+
+
     } else {
       return res.json({ msg: "Incorrect password" });
     }

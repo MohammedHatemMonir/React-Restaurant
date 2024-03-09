@@ -3,13 +3,19 @@ const resturant  = require("../../database/models/resturant.Model");
 const { validationResult } = require("express-validator");
 
 
-const addNewmeal = async (req, res) => {
+const addNewmeal = async (req, res) => { //{MealName:"",MealImg:"",Description:"",Price:"",Resid:""}
     try {
       const errors =validationResult(req)
       if(!errors.isEmpty()){
         res.status(400).json(errors.array()[0].msg)
       }else{
+
+        if(req.session.user.role!="ADMIN") {
+          res.status(500).json({message:"You are not Authenticated to add a meal", pass: req.session.user.password});
+          return;
+        }
       const MealName = req.body.MealName;
+
       const meals = await meal.find({MealName:MealName});
       if (!meals[0]) {
         // console.log(req.body.MealImg.split('.').pop() )
