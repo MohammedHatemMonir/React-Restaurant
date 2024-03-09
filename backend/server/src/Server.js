@@ -21,7 +21,6 @@ console.log('Secret Key:', secretKey);
 
 app.use(express.urlencoded({ extended: true }));
 
-
 app.use(
   session({
     secret: secretKey,

@@ -14,19 +14,20 @@ const signup = async (req, res) => {
 
     const user = await myusers.findOne({ email });
     if (user) {
-      return res.status(400).json({ error: "User already exists" });
+      return res.json({success:true, msg: "User already exists" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 8);
     const newUser = await myusers.create({ name, email, password: hashedPassword });
-    return res.json({ msg: "Signup successful" });
+    
+    return res.json({success:true, msg: "Signup successful", name:name, email:email});
   } catch (error) {
     console.error("Error during signup:", error);
-    return res.status(500).json({ error: "Internal server error" });
+    return res.status(500).json({ success:false,error: "Internal server error" });
   }
 };
 
-const signin = async (req, res) => {
+const signin = async (req, res) => { //{email:"",password:""}
   const { email, password } = req.body;
 
   try {
@@ -44,13 +45,14 @@ const signin = async (req, res) => {
     if (match) {
       // let token=generateToken({name:user.name,role:user.role,userId:user._id})
       // return res.json({ msg: `Welcome ${user.name}`, role: user.role, token });
+
         req.session.user = user;
-        console.log("Seission User!",req.session.user.role);
-        return res.json({ msg: `Welcome ${user.name}` });
+        console.log("Seission User!",req.session.user);
+        return res.json({ success:true, role:user.role, name:user.name ,msg: `Welcome ${user.name}` });
 
 
     } else {
-      return res.json({ msg: "Incorrect password" });
+      return res.json({success:false, msg: "Incorrect password" });
     }
   } catch (error) {
     console.error("Error during signin:", error);

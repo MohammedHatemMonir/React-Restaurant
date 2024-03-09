@@ -1,41 +1,93 @@
 import React from "react";
 import "./Login.css";
-import { Link } from "react-router-dom";
-import { useSignal } from "@preact/signals-react";
+import { Form, Button, Card } from 'react-bootstrap';
+import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { useMutation } from "react-query";
+import { apiClient } from "../../Data/apiclient";
+
 
 const Login = () => {
-  const email = useSignal("");
-  const password = useSignal("");
-  const errors = useSignal({});
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    var validationErrors = {};
+  
+  const m = useMutation({
+    mutationKey: [],
+    // cacheTime: 600000,
+    // onSuccess: onSuccess,
+    // onError: onError,
+    mutationFn: async (params) => {
+      console.log("trying to load");
+      let url = "/api/users/signin";
+      console.log("posting to ", url);
+      return await apiClient.post(url, params);
+    },
+  });
 
-    // Simple email validation
-    if (!email.value || !/\S+@\S+\.\S+/.test(email.value)) {
-      validationErrors.email = "Please enter a valid email address";
-    }
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm();
 
-    // Simple password validation
-    if (!password.value || password.value.length < 7) {
-      validationErrors.password = "Password must be at least 7 characters";
-    }
+  const navigate = useNavigate();
 
-    // If there are validation errors
-    if (Object.keys(validationErrors).length > 0) {
-      errors.value = validationErrors;
-    } else {
-      validationErrors = {}; // Clear errors
-      errors.value = validationErrors;
-      // If no errors, proceed with SingUP logic
-      console.log("Login SingUP goes here...");
-    }
-  };
+  const onSubmit = async function (data) {
+    console.log("Data to send",data);
+    const result = await m.mutateAsync(data);
+
+    console.log("result",result.data);
+
+      if(!result.data.success){
+        alert("Invalid Email or Password");
+      }else{
+        if(result.data.role==="ADMIN"){
+          navigate("/tutorials");
+        }else{
+          navigate("/");
+        }
+      }
+    };
 
   return (
     <>
-    <div className="login-container">
+
+<div className="d-flex justify-content-center align-items-center" style={{ height: '75vh' }}>
+    <Card style={{ width: '18rem' }}>
+      <Card.Body>
+        <Card.Title>Login Form</Card.Title>
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <Form.Group controlId="username">
+            <Form.Label>Email:</Form.Label>
+            <Form.Control type="text" name="username" {...register("email", 
+                                                                    {required: "Email is required", 
+                                                                    pattern: 
+                                                                      {value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                                                                        message: "Invalid email address"}}
+            )}/>
+            <span style={{color:"red"}}>
+              {errors["email"] && errors["email"].message}
+            </span>
+          </Form.Group>
+          <Form.Group controlId="password">
+            <Form.Label>Password:</Form.Label>
+            <Form.Control type="password" name="password" {...register("password", 
+                                                                        {required: "Password is required",
+                                                                        minLength: {
+                                                                          value: 5,
+                                                                          message: "Password must have at least 5 characters"
+                                                                        }})} />
+            <span style={{color:"red"}}>
+              {errors["password"] && errors["password"].message}
+            </span>
+          </Form.Group>
+          <Button variant="primary" type="submit">
+            Login
+          </Button>
+        </Form>
+      </Card.Body>
+    </Card>
+  </div>
+    {/* <div className="login-container">
       <h2>Login Form</h2>
       <form onSubmit={handleFormSubmit}>
         <div className="form1">
@@ -79,7 +131,7 @@ const Login = () => {
           Forgot Password ?
         </Link>
       </form>
-    </div>
+    </div> */}
     </>
   );
 };

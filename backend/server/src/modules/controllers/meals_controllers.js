@@ -10,8 +10,8 @@ const addNewmeal = async (req, res) => { //{MealName:"",MealImg:"",Description:"
         res.status(400).json(errors.array()[0].msg)
       }else{
 
-        if(req.session.user.role!="ADMIN") {
-          res.status(500).json({message:"You are not Authenticated to add a meal", pass: req.session.user.password});
+        if(req.session?.user?.role!="ADMIN") {
+          res.status(500).json({message:"You are not Authenticated to add a meal"});
           return;
         }
       const MealName = req.body.MealName;
