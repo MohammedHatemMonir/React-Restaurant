@@ -8,7 +8,43 @@ import ThemeController from "./ThemeController";
 export default function NavbarGlobal() {
   return (
     <div>
-      <Navbar expand="lg" className="bg-body-tertiary">
+
+
+
+        <div className="my-test-nav">
+          <Navbar expand="lg">
+          <Container className="navbar-container">
+                  <input type="checkbox" name="" id="" />
+                  <div className="hamburger-lines">
+                    <span className="line line1" />
+                    <span className="line line2" />
+                    <span className="line line3" />
+                  </div>
+                  <ul className="menu-items">
+                    <li>
+                    <Link to="/" className="m-1">
+                      Home
+                    </Link>
+                    </li>
+                    <li>
+                    <Link to="/tutorials">Tutorials</Link>
+                    </li>
+                    <li>
+                    <Link to="/login">
+                      LogIn
+                    </Link>
+                    </li>
+                    <li>
+                    <Link to="SignUp" >
+                      SignUp
+                    </Link>
+                    </li>
+                  </ul>
+                  <h1 className="logo">DineMe</h1>
+                  </Container>
+              </Navbar>
+            </div>
+      {/* <Navbar expand="lg" className="bg-body-tertiary">
         <Container>
           <input
             type="image"
@@ -16,19 +52,7 @@ export default function NavbarGlobal() {
             src="https://i.imgur.com/Afh6yfe.png"
             style={{ outline: "none" }}
           />
-          {/* <Link to="home">Logo</Link> */}
-          <Link to="/" className="m-1">
-            Home
-          </Link>
-
-          <Link to="/tutorials">Tutorials</Link>
-
-          <Link to="/login" className="m-1" style={{ textDecoration: "none" }}>
-            LogIn
-          </Link>
-          <Link to="SignUp" className="m-1" style={{ textDecoration: "none" }}>
-            SignUp
-          </Link>
+          
 
           <ThemeController />
           <div style={{ color: "var(--dineme-bg)" }}>ThemeTest</div>
@@ -37,7 +61,7 @@ export default function NavbarGlobal() {
             <Nav className="ms-auto"></Nav>
           </Navbar.Collapse>
         </Container>
-      </Navbar>
+      </Navbar> */}
     </div>
   );
 }
