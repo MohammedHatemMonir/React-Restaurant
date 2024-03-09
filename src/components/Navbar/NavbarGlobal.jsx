@@ -7,9 +7,6 @@ import ThemeController from "./ThemeController";
 
 export default function NavbarGlobal() {
   return (
-    <div>
-
-
 
         <div className="my-test-nav">
           <Navbar expand="lg">
@@ -43,7 +40,6 @@ export default function NavbarGlobal() {
                   <h1 className="logo">DineMe</h1>
                   </Container>
               </Navbar>
-            </div>
       {/* <Navbar expand="lg" className="bg-body-tertiary">
         <Container>
           <input
