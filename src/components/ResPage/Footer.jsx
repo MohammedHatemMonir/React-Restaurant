@@ -146,7 +146,7 @@ const Footer = () => {
           <div className="container">
             <div className="row">
               <div className="col-md-12 text-center">
-                <p className="p-3 m-0 text-center">
+                <p className="p-3 m-0 text-center font-weight-bold">
                   Copyright &copy; {currentYear}
                 </p>
               </div>
