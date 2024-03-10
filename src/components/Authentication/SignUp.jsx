@@ -69,7 +69,7 @@ const navigate = useNavigate();
                 <FormGroup className="mb-3">
                     <Form.Label>Name</Form.Label>
                     <FormControl type="text" placeholder="Name"{...register("name", {required: "Name is required", minLength:{value:3,message: "Name must be 3 or more characters"}})}/>
-                    <span style={{color:"red"}}>
+                    <span className="text-danger">
                       {errors["name"] && errors["name"].message}
                     </span>
                 </FormGroup>
@@ -81,7 +81,7 @@ const navigate = useNavigate();
                                                                       {value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
                                                                         message: "Invalid email address"}}
             )}/>
-                    <span style={{color:"red"}}>
+                    <span className="text-danger  ">
                       {errors["email"] && errors["email"].message}
                     </span>
                             </FormGroup>
@@ -95,7 +95,7 @@ const navigate = useNavigate();
                                                                           value: 5,
                                                                           message: "Password must have at least 5 characters"
                                                                         }})} />
-                        <span style={{color:"red"}}>
+                        <span className="text-danger  ">
                           {errors["password"] && errors["password"].message}
                         </span>
                         </FormGroup>
@@ -111,7 +111,7 @@ const navigate = useNavigate();
                                                                           }
                                                                         }
                                                                     })} />
-                          <span style={{color:"red"}}>
+                          <span className="text-danger">
                             {errors["confirmPassword"] && errors["confirmPassword"].message}
                           </span>
                         </FormGroup>

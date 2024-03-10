@@ -12,6 +12,8 @@ import { useQuery } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 import { Col, Container } from "reactstrap";
 import { Link } from "react-router-dom";
+import Tabs from "./new/Tabs";
+import MainCards from "./new/MainCards";
 
 export default function ResPage() {
   const q = useQuery({
@@ -34,7 +36,7 @@ export default function ResPage() {
       <Slider />
       <Container style={{ width: "85%" }}>
         <Header />
-        <div className="row">
+        {/* <div className="row">
           {!q.isLoading &&
             q.data?.data.map((data, index) => (
               <div className="col-sm-12 col-md-6 col-lg-4" key={index}>
@@ -51,9 +53,13 @@ export default function ResPage() {
                 </Link>
               </div>
             ))}
-        </div>
-      </Container>
+        </div> */}
 
+
+
+      </Container>
+      {/* <Tabs /> */}
+      <MainCards />
       <Footer />
     </section>
   );
