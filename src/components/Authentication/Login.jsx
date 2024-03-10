@@ -10,6 +10,8 @@ import { UserData } from "../../Globals";
 
 const Login = () => {
 
+
+  
   const m = useMutation({
     mutationKey: [],
     // cacheTime: 600000,
@@ -35,12 +37,12 @@ const Login = () => {
     console.log("Data to send",data);
     const result = await m.mutateAsync(data);
 
-    console.log("result",result.data);
+    console.log("login",result.data);
 
       if(!result.data.success){
         alert("Invalid Email or Password");
       }else{
-        UserData.value = {name:result.data.name, email:result.data.email, role:result.data.role, id:result.data.id, loggedIn:true}
+        UserData.value = {name:result.data.name, email:result.data.email, role:result.data.role, id:result.data.id, loggedIn:result.data.loggedIn};
         if(result.data.role==="ADMIN"){
           navigate("/tutorials");
         }else{
@@ -81,7 +83,7 @@ const Login = () => {
               {errors["password"] && errors["password"].message}
             </span>
           </Form.Group>
-          <Link to="/SignUp" style={{ textDecoration: "none" }}> SignUp</Link>
+          <Link to="/signup" style={{ textDecoration: "none" }}> SignUp</Link>
           <Button variant="primary" type="submit">
             Login
           </Button>

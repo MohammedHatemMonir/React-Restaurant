@@ -1,6 +1,8 @@
 const { validationResult } = require("express-validator");
 const myusers = require("../../database/models/userModel");
 const bcrypt =require('bcrypt');
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 // const generateToken = require("../../utils/GenerateToken.js");
 
 const signup = async (req, res) => {
@@ -48,7 +50,7 @@ const signin = async (req, res) => { //{email:"",password:""}
 
         req.session.user = user;
         console.log("Seission User!",req.session.user);
-        return res.json({ success:true,id:user._id, role:user.role, name:user.name, email:user.email ,msg: `Welcome ${user.name}` });
+        return res.json({ success:true,id:user._id, role:user.role, name:user.name, email:user.email ,msg: `Welcome ${user.name}`,loggedIn:true });
 
 
     } else {
@@ -63,7 +65,7 @@ const signin = async (req, res) => { //{email:"",password:""}
 
 const logout = async (req, res) => {
 
-  
+  try {
   req.session.destroy(err => {
     if (err) {
       console.error('Error destroying session:', err);
@@ -71,11 +73,48 @@ const logout = async (req, res) => {
     // Redirect the user to the home page or wherever you want after logout
     res.json({success:true,msg:"Logged out successfully"});
   });
-
+  }
+  catch (error) {
+    console.error("Error during logout:", error);
+  }
 
 };
 
-module.exports = {signup,signin,logout};
+
+const session = async (req, res) => { //{email:"",password:""}
+  try {
+    
+
+    if(req.session.user){
+        const user = req.session.user;
+        console.log("Seission Requested",req.session.user);
+        return res.json({ success:true,id:user._id, role:user.role, name:user.name, email:user.email ,msg: `Welcome ${user.name}`, loggedIn:true});
+    }else{
+      res.json({loggedIn:false})
+    }
+
+    
+  } catch (error) {
+    console.error("Error during signin:", error);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+const terminateSession = async (req, res) => {
+  try {
+    req.session.destroy(err => {
+      if (err) {
+        console.error('Error destroying session:', err);
+      }
+      // Redirect the user to the home page or wherever you want after logout
+      res.json({success:true,msg:"Logged out successfully"});
+    });
+    }
+    catch (error) {
+      console.error("Error during logout:", error);
+    }
+};
+module.exports = {signup,signin,logout,session,terminateSession};
 
 // Get
 // const getSingleuser = async (req, res) => {

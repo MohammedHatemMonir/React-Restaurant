@@ -7,7 +7,33 @@ import ThemeController from "./ThemeController";
 import "./NavBarGlobal.scss";
 import { UserData } from "../../Globals";
 import LogoutButton from "../Authentication/LogoutButton";
+import { useMutation } from "react-query";
+import { apiClient } from "../../Data/apiclient";
 export default function NavbarGlobal() {
+
+
+  const m = useMutation({
+    mutationKey: [],
+    // cacheTime: 600000,
+    // onSuccess: onSuccess,
+    // onError: onError,
+    mutationFn: async (params) => {
+      console.log("trying to load");
+      let url = "/api/users/terminateSession";
+      console.log("posting to ", url);
+      return await apiClient.post(url, params);
+    },
+  });
+
+
+  async function terminateSession(){
+
+
+    const result = await m.mutateAsync();
+    console.log("result",result.data);
+
+  }
+  
   return (
     <div className="my-test-nav">
       <Navbar expand="lg">
@@ -18,6 +44,7 @@ export default function NavbarGlobal() {
             <span className="line line2" />
             <span className="line line3" />
           </div>
+          <button onClick={()=>{terminateSession()}}> terminate session</button>
           <ul className="menu-items">
             <li>
               <Link to="/" className="m-1">

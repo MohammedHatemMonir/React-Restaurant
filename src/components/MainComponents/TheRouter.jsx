@@ -19,37 +19,68 @@ import  { useEffect } from 'react';
 
 import { useLocation } from "react-router-dom";
 import { UserData } from "../../Globals";
+import { useQuery } from "react-query";
+import { apiClient } from "../../Data/apiclient";
 
 
 export default function TheRouter() {
 
 const navigate = useNavigate();
 
-  const ScrollToTop = ({ children }) => {
-    const { pathname } = useLocation();
+
+
+
+
+
+  const OnWindowChange = ({ children }) => {
+    const q = useQuery({
+      queryKey: ["session"],
+      onSuccess: navigateLogic(),
+      queryFn: async () => {
+        let url = "/api/users/session";
   
+        var result = await apiClient.post(url);
+        UserData.value = {name:result.data.name, email:result.data.email, role:result.data.role, id:result.data.id, loggedIn:result.data.loggedIn};
+        localStorage.setItem("UserData", JSON.stringify(UserData.value));
+        console.log("session",result.data);
+  
+        return result;
+      },
+    });
     useEffect(() => {
 
-      if(!UserData.value.loggedIn && pathname!=='/login' && pathname!=='/SignUp' && pathname!=='/ForgotPass')
-        navigate("/login");
       window.scrollTo({
 
         top: 0,
         behavior: "instant",
       });
-    }, [pathname]);
+
+      
+    }, []);
   
-    return null;
   };
+  const protectedpaths = ["/login","/signup","/forgotpass"];
+
+  const  navigateLogic = () =>{
+    const { pathname } = useLocation();
+
+
+    if(!UserData.value.loggedIn && !protectedpaths.includes(pathname)){
+      navigate("/login");
+    }
+    else if(UserData.value.loggedIn && protectedpaths.includes(pathname)){
+      navigate("/");
+    }
+  }
 
   return (
     <>
-      <ScrollToTop />
+      <OnWindowChange />
       <Routes>
         <Route element={<><Outlet /></>} >
           <Route path="login" element={<Login />}></Route>
-          <Route path="SignUp" element={<SignUp />}></Route>
-          <Route path="ForgotPass" element={<ForgotPass />}></Route>
+          <Route path="signup" element={<SignUp />}></Route>
+          <Route path="forgotpass" element={<ForgotPass />}></Route>
 
 
         </Route>
