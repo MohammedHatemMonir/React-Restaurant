@@ -59,8 +59,8 @@ const NavWithSlider = () => {
             >
               <img src={item.src} alt={`Slider ${index + 1}`} />
               <div className="content">
-                <h2>Slider {index + 1}</h2>
-                <p>{item.description}</p>
+                <h2 style={{fontSize:"70px"}}>Slider {index + 1}</h2>
+                <h4>{item.description}</h4>
               </div>
             </div>
           ))}

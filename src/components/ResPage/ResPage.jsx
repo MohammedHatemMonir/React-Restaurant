@@ -54,12 +54,11 @@ export default function ResPage() {
               </div>
             ))}
         </div> */}
-
-
-
       </Container>
       {/* <Tabs /> */}
       <MainCards />
+      {/* <MainCards />
+      <MainCards /> */}
       <Footer />
     </section>
   );
