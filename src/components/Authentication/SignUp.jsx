@@ -27,6 +27,20 @@ const navigate = useNavigate();
       return await apiClient.post(url, params);
     },
   });
+
+
+  const googleMutation = useMutation({
+    mutationKey: [],
+    // cacheTime: 600000,
+    // onSuccess: onSuccess,
+    // onError: onError,
+    mutationFn: async (params) => {
+      console.log("trying to load");
+      let url = "/api/users/googleSignin";
+      console.log("posting to ", url);
+      return await apiClient.get(url, params);
+    },
+  });
   const onSubmit = async function (data) {
 
     console.log("Form submitted", data);
@@ -51,7 +65,7 @@ const navigate = useNavigate();
                 <h3>Sign Up</h3>
                 <p>Create your account today</p>
             </div>
-            <Button variant="secondary" className="w-100 mb-3">
+            <Button variant="secondary" className="w-100 mb-3" onClick={()=>{console.log("googleMutate"); googleMutation.mutateAsync()}}>
                 {/* Add your Sign up logic or link here */}
                 Sign up with Google
             </Button>

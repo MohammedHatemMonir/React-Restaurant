@@ -41,10 +41,10 @@ export default function NavbarGlobal() {
               {UserData.value.loggedIn && 
                 <>
                   <li>
-                  NAME: {UserData.value.name}
+                    <LogoutButton />
                   </li>
                   <li>
-                    <LogoutButton />
+                  NAME: {UserData.value.name}
                   </li>
                 </>
               }
