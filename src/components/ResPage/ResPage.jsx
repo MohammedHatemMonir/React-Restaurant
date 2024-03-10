@@ -36,7 +36,9 @@ export default function ResPage() {
     <section>
       <Slider />
       <Container style={{ width: "85%" }}>
-        <Header />
+        {/* <div className="bg-danger">
+          <Header />
+        </div> */}
         {/* Old Cards */}
         {/* <div className="row">
           {!q.isLoading &&
@@ -57,10 +59,11 @@ export default function ResPage() {
             ))}
         </div> */}
       </Container>
-      {/* NavBar */}
+      {/* NavBar & Loader*/}
       {/* <MainCards /> */}
-
-      <Eltest />
+      <div className="mt-5">
+        <Eltest />
+      </div>
       <Footer />
     </section>
   );

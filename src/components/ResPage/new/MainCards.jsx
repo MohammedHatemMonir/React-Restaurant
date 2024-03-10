@@ -6,6 +6,7 @@ const MainCards = () => {
   return (
     <>
       <Header />
+      <Loader />
     </>
   );
 };
