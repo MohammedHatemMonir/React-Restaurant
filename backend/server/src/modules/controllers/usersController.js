@@ -14,7 +14,7 @@ const signup = async (req, res) => {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const user = await myusers.findOne({ email });
+    const user = await myusers.findOne({ email: { $regex: new RegExp(`^${email}$`, 'i') } });
     if (user) {
       return res.json({success:true, msg: "User already exists" });
     }
@@ -38,7 +38,7 @@ const signin = async (req, res) => { //{email:"",password:""}
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const user = await myusers.findOne({ email });
+    const user = await myusers.findOne({ email: { $regex: new RegExp(`^${email}$`, 'i') } });
     if (!user) {
       return res.json({ msg: "User with this email does not exist" });
     }
