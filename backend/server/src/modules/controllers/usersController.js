@@ -48,7 +48,7 @@ const signin = async (req, res) => { //{email:"",password:""}
 
         req.session.user = user;
         console.log("Seission User!",req.session.user);
-        return res.json({ success:true, role:user.role, name:user.name ,msg: `Welcome ${user.name}` });
+        return res.json({ success:true,id:user._id, role:user.role, name:user.name, email:user.email ,msg: `Welcome ${user.name}` });
 
 
     } else {
@@ -60,7 +60,22 @@ const signin = async (req, res) => { //{email:"",password:""}
   }
 };
 
-module.exports = {signup,signin};
+
+const logout = async (req, res) => {
+
+  
+  req.session.destroy(err => {
+    if (err) {
+      console.error('Error destroying session:', err);
+    }
+    // Redirect the user to the home page or wherever you want after logout
+    res.json({success:true,msg:"Logged out successfully"});
+  });
+
+
+};
+
+module.exports = {signup,signin,logout};
 
 // Get
 // const getSingleuser = async (req, res) => {

@@ -2,12 +2,33 @@ import "./App.scss";
 import "./CssVariables.scss";
 import "./TemplateCss.scss";
 import TheRouter from "./components/MainComponents/TheRouter";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { BrowserRouter } from "react-router-dom";
+
+
+
 
 function App() {
+
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        // refetchOnWindowFocus: false,
+        // refetchOnmount: false,
+        // refetchOnReconnect: false,
+        // retry: 1,
+        // staleTime: 5 * 1000,
+      },
+    },
+  });
   return (
-    <div>
-      <TheRouter />
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <div>
+          <TheRouter />
+        </div>
+      </BrowserRouter>
+    </QueryClientProvider>
   );
 }
 

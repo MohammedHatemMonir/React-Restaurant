@@ -5,13 +5,15 @@ const { validateUserInputSignUp,validateUserInputLogin} = require("../../middlew
 const router = express.Router();
 
 router.post("/signup",validateUserInputSignUp,usersController.signup)
- 
+router.post("/signin",validateUserInputLogin,usersController.signin)
+router.post("/logout",validateUserInputLogin,usersController.logout)
+
     // sign up
     // .post(
     //     validateUserInputSignUp,
     //     usersController.signup
     // )
-router.post("/signin",validateUserInputLogin,usersController.signin)
+
     // log in
     // .post(
     //     validateUserInputLogin,

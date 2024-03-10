@@ -1,15 +1,15 @@
 import React from "react";
 import "./Login.css";
 import { Form, Button, Card } from 'react-bootstrap';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { apiClient } from "../../Data/apiclient";
+import { UserData } from "../../Globals";
 
 
 const Login = () => {
 
-  
   const m = useMutation({
     mutationKey: [],
     // cacheTime: 600000,
@@ -40,6 +40,7 @@ const Login = () => {
       if(!result.data.success){
         alert("Invalid Email or Password");
       }else{
+        UserData.value = {name:result.data.name, email:result.data.email, role:result.data.role, id:result.data.id, loggedIn:true}
         if(result.data.role==="ADMIN"){
           navigate("/tutorials");
         }else{
@@ -80,6 +81,7 @@ const Login = () => {
               {errors["password"] && errors["password"].message}
             </span>
           </Form.Group>
+          <Link to="/SignUp" style={{ textDecoration: "none" }}> SignUp</Link>
           <Button variant="primary" type="submit">
             Login
           </Button>

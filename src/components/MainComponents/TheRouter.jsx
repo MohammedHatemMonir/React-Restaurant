@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Outlet, Route, Routes, useNavigate } from "react-router-dom";
 import DefaultLayout from "./DefaultLayout";
 import MedoTest from "../TestComponents/MedoTest";
 import HemaTest from "../TestComponents/HemaTest";
@@ -18,14 +18,20 @@ import SelectResPage from './../SelectedResPage/SelectResPage';
 import  { useEffect } from 'react';
 
 import { useLocation } from "react-router-dom";
+import { UserData } from "../../Globals";
+
 
 export default function TheRouter() {
 
+const navigate = useNavigate();
 
   const ScrollToTop = ({ children }) => {
     const { pathname } = useLocation();
   
     useEffect(() => {
+
+      if(!UserData.value.loggedIn && pathname!=='/login' && pathname!=='/SignUp' && pathname!=='/ForgotPass')
+        navigate("/login");
       window.scrollTo({
 
         top: 0,
@@ -40,11 +46,18 @@ export default function TheRouter() {
     <>
       <ScrollToTop />
       <Routes>
+        <Route element={<><Outlet /></>} >
+          <Route path="login" element={<Login />}></Route>
+          <Route path="SignUp" element={<SignUp />}></Route>
+          <Route path="ForgotPass" element={<ForgotPass />}></Route>
+
+
+        </Route>
+        
+        {UserData.value.loggedIn &&
         <Route path="/" element={<DefaultLayout />}>
           <Route index element={<ResPage />} />
-          <Route path="login" element={<Login />}></Route>
-          <Route path="ForgotPass" element={<ForgotPass />}></Route>
-          <Route path="SignUp" element={<SignUp />}></Route>
+          
 
           <Route path="card" element={<Card />}></Route>
           <Route path="dash1" element={<Dashboard1 />}></Route>
@@ -63,6 +76,7 @@ export default function TheRouter() {
 
           
         </Route>
+      }
       </Routes>
     </>
   );

@@ -5,6 +5,8 @@ import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
 import ThemeController from "./ThemeController";
 import "./NavBarGlobal.scss";
+import { UserData } from "../../Globals";
+import LogoutButton from "../Authentication/LogoutButton";
 export default function NavbarGlobal() {
   return (
     <div className="my-test-nav">
@@ -25,13 +27,28 @@ export default function NavbarGlobal() {
             <li>
               <Link to="/tutorials">Tutorials</Link>
             </li>
-            <li>
-              <Link to="/login">LogIn</Link>
-            </li>
-            <li>
-              <Link to="SignUp">SignUp</Link>
-            </li>
-          </ul>
+
+              {!UserData.value.loggedIn && <>
+                    <li>
+                      <Link to="/login">LogIn</Link>
+                    </li>
+                    <li>
+                      <Link to="SignUp">SignUp</Link>
+                    </li>
+                    </>
+                  
+              }
+              {UserData.value.loggedIn && 
+                <>
+                  <li>
+                  NAME: {UserData.value.name}
+                  </li>
+                  <li>
+                    <LogoutButton />
+                  </li>
+                </>
+              }
+            </ul>
           <Link to="/">
             <h1 className="logo">DineMe</h1>
           </Link>
