@@ -236,6 +236,7 @@ const Eltest = () => {
                                     data-v-34cbeed1=""
                                     className="vue-star-rating"
                                   >
+                                    {/* Star 1 */}
                                     <span
                                       data-v-34cbeed1=""
                                       className="vue-star-rating-star"
@@ -314,6 +315,7 @@ const Eltest = () => {
                                         />
                                       </svg>
                                     </span>
+                                    {/* Star 2 */}
                                     <span
                                       data-v-34cbeed1=""
                                       className="vue-star-rating-star"
@@ -392,6 +394,7 @@ const Eltest = () => {
                                         />
                                       </svg>
                                     </span>
+                                    {/* Star 3 */}
                                     <span
                                       data-v-34cbeed1=""
                                       className="vue-star-rating-star"
@@ -470,6 +473,7 @@ const Eltest = () => {
                                         />
                                       </svg>
                                     </span>
+                                    {/* Star 4 */}
                                     <span
                                       data-v-34cbeed1=""
                                       className="vue-star-rating-star"
@@ -548,6 +552,7 @@ const Eltest = () => {
                                         />
                                       </svg>
                                     </span>
+                                    {/* Star 5 */}
                                     <span
                                       data-v-34cbeed1=""
                                       className="vue-star-rating-star"
@@ -645,7 +650,12 @@ const Eltest = () => {
                             </div>
                             <div className="main-data">
                               <h3 className="card-title">
-                                <a href="/cairo/popcity--lqxro">Popcity</a>
+                                <a
+                                  href="/cairo/popcity--lqxro"
+                                  style={{ textDecoration: "none" }}
+                                >
+                                  Popcity
+                                </a>
                               </h3>
                             </div>
                           </div>
@@ -662,12 +672,6 @@ const Eltest = () => {
                             </span>
                           </div>
                         </div>
-                        <a
-                          rel="noopener"
-                          target="_blank"
-                          href="https://elmenus.page.link/3qgU"
-                          className="get-app"
-                        />
                       </div>
                     </div>
                   </div>
