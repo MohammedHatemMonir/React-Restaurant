@@ -14,6 +14,7 @@ import { Col, Container } from "reactstrap";
 import { Link } from "react-router-dom";
 import Tabs from "./new/Tabs";
 import MainCards from "./new/MainCards";
+import Eltest from "./New folder/Eltest";
 
 export default function ResPage() {
   const q = useQuery({
@@ -36,6 +37,7 @@ export default function ResPage() {
       <Slider />
       <Container style={{ width: "85%" }}>
         <Header />
+        {/* Old Cards */}
         {/* <div className="row">
           {!q.isLoading &&
             q.data?.data.map((data, index) => (
@@ -55,10 +57,10 @@ export default function ResPage() {
             ))}
         </div> */}
       </Container>
-      {/* <Tabs /> */}
-      <MainCards />
-      {/* <MainCards />
-      <MainCards /> */}
+      {/* NavBar */}
+      {/* <MainCards /> */}
+
+      <Eltest />
       <Footer />
     </section>
   );
