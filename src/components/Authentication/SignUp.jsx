@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { apiClient } from "../../Data/apiclient";
-
+import { Link } from "react-router-dom";
 export default function SignUp() {
   const {
     handleSubmit,
@@ -120,9 +120,9 @@ const navigate = useNavigate();
                 <Button variant="primary" type="submit"className="w-100 mb-3">Sign up</Button>
 
                 <div className="text-center">
-                    <a style={{ textDecoration: "none", cursor: "pointer" }} className="fs--1 fw-bold">
+                    <Link to="/login" style={{ textDecoration: "none", cursor: "pointer" }} className="fs--1 fw-bold">
                         Sign in to an existing account
-                    </a>
+                    </Link>
                 </div>
             </Form>
         </Col>
