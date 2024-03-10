@@ -11,15 +11,14 @@ const validateUserInputSignUp=[
     .isEmail().withMessage("Please enter a valid email address"),
 ]
 
-const validateUserInputLogin=[
-    body("email")
-    .isEmail().withMessage("Please enter a valid email address")
+const validateUserInputLogin = [
+    body("nameOrEmail")
     .notEmpty().withMessage("Enter your Email")
     .isLength({ min: 3 }).withMessage("Length must be more than 3 digits"),
     body("password")
     .notEmpty().withMessage("Enter the password")
     .isLength({ min: 3 }).withMessage("week password"),
+];
 
-]
 
 module.exports={validateUserInputSignUp,validateUserInputLogin}

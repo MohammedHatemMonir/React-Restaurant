@@ -1,6 +1,7 @@
 const { validationResult } = require("express-validator");
 const myusers = require("../../database/models/userModel");
 const bcrypt =require('bcrypt');
+const session = require('express-session');
 // const generateToken = require("../../utils/GenerateToken.js");
 
 const signup = async (req, res) => {
@@ -12,7 +13,7 @@ const signup = async (req, res) => {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const user = await myusers.findOne({ email });
+    const user = await myusers.findOne({ email: { $regex: new RegExp(`^${email}$`, 'i') } });
     if (user) {
       return res.json({success:true, msg: "User already exists" });
     }
@@ -27,8 +28,8 @@ const signup = async (req, res) => {
   }
 };
 
-const signin = async (req, res) => { //{email:"",password:""}
-  const { email, password } = req.body;
+const signin = async (req, res) => {
+  const { nameOrEmail, password } = req.body;
 
   try {
     const errors = validationResult(req);
@@ -36,29 +37,42 @@ const signin = async (req, res) => { //{email:"",password:""}
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const user = await myusers.findOne({ email });
+    console.log("Name or Email:", nameOrEmail);
+
+    const user = await myusers.findOne({
+      $or: [
+        { name: { $regex: new RegExp(nameOrEmail, 'i') } },
+        { email: { $regex: new RegExp(nameOrEmail, 'i') } }
+      ]
+    });
+
+    console.log("User found:", user);
+
     if (!user) {
-      return res.json({ msg: "User with this email does not exist" });
+      return res.json({ msg: "User with this email/username does not exist" });
     }
 
     const match = await bcrypt.compare(password, user.password);
     if (match) {
-      // let token=generateToken({name:user.name,role:user.role,userId:user._id})
-      // return res.json({ msg: `Welcome ${user.name}`, role: user.role, token });
-
-        req.session.user = user;
-        console.log("Seission User!",req.session.user);
-        return res.json({ success:true,id:user._id, role:user.role, name:user.name, email:user.email ,msg: `Welcome ${user.name}` });
-
-
+      req.session.user = user;
+      console.log("Session User:", req.session.user);
+      return res.json({ 
+        success: true, 
+        id: user._id, 
+        role: user.role, 
+        name: user.name, 
+        email: user.email,
+        msg: `Welcome ${user.name}` 
+      });
     } else {
-      return res.json({success:false, msg: "Incorrect password" });
+      return res.json({ success: false, msg: "Incorrect password" });
     }
   } catch (error) {
     console.error("Error during signin:", error);
     return res.status(500).json({ error: "Internal server error" });
   }
 };
+
 
 
 const logout = async (req, res) => {
