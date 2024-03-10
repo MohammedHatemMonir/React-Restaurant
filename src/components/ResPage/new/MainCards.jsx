@@ -249,7 +249,7 @@ function Header() {
     </>
   );
 }
-function loader() {
+function Loader() {
   return (
     <>
       <main id="main-content" tabIndex={-1} className="cj">
