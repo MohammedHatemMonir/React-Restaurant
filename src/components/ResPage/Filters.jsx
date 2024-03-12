@@ -1,3 +1,4 @@
+import React from "react";
 import "./Filters.scss";
 
 const Filters = () => {
@@ -14,6 +15,15 @@ const Filters = () => {
               <li data-filter=".personal">Personal</li>
               <li data-filter=".agency">Agency</li>
               <li data-filter=".portal">Portal</li>
+              <span>
+                <select id="cars" name="cars">
+                  <option disabled>Choose</option>
+                  <option value="volvo">Volvo</option>
+                  <option value="saab">Saab</option>
+                  <option value="mercedes">Mercedes</option>
+                  <option value="audi">Audi</option>
+                </select>
+              </span>
             </ul>
           </div>
         </div>
