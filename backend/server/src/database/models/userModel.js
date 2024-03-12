@@ -5,17 +5,15 @@ const addressSchema = new Schema({
     street: String,
     city: String,
     country: String
-})
+});
 
 const UserSchema = new Schema({
-    firstname: {
-        type: String,
-        required: true
-    },
-    lastname: {
-        type: String,
-        required: true
-    },
+    // firstname: {
+    //     type: String,
+    // },
+    // lastname: {
+    //     type: String,
+    // },
     name: {
         type: String,
         required: true

@@ -54,7 +54,7 @@ const navigate = useNavigate();
         }
 
     console.log("result", result?.data);
-   
+
   };
   return (
     <>
@@ -89,9 +89,9 @@ const navigate = useNavigate();
                 </FormGroup>
                 <FormGroup className="mb-3">
                     <Form.Label>Email address</Form.Label>
-                    <FormControl type="email" placeholder="name@example.com"  {...register("email", 
-                                                                    {required: "Email is required", 
-                                                                    pattern: 
+                    <FormControl type="email" placeholder="name@example.com"  {...register("email",
+                                                                    {required: "Email is required",
+                                                                    pattern:
                                                                       {value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
                                                                         message: "Invalid email address"}}
             )}/>
@@ -103,7 +103,7 @@ const navigate = useNavigate();
                     <Col sm={6}>
                         <FormGroup>
                             <Form.Label>Password</Form.Label>
-                            <FormControl type="password" placeholder="Password" {...register("password", 
+                            <FormControl type="password" placeholder="Password" {...register("password",
                                                                         {required: "Password is required",
                                                                         minLength: {
                                                                           value: 5,
@@ -117,8 +117,8 @@ const navigate = useNavigate();
                     <Col sm={6}>
                         <FormGroup>
                             <Form.Label>Confirm Password</Form.Label>
-                            <FormControl type="password" placeholder="Confirm Password" {...register("confirmPassword", 
-                                                                        {required: "Confirm Password is required", 
+                            <FormControl type="password" placeholder="Confirm Password" {...register("confirmPassword",
+                                                                        {required: "Confirm Password is required",
                                                                         validate: (val) => {
                                                                           if (watch('password') != val) {
                                                                             return "Your passwords do no match";

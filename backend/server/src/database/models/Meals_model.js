@@ -25,6 +25,7 @@ const mealSchema=mongoose.Schema({
         type:Number,
         require:[true,"Enter Meal rating"]
     },
+    // ! What does that means ?
     ResID: { type: String, ref: 'restaurant' }
     // ResID: { type: ObjectId, ref: 'restaurant' }
 })
