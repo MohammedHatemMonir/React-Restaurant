@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 
 const connectToMongoDB = async () => {
     try {
+        // encryption this mongoDB Link To DB
         await mongoose.connect("mongodb+srv://mahmoud:graduationproject@graduationproject.depfjap.mongodb.net/graduationproject", {
             useNewUrlParser: true,
             useUnifiedTopology: true,

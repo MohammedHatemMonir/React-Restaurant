@@ -1,32 +1,42 @@
-
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const ordersSchema=mongoose.Schema({
-    ResName:{
-        type:String,
-        require:[true,"Enter resturant name "]
-    },
-    ResImg:{
-        type:String,
-        require:[true,"Enter resturant ResImg"]
-    },
-    Categoery:{
-        type:String,
-        require:[true,"Enter resturant Categoery"]
-    },
-    rating:{
-        type:Number,
-        require:[true,"Enter resturant rating"]
-    },
-    // Mshehata addition to schema
-    creation_date: {
-        type:Date,
-        require:[true,"creation date of restaurant"]
-    },
-    comment_num:{
-        type:Number,
-        require:[true,"Enter resturant rating"]
-    },
-})
 
-module.exports = mongoose.model("order", ordersSchema);
+const orderSchema = Schema({
+    user: {
+        type: Schema.Types.ObjectId,
+        role: 'user',
+        required: true
+    },
+    items: [{
+        name: {
+            type: String,
+            required: true
+        },
+        quantity: {
+            type: Number,
+            required: true
+        },
+        price: {
+            type: Number,
+            required: true
+        }
+    }],
+    totalAmount: {
+        type: Number,
+        required: true
+    },
+    status: {
+        type: String,
+        enum: ['pending', 'confirmed', 'completed', 'cancelled'],
+        default: 'pending'
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
+});
+
+const Order = mongoose.model("Order", orderSchema);
+
+module.exports = Order;
