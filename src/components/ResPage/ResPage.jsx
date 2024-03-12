@@ -17,6 +17,7 @@ import { Link } from "react-router-dom";
 import Tabs from "./new/Tabs";
 import MainCards from "./new/MainCards";
 import Eltest from "./New folder/Eltest";
+import Filters from './Filters';
 
 export default function ResPage() {
   const q = useQuery({
@@ -75,12 +76,12 @@ export default function ResPage() {
       <div id="app" className="">
           <div id="page-content" className="page-content">
             <div className="container">
+              <Filters />
               <div className="row">
                 <div className="col-header col-xs-16">
                   <h2 className="col-title inline-block">
                     Restaurants
                     <p style={{ display: "inline", fontSize: "17px" }}>
-                      {" "}
                       ( 1074 )
                     </p>
                   </h2>
