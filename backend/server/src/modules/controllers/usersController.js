@@ -1,5 +1,6 @@
 const { validationResult } = require("express-validator");
 const myusers = require("../../database/models/userModel");
+// const myusers = new User();
 const bcrypt =require('bcrypt');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
@@ -21,7 +22,7 @@ const signup = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 8);
     const newUser = await myusers.create({ name, email, password: hashedPassword });
-    
+
     return res.json({success:true, msg: "Signup successful", name:name, email:email});
   } catch (error) {
     console.error("Error during signup:", error);
@@ -83,7 +84,7 @@ const logout = async (req, res) => {
 
 const session = async (req, res) => { //{email:"",password:""}
   try {
-    
+
 
     if(req.session.user){
         const user = req.session.user;
@@ -93,7 +94,7 @@ const session = async (req, res) => { //{email:"",password:""}
       res.json({loggedIn:false})
     }
 
-    
+
   } catch (error) {
     console.error("Error during signin:", error);
     return res.status(500).json({ error: "Internal server error" });
@@ -132,7 +133,7 @@ module.exports = {signup,signin,logout,session,terminateSession};
 //         res.status(201).send("user Not Found");
 //       } else if(myuser[0].password!==password) {
 //         res.status(201).send("wrong password");
-        
+
 //       }else{
 //         console.log(myuser)
 //         res.status(201).json({role:myuser[0].role,username:myuser[0].username});

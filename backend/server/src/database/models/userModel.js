@@ -16,7 +16,7 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
-    username: {
+    name: {
         type: String,
         required: true
     },
@@ -32,7 +32,7 @@ const UserSchema = new Schema({
     email: {
         type: String,
         required: false,
-        lowercase: true
+        // lowercase: true
     },
     createdAt: {
         type: Date,
@@ -46,5 +46,7 @@ const UserSchema = new Schema({
     address: addressSchema
 });
 
-const User = mongoose.model("User", UserSchema);
-module.exports = User;
+// const User = mongoose.model("User", UserSchema);
+// module.exports = User;
+
+module.exports = mongoose.model("User", UserSchema);
