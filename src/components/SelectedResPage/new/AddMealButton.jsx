@@ -17,7 +17,7 @@ export default function AddMealButton() {
   const ShowSignal = useSignal();
 
   function submit(data) {
-    console.log("submit!");
+    console.log("submit!", data);
     //Handle add meals logic here
     ShowSignal.value = false;
     reset();

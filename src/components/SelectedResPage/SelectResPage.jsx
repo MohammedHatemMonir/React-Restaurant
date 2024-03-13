@@ -15,16 +15,18 @@ import AddMealButton from './new/AddMealButton';
 export default function SelectResPage() {
   const { resID, resName } = useParams();
   console.log("resID", resID);
+
+
   const q = useQuery({
     queryKey: ["getAllresturant"],
 
     // cacheTime: 60000,
     // staleTime: 60000,
     queryFn: async () => {
-      let url = "/getAllresturant";
+      let url = `/getAllresturantWithMeals/${resID}`;
 
-      var ret = await apiClient.get(url);
-
+      const ret = await apiClient.get(url);
+      console.log("Returned Meals", ret);
       return ret;
     },
   });
@@ -334,7 +336,7 @@ export default function SelectResPage() {
                                 )}
                                 <Container>
                                   {!q.isLoading &&
-                                    q.data?.data?.map((item, index) => {
+                                    q.data?.data?.meals.map((item, index) => {
                                       return (
                                         <TempMealCard
                                           id={item.id}
