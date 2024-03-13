@@ -77,7 +77,7 @@ export default function ResPage() {
       <div className="mt-5">
       <div id="app" className="">
           <div id="page-content" className="page-content">
-            <div className="container d-flex">
+            <div className="container">
               {UserData.value.role == "ADMIN" && <div><AddRestaurantButton /></div>}
               <Filters />
               
