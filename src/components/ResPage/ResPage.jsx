@@ -23,7 +23,7 @@ import { UserData } from "../../Globals";
 
 export default function ResPage() {
   const q = useQuery({
-    queryKey: ["getAllresturant"],
+    queryKey: [],
 
     queryFn: async () => {
       let url = "/getAllresturant";
@@ -37,6 +37,9 @@ export default function ResPage() {
   if (q.isLoading) {
     return <>Loading</>;
   }
+
+
+  if(q.data)
   return (
     <>
     <style
@@ -77,7 +80,7 @@ export default function ResPage() {
       <div className="mt-5">
       <div id="app" className="">
           <div id="page-content" className="page-content">
-            <div className="container">
+            <div className="container d-flex">
               {UserData.value.role == "ADMIN" && <div><AddRestaurantButton /></div>}
               <Filters />
               
@@ -96,7 +99,7 @@ export default function ResPage() {
                 >
                   <div className="col-body">
                     <div className="row">
-                      {q.data?.data.map((data, index) => {
+                      {!q.isLoading && q.data?.data?.map((data, index) => {
                         return (
                           <ResCard
                             key={index}

@@ -31,6 +31,7 @@ export default function SelectResPage() {
     },
   });
 
+
   console.log("query data", q.data?.data);
 
   return (
@@ -61,7 +62,7 @@ export default function SelectResPage() {
                   <div className="content">
                     <div className="resturant-name">
                       <h1 className="title">
-                        Munch &amp; Shake
+                        {q.data?.data?.restaurant?.ResName}
                         <span className="green">Order online</span>
                       </h1>
                     </div>
@@ -336,7 +337,7 @@ export default function SelectResPage() {
                                 )}
                                 <Container>
                                   {!q.isLoading &&
-                                    q.data?.data?.meals.map((item, index) => {
+                                    q.data?.data?.meals?.map((item, index) => {
                                       return (
                                         <TempMealCard
                                           id={item.id}
