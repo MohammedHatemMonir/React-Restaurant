@@ -29,7 +29,7 @@ export default function AddRestaurantButton(){
 return(<>
 
 
-        <CustomModal ButtonText={<AddIcon />} Show={ShowSignal} Header={"Add restaurant"} submit={() => {handleSubmit(submit)();}} onCancel={()=>{}} >
+        <CustomModal ButtonText={<AddIcon />} Show={ShowSignal} Header={"Add restaurant"} submit={() => {handleSubmit(submit)();}} onCancel={()=>{ShowSignal.value = false;}} >
 
             <>
                 <Form>
