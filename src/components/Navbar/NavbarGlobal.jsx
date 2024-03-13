@@ -11,6 +11,8 @@ import { useMutation } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 import PersonIcon from "../../Icons/PersonIcon";
 import HomeIcon from "../../Icons/HomeIcon";
+import DineMeLogo from '../../images/DineMeLogo.png';
+
 export default function NavbarGlobal() {
 
 
@@ -92,15 +94,13 @@ export default function NavbarGlobal() {
                       aria-current="page"
                       className="active"
                     >
-                      {/* <img
-                        alt="Uber Eats Home"
+                      <img
+                        alt="DineMe"
                         role="img"
-                        src="https://d3i4yxtzktqr9n.cloudfront.net/web-eats-v2/97c43f8974e6c876.svg"
-                        width={146}
-                        height={24}
-                        className="ch ci ca cj"
-                      /> */}
-                      DineMeLogo
+                        src={DineMeLogo}
+                        width={75}
+                        height={50}
+                      />
                     </Link>
                     <div className="spacer _24" />
                     <div className="spacer _16" />
