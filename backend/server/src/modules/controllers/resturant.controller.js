@@ -4,9 +4,11 @@ const meal = require("../../database/models/Meals_model");
 
 const getAllresturantWithMeals = async (req, res) => {
     try {
-        const{id}=req.params
-        const meals = await meal.find({ResID:id}).populate('ResID','ResName-_id')
-        res.status(200).json(meals);
+        const{id}=req.params;
+        const meals = await meal.find({ResID:id});
+        const RestaurantData = await restaurant.findOne({_id:id});
+        
+        res.status(200).json({restaurant: RestaurantData,meals:meals});
     } catch (error) {
         res.status(500).json({ message: error });
     }
