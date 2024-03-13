@@ -18,6 +18,8 @@ import Tabs from "./new/Tabs";
 import MainCards from "./new/MainCards";
 import Eltest from "./New folder/Eltest";
 import Filters from './Filters';
+import AddRestaurantButton from "./AddRestaurantButton";
+import { UserData } from "../../Globals";
 
 export default function ResPage() {
   const q = useQuery({
@@ -75,8 +77,10 @@ export default function ResPage() {
       <div className="mt-5">
       <div id="app" className="">
           <div id="page-content" className="page-content">
-            <div className="container">
+            <div className="container d-flex">
+              {UserData.value.role == "ADMIN" && <div><AddRestaurantButton /></div>}
               <Filters />
+              
               <div className="row">
                 <div className="col-header col-xs-16">
                   <h2 className="col-title inline-block">

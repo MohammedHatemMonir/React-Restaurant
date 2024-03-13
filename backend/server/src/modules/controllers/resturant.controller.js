@@ -10,14 +10,14 @@ const getAllresturant = async (req, res) => {
     }
 }
 
-const addNewresturant = async (req, res) => {
+const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery}
     try {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
 
-        const allowedMimetypes = ['jpeg', 'png', 'gif', 'jpg'];
+        const allowedMimetypes = ['jpeg', 'png', 'jpg'];
         const fileExtension = req.body.ResImg.split('.').pop().toLowerCase();
         if (!allowedMimetypes.includes(fileExtension)) {
             return res.status(400).json({ error: 'Invalid image format' });

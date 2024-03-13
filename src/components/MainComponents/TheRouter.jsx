@@ -47,16 +47,19 @@ const navigate = useNavigate();
         return result;
       },
     });
-    useEffect(() => {
 
-      window.scrollTo({
 
-        top: 0,
-        behavior: "instant",
-      });
+
+    // useEffect(() => {
+
+    //   window.scrollTo({
+
+    //     top: 0,
+    //     behavior: "instant",
+    //   });
 
       
-    }, []);
+    // }, []);
   
   };
   const protectedpaths = ["/login","/signup","/forgotpass"];
