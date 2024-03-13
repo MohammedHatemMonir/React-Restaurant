@@ -1,6 +1,16 @@
 const restaurant = require("../../database/models/resturant.Model");
 const { validationResult, check } = require("express-validator");
+const meal = require("../../database/models/Meals_model");
 
+const getAllresturantWithMeals = async (req, res) => {
+    try {
+        const{id}=req.params
+        const meals = await meal.find({ResID:id}).populate('ResID','ResName-_id')
+        res.status(200).json(meals);
+    } catch (error) {
+        res.status(500).json({ message: error });
+    }
+}
 const getAllresturant = async (req, res) => {
     try {
         const restaurants = await restaurant.find({});
@@ -80,4 +90,5 @@ module.exports = {
     addNewresturant,
     deleteresturant,
     postRestaurantComment,
+    getAllresturantWithMeals
 };
