@@ -38,7 +38,7 @@ export default function CustomModal({children = <></>, Header= <></>, ButtonText
           {children}
         </Modal.Body>
         <Modal.Footer>
-        <Button variant="outline-primary" onClick={() => {submit();}}>Cancel</Button>
+        <Button variant="outline-primary" onClick={() => {submit();}}>Submit</Button>
 
           <Button variant="outline-primary" onClick={() => {onCancel();}}>Cancel</Button>
         </Modal.Footer>
