@@ -1,25 +1,22 @@
-import { signal, useSignal } from "@preact/signals-react";
-// import "./Modal.scss";
+import "../Prototypes/Modal.scss";
 import React from "react";
-
 import { Button, Modal } from "react-bootstrap";
 
 export default function CartModal({
   children = <></>,
   Header = <></>,
-  onCancel = () => {},
-  submit = () => {},
-  Show = useSignal(),
-  show,
+  onCancel,
+  // submit = () => {},
+  display,
 }) {
   // const Show = useSignal(false);
 
   return (
     <>
       <Modal
-        show={show}
+        show={display}
         onHide={() => {
-          Show.value = false;
+          onCancel();
           console.log("Hide triggered");
         }}
         size="lg"
@@ -33,19 +30,13 @@ export default function CartModal({
         <Modal.Footer>
           <Button
             onClick={() => {
-              submit();
+              onSubmit();
             }}
           >
             Submit
           </Button>
 
-          <Button
-            variant="outline-primary"
-            onClick={() => {
-              onCancel();
-              //   show = false;
-            }}
-          >
+          <Button variant="outline-primary" onClick={onCancel}>
             Cancel
           </Button>
         </Modal.Footer>

@@ -36,6 +36,9 @@ export default function NavbarGlobal() {
   }
 
   let Show = useSignal(false);
+  function cancleModal() {
+    Show.value = false;
+  }
   return (
     <>
       <>
@@ -106,7 +109,13 @@ export default function NavbarGlobal() {
                         <BsCartX />
                       </button>
                       {Show.value == true && (
-                        <CartModal Header={"Cart Modal"} children={"Empty Content"} show={(Show.value = true)} />
+                        <CartModal
+                          Header={"Cart Modal"}
+                          children={"Empty Content"}
+                          display={(Show.value = true)}
+                          onCancel={() => cancleModal()}
+                          // submit={}
+                        />
                       )}
                       <div className="spacer _24" />
                       <div className="spacer _16" />
