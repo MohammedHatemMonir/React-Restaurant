@@ -22,6 +22,9 @@ const getAllresturant = async (req, res) => {
 
 const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery}
     try {
+        if(req.session.user.role == "user")
+            return res.status(400).json({ errors: "Not Authenticated" });
+
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
@@ -44,7 +47,8 @@ const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery}
                         Categoery: req.body.Categoery,
                         rating:rating,
                         comment_num:comment_num,
-                        creation_date:req.body.creation_date
+                        // Not From FrontEnd
+                        creation_date: Date.now
                     };
                     const newRestaurant = await restaurant.create(newRestaurantData);
                     res.status(200).json(newRestaurantData);

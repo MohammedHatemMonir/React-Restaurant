@@ -7,14 +7,14 @@ const validateResturantInput = [
     check('ResImg')
         .notEmpty().withMessage('Restaurant image URL is required')
         .custom((value, { req }) => {
-            const allowedMimetypes = ['jpeg', 'png', 'gif', 'jpg'];
-            if (!value.match(/\.(jpeg|jpg|gif|png)$/)) {
+            const allowedMimetypes = ['jpeg', 'png', 'jpg'];
+            if (!value.match(/\.(jpeg|jpg|png)$/)) {
                 throw new Error('Invalid image format');
             }
             return true;
         }),
-    check("rating")
-        .isNumeric().withMessage("only numpers allowd"),
+    // check("rating")
+    //     .isNumeric().withMessage("only numpers allowd"),
     check('Categoery')
         .notEmpty().withMessage('Restaurant category is required')
 ];
