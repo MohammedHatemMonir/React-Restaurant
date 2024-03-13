@@ -2,6 +2,10 @@ import React from "react";
 import "./Filters.scss";
 
 const Filters = () => {
+
+
+
+  
   return (
     <div className="my-filters">
       <section className="portfolio section">

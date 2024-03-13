@@ -17,7 +17,7 @@ const MedoTest = () => {
   }
   return (
     <div>
-        <CustomModal Header={"This is a test header"} ButtonText={"Click to open"}onSubmit={okayBtn} onCancel={cancelBtn}>
+        <CustomModal Header={"This is a test header"} ButtonText={"Click to open  "}onSubmit={okayBtn} onCancel={cancelBtn}>
           testtt
 
           </CustomModal>
