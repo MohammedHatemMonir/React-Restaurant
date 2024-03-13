@@ -13,8 +13,8 @@ import PersonIcon from "../../Icons/PersonIcon";
 import HomeIcon from "../../Icons/HomeIcon";
 import DineMeLogo from "../../images/DineMeLogo.png";
 import { BsCartX } from "react-icons/bs";
-import NavCart from "./NavCart";
-import CustomModal from "../Prototypes/CustomModal";
+import { useSignal } from "@preact/signals-react";
+import CartModal from "./CartModal";
 
 export default function NavbarGlobal() {
   const m = useMutation({
@@ -35,6 +35,7 @@ export default function NavbarGlobal() {
     console.log("result", result.data);
   }
 
+  let Show = useSignal(false);
   return (
     <>
       <>
@@ -95,15 +96,18 @@ export default function NavbarGlobal() {
                           height={50}
                         />
                       </Link>
-                      <a
-                       
+                      <button
+                        onClick={() => (Show.value = true)}
                         style={{
                           transform: "scale(1.5)",
                           padding: "0 0 5px 20px",
                         }}
                       >
                         <BsCartX />
-                      </a>
+                      </button>
+                      {Show.value == true && (
+                        <CartModal Header={"Cart Modal"} children={"Empty Content"} show={(Show.value = true)} />
+                      )}
                       <div className="spacer _24" />
                       <div className="spacer _16" />
                       <a
