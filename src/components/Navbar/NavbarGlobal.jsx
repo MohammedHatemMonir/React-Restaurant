@@ -255,6 +255,9 @@ export default function NavbarGlobal() {
                       >
                         Tutorials
                       </Link>
+
+
+                      <LogoutButton />
                     </div>
                   </div>
                 </div>
