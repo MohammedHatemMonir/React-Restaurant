@@ -1,48 +1,59 @@
 import { signal, useSignal } from "@preact/signals-react";
-import "./Modal.scss"
-import React from 'react';
+import "./Modal.scss";
+import React from "react";
 
-import { Button, Modal } from 'react-bootstrap';
+import { Button, Modal } from "react-bootstrap";
 
-
-export default function CustomModal({children = <></>, Header= <></>, ButtonText= <></>,
-                                    onCancel = () =>{}, submit = () =>{},
-                                    Show = useSignal()}){
-
-
-
-
+export default function CustomModal({
+  children = <></>,
+  Header = <></>,
+  ButtonText = <></>,
+  onCancel = () => {},
+  submit = () => {},
+  Show = useSignal(),
+  mealPage,
+}) {
   // const Show = useSignal(false);
 
-
-    return(
-    
+  return (
     <>
-      <Button variant="primary" onClick={() => Show.value = true}>
+      <Button variant="primary" onClick={() => (Show.value = true)}>
         {ButtonText}
       </Button>
 
       <Modal
         show={Show.value}
-        onHide={() => {Show.value = false; console.log("Hide triggered")}}
+        onHide={() => {
+          Show.value = false;
+          console.log("Hide triggered");
+        }}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            {Header}
-          </Modal.Title>
+          <Modal.Title id="contained-modal-title-vcenter">{Header}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          {children}
-        </Modal.Body>
+        <Modal.Body>{children}</Modal.Body>
         <Modal.Footer>
-        <Button onClick={() => {submit();}}>Submit</Button>
+          <Button
+            onClick={() => {
+              submit();
+            }}
+          >
+            Submit
+          </Button>
 
-          <Button variant="outline-primary" onClick={() => {onCancel();}}>Cancel</Button>
+          <Button
+            variant="outline-primary"
+            onClick={() => {
+              onCancel();
+            }}
+          >
+            Cancel
+          </Button>
         </Modal.Footer>
       </Modal>
     </>
-    )
+  );
 }

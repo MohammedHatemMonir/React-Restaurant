@@ -9,6 +9,8 @@ import RightArrowIcon from "../../Icons/RightArrowIcon";
 import CommentBox from "./CommentBox";
 import { useParams } from "react-router-dom";
 import CardBox from "./CardBox";
+import { UserData } from "../../Globals";
+import AddMealButton from './new/AddMealButton';
 
 export default function SelectResPage() {
   const { resID, resName } = useParams();
@@ -324,7 +326,12 @@ export default function SelectResPage() {
                               </Col>
 
                               <Col sm={6}>
-                                {/* ibrahimmmm start here*/}
+                                {/* Add button for admin only*/}
+                                {UserData.value.role == "ADMIN" && (
+                                  <div>
+                                    <AddMealButton />
+                                  </div>
+                                )}
                                 <Container>
                                   {!q.isLoading &&
                                     q.data?.data?.map((item, index) => {
