@@ -18,12 +18,12 @@ export default function SelectResPage() {
 
 
   const q = useQuery({
-    queryKey: ["getAllresturant"],
+    queryKey: [],
 
     // cacheTime: 60000,
     // staleTime: 60000,
     queryFn: async () => {
-      let url = `/getAllresturantWithMeals/${resID}`;
+      let url = `/getResturantWithMeals/${resID}`;
 
       const ret = await apiClient.get(url);
       console.log("Returned Meals", ret);
