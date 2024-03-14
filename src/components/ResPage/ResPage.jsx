@@ -1,22 +1,14 @@
-import { useState } from "react";
-import ResPageBox from "./ResPageBox";
+
 import "./ResPageBox.scss";
 import "./ResPage.scss";
 import Slider from "./Slider";
-import Header from "./Header";
-import Card from "../Card/Card";
-import img1 from "../../utils/meals-img/item-1.jpeg";
-import img8 from "../../utils/meals-img/item-8.jpeg";
 import Footer from "./Footer";
 import { useQuery } from "react-query";
 import { apiClient } from "../../Data/apiclient";
-import { Col, Container } from "reactstrap";
+import { Container } from "reactstrap";
 import { TbTruckDelivery } from "react-icons/tb";
 import { IoMdCard } from "react-icons/io";
 import { Link } from "react-router-dom";
-import Tabs from "./new/Tabs";
-import MainCards from "./new/MainCards";
-import Eltest from "./New folder/Eltest";
 import Filters from "./Filters";
 import AddRestaurantButton from "./AddRestaurantButton";
 import { UserData } from "../../Globals";
@@ -24,8 +16,8 @@ import Stars from "./../Stars/Stars";
 
 export default function ResPage() {
   const q = useQuery({
-    queryKey: [],
-
+    queryKey: ["getAllresturant"],
+    cacheTime: 3 * 60000, //3 minutes
     queryFn: async () => {
       let url = "/getAllresturant";
 
@@ -103,7 +95,7 @@ export default function ResPage() {
                     >
                       <div className="col-body">
                         <div className="row">
-                          {!q.isLoading &&
+                          {!q.isLoading && Array.isArray(q.data?.data) &&
                             q.data?.data?.map((data, index) => {
                               return (
                                 <ResCard
