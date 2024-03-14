@@ -9,9 +9,10 @@ const comment_routes = require("./modules/routes/comment_routes");
 const router = require('./modules/routes/resturant.router');
 const MEALrouter = require('./modules/routes/meals_routes');
 const passport = require('passport');
+// const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
-const YOUR_GOOGLE_CLIENT_ID = "614280533363-92i70mp5io63o35tlp56apahkvbmnv32.apps.googleusercontent.com";
-const YOUR_GOOGLE_CLIENT_SECRET = "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";
+
+
 // Generate a random secret key
 const generateSecretKey = () => {
   return crypto.randomBytes(32).toString('hex'); // Generate a 32-byte random string and convert it to hexadecimal format
@@ -52,6 +53,12 @@ app.use("/api/users", userRouter);
 
 
 //////////////////////////////////////////////////////
+
+
+
+
+
+
 passport.serializeUser(function(user, done) {
   done(null, user);
 });
@@ -70,8 +77,11 @@ app.get('/auth/google',
   app.get('/auth/google/callback',
   passport.authenticate('google', { session: true, failureRedirect: '/login'}),
   (req, res) => {
-    // Redirect back to the React.js application with the authentication token
-    res.redirect('http://localhost:3000/');
+    // Redirect back to the React.js application with the authentication token {name:req.user.name.givenName, email:req.user.emails[0].value, role:"user", id:req.user.id, loggedIn:true};
+    req.session.user = req.user;
+    console.log("req user",req.user) // Use req.
+    console.log("req session",req.session.user)
+        res.redirect('http://localhost:3000/');
   }
 );
 

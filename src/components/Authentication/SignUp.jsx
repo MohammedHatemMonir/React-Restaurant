@@ -65,7 +65,7 @@ const navigate = useNavigate();
                 <h3>Sign Up</h3>
                 <p>Create your account today</p>
             </div>
-            <Button variant="secondary" className="w-100 mb-3" onClick={()=>{ googleMutation.mutateAsync()}}>
+            <Button variant="secondary" className="w-100 mb-3" onClick={()=>{ window.location.href = 'http://localhost:5001/auth/google';}}>
                 {/* Add your Sign up logic or link here */}
                 Sign up with Google
             </Button>

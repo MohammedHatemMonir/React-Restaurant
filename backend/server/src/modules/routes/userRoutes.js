@@ -6,6 +6,9 @@ const router = express.Router();
 
 router.post("/signup",validateUserInputSignUp,usersController.signup)
 router.post("/signin",validateUserInputLogin,usersController.signin)
+router.post("/terminateSession",validateUserInputLogin,usersController.terminateSession)
+router.post("/google",validateUserInputLogin,usersController.terminateSession)
+
 router.post("/logout",validateUserInputLogin,usersController.logout)
 router.post("/session",validateUserInputLogin,usersController.session)
 router.post("/terminateSession",validateUserInputLogin,usersController.terminateSession)

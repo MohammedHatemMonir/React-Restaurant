@@ -82,7 +82,27 @@ const logout = async (req, res) => {
 };
 
 
-const session = async (req, res) => { //{email:"",password:""}
+const google = async (req, res) => {
+
+  try {
+  req.session.destroy(err => {
+    if (err) {
+      console.error('Error destroying session:', err);
+    }
+    // Redirect the user to the home page or wherever you want after logout
+    res.json({success:true,msg:"Logged out successfully"});
+  });
+  }
+  catch (error) {
+    console.error("Error during logout:", error);
+  }
+
+};
+
+
+
+
+const session = async (req, res) => {
   try {
 
 
@@ -101,6 +121,34 @@ const session = async (req, res) => { //{email:"",password:""}
   }
 };
 
+const YOUR_GOOGLE_CLIENT_ID = "614280533363-92i70mp5io63o35tlp56apahkvbmnv32.apps.googleusercontent.com";
+const YOUR_GOOGLE_CLIENT_SECRET = "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";
+
+passport.use(new GoogleStrategy({
+  clientID: YOUR_GOOGLE_CLIENT_ID,
+  clientSecret: YOUR_GOOGLE_CLIENT_SECRET,
+  callbackURL: "http://localhost:5001/auth/google/callback"
+},
+async function(accessToken, refreshToken, profile, cb) {
+  // Find or create a user in your database here
+  // For now, we'll just return the profile
+  try {
+      console.log("Google trying to find user");
+
+      let user = await myusers.findOne({ email: profile.emails[0].value, password: profile.displayName });
+      if(!user){
+        user = await myusers.create({ name: profile.displayName, email: profile.emails[0].value, password: "GooglePassword" });
+      }
+
+      console.log("Google User",user)
+  
+      return cb(null, user);
+    } catch (error) {
+      console.error("Error during google signin:", error);
+    }
+}
+));
+
 const terminateSession = async (req, res) => {
   try {
     req.session.destroy(err => {
@@ -115,7 +163,7 @@ const terminateSession = async (req, res) => {
       console.error("Error during logout:", error);
     }
 };
-module.exports = {signup,signin,logout,session,terminateSession};
+module.exports = {signup,signin,logout,session,terminateSession,google};
 
 // Get
 // const getSingleuser = async (req, res) => {
