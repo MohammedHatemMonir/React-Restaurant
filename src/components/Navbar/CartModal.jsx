@@ -1,4 +1,4 @@
-import "../Prototypes/Modal.scss";
+// import "../Prototypes/Modal.scss";
 import React from "react";
 import { Button, Modal } from "react-bootstrap";
 

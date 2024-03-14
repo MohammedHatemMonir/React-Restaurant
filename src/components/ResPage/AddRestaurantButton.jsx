@@ -39,13 +39,13 @@ export default function AddRestaurantButton() {
             <Row>
               <Col sm={6}>
                 <Form.Group className="mb-2 mb-sm-0">
-                  <Form.Label>Job Title</Form.Label>
+                  <Form.Label>Name</Form.Label>
                   <Form.Control
                     type="text"
                     name="ResName"
                     placeholder="Restaurant Name"
                     {...register("ResName", {
-                      required: "Please choose a restaurant name",
+                      required: "Please add restaurant name",
                     })}
                   />
                   <span className="error" style={{ color: "red" }}>

@@ -77,6 +77,7 @@ export default function SelectResPage() {
                                 transform: "scale(0.5)",
                                 marginLeft: "-40px",
                                 marginBottom: "35px",
+                                // marginTop: "-10px",
                               }}
                             >
                               <Stars
@@ -87,9 +88,14 @@ export default function SelectResPage() {
                         </div>
                         <ul
                           className="cuisines-list h-dots-list"
-                          style={{ padding: "0px" }}
+                          style={{ marginTop: "10px", }}
                         >
-                          <li className="list-item">
+                          <li
+                            className="list-item"
+                            style={{
+                              marginTop: "-23px",
+                            }}
+                          >
                             {q.data?.data?.restaurant?.Categoery}
                           </li>
                         </ul>
