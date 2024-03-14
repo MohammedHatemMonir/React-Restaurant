@@ -6,6 +6,7 @@ const Stars = ({ stars1 }) => {
 
   const inputRefs = useRef(Array(5).fill(null)); // Initialize as an array of length 5 with null values
 
+  stars1 = Math.round(stars1);
   useEffect(() => {
     switch (stars1) {
       case 1: // 1 Star

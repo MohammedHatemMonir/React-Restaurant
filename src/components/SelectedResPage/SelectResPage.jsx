@@ -10,12 +10,11 @@ import CommentBox from "./CommentBox";
 import { useParams } from "react-router-dom";
 import CardBox from "./CardBox";
 import { UserData } from "../../Globals";
-import AddMealButton from './new/AddMealButton';
+import AddMealButton from "./new/AddMealButton";
 
 export default function SelectResPage() {
   const { resID, resName } = useParams();
   console.log("resID", resID);
-
 
   const q = useQuery({
     queryKey: [],
@@ -31,13 +30,13 @@ export default function SelectResPage() {
     },
   });
 
-
   console.log("query data", q.data?.data);
 
   return (
     <>
       <div id="page-content restaurant-container" className="page-content">
         <div className="restaurant-cover active-on-menu-tab  menu-tab-activated">
+          {/* Banner Img */}
           <img
             src="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/e7a942a5-9893-4587-8ece-07b967e44745.jpg"
             alt="cover photo"
@@ -49,9 +48,10 @@ export default function SelectResPage() {
             <Col sm={12} className="section-header">
               <div className="restaurant-image-container">
                 <div className="restaurant-image image-ratio ratio-square">
+                  {/* Res Image */}
                   <img
-                    src="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/9a48939b-f7b2-4232-b2e0-c3e2ea588103.jpg"
-                    alt="Munch &amp; Shake"
+                    src={q.data?.data?.restaurant?.ResImg}
+                    alt={q.data?.data?.restaurant?.ResImg}
                     className="v-center"
                   />
                 </div>
@@ -79,7 +79,9 @@ export default function SelectResPage() {
                                 marginBottom: "35px",
                               }}
                             >
-                              <Stars stars1={4} />
+                              <Stars
+                                stars1={q.data?.data?.restaurant?.rating}
+                              />
                             </div>
                           </div>
                         </div>
@@ -87,7 +89,9 @@ export default function SelectResPage() {
                           className="cuisines-list h-dots-list"
                           style={{ padding: "0px" }}
                         >
-                          <li className="list-item">American</li>
+                          <li className="list-item">
+                            {q.data?.data?.restaurant?.Categoery}
+                          </li>
                         </ul>
                       </div>
                       <div
@@ -340,9 +344,13 @@ export default function SelectResPage() {
                                     q.data?.data?.meals?.map((item, index) => {
                                       return (
                                         <TempMealCard
-                                          id={item.id}
-                                          name={item.ResName}
                                           key={index}
+                                          id={item.ResID}
+                                          name={item.MealName}
+                                          price={item.Price}
+                                          desc={item.Description}
+                                          rating={item.rating}
+                                          mealImg={item.MealImg}
                                         />
                                       );
                                     })}
@@ -370,7 +378,7 @@ export default function SelectResPage() {
   );
 }
 
-function TempMealCard({ id, name, description, price, imageUrl, stars }) {
+function TempMealCard({ id, name, desc, price, mealImg, rating }) {
   return (
     <div
       style={{
@@ -385,9 +393,10 @@ function TempMealCard({ id, name, description, price, imageUrl, stars }) {
       }}
       className="meal-card"
     >
+      {/* Meal Img */}
       <img
-        src="https://media.istockphoto.com/id/1295633127/photo/grilled-chicken-meat-and-fresh-vegetable-salad-of-tomato-avocado-lettuce-and-spinach-healthy.jpg?s=612x612&w=0&k=20&c=Qa3tiqUCO4VpVMQDXLXG47znCmHr_ZIdoynViJ8kW0E="
-        alt={name}
+        src={mealImg}
+        alt={mealImg}
         style={{
           width: "100%",
           height: "150px",
@@ -414,7 +423,7 @@ function TempMealCard({ id, name, description, price, imageUrl, stars }) {
           }}
           className="meal-card__description"
         >
-          {description}
+          {desc}
         </p>
         <div
           style={{
@@ -434,7 +443,7 @@ function TempMealCard({ id, name, description, price, imageUrl, stars }) {
               }}
               className="meal-card__price"
             >
-              1200${price}
+              {price}
             </p>
           </div>
           <div
@@ -445,7 +454,7 @@ function TempMealCard({ id, name, description, price, imageUrl, stars }) {
             }}
             className="meal-card__rating"
           >
-            <Stars stars1={5} />
+            <Stars stars1={rating} />
           </div>
           <button
             style={{
