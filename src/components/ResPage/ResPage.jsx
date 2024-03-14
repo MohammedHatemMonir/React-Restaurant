@@ -1,4 +1,3 @@
-
 import "./ResPageBox.scss";
 import "./ResPage.scss";
 import Slider from "./Slider";
@@ -13,6 +12,7 @@ import Filters from "./Filters";
 import AddRestaurantButton from "./AddRestaurantButton";
 import { UserData } from "../../Globals";
 import Stars from "./../Stars/Stars";
+import MainLoader from "../Loaders/MainLoader";
 
 export default function ResPage() {
   const q = useQuery({
@@ -28,7 +28,11 @@ export default function ResPage() {
     },
   });
   if (q.isLoading) {
-    return <>Loading</>;
+    return (
+      <>
+        <MainLoader />
+      </>
+    );
   }
 
   if (q.data)
@@ -95,7 +99,8 @@ export default function ResPage() {
                     >
                       <div className="col-body">
                         <div className="row">
-                          {!q.isLoading && Array.isArray(q.data?.data) &&
+                          {!q.isLoading &&
+                            Array.isArray(q.data?.data) &&
                             q.data?.data?.map((data, index) => {
                               return (
                                 <ResCard

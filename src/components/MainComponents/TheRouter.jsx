@@ -21,6 +21,7 @@ import { useLocation } from "react-router-dom";
 import { UserData } from "../../Globals";
 import { useQuery } from "react-query";
 import { apiClient } from "../../Data/apiclient";
+import MainLoader from "../Loaders/MainLoader";
 
 
 export default function TheRouter() {
@@ -97,6 +98,7 @@ const navigate = useNavigate();
           <Route path="dash1" element={<Dashboard1 />}></Route>
           <Route path="dash2" element={<Dashboard2 />}></Route>
           <Route path="/restaurant/:resID/:resName" element={<SelectResPage />}></Route>
+          {/* <Route path="loader" element={<MainLoader />}></Route> */}
 
           <Route path="/tutorials" element={<Tutorials />}>
               <Route path="Medotest" element={<MedoTest />}></Route>
