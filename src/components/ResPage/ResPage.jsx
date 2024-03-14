@@ -13,6 +13,7 @@ import AddRestaurantButton from "./AddRestaurantButton";
 import { UserData } from "../../Globals";
 import Stars from "./../Stars/Stars";
 import MainLoader from "../Loaders/MainLoader";
+import MainCards from './new/MainCards';
 
 export default function ResPage() {
   const q = useQuery({

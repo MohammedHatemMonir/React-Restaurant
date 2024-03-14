@@ -1,4 +1,5 @@
 .main-loader {
+transform: scale(0.7);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,7 +19,7 @@
     stroke-dasharray: 180 800;
     fill: none;
     stroke: url(#gradient);
-    stroke-width: 23;
+    stroke-width: 15;
     stroke-linecap: round;
   }
 
@@ -27,7 +28,7 @@
     stroke-dasharray: 26 54;
     fill: none;
     stroke: url(#gradient);
-    stroke-width: 23;
+    stroke-width: 15;
     stroke-linecap: round;
   }
 
