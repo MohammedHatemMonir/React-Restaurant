@@ -18,6 +18,9 @@ export default function AddRestaurantButton() {
   function submit(data) {
     console.log("submit!");
     //Handle add restaurant logic here
+
+
+    
     ShowSignal.value = false;
     reset();
   }

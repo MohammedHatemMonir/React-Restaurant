@@ -15,6 +15,8 @@ import DineMeLogo from "../../images/DineMeLogo.png";
 import { BsCartX } from "react-icons/bs";
 import { useSignal } from "@preact/signals-react";
 import CartModal from "./CartModal";
+import CustomModal from "../Prototypes/CustomModal";
+import AddIcon from "../../Icons/AddIcon";
 
 export default function NavbarGlobal() {
   const m = useMutation({
@@ -106,17 +108,19 @@ export default function NavbarGlobal() {
                           padding: "0 0 5px 20px",
                         }}
                       >
-                        <BsCartX />
+                        
                       </button>
-                      {Show.value == true && (
-                        <CartModal
+                        <CustomModal
                           Header={"Cart Modal"}
-                          children={"Empty Content"}
+                          ButtonText={<BsCartX fontSize={"1.5em"} />}
+                          Show={Show}
                           display={(Show.value = true)}
-                          onCancel={() => cancleModal()}
+                          onCancel={() =>{ Show.value = false;}}
                           // submit={}
-                        />
-                      )}
+                        > 
+                        This is children
+                        </CustomModal>
+
                       <div className="spacer _24" />
                       <div className="spacer _16" />
                       <a

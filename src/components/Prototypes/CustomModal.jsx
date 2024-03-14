@@ -11,13 +11,12 @@ export default function CustomModal({
   onCancel = () => {},
   submit = () => {},
   Show = useSignal(),
-  mealPage,
 }) {
   // const Show = useSignal(false);
 
   return (
     <>
-      <Button variant="primary" onClick={() => (Show.value = true)}>
+      <Button variant="" onClick={() => (Show.value = true)}>
         {ButtonText}
       </Button>
 
