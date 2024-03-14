@@ -135,9 +135,11 @@ async function(accessToken, refreshToken, profile, cb) {
   try {
       console.log("Google trying to find user");
 
-      let user = await myusers.findOne({ email: profile.emails[0].value, password: profile.displayName });
-      if(!user){
+      let user = await myusers.findOne({ email: profile.emails[0].value});
+      console.log("Found User:",user)
+      if(!user?._id){
         user = await myusers.create({ name: profile.displayName, email: profile.emails[0].value, password: "GooglePassword" });
+        console.log("Created Google User")
       }
 
       console.log("Google User",user)
