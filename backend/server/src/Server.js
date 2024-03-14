@@ -77,11 +77,15 @@ app.get('/auth/google',
   app.get('/auth/google/callback',
   passport.authenticate('google', { session: true, failureRedirect: '/login'}),
   (req, res) => {
+    try {
     // Redirect back to the React.js application with the authentication token {name:req.user.name.givenName, email:req.user.emails[0].value, role:"user", id:req.user.id, loggedIn:true};
     req.session.user = req.user;
     console.log("req user",req.user) // Use req.
     console.log("req session",req.session.user)
         res.redirect('http://localhost:3000/');
+    } catch (error) {
+      console.error("Error during auth/google/callback:", error);
+    }
   }
 );
 
