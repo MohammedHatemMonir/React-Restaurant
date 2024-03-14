@@ -72,7 +72,7 @@ const addNewmeal = async (req, res) => { //{MealName:"",MealImg:"",Description:"
       if(!errors.isEmpty()){
         res.status(400).json(errors.array()[0].msg)
       }else{
-        const restaurantname = req.body.Res;
+        const restaurantname = req.body.ResName; // Res
         const resturants = await resturant.find({ResName:restaurantname});
         if (!resturants[0]) {
             res.send("RESTURAND DOSENT EXEST");
