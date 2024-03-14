@@ -75,7 +75,7 @@ export default function SelectResPage() {
                               className="vue-star-rating"
                               style={{
                                 transform: "scale(0.5)",
-                                marginLeft: "-40px",
+                                marginLeft: "-45px",
                                 marginBottom: "35px",
                                 // marginTop: "-10px",
                               }}
@@ -88,7 +88,7 @@ export default function SelectResPage() {
                         </div>
                         <ul
                           className="cuisines-list h-dots-list"
-                          style={{ marginTop: "10px", }}
+                          style={{ marginTop: "8px", }}
                         >
                           <li
                             className="list-item"
