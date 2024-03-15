@@ -17,6 +17,7 @@ import { useSignal } from "@preact/signals-react";
 import CartModal from "./CartModal";
 import CustomModal from "../Prototypes/CustomModal";
 import AddIcon from "../../Icons/AddIcon";
+import CartHandler from "./CartHanlder";
 
 export default function NavbarGlobal() {
   const m = useMutation({
@@ -110,15 +111,7 @@ export default function NavbarGlobal() {
                       >
                         
                       </button>
-                        <CustomModal
-                          Header={"Cart Modal"}
-                          ButtonText={<BsCartX fontSize={"1.5em"} />}
-                          Show={Show}
-                          onCancel={() =>{ Show.value = false;}}
-                          // submit={}
-                        > 
-                        This is children
-                        </CustomModal>
+                        <CartHandler />
 
                       <div className="spacer _24" />
                       <div className="spacer _16" />

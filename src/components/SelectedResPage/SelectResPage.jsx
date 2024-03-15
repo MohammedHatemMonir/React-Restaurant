@@ -9,7 +9,7 @@ import RightArrowIcon from "../../Icons/RightArrowIcon";
 import CommentBox from "./CommentBox";
 import { useParams } from "react-router-dom";
 import CardBox from "./CardBox";
-import { UserData } from "../../Globals";
+import { Cart, UserData } from "../../Globals";
 import AddMealButton from "./new/AddMealButton";
 
 export default function SelectResPage() {
@@ -351,12 +351,13 @@ export default function SelectResPage() {
                                       return (
                                         <TempMealCard
                                           key={index}
-                                          id={item.ResID}
+                                          id={item._id}
                                           name={item.MealName}
                                           price={item.Price}
                                           desc={item.Description}
                                           rating={item.rating}
                                           mealImg={item.MealImg}
+                                          resID={resID}
                                         />
                                       );
                                     })}
@@ -384,7 +385,25 @@ export default function SelectResPage() {
   );
 }
 
-function TempMealCard({ id, name, desc, price, mealImg, rating }) {
+function TempMealCard({ id, name, desc, price, mealImg, rating, resID}) {
+
+
+console.log("meal: " + id + "  "+ name)
+    function AddToCart() {
+
+      if(Cart.value.ResId != resID){
+        console.log("ID NOT EQUAL")
+        Cart.value.ResId = resID;
+        Cart.value.meals = [];
+        }
+
+        if(!Cart.value.meals.some((meal) => meal.id == id? meal.quantity += 1: false)){
+          console.log("meal not found")
+          Cart.value.meals.push({id:id, name:name, quantity:1});
+        }
+
+        console.log("Cart", Cart.value);
+    }
   return (
     <div
       style={{
@@ -472,6 +491,7 @@ function TempMealCard({ id, name, desc, price, mealImg, rating }) {
               cursor: "pointer",
               transition: "background-color 0.3s",
             }}
+            onClick={AddToCart}
             className="btn meal-card__button"
           >
             Buy
