@@ -114,7 +114,6 @@ export default function NavbarGlobal() {
                           Header={"Cart Modal"}
                           ButtonText={<BsCartX fontSize={"1.5em"} />}
                           Show={Show}
-                          display={(Show.value = true)}
                           onCancel={() =>{ Show.value = false;}}
                           // submit={}
                         > 
