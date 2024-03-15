@@ -1,5 +1,6 @@
 const meal = require("../../database/models/Meals_model");
 const resturant  = require("../../database/models/resturant.Model");
+const Order = require("../../database/models/orders");
 const { validationResult } = require("express-validator");
 
 
@@ -24,7 +25,6 @@ const addNewmeal = async (req, res) => { //{MealName:"",MealImg:"",Description:"
         return res.status(400).json({ error: 'Invalid image format' });
         }else {
             const Resid = req.body.Resid;
-            
             const resturants = await resturant.find({_id:Resid});
             if (!resturants[0]) {
                 res.send("RESTURAND DOSENT EXEST");
@@ -91,7 +91,59 @@ const addNewmeal = async (req, res) => { //{MealName:"",MealImg:"",Description:"
     }
   };
 
+// ========== Order ==========
+
+// Create Order in specific restaurant
+const createOrder = async(req, res) => {
+
+  try {
+  // const { restaurantId, meals } = req.body;
+  const restaurantId = req.body.resId;
+  const meals = req.body.mealId;
+  // Input validation
+  if(!restaurantId || !meals || !meals.length){
+    return res.status(400).json({message: "Missing required fields"});
+  }
+
+
+    // Find the restaurant
+    const restaurant = await resturant.findById(restaurantId);
+    if(!restaurant){
+      return res.status(404).json({message: "Restaurant not found"});
+    }
+
+    // Find Valid meals and calculate total price
+    const validMeals = await meal.find({_id: { $in: meals }}); // Use $in operator for efficiency
+    if(validMeals.length !== meals.length){
+      return res.status(400).json({message: "Invalid meal IDs provided"});
+    }
+
+    const totalPrice = validMeals.reduce((acc, meal) => acc + meal.price, 0);
+
+    // Create a new order
+    const newOrder = new Order({
+      _id: mongoose.Types.ObjectId(),
+      resId: restaurant,
+      meals: validMeals.map(meal => meal._id),
+      // totalPrice: totalPrice
+    });
+
+    // Save the order
+    await newOrder.save();
+
+    res.status(201).json({message: "Order created successfully", order: newOrder});
+  } catch(err){
+    console.error("Error crearting Order: ", err);
+    res.status(500).json({message: "Error creating order"});
+  }
+}
+
+
+
+
+
   module.exports = {
     addNewmeal,
     getAllmeals,
+    createOrder
   };

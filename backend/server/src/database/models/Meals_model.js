@@ -26,7 +26,9 @@ const mealSchema=mongoose.Schema({
         require:[true,"Enter Meal rating"]
     },
     // ! What does that means ?
-    ResID: { type: String, ref: 'restaurant' }
+    ResID: {
+        type: String, ref: 'restaurant'
+    }
     // ResID: { type: ObjectId, ref: 'restaurant' }
 })
 module.exports = mongoose.model('Meal', mealSchema);
