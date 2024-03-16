@@ -358,6 +358,7 @@ export default function SelectResPage() {
                                           rating={item.rating}
                                           mealImg={item.MealImg}
                                           resID={resID}
+                                          resName={resName}
                                         />
                                       );
                                     })}
@@ -385,7 +386,7 @@ export default function SelectResPage() {
   );
 }
 
-function TempMealCard({ id, name, desc, price, mealImg, rating, resID}) {
+function TempMealCard({ id, name, desc, price, mealImg, rating, resID, resName}) {
 
 
 console.log("meal: " + id + "  "+ name)
@@ -394,12 +395,13 @@ console.log("meal: " + id + "  "+ name)
       if(Cart.value.ResId != resID){
         console.log("ID NOT EQUAL")
         Cart.value.ResId = resID;
+        Cart.value.ResName = resName;
         Cart.value.meals = [];
         }
 
         if(!Cart.value.meals.some((meal) => meal.id == id? meal.quantity += 1: false)){
           console.log("meal not found")
-          Cart.value.meals.push({id:id, name:name, quantity:1});
+          Cart.value.meals.push({id:id, name:name, mealImg:mealImg,rating: rating,desc:desc, price: price, quantity:1});
         }
 
         console.log("Cart", Cart.value);

@@ -7,7 +7,7 @@ import { Cart } from "../../Globals";
 
 
 export default function CartHandler() {
-    
+
     const Show = useSignal(false);
     const m = useMutation({
         mutationKey: [],
@@ -30,12 +30,15 @@ return(<>
 
 
                 <CustomModal
-                    Header={"Cart Modal"}
+                    Header={Cart.value.ResName}
                     ButtonText={<BsCartX fontSize={"1.5em"} />}
                     Show={Show}
                     onCancel={() =>{ Show.value = false;}}
                     submit={() => {createOrder()}} 
                     > 
+
+                        {/* Loop meals here ibrahim */}
+
                     
                         </CustomModal>
 
