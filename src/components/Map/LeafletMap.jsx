@@ -1,6 +1,21 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import L from "leaflet";
 import { useSignal } from "@preact/signals-react";
+
+// Import marker icon
+import markerIcon from "leaflet/dist/images/marker-icon.png";
+import markerShadow from "leaflet/dist/images/marker-shadow.png";
+
+// Customize marker icon
+const customMarkerIcon = L.icon({
+  iconUrl: markerIcon,
+  shadowUrl: markerShadow,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41],
+});
 
 function LeafletMap() {
   const markerPosition = useSignal([51.505, -0.09]);
@@ -34,6 +49,7 @@ function LeafletMap() {
         />
         <Marker
           position={markerPosition.value}
+          icon={customMarkerIcon}
           draggable={true}
           eventHandlers={{
             dragend: handleMarkerDragEnd,
