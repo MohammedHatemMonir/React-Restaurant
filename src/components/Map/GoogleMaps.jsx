@@ -11,7 +11,7 @@ const center = {
   lng: 150.644,
 };
 
-function App() {
+function GoogleMaps() {
   return (
     <div className="App">
       <h1>Google Maps in React</h1>
@@ -26,4 +26,4 @@ function App() {
   );
 }
 
-export default App;
+export default GoogleMaps;
