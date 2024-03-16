@@ -61,9 +61,13 @@ app.use("/api/users", userRouter);
 
 
 app.post('/uploadImage', async (req, res) => {
+  try{
 
-  const uploadedimgUrl = await uploadImg(req.body.image);
-  console.log("uploadedimg",uploadedimgUrl);
+    const uploadedimgUrl = await uploadImg(req.body.image);
+    console.log("uploadedimg",uploadedimgUrl);
+  }catch(err){
+    console.log("error in upload image",err);
+  }
 });
 
 //////////////////////////////////////////////////////
