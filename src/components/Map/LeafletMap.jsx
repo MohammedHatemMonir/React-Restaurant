@@ -2,10 +2,10 @@ import React from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
-function App() {
+function LeafletMap() {
   return (
     <div className="App">
-      <h1>React Leaflet Map</h1>
+      <h1>Leaflet Map</h1>
       <MapContainer
         center={[51.505, -0.09]}
         zoom={13}
@@ -25,4 +25,4 @@ function App() {
   );
 }
 
-export default App;
+export default LeafletMap;

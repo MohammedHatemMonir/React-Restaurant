@@ -19,7 +19,8 @@ import { useLocation } from "react-router-dom";
 import { UserData } from "../../Globals";
 import { useQuery } from "react-query";
 import { apiClient } from "../../Data/apiclient";
-import LocationPickerExample from './../Map/HemaMap';
+import LocationPickerExample from "../Map/LeafletMap";
+import LeafletMap from "./../Map/LeafletMap";
 
 export default function TheRouter() {
   const navigate = useNavigate();
@@ -96,7 +97,7 @@ export default function TheRouter() {
               element={<SelectResPage />}
             ></Route>
             {/* <Route path="loader" element={<MainLoader />}></Route> */}
-            <Route path="map" element={<LocationPickerExample />}></Route>
+            <Route path="map" element={<LeafletMap />}></Route>
 
             <Route path="/tutorials" element={<Tutorials />}>
               <Route path="Medotest" element={<MedoTest />}></Route>
