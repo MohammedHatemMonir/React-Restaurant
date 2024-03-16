@@ -108,7 +108,7 @@ const session = async (req, res) => {
 
     if(req.session.user){
         const user = req.session.user;
-        console.log("Seission Requested",req.session.user);
+        // console.log("Seission Requested",req.session.user);
         return res.json({ success:true,id:user._id, role:user.role, name:user.name, email:user.email ,msg: `Welcome ${user.name}`, loggedIn:true});
     }else{
       res.json({loggedIn:false})

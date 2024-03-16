@@ -97,11 +97,12 @@ const addNewmeal = async (req, res) => { //{MealName:"",MealImg:"",Description:"
 // Create Order in specific restaurant
 const createOrder = async (req, res) => {
   try {
+  
     const orderMealsIds = Promise.all(
-      req.body.orderMeals.map(async (orderMeal) => {
+      req.body.meals.map(async (orderMeal) => {
         let newOrderMeal = new OrderMeal({
-          mealId: orderMeal.mealId,
-          mealName: orderMeal.mealName,
+          mealId: orderMeal.id,
+          mealName: orderMeal.name,
           quantity: orderMeal.quantity,
         });
 
@@ -110,7 +111,7 @@ const createOrder = async (req, res) => {
       })
     );
 
-    const restaurantId = req.body.resId;
+    const restaurantId = req.body.ResId;
     const orderMealsIdsResolved = await orderMealsIds; // This is an array include ids of meals
 
     if (
@@ -162,8 +163,8 @@ const createOrder = async (req, res) => {
       resId: restaurantId,
       orderMeals: orderMealsIdsResolved,
       // userId: req.user?.id,
-      totalPrice: totalPrice,
-      // user: req.session.user._id,
+      totalPrice: totalPrice, 
+      user: req.session.user._id,
       // user: req.body.user
     });
 
