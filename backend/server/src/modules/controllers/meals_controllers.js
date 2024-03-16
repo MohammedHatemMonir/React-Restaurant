@@ -1,6 +1,7 @@
 const meal = require("../../database/models/Meals_model");
 const resturant  = require("../../database/models/resturant.Model");
-const Order = require("../../database/models/orders");
+const { Order } = require("../../database/models/orders");
+const { OrderMeal } = require("../../database/models/orderMeal");
 const { validationResult } = require("express-validator");
 
 
@@ -94,49 +95,92 @@ const addNewmeal = async (req, res) => { //{MealName:"",MealImg:"",Description:"
 // ========== Order ==========
 
 // Create Order in specific restaurant
-const createOrder = async(req, res) => {
-
+const createOrder = async (req, res) => {
   try {
-  // const { restaurantId, meals } = req.body;
-  const restaurantId = req.body.resId;
-  const meals = req.body.mealId;
-  // Input validation
-  if(!restaurantId || !meals || !meals.length){
-    return res.status(400).json({message: "Missing required fields"});
-  }
+    const orderMealsIds = Promise.all(
+      req.body.orderMeals.map(async (orderMeal) => {
+        let newOrderMeal = new OrderMeal({
+          mealId: orderMeal.mealId,
+          mealName: orderMeal.mealName,
+          quantity: orderMeal.quantity,
+        });
 
+        newOrderMeal = await newOrderMeal.save();
+        return newOrderMeal._id;
+      })
+    );
+
+    const restaurantId = req.body.resId;
+    const orderMealsIdsResolved = await orderMealsIds; // This is an array include ids of meals
+
+    if (
+      !restaurantId ||
+      !orderMealsIdsResolved ||
+      !orderMealsIdsResolved.length
+    ) {
+      return res
+        .status(400)
+        .json({
+          message: "Missing required fields (restaurantId, orderMealsIds)",
+        });
+    }
 
     // Find the restaurant
     const restaurant = await resturant.findById(restaurantId);
-    if(!restaurant){
-      return res.status(404).json({message: "Restaurant not found"});
+    if (!restaurant) {
+      return res.status(404).json({ message: "Restaurant not found" });
     }
 
     // Find Valid meals and calculate total price
-    const validMeals = await meal.find({_id: { $in: meals }}); // Use $in operator for efficiency
-    if(validMeals.length !== meals.length){
-      return res.status(400).json({message: "Invalid meal IDs provided"});
-    }
+    // const validMeals = await meal.find({_id: { $in: mealIds }}); // Use $in operator for efficiency
 
-    const totalPrice = validMeals.reduce((acc, meal) => acc + meal.price, 0);
+    // ! Edit This Code
+
+    // const validMeals = await Promise.all(orderMealsIdsResolved.map(async (orderMealId) => {
+    //   orderMealsIds.findById(orderMealId);
+    // }));
+    // if(validMeals.length !== mealIds.length){
+    //   return res.status(400).json({ message: "Invalid meal IDs provided"});
+    // }
+
+    const totalPrices = await Promise.all(
+      orderMealsIdsResolved.map(async (orderMealId) => {
+        const orderMeal = await OrderMeal.findById(orderMealId).populate(
+          "mealId",
+          "Price"
+        );
+        const totalPrice = orderMeal.mealId.Price * orderMeal.quantity;
+
+        return totalPrice;
+      })
+    );
+
+    const totalPrice = totalPrices.reduce((acc, meal) => acc + meal, 0);
 
     // Create a new order
-    const newOrder = new Order({
-      _id: mongoose.Types.ObjectId(),
-      resId: restaurant,
-      meals: validMeals.map(meal => meal._id),
-      // totalPrice: totalPrice
+    let newOrder = new Order({
+      resId: restaurantId,
+      orderMeals: orderMealsIdsResolved,
+      // userId: req.user?.id,
+      totalPrice: totalPrice,
+      // user: req.session.user._id,
+      // user: req.body.user
     });
 
     // Save the order
-    await newOrder.save();
+    newOrder = await newOrder.save();
 
-    res.status(201).json({message: "Order created successfully", order: newOrder});
-  } catch(err){
+    if (!newOrder) {
+      return res.status(400).send("The order cannot be created!");
+    }
+    res
+      .status(201)
+      .json({ message: "Order created successfully", order: newOrder });
+  } catch (err) {
     console.error("Error crearting Order: ", err);
-    res.status(500).json({message: "Error creating order"});
+    res.status(500).json({ message: "Error creating order" });
   }
-}
+};
 
 
 
