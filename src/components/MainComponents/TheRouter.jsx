@@ -13,25 +13,16 @@ import Dashboard1 from "../Dashboard/Dashboard1";
 import Dashboard2 from "../Dashboard/Dashboard2";
 import Home from "./Home";
 import Tutorials from "../TestComponents/Tutorials";
-import ResPage from './../ResPage/ResPage';
-import SelectResPage from './../SelectedResPage/SelectResPage';
-import  { useEffect } from 'react';
-
+import ResPage from "./../ResPage/ResPage";
+import SelectResPage from "./../SelectedResPage/SelectResPage";
 import { useLocation } from "react-router-dom";
 import { UserData } from "../../Globals";
 import { useQuery } from "react-query";
 import { apiClient } from "../../Data/apiclient";
-import MainLoader from "../Loaders/MainLoader";
-
+import LocationPickerExample from './../Map/HemaMap';
 
 export default function TheRouter() {
-
-const navigate = useNavigate();
-
-
-
-
-
+  const navigate = useNavigate();
 
   const OnWindowChange = ({ children }) => {
     const q = useQuery({
@@ -39,17 +30,21 @@ const navigate = useNavigate();
       onSuccess: navigateLogic(),
       queryFn: async () => {
         let url = "/api/users/session";
-  
+
         var result = await apiClient.post(url);
-        UserData.value = {name:result.data.name, email:result.data.email, role:result.data.role, id:result.data.id, loggedIn:result.data.loggedIn};
+        UserData.value = {
+          name: result.data.name,
+          email: result.data.email,
+          role: result.data.role,
+          id: result.data.id,
+          loggedIn: result.data.loggedIn,
+        };
         localStorage.setItem("UserData", JSON.stringify(UserData.value));
-        console.log("session",result.data);
-  
+        console.log("session", result.data);
+
         return result;
       },
     });
-
-
 
     // useEffect(() => {
 
@@ -59,60 +54,60 @@ const navigate = useNavigate();
     //     behavior: "instant",
     //   });
 
-      
     // }, []);
-  
   };
-  const protectedpaths = ["/login","/signup","/forgotpass"];
+  const protectedpaths = ["/login", "/signup", "/forgotpass"];
 
-  const  navigateLogic = () =>{
+  const navigateLogic = () => {
     const { pathname } = useLocation();
 
-
-    if(!UserData.value.loggedIn && !protectedpaths.includes(pathname)){
+    if (!UserData.value.loggedIn && !protectedpaths.includes(pathname)) {
       navigate("/login");
-    }
-    else if(UserData.value.loggedIn && protectedpaths.includes(pathname)){
+    } else if (UserData.value.loggedIn && protectedpaths.includes(pathname)) {
       navigate("/");
     }
-  }
+  };
 
   return (
     <>
       <OnWindowChange />
       <Routes>
-        <Route element={<><Outlet /></>} >
+        <Route
+          element={
+            <>
+              <Outlet />
+            </>
+          }
+        >
           <Route path="login" element={<Login />}></Route>
           <Route path="signup" element={<SignUp />}></Route>
           <Route path="forgotpass" element={<ForgotPass />}></Route>
-
-
         </Route>
-        
-        {UserData.value.loggedIn &&
-        <Route path="/" element={<DefaultLayout />}>
-          <Route index element={<ResPage />} />
-          
 
-          <Route path="card" element={<Card />}></Route>
-          <Route path="dash1" element={<Dashboard1 />}></Route>
-          <Route path="dash2" element={<Dashboard2 />}></Route>
-          <Route path="/restaurant/:resID/:resName" element={<SelectResPage />}></Route>
-          {/* <Route path="loader" element={<MainLoader />}></Route> */}
+        {UserData.value.loggedIn && (
+          <Route path="/" element={<DefaultLayout />}>
+            <Route index element={<ResPage />} />
 
-          <Route path="/tutorials" element={<Tutorials />}>
+            <Route path="card" element={<Card />}></Route>
+            <Route path="dash1" element={<Dashboard1 />}></Route>
+            <Route path="dash2" element={<Dashboard2 />}></Route>
+            <Route
+              path="/restaurant/:resID/:resName"
+              element={<SelectResPage />}
+            ></Route>
+            {/* <Route path="loader" element={<MainLoader />}></Route> */}
+            <Route path="map" element={<LocationPickerExample />}></Route>
+
+            <Route path="/tutorials" element={<Tutorials />}>
               <Route path="Medotest" element={<MedoTest />}></Route>
               <Route path="Hema" element={<HemaTest />}></Route>
               <Route path="ZyadTest" element={<ZyadTest />}></Route>
               <Route path="Prototype" element={<Prototype />}>
                 <Route path="Signal" element={<SignalPrototype />}></Route>
               </Route>
-            
+            </Route>
           </Route>
-
-          
-        </Route>
-      }
+        )}
       </Routes>
     </>
   );
