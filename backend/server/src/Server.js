@@ -9,6 +9,8 @@ const comment_routes = require("./modules/routes/comment_routes");
 const router = require('./modules/routes/resturant.router');
 const MEALrouter = require('./modules/routes/meals_routes');
 const passport = require('passport');
+const uploadImg = require('./utils/uploadImg');
+const { error } = require('console');
 // const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 
@@ -22,7 +24,7 @@ const generateSecretKey = () => {
 const secretKey = generateSecretKey();
 console.log('Secret Key:', secretKey);
 
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ limit: '50mb', extended: true}));
 
 
 app.use(
@@ -38,7 +40,7 @@ app.use(passport.session());
 
 connectToMongoDB();
 
-app.use(express.json());
+app.use(express.json({limit: '50mb'}));
 app.use(cors({
     origin: 'http://localhost:3000',
     credentials: true,
@@ -51,6 +53,18 @@ app.use("/api/users", userRouter);
 
 
 
+
+
+
+
+//Mohammed hatem image upload here  .then((url) => res.send(url)).catch((err) => res.status(500).send(err))
+
+
+app.post('/uploadImage', async (req, res) => {
+
+  const uploadedimgUrl = await uploadImg(req.body.image);
+  console.log("uploadedimg",uploadedimgUrl);
+});
 
 //////////////////////////////////////////////////////
 
