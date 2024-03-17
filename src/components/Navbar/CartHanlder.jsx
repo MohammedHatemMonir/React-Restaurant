@@ -37,6 +37,20 @@ export default function CartHandler() {
         }}
       >
         {/* Loop meals here ibrahim */}
+        
+        {Cart.value.meals.map((meal, index) => (
+          <div
+            key={index}
+            className="mb-3 border-bottom pb-3 d-flex justify-content-around"
+          >
+            <p className="font-weight-bold">{meal.name}</p>
+            <div className="d-flex align-items-center">
+              <button className="btn btn-secondary mr-2">-</button>
+              <span>{meal.quantity}</span>
+              <button className="btn btn-secondary ml-2">+</button>
+            </div>
+          </div>
+        ))}
       </CustomModal>
     </>
   );

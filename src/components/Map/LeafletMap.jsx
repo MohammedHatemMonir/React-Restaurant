@@ -19,7 +19,6 @@ const customMarkerIcon = L.icon({
 });
 
 function LeafletMap() {
-
   const isLoading = useSignal(true);
   const userLocation = useSignal(null);
 
