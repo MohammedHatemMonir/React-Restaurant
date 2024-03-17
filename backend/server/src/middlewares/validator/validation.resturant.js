@@ -5,14 +5,10 @@ const validateResturantInput = [
         .isLength({ min: 2 }).withMessage('Restaurant name must be at least 2 characters long'),
 
     check('ResImg')
-        .notEmpty().withMessage('Restaurant image URL is required')
-        .custom((value, { req }) => {
-            const allowedMimetypes = ['jpeg', 'png', 'jpg'];
-            if (!value.match(/\.(jpeg|jpg|png)$/)) {
-                throw new Error('Invalid image format');
-            }
-            return true;
-        }),
+        .notEmpty().withMessage('Restaurant image URL is required'),
+        // .custom((value, { req }) => {
+            
+        // }),
     // check("rating")
     //     .isNumeric().withMessage("only numpers allowd"),
     check('Categoery')
