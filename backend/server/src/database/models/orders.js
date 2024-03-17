@@ -4,7 +4,15 @@ const Schema = mongoose.Schema;
 
 const orderSchema = Schema({
     resId: { type: Schema.Types.ObjectId, ref: "restaurant", required: true },
-    orderMeals: [{ type: Schema.Types.ObjectId, ref: "orderMeal", required: true }],
+    // orderMeals: [{ type: Schema.Types.ObjectId, ref: "orderMeal", required: true }],
+    meals:
+        [{type: Schema.Types.ObjectId, ref: "OrderMeals", required: true }],
+        // {
+            // id: { type: Schema.Types.ObjectId, ref: "Meal", required: true },
+            // name: { type: String, ref: "Meal", required: true },
+            // quantity: { type: Number, default: 1 },
+        // }
+
     totalPrice: {
         type: Number,
     },
