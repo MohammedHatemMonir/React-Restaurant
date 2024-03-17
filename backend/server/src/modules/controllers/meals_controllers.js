@@ -1,52 +1,70 @@
 const meal = require("../../database/models/Meals_model");
 const resturant  = require("../../database/models/resturant.Model");
 const { Order } = require("../../database/models/orders");
-const { OrderMeal } = require("../../database/models/orderMeal");
+const { OrderMeals } = require("../../database/models/orderMeal");
 const { validationResult } = require("express-validator");
 
 
-const addNewmeal = async (req, res) => {
-  try {
-      const errors = validationResult(req)
-      if (!errors.isEmpty()) {
-          res.status(400).json(errors.array()[0].msg)
+const addNewmeal = async (req, res) => { //{MealName:"",MealImg:"",Description:"",Price:"",Resid:""}
+    try {
+      const errors =validationResult(req)
+      if(!errors.isEmpty()){
+        res.status(400).json(errors.array()[0].msg)
+      }else{
+
+        if(req.session?.user?.role!="ADMIN") {
+          res.status(500).json({message:"You are not Authenticated to add a meal"});
+          return;
+        }
+      const MealName = req.body.MealName;
+
+      const meals = await meal.find({MealName:MealName});
+      if (!meals[0]) {
+        // console.log(req.body.MealImg.split('.').pop() )
+        const allowedMimetypes = ['jpeg', 'png', 'gif','jpg'];
+        if (!allowedMimetypes.includes(req.body.MealImg.split('.').pop())) {
+        return res.status(400).json({ error: 'Invalid image format' });
+        }else {
+            const Resid = req.body.Resid;
+            const resturants = await resturant.find({_id:Resid});
+            if (!resturants[0]) {
+                res.send("RESTURAND DOSENT EXEST");
+            }else{
+              const comment_num=0
+              const rating = 0
+                const body = {
+                  MealName:req.body.MealName,
+                  MealImg:req.body.MealImg,
+                  Description:req.body.Description,
+                  Price:req.body.Price,
+                  ResID:req.body.Resid,
+                  rating:rating,
+                  comment_num:comment_num}
+                const meals = new meal(body);
+                await meals.save();
+                    // const meals=await meal.create(body)
+                  //   new_Meals_num=resturants[0].Meals_num+1
+                  //   test1=resturants[0].Meals_num+resturants[0].comment_num
+                  //   new_res_rating=(resturants[0].rating*(test1))/(test1+1)
+                  //   const res_body={
+                  //     ResName: resturants[0].ResName,
+                  //     ResImg: resturants[0].ResImg,
+                  //     Categoery: resturants[0].Categoery,
+                  //     rating:new_res_rating,
+                  //     Meals_num:new_Meals_num,
+                  //     comment_num:resturants[0].comment_num
+                  // }
+                  // const res_update = await resturant.updateOne({ _id: Resid },{ $set: res_body});
+                res.status(201).json(body);
+                    // console.log(req.body)
+
+            }}
       } else {
-          if (req.session?.user?.role !== "ADMIN") {
-              res.status(500).json({ message: "You are not Authenticated to add a meal" });
-              return;
-          }
-
-          const MealName = req.body.MealName;
-
-          const meals = await meal.find({ MealName: MealName });
-          if (!meals[0]) {
-              const Resid = req.body.Resid;
-              const resturants = await resturant.find({ _id: Resid });
-              if (!resturants[0]) {
-                  res.send("RESTAURANT DOES NOT EXIST");
-              } else {
-                  const comment_num = 0;
-                  const rating = 0;
-                  const body = {
-                      MealName: req.body.MealName,
-                      MealImg: req.body.MealImg,
-                      Description: req.body.Description,
-                      Price: req.body.Price,
-                      ResID: req.body.Resid,
-                      rating: rating,
-                      comment_num: comment_num
-                  };
-                  const meals = new meal(body);
-                  await meals.save();
-                  res.status(201).json(body);
-              }
-          } else {
-              res.send("MEAL EXISTS");
-          }
-      }
-  } catch (err) {
+        res.send("MEAL EXEST");
+      }}
+    } catch (err) {
       res.status(400).json({ error: err });
-  }
+    }
 };
 
   const getAllmeals = async (req, res) => {
@@ -79,22 +97,23 @@ const addNewmeal = async (req, res) => {
 // Create Order in specific restaurant
 const createOrder = async (req, res) => {
   try {
-  
-    const orderMealsIds = Promise.all(
-      req.body.meals.map(async (orderMeal) => {
-        let newOrderMeal = new OrderMeal({
-          mealId: orderMeal.id,
-          mealName: orderMeal.name,
-          quantity: orderMeal.quantity,
+
+
+    const newOrderMeals = Promise.all(
+      req.body.meals.map(async (meal) => {
+        let orderMeals = new OrderMeals({
+          id: meal.id,
+          name: meal.name,
+          quantity: meal.quantity,
         });
 
-        newOrderMeal = await newOrderMeal.save();
-        return newOrderMeal._id;
+        orderMeals = await orderMeals.save();
+        return orderMeals._id;
       })
     );
 
     const restaurantId = req.body.ResId;
-    const orderMealsIdsResolved = await orderMealsIds; // This is an array include ids of meals
+    const orderMealsIdsResolved = await newOrderMeals; // This is an array include ids of meals
 
     if (
       !restaurantId ||
@@ -127,12 +146,15 @@ const createOrder = async (req, res) => {
     // }
 
     const totalPrices = await Promise.all(
-      orderMealsIdsResolved.map(async (orderMealId) => {
-        const orderMeal = await OrderMeal.findById(orderMealId).populate(
-          "mealId",
+      orderMealsIdsResolved.map(async (mealIds) => {
+        const orderMeals = await OrderMeals.findById(mealIds).populate(
+          "id",
           "Price"
         );
-        const totalPrice = orderMeal.mealId.Price * orderMeal.quantity;
+        if (!orderMeals) {
+          return res.status(404).json({ message: "Order meal not found" });
+        }
+        const totalPrice = orderMeals.id.Price * orderMeals.quantity;
 
         return totalPrice;
       })
@@ -143,10 +165,10 @@ const createOrder = async (req, res) => {
     // Create a new order
     let newOrder = new Order({
       resId: restaurantId,
-      orderMeals: orderMealsIdsResolved,
+      meals: orderMealsIdsResolved,
       // userId: req.user?.id,
-      totalPrice: totalPrice, 
-      user: req.session.user._id,
+      totalPrice: totalPrice,
+      // user: req.session.user._id,
       // user: req.body.user
     });
 

@@ -3,13 +3,9 @@ const Schema = mongoose.Schema;
 
 
 const orderMealSchema = Schema({
-    // FrontEnd
-    mealId: { type: Schema.Types.ObjectId, ref: "Meal", required: true },
-    mealName: { type: String, ref: "Meal", required: true },
+    id: { type: Schema.Types.ObjectId, ref: "Meal", required: true },
+    name: { type: String, required: true },
     quantity: { type: Number, default: 1 },
-    // FrontEnd
-    // Backend
-    // price: { type: Number },
 });
 
-exports.OrderMeal = mongoose.model("OrderMeal", orderMealSchema);
+exports.OrderMeals = mongoose.model("OrderMeals", orderMealSchema);
