@@ -1,8 +1,8 @@
-import "./MainLoader.scss";
+import "./CircleLoader.scss";
 
-const MainLoader = () => {
+const CircleLoader = () => {
   return (
-    <div className="main-loader">
+    <div className="Circle-Loader">
       <svg className="snurra" width={200} height={200} viewBox="0 0 200 200">
         <defs>
           <linearGradient id="linjärGradient">
@@ -29,4 +29,4 @@ const MainLoader = () => {
   );
 };
 
-export default MainLoader;
+export default CircleLoader;

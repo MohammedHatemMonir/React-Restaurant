@@ -11,7 +11,6 @@ import Prototype from "../Prototypes/Prototype";
 import Card from "../Card/Card";
 import Dashboard1 from "../Dashboard/Dashboard1";
 import Dashboard2 from "../Dashboard/Dashboard2";
-import Home from "./Home";
 import Tutorials from "../TestComponents/Tutorials";
 import ResPage from "./../ResPage/ResPage";
 import SelectResPage from "./../SelectedResPage/SelectResPage";
@@ -21,6 +20,8 @@ import { useQuery } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 import LeafletMap from "./../Map/LeafletMap";
 import GoogleMaps from './../Map/GoogleMaps';
+import CircleLoader from "../Loaders/CircleLoader";
+import CookingLoader from './../Loaders/CookingLoader';
 
 export default function TheRouter() {
   const navigate = useNavigate();
@@ -96,7 +97,9 @@ export default function TheRouter() {
               path="/restaurant/:resID/:resName"
               element={<SelectResPage />}
             ></Route>
-            {/* <Route path="loader" element={<MainLoader />}></Route> */}
+
+            <Route path="cooking" element={<CookingLoader />}></Route>
+            <Route path="circle" element={<CircleLoader />}></Route>
             <Route path="map" element={<LeafletMap />}></Route>
             <Route path="googlemap" element={<GoogleMaps />}></Route>
 

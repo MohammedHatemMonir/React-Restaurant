@@ -12,8 +12,9 @@ import Filters from "./Filters";
 import AddRestaurantButton from "./AddRestaurantButton";
 import { UserData } from "../../Globals";
 import Stars from "./../Stars/Stars";
-import MainLoader from "../Loaders/MainLoader";
-import MainCards from './new/MainCards';
+import MainLoader from "../Loaders/CircleLoader";
+import MainCards from "./new/MainCards";
+import CookingLoader from "./../Loaders/CookingLoader";
 
 export default function ResPage() {
   const q = useQuery({
@@ -31,7 +32,7 @@ export default function ResPage() {
   if (q.isLoading) {
     return (
       <>
-        <MainLoader />
+        <CookingLoader />
       </>
     );
   }
