@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { useSignal } from "@preact/signals-react";
@@ -18,7 +18,8 @@ const customMarkerIcon = L.icon({
   shadowSize: [41, 41],
 });
 
-function LeafletMap() {
+ function LeafletMap() {
+  const [isLoading, setIsLoading] = useState(true);
   const userLocation = useSignal(null);
   useEffect(() => {
     const fetchUserLocation = async () => {
@@ -30,17 +31,20 @@ function LeafletMap() {
           position.coords.latitude,
           position.coords.longitude,
         ];
+        setIsLoading(false)
       } catch (error) {
         console.error("Error getting user location:", error);
+        setIsLoading(false)
       }
     };
 
     fetchUserLocation();
   }, []);
 
+
   // Default map center and zoom level
   const defaultCenter = [51.505, -0.09];
-  const defaultZoom = 13;
+  const defaultZoom = 14;
 
   const handleMarkerDragEnd = async (event) => {
     const { lat, lng } = event.target.getLatLng();
@@ -73,8 +77,9 @@ function LeafletMap() {
 
   return (
     <div>
-      <h1 className="text-center font-weight-bold p-2">Leaflet Map</h1>
-      <MapContainer
+      {isLoading ? ( <p>Loading user location...</p>
+      ):(
+        <MapContainer
         center={userLocation.value || defaultCenter}
         zoom={userLocation.value ? defaultZoom : 3}
         style={{ height: "100vh", width: "100%" }}
@@ -85,6 +90,9 @@ function LeafletMap() {
         />
         {marker}
       </MapContainer>
+      )}
+      <h1 className="text-center font-weight-bold p-2">Leaflet Map</h1>
+
     </div>
   );
 }
