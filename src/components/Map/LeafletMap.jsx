@@ -1,7 +1,8 @@
+import { useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import L from "leaflet";
 import { useSignal } from "@preact/signals-react";
+import L from "leaflet";
 
 // Import marker icon
 import markerIcon from "leaflet/dist/images/marker-icon.png";
@@ -18,11 +19,31 @@ const customMarkerIcon = L.icon({
 });
 
 function LeafletMap() {
-  const markerPosition = useSignal([51.505, -0.09]);
+  const userLocation = useSignal(null);
+  useEffect(() => {
+    const fetchUserLocation = async () => {
+      try {
+        const position = await new Promise((resolve, reject) => {
+          navigator.geolocation.getCurrentPosition(resolve, reject);
+        });
+        userLocation.value = [
+          position.coords.latitude,
+          position.coords.longitude,
+        ];
+      } catch (error) {
+        console.error("Error getting user location:", error);
+      }
+    };
+
+    fetchUserLocation();
+  }, []);
+
+  // Default map center and zoom level
+  const defaultCenter = [51.505, -0.09];
+  const defaultZoom = 13;
 
   const handleMarkerDragEnd = async (event) => {
     const { lat, lng } = event.target.getLatLng();
-    markerPosition.value = [lat, lng];
     try {
       const response = await fetch(
         `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`
@@ -35,30 +56,34 @@ function LeafletMap() {
     }
   };
 
+  const marker = (
+    <Marker
+      position={userLocation.value || defaultCenter}
+      icon={customMarkerIcon}
+      draggable={true}
+      eventHandlers={{
+        dragend: handleMarkerDragEnd,
+      }}
+    >
+      <Popup>
+        A pretty CSS3 popup. <br /> Easily customizable.
+      </Popup>
+    </Marker>
+  );
+
   return (
     <div>
-      <h1 className="text-center p-2">Leaflet Map</h1>
+      <h1 className="text-center font-weight-bold p-2">Leaflet Map</h1>
       <MapContainer
-        center={markerPosition.value}
-        zoom={13}
+        center={userLocation.value || defaultCenter}
+        zoom={userLocation.value ? defaultZoom : 3}
         style={{ height: "100vh", width: "100%" }}
       >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
-        <Marker
-          position={markerPosition.value}
-          icon={customMarkerIcon}
-          draggable={true}
-          eventHandlers={{
-            dragend: handleMarkerDragEnd,
-          }}
-        >
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
-        </Marker>
+        {marker}
       </MapContainer>
     </div>
   );

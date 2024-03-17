@@ -22,9 +22,6 @@ import { apiClient } from "../../Data/apiclient";
 import LeafletMap from "./../Map/LeafletMap";
 import GoogleMaps from './../Map/GoogleMaps';
 
-
-
-
 export default function TheRouter() {
   const navigate = useNavigate();
 
