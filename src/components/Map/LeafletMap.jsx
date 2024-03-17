@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { useSignal } from "@preact/signals-react";
@@ -19,8 +19,10 @@ const customMarkerIcon = L.icon({
 });
 
 function LeafletMap() {
-  const [isLoading, setIsLoading] = useState(true);
+
+  const isLoading = useSignal(true);
   const userLocation = useSignal(null);
+
   useEffect(() => {
     const fetchUserLocation = async () => {
       try {
@@ -31,10 +33,10 @@ function LeafletMap() {
           position.coords.latitude,
           position.coords.longitude,
         ];
-        setIsLoading(false);
+        isLoading.value = false;
       } catch (error) {
         console.error("Error getting user location:", error);
-        setIsLoading(false);
+        isLoading.value = false;
       }
     };
 
@@ -77,7 +79,7 @@ function LeafletMap() {
   return (
     <div>
       <h1 className="text-center font-weight-bold p-2">Leaflet Map</h1>
-      {isLoading ? (
+      {isLoading.value ? (
         <p>Loading user location...</p>
       ) : (
         <MapContainer
