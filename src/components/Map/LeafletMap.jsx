@@ -18,7 +18,7 @@ const customMarkerIcon = L.icon({
   shadowSize: [41, 41],
 });
 
- function LeafletMap() {
+function LeafletMap() {
   const [isLoading, setIsLoading] = useState(true);
   const userLocation = useSignal(null);
   useEffect(() => {
@@ -31,16 +31,15 @@ const customMarkerIcon = L.icon({
           position.coords.latitude,
           position.coords.longitude,
         ];
-        setIsLoading(false)
+        setIsLoading(false);
       } catch (error) {
         console.error("Error getting user location:", error);
-        setIsLoading(false)
+        setIsLoading(false);
       }
     };
 
     fetchUserLocation();
   }, []);
-
 
   // Default map center and zoom level
   const defaultCenter = [51.505, -0.09];
@@ -77,22 +76,22 @@ const customMarkerIcon = L.icon({
 
   return (
     <div>
-      {isLoading ? ( <p>Loading user location...</p>
-      ):(
-        <MapContainer
-        center={userLocation.value || defaultCenter}
-        zoom={userLocation.value ? defaultZoom : 3}
-        style={{ height: "100vh", width: "100%" }}
-      >
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        />
-        {marker}
-      </MapContainer>
-      )}
       <h1 className="text-center font-weight-bold p-2">Leaflet Map</h1>
-
+      {isLoading ? (
+        <p>Loading user location...</p>
+      ) : (
+        <MapContainer
+          center={userLocation.value || defaultCenter}
+          zoom={userLocation.value ? defaultZoom : 3}
+          style={{ height: "100vh", width: "100%" }}
+        >
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          />
+          {marker}
+        </MapContainer>
+      )}
     </div>
   );
 }
