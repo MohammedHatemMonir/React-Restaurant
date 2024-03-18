@@ -21,9 +21,8 @@ const customMarkerIcon = L.icon({
 
 function LeafletMap() {
   const isLoading = useSignal(true);
-  const userLocation = useSignal(null);
+  const userLocation = useSignal([51.505, -0.09]);
   const currentLocation = useSignal("Your Location");
-  const defaultCenter = [51.505, -0.09];
   const defaultZoom = 14;
 
   useEffect(() => {
@@ -63,7 +62,7 @@ function LeafletMap() {
 
   const marker = (
     <Marker
-      position={userLocation.value || defaultCenter}
+      position={userLocation.value}
       icon={customMarkerIcon}
       draggable={true}
       eventHandlers={{
@@ -81,7 +80,7 @@ function LeafletMap() {
         <MapLoader />
       ) : (
         <MapContainer
-          center={userLocation.value || defaultCenter}
+          center={userLocation.value }
           zoom={userLocation.value ? defaultZoom : 3}
           style={{ height: "100vh", width: "100%" }}
         >
