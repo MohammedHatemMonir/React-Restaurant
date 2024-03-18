@@ -1,0 +1,49 @@
+.map-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background: #0f7173;
+
+  h1 {
+    color: white;
+    font-weight: bold;
+  }
+  .pinMap {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    transform: scale(1.4);
+    margin-top: -50px;
+  }
+  .pinMap::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 50% 50% 0;
+    border: 18px solid #ffc600;
+    transform: rotate(45deg) translate(0, 0);
+    animation: pinAnim 0.4s ease-in-out infinite alternate;
+  }
+  @keyframes pinAnim {
+    0% {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    100% {
+      transform: rotate(45deg) translate(-5px, -5px);
+    }
+  }
+
+  @keyframes shadowAnim {
+    0% {
+      transform: scale(0.5);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+}

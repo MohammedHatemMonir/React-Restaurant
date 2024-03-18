@@ -7,6 +7,7 @@ import L from "leaflet";
 // Import marker icon
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
+import MapLoader from "./../Loaders/MapLoader";
 
 // Customize marker icon
 const customMarkerIcon = L.icon({
@@ -79,7 +80,7 @@ function LeafletMap() {
     <div>
       <h1 className="text-center font-weight-bold p-2">Leaflet Map</h1>
       {isLoading.value ? (
-        <p>Loading user location...</p>
+        <MapLoader />
       ) : (
         <MapContainer
           center={userLocation.value || defaultCenter}
