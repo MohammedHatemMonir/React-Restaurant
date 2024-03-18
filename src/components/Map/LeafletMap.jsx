@@ -22,6 +22,9 @@ const customMarkerIcon = L.icon({
 function LeafletMap() {
   const isLoading = useSignal(true);
   const userLocation = useSignal(null);
+  const currentLocation = useSignal("Your Location");
+  const defaultCenter = [51.505, -0.09];
+  const defaultZoom = 14;
 
   useEffect(() => {
     const fetchUserLocation = async () => {
@@ -44,8 +47,6 @@ function LeafletMap() {
   }, []);
 
   // Default map center and zoom level
-  const defaultCenter = [51.505, -0.09];
-  const defaultZoom = 14;
 
   const handleMarkerDragEnd = async (event) => {
     const { lat, lng } = event.target.getLatLng();
@@ -56,6 +57,7 @@ function LeafletMap() {
       const data = await response.json();
       console.log("New marker position:", [lat, lng]);
       console.log("New location:", data.display_name);
+      currentLocation.value = data.display_name;
     } catch (error) {
       console.error("Error fetching location:", error);
     }
@@ -70,9 +72,7 @@ function LeafletMap() {
         dragend: handleMarkerDragEnd,
       }}
     >
-      <Popup>
-        A pretty CSS3 popup. <br /> Easily customizable.
-      </Popup>
+      <Popup>{currentLocation.value}</Popup>
     </Marker>
   );
 
