@@ -19,9 +19,8 @@ const customMarkerIcon = L.icon({
   shadowSize: [41, 41],
 });
 
-function LeafletMap() {
+function LeafletMap({ userLocation = useSignal([51.505, -0.09])}) {
   const isLoading = useSignal(true);
-  const userLocation = useSignal([51.505, -0.09]);
   const currentLocation = useSignal("Your Location");
   const defaultZoom = 14;
 
