@@ -12,8 +12,7 @@ import Filters from "./Filters";
 import AddRestaurantButton from "./AddRestaurantButton";
 import { UserData } from "../../Globals";
 import Stars from "./../Stars/Stars";
-import MainLoader from "../Loaders/CircleLoader";
-import MainCards from "./new/MainCards";
+
 import CookingLoader from "./../Loaders/CookingLoader";
 
 export default function ResPage() {
@@ -141,7 +140,7 @@ function ResCard({ id, name, start1 }) {
             style={{ width: "100%" }}
           />
           <div className="card-content clickable-item">
-            <a className="clickable-anchor" />
+            <Link className="clickable-anchor" />
             <div>
               <div className="pull-right flip">
                 <div
