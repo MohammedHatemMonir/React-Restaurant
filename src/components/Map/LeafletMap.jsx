@@ -46,8 +46,6 @@ function LeafletMap() {
     fetchUserLocation();
   }, []);
 
-  // Default map center and zoom level
-
   const handleMarkerDragEnd = async (event) => {
     const { lat, lng } = event.target.getLatLng();
     try {
