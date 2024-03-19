@@ -19,7 +19,10 @@ const customMarkerIcon = L.icon({
   shadowSize: [41, 41],
 });
 
-function LeafletMap({ userLocation = useSignal([51.505, -0.09]),currentLocation = useSignal("Your Location") }) {
+function LeafletMap({
+  userLocation = useSignal([51.505, -0.09]),
+  currentLocation = useSignal("Your Location"),
+}) {
   const isLoading = useSignal(true);
   const defaultZoom = 14;
 
@@ -78,9 +81,9 @@ function LeafletMap({ userLocation = useSignal([51.505, -0.09]),currentLocation 
         <MapLoader />
       ) : (
         <MapContainer
-          center={userLocation.value }
+          center={userLocation.value}
           zoom={userLocation.value ? defaultZoom : 3}
-          style={{ height: "100vh", width: "100%" }}
+          style={{ height: "80vh", width: "100%" }}
         >
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

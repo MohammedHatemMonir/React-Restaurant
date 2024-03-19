@@ -4,6 +4,7 @@ import CustomModal from "../Prototypes/CustomModal";
 import { Col, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { signal, useSignal } from "@preact/signals-react";
+import LeafletMap from "./../Map/LeafletMap";
 
 export default function AddRestaurantButton() {
   const {
@@ -19,17 +20,22 @@ export default function AddRestaurantButton() {
     console.log("submit!");
     //Handle add restaurant logic here
 
-
-    
     ShowSignal.value = false;
     reset();
+  }
+  const showMap = useSignal(false);
+  const myBtn = useSignal(true);
+
+  function handleBtnClick() {
+    showMap.value = !showMap.value;
+    myBtn.value = !myBtn.value;
   }
   return (
     <>
       <CustomModal
         ButtonText={<AddIcon />}
         Show={ShowSignal}
-        Header={"Add restaurant"}
+        Header={"Add new restaurant"}
         submit={() => {
           handleSubmit(submit)();
         }}
@@ -107,9 +113,9 @@ export default function AddRestaurantButton() {
                   </span>
                 </Form.Group>
               </Col>
-              <Col sm={12}>
+              <Col sm={8}>
                 <Form.Group className="mb-2 mb-sm-0">
-                  <Form.Label>Location</Form.Label>
+                  {/* <Form.Label>Location</Form.Label> */}
                   <Form.Control
                     type="text"
                     name="resLocation"
@@ -123,6 +129,25 @@ export default function AddRestaurantButton() {
                   </span>
                 </Form.Group>
               </Col>
+              <Col sm={4}>
+                <input
+                  type="button"
+                  value={myBtn.value ? "Open Map" : "Close Map"}
+                  // ${myBtn.value ? "bg-primary" : "bg-danger"}
+                  className={`btn ${
+                    myBtn.value ? "btn-primary" : " btn-danger"
+                  }  text-light`}
+                  onClick={handleBtnClick}
+                  style={{ transition: "all", direction: "2s" }}
+                />
+              </Col>
+              {showMap.value == true && (
+                <Col sm={12}>
+                  <div style={{ transition: "all", direction: "2s" }}>
+                    <LeafletMap />
+                  </div>
+                </Col>
+              )}
             </Row>
           </Form>
         </>
