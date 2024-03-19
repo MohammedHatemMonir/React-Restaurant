@@ -5,6 +5,7 @@ import { Col, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { signal, useSignal } from "@preact/signals-react";
 import LeafletMap from "./../Map/LeafletMap";
+import { Button } from "reactstrap";
 
 export default function AddRestaurantButton() {
   const {
@@ -130,16 +131,12 @@ export default function AddRestaurantButton() {
                 </Form.Group>
               </Col>
               <Col sm={4}>
-                <input
-                  type="button"
-                  value={myBtn.value ? "Open Map" : "Close Map"}
-                  // ${myBtn.value ? "bg-primary" : "bg-danger"}
-                  className={`btn ${
-                    myBtn.value ? "btn-primary" : " btn-danger"
-                  }  text-light`}
+                <Button
+                  className={`${myBtn.value ? "bg-primary" : " bg-danger"}`}
                   onClick={handleBtnClick}
-                  style={{ transition: "all", direction: "2s" }}
-                />
+                >
+                  {myBtn.value ? "Open Map" : "Close Map"}
+                </Button>
               </Col>
               {showMap.value == true && (
                 <Col sm={12}>
