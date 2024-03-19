@@ -8,6 +8,7 @@ import LeafletMap from "./../Map/LeafletMap";
 import { Button } from "reactstrap";
 
 export default function AddRestaurantButton() {
+  const currentLocation = useSignal();
   const {
     handleSubmit,
     register,
@@ -121,6 +122,7 @@ export default function AddRestaurantButton() {
                     type="text"
                     name="resLocation"
                     placeholder="Restaurant Location"
+                    value={currentLocation.value}
                     {...register("resLocation", {
                       required: "Please enter restaurant location",
                     })}
@@ -141,7 +143,7 @@ export default function AddRestaurantButton() {
               {showMap.value == true && (
                 <Col sm={12}>
                   <div style={{ transition: "all", direction: "2s" }}>
-                    <LeafletMap />
+                    <LeafletMap currentLocation={currentLocation} />
                   </div>
                 </Col>
               )}

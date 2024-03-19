@@ -1,9 +1,4 @@
-import { NavLink } from "react-bootstrap";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
-import ThemeController from "./ThemeController";
 import "./NavBarGlobal.scss";
 import { UserData } from "../../Globals";
 import LogoutButton from "../Authentication/LogoutButton";
@@ -12,11 +7,7 @@ import { apiClient } from "../../Data/apiclient";
 import PersonIcon from "../../Icons/PersonIcon";
 import HomeIcon from "../../Icons/HomeIcon";
 import DineMeLogo from "../../images/DineMeLogo.png";
-import { BsCartX } from "react-icons/bs";
 import { useSignal } from "@preact/signals-react";
-import CartModal from "./CartModal";
-import CustomModal from "../Prototypes/CustomModal";
-import AddIcon from "../../Icons/AddIcon";
 import CartHandler from "./CartHanlder";
 
 export default function NavbarGlobal() {
@@ -108,10 +99,8 @@ export default function NavbarGlobal() {
                           transform: "scale(1.5)",
                           padding: "0 0 5px 20px",
                         }}
-                      >
-                        
-                      </button>
-                        <CartHandler />
+                      ></button>
+                      <CartHandler />
 
                       <div className="spacer _24" />
                       <div className="spacer _16" />

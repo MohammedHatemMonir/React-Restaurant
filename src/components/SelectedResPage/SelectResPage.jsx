@@ -1,4 +1,3 @@
-import React from "react";
 import { useQuery } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 import LocationDotIcon from "../../Icons/LocationDotIcon";
@@ -8,10 +7,12 @@ import { Container, Row, Col } from "react-bootstrap";
 import RightArrowIcon from "../../Icons/RightArrowIcon";
 import CommentBox from "./CommentBox";
 import { useParams } from "react-router-dom";
-import CardBox from "./CardBox";
 import { Cart, UserData } from "../../Globals";
 import AddMealButton from "./new/AddMealButton";
-
+import { useSignal } from "@preact/signals-react";
+import CustomModal from "./../Prototypes/CustomModal";
+import MealDetailsModal from "./MealDetailsModal";
+import React, { useState } from "react";
 export default function SelectResPage() {
   const { resID, resName } = useParams();
   console.log("resID", resID);
@@ -88,7 +89,7 @@ export default function SelectResPage() {
                         </div>
                         <ul
                           className="cuisines-list h-dots-list"
-                          style={{ marginTop: "8px", }}
+                          style={{ marginTop: "8px" }}
                         >
                           <li
                             className="list-item"
@@ -190,21 +191,6 @@ export default function SelectResPage() {
                   </li>
                 </ul>
               </div>
-
-              {/* <div className="info-items-group">
-                <span className="info-item positive">
-                  <span className="icon info-icon">
-                    <Day2DayIcon />
-                  </span>
-                </span>
-
-                <div className="info-item text-center d-flex">
-                  <div className="icon info-icon">
-                    <ClockIcon />
-                  </div>
-                  <p className=""> 12:00 PM 02:00 AM</p>
-                </div>
-              </div> */}
             </Col>
           </Row>
 
@@ -386,28 +372,50 @@ export default function SelectResPage() {
   );
 }
 
-function TempMealCard({ id, name, desc, price, mealImg, rating, resID, resName}) {
-
-
-console.log("meal: " + id + "  "+ name)
-    function AddToCart() {
-
-      if(Cart.value.ResId != resID){
-        console.log("ID NOT EQUAL")
-        Cart.value.ResId = resID;
-        Cart.value.ResName = resName;
-        Cart.value.meals = [];
-        }
-
-        if(!Cart.value.meals.some((meal) => meal.id == id? meal.quantity += 1: false)){
-          console.log("meal not found")
-          Cart.value.meals.push({id:id, name:name, mealImg:mealImg,rating: rating,desc:desc, price: price, quantity:1});
-        }
-
-        console.log("Cart", Cart.value);
+function TempMealCard({
+  id,
+  name,
+  desc,
+  price,
+  mealImg,
+  rating,
+  resID,
+  resName,
+}) {
+  console.log("meal: " + id + "  " + name);
+  function AddToCart() {
+    if (Cart.value.ResId != resID) {
+      console.log("ID NOT EQUAL");
+      Cart.value.ResId = resID;
+      Cart.value.ResName = resName;
+      Cart.value.meals = [];
     }
+
+    if (
+      !Cart.value.meals.some((meal) =>
+        meal.id == id ? (meal.quantity += 1) : false
+      )
+    ) {
+      console.log("meal not found");
+      Cart.value.meals.push({
+        id: id,
+        name: name,
+        mealImg: mealImg,
+        rating: rating,
+        desc: desc,
+        price: price,
+        quantity: 1,
+      });
+    }
+    console.log("Cart", Cart.value);
+  }
+  const showModal = useSignal(false);
+  function handleClose() {
+    showModal.value = false;
+  }
   return (
     <div
+      onClick={() => (showModal.value = true)}
       style={{
         backgroundColor: "#fff",
         boxShadow:
@@ -420,6 +428,13 @@ console.log("meal: " + id + "  "+ name)
       }}
       className="meal-card"
     >
+      {/* Modal Here */}
+
+      <MealDetailsModal showModal={showModal.value} closeModal={handleClose} />
+
+      {/* <div style={{ width: "100%", height: "100%" }}>
+        <CustomModal />
+      </div> */}
       {/* Meal Img */}
       <img
         src={mealImg}

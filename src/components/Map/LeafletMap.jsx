@@ -76,7 +76,7 @@ function LeafletMap({
 
   return (
     <div>
-      <h1 className="text-center font-weight-bold p-2">Leaflet Map</h1>
+      {/* <h1 className="text-center font-weight-bold p-2">Leaflet Map</h1> */}
       {isLoading.value ? (
         <MapLoader />
       ) : (
