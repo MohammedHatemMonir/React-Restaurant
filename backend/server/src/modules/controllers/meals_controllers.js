@@ -97,35 +97,62 @@ const addNewmeal = async (req, res) => { //{MealName:"",MealImg:"",Description:"
 // Create Order in specific restaurant
 const createOrder = async (req, res) => {
   try {
-
-
+    const restaurantId = req.body.resId;
     const newOrderMeals = Promise.all(
       req.body.meals.map(async (meal) => {
+        // console.log(req.body.meals);
+        // let orderMeals = new Order({
+        //   meals.id: meal.id,
+        //   meals.quantity: meal.quantity,
+        // });
+
+        // let mealObject = {
+        //   id: meal.id,
+        //   quantity: meal.quantity
+        // };
+
         let orderMeals = new OrderMeals({
           id: meal.id,
-          name: meal.name,
+          // name: meal.name,
           quantity: meal.quantity,
         });
 
+        // console.log(orderMeals);
+
+        // const mealPriceFunc = async() => {
+        //
+        //   const mealPrice = await meal.findById(meal.id).populate("Price");
+        //
+        //   if (!mealPrice) {
+        //     return res.status(404).json({ message: "Order meal price not found" });
+        //   }
+        //
+
+        //   const mealPrices = mealPrice.Price * meal.quantity;
+
+        //   return mealPrices;
+        // }
+
         orderMeals = await orderMeals.save();
-        return orderMeals._id;
+        return orderMeals;
       })
     );
 
-    const restaurantId = req.body.ResId;
-    const orderMealsIdsResolved = await newOrderMeals; // This is an array include ids of meals
+    const orderMealsIdsResolved = await newOrderMeals;
+    // console.log(orderMealsIdsResolved);
+    // console.log("mealsIds", orderMealsIdsResolved);
 
-    if (
-      !restaurantId ||
-      !orderMealsIdsResolved ||
-      !orderMealsIdsResolved.length
-    ) {
-      return res
-        .status(400)
-        .json({
-          message: "Missing required fields (restaurantId, orderMealsIds)",
-        });
-    }
+    // if (
+    //   !restaurantId ||
+    //   !orderMealsIdsResolved ||
+    //   !orderMealsIdsResolved.length
+    // ) {
+    //   return res
+    //     .status(400)
+    //     .json({
+    //       message: "Missing required fields (restaurantId, orderMealsIds)",
+    //     });
+    // }
 
     // Find the restaurant
     const restaurant = await resturant.findById(restaurantId);
@@ -144,43 +171,124 @@ const createOrder = async (req, res) => {
     // if(validMeals.length !== mealIds.length){
     //   return res.status(400).json({ message: "Invalid meal IDs provided"});
     // }
+    //
 
+    let orderMealsIds = Promise.all(
+      req.body.meals.map(async (meal) => {
+        let orderMeals = new OrderMeals({
+          id: meal.id,
+          // name: meal.name,
+          quantity: meal.quantity,
+        });
+
+        orderMeals = await orderMeals.save();
+        return orderMeals.id;
+      })
+    );
+
+    orderMealsIds = await orderMealsIds;
+
+    // try {
     const totalPrices = await Promise.all(
       orderMealsIdsResolved.map(async (mealIds) => {
+        // let meal = {
+        //   meals: mealIds
+        // };
+        //
+
+        //   let mealObject = {
+        //   id: meal.id,
+        //   quantity: meal.quantity
+        // };
+
+        // let meal = new Order({
+        //   meals: mealIds,
+        // })
         const orderMeals = await OrderMeals.findById(mealIds).populate(
           "id",
           "Price"
+
+          // path: "meals.id",
+          // "Price",
+
+          // "id",
+          // "Price"
         );
+        // console.log("OrderMeals", orderMeals);
         if (!orderMeals) {
           return res.status(404).json({ message: "Order meal not found" });
         }
-        const totalPrice = orderMeals.id.Price * orderMeals.quantity;
-
+        // const meal = orderMeals.meals;
+        // if(!meal) {
+        //   return res.status(404).json({ message: "Meal not found" });
+        // }
+        // const meal = orderMeals.meals.find(m => m.id.toString() === mealIds.id.toString());
+        // if (!meal) {
+        //   return res.status(404).json({ message: "Meal not found" });
+        // }
+        // const totalPrice = orderMeals.id.Price * orderMeals.quantity;
+        const totalPrice = orderMeals.id.Price * mealIds.quantity;
+        // console.log("totalPrice", totalPrice);
         return totalPrice;
       })
     );
+    // }
+    //  catch(error) {
+    //   console.error("Error calculating total price:", error);
+    //   return res.status(500).json({ message: "Internal server error" });
+    // }
 
     const totalPrice = totalPrices.reduce((acc, meal) => acc + meal, 0);
 
     // Create a new order
     let newOrder = new Order({
       resId: restaurantId,
-      meals: orderMealsIdsResolved,
+      meals: req.body.meals
+        .map((meal) => ({
+          id: meal.id,
+          quantity: meal.quantity,
+        }))
+        .filter((meal) => meal.id !== null),
       // userId: req.user?.id,
       totalPrice: totalPrice,
       // user: req.session.user._id,
       // user: req.body.user
     });
 
+    // const f = await OrderMeals.find({newOrder}, {_id: 0});
+    // console.log("findFunction", f);
+
+    // console.log(newOrder);
+
     // Save the order
-    newOrder = await newOrder.save();
+    const savedOrder = await newOrder.save();
+
+    const responseMeals = savedOrder.meals.map((meal) => ({
+      id: meal.id,
+      quantity: meal.quantity,
+    }));
 
     if (!newOrder) {
       return res.status(400).send("The order cannot be created!");
     }
-    res
-      .status(201)
-      .json({ message: "Order created successfully", order: newOrder });
+    // const f = await OrderMeals.findOne({_id});
+    // console.log(f);
+    // res
+    // .status(201)
+    // // .json({ message: "Order created successfully", order: newOrder });
+    //
+
+    res.status(201).json({
+      message: "Order created successfully",
+      order: {
+        resId: savedOrder.resId,
+        meals: responseMeals,
+        totalPrice: savedOrder.totalPrice,
+        status: savedOrder.status,
+        _id: savedOrder._id,
+        dateOrdered: savedOrder.dateOrdered,
+      },
+    });
   } catch (err) {
     console.error("Error crearting Order: ", err);
     res.status(500).json({ message: "Error creating order" });
