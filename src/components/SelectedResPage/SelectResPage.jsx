@@ -413,7 +413,6 @@ function TempMealCard({
   }
   return (
     <div
-      onClick={() => (displayModal.value = true)}
       style={{
         backgroundColor: "#fff",
         boxShadow:
@@ -426,18 +425,9 @@ function TempMealCard({
       }}
       className="meal-card"
     >
-      {/* Modal Here */}
-      (
-      <MealDetailsModal
-        openModal={displayModal.value}
-        closeModal={handleClose}
-      />
-      )
-      {/* <div style={{ width: "100%", height: "100%" }}>
-        <CustomModal />
-      </div> */}
       {/* Meal Img */}
       <img
+        onClick={() => (displayModal.value = true)}
         src={mealImg}
         alt={mealImg}
         style={{
@@ -449,6 +439,15 @@ function TempMealCard({
         className="meal-card__image"
       />
       <div style={{ padding: "1rem" }} className="meal-card__content">
+        {/* Modal Here */}
+        <MealDetailsModal
+          openModal={displayModal.value}
+          closeModal={handleClose}
+          mealName={name}
+          mealDesc={desc}
+          mealImg={mealImg}
+          mealPrice={price}
+        />
         <h3
           style={{
             fontSize: "1.125rem",

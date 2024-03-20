@@ -1,7 +1,15 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import { AiOutlineLike } from "react-icons/ai";
 
-function MealDetailsModal({ openModal, closeModal }) {
+function MealDetailsModal({
+  openModal,
+  closeModal,
+  mealName,
+  mealDesc,
+  mealImg,
+  mealPrice,
+}) {
   const MyVerticallyCenteredModal = () => (
     <Modal
       show={openModal}
@@ -11,7 +19,10 @@ function MealDetailsModal({ openModal, closeModal }) {
       centered
     >
       <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
+        <Modal.Title
+          id="contained-modal-title-vcenter"
+          className="font-weight-bold"
+        >
           Meal Details
         </Modal.Title>
       </Modal.Header>
@@ -30,24 +41,15 @@ function MealDetailsModal({ openModal, closeModal }) {
             </button>
             <div className="image image-ratio ratio-dish-cover">
               <div className="ratio-content">
-                <img
-                  src="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/04234959-eccc-4c09-bf71-3c3b0ea3d36b.jpg"
-                  alt="Classic Nachos"
-                  className="v-center"
-                />
+                <img src={mealImg} alt={mealImg} className="v-center" />
               </div>
             </div>
           </div>
           <div className="modal-body">
-   
-            
             <div className="item-header">
-              <h3 className="title">Classic Nachos</h3>
+              <h3 className="title font-weight-bold">{mealName}</h3>
             </div>
-            <p className="item-description">
-              12 pieces of tortilla bread with mix cheese, mashed black beans,
-              queso and jalapenos, served with sour cream and pico salad
-            </p>
+            <p className="item-description ">{mealDesc}</p>
             <div className="item-actions">
               <div className="reactions">
                 <button
@@ -56,26 +58,24 @@ function MealDetailsModal({ openModal, closeModal }) {
                   className="action-btn reaction-btn like-btn"
                 >
                   <span className="icon">
-                    <svg viewBox="0 0 25 25">
-                      <use xlinkHref="#like" />
-                    </svg>
+                    <AiOutlineLike />
                   </span>
-                  <span className="count">323</span>
+                  <span className="count"> 323</span>
                 </button>
               </div>
-              <div className="item-sizes">
+              <div className="item-sizes ">
                 <ul className="sizes-list custom-radio-group">
                   <li className="size">
                     <label className="size-option toggle-active custom-radio-holder active">
-                      <p className="input-label">Regular</p>
+                      <p className="input-label font-weight-bold">Regular</p>
                     </label>
-                    <div className="price pull-right">
-                      <span className="cost"> 258.93</span>
-                      <span className="currency">EGP</span>
+                    <div className="price pull-right font-weight-bold">
+                      <span className="cost text-danger"> {mealPrice}</span>
+                      <span className="currency"> EGP</span>
                     </div>
                   </li>
                 </ul>
-              </div>{" "}
+              </div>
             </div>
           </div>
         </div>
