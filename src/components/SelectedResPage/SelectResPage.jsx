@@ -10,9 +10,7 @@ import { useParams } from "react-router-dom";
 import { Cart, UserData } from "../../Globals";
 import AddMealButton from "./new/AddMealButton";
 import { useSignal } from "@preact/signals-react";
-import CustomModal from "./../Prototypes/CustomModal";
 import MealDetailsModal from "./MealDetailsModal";
-import React, { useState } from "react";
 export default function SelectResPage() {
   const { resID, resName } = useParams();
   console.log("resID", resID);
@@ -409,13 +407,13 @@ function TempMealCard({
     }
     console.log("Cart", Cart.value);
   }
-  const showModal = useSignal(false);
+  const displayModal = useSignal(false);
   function handleClose() {
-    showModal.value = false;
+    displayModal.value = false;
   }
   return (
     <div
-      onClick={() => (showModal.value = true)}
+      onClick={() => (displayModal.value = true)}
       style={{
         backgroundColor: "#fff",
         boxShadow:
@@ -429,9 +427,12 @@ function TempMealCard({
       className="meal-card"
     >
       {/* Modal Here */}
-
-      <MealDetailsModal showModal={showModal.value} closeModal={handleClose} />
-
+      (
+      <MealDetailsModal
+        openModal={displayModal.value}
+        closeModal={handleClose}
+      />
+      )
       {/* <div style={{ width: "100%", height: "100%" }}>
         <CustomModal />
       </div> */}
