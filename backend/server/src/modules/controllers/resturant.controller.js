@@ -24,15 +24,18 @@ const getAllresturant = async (req, res) => {
     }
 }
 
-const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery}
+const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResBanner} Remove validation of .png,add banner to database ,Upload image from request body
     try {
-        if (req.session.user.role == "user")
+        if (req.session.user.role != "ADMIN")
             return res.status(400).json({ errors: "Not Authenticated" });
 
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
+
+         const resImgUrl = await uploadImage(req.body.ResImg);
+         const resBannerUrl = await uploadImage(req.body.ResBanner);
 
         const restaurantname = req.body.ResName;
         const restaurants = await restaurant.find({ ResName: restaurantname });
