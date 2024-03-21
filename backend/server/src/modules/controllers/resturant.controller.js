@@ -1,7 +1,7 @@
 const restaurant = require("../../database/models/resturant.Model");
 const { validationResult } = require("express-validator");
 const meal = require("../../database/models/Meals_model");
-const uploadImage = require('../../utils/uploadImg.js');
+const uploadImg = require('../../utils/uploadImg.js');
 
 const getResturantWithMeals = async (req, res) => {
     try {
@@ -34,8 +34,8 @@ const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResB
             return res.status(400).json({ errors: errors.array() });
         }
 
-         const resImgUrl = await uploadImage(req.body.ResImg);
-         const resBannerUrl = await uploadImage(req.body.ResBanner);
+        //  const resImgUrl = await uploadImage(req.body.ResImg);
+        //  const resBannerUrl = await uploadImage(req.body.ResBanner);
 
         const restaurantname = req.body.ResName;
         const restaurants = await restaurant.find({ ResName: restaurantname });
@@ -43,12 +43,13 @@ const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResB
             const rating = 0;
             const Meals_num = 0;
             const comment_num = 0;
-
-            uploadImage(req, res, async () => {
+            const ResImg = await uploadImg(req.body.ResImg);
+            const ResBanner= await uploadImg(req.body.ResBanner);
                 try {
                     const newRestaurantData = {
                         ResName: req.body.ResName,
-                        ResImg: req.imageURL, 
+                        ResImg: ResImg, 
+                        ResImg: ResBanner, 
                         Categoery: req.body.Categoery,
                         rating: rating,
                         comment_num: comment_num,
@@ -61,7 +62,7 @@ const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResB
                     console.error('Error creating new restaurant:', error);
                     res.status(500).json({ error: 'Server error while adding new restaurant' });
                 }
-            });
+
         } else {
             res.send("Restaurant already exists");
         }

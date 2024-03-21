@@ -9,6 +9,10 @@ const resturantSchema=mongoose.Schema({
         type:String,
         require:[true,"Enter resturant ResImg"]
     },
+    ResBanner:{
+        type:String,
+        require:[true,"Enter resturant ResBannar"]
+    },
     Categoery:{
         type:String,
         require:[true,"Enter resturant Categoery"]
