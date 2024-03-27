@@ -5,7 +5,7 @@ const Edit = () => {
   return (
     <div className="edit-profile">
       <div className="container form__wrapper">
-        <h2>Edit Your Profile</h2>
+        <h2 className="font-weight-bold">Edit Your Profile</h2>
         <form id="myForm">
           <div className="form-row">
             <div className="form-group col-md-6">
@@ -39,10 +39,10 @@ const Edit = () => {
             <input
               name="email"
               type="email"
+              id="email"
               className="form-control"
               placeholder="dineMe@example.com"
               required
-              id="email"
             />
             <br />
             <div className="form-group">

@@ -24,6 +24,7 @@ import CircleLoader from "../Loaders/CircleLoader";
 import CookingLoader from './../Loaders/CookingLoader';
 import MapLoader from './../Loaders/MapLoader';
 import Edit from './../Profile/Edit';
+import Profile from './../Profile/Profile';
 
 export default function TheRouter() {
   const navigate = useNavigate();
@@ -105,6 +106,7 @@ export default function TheRouter() {
             <Route path="/map" element={<LeafletMap />}></Route>
             <Route path="/googlemap" element={<GoogleMaps />}></Route>
             <Route path="/maploader" element={<MapLoader />}></Route>
+            <Route path="/profile" element={<Profile />}></Route>
             <Route path="/edit" element={<Edit />}></Route>
 
             <Route path="/tutorials" element={<Tutorials />}>
