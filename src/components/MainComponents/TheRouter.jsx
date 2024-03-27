@@ -23,6 +23,7 @@ import GoogleMaps from './../Map/GoogleMaps';
 import CircleLoader from "../Loaders/CircleLoader";
 import CookingLoader from './../Loaders/CookingLoader';
 import MapLoader from './../Loaders/MapLoader';
+import Edit from './../Profile/Edit';
 
 export default function TheRouter() {
   const navigate = useNavigate();
@@ -99,11 +100,12 @@ export default function TheRouter() {
               element={<SelectResPage />}
             ></Route>
 
-            <Route path="cooking" element={<CookingLoader />}></Route>
-            <Route path="circle" element={<CircleLoader />}></Route>
-            <Route path="map" element={<LeafletMap />}></Route>
-            <Route path="googlemap" element={<GoogleMaps />}></Route>
-            <Route path="maploader" element={<MapLoader />}></Route>
+            <Route path="/cooking" element={<CookingLoader />}></Route>
+            <Route path="/circle" element={<CircleLoader />}></Route>
+            <Route path="/map" element={<LeafletMap />}></Route>
+            <Route path="/googlemap" element={<GoogleMaps />}></Route>
+            <Route path="/maploader" element={<MapLoader />}></Route>
+            <Route path="/edit" element={<Edit />}></Route>
 
             <Route path="/tutorials" element={<Tutorials />}>
               <Route path="Medotest" element={<MedoTest />}></Route>
