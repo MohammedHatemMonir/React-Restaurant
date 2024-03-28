@@ -10,9 +10,9 @@ const OrdersTable = () => {
           <thead className="thead-dark">
             <tr>
               <th>Order ID</th>
-              <th>Customer Name</th>
+              <th>Restaurant Name</th>
               <th>Product Name</th>
-              <th>Meal Image</th>
+              {/* <th>Meal Image</th> */}
               <th>Quantity</th>
               <th>Total Price</th>
               <th>Order Status</th>
@@ -24,14 +24,14 @@ const OrdersTable = () => {
                 <td>{order.id}</td>
                 <td>{order.customerName}</td>
                 <td>{order.productName}</td>
-                <td>
+                {/* <td>
                   <img
                     src={order.mealImage}
                     alt="Meal"
                     className="img-thumbnail"
                     style={{ maxWidth: "100px", maxHeight: "100px" }}
                   />
-                </td>
+                </td> */}
                 <td>{order.quantity}</td>
                 <td>${order.totalPrice.toFixed(2)}</td>
                 <td>{order.orderStatus}</td>

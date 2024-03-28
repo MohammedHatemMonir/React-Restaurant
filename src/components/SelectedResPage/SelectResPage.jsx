@@ -16,9 +16,9 @@ export default function SelectResPage() {
   console.log("resID", resID);
 
   const q = useQuery({
-    queryKey: [],
+    queryKey: [resID],
 
-    // cacheTime: 60000,
+    cacheTime: 60000,
     // staleTime: 60000,
     queryFn: async () => {
       let url = `/getResturantWithMeals/${resID}`;
