@@ -37,7 +37,7 @@ export default function SelectResPage() {
         <div className="restaurant-cover active-on-menu-tab  menu-tab-activated">
           {/* Banner Img */}
           <img
-            src="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/e7a942a5-9893-4587-8ece-07b967e44745.jpg"
+            src={q.data?.data?.restaurant?.ResBanner}
             alt="cover photo"
           />
         </div>
@@ -50,7 +50,7 @@ export default function SelectResPage() {
                   {/* Res Image */}
                   <img
                     src={q.data?.data?.restaurant?.ResImg}
-                    alt={q.data?.data?.restaurant?.ResImg}
+                    alt={q.data?.data?.restaurant?.ResName}
                     className="v-center"
                   />
                 </div>

@@ -26,6 +26,7 @@ const getAllresturant = async (req, res) => {
 
 const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResBanner} Remove validation of .png,add banner to database ,Upload image from request body
     try {
+        console.log("Get all res started, body:", req.body)
         if (req.session.user.role != "ADMIN")
             return res.status(400).json({ errors: "Not Authenticated" });
 

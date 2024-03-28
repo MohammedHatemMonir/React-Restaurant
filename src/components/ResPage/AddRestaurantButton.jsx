@@ -31,7 +31,7 @@ export default function AddRestaurantButton() {
       console.log("trying to load");
       let url = "/Addresturant";
       console.log("posting to ", url);
-      return await apiClient.post(url, {params});
+      return await apiClient.post(url, params);
     },
   });
 

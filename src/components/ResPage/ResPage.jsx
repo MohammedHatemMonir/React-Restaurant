@@ -108,6 +108,7 @@ export default function ResPage() {
                                   key={index}
                                   id={data._id}
                                   name={data.ResName}
+                                  img={data.ResImg}
                                   start1={data.rating}
                                 />
                               );
@@ -126,7 +127,7 @@ export default function ResPage() {
     );
 }
 
-function ResCard({ id, name, start1 }) {
+function ResCard({ id, name, start1, img }) {
   return (
     <>
       <Link
@@ -135,7 +136,7 @@ function ResCard({ id, name, start1 }) {
       >
         <div className="card-inner">
           <img
-            src="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/92edf264-8a29-4efb-997a-ca2fdf9b3a92.jpg"
+            src={img ||`https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/92edf264-8a29-4efb-997a-ca2fdf9b3a92.jpg`}
             alt=""
             style={{ width: "100%" }}
           />
