@@ -1,0 +1,57 @@
+[
+    {
+      "id": 1,
+      "customerName": "John Doe",
+      "productName": "Product A",
+      "mealImage": "url_to_your_image1.jpg",
+      "quantity": 2,
+      "totalPrice": 25.99,
+      "orderStatus": "In Progress"
+    },
+    {
+      "id": 2,
+      "customerName": "Jane Smith",
+      "productName": "Product B",
+      "mealImage": "url_to_your_image2.jpg",
+      "quantity": 1,
+      "totalPrice": 15.49,
+      "orderStatus": "Delivered"
+    },
+    {
+      "id": 3,
+      "customerName": "Michael Johnson",
+      "productName": "Product C",
+      "mealImage": "url_to_your_image3.jpg",
+      "quantity": 3,
+      "totalPrice": 35.75,
+      "orderStatus": "Pending"
+    },
+    {
+      "id": 4,
+      "customerName": "Alice Brown",
+      "productName": "Product D",
+      "mealImage": "url_to_your_image4.jpg",
+      "quantity": 1,
+      "totalPrice": 19.99,
+      "orderStatus": "Shipped"
+    },
+    {
+      "id": 5,
+      "customerName": "David Wilson",
+      "productName": "Product E",
+      "mealImage": "url_to_your_image5.jpg",
+      "quantity": 2,
+      "totalPrice": 30.50,
+      "orderStatus": "Cancelled"
+    },
+    {
+      "id": 6,
+      "customerName": "Emily Taylor",
+      "productName": "Product F",
+      "mealImage": "url_to_your_image6.jpg",
+      "quantity": 1,
+      "totalPrice": 12.75,
+      "orderStatus": "Pending"
+    }
+  ]
+  
