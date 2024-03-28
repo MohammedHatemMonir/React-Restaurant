@@ -19,12 +19,13 @@ import { UserData } from "../../Globals";
 import { useQuery } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 import LeafletMap from "./../Map/LeafletMap";
-import GoogleMaps from './../Map/GoogleMaps';
+import GoogleMaps from "./../Map/GoogleMaps";
 import CircleLoader from "../Loaders/CircleLoader";
-import CookingLoader from './../Loaders/CookingLoader';
-import MapLoader from './../Loaders/MapLoader';
-import Edit from './../Profile/Edit';
-import Profile from './../Profile/Profile';
+import CookingLoader from "./../Loaders/CookingLoader";
+import MapLoader from "./../Loaders/MapLoader";
+import Edit from "./../Profile/Edit";
+import Profile from "./../Profile/Profile";
+import OrdersPage from './../Orders/OrdersPage';
 
 export default function TheRouter() {
   const navigate = useNavigate();
@@ -92,7 +93,6 @@ export default function TheRouter() {
         {UserData.value.loggedIn && (
           <Route path="/" element={<DefaultLayout />}>
             <Route index element={<ResPage />} />
-
             <Route path="card" element={<Card />}></Route>
             <Route path="dash1" element={<Dashboard1 />}></Route>
             <Route path="dash2" element={<Dashboard2 />}></Route>
@@ -100,15 +100,14 @@ export default function TheRouter() {
               path="/restaurant/:resID/:resName"
               element={<SelectResPage />}
             ></Route>
-
             <Route path="/cooking" element={<CookingLoader />}></Route>
             <Route path="/circle" element={<CircleLoader />}></Route>
             <Route path="/map" element={<LeafletMap />}></Route>
             <Route path="/googlemap" element={<GoogleMaps />}></Route>
             <Route path="/maploader" element={<MapLoader />}></Route>
             <Route path="/profile" element={<Profile />}></Route>
-            <Route path="/edit" element={<Edit />}></Route>
-
+            <Route path="/edit" element={<Edit />}></Route>{" "}
+            <Route path="/orders" element={<OrdersPage />}></Route>
             <Route path="/tutorials" element={<Tutorials />}>
               <Route path="Medotest" element={<MedoTest />}></Route>
               <Route path="Hema" element={<HemaTest />}></Route>
