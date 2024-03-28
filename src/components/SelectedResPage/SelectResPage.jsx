@@ -380,7 +380,6 @@ function TempMealCard({
   resID,
   resName,
 }) {
-  console.log("meal: " + id + "  " + name);
   function AddToCart() {
     if (Cart.value.ResId != resID) {
       console.log("ID NOT EQUAL");
