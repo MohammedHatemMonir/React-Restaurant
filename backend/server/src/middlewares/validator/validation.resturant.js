@@ -4,7 +4,7 @@ const validateResturantInput = [
         .not().isEmpty().withMessage('Restaurant name is required')
         .isLength({ min: 2 }).withMessage('Restaurant name must be at least 2 characters long'),
 
-    check('ResImg')
+    check('resImg')
         .notEmpty().withMessage('Restaurant image URL is required'),
         // .custom((value, { req }) => {
             

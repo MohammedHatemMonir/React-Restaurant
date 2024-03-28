@@ -6,6 +6,9 @@ import { useForm } from "react-hook-form";
 import { signal, useSignal } from "@preact/signals-react";
 import LeafletMap from "./../Map/LeafletMap";
 import { Button } from "reactstrap";
+import { convertBase64 } from "../../Globals";
+import { useMutation } from "react-query";
+import { apiClient } from "../../Data/apiclient";
 
 export default function AddRestaurantButton() {
   const currentLocation = useSignal();
@@ -18,12 +21,39 @@ export default function AddRestaurantButton() {
 
   const ShowSignal = useSignal();
 
-  function submit(data) {
-    console.log("submit!");
-    //Handle add restaurant logic here
+  const m = useMutation({
+    mutationKey: [],
+    // cacheTime: 600000,
+    // onSuccess: onSuccess,
+    // onError: onError,
+    mutationFn: async (params) => {
 
+      console.log("trying to load");
+      let url = "/Addresturant";
+      console.log("posting to ", url);
+      return await apiClient.post(url, {params});
+    },
+  });
+
+  async function submit(data) {
+
+    // console.log("submit! ADD RESTAURANT", data);
+    const resImg64 =  await convertBase64(data.resImg[0]);
+    const resBanner64 =  await convertBase64(data.resBanner[0]);
+  
+
+    data.resImg = resImg64;
+    data.resBanner = resBanner64;
+
+    console.log("NEW DATA", data)
+
+    const ret = await m.mutateAsync(data);
+    //Handle add restaurant logic herea
+    
+    if(ret){
     ShowSignal.value = false;
     reset();
+    }
   }
   const showMap = useSignal(false);
   const myBtn = useSignal(true);

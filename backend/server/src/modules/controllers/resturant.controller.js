@@ -29,10 +29,10 @@ const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResB
         if (req.session.user.role != "ADMIN")
             return res.status(400).json({ errors: "Not Authenticated" });
 
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
-        }
+        // const errors = validationResult(req);
+        // if (!errors.isEmpty()) {
+        //     return res.status(400).json({ errors: errors.array() });
+        // }
 
         //  const resImgUrl = await uploadImage(req.body.ResImg);
         //  const resBannerUrl = await uploadImage(req.body.ResBanner);
@@ -43,17 +43,19 @@ const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResB
             const rating = 0;
             const Meals_num = 0;
             const comment_num = 0;
-            const ResImg = await uploadImg(req.body.ResImg);
-            const ResBanner= await uploadImg(req.body.ResBanner);
+            console.log("Upload image here")
+            const ResImg = await uploadImg(req.body.resImg);
+            console.log("ResImg", ResImg)
+            const ResBanner= await uploadImg(req.body.resBanner);
+            console.log("ResBanner", ResBanner)
                 try {
                     const newRestaurantData = {
                         ResName: req.body.ResName,
                         ResImg: ResImg, 
-                        ResImg: ResBanner, 
+                        ResBanner: ResBanner, 
                         Categoery: req.body.Categoery,
                         rating: rating,
                         comment_num: comment_num,
-                        
                         creation_date: Date.now()
                     };
                     const newRestaurant = await restaurant.create(newRestaurantData);
