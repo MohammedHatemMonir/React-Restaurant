@@ -35,6 +35,17 @@ const Edit = () => {
           </div>
           {/* /form-row */}
           <div className="form-group">
+              <label htmlFor="my-img">Profile Image</label>
+              <input
+                name="user-image"
+                type="file"
+                className="form-control"
+                id="my-img"
+                placeholder="Last name"
+                required
+              />
+            </div>
+          <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
               name="email"
