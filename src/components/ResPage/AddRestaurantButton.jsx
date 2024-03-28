@@ -48,6 +48,22 @@ export default function AddRestaurantButton() {
         <>
           <Form>
             <Row>
+            <Col sm={12}>
+              <Form.Group className="mb-2 mb-sm-0">
+                  <Form.Label>Search user</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="search-user"
+                    placeholder="Search User"
+                    {...register("search-user", {
+                      required: "Please enter user name to search",
+                    })}
+                  />
+                  <span className="error" style={{ color: "red" }}>
+                    {errors["search-user"] && errors["search-user"].message}
+                  </span>
+                </Form.Group>
+              </Col>
               <Col sm={6}>
                 <Form.Group className="mb-2 mb-sm-0">
                   <Form.Label>Name</Form.Label>
