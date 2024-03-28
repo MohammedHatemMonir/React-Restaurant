@@ -108,7 +108,8 @@ export default function ResPage() {
                                   key={index}
                                   id={data._id}
                                   name={data.ResName}
-                                  img={data.ResImg}
+                                  ResImg={data.ResImg}
+                                  MealImg={data.MealImg}
                                   start1={data.rating}
                                 />
                               );
@@ -127,7 +128,7 @@ export default function ResPage() {
     );
 }
 
-function ResCard({ id, name, start1, img }) {
+function ResCard({ id, name, start1, ResImg, MealImg }) {
   return (
     <>
       <Link
@@ -136,8 +137,8 @@ function ResCard({ id, name, start1, img }) {
       >
         <div className="card-inner">
           <img
-            src={img ||`https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/92edf264-8a29-4efb-997a-ca2fdf9b3a92.jpg`}
-            alt=""
+            src={MealImg ||`https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/92edf264-8a29-4efb-997a-ca2fdf9b3a92.jpg`}
+            alt={name}
             style={{ width: "100%" }}
           />
           <div className="card-content clickable-item">
@@ -167,11 +168,9 @@ function ResCard({ id, name, start1, img }) {
             <div className="rest-logo image-ratio ratio-square radius">
               <div className="ratio-content image-loading image-loaded">
                 <img
-                  alt="restaurant.data.name"
+                  alt={name}
                   className="b-lazy"
-                  data-src="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Thumbnail/15ecd61e-51fe-44be-9e09-46d6d6cd1f9e.jpg"
-                  src="https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Thumbnail/15ecd61e-51fe-44be-9e09-46d6d6cd1f9e.jpg"
-                  lazy="loaded"
+                  src={ ResImg||`https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Thumbnail/15ecd61e-51fe-44be-9e09-46d6d6cd1f9e.jpg`}
                 />
               </div>
             </div>
