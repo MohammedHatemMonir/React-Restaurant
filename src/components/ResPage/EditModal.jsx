@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { useSignal } from "@preact/signals-react";
 import LeafletMap from "./../Map/LeafletMap";
 
-function EditModal({ openModal, closeModal }) {
+function EditModal({ openModal, closeModal ,resName}) {
   const currentLocation = useSignal();
   const showMap = useSignal(false);
   const myBtn = useSignal(true);
@@ -44,6 +44,7 @@ function EditModal({ openModal, closeModal }) {
                 <Form.Control
                   type="text"
                   name="mealName"
+                  defaultValue={resName}
                   placeholder="Meal Name"
                   {...register("MealName", {
                     required: "Please add new restaurant name",

@@ -148,6 +148,7 @@ function ResCard({ id, name, start1, ResImg, MealImg }) {
       )}
       {showEditModal.value == true && (
         <EditModal
+          resName={name}
           openModal={() => (showEditModal.value = true)}
           closeModal={onCloseEdit}
         />

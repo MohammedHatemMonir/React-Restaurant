@@ -234,7 +234,10 @@ export default function NavbarGlobal() {
                         <Link className="ck cl cm cn co d4 c8 af bd ek el b1 ct cu cv cw cx">
                           <PersonIcon />
                           <div className="spacer _4" />
-                          {UserData.value.loggedIn && UserData.value.name}
+                          <Link to="/profile">
+                     
+                            {UserData.value.loggedIn && UserData.value.name}
+                          </Link>
                         </Link>
 
                         <div className="cy" />
