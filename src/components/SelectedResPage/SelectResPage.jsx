@@ -11,6 +11,7 @@ import { Cart, UserData } from "../../Globals";
 import AddMealButton from "./new/AddMealButton";
 import { useSignal } from "@preact/signals-react";
 import MealDetailsModal from "./MealDetailsModal";
+import ReviewsCard from './../Reviews/ReviewsCard';
 export default function SelectResPage() {
   const { resID, resName } = useParams();
   console.log("resID", resID);
@@ -32,7 +33,7 @@ export default function SelectResPage() {
   console.log("query data", q.data?.data);
 
   return (
-    <>
+    <div className="select-res-page">
       <div id="page-content restaurant-container" className="page-content">
         <div className="restaurant-cover active-on-menu-tab  menu-tab-activated">
           {/* Banner Img */}
@@ -334,7 +335,8 @@ export default function SelectResPage() {
                               {/* style={{ transform: "scale(0.9)" }} */}
                               <Col sm={4} style={{ transform: "scale(1)" }}>
                                 <CommentBox resID={resID} />
-                                <Reviews />
+                                {/* <Reviews /> */}
+                                <ReviewsCard />
                               </Col>
                             </Row>
                           </div>
@@ -349,7 +351,7 @@ export default function SelectResPage() {
         </div>
       </div>
       {/* </div> */}
-    </>
+    </div>
   );
 }
 

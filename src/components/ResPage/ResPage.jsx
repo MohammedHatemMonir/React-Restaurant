@@ -46,7 +46,7 @@ export default function ResPage() {
               ".vue-star-rating-star[data-v-34cbeed1]{display:inline-block}.vue-star-rating-pointer[data-v-34cbeed1]{cursor:pointer}.vue-star-rating[data-v-34cbeed1]{display:flex;align-items:center}.vue-star-rating-inline[data-v-34cbeed1]{display:inline-flex}.vue-star-rating-rating-text[data-v-34cbeed1]{margin-top:7px;margin-left:7px}.vue-star-rating-rtl[data-v-34cbeed1]{direction:rtl}.vue-star-rating-rtl .vue-star-rating-rating-text[data-v-34cbeed1]{margin-right:10px;direction:rtl}",
           }}
         />
-        <section>
+        <section className="select-res-page">
           <Slider />
           <Container style={{ width: "85%" }}>
             {/* <div className="bg-danger">
@@ -137,7 +137,10 @@ function ResCard({ id, name, start1, ResImg, MealImg }) {
       >
         <div className="card-inner">
           <img
-            src={MealImg ||`https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/92edf264-8a29-4efb-997a-ca2fdf9b3a92.jpg`}
+            src={
+              MealImg ||
+              `https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/92edf264-8a29-4efb-997a-ca2fdf9b3a92.jpg`
+            }
             alt={name}
             style={{ width: "100%" }}
           />
@@ -170,7 +173,10 @@ function ResCard({ id, name, start1, ResImg, MealImg }) {
                 <img
                   alt={name}
                   className="b-lazy"
-                  src={ ResImg||`https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Thumbnail/15ecd61e-51fe-44be-9e09-46d6d6cd1f9e.jpg`}
+                  src={
+                    ResImg ||
+                    `https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Thumbnail/15ecd61e-51fe-44be-9e09-46d6d6cd1f9e.jpg`
+                  }
                 />
               </div>
             </div>
