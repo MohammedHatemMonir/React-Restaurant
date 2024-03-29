@@ -23,7 +23,7 @@ const CommentBox = ({ resID }) => {
   };
 
   async function PostRestaurantComment(props) {
-    var j = { text: props.comment, ResID: props.resID };
+    var j = { text: comment.value, ResID: props.resID };
     try {
       await m.mutateAsync(j);
     } catch (e) {

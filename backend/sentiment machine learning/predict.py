@@ -17,8 +17,10 @@ loaded_model = tf.keras.models.load_model('backend/sentiment machine learning/an
 
 
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app, origins=['http://localhost:3000', 'http://localhost:5001'])
 
 def analyze_sentiment(text):
     # Your sentiment analysis logic using scikit-learn or other libraries
