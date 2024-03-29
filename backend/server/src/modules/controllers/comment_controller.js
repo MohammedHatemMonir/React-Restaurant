@@ -94,6 +94,10 @@ const analyze = async (req, res) => { //{text:"",mealid: ""}
 ///////////////////////////////////
 const res_comment = async (req, res) => { // {text:"",ResID: "" }
   try {
+
+    // req.session.user._id
+
+
     const errors =validationResult(req)
     if(!errors.isEmpty()){
       res.status(400).json(errors.array())

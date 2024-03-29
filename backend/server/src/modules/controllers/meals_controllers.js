@@ -97,7 +97,10 @@ const addNewmeal = async (req, res) => { //{MealName:"",MealImg:"",Description:"
 // Create Order in specific restaurant
 const createOrder = async (req, res) => {
   try {
-    const restaurantId = req.body.resId;
+
+    // req.session.user._id
+
+    const restaurantId = req.body.ResId;
     const newOrderMeals = Promise.all(
       req.body.meals.map(async (meal) => {
         // console.log(req.body.meals);

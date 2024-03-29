@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useSignal } from "@preact/signals-react";
 import CustomModal from "./../../Prototypes/CustomModal";
 import AddIcon from "./../../../Icons/AddIcon";
+import { useMutation } from "react-query";
 
 export default function AddMealButton() {
   const {
@@ -14,6 +15,21 @@ export default function AddMealButton() {
   } = useForm();
 
   const ShowSignal = useSignal();
+
+
+  const m = useMutation({
+    mutationKey: [],
+    // cacheTime: 600000,
+    // onSuccess: onSuccess,
+    // onError: onError,
+    mutationFn: async (params) => {
+      console.log("trying to load");
+      let url = "/Addmeal";
+      console.log("posting to ", url);
+      return await apiClient.post(url, params);
+    },
+  });
+
 
   function submit(data) {
     console.log("submit!", data);

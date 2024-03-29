@@ -22,6 +22,7 @@ export default function CartHandler() {
 
   async function createOrder() {
     const result = await m.mutateAsync();
+    console.log("Created order",result);
   }
   return (
     <>
