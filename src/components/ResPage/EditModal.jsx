@@ -6,7 +6,11 @@ import { useForm } from "react-hook-form";
 import { useSignal } from "@preact/signals-react";
 import LeafletMap from "./../Map/LeafletMap";
 
-function EditModal({ openModal, closeModal ,resName}) {
+function EditModal({ openModal, closeModal, resName }) {
+  const {
+    register,
+    formState: { errors },
+  } = useForm();
   const currentLocation = useSignal();
   const showMap = useSignal(false);
   const myBtn = useSignal(true);
@@ -15,10 +19,7 @@ function EditModal({ openModal, closeModal ,resName}) {
     showMap.value = !showMap.value;
     myBtn.value = !myBtn.value;
   }
-  const {
-    register,
-    formState: { errors },
-  } = useForm();
+
   const MyVerticallyCenteredModal = () => (
     <Modal
       show={openModal}
@@ -43,6 +44,7 @@ function EditModal({ openModal, closeModal ,resName}) {
                 <Form.Label>New Name</Form.Label>
                 <Form.Control
                   type="text"
+                  s
                   name="mealName"
                   defaultValue={resName}
                   placeholder="Meal Name"

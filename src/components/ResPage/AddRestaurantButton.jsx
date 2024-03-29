@@ -12,6 +12,13 @@ import { apiClient } from "../../Data/apiclient";
 
 export default function AddRestaurantButton() {
   const currentLocation = useSignal();
+  const showMap = useSignal(false);
+  const myBtn = useSignal(true);
+
+  function handleBtnClick() {
+    showMap.value = !showMap.value;
+    myBtn.value = !myBtn.value;
+  }
   const {
     handleSubmit,
     register,
@@ -52,13 +59,7 @@ export default function AddRestaurantButton() {
       reset();
     }
   }
-  const showMap = useSignal(false);
-  const myBtn = useSignal(true);
 
-  function handleBtnClick() {
-    showMap.value = !showMap.value;
-    myBtn.value = !myBtn.value;
-  }
   return (
     <>
       <CustomModal
