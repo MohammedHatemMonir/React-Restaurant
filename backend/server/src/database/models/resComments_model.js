@@ -8,7 +8,11 @@ const rescommentSchema=mongoose.Schema({
         type:Array,
         require:[true,"Enter resturant ResImg"]
     },
-    ResID: { type: String, ref: 'meal' }
+    ResID: { type: String, ref: 'meal' },
+    user: {
+        type: mongoose.Schema.Types.ObjectId, ref: "user", required: true
+    }
+
     // MealID: { type: ObjectId, ref: 'meal' }
 })
 module.exports = mongoose.model('rescomment', rescommentSchema);

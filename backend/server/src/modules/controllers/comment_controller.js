@@ -26,11 +26,11 @@ const analyze = async (req, res) => { //{text:"",mealid: ""}
     const errors =validationResult(req)
     if(!errors.isEmpty()){
       res.status(400).json(errors.array())
-      
+
     }else{
         const mealid = req.body.mealid;
         const meals = await meal.find({_id:mealid});
-        if (!meals[0]) {        
+        if (!meals[0]) {
             res.send("STOP HACKING!!!");
           }else{
             const text= req.body.text
@@ -85,7 +85,7 @@ const analyze = async (req, res) => { //{text:"",mealid: ""}
             res.status(200).json({Comment:text,commentSentmint:result.sentiment,});
             ///////////////////////////////////////
         }
-    } 
+    }
 
   } catch (err) {
     res.status(400).json({ error: err });
@@ -101,11 +101,12 @@ const res_comment = async (req, res) => { // {text:"",ResID: "" }
     const errors =validationResult(req)
     if(!errors.isEmpty()){
       res.status(400).json(errors.array())
-      
+
     }else{
         const ResID = req.body.ResID;
+        const userId = req.session.user._id;
         const resturants= await resturant.find({_id:ResID});
-        if (!resturants[0]) {        
+        if (!resturants[0]) {
             res.send("STOP HACKING!!!");
         }else{
           const text= req.body.text
@@ -117,7 +118,9 @@ const res_comment = async (req, res) => { // {text:"",ResID: "" }
           const body = {
             Comment:text,
             commentSentmint:result.sentiment,
-            ResID:req.body.ResID}
+            ResID:req.body.ResID,
+            userId: userId
+          }
           const CommentS = new rescommentSchema(body);
           await CommentS.save();
           /////////////////////////////////////////
@@ -139,7 +142,7 @@ const res_comment = async (req, res) => { // {text:"",ResID: "" }
           res.status(200).json({Comment:text,commentSentmint:result.sentiment,});
           ///////////////////////////////////////
         }
-    } 
+    }
   } catch (err) {
     res.status(400).json({ error: err });
   }
