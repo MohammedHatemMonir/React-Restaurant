@@ -8,7 +8,7 @@ import { useMutation } from "react-query";
 import { convertBase64 } from "../../../Globals";
 import { apiClient } from "../../../Data/apiclient";
 
-export default function AddMealButton({Resid}) {
+export default function AddMealButton({ Resid }) {
   const {
     handleSubmit,
     register,
@@ -17,7 +17,6 @@ export default function AddMealButton({Resid}) {
   } = useForm();
 
   const ShowSignal = useSignal();
-
 
   const m = useMutation({
     mutationKey: [],
@@ -32,7 +31,6 @@ export default function AddMealButton({Resid}) {
     },
   });
 
-
   async function submit(data) {
     console.log("submit!", data);
 
@@ -43,8 +41,7 @@ export default function AddMealButton({Resid}) {
     console.log("added meal", result);
     //Handle add meals logic here
 
-
-    if(result){
+    if (result) {
       ShowSignal.value = false;
       reset();
     }

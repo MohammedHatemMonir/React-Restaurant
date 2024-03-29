@@ -16,6 +16,9 @@ import { Row } from "react-bootstrap";
 import { Col } from "react-bootstrap";
 import EditIcon from "./../../Icons/EditIcon";
 import DeleteIcon from "./../../Icons/DeleteIcon";
+import { useSignal } from "@preact/signals-react";
+import EditModal from "./EditModal";
+import DeleteModal from "./DeleteModal";
 
 export default function ResPage() {
   const q = useQuery({
@@ -113,8 +116,42 @@ export default function ResPage() {
 }
 
 function ResCard({ id, name, start1, ResImg, MealImg }) {
+  const showDelModal = useSignal(false);
+  const showEditModal = useSignal(false);
+
+  // Handle open and close popup modals
+  function onOpenDel(e) {
+    // e.stopPropagation();
+    e.preventDefault();
+    showDelModal.value = true;
+  }
+  function onOpenEdit(e) {
+    // e.stopPropagation();
+    e.preventDefault();
+    showEditModal.value = true;
+  }
+
+  function onCloseDel() {
+    showDelModal.value = false;
+  }
+  function onCloseEdit() {
+    showEditModal.value = false;
+  }
   return (
     <>
+      {showDelModal.value == true && (
+        <DeleteModal
+          resName={name}
+          openModal={() => (showDelModal.value = true)}
+          closeModal={onCloseDel}
+        />
+      )}
+      {showEditModal.value == true && (
+        <EditModal
+          openModal={() => (showEditModal.value = true)}
+          closeModal={onCloseEdit}
+        />
+      )}
       <Link
         to={`/restaurant/${id}/${name}`}
         className="restaurant-card restaurant-delivery-card col-md-5 col-sm-8 col-xs-16"
@@ -186,14 +223,14 @@ function ResCard({ id, name, start1, ResImg, MealImg }) {
                 style={{ transform: "scale(1.3)", margin: "3px 33px 5px 33px" }}
               >
                 <Col sm={6} className="text-start">
-                  <Link to="/profile">
+                  <div onClick={onOpenDel}>
                     <DeleteIcon className="delete-icon" />
-                  </Link>
+                  </div>
                 </Col>
                 <Col sm={6} className="text-end">
-                  <Link to="/profile">
+                  <div onClick={onOpenEdit}>
                     <EditIcon className="edit-icon" />
-                  </Link>
+                  </div>
                 </Col>
               </Row>
             </div>

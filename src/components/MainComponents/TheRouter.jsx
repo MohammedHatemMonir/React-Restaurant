@@ -26,6 +26,8 @@ import MapLoader from "./../Loaders/MapLoader";
 import Profile from "./../Profile/Profile";
 import OrdersPage from './../Orders/OrdersPage';
 import EditProfile from "../Profile/EditProfile";
+import EditModal from "../ResPage/EditModal";
+import DeleteModal from "../ResPage/DeleteModal";
 
 export default function TheRouter() {
   const navigate = useNavigate();
@@ -106,8 +108,9 @@ export default function TheRouter() {
             <Route path="/googlemap" element={<GoogleMaps />}></Route>
             <Route path="/maploader" element={<MapLoader />}></Route>
             <Route path="/profile" element={<Profile />}></Route>
-            <Route path="/edit" element={<EditProfile />}></Route>{" "}
+            <Route path="/edit" element={<EditProfile />}></Route>
             <Route path="/orders" element={<OrdersPage />}></Route>
+
             <Route path="/tutorials" element={<Tutorials />}>
               <Route path="Medotest" element={<MedoTest />}></Route>
               <Route path="Hema" element={<HemaTest />}></Route>
