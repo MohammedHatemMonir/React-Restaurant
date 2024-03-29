@@ -177,7 +177,9 @@ export default function AddRestaurantButton() {
               <Col sm={2}>
                 <Button
                   className={`${
-                    myBtn.value ? "bg-primary my-sm-3 text-end" : " bg-danger my-sm-3"
+                    myBtn.value
+                      ? "bg-primary my-sm-3 text-end"
+                      : " bg-danger my-sm-3"
                   }`}
                   onClick={handleBtnClick}
                 >

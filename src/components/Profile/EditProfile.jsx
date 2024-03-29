@@ -47,23 +47,23 @@ const EditProfile = () => {
             />
             <br />
             <div className="form-group">
-              <label htmlFor="pass">Password</label>
+              <label htmlFor="old-pass">Old Password</label>
               <input
-                name="pass"
+                name="old-pass"
                 type="password"
                 className="form-control"
-                id="pass"
+                id="old-pass"
                 placeholder="*******"
                 required
               />
             </div>
             <div className="form-group">
-              <label htmlFor="confirm-pass">Confirm Password</label>
+              <label htmlFor="new-pass">New Password</label>
               <input
-                name="confirm-pass"
+                name="new-pass"
                 type="password"
                 className="form-control"
-                id="confirm-pass"
+                id="new-pass"
                 placeholder="*******"
                 required
               />
@@ -82,7 +82,7 @@ const EditProfile = () => {
               />
             </div>
             <div className="form-group col-md-6">
-              <label htmlFor="city">Location</label>
+              <label htmlFor="location">Location</label>
               <input
                 name="location"
                 type="text"
