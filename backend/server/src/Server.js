@@ -41,11 +41,17 @@ app.use(passport.session());
 connectToMongoDB();
 
 app.use(express.json({limit: '50mb'}));
-app.use(cors({
-    origin: 'http://localhost:3000',
-    credentials: true,
-    preflightContinue: true
-  }));
+
+const corsOptions = {
+  origin: ['http://localhost:3000', 'http://localhost:5000', 'http://localhost:5001'],
+  credentials: true,
+  preflightContinue: true
+};
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
+
+
+
 app.use(router)
 app.use(MEALrouter)
 app.use("/analyze", comment_routes);

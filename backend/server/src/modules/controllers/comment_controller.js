@@ -23,11 +23,7 @@ async function analyzeText(text) {
 
 const analyze = async (req, res) => { //{text:"",mealid: ""}
   try {
-    const errors =validationResult(req)
-    if(!errors.isEmpty()){
-      res.status(400).json(errors.array())
 
-    }else{
         const mealid = req.body.mealid;
         const meals = await meal.find({_id:mealid});
         if (!meals[0]) {
@@ -84,7 +80,7 @@ const analyze = async (req, res) => { //{text:"",mealid: ""}
           const res_update = await resturant.updateOne({ _id: meals[0].ResID },{ $set: res_body});
             res.status(200).json({Comment:text,commentSentmint:result.sentiment,});
             ///////////////////////////////////////
-        }
+        
     }
 
   } catch (err) {
@@ -103,8 +99,14 @@ const res_comment = async (req, res) => { // {text:"",ResID: "" }
       res.status(400).json(errors.array())
 
     }else{
+
+        if(!req.session.user){
+          res.status(400).json({ error: "Not Authenticated" });
+        }
+
         const ResID = req.body.ResID;
         const userId = req.session.user._id;
+        
         const resturants= await resturant.find({_id:ResID});
         if (!resturants[0]) {
             res.send("STOP HACKING!!!");
