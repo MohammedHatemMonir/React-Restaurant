@@ -3,10 +3,15 @@ const resturant  = require("../../database/models/resturant.Model");
 const { Order } = require("../../database/models/orders");
 const { OrderMeals } = require("../../database/models/orderMeal");
 const { validationResult } = require("express-validator");
-
+const uploadImg = require("../../utils/uploadImg.js"); 
 
 const addNewmeal = async (req, res) => { //{MealName:"",MealImg:"",Description:"",Price:"",Resid:""}
     try {
+      const errors =validationResult(req)
+      if(!errors.isEmpty()){
+        res.status(400).json(errors.array()[0].msg)
+      }else{
+
         if(req.session?.user?.role!="ADMIN") {
           res.status(500).json({message:"You are not Authenticated to add a meal"});
           return;
@@ -16,17 +21,17 @@ const addNewmeal = async (req, res) => { //{MealName:"",MealImg:"",Description:"
       const meals = await meal.find({MealName:MealName});
       if (!meals[0]) {
         // console.log(req.body.MealImg.split('.').pop() )
-
             const Resid = req.body.Resid;
             const resturants = await resturant.find({_id:Resid});
             if (!resturants[0]) {
                 res.send("RESTURAND DOSENT EXEST");
             }else{
+              const mealimage=await uploadImg(req.body.MealImg)
               const comment_num=0
               const rating = 0
                 const body = {
                   MealName:req.body.MealName,
-                  MealImg:req.body.MealImg,
+                  MealImg:mealimage,
                   Description:req.body.Description,
                   Price:req.body.Price,
                   ResID:req.body.Resid,
@@ -53,7 +58,7 @@ const addNewmeal = async (req, res) => { //{MealName:"",MealImg:"",Description:"
             }
       } else {
         res.send("MEAL EXEST");
-      }
+      }}
     } catch (err) {
       res.status(400).json({ error: err });
     }

@@ -32,6 +32,10 @@ const UserSchema = new Schema({
         required: false,
         // lowercase: true
     },
+    userImg:{
+        type:String,
+        required: false,
+    },
     createdAt: {
         type: Date,
         immutable: true,

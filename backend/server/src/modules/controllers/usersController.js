@@ -3,12 +3,13 @@ const myusers = require("../../database/models/userModel");
 // const myusers = new User();
 const bcrypt =require('bcrypt');
 const passport = require('passport');
+const uploadImg = require("../../utils/uploadImg.js");
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+
 // const generateToken = require("../../utils/GenerateToken.js");
 
 const signup = async (req, res) => {
-  const { name, email, password } = req.body;
-
+  const { name, email, password ,userImg} = req.body;
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -21,9 +22,10 @@ const signup = async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 8);
-    const newUser = await myusers.create({ name, email, password: hashedPassword });
+    const UserImage=await uploadImg(userImg)
+    const newUser = await myusers.create({ name, email, password: hashedPassword ,userImg:UserImage});
 
-    return res.json({success:true, msg: "Signup successful", name:name, email:email});
+    return res.json({success:true, msg: "Signup successful", name:name, email:email,userImg:newUser.userImg});
   } catch (error) {
     console.error("Error during signup:", error);
     return res.status(500).json({ success:false,error: "Internal server error" });
