@@ -9,8 +9,8 @@ const EditProfile = () => {
         <h2 className="font-weight-bold">Edit Your Profile</h2>
         <form id="myForm">
           <div className="form-row">
-            <div className="form-group col-md-12">
-              <label  htmlFor="firstName">Name</label>
+            <div className="form-group col-md-6">
+              <label htmlFor="firstName">Name</label>
               <input
                 name="firstName"
                 type="text"
@@ -21,13 +21,7 @@ const EditProfile = () => {
                 required
               />
             </div>
-            {/* /form-group */}
-           
-
-            {/* /form-group */}
-          </div>
-          {/* /form-row */}
-          <div className="form-group">
+            <div className="form-group col-md-6">
               <label htmlFor="my-img">Profile Image</label>
               <input
                 name="user-image"
@@ -38,6 +32,8 @@ const EditProfile = () => {
                 required
               />
             </div>
+          </div>
+
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
@@ -73,73 +69,29 @@ const EditProfile = () => {
               />
             </div>
           </div>
-          {/* /form-group */}
+
           <div className="form-row">
             <div className="form-group col-md-6">
-              <label htmlFor="city">City</label>
+              <label htmlFor="state">Phone Number</label>
               <input
-                name="city"
-                type="text"
-                className="form-control"
-                id="city"
-                placeholder="City"
-              />
-            </div>
-            {/* /form-group */}
-            <div className="form-group col-md-4">
-              <label htmlFor="state">State</label>
-              <input
-                name="state"
-                type="text"
+                name="phone"
+                type="number"
                 className="form-control"
                 id="state"
-                placeholder="State"
+                placeholder="01*********"
               />
             </div>
-            {/* /form-group */}
-            <div className="form-group col-md-2">
-              <label htmlFor="zipCode">Zip Code</label>
+            <div className="form-group col-md-6">
+              <label htmlFor="city">Location</label>
               <input
-                name="zipCode"
+                name="location"
                 type="text"
                 className="form-control"
-                id="zipCode"
-                placeholder="Zip code"
+                id="location"
+                placeholder="Location"
               />
             </div>
-            {/* /form-group */}
           </div>
-          {/* /form-row */}
-          <div className="form-row">
-            <div className="form-group col-md-6">
-              <label htmlFor="homeNumber">Home Number</label>
-              <input
-                name="homeNumber"
-                type="tel"
-                className="form-control"
-                id="homeNumber"
-                placeholder="Home number"
-              />
-            </div>
-            {/* /form-group */}
-            <div className="form-group col-md-6">
-              <label htmlFor="faxNumber">Fax Number</label>
-              <input
-                name="faxNumber"
-                type="tel"
-                className="form-control"
-                id="faxNumber"
-                placeholder="Fax number"
-              />
-            </div>
-            {/* /form-group */}
-          </div>
-          {/* /form-row */}
-          <div className="form-row form__comments">
-            <div id="form__comments-by" className="form-group col-md-6" />
-            <div id="form__comments-txt" className="form-group col-md-6" />
-          </div>
-          {/* /form-row */}
           <div className="form__btns row text-center">
             <div>
               <button id="save" className="btn btn-primary col-sm-4 mr-5">

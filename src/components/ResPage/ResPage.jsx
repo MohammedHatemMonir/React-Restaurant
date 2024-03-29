@@ -172,20 +172,30 @@ function ResCard({ id, name, start1, ResImg, MealImg }) {
                 <li className="list-item">American</li>
               </ul>
               <span title="staticContent.filters.onlinePayment">
-                <span className="icon online-payment-icon" style={{ transform: "scale(1.3)" }}>
+                <span
+                  className="icon online-payment-icon"
+                  style={{ transform: "scale(1.3)" }}
+                >
                   <IoMdCard />
                 </span>
               </span>
             </div>
           </div>
           {UserData.value.role == "ADMIN" && (
-            <div style={{ transform: "scale(1.3)" }}>
-              <Row className="justify-content-between mx-5">
+            <div>
+              <Row
+                className="justify-content-between mx-5"
+                style={{ transform: "scale(1.3)" }}
+              >
                 <Col sm={6} className="text-start">
-                  <DeleteIcon />
+                  <Link to="/profile">
+                    <DeleteIcon className="delete-icon" />
+                  </Link>
                 </Col>
                 <Col sm={6} className="text-end">
-                  <EditIcon />
+                  <Link to="/profile">
+                    <EditIcon className="edit-icon" />
+                  </Link>
                 </Col>
               </Row>
             </div>
