@@ -46,7 +46,7 @@ export default function ResPage() {
               ".vue-star-rating-star[data-v-34cbeed1]{display:inline-block}.vue-star-rating-pointer[data-v-34cbeed1]{cursor:pointer}.vue-star-rating[data-v-34cbeed1]{display:flex;align-items:center}.vue-star-rating-inline[data-v-34cbeed1]{display:inline-flex}.vue-star-rating-rating-text[data-v-34cbeed1]{margin-top:7px;margin-left:7px}.vue-star-rating-rtl[data-v-34cbeed1]{direction:rtl}.vue-star-rating-rtl .vue-star-rating-rating-text[data-v-34cbeed1]{margin-right:10px;direction:rtl}",
           }}
         />
-        <section className="select-res-page">
+        <section className="">
           <Slider />
           <Container style={{ width: "85%" }}>
             {/* <div className="bg-danger">
@@ -84,7 +84,7 @@ export default function ResPage() {
                     </div>
                   )}
                   <Filters />
-
+                  {/* select-res-page */}
                   <div className="row">
                     <div className="col-header col-xs-16">
                       <h2 className="col-title inline-block">
@@ -98,7 +98,7 @@ export default function ResPage() {
                       id="rest-list-col"
                       className="delivery-rest-list col-sm-13 col-xs-16"
                     >
-                      <div className="col-body">
+                      <div className="col-body select-res-page">
                         <div className="row">
                           {!q.isLoading &&
                             Array.isArray(q.data?.data) &&
@@ -192,13 +192,10 @@ function ResCard({ id, name, start1, ResImg, MealImg }) {
               </span>
             </div>
           </div>
-          <div className="card-footer clickable-item">
-            <span>
-              <span className="icon">
-                <TbTruckDelivery />
-              </span>
-              60 mins
-            </span>
+          <div className="">
+            {UserData.value.role == "ADMIN" && (
+              <div className="text-center">Admin Test</div>
+            )}
           </div>
         </div>
       </Link>
