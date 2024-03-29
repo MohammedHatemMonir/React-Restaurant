@@ -1,18 +1,20 @@
+import { UserData } from "../../Globals";
 import "./Edit.scss";
 import { Link } from "react-router-dom";
 
-const Edit = () => {
+const EditProfile = () => {
   return (
     <div className="edit-profile">
       <div className="container form__wrapper">
         <h2 className="font-weight-bold">Edit Your Profile</h2>
         <form id="myForm">
           <div className="form-row">
-            <div className="form-group col-md-6">
-              <label htmlFor="firstName">First Name</label>
+            <div className="form-group col-md-12">
+              <label  htmlFor="firstName">Name</label>
               <input
                 name="firstName"
                 type="text"
+                defaultValue={UserData.value.name}
                 className="form-control"
                 id="firstName"
                 placeholder="First name"
@@ -20,17 +22,8 @@ const Edit = () => {
               />
             </div>
             {/* /form-group */}
-            <div className="form-group col-md-6">
-              <label htmlFor="lastName">Last Name</label>
-              <input
-                name="lastName"
-                type="text"
-                className="form-control"
-                id="lastName"
-                placeholder="Last name"
-                required
-              />
-            </div>
+           
+
             {/* /form-group */}
           </div>
           {/* /form-row */}
@@ -50,6 +43,7 @@ const Edit = () => {
             <input
               name="email"
               type="email"
+              defaultValue={UserData.value.email}
               id="email"
               className="form-control"
               placeholder="dineMe@example.com"
@@ -162,4 +156,4 @@ const Edit = () => {
   );
 };
 
-export default Edit;
+export default EditProfile;

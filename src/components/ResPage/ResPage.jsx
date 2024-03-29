@@ -14,6 +14,10 @@ import { UserData } from "../../Globals";
 import Stars from "./../Stars/Stars";
 
 import CookingLoader from "./../Loaders/CookingLoader";
+import { Row } from "react-bootstrap";
+import { Col } from "react-bootstrap";
+import EditIcon from "./../../Icons/EditIcon";
+import DeleteIcon from "./../../Icons/DeleteIcon";
 
 export default function ResPage() {
   const q = useQuery({
@@ -165,20 +169,27 @@ function ResCard({ id, name, start1, ResImg, MealImg }) {
             <div className="main-data">
               <h3 className="card-title">{name}</h3>
               <ul className="cuisines-list h-dots-list truncate p-0 ">
-                <li className="list-item ">American</li>
+                <li className="list-item">American</li>
               </ul>
               <span title="staticContent.filters.onlinePayment">
-                <span className="icon online-payment-icon">
+                <span className="icon online-payment-icon" style={{ transform: "scale(1.3)" }}>
                   <IoMdCard />
                 </span>
               </span>
             </div>
           </div>
-          <div className="">
-            {UserData.value.role == "ADMIN" && (
-              <div className="text-center">Admin Test</div>
-            )}
-          </div>
+          {UserData.value.role == "ADMIN" && (
+            <div style={{ transform: "scale(1.3)" }}>
+              <Row className="justify-content-between mx-5">
+                <Col sm={6} className="text-start">
+                  <DeleteIcon />
+                </Col>
+                <Col sm={6} className="text-end">
+                  <EditIcon />
+                </Col>
+              </Row>
+            </div>
+          )}
         </div>
       </Link>
     </>

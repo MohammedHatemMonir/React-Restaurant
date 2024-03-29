@@ -7,11 +7,6 @@ const { validationResult } = require("express-validator");
 
 const addNewmeal = async (req, res) => { //{MealName:"",MealImg:"",Description:"",Price:"",Resid:""}
     try {
-      const errors =validationResult(req)
-      if(!errors.isEmpty()){
-        res.status(400).json(errors.array()[0].msg)
-      }else{
-
         if(req.session?.user?.role!="ADMIN") {
           res.status(500).json({message:"You are not Authenticated to add a meal"});
           return;
@@ -21,10 +16,7 @@ const addNewmeal = async (req, res) => { //{MealName:"",MealImg:"",Description:"
       const meals = await meal.find({MealName:MealName});
       if (!meals[0]) {
         // console.log(req.body.MealImg.split('.').pop() )
-        const allowedMimetypes = ['jpeg', 'png', 'gif','jpg'];
-        if (!allowedMimetypes.includes(req.body.MealImg.split('.').pop())) {
-        return res.status(400).json({ error: 'Invalid image format' });
-        }else {
+
             const Resid = req.body.Resid;
             const resturants = await resturant.find({_id:Resid});
             if (!resturants[0]) {
@@ -58,10 +50,10 @@ const addNewmeal = async (req, res) => { //{MealName:"",MealImg:"",Description:"
                 res.status(201).json(body);
                     // console.log(req.body)
 
-            }}
+            }
       } else {
         res.send("MEAL EXEST");
-      }}
+      }
     } catch (err) {
       res.status(400).json({ error: err });
     }
