@@ -310,7 +310,7 @@ export default function SelectResPage() {
                                 {/* Add button for admin only*/}
                                 {UserData.value.role == "ADMIN" && (
                                   <div>
-                                    <AddMealButton />
+                                    <AddMealButton Resid={resID}/>
                                   </div>
                                 )}
                                 <Container>

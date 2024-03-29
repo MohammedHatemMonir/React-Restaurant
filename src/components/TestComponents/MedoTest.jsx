@@ -19,6 +19,7 @@ const MedoTest = () => {
       if(!file.value){ console.log("no file"); return;}
 
       const base64 = await convertBase64(file.value);
+      console.log("base64",base64);
       console.log("trying to load");
       let url = "/uploadImage";
       console.log("posting to ", url);

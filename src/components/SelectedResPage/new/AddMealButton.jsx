@@ -5,8 +5,10 @@ import { useSignal } from "@preact/signals-react";
 import CustomModal from "./../../Prototypes/CustomModal";
 import AddIcon from "./../../../Icons/AddIcon";
 import { useMutation } from "react-query";
+import { convertBase64 } from "../../../Globals";
+import { apiClient } from "../../../Data/apiclient";
 
-export default function AddMealButton() {
+export default function AddMealButton({Resid}) {
   const {
     handleSubmit,
     register,
@@ -31,11 +33,21 @@ export default function AddMealButton() {
   });
 
 
-  function submit(data) {
+  async function submit(data) {
     console.log("submit!", data);
+
+    data.Resid = Resid;
+    data.MealImg = await convertBase64(data.MealImg[0]);
+
+    const result = await m.mutateAsync(data);
+    console.log("added meal", result);
     //Handle add meals logic here
-    ShowSignal.value = false;
-    reset();
+
+
+    if(result){
+      ShowSignal.value = false;
+      reset();
+    }
   }
 
   return (
@@ -62,7 +74,7 @@ export default function AddMealButton() {
                     type="text"
                     name="mealName"
                     placeholder="Meal Name"
-                    {...register("mealName", {
+                    {...register("MealName", {
                       required: "Please add meal name",
                     })}
                   />
@@ -78,7 +90,7 @@ export default function AddMealButton() {
                     type="file"
                     name="mealImg"
                     placeholder="Restaurant Name"
-                    {...register("mealImg", {
+                    {...register("MealImg", {
                       required: "Please add meal image",
                     })}
                   />
@@ -94,7 +106,7 @@ export default function AddMealButton() {
                     type="text"
                     name="mealDesc"
                     placeholder="Meal description"
-                    {...register("mealDesc", {
+                    {...register("Description", {
                       required: "Please add meal description",
                     })}
                   />
@@ -110,7 +122,7 @@ export default function AddMealButton() {
                     type="number"
                     name="mealPrice"
                     placeholder="Meal price"
-                    {...register("mealPrice", {
+                    {...register("Price", {
                       required: "Please enter meal price",
                     })}
                   />
