@@ -1,6 +1,6 @@
 import { UserData } from "../../Globals";
 import "./Edit.scss";
-import { Link } from "react-router-dom";
+
 
 const EditProfile = () => {
   return (

@@ -5,14 +5,12 @@ import Footer from "./Footer";
 import { useQuery } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 import { Container } from "reactstrap";
-import { TbTruckDelivery } from "react-icons/tb";
 import { IoMdCard } from "react-icons/io";
 import { Link } from "react-router-dom";
 import Filters from "./Filters";
 import AddRestaurantButton from "./AddRestaurantButton";
 import { UserData } from "../../Globals";
 import Stars from "./../Stars/Stars";
-
 import CookingLoader from "./../Loaders/CookingLoader";
 import { Row } from "react-bootstrap";
 import { Col } from "react-bootstrap";
@@ -71,7 +69,7 @@ export default function ResPage() {
                   )}
                   <Filters />
                   {/* select-res-page */}
-                  <div className="row">
+                  <div className="row  select-res-page ">
                     <div className="col-header col-xs-16">
                       <h2 className="col-title inline-block">
                         Restaurants
@@ -182,10 +180,10 @@ function ResCard({ id, name, start1, ResImg, MealImg }) {
             </div>
           </div>
           {UserData.value.role == "ADMIN" && (
-            <div>
+            <div className="position-relative">
               <Row
-                className="justify-content-between mx-5"
-                style={{ transform: "scale(1.3)" }}
+                className="justify-content-between"
+                style={{ transform: "scale(1.3)", margin: "3px 33px 5px 33px" }}
               >
                 <Col sm={6} className="text-start">
                   <Link to="/profile">

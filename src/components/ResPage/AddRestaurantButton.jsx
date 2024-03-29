@@ -3,7 +3,7 @@ import AddIcon from "../../Icons/AddIcon";
 import CustomModal from "../Prototypes/CustomModal";
 import { Col, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { signal, useSignal } from "@preact/signals-react";
+import { useSignal } from "@preact/signals-react";
 import LeafletMap from "./../Map/LeafletMap";
 import { Button } from "reactstrap";
 import { convertBase64 } from "../../Globals";
@@ -27,7 +27,6 @@ export default function AddRestaurantButton() {
     // onSuccess: onSuccess,
     // onError: onError,
     mutationFn: async (params) => {
-
       console.log("trying to load");
       let url = "/Addresturant";
       console.log("posting to ", url);
@@ -36,23 +35,21 @@ export default function AddRestaurantButton() {
   });
 
   async function submit(data) {
-
     // console.log("submit! ADD RESTAURANT", data);
-    const resImg64 =  await convertBase64(data.resImg[0]);
-    const resBanner64 =  await convertBase64(data.resBanner[0]);
-  
+    const resImg64 = await convertBase64(data.resImg[0]);
+    const resBanner64 = await convertBase64(data.resBanner[0]);
 
     data.resImg = resImg64;
     data.resBanner = resBanner64;
 
-    console.log("NEW DATA", data)
+    console.log("NEW DATA", data);
 
     const ret = await m.mutateAsync(data);
     //Handle add restaurant logic herea
-    
-    if(ret){
-    ShowSignal.value = false;
-    reset();
+
+    if (ret) {
+      ShowSignal.value = false;
+      reset();
     }
   }
   const showMap = useSignal(false);
@@ -78,8 +75,8 @@ export default function AddRestaurantButton() {
         <>
           <Form>
             <Row>
-            <Col sm={12}>
-              <Form.Group className="mb-2 mb-sm-0">
+              <Col sm={12}>
+                <Form.Group className="mb-2 mb-sm-0">
                   <Form.Label>Search user</Form.Label>
                   <Form.Control
                     type="text"
@@ -161,14 +158,13 @@ export default function AddRestaurantButton() {
                   </span>
                 </Form.Group>
               </Col>
-              <Col sm={8}>
-                <Form.Group className="mb-2 mb-sm-0">
-                  {/* <Form.Label>Location</Form.Label> */}
+              <Col sm={10}>
+                <Form.Group className="mb-2 my-sm-3">
                   <Form.Control
                     type="text"
                     name="resLocation"
                     placeholder="Restaurant Location"
-                    value={currentLocation.value}
+                    defaultValue={currentLocation.value}
                     {...register("resLocation", {
                       required: "Please enter restaurant location",
                     })}
@@ -178,9 +174,11 @@ export default function AddRestaurantButton() {
                   </span>
                 </Form.Group>
               </Col>
-              <Col sm={4}>
+              <Col sm={2}>
                 <Button
-                  className={`${myBtn.value ? "bg-primary" : " bg-danger"}`}
+                  className={`${
+                    myBtn.value ? "bg-primary my-sm-3 text-end" : " bg-danger my-sm-3"
+                  }`}
                   onClick={handleBtnClick}
                 >
                   {myBtn.value ? "Open Map" : "Close Map"}
