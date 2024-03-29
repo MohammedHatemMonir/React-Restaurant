@@ -36,10 +36,7 @@ export default function SelectResPage() {
       <div id="page-content restaurant-container" className="page-content">
         <div className="restaurant-cover active-on-menu-tab  menu-tab-activated">
           {/* Banner Img */}
-          <img
-            src={q.data?.data?.restaurant?.ResBanner}
-            alt="cover photo"
-          />
+          <img src={q.data?.data?.restaurant?.ResBanner} alt="cover photo" />
         </div>
 
         <div className="container">
@@ -110,20 +107,6 @@ export default function SelectResPage() {
                         </span>
                         <p className="info-value">
                           Tivolli Dome, Omar Ibn Khattab St ( Delivery Only )
-                          <a
-                            href="/cairo/delivery/heliopolis"
-                            className="address-link mx-2"
-                          >
-                            Almaza, Heliopolis
-                          </a>
-                          <a
-                            href="/cairo/munch-shake-my54k/heliopolis-yv4k3/branches"
-                            aria-controls="reviews-tab"
-                            role="tab"
-                            className="side-margin more-btn"
-                          >
-                            +3 more
-                          </a>
                         </p>
                       </div>
                     </div>

@@ -2,11 +2,10 @@ import { useSignal } from "@preact/signals-react";
 import { useMutation } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 
-const CommentBox = ({resID}) => {
+const CommentBox = ({ resID }) => {
   const comment = useSignal("");
 
-
- const m = useMutation({
+  const m = useMutation({
     mutationKey: [resID],
     // cacheTime: 600000,
     // onSuccess: onSuccess,
@@ -19,59 +18,55 @@ const CommentBox = ({resID}) => {
     },
   });
 
-
-
   const handleInputChange = (event) => {
     comment.value = event.target.value;
   };
 
   async function PostRestaurantComment(props) {
-    var j = { text: props.comment, ResID: props.resID};
-        try {
-        await m.mutateAsync(j);
-        }catch(e){
-        console.log("Failed to post comment",e);
-
-          }
-        }
+    var j = { text: props.comment, ResID: props.resID };
+    try {
+      await m.mutateAsync(j);
+    } catch (e) {
+      console.log("Failed to post comment", e);
+    }
+  }
 
   const handleSubmit = () => {
-    PostRestaurantComment({comment: comment.value, resID: resID});
-    // Mohamed Hatim add your submission logic here
+    PostRestaurantComment({ comment: comment.value, resID: resID });
     console.log("Submitted:", comment.value);
     // Clear the input field after submission if you need
     // comment.value = "";
   };
 
   return (
-    <div
-      style={{ display: "flex", alignItems: "center", marginBottom: "20px" }}
-    >
+    <div className="d-flex flex-column align-items-center mb-4">
       <input
         type="text"
         value={comment}
         onChange={handleInputChange}
+        className="form-control mb-3"
         style={{
           padding: "10px",
-          marginRight: "10px",
-          marginTop: "15px",
           borderRadius: "5px",
           border: "1px solid #ccc",
           fontSize: "16px",
-          width: "300px",
+          width: "80%",
+          maxWidth: "300px",
+          boxSizing: "border-box",
         }}
         placeholder="Add new comment"
       />
       <button
         onClick={handleSubmit}
+        className="btn btn-primary"
         style={{
           padding: "10px 20px",
           borderRadius: "5px",
-          backgroundColor: "#007bff",
-          color: "#fff",
-          border: "none",
           fontSize: "16px",
           cursor: "pointer",
+          width: "80%",
+          maxWidth: "300px",
+          boxSizing: "border-box",
         }}
       >
         Submit
