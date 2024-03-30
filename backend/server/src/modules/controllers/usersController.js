@@ -189,7 +189,7 @@ const forgetPassword = async (req, res) => {
       service: 'gmail',
       auth: {
         user: 'dine.me155@gmail.com',
-        pass: 'Dineme*55*'
+        pass: 'zcna yjlh kwhi cdbr'
       }
     });
 
@@ -218,7 +218,7 @@ const forgetPassword = async (req, res) => {
 
 const resetPassword = async (req, res) => {
   const { userId, token } = req.params;
-  const { newPassword } = req.body;
+  const { password} = req.body;
 
   try {
     jwt.verify(token, "jwt_secret_key", async (err, decoded) => {
@@ -229,7 +229,7 @@ const resetPassword = async (req, res) => {
       if (!user) {
         return res.status(404).json({ msg: "User not found" });
       }
-      const hashedPassword = await bcrypt.hash(newPassword, 8);
+      const hashedPassword = await bcrypt.hash(password, 8);
       user.password = hashedPassword;
       await user.save();
       return res.json({ msg: "Password reset successful" });
