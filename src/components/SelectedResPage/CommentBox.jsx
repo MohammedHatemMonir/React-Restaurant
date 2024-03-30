@@ -68,9 +68,11 @@ const CommentBox = ({ resID }) => {
             width: "80%",
             maxWidth: "300px",
             boxSizing: "border-box",
+            color: "white",
+            // fontWeight:"Bold"
           }}
         >
-          Submit
+          Add
         </button>
       </div>
     </div>
