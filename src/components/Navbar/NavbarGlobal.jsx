@@ -78,10 +78,9 @@ export default function NavbarGlobal() {
 
                       <div className="spacer _24" />
                       <div className="spacer _16" />
-                      <a
+                      <Link
                         data-testid="edit-delivery-location-button"
                         className="ck cl cm cn co al aq c8 cc cp cq af cr cs b1 ct cu cv cw cx"
-                        href="/feed?diningMode=DELIVERY&mod=deliveryDetails&pl=JTdCJTIyYWRkcmVzcyUyMiUzQSUyMk5ldyUyMFlvcmslMjIlMkMlMjJyZWZlcmVuY2UlMjIlM0ElMjJDaElKT3dnXzA2VlB3b2tSWXY1MzRRYVBDOGclMjIlMkMlMjJyZWZlcmVuY2VUeXBlJTIyJTNBJTIyZ29vZ2xlX3BsYWNlcyUyMiUyQyUyMmxhdGl0dWRlJTIyJTNBNDAuNzEyNzc1MyUyQyUyMmxvbmdpdHVkZSUyMiUzQS03NC4wMDU5NzI4JTdE&ps=1"
                       >
                         <div className="cy ca cz">
                           <svg
@@ -113,7 +112,7 @@ export default function NavbarGlobal() {
                         <div data-test="delivery-time" className="d0 bd bb d6">
                           Now
                         </div>
-                      </a>
+                      </Link>
                       <div className="spacer _16" />
                       <div className="d7 al bz d8">
                         <div
