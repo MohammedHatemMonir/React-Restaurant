@@ -1,33 +1,80 @@
-import StarIcon from "../../Icons/StarIcon";
 import "./HemaTest.scss";
-const Testimonial = () => {
+const HemaTest = () => {
   return (
-    <div className="reviews-card mt-5">
-      <div className="testimonials" id="testimonials">
-        <div className="container">
-          <div className="box">
-            <img
-              src="data:image/jpeg;base64,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"
-              alt=""
-            />
-            <h3>Mohamed Farag</h3>
-            <span className="title">Full Stack Developer</span>
-            <div className="rate">
-              <StarIcon />
-              <StarIcon />
-              <StarIcon />
-              <StarIcon />
-              <StarIcon />
-            </div>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
-              et reiciendis voluptatum, amet est natus quaerat ducimus
-            </p>
+    <div className="my-meal-card">
+      <div className="my-meal-card-body">
+      <div id="container">
+        {/* Start Product details */}
+        <div className="product-details">
+          {/* Product Name */}
+          <h1>Biru Putaran</h1>
+          {/* Product rating */}
+          <span className="hint-star star">
+            <i className="fa fa-star" aria-hidden="true"></i>
+            <i className="fa fa-star" aria-hidden="true"></i>
+            <i className="fa fa-star" aria-hidden="true"></i>
+            <i className="fa fa-star-half-o" aria-hidden="true"></i>
+            <i className="fa fa-star-o" aria-hidden="true"></i>
+          </span>
+          {/* The most important information about the product */}
+          <p className="information">
+            " Especially good for container gardening, the Angelonia will keep
+            blooming all summer even if old flowers are removed. Once tall
+            enough to cut, bring them inside and you'll notice a light scent
+            that some say is reminiscent of apples. "
+          </p>
+          {/* Control */}
+          <div className="control">
+            {/* Start Button buying */}
+            <button className="btn">
+              {/* The Price */}
+              <span className="price">49 $</span>
+              {/* Shopping cart icon */}
+              <span className="shopping-cart">
+                <i className="fa fa-shopping-cart" aria-hidden="true"></i>
+              </span>
+              {/* Buy Now / ADD to Cart */}
+              <span className="buy">Buy Now</span>
+            </button>
+            {/* End Button buying */}
           </div>
         </div>
+        {/* End Product details */}
+        {/* Start product image & Information */}
+        <div className="product-image">
+          <img
+            src="https://sc01.alicdn.com/kf/HTB1Cic9HFXXXXbZXpXXq6xXFXXX3/200006212/HTB1Cic9HFXXXXbZXpXXq6xXFXXX3.jpg"
+            alt="Omar Dsoky"
+          />
+          {/* Product Information */}
+          <div className="info">
+            <h2>The Description</h2>
+            <ul>
+              <li>
+                <strong>Sun Needs: </strong>Full Sun
+              </li>
+              <li>
+                <strong>Soil Needs: </strong>Damp
+              </li>
+              <li>
+                <strong>Zones: </strong>9 - 11
+              </li>
+              <li>
+                <strong>Height: </strong>2 - 3 feet
+              </li>
+              <li>
+                <strong>Blooms in: </strong>Mid‑Summer - Mid‑Fall
+              </li>
+              <li>
+                <strong>Features: </strong>Tolerates heat
+              </li>
+            </ul>
+          </div>
+        </div>
+        </div>     {/* End product image */}
       </div>
     </div>
   );
 };
 
-export default Testimonial;
+export default HemaTest;
