@@ -5,11 +5,13 @@ const bcrypt =require('bcrypt');
 const passport = require('passport');
 const uploadImg = require("../../utils/uploadImg.js");
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-
+const nodemailer=require('nodemailer')
+const jwt=require('jsonwebtoken')
 // const generateToken = require("../../utils/GenerateToken.js");
 
 const signup = async (req, res) => {
-  const { name, email, password ,userImg} = req.body;
+  const { name, email, password, userImg } = req.body;
+  
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -18,19 +20,24 @@ const signup = async (req, res) => {
 
     const user = await myusers.findOne({ email: { $regex: new RegExp(`^${email}$`, 'i') } });
     if (user) {
-      return res.json({success:true, msg: "User already exists" });
+      return res.json({ success: true, msg: "User already exists" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 8);
-    const UserImage=await uploadImg(userImg)
-    const newUser = await myusers.create({ name, email, password: hashedPassword ,userImg:UserImage});
+    let UserImage = null;
+    if (userImg) {
+      UserImage = await uploadImg(userImg);
+    }
+    
+    const newUser = await myusers.create({ name, email, password: hashedPassword, userImg: UserImage });
 
-    return res.json({success:true, msg: "Signup successful", name:name, email:email,userImg:newUser.userImg});
+    return res.json({ success: true, msg: "Signup successful", name, email, userImg: newUser.userImg });
   } catch (error) {
     console.error("Error during signup:", error);
-    return res.status(500).json({ success:false,error: "Internal server error" });
+    return res.status(500).json({ success: false, error: "Internal server error" });
   }
 };
+
 
 const signin = async (req, res) => { //{email:"",password:""}
   const { email, password } = req.body;
@@ -167,7 +174,73 @@ const terminateSession = async (req, res) => {
       console.error("Error during logout:", error);
     }
 };
-module.exports = {signup,signin,logout,session,terminateSession,google};
+
+
+const forgetPassword = async (req, res) => {
+  const { email } = req.body;
+  try {
+    const user = await myusers.findOne({ email });
+    if (!user) {
+      return res.json({ msg: "User not found" });
+    }
+    const token = jwt.sign({ id: user._id }, "jwt_secret_key", { expiresIn: "1d" });
+
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'dine.me155@gmail.com',
+        pass: 'Dineme*55*'
+      }
+    });
+
+    const resetLink = `http://localhost:5001/reset-password/${user._id}/${token}`;
+    const mailOptions = {
+      from: 'dine.me155@gmail.com',
+      to: user.email,
+      subject: 'Reset your Password',
+      text: `Click the following link to reset your password: ${resetLink}`
+    };
+
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log("Error:", error);
+        return res.json({ msg: "Error sending email" });
+      } else {
+        console.log('Email sent: ' + info.response);
+        return res.json({ msg: "Email sent successfully" });
+      }
+    });
+  } catch (error) {
+    console.error("Error during password reset request:", error);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+const resetPassword = async (req, res) => {
+  const { userId, token } = req.params;
+  const { newPassword } = req.body;
+
+  try {
+    jwt.verify(token, "jwt_secret_key", async (err, decoded) => {
+      if (err) {
+        return res.status(400).json({ msg: "Invalid or expired token" });
+      }
+      const user = await myusers.findById(userId);
+      if (!user) {
+        return res.status(404).json({ msg: "User not found" });
+      }
+      const hashedPassword = await bcrypt.hash(newPassword, 8);
+      user.password = hashedPassword;
+      await user.save();
+      return res.json({ msg: "Password reset successful" });
+    });
+  } catch (error) {
+    console.error("Error during password reset:", error);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+module.exports = {signup,signin,logout,session,terminateSession,google,forgetPassword,resetPassword};
 
 // Get
 // const getSingleuser = async (req, res) => {
