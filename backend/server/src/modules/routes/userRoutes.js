@@ -9,7 +9,7 @@ router.post("/signin",validateUserInputLogin,usersController.signin)
 router.post("/terminateSession",validateUserInputLogin,usersController.terminateSession)
 router.post("/google",validateUserInputLogin,usersController.terminateSession)
 router.post("/forget-password",validateUserInputSignUp,usersController.forgetPassword)
-router.post("/forget-password",validateUserInputSignUp,usersController.resetPassword)
+router.post("/reset-password",validateUserInputSignUp,usersController.resetPassword)
 
 router.post("/logout",validateUserInputLogin,usersController.logout)
 router.post("/session",validateUserInputLogin,usersController.session)
