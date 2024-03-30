@@ -39,38 +39,40 @@ const CommentBox = ({ resID }) => {
   };
 
   return (
-    <div className="d-flex flex-column align-items-center mb-4">
-      <input
-        type="text"
-        value={comment}
-        onChange={handleInputChange}
-        className="form-control mb-3"
-        style={{
-          padding: "10px",
-          borderRadius: "5px",
-          border: "1px solid #ccc",
-          fontSize: "16px",
-          width: "80%",
-          maxWidth: "300px",
-          boxSizing: "border-box",
-        }}
-        placeholder="Add new comment"
-      />
-      <button
-        onClick={handleSubmit}
-        className="btn btn-primary"
-        style={{
-          padding: "10px 20px",
-          borderRadius: "5px",
-          fontSize: "16px",
-          cursor: "pointer",
-          width: "80%",
-          maxWidth: "300px",
-          boxSizing: "border-box",
-        }}
-      >
-        Submit
-      </button>
+    <div className="my-comment-box">
+      <div className="d-flex flex-column align-items-center mb-4">
+        <input
+          type="text"
+          value={comment}
+          onChange={handleInputChange}
+          className="form-control mb-3"
+          style={{
+            padding: "10px",
+            borderRadius: "5px",
+            border: "1px solid #ccc",
+            fontSize: "16px",
+            width: "80%",
+            maxWidth: "300px",
+            boxSizing: "border-box",
+          }}
+          placeholder="Add new comment"
+        />
+        <button
+          onClick={handleSubmit}
+          className="btn btn-primary"
+          style={{
+            padding: "10px 20px",
+            borderRadius: "5px",
+            fontSize: "16px",
+            cursor: "pointer",
+            width: "80%",
+            maxWidth: "300px",
+            boxSizing: "border-box",
+          }}
+        >
+          Submit
+        </button>
+      </div>
     </div>
   );
 };

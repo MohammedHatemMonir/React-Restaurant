@@ -235,7 +235,6 @@ export default function NavbarGlobal() {
                           <PersonIcon />
                           <div className="spacer _4" />
                           <Link to="/profile">
-                     
                             {UserData.value.loggedIn && UserData.value.name}
                           </Link>
                         </Link>
