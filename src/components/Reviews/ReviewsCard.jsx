@@ -1,4 +1,3 @@
-import StarIcon from "../../Icons/StarIcon";
 import "./ReviewsCard.scss";
 import Stars from "./../Stars/Stars";
 
