@@ -7,16 +7,7 @@ const EditProfile = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm();
-
-  // useEffect(() => {
-  //   // Reset form fields to default values when UserData changes
-  //   reset({
-  //     firstName: UserData.value.name,
-  //     email: UserData.value.email,
-  //   });
-  // }, [reset, UserData.value]);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -31,7 +22,13 @@ const EditProfile = () => {
             <div className="form-group col-md-6">
               <label htmlFor="firstName">Name</label>
               <input
-                // {...register("firstName", { required: "Name is required" })}
+                {...register("firstName", {
+                  // { required: "Name is required" }
+                  minLength: {
+                    value: 3,
+                    message: "Name must have at least 3 characters",
+                  },
+                })}
                 type="text"
                 className="form-control"
                 defaultValue={UserData.value.name}
@@ -49,11 +46,7 @@ const EditProfile = () => {
               <label htmlFor="my-img">Profile Image</label>
               <input
                 {...register("userImage", {
-                  required: "Profile image is required",
-                  minLength: {
-                    value: 3,
-                    message: "Name must have at least 3 characters",
-                  },
+                  // required: "Profile image is required",
                 })}
                 type="file"
                 required
@@ -72,7 +65,7 @@ const EditProfile = () => {
             <label htmlFor="email">Email</label>
             <input
               {...register("email", {
-                required: "Email is required",
+                // required: "Email is required",
                 pattern: {
                   value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
                   message: "Invalid email address",
@@ -98,8 +91,8 @@ const EditProfile = () => {
                 {...register("oldPass", {
                   required: "Old password is required",
                   minLength: {
-                    value: 7,
-                    message: "Password must have at least 7 characters",
+                    value: 5,
+                    message: "Password must have at least 5 characters",
                   },
                 })}
                 type="password"
@@ -142,26 +135,47 @@ const EditProfile = () => {
 
           <div className="form-row">
             <div className="form-group col-md-6">
-              <label htmlFor="state">Phone Number</label>
+              <label htmlFor="phone">Phone Number</label>
               <input
-                {...register("phone")}
+                {...register("phone", {
+                  minLength: {
+                    value: 11,
+                    message: "Phone number must have at least 11 characters",
+                  },
+                })}
                 type="number"
                 className="form-control"
                 required
-                id="state"
+                id="phone"
                 placeholder="01*********"
               />
+              {errors.phone && (
+                <span className="text-danger font-weight-bold">
+                  {errors.phone.message}
+                </span>
+              )}
             </div>
+
             <div className="form-group col-md-6">
               <label htmlFor="location">Location</label>
               <input
-                {...register("location")}
+                {...register("location", {
+                  minLength: {
+                    value: 3,
+                    message: "Location must have at least 3 characters",
+                  },
+                })}
                 type="text"
                 className="form-control"
                 required
                 id="location"
                 placeholder="Location"
               />
+              {errors.location && (
+                <span className="text-danger font-weight-bold">
+                  {errors.location.message}
+                </span>
+              )}
             </div>
           </div>
           <div className="form__btns row text-center">
