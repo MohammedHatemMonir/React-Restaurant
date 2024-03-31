@@ -4,7 +4,7 @@ import EmptyOrders from "./EmptyOrders";
 const OrdersTable = () => {
   return (
     <div className="container">
-      <h2 className="text-center font-weight-bold my-4">Orders</h2>
+      <h2 className="text-center font-weight-bold my-4">My Orders</h2>
       <div className="table-responsive">
         <table className="table table-bordered table-hover">
           <thead className="thead-dark">
