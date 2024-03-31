@@ -181,7 +181,7 @@ const forgetPassword = async (req, res) => {
   try {
     const user = await myusers.findOne({ email });
     if (!user) {
-      return res.json({ msg: "User not found" });
+      return res.json({ msg: "Email not found" });
     }
     const token = jwt.sign({ id: user._id }, "jwt_secret_key", { expiresIn: "1d" });
 
@@ -193,7 +193,7 @@ const forgetPassword = async (req, res) => {
       }
     });
 
-    const resetLink = `http://localhost:5001/reset-password/${user._id}/${token}`;
+    const resetLink = `http://localhost:5001/api/users/reset-password/${user._id}/${token}`;
     const mailOptions = {
       from: 'dine.me155@gmail.com',
       to: user.email,
