@@ -106,8 +106,8 @@ const navigate = useNavigate();
                             <FormControl type="password" placeholder="Password" {...register("password",
                                                                         {required: "Password is required",
                                                                         minLength: {
-                                                                          value: 7,
-                                                                          message: "Password must have at least 7 characters"
+                                                                          value: 5,
+                                                                          message: "Password must have at least 5 characters"
                                                                         }})} />
                         <span className="text-danger  ">
                           {errors["password"] && errors["password"].message}
