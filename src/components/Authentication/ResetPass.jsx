@@ -4,9 +4,10 @@ export default function ResetPass() {
   function handleClick(e) {
     e.preventDefault();
   }
+
   return (
-    <div className="container text-center">
-      <div className="row justify-content-center" style={{ marginTop: "30vh" }}>
+    <div className="container text-center" style={{ marginTop: "30vh" }}>
+      <div className="row justify-content-center mt-5">
         <div className="col-md-6">
           <h2>Reset Your Password?</h2>
           <p>Enter your new password</p>
@@ -28,8 +29,10 @@ export default function ResetPass() {
             >
               Submit
             </button>
-            <div style={{ textDecoration: "none", marginTop: "10px" }}>
-              <Link to="/" style={{ textDecoration: "none"}}>Back to Home</Link>
+            <div className="mt-3">
+              <Link to="/" className="text-decoration-none">
+                Back to Home
+              </Link>
             </div>
           </form>
         </div>

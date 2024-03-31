@@ -29,7 +29,7 @@ export default function ForgotPass() {
           </form>
           <div className="mt-3">
             <Link
-              to="https://www.google.com/?hl=ar"
+              // to="/"
               style={{ textDecoration: "none" }}
             >
               Still having problems?
