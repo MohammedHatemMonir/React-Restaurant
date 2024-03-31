@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function ForgotPass() {
+export default function ResetPass() {
   return (
     <div className="container text-center">
       <div className="row justify-content-center" style={{ marginTop: "30vh" }}>

@@ -28,6 +28,7 @@ import OrdersPage from './../Orders/OrdersPage';
 import EditProfile from "../Profile/EditProfile";
 import EditModal from "../ResPage/EditModal";
 import DeleteModal from "../ResPage/DeleteModal";
+import ResetPass from './../Authentication/ResetPass';
 
 export default function TheRouter() {
   const navigate = useNavigate();
@@ -89,7 +90,8 @@ export default function TheRouter() {
         >
           <Route path="login" element={<Login />}></Route>
           <Route path="signup" element={<SignUp />}></Route>
-          <Route path="forgotpass" element={<ForgotPass />}></Route>
+          <Route path="forget" element={<ForgotPass />}></Route>
+          <Route path="reset" element={<ResetPass />}></Route>
         </Route>
 
         {UserData.value.loggedIn && (
