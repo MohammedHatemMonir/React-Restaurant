@@ -165,7 +165,7 @@ export default function AddRestaurantButton() {
                     type="text"
                     name="resLocation"
                     placeholder="Restaurant Location"
-                    defaultValue={currentLocation.value}
+                    value={currentLocation.value}
                     {...register("resLocation", {
                       required: "Please enter restaurant location",
                     })}
