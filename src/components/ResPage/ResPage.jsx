@@ -22,7 +22,7 @@ import DeleteModal from "./DeleteModal";
 
 export default function ResPage() {
   const q = useQuery({
-    queryKey: ['getAllresturant'],
+    queryKey: ["getAllresturant"],
     cacheTime: 3 * 60000, //3 minutes
     queryFn: async () => {
       let url = "/getAllresturant";
@@ -64,7 +64,7 @@ export default function ResPage() {
           <div className="mt-5">
             <div id="app" className="">
               <div id="page-content" className="page-content">
-                <div className="container d-flex">
+                <div className="container">
                   {UserData.value.role == "ADMIN" && (
                     <div>
                       <AddRestaurantButton />
@@ -142,7 +142,7 @@ function ResCard({ id, name, start1, ResImg, MealImg }) {
     <>
       {showDelModal.value == true && (
         <DeleteModal
-          resId = {id}
+          resId={id}
           resName={name}
           openModal={() => (showDelModal.value = true)}
           closeModal={onCloseDel}
@@ -227,7 +227,7 @@ function ResCard({ id, name, start1, ResImg, MealImg }) {
               >
                 <Col sm={6} className="text-start">
                   <div onClick={onOpenDel}>
-                    <DeleteIcon className="delete-icon" resId={id}/>
+                    <DeleteIcon className="delete-icon" resId={id} />
                   </div>
                 </Col>
                 <Col sm={6} className="text-end">
