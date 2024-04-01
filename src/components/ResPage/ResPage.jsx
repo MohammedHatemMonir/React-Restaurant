@@ -221,7 +221,7 @@ function ResCard({ id, name, start1, ResImg, MealImg }) {
             <div className="position-relative">
               <Row
                 className="justify-content-between"
-                style={{ transform: "scale(1.3)", margin: "3px 33px 5px 33px" }}
+                style={{ transform: "scale(1.4)", margin: "3px 40px 5px 40px" }}
               >
                 <Col sm={6} className="text-start">
                   <div onClick={onOpenDel}>

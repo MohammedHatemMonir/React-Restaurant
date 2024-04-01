@@ -26,8 +26,6 @@ import MapLoader from "./../Loaders/MapLoader";
 import Profile from "./../Profile/Profile";
 import OrdersPage from './../Orders/OrdersPage';
 import EditProfile from "../Profile/EditProfile";
-import EditModal from "../ResPage/EditModal";
-import DeleteModal from "../ResPage/DeleteModal";
 import ResetPass from './../Authentication/ResetPass';
 
 export default function TheRouter() {
