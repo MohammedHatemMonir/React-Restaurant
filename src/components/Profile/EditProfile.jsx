@@ -89,7 +89,7 @@ const EditProfile = () => {
               <label htmlFor="old-pass">Old Password</label>
               <input
                 {...register("oldPass", {
-                  required: "Old password is required",
+                  // required: "Old password is required",
                   minLength: {
                     value: 5,
                     message: "Password must have at least 5 characters",
@@ -97,7 +97,7 @@ const EditProfile = () => {
                 })}
                 type="password"
                 defaultValue={UserData.value.password}
-                required
+                // required
                 className="form-control"
                 id="old-pass"
                 placeholder="*******"
@@ -113,7 +113,7 @@ const EditProfile = () => {
               <label htmlFor="new-pass">New Password</label>
               <input
                 {...register("newPass", {
-                  required: "New password is required",
+                  // required: "New password is required",
                   minLength: {
                     value: 5,
                     message: "Password must have at least 5 characters",
