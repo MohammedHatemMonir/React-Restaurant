@@ -4,15 +4,14 @@ import { useMutation } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 
 export default function ResetPass() {
-  const { id, token} =useParams();
-  console.log("id and token",id,token)
+  const { id, token } = useParams();
+  console.log("id and token", id, token);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  
   const m = useMutation({
     mutationKey: [],
     // cacheTime: 600000,
@@ -26,12 +25,12 @@ export default function ResetPass() {
     },
   });
 
-
-  const onSubmit = async function(data) {
+  const onSubmit = async function (data) {
     console.log("Password Reset");
     const result = await m.mutateAsync({ password: data.pass });
-    console.log("result from resetpass",result)
-  }
+    console.log("result from resetpass", result);
+    alert(result.data.msg);
+  };
   return (
     <div className="container text-center" style={{ marginTop: "30vh" }}>
       <div className="row justify-content-center mt-5">
@@ -49,8 +48,8 @@ export default function ResetPass() {
                 {...register("pass", {
                   required: "Password is required",
                   minLength: {
-                    value: 7,
-                    message: "Password must have at least 7 characters",
+                    value: 5,
+                    message: "Password must have at least 5 characters",
                   },
                 })}
               />

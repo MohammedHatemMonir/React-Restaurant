@@ -233,7 +233,7 @@ const forgetPassword = async (req, res) => {
         return res.json({ msg: "Error sending email" });
       } else {
         console.log("Email sent: " + info.response);
-        return res.json({ msg: "Email sent successfully" });
+        return res.json({ msg: "Email Send Successfully" });
       }
     });
   } catch (error) {
@@ -260,7 +260,7 @@ const resetPassword = async (req, res) => {
       const hashedPassword = await bcrypt.hash(password, 8);
       user.password = hashedPassword;
       await user.save();
-      return res.json({ msg: "Password reset successful" });
+      return res.json({ msg: "Password Reseated Successfully" });
     });
   } catch (error) {
     console.error("Error during password reset:", error);

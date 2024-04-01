@@ -140,7 +140,7 @@ const EditProfile = () => {
                 {...register("phone", {
                   minLength: {
                     value: 11,
-                    message: "Phone number must have at least 11 characters",
+                    message: "Phone number must have at least 11 number",
                   },
                 })}
                 type="number"
