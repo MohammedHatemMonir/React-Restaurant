@@ -1,9 +1,12 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { apiClient } from "./../../Data/apiclient";
 
-function EditModal({ resId, resName, openModal, closeModal }) {
+function DeleteModal({ resId, resName, openModal, closeModal }) {
+
+
+  const queryClient = useQueryClient();
   const m = useMutation({
     mutationKey: [],
     // cacheTime: 600000,
@@ -13,13 +16,15 @@ function EditModal({ resId, resName, openModal, closeModal }) {
       console.log("trying to load");
       let url = `/deleteresturant/${resId}`;
       console.log("posting to ", url);
-      return await apiClient.post(url, params);
+      return await apiClient.delete(url, params);
     },
   });
 
-  const onSubmit = async function (data) {
-    const result = await m.mutateAsync({ ResName: data.ResName });
-    alert(result.data.msg);
+  const onSubmit = async function () {
+    const result = await m.mutateAsync();
+
+      closeModal();
+      queryClient.invalidateQueries({queryKey: ["getAllresturant"]});
   };
 
   const MyVerticallyCenteredModal = () => (
@@ -57,4 +62,4 @@ function EditModal({ resId, resName, openModal, closeModal }) {
   return <MyVerticallyCenteredModal onHide={() => closeModal} />;
 }
 
-export default EditModal;
+export default DeleteModal;

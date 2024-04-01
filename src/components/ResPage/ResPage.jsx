@@ -22,7 +22,7 @@ import DeleteModal from "./DeleteModal";
 
 export default function ResPage() {
   const q = useQuery({
-    queryKey: ["getAllresturant"],
+    queryKey: ['getAllresturant'],
     cacheTime: 3 * 60000, //3 minutes
     queryFn: async () => {
       let url = "/getAllresturant";
@@ -142,6 +142,7 @@ function ResCard({ id, name, start1, ResImg, MealImg }) {
     <>
       {showDelModal.value == true && (
         <DeleteModal
+          resId = {id}
           resName={name}
           openModal={() => (showDelModal.value = true)}
           closeModal={onCloseDel}
