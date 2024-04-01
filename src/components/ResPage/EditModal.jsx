@@ -49,7 +49,7 @@ function EditModal({ openModal, closeModal, resName }) {
                   defaultValue={resName}
                   placeholder="Meal Name"
                   {...register("MealName", {
-                    required: "Please add new restaurant name",
+                    // required: "Please add new restaurant name",
                   })}
                 />
                 <span className="error" style={{ color: "red" }}>
@@ -63,7 +63,7 @@ function EditModal({ openModal, closeModal, resName }) {
                 <Form.Select
                   value={null}
                   {...register("Category", {
-                    required: "Please select a category",
+                    // required: "Please select a category",
                   })}
                 >
                   <option value="">Please Select ...</option>
@@ -84,7 +84,7 @@ function EditModal({ openModal, closeModal, resName }) {
                   name="mealImg"
                   placeholder="Restaurant Name"
                   {...register("MealImg", {
-                    required: "Please add new restaurant image",
+                    // required: "Please add new restaurant image",
                   })}
                 />
                 <span className="error" style={{ color: "red" }}>
@@ -100,7 +100,7 @@ function EditModal({ openModal, closeModal, resName }) {
                   name="mealDesc"
                   placeholder="Meal description"
                   {...register("Description", {
-                    required: "Please add new restaurant banner",
+                    // required: "Please add new restaurant banner",
                   })}
                 />
                 <span className="error" style={{ color: "red" }}>
@@ -116,7 +116,7 @@ function EditModal({ openModal, closeModal, resName }) {
                   placeholder="Restaurant Location"
                   value={currentLocation.value}
                   {...register("resLocation", {
-                    required: "Please enter restaurant location",
+                    // required: "Please enter restaurant location",
                   })}
                 />
                 <span className="error" style={{ color: "red" }}>

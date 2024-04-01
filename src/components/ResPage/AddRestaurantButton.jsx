@@ -84,7 +84,7 @@ export default function AddRestaurantButton() {
                     name="search-user"
                     placeholder="Search User"
                     {...register("search-user", {
-                      required: "Please enter user name to search",
+                      // required: "Please enter user name to search",
                     })}
                   />
                   <span className="error" style={{ color: "red" }}>
