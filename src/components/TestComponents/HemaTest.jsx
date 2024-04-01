@@ -1,37 +1,45 @@
-import React, { useRef } from 'react';
-import emailjs from '@emailjs/browser';
+import React from "react";
+import axios from "axios";
+import { useSignal } from "@preact/signals-react";
 
-export const ContactUs = () => {
-  const form = useRef();
+function ForgetPasswordForm() {
+  const email = useSignal("");
 
-  const sendEmail = (e) => {
+  console.log(email);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    emailjs
-    .sendForm("service_br4sfq8", "template_lt8ewd1", form.current, {
-      publicKey: "AAE4MZLVDGqWZN8gj",
-    })
-      .then(
-        () => {
-          console.log('SUCCESS!');
-        },
-        (error) => {
-          console.log('FAILED...', error.text);
-        },
+    try {
+      const response = await axios.post(
+        "http://localhost:5001/api/users/forget-password",
+        {
+          email: email,
+        }
       );
+
+      console.log("Password reset email sent successfully:", response.data);
+      alert("Email sent successfully");
+    } catch (error) {
+      console.error("Error sending password reset email:", error);
+      alert("('Error Sending Email");
+    }
   };
 
   return (
-    <form ref={form} onSubmit={sendEmail}>
-      <label>Name</label>
-      <input type="text" name="user_name" />
-      <label>Email</label>
-      <input type="email" name="user_email" />
-      <label>Message</label>
-      <textarea name="message" />
-      <input type="submit" value="Send" />
+    <form onSubmit={handleSubmit}>
+      <label>
+        Email:
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => (email.value = e.target.value)}
+          required
+        />
+      </label>
+      <button type="submit">Reset Password</button>
     </form>
   );
-};
+}
 
-export default ContactUs;
+export default ForgetPasswordForm;

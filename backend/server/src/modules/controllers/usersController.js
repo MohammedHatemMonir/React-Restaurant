@@ -1,24 +1,26 @@
 const { validationResult } = require("express-validator");
 const myusers = require("../../database/models/userModel");
 // const myusers = new User();
-const bcrypt =require('bcrypt');
-const passport = require('passport');
+const bcrypt = require("bcrypt");
+const passport = require("passport");
 const uploadImg = require("../../utils/uploadImg.js");
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const nodemailer=require('nodemailer')
-const jwt=require('jsonwebtoken')
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
+const nodemailer = require("nodemailer");
+const jwt = require("jsonwebtoken");
 // const generateToken = require("../../utils/GenerateToken.js");
 
 const signup = async (req, res) => {
   const { name, email, password, userImg } = req.body;
-  
+
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const user = await myusers.findOne({ email: { $regex: new RegExp(`^${email}$`, 'i') } });
+    const user = await myusers.findOne({
+      email: { $regex: new RegExp(`^${email}$`, "i") },
+    });
     if (user) {
       return res.json({ success: true, msg: "User already exists" });
     }
@@ -28,18 +30,31 @@ const signup = async (req, res) => {
     if (userImg) {
       UserImage = await uploadImg(userImg);
     }
-    
-    const newUser = await myusers.create({ name, email, password: hashedPassword, userImg: UserImage });
 
-    return res.json({ success: true, msg: "Signup successful", name, email, userImg: newUser.userImg });
+    const newUser = await myusers.create({
+      name,
+      email,
+      password: hashedPassword,
+      userImg: UserImage,
+    });
+
+    return res.json({
+      success: true,
+      msg: "Signup successful",
+      name,
+      email,
+      userImg: newUser.userImg,
+    });
   } catch (error) {
     console.error("Error during signup:", error);
-    return res.status(500).json({ success: false, error: "Internal server error" });
+    return res
+      .status(500)
+      .json({ success: false, error: "Internal server error" });
   }
 };
 
-
-const signin = async (req, res) => { //{email:"",password:""}
+const signin = async (req, res) => {
+  //{email:"",password:""}
   const { email, password } = req.body;
 
   try {
@@ -48,7 +63,9 @@ const signin = async (req, res) => { //{email:"",password:""}
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const user = await myusers.findOne({ email: { $regex: new RegExp(`^${email}$`, 'i') } });
+    const user = await myusers.findOne({
+      email: { $regex: new RegExp(`^${email}$`, "i") },
+    });
     if (!user) {
       return res.json({ msg: "User with this email does not exist" });
     }
@@ -58,13 +75,19 @@ const signin = async (req, res) => { //{email:"",password:""}
       // let token=generateToken({name:user.name,role:user.role,userId:user._id})
       // return res.json({ msg: `Welcome ${user.name}`, role: user.role, token });
 
-        req.session.user = user;
-        console.log("Seission User!",req.session.user);
-        return res.json({ success:true,id:user._id, role:user.role, name:user.name, email:user.email ,msg: `Welcome ${user.name}`,loggedIn:true });
-
-
+      req.session.user = user;
+      console.log("Seission User!", req.session.user);
+      return res.json({
+        success: true,
+        id: user._id,
+        role: user.role,
+        name: user.name,
+        email: user.email,
+        msg: `Welcome ${user.name}`,
+        loggedIn: true,
+      });
     } else {
-      return res.json({success:false, msg: "Incorrect password" });
+      return res.json({ success: false, msg: "Incorrect password" });
     }
   } catch (error) {
     console.error("Error during signin:", error);
@@ -72,133 +95,136 @@ const signin = async (req, res) => { //{email:"",password:""}
   }
 };
 
-
 const logout = async (req, res) => {
-
   try {
-  req.session.destroy(err => {
-    if (err) {
-      console.error('Error destroying session:', err);
-    }
-    // Redirect the user to the home page or wherever you want after logout
-    res.json({success:true,msg:"Logged out successfully"});
-  });
-  }
-  catch (error) {
+    req.session.destroy((err) => {
+      if (err) {
+        console.error("Error destroying session:", err);
+      }
+      // Redirect the user to the home page or wherever you want after logout
+      res.json({ success: true, msg: "Logged out successfully" });
+    });
+  } catch (error) {
     console.error("Error during logout:", error);
   }
-
 };
-
 
 const google = async (req, res) => {
-
   try {
-  req.session.destroy(err => {
-    if (err) {
-      console.error('Error destroying session:', err);
-    }
-    // Redirect the user to the home page or wherever you want after logout
-    res.json({success:true,msg:"Logged out successfully"});
-  });
-  }
-  catch (error) {
+    req.session.destroy((err) => {
+      if (err) {
+        console.error("Error destroying session:", err);
+      }
+      // Redirect the user to the home page or wherever you want after logout
+      res.json({ success: true, msg: "Logged out successfully" });
+    });
+  } catch (error) {
     console.error("Error during logout:", error);
   }
-
 };
-
-
-
 
 const session = async (req, res) => {
   try {
-
-
-    if(req.session.user){
-        const user = req.session.user;
-        // console.log("Seission Requested",req.session.user);
-        return res.json({ success:true,id:user._id, role:user.role, name:user.name, email:user.email ,msg: `Welcome ${user.name}`, loggedIn:true});
-    }else{
-      res.json({loggedIn:false})
+    if (req.session.user) {
+      const user = req.session.user;
+      // console.log("Seission Requested",req.session.user);
+      return res.json({
+        success: true,
+        id: user._id,
+        role: user.role,
+        name: user.name,
+        email: user.email,
+        msg: `Welcome ${user.name}`,
+        loggedIn: true,
+      });
+    } else {
+      res.json({ loggedIn: false });
     }
-
-
   } catch (error) {
     console.error("Error during signin:", error);
     return res.status(500).json({ error: "Internal server error" });
   }
 };
 
-const YOUR_GOOGLE_CLIENT_ID = "614280533363-92i70mp5io63o35tlp56apahkvbmnv32.apps.googleusercontent.com";
+const YOUR_GOOGLE_CLIENT_ID =
+  "614280533363-92i70mp5io63o35tlp56apahkvbmnv32.apps.googleusercontent.com";
 const YOUR_GOOGLE_CLIENT_SECRET = "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";
 
-passport.use(new GoogleStrategy({
-  clientID: YOUR_GOOGLE_CLIENT_ID,
-  clientSecret: YOUR_GOOGLE_CLIENT_SECRET,
-  callbackURL: "http://localhost:5001/auth/google/callback"
-},
-async function(accessToken, refreshToken, profile, cb) {
-  // Find or create a user in your database here
-  // For now, we'll just return the profile
-  try {
-      console.log("Google trying to find user");
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: YOUR_GOOGLE_CLIENT_ID,
+      clientSecret: YOUR_GOOGLE_CLIENT_SECRET,
+      callbackURL: "http://localhost:5001/auth/google/callback",
+    },
+    async function (accessToken, refreshToken, profile, cb) {
+      // Find or create a user in your database here
+      // For now, we'll just return the profile
+      try {
+        console.log("Google trying to find user");
 
-      let user = await myusers.findOne({ email: profile.emails[0].value});
-      console.log("Found User:",user)
-      if(!user?._id){
-        user = await myusers.create({ name: profile.name.givenName, email: profile.emails[0].value, password: "GooglePassword" });
-        console.log("Created Google User")
+        let user = await myusers.findOne({ email: profile.emails[0].value });
+        console.log("Found User:", user);
+        if (!user?._id) {
+          user = await myusers.create({
+            name: profile.name.givenName,
+            email: profile.emails[0].value,
+            password: "GooglePassword",
+          });
+          console.log("Created Google User");
+        }
+
+        console.log("Google User", user);
+
+        return cb(null, user);
+      } catch (error) {
+        console.error("Error during google signin:", error);
       }
-
-      console.log("Google User",user)
-  
-      return cb(null, user);
-    } catch (error) {
-      console.error("Error during google signin:", error);
     }
-}
-));
+  )
+);
 
 const terminateSession = async (req, res) => {
   try {
-    req.session.destroy(err => {
+    req.session.destroy((err) => {
       if (err) {
-        console.error('Error destroying session:', err);
+        console.error("Error destroying session:", err);
       }
       // Redirect the user to the home page or wherever you want after logout
-      res.json({success:true,msg:"Logged out successfully"});
+      res.json({ success: true, msg: "Logged out successfully" });
     });
-    }
-    catch (error) {
-      console.error("Error during logout:", error);
-    }
+  } catch (error) {
+    console.error("Error during logout:", error);
+  }
 };
-
 
 const forgetPassword = async (req, res) => {
   const { email } = req.body;
+
   try {
+    console.log("This the email", email);
     const user = await myusers.findOne({ email });
     if (!user) {
       return res.json({ msg: "Email not found" });
     }
-    const token = jwt.sign({ id: user._id }, "jwt_secret_key", { expiresIn: "1d" });
+    const token = jwt.sign({ id: user._id }, "jwt_secret_key", {
+      expiresIn: "1d",
+    });
 
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      service: "gmail",
       auth: {
-        user: 'dine.me155@gmail.com',
-        pass: 'zcna yjlh kwhi cdbr'
-      }
+        user: "dine.me155@gmail.com",
+        pass: "zcna yjlh kwhi cdbr",
+      },
     });
 
     const resetLink = `http://localhost:5001/api/users/reset-password/${user._id}/${token}`;
     const mailOptions = {
-      from: 'dine.me155@gmail.com',
+      from: "dine.me155@gmail.com",
       to: user.email,
-      subject: 'Reset your Password',
-      text: `Click the following link to reset your password: ${resetLink}`
+      subject: "Reset your Password",
+      text: `Click the following link to reset your password: ${resetLink}`,
     };
 
     transporter.sendMail(mailOptions, function (error, info) {
@@ -206,7 +232,7 @@ const forgetPassword = async (req, res) => {
         console.log("Error:", error);
         return res.json({ msg: "Error sending email" });
       } else {
-        console.log('Email sent: ' + info.response);
+        console.log("Email sent: " + info.response);
         return res.json({ msg: "Email sent successfully" });
       }
     });
@@ -218,7 +244,7 @@ const forgetPassword = async (req, res) => {
 
 const resetPassword = async (req, res) => {
   const { userId, token } = req.params;
-  const { password} = req.body;
+  const { password } = req.body;
 
   try {
     jwt.verify(token, "jwt_secret_key", async (err, decoded) => {
@@ -240,7 +266,16 @@ const resetPassword = async (req, res) => {
   }
 };
 
-module.exports = {signup,signin,logout,session,terminateSession,google,forgetPassword,resetPassword};
+module.exports = {
+  signup,
+  signin,
+  logout,
+  session,
+  terminateSession,
+  google,
+  forgetPassword,
+  resetPassword,
+};
 
 // Get
 // const getSingleuser = async (req, res) => {

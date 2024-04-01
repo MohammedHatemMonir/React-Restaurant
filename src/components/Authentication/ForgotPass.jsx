@@ -1,5 +1,9 @@
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useSignal } from "@preact/signals-react";
+import axios from "axios";
+import { useMutation } from "react-query";
+import { apiClient } from "./../../Data/apiclient";
 
 export default function ForgotPass() {
   const {
@@ -8,7 +12,23 @@ export default function ForgotPass() {
     handleSubmit,
   } = useForm();
 
-  const onSubmit = () => {};
+  const m = useMutation({
+    mutationKey: [],
+    // cacheTime: 600000,
+    // onSuccess: onSuccess,
+    // onError: onError,
+    mutationFn: async (params) => {
+      console.log("trying to load");
+      let url = "/api/users/forget-password";
+      console.log("posting to ", url);
+      return await apiClient.post(url, params);
+    },
+  });
+
+  const onSubmit = async function (data) {
+    const result = await m.mutateAsync({ email: data.email });
+    console.log(data.email);
+  };
 
   return (
     <div className="container text-center">
