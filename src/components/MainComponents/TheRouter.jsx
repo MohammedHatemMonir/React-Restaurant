@@ -64,7 +64,7 @@ export default function TheRouter() {
 
     // }, []);
   };
-  const protectedpaths = ["/login", "/signup", "/forgotpass"];
+  const protectedpaths = ["/login", "/signup", "/forget"];
 
   const navigateLogic = () => {
     const { pathname } = useLocation();
