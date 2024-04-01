@@ -2,6 +2,7 @@ const restaurant = require("../../database/models/resturant.Model");
 const { validationResult } = require("express-validator");
 const meal = require("../../database/models/Meals_model");
 const uploadImg = require('../../utils/uploadImg.js');
+const rescomment = require("../../database/models/resComments_model");
 
 const getResturantWithMeals = async (req, res) => {
     try {
@@ -79,8 +80,13 @@ const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResB
 const deleteresturant = async (req, res) => {
     try {
         const { id } = req.params;
-       const meals= await meal.deleteMany({ ResID:id });
-       const resturants=await restaurant.findOneAndDelete(id);
+        const meals= await meal.deleteMany({ ResID:id });
+        const comments= await rescomment.deleteMany({ ResID:id });
+        const resturants=await restaurant.findOneAndDelete(id);
+
+
+
+        
         if (!resturants) {
             return res.status(404).json({ message: "Restaurant Not Found" });
         }

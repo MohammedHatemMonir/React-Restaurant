@@ -27,6 +27,20 @@ module.exports = (image) => { // image = > base64
 }
 
 
+//Delete here:
+
+
+/* 
+const url = '...'; // your image URL
+const publicId = url.split('/').pop().split('.')[0];
+
+cloudinary.uploader.destroy(publicId, function(error, result) {
+    console.log(result, error);
+});
+
+*/
+
+
 
 
 
