@@ -1,7 +1,7 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-function EditModal({ openModal, closeModal ,resName}) {
+function EditModal({ openModal, closeModal, resName }) {
   const MyVerticallyCenteredModal = () => (
     <Modal
       show={openModal}
@@ -19,7 +19,11 @@ function EditModal({ openModal, closeModal ,resName}) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <h3>Are you sure you want to delete <span className="text-danger font-weight-bold">{resName}</span> restaurant</h3>
+        <h3>
+          Are you sure you want to delete
+          <span className="text-danger font-weight-bold"> {resName} </span>
+          restaurant
+        </h3>
       </Modal.Body>
       <Modal.Footer>
         <Button type="submit">Yes</Button>
