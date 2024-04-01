@@ -8,9 +8,7 @@ export default function ResetPass() {
     formState: { errors },
   } = useForm();
 
-  function onSubmit(e) {
-    e.preventDefault();
-  }
+  function onSubmit() {}
   return (
     <div className="container text-center" style={{ marginTop: "30vh" }}>
       <div className="row justify-content-center mt-5">

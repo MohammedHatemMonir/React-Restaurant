@@ -8,10 +8,7 @@ export default function ForgotPass() {
     handleSubmit,
   } = useForm();
 
-  const onSubmit = (e) => {
-    // Handle form submission here
-    e.preventDefault();
-  };
+  const onSubmit = () => {};
 
   return (
     <div className="container text-center">
