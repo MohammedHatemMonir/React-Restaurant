@@ -30,9 +30,11 @@ const analyze = async (req, res) => { //{text:"",mealid: ""}
             res.send("STOP HACKING!!!");
           }else{
             const text= req.body.text
-            // console.log(errors)
+            console.log("Python errors",errors)
             //------connecting to python---------
             const result = await analyzeText(text);
+
+            console.log("Python result",result)
             /////////////////////////////////////
             //------saving the comment---------
             const body = {
@@ -94,15 +96,16 @@ const res_comment = async (req, res) => { // {text:"",ResID: "" }
     // req.session.user._id
 
 
-    const errors =validationResult(req)
-    if(!errors.isEmpty()){
-      res.status(400).json(errors.array())
+    // const errors =validationResult(req)
+    // if(!errors.isEmpty()){
+    //   res.status(400).json(errors.array())
 
-    }else{
-
+    // }else{
+      console.log("THIS IS WORKING 1")
         if(!req.session.user){
           res.status(400).json({ error: "Not Authenticated" });
         }
+        console.log("THIS IS WORKING 2")
 
         const ResID = req.body.ResID;
         const userId = req.session.user._id;
@@ -111,6 +114,8 @@ const res_comment = async (req, res) => { // {text:"",ResID: "" }
         if (!resturants[0]) {
             res.send("STOP HACKING!!!");
         }else{
+
+          console.log("THIS IS WORKING 3")
           const text= req.body.text
           // console.log(errors)
           //------connecting to python---------
@@ -121,7 +126,7 @@ const res_comment = async (req, res) => { // {text:"",ResID: "" }
             Comment:text,
             commentSentmint:result.sentiment,
             ResID:req.body.ResID,
-            userId: userId
+            user: userId
           }
           const CommentS = new rescommentSchema(body);
           await CommentS.save();
@@ -130,7 +135,7 @@ const res_comment = async (req, res) => { // {text:"",ResID: "" }
           const Comment_rating=result.sentiment[2]*5
           const new_res_comment_num=resturants[0].comment_num+1
           const meals2 = await meal.find({ResID:ResID,comment_num: { $gte: 1}});
-          console.log(meals2.length)
+          // console.log(meals2.length)
           const new_rating=(Comment_rating+resturants[0].rating*(meals2.length+resturants[0].comment_num))/(meals2.length+new_res_comment_num)
           const res_body={
             ResName: resturants[0].ResName,
@@ -143,10 +148,11 @@ const res_comment = async (req, res) => { // {text:"",ResID: "" }
           await resturant.updateOne({ _id: ResID },{ $set: res_body});
           res.status(200).json({Comment:text,commentSentmint:result.sentiment,});
           ///////////////////////////////////////
-        }
+        
     }
   } catch (err) {
     res.status(400).json({ error: err });
+    console.log("res comment error", err)
   }
 };
 module.exports = {

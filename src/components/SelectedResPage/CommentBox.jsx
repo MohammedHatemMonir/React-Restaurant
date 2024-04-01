@@ -12,7 +12,7 @@ const CommentBox = ({ resID }) => {
     // onError: onError,
     mutationFn: async (params) => {
       console.log("trying to load");
-      let url = "/rescomment";
+      let url = "/analyze/rescomment";
       console.log("posting to ", url);
       return await apiClient.post(url, params);
     },
