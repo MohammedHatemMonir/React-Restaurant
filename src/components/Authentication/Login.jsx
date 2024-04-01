@@ -104,6 +104,13 @@ const Login = () => {
               >
                 SignUp
               </Link>
+
+              <Link
+                to="/forget"
+                style={{ textDecoration: "none", marginRight: "10px" }}
+              >
+                Forgot password?
+              </Link>
               <Button variant="primary" type="submit">
                 Login
               </Button>

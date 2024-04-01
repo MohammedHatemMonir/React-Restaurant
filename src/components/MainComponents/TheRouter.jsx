@@ -70,6 +70,7 @@ export default function TheRouter() {
     const { pathname } = useLocation();
 
     if (!UserData.value.loggedIn && !protectedpaths.includes(pathname)) {
+      console.log("navigate to login", protectedpaths.includes(pathname), "pathname:", pathname);
       navigate("/login");
     } else if (UserData.value.loggedIn && protectedpaths.includes(pathname)) {
       navigate("/");
@@ -80,19 +81,11 @@ export default function TheRouter() {
     <>
       <OnWindowChange />
       <Routes>
-        <Route
-          element={
-            <>
-              <Outlet />
-            </>
-          }
-        >
           <Route path="login" element={<Login />}></Route>
           <Route path="signup" element={<SignUp />}></Route>
-          <Route path="forget" element={<ForgotPass />}></Route>
+          <Route path="Forget" element={<ForgotPass />}></Route>
           <Route path="reset/:id/:token" element={<ResetPass />}></Route>
-        </Route>
-
+ 
         {UserData.value.loggedIn && (
           <Route path="/" element={<DefaultLayout />}>
             <Route index element={<ResPage />} />
