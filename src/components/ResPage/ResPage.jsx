@@ -116,6 +116,7 @@ export default function ResPage() {
 }
 
 function ResCard({ id, name, start1, ResImg, MealImg }) {
+  // console.log("Hema ID",id)
   const showDelModal = useSignal(false);
   const showEditModal = useSignal(false);
 
@@ -225,7 +226,7 @@ function ResCard({ id, name, start1, ResImg, MealImg }) {
               >
                 <Col sm={6} className="text-start">
                   <div onClick={onOpenDel}>
-                    <DeleteIcon className="delete-icon" />
+                    <DeleteIcon className="delete-icon" resId={id}/>
                   </div>
                 </Col>
                 <Col sm={6} className="text-end">

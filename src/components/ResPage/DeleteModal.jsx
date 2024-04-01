@@ -1,7 +1,27 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import { useMutation } from "react-query";
+import { apiClient } from "./../../Data/apiclient";
 
-function EditModal({ openModal, closeModal, resName }) {
+function EditModal({ resId, resName, openModal, closeModal }) {
+  const m = useMutation({
+    mutationKey: [],
+    // cacheTime: 600000,
+    // onSuccess: onSuccess,
+    // onError: onError,
+    mutationFn: async (params) => {
+      console.log("trying to load");
+      let url = `/deleteresturant/${resId}`;
+      console.log("posting to ", url);
+      return await apiClient.post(url, params);
+    },
+  });
+
+  const onSubmit = async function (data) {
+    const result = await m.mutateAsync({ ResName: data.ResName });
+    alert(result.data.msg);
+  };
+
   const MyVerticallyCenteredModal = () => (
     <Modal
       show={openModal}
@@ -26,7 +46,9 @@ function EditModal({ openModal, closeModal, resName }) {
         </h3>
       </Modal.Body>
       <Modal.Footer>
-        <Button type="submit">Yes</Button>
+        <Button type="submit" onClick={onSubmit}>
+          Yes
+        </Button>
         <Button onClick={closeModal}>No</Button>
       </Modal.Footer>
     </Modal>
