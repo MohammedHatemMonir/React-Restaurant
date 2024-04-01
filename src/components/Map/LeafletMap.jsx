@@ -19,10 +19,13 @@ const customMarkerIcon = L.icon({
   shadowSize: [41, 41],
 });
 
+
 function LeafletMap({
+  
   userLocation = useSignal([51.505, -0.09]),
   currentLocation = useSignal("Your Location"),
 }) {
+  
   const isLoading = useSignal(true);
   const defaultZoom = 14;
 
@@ -37,6 +40,12 @@ function LeafletMap({
           position.coords.longitude,
         ];
         isLoading.value = false;
+
+        const response = await fetch(
+          `https://nominatim.openstreetmap.org/reverse?lat=${userLocation.value[0]}&lon=${userLocation.value[1]}&format=json`
+        );
+        const data = await response.json();
+        currentLocation.value = data.display_name;
       } catch (error) {
         console.error("Error getting user location:", error);
         isLoading.value = false;
@@ -44,6 +53,8 @@ function LeafletMap({
     };
 
     fetchUserLocation();
+
+    
   }, []);
 
   const handleMarkerDragEnd = async (event) => {
