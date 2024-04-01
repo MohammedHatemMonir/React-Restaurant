@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useSignal } from "@preact/signals-react";
-import axios from "axios";
 import { useMutation } from "react-query";
 import { apiClient } from "./../../Data/apiclient";
 
@@ -27,7 +25,7 @@ export default function ForgotPass() {
 
   const onSubmit = async function (data) {
     const result = await m.mutateAsync({ email: data.email });
-    console.log(data.email);
+    alert(result.data.msg);
   };
 
   return (
