@@ -38,7 +38,9 @@ const Login = () => {
         email: result.data.email,
         role: result.data.role,
         id: result.data.id,
+        userImg: result.data.userImg,
         loggedIn: result.data.loggedIn,
+
       };
       if (result.data.role === "ADMIN") {
         navigate("/tutorials");

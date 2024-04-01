@@ -101,11 +101,9 @@ const res_comment = async (req, res) => { // {text:"",ResID: "" }
     //   res.status(400).json(errors.array())
 
     // }else{
-      console.log("THIS IS WORKING 1")
         if(!req.session.user){
           res.status(400).json({ error: "Not Authenticated" });
         }
-        console.log("THIS IS WORKING 2")
 
         const ResID = req.body.ResID;
         const userId = req.session.user._id;
@@ -114,8 +112,6 @@ const res_comment = async (req, res) => { // {text:"",ResID: "" }
         if (!resturants[0]) {
             res.send("STOP HACKING!!!");
         }else{
-
-          console.log("THIS IS WORKING 3")
           const text= req.body.text
           // console.log(errors)
           //------connecting to python---------

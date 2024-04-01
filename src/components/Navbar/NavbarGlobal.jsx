@@ -211,7 +211,7 @@ export default function NavbarGlobal() {
                 >
                   <Link to="/profile" className="position-relative">
                     <img
-                      src="https://cdn.icon-icons.com/icons2/2643/PNG/512/male_boy_person_people_avatar_icon_159358.png"
+                      src={UserData.value.userImg}
                       alt="User-Img"
                       className="i"
                     />

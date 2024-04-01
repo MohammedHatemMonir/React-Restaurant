@@ -44,6 +44,7 @@ export default function TheRouter() {
           email: result.data.email,
           role: result.data.role,
           id: result.data.id,
+          userImg: result.data.userImg,
           loggedIn: result.data.loggedIn,
         };
         localStorage.setItem("UserData", JSON.stringify(UserData.value));

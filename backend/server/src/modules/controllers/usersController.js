@@ -83,6 +83,7 @@ const signin = async (req, res) => {
         role: user.role,
         name: user.name,
         email: user.email,
+        userImg: user.userImg,
         msg: `Welcome ${user.name}`,
         loggedIn: true,
       });
@@ -134,6 +135,7 @@ const session = async (req, res) => {
         role: user.role,
         name: user.name,
         email: user.email,
+        userImg: user.userImg,
         msg: `Welcome ${user.name}`,
         loggedIn: true,
       });
