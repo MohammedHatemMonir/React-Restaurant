@@ -1,14 +1,37 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useMutation } from "react-query";
+import { apiClient } from "../../Data/apiclient";
 
 export default function ResetPass() {
+  const { id, token} =useParams();
+  console.log("id and token",id,token)
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  function onSubmit() {}
+  
+  const m = useMutation({
+    mutationKey: [],
+    // cacheTime: 600000,
+    // onSuccess: onSuccess,
+    // onError: onError,
+    mutationFn: async (params) => {
+      console.log("trying to load");
+      let url = `/api/users/reset-password/${id}/${token}`;
+      console.log("posting to ", url);
+      return await apiClient.post(url, params);
+    },
+  });
+
+
+  const onSubmit = async function(data) {
+    console.log("Password Reset");
+    const result = await m.mutateAsync({ password: data.pass });
+    console.log("result from resetpass",result)
+  }
   return (
     <div className="container text-center" style={{ marginTop: "30vh" }}>
       <div className="row justify-content-center mt-5">

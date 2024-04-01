@@ -91,7 +91,7 @@ export default function TheRouter() {
           <Route path="login" element={<Login />}></Route>
           <Route path="signup" element={<SignUp />}></Route>
           <Route path="forget" element={<ForgotPass />}></Route>
-          <Route path="reset" element={<ResetPass />}></Route>
+          <Route path="reset/:id/:token" element={<ResetPass />}></Route>
         </Route>
 
         {UserData.value.loggedIn && (

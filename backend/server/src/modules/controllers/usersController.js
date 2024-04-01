@@ -219,7 +219,7 @@ const forgetPassword = async (req, res) => {
       },
     });
 
-    const resetLink = `http://localhost:5001/api/users/reset-password/${user._id}/${token}`;
+    const resetLink = `http://localhost:3000/reset/${user._id}/${token}`;
     const mailOptions = {
       from: "dine.me155@gmail.com",
       to: user.email,
@@ -243,10 +243,12 @@ const forgetPassword = async (req, res) => {
 };
 
 const resetPassword = async (req, res) => {
-  const { userId, token } = req.params;
-  const { password } = req.body;
-
   try {
+    const { userId, token } = req.params;
+    const { password } = req.body;
+
+
+
     jwt.verify(token, "jwt_secret_key", async (err, decoded) => {
       if (err) {
         return res.status(400).json({ msg: "Invalid or expired token" });
