@@ -197,10 +197,6 @@ export default function NavbarGlobal() {
                 <div className="di ef b9 e3 e4" />
               </div>
               <div className="eg al eh c8">
-                {/* <PersonIcon /> */}
-                {/* { UserData.value.loggedIn &&
-                                 UserData.value.userImg
-                                 } */}
                 <div
                   style={{
                     width: "80px",

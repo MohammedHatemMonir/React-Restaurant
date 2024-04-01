@@ -9,9 +9,7 @@ const EditProfile = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-  };
+  const onSubmit = () => {};
 
   return (
     <div className="edit-profile">
@@ -32,7 +30,7 @@ const EditProfile = () => {
                 type="text"
                 className="form-control"
                 defaultValue={UserData.value.name}
-                required
+                // required
                 id="firstName"
                 placeholder="Name"
               />
@@ -49,7 +47,7 @@ const EditProfile = () => {
                   // required: "Profile image is required",
                 })}
                 type="file"
-                required
+                // required
                 className="form-control"
                 id="my-img"
               />
@@ -72,7 +70,7 @@ const EditProfile = () => {
                 },
               })}
               type="email"
-              required
+              // required
               defaultValue={UserData.value.email}
               className="form-control"
               id="email"
@@ -122,7 +120,7 @@ const EditProfile = () => {
                 type="password"
                 className="form-control"
                 id="new-pass"
-                required
+                // required
                 placeholder="*******"
               />
               {errors.newPass && (
@@ -145,7 +143,7 @@ const EditProfile = () => {
                 })}
                 type="number"
                 className="form-control"
-                required
+                // required
                 id="phone"
                 placeholder="01*********"
               />
@@ -167,7 +165,7 @@ const EditProfile = () => {
                 })}
                 type="text"
                 className="form-control"
-                required
+                // required
                 id="location"
                 placeholder="Location"
               />
