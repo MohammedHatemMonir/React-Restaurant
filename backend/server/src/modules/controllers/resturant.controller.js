@@ -79,11 +79,12 @@ const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResB
 const deleteresturant = async (req, res) => {
     try {
         const { id } = req.params;
-        const restaurants = await restaurant.findByIdAndDelete(id);
-        if (!restaurants) {
+       const meals= await meal.deleteMany({ ResID:id });
+       const resturants=await restaurant.findOneAndDelete(id);
+        if (!resturants) {
             return res.status(404).json({ message: "Restaurant not found" });
         }
-        res.status(200).json({ message: "Deleted successfully" });
+        res.status(200).json({ message: "Deleted successfully",resturants,meals});
     } catch (error) {
         res.status(500).json({ message: error });
     }

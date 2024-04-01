@@ -26,7 +26,7 @@ const addNewmeal = async (req, res) => { //{MealName:"",MealImg:"",Description:"
             if (!resturants[0]) {
                 res.send("RESTURAND DOSENT EXEST");
             }else{
-              const mealimage=await uploadImg(req.body.MealImg)
+              let mealimage=await uploadImg(req.body.MealImg)
               const comment_num=0
               const rating = 0
                 const body = {
