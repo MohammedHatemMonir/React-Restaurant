@@ -207,7 +207,7 @@ export default function NavbarGlobal() {
                 >
                   <Link to="/profile" className="position-relative">
                     <img
-                      src={UserData.value.userImg}
+                      src={UserData.value.loggedIn && UserData.value.userImg}
                       alt="User-Img"
                       className="i"
                     />

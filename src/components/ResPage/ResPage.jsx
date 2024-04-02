@@ -168,8 +168,8 @@ function ResCard({ id, name, start1, ResImg, MealImg }) {
             alt={name}
             style={{ width: "100%" }}
           />
-          <div className="card-content clickable-item">
-            <Link className="clickable-anchor" />
+          <div className="card-content clickable-item pt-1">
+            <Link className="clickable-anchor  " />
             <div>
               <div className="pull-right flip">
                 <div
@@ -179,10 +179,10 @@ function ResCard({ id, name, start1, ResImg, MealImg }) {
                   <div className="vue-star-rating position-relative">
                     <div
                       style={{
-                        transform: "scale(0.45)",
+                        transform: "scale(0.5)",
                         position: "absolute",
-                        marginLeft: "-145px",
-                        marginTop: "-21px",
+                        marginLeft: "-147px",
+                        marginTop: "-23px",
                       }}
                     >
                       <Stars stars1={start1} />

@@ -62,7 +62,7 @@ const NavWithSlider = () => {
                 <p style={{ fontSize: "70px", fontWeight: "bold" }}>
                   Slider {index + 1}
                 </p>
-                <h4 style={{marginTop:"-20px"}}>{item.description}</h4>
+                <h4 style={{marginTop:"-30px"}}>{item.description}</h4>
               </div>
             </div>
           ))}

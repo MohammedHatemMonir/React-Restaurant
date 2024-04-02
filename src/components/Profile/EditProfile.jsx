@@ -1,6 +1,9 @@
 import { useForm } from "react-hook-form";
 import { UserData } from "../../Globals";
 import "./Edit.scss";
+import { useSignal } from "@preact/signals-react";
+import { Button, Col } from "reactstrap";
+import LeafletMap from "./../Map/LeafletMap";
 
 const EditProfile = () => {
   const {
@@ -8,6 +11,14 @@ const EditProfile = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const currentLocation = useSignal("");
+  const showMap = useSignal(false);
+  const myBtn = useSignal(true);
+
+  function handleBtnClick() {
+    showMap.value = !showMap.value;
+    myBtn.value = !myBtn.value;
+  }
 
   const onSubmit = () => {};
 
@@ -58,7 +69,6 @@ const EditProfile = () => {
               )}
             </div>
           </div>
-
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
@@ -81,9 +91,9 @@ const EditProfile = () => {
                 {errors.email.message}
               </span>
             )}
-            <br />
-
-            <div className="form-group">
+          </div>
+          <div className="form-row">
+            <div className="form-group col-md-6">
               <label htmlFor="old-pass">Old Password</label>
               <input
                 {...register("oldPass", {
@@ -106,8 +116,7 @@ const EditProfile = () => {
                 </span>
               )}
             </div>
-
-            <div className="form-group">
+            <div className="form-group col-md-6">
               <label htmlFor="new-pass">New Password</label>
               <input
                 {...register("newPass", {
@@ -130,20 +139,19 @@ const EditProfile = () => {
               )}
             </div>
           </div>
-
+     
           <div className="form-row">
-            <div className="form-group col-md-6">
+            <div className="form-group col-md-5">
               <label htmlFor="phone">Phone Number</label>
               <input
                 {...register("phone", {
                   minLength: {
                     value: 11,
-                    message: "Phone number must have at least 11 number",
+                    message: "Phone number must have at least 11 digits",
                   },
                 })}
-                type="number"
+                type="tel"
                 className="form-control"
-                // required
                 id="phone"
                 placeholder="01*********"
               />
@@ -154,7 +162,7 @@ const EditProfile = () => {
               )}
             </div>
 
-            <div className="form-group col-md-6">
+            <div className="form-group col-md-5">
               <label htmlFor="location">Location</label>
               <input
                 {...register("location", {
@@ -165,8 +173,8 @@ const EditProfile = () => {
                 })}
                 type="text"
                 className="form-control"
-                // required
                 id="location"
+                value={currentLocation}
                 placeholder="Location"
               />
               {errors.location && (
@@ -175,13 +183,31 @@ const EditProfile = () => {
                 </span>
               )}
             </div>
+
+            <div className="form-group col-sm-12 col-md-2 d-flex justify-content-center align-items-end">
+              <Button
+                className={`${myBtn.value ? "bg-primary" : " bg-danger"}`}
+                onClick={handleBtnClick}
+              >
+                {myBtn.value ? "Open Map" : "Close Map"}
+              </Button>
+            </div>
+
+            {showMap.value && (
+              <div className="form-group col-md-12">
+                <div style={{ transition: "all 2s" }}>
+                  <LeafletMap currentLocation={currentLocation} />
+                </div>
+              </div>
+            )}
           </div>
-          <div className="form__btns row text-center">
+
+          <div className="form__btns row text-center mt-3">
             <div>
               <button
                 type="submit"
                 id="save"
-                className="btn btn-primary col-sm-4 mr-5"
+                className="btn btn-primary col-sm-4 my-3 mr-4"
               >
                 Save
               </button>

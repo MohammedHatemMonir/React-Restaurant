@@ -26,7 +26,6 @@ export default function Profile() {
           <br />
           <i className="fa fa-lock" />
           <br />
-
           <h4 className="profile-status">This profile is hidden</h4>
         </div>
       </div>
