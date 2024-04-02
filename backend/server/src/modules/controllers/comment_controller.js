@@ -56,7 +56,8 @@ const analyze = async (req, res) => { //{text:"",mealid: ""}
               Price:meals[0].Price,
               rating: new_rating,
               ResID:meals[0].ResID ,
-              comment_num:new_comment_num}
+              comment_num:new_comment_num
+            }
               console.log (meal_body)
             const meal_update = await meal.updateOne({ _id: mealid },{ $set: meal_body});
             console.log(meals[0].rating)
@@ -132,13 +133,13 @@ const res_comment = async (req, res) => { // {text:"",ResID: "" }
           const new_res_comment_num=resturants[0].comment_num+1
           const meals2 = await meal.find({ResID:ResID,comment_num: { $gte: 1}});
           // console.log(meals2.length)
-          const new_rating=(Comment_rating+resturants[0].rating*(meals2.length+resturants[0].comment_num))/(meals2.length+new_res_comment_num)
+          const new_rating=(Comment_rating+(resturants[0].rating*(meals2.length+resturants[0].comment_num)))/(meals2.length+new_res_comment_num)
           const res_body={
             ResName: resturants[0].ResName,
             ResImg: resturants[0].ResImg,
             Categoery: resturants[0].Categoery,
             rating:new_rating,
-            comment_num:resturants[0].comment_num,
+            comment_num:new_res_comment_num,
             creation_date:resturants[0].creation_date
           }
           await resturant.updateOne({ _id: ResID },{ $set: res_body});

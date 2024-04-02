@@ -144,7 +144,7 @@ function ResCard({ id, name, start1, ResImg, MealImg }) {
     <>
       {showDelModal.value == true && (
         <DeleteModal
-          resId={id}
+          ResId={id}
           resName={name}
           openModal={() => (showDelModal.value = true)}
           closeModal={onCloseDel}
@@ -229,7 +229,7 @@ function ResCard({ id, name, start1, ResImg, MealImg }) {
               >
                 <Col sm={6} className="text-start">
                   <div onClick={onOpenDel}>
-                    <DeleteIcon className="delete-icon" resId={id} />
+                    <DeleteIcon className="delete-icon" />
                   </div>
                 </Col>
                 <Col sm={6} className="text-end">
