@@ -48,7 +48,7 @@ export default function TheRouter() {
           loggedIn: result.data.loggedIn,
         };
         localStorage.setItem("UserData", JSON.stringify(UserData.value));
-        console.log("session", result.data);
+        // console.log("session", result.data);
 
         return result;
       },

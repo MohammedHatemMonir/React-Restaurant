@@ -7,7 +7,7 @@ import { useSignal } from "@preact/signals-react";
 import LeafletMap from "./../Map/LeafletMap";
 import { Button } from "reactstrap";
 import { convertBase64 } from "../../Globals";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 
 export default function AddRestaurantButton() {
@@ -15,6 +15,7 @@ export default function AddRestaurantButton() {
   const showMap = useSignal(false);
   const myBtn = useSignal(true);
 
+  const queryClient= useQueryClient();
   function handleBtnClick() {
     showMap.value = !showMap.value;
     myBtn.value = !myBtn.value;
@@ -43,10 +44,17 @@ export default function AddRestaurantButton() {
 
   async function submit(data) {
     // console.log("submit! ADD RESTAURANT", data);
-    const resImg64 = await convertBase64(data.resImg[0]);
-    const resBanner64 = await convertBase64(data.resBanner[0]);
+    let resImg64;
+    let resBanner64;
+    if(data.resImg[0])
+      resImg64 = await convertBase64(data.resImg[0]);
+    if(data.resBanner[0])
+      resBanner64 = await convertBase64(data.resBanner[0]);
 
+
+    if(resImg64)
     data.resImg = resImg64;
+    if(resBanner64)
     data.resBanner = resBanner64;
 
     console.log("NEW DATA", data);
@@ -56,6 +64,8 @@ export default function AddRestaurantButton() {
 
     if (ret) {
       ShowSignal.value = false;
+      queryClient.invalidateQueries(["getAllresturant"]);
+      queryClient.refetchQueries(["getAllresturant"]);
       reset();
     }
   }
@@ -66,7 +76,9 @@ export default function AddRestaurantButton() {
         ButtonText={<AddIcon />}
         Show={ShowSignal}
         Header={"Add new restaurant"}
+        
         submit={() => {
+          !m.isLoading &&
           handleSubmit(submit)();
         }}
         onCancel={() => {
@@ -134,9 +146,9 @@ export default function AddRestaurantButton() {
                     type="file"
                     name="resImg"
                     placeholder="Restaurant Image "
-                    {...register("resImg", {
-                      required: "Please add restaurant image",
-                    })}
+                    {...register("resImg",{
+                      required: "Please add restaurant Image",
+                    } )}
                   />
                   <span className="error" style={{ color: "red" }}>
                     {errors["resImg"] && errors["resImg"].message}
@@ -150,8 +162,8 @@ export default function AddRestaurantButton() {
                     type="file"
                     name="resBanner"
                     placeholder="Restaurant Banner"
-                    {...register("resBanner", {
-                      required: "Please add restaurant banner",
+                    {...register("resBanner",{
+                      required: "Please add restaurant Banner",
                     })}
                   />
                   <span className="error" style={{ color: "red" }}>

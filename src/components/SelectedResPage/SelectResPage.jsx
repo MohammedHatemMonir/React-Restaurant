@@ -344,7 +344,7 @@ export default function SelectResPage() {
                                   stars={item.commentSentmint[2] * 5}
                                   emotion={item.commentSentmint[1]}
                                   comment={item.Comment}
-                                  image={"https://www.w3schools.com/w3images/avatar6.png"}
+                                  image={item.user.userImg || "https://www.w3schools.com/w3images/avatar6.png"}
                                 />
                                 )
                               })}

@@ -46,7 +46,7 @@ function DeleteModal({ resId, resName, openModal, closeModal }) {
       <Modal.Body>
         <h3>
           Are you sure you want to delete
-          <span className="text-danger font-weight-bold"> {resName} </span>
+          <span className="text-danger font-weight-bold"> {resName} + {resId} </span>
           restaurant
         </h3>
       </Modal.Body>

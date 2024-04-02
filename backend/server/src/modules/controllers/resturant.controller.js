@@ -47,7 +47,7 @@ const getAllresturant = async (req, res) => {
 
 const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResBanner} Remove validation of .png,add banner to database ,Upload image from request body
     try {
-        console.log("Get all res started, body:", req.body)
+        console.log("add new res body:", req.body)
         if (req.session.user.role != "ADMIN")
             return res.status(400).json({ errors: "Not Authenticated" });
 
@@ -65,12 +65,13 @@ const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResB
             const rating = 0;
             const Meals_num = 0;
             const comment_num = 0;
-            console.log("Upload image here")
-            const ResImg = await uploadImg(req.body.resImg);
-            console.log("ResImg", ResImg)
-            const ResBanner= await uploadImg(req.body.resBanner);
-            console.log("ResBanner", ResBanner)
-                try {
+            let ResImg
+            let ResBanner;
+            if(req.body.resImg)
+                ResImg = await uploadImg(req.body.resImg);
+            if(req.body.resBanner)
+                ResBanner= await uploadImg(req.body.resBanner);
+            try {
                     const newRestaurantData = {
                         ResName: req.body.ResName,
                         ResImg: ResImg, 
@@ -102,7 +103,7 @@ const deleteresturant = async (req, res) => {
         const { id } = req.params;
         const meals= await meal.deleteMany({ ResID:id });
         const comments= await rescomment.deleteMany({ ResID:id });
-        const resturants=await restaurant.findOneAndDelete(id);
+        const resturants=await restaurant.findOneAndDelete({_id: id});
 
 
 
