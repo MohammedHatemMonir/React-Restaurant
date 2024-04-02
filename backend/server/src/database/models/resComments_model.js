@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const userModel = require("./userModel.js")
+
 const rescommentSchema=mongoose.Schema({
     Comment:{
         type:String,
@@ -8,9 +10,9 @@ const rescommentSchema=mongoose.Schema({
         type:Array,
         require:[true,"Enter resturant ResImg"]
     },
-    ResID: { type: String, ref: 'meal' },
+    ResID: { type: String, ref: 'restaurant' },
     user: {
-        type: mongoose.Schema.Types.ObjectId, ref: "user", required: true
+        type: mongoose.Schema.Types.ObjectId, ref: "User", required: true
     }
 
     // MealID: { type: ObjectId, ref: 'meal' }

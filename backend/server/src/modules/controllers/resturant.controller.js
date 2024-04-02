@@ -3,6 +3,7 @@ const { validationResult } = require("express-validator");
 const meal = require("../../database/models/Meals_model");
 const uploadImg = require('../../utils/uploadImg.js');
 const rescomment = require("../../database/models/resComments_model");
+const userModel = require("../../database/models/userModel.js");
 
 const getResturantWithMeals = async (req, res) => {
     try {
@@ -10,11 +11,30 @@ const getResturantWithMeals = async (req, res) => {
         const meals = await meal.find({ ResID: id });
         const RestaurantData = await restaurant.findOne({ _id: id });
 
-        res.status(200).json({ restaurant: RestaurantData, meals: meals });
+        const restaurantComments = await rescomment.find({ ResID: id }).populate('user','name email -_id');
+        res.status(200).json({ restaurant: RestaurantData, meals: meals,restaurantComments });
     } catch (error) {
         res.status(500).json({ message: error });
     }
 }
+const getRestaurantWithComments = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const restaurantComments = await rescomment.find({ ResID: id }).populate('user');
+        //const userComments = await rescomment.find({ user: id });
+
+        if (!restaurantComments) {
+            return res.status(404).json({ message: "Restaurant comments not found" });
+        }
+
+        res.status(200).json({ restaurantComments });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+}
+
+
 
 const getAllresturant = async (req, res) => {
     try {
@@ -110,5 +130,6 @@ module.exports = {
     addNewresturant,
     deleteresturant,
     postRestaurantComment,
-    getResturantWithMeals
+    getResturantWithMeals,
+    getRestaurantWithComments
 };
