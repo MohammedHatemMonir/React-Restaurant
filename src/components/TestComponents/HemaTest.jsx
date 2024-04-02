@@ -1,45 +1,61 @@
-import React from "react";
-import axios from "axios";
-import { useSignal } from "@preact/signals-react";
-
-function ForgetPasswordForm() {
-  const email = useSignal("");
-
-  console.log(email);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      const response = await axios.post(
-        "http://localhost:5001/api/users/forget-password",
-        {
-          email: email,
-        }
-      );
-
-      console.log("Password reset email sent successfully:", response.data);
-      alert("Email sent successfully");
-    } catch (error) {
-      console.error("Error sending password reset email:", error);
-      alert("('Error Sending Email");
-    }
-  };
-
+import "./HemaTest.scss";
+import logo from "../../images/DineMeLogo-modified.png";
+export default function HemaTest() {
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Email:
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => (email.value = e.target.value)}
-          required
-        />
-      </label>
-      <button type="submit">Reset Password</button>
-    </form>
+    <div className="my-login">
+      <div className="sidenav">
+        <div className="login-main-text  d-flex justify-content-center align-items-center">
+          <img
+            src={logo}
+            style={{
+              // display: "block",
+              // margin: "-30px auto",
+              transform: "scale(0.6)",
+              // marginRight:"-20px"
+            }}
+          />
+        </div>
+      </div>
+      <div className="main ">
+        <div
+          className="col-md-6 col-sm-12"
+          style={{ marginLeft: 60, paddingBottom: 30 }}
+        >
+          <br />
+          <h2>Login Form</h2>
+          <div className="login-form">
+            <form>
+              <div className="form-group">
+                <label>User Name</label>
+                <input type="text" className="form-control" />
+              </div>
+              <div className="form-group">
+                <label>Password</label>
+                <input type="password" className="form-control" />
+              </div>
+              <div className="form-check mt-2 mb-3">
+                <input
+                  className="form-check-input "
+                  type="checkbox"
+                  id="inlineCheckbox1"
+                  defaultValue="option1"
+                />
+                <label className="form-check-label " htmlFor="inlineCheckbox1">
+                  Remember Me
+                </label>
+              </div>
+              <section>
+                <a href="#" style={{ textDecoration: "none" }}>
+                  Forgot Password
+                </a>
+              </section>
+              <button type="submit" className="btn btn-black mt-3">
+                Login
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
-
-export default ForgetPasswordForm;

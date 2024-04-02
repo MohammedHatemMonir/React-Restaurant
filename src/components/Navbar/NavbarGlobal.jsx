@@ -34,7 +34,7 @@ export default function NavbarGlobal() {
     Show.value = false;
   }
   return (
-    <header className="select-res-page">
+    <header className="select-res-page" style={{zIndex:"100"}}>
       <div>
         <div>
           <div className="bz c0 c1 c2 c3 c4">
