@@ -12,7 +12,7 @@ const getResturantWithMeals = async (req, res) => {
         const RestaurantData = await restaurant.findOne({ _id: id });
 
         const restaurantComments = await rescomment.find({ ResID: id }).populate('user','name email -_id');
-        res.status(200).json({ restaurant: RestaurantData, meals: meals,restaurantComments });
+        res.status(200).json({ restaurant: RestaurantData, meals: meals,resComments: restaurantComments });
     } catch (error) {
         res.status(500).json({ message: error });
     }

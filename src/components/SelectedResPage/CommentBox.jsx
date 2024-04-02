@@ -1,10 +1,11 @@
 import { useSignal } from "@preact/signals-react";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 
 const CommentBox = ({ resID }) => {
   const comment = useSignal("");
 
+  const queryClient = useQueryClient();
   const m = useMutation({
     mutationKey: [],
     // cacheTime: 600000,
@@ -26,14 +27,20 @@ const CommentBox = ({ resID }) => {
     var j = { text: comment.value, ResID: props.resID };
     try {
       await m.mutateAsync(j);
+      queryClient.invalidateQueries({queryKey: ["rest"+resID]});
+      comment.value = "";
+
     } catch (e) {
       console.log("Failed to post comment", e);
     }
   }
 
   const handleSubmit = () => {
-    PostRestaurantComment({ comment: comment.value, resID: resID });
-    console.log("Submitted:", comment.value);
+
+    if(comment.value != ""){
+      PostRestaurantComment({ comment: comment.value, resID: resID });
+      console.log("Submitted:", comment.value);
+    }
     // Clear the input field after submission if you need
     // comment.value = "";
   };

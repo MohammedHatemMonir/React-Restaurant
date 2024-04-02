@@ -17,7 +17,7 @@ export default function SelectResPage() {
   console.log("resID", resID);
 
   const q = useQuery({
-    queryKey: [resID],
+    queryKey: ["rest"+resID],
 
     cacheTime: 60000,
     // staleTime: 60000,
@@ -336,7 +336,18 @@ export default function SelectResPage() {
                               <Col sm={4} style={{ transform: "scale(1)" }}>
                                 <CommentBox resID={resID} />
                                 {/* <Reviews /> */}
-                                <ReviewsCard />
+                              {!q.isLoading && q.data?.data?.resComments?.map((item, index) => {
+                                return(
+                                <ReviewsCard
+                                  key={index+"rescomment"+resID}
+                                  name ={item.user.name}
+                                  stars={item.commentSentmint[2] * 5}
+                                  emotion={"sad"}
+                                  comment={item.Comment}
+                                  image={"https://www.w3schools.com/w3images/avatar6.png"}
+                                />
+                                )
+                              })}
                               </Col>
                             </Row>
                           </div>
