@@ -4,8 +4,6 @@ import { useMutation, useQueryClient } from "react-query";
 import { apiClient } from "./../../Data/apiclient";
 
 function DeleteModal({ resId, resName, openModal, closeModal }) {
-
-
   const queryClient = useQueryClient();
   const m = useMutation({
     mutationKey: [],
@@ -23,8 +21,8 @@ function DeleteModal({ resId, resName, openModal, closeModal }) {
   const onSubmit = async function () {
     const result = await m.mutateAsync();
 
-      closeModal();
-      queryClient.invalidateQueries({queryKey: ["getAllresturant"]});
+    closeModal();
+    queryClient.invalidateQueries({ queryKey: ["getAllresturant"] });
   };
 
   const MyVerticallyCenteredModal = () => (
@@ -46,7 +44,7 @@ function DeleteModal({ resId, resName, openModal, closeModal }) {
       <Modal.Body>
         <h3>
           Are you sure you want to delete
-          <span className="text-danger font-weight-bold"> {resName} + {resId} </span>
+          <span className="text-danger font-weight-bold"> {resName} </span>
           restaurant
         </h3>
       </Modal.Body>
