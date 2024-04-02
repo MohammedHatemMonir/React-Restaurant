@@ -342,7 +342,7 @@ export default function SelectResPage() {
                                   key={index+"rescomment"+resID}
                                   name ={item.user.name}
                                   stars={item.commentSentmint[2] * 5}
-                                  emotion={"sad"}
+                                  emotion={item.commentSentmint[1]}
                                   comment={item.Comment}
                                   image={"https://www.w3schools.com/w3images/avatar6.png"}
                                 />

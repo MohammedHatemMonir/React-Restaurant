@@ -3,7 +3,7 @@ import Stars from "./../Stars/Stars";
 
 const ReviewsCard = ({name, stars, emotion, image, comment }) => {
   return (
-    <div className="reviews-card py-5">
+    <div className="reviews-card py-3">
       <div className="testimonials" id="testimonials">
         <div className="container">
           <div className="box" style={{ backgroundColor: "#ebebeb" }}>
@@ -12,7 +12,7 @@ const ReviewsCard = ({name, stars, emotion, image, comment }) => {
               alt="img"
             />
             <h3>{name}</h3>
-            <span className="title">Mern Stack Developer</span>
+            <span className="title">{emotion}</span>
             <div
               style={{
                 transform: "scale(0.5)",
