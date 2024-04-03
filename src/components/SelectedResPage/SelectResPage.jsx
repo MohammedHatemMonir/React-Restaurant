@@ -37,7 +37,7 @@ export default function SelectResPage() {
       <div id="page-content restaurant-container" className="page-content">
         <div className="restaurant-cover active-on-menu-tab  menu-tab-activated">
           {/* Banner Img */}
-          <img src={q.data?.data?.restaurant?.ResBanner} alt="cover photo" />
+          <img loading="lazy" src={q.data?.data?.restaurant?.ResBanner} alt="cover photo" />
         </div>
 
         <div className="container">
@@ -47,6 +47,7 @@ export default function SelectResPage() {
                 <div className="restaurant-image image-ratio ratio-square">
                   {/* Res Image */}
                   <img
+                    loading="lazy"
                     src={q.data?.data?.restaurant?.ResImg}
                     alt={q.data?.data?.restaurant?.ResName}
                     className="v-center"
