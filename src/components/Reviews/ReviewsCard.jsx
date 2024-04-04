@@ -43,7 +43,7 @@ const ReviewsCard = ({ name, stars, emotion, image, comment }) => {
     default:
       emoji.value = null;
   }
-  
+
   return (
     <div className="reviews-card py-3">
       <div className="testimonials" id="testimonials">
