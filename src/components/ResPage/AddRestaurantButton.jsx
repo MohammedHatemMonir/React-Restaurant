@@ -46,6 +46,7 @@ export default function AddRestaurantButton() {
     // console.log("submit! ADD RESTAURANT", data);
     let resImg64;
     let resBanner64;
+    data.location = currentLocation.value;
     if(data.resImg[0])
       resImg64 = await convertBase64(data.resImg[0]);
     if(data.resBanner[0])

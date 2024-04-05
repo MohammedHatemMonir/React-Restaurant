@@ -108,7 +108,7 @@ export default function SelectResPage() {
                           </svg>
                         </span>
                         <p className="info-value">
-                          Tivolli Dome, Omar Ibn Khattab St ( Delivery Only )
+                          {q.data?.data?.restaurant?.location}
                         </p>
                       </div>
                     </div>

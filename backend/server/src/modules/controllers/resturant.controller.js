@@ -27,7 +27,7 @@ const getAllresturant = async (req, res) => {
     }
 }
 
-const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResBanner} Remove validation of .png,add banner to database ,Upload image from request body
+const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResBanner,location} Remove validation of .png,add banner to database ,Upload image from request body
     try {
         console.log("Get all res started, body:", req.body)
         if (req.session.user.role != "ADMIN")
@@ -108,7 +108,7 @@ const postRestaurantComment = async (req, res) => {
     }
 }
 
-const updateRestaurant = async (req, res) => {
+const updateRestaurant = async (req, res) => { //{ResName, ResImg, location,ResBanner}
     try {
         const { id } = req.params;
 
@@ -116,12 +116,14 @@ const updateRestaurant = async (req, res) => {
             return res.status(400).json({ errors: "Not Authenticated" });
         }
 
-        
+        const restaurant = await restaurant.findById(id);
+        if(!restaurant)  return res.status(404).json({ message: "Restaurant not found" });
+
         const updatedRestaurantData = {
-            ResName: req.body.ResName,
-            ResImg: req.body.ResImg,
-            ResBanner: req.body.ResBanner,
-            location:req.body.location
+            ResName: req.body.ResName || restaurant.ResName,
+            ResImg: req.body.ResImg || restaurant.ResImg,
+            ResBanner: req.body.ResBanner || restaurant.ResBanner,
+            location:req.body.location || restaurant.location
         };
 
         
