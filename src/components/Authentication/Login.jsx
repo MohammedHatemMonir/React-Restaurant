@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 import { UserData } from "../../Globals";
-import "./Login.scss";
+import "./Login&Signup.scss";
 import logo from "../../images/DineMeLogo-modified.png";
 import { useSignal } from "@preact/signals-react";
 import { Button } from "reactstrap";
@@ -57,7 +57,7 @@ const Login = () => {
     showPass.value = !showPass.value;
   }
   return (
-    <div className="my-login">
+    <div className="my-login-my-singup">
       <div className="sidenav">
         <div className="login-main-text  d-flex justify-content-center align-items-center">
           <img
@@ -68,24 +68,31 @@ const Login = () => {
           />
         </div>
       </div>
-      <div className="main ">
+      <div className="main">
         <div
           className="col-md-6 col-sm-12"
           style={{ marginLeft: 60, paddingBottom: 30 }}
         >
           <div className="login-form">
+            <div className="text-center">
+              <h3>Login</h3>
+              <p>Welcome back! Please sign in to your account</p>
+            </div>
+
             <form onSubmit={handleSubmit(onSubmit)}>
               <Button
                 variant="secondary"
-                className="w-100 my-3"
+                className="w-100 mb-3"
                 onClick={() => {
                   window.location.href = "http://localhost:5001/auth/google";
                 }}
               >
                 Sign in with Google
               </Button>
-              <p className="text-center font-weight-bold my-2">OR</p>
-              <h2>Login</h2> <br />
+              <div className="position-relative mt-4">
+                <hr className="bg-200" />
+                <div className="text-center font-weight-bold">Use Email</div>
+              </div>
               <div className="form-group">
                 <label>Email</label>
                 <input
@@ -137,11 +144,21 @@ const Login = () => {
                 </label>
               </div>
               <section>
-                <Link className="text-decoration-none" to="/forget">
-                  Forgot Password
-                </Link>
+                <span>
+                  <Link
+                    to="/signup"
+                    style={{ textDecoration: "none", marginRight: "10px" }}
+                  >
+                    SignUp
+                  </Link>
+                  <span>
+                    <Link className="text-decoration-none" to="/forget">
+                      Forgot Password
+                    </Link>
+                  </span>
+                </span>
               </section>
-              <button type="submit" className="btn btn-black mt-3">
+              <button type="submit" className="btn btn-black text-light mt-3">
                 Login
               </button>
             </form>
