@@ -11,11 +11,12 @@ import Stars from "./../Stars/Stars";
 import { useSignal } from "@preact/signals-react";
 
 const ReviewsCard = ({ name, stars, emotion, image, comment }) => {
-  console.log("hema", Math.trunc(stars));
   const emoji = useSignal(<></>);
+
   const importantStyle = {
     color: "green !important",
   };
+
   switch (emotion) {
     case "anger":
       emoji.value = <span> 😠 </span>;
@@ -61,7 +62,7 @@ const ReviewsCard = ({ name, stars, emotion, image, comment }) => {
                 margin: "-10px 370px 45px 0px",
               }}
             >
-              <Stars stars1={Math.trunc(stars)} />
+              <Stars stars1={stars} />
             </div>
             <p>{comment}</p>
           </div>
