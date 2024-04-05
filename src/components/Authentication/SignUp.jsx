@@ -19,6 +19,7 @@ import { useMutation } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 import { Link } from "react-router-dom";
 import { useSignal } from "@preact/signals-react";
+import { toast } from "react-toastify";
 export default function SignUp() {
   const {
     handleSubmit,
@@ -59,9 +60,27 @@ export default function SignUp() {
     const result = await m.mutateAsync(data);
 
     if (!result.data.success) {
-      alert(result.data?.msg);
+      // alert(result.data?.msg);
+      toast.error(result.data?.msg, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     } else {
-      alert(result.data?.msg);
+      // alert(result.data?.msg);
+      toast.success(result.data?.msg, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       navigate("/login");
     }
 
