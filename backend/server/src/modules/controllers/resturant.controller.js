@@ -85,7 +85,7 @@ const deleteresturant = async (req, res) => {
         const { id } = req.params;
         const meals= await meal.deleteMany({ ResID:id });
         const comments= await rescomment.deleteMany({ ResID:id });
-        const resturants=await restaurant.findOneAndDelete(id);
+        const resturants=await restaurant.findOneAndDelete({_id: id});
 
 
 
