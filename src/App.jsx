@@ -4,12 +4,9 @@ import "./TemplateCss.scss";
 import TheRouter from "./components/MainComponents/TheRouter";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter } from "react-router-dom";
-
-
-
+import { ToastContainer } from 'react-toastify';
 
 function App() {
-
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -26,6 +23,7 @@ function App() {
       <BrowserRouter>
         <div>
           <TheRouter />
+          <ToastContainer />
         </div>
       </BrowserRouter>
     </QueryClientProvider>

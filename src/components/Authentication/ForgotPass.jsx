@@ -2,8 +2,12 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { apiClient } from "./../../Data/apiclient";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useSignal } from "@preact/signals-react";
 
 export default function ForgotPass() {
+  const msg = useSignal("");
   const {
     register,
     formState: { errors },
@@ -25,9 +29,33 @@ export default function ForgotPass() {
 
   const onSubmit = async function (data) {
     const result = await m.mutateAsync({ email: data.email });
-    alert(result.data.msg);
+    // alert(result.data.msg);
+    msg.value = result.data.msg;
+    notify(msg.value);
   };
-
+  function notify(msg) {
+    if (msg === "Email Send Successfully") {
+      toast.success(msg, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else {
+      toast.error(msg, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+  }
   return (
     <div className="container text-center">
       <div className="row justify-content-center" style={{ marginTop: "30vh" }}>
@@ -68,7 +96,7 @@ export default function ForgotPass() {
           </form>
           <div className="mt-3">
             <Link to="/" className="text-decoration-none">
-              Back to Home
+              Back to Login
             </Link>
           </div>
         </div>

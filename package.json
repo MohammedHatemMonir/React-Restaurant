@@ -43,6 +43,7 @@
         "react-router-dom": "^6.20.0",
         "react-script-loader-hoc": "^1.2.2",
         "react-scripts": "^5.0.1",
+        "react-toastify": "^10.0.5",
         "reactstrap": "8.8.1",
         "recharts": "^2.10.3",
         "redux": "^4.2.1",
