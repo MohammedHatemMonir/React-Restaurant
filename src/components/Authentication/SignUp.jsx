@@ -43,18 +43,7 @@ export default function SignUp() {
     },
   });
 
-  const googleMutation = useMutation({
-    mutationKey: [],
-    // cacheTime: 600000,
-    // onSuccess: onSuccess,
-    // onError: onError,
-    mutationFn: async (params) => {
-      console.log("trying to load");
-      let url = "/api/users/google";
-      console.log("posting to ", url);
-      return await apiClient.get(url);
-    },
-  });
+  
   const onSubmit = async function (data) {
     console.log("Form submitted", data);
     const result = await m.mutateAsync(data);

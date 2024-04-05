@@ -22,7 +22,7 @@ const signup = async (req, res) => {
       email: { $regex: new RegExp(`^${email}$`, "i") },
     });
     if (user) {
-      return res.json({ success: true, msg: "User already exists" });
+      return res.json({ success: false, msg: "User already exists" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 8);
