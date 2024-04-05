@@ -17,6 +17,10 @@ const resturantSchema=mongoose.Schema({
         type:String,
         require:[true,"Enter resturant Categoery"]
     },
+    location: {
+            type: String,
+            required: true
+        },
     rating:{
         type:Number,
         require:[true,"Enter resturant rating"]

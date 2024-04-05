@@ -17,24 +17,6 @@ const getResturantWithMeals = async (req, res) => {
         res.status(500).json({ message: error });
     }
 }
-const getRestaurantWithComments = async (req, res) => {
-    try {
-        const { id } = req.params;
-        const restaurantComments = await rescomment.find({ ResID: id }).populate('user');
-        //const userComments = await rescomment.find({ user: id });
-
-        if (!restaurantComments) {
-            return res.status(404).json({ message: "Restaurant comments not found" });
-        }
-
-        res.status(200).json({ restaurantComments });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: "Internal server error" });
-    }
-}
-
-
 
 const getAllresturant = async (req, res) => {
     try {
@@ -47,7 +29,7 @@ const getAllresturant = async (req, res) => {
 
 const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResBanner} Remove validation of .png,add banner to database ,Upload image from request body
     try {
-        console.log("add new res body:", req.body)
+        console.log("Get all res started, body:", req.body)
         if (req.session.user.role != "ADMIN")
             return res.status(400).json({ errors: "Not Authenticated" });
 
@@ -65,13 +47,12 @@ const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResB
             const rating = 0;
             const Meals_num = 0;
             const comment_num = 0;
-            let ResImg
-            let ResBanner;
-            if(req.body.resImg)
-                ResImg = await uploadImg(req.body.resImg);
-            if(req.body.resBanner)
-                ResBanner= await uploadImg(req.body.resBanner);
-            try {
+            console.log("Upload image here")
+            const ResImg = await uploadImg(req.body.resImg);
+            console.log("ResImg", ResImg)
+            const ResBanner= await uploadImg(req.body.resBanner);
+            console.log("ResBanner", ResBanner)
+                try {
                     const newRestaurantData = {
                         ResName: req.body.ResName,
                         ResImg: ResImg, 
@@ -103,7 +84,7 @@ const deleteresturant = async (req, res) => {
         const { id } = req.params;
         const meals= await meal.deleteMany({ ResID:id });
         const comments= await rescomment.deleteMany({ ResID:id });
-        const resturants=await restaurant.findOneAndDelete({_id: id});
+        const resturants=await restaurant.findOneAndDelete(id);
 
 
 
@@ -126,11 +107,45 @@ const postRestaurantComment = async (req, res) => {
     }
 }
 
+const updateRestaurant = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        if (req.session.user.role !== "ADMIN") {
+            return res.status(400).json({ errors: "Not Authenticated" });
+        }
+
+        
+        const updatedRestaurantData = {
+            ResName: req.body.ResName,
+            ResImg: req.body.ResImg,
+            ResBanner: req.body.ResBanner,
+            location:req.body.location
+        };
+
+        
+        const existingRestaurant = await restaurant.findByIdAndUpdate(id, updatedRestaurantData);
+
+        
+        if (!existingRestaurant) {
+            return res.status(404).json({ message: "Restaurant not found" });
+        }
+
+        const updatedRestaurant = await restaurant.findById(id);
+
+        res.status(200).json(updatedRestaurant);
+    } catch (error) {
+        console.error("Error updating restaurant:", error);
+        res.status(500).json({ error: "Server error while updating restaurant" });
+    }
+};
+
+
 module.exports = {
     getAllresturant,
     addNewresturant,
     deleteresturant,
     postRestaurantComment,
     getResturantWithMeals,
-    getRestaurantWithComments
+    updateRestaurant
 };

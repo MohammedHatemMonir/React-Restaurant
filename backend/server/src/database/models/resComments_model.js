@@ -13,6 +13,10 @@ const rescommentSchema=mongoose.Schema({
     ResID: { type: String, ref: 'restaurant' },
     user: {
         type: mongoose.Schema.Types.ObjectId, ref: "User", required: true
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
     }
 
     // MealID: { type: ObjectId, ref: 'meal' }
