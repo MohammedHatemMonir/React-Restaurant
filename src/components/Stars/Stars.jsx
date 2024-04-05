@@ -9,6 +9,7 @@ const Stars = ({ stars1 }) => {
   stars1 = Math.round(stars1);
   useEffect(() => {
     switch (stars1) {
+      case 0: // 1 Star
       case 1: // 1 Star
         inputRefs.current[0].disabled = false; // checked
         inputRefs.current[1].disabled = true; //  disabled

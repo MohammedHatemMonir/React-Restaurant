@@ -345,7 +345,7 @@ export default function SelectResPage() {
                                   stars={item.commentSentmint[2] * 5}
                                   emotion={item.commentSentmint[1]}
                                   comment={item.Comment}
-                                  image={item.user.userImg || "https://img.lovepik.com/free-png/20211216/lovepik-boy-avatar-png-image_401704859_wh1200.png"}
+                                  image={item.user.userImg || "https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png"}
                                 />
                                 )
                               })}
