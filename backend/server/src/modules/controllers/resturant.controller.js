@@ -58,6 +58,7 @@ const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResB
                         ResImg: ResImg, 
                         ResBanner: ResBanner, 
                         Categoery: req.body.Categoery,
+                        location:req.body.location,
                         rating: rating,
                         comment_num: comment_num,
                         creation_date: Date.now()

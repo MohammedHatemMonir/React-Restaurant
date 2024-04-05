@@ -26,11 +26,6 @@ const resturantSchema=mongoose.Schema({
         require:[true,"Enter resturant rating"]
     },
     // Mshehata addition to schema
-    creation_date: {
-        type:Date,
-        // default: Date.now,
-        require:[true,"creation date of restaurant"]
-    },
     comment_num:{
         type:Number,
         require:[true,"Enter resturant rating"]
