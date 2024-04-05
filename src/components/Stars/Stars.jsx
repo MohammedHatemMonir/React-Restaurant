@@ -5,15 +5,15 @@ const Stars = ({ stars1 }) => {
     <div className="my-stars-rating">
       {/* The defaultChecked in radio buttons is reversed */}
       <div className="rating">
-        <input type="checkbox" checked={stars1 === 5} />
+        <input type="checkbox" checked={stars1 === 5} readOnly />
         <label />
-        <input type="checkbox" checked={stars1 === 4} />
+        <input type="checkbox" checked={stars1 === 4} readOnly/>
         <label />
-        <input type="checkbox" checked={stars1 === 3} />
+        <input type="checkbox" checked={stars1 === 3} readOnly/>
         <label />
-        <input type="checkbox" checked={stars1 === 2} />
+        <input type="checkbox" checked={stars1 === 2} readOnly/>
         <label />
-        <input type="checkbox" checked={stars1 === 0 || stars1 === 1} />
+        <input type="checkbox" checked={stars1 === 0 || stars1 === 1} readOnly/>
         <label />
       </div>
     </div>
