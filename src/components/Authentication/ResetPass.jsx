@@ -2,8 +2,10 @@ import { Link, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { apiClient } from "../../Data/apiclient";
+import { useSignal } from "@preact/signals-react";
 
 export default function ResetPass() {
+  const msg = useSignal("");
   const { id, token } = useParams();
   console.log("id and token", id, token);
   const {
@@ -28,9 +30,35 @@ export default function ResetPass() {
   const onSubmit = async function (data) {
     console.log("Password Reset");
     const result = await m.mutateAsync({ password: data.pass });
-    console.log("result from resetpass", result);
-    alert(result.data.msg);
+    // console.log("result from resetpass", result);
+    // alert(result.data.msg);
+    msg.value = result.data.msg;
+    notify(msg.value);
   };
+  
+  function notify(msg) {
+    if (msg === "Email Send Successfully") {
+      toast.success(msg, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else {
+      toast.error(msg, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+  }
   return (
     <div className="container text-center" style={{ marginTop: "30vh" }}>
       <div className="row justify-content-center mt-5">

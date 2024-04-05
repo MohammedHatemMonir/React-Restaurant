@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { apiClient } from "./../../Data/apiclient";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { useSignal } from "@preact/signals-react";
 
 export default function ForgotPass() {

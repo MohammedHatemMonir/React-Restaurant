@@ -7,6 +7,7 @@ import "./Login&Signup.scss";
 import logo from "../../images/DineMeLogo-modified.png";
 import { useSignal } from "@preact/signals-react";
 import { Button } from "reactstrap";
+import { toast } from 'react-toastify';
 
 const Login = () => {
   const m = useMutation({
@@ -34,7 +35,16 @@ const Login = () => {
     console.log("login", result.data);
 
     if (!result.data.success) {
-      alert("Invalid Email or Password");
+      // alert("Invalid Email or Password");
+      toast.error("Invalid Email or Password", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     } else {
       UserData.value = {
         name: result.data.name,

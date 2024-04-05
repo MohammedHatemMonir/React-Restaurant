@@ -4,7 +4,8 @@ import "./TemplateCss.scss";
 import TheRouter from "./components/MainComponents/TheRouter";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter } from "react-router-dom";
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const queryClient = new QueryClient({
