@@ -1,3 +1,4 @@
+import { FaGrin } from "react-icons/fa";
 import { UserData } from "../../Globals";
 import "./Profile.scss";
 import { Link } from "react-router-dom";
@@ -18,12 +19,12 @@ export default function Profile() {
           />
           <h4 className="name font-weight-bold">{UserData.value.name}</h4>
           <h4 className="work font-weight-bold">
-            1300 Comment | 4.5 <span className="text-warning">&#x2B50;</span>|
-            Test
+            1300 Comment | 4.5 <span className="text-warning">&#x2B50;</span> |
+            <span> <FaGrin  /> </span>
           </h4>
         </div>
         <div className="footer">
-          <Link to="/edit" className="btn-follow">
+          <Link to="/edit" className="btn-follow text-decoration-none">
             Edit
           </Link>
           <br />
