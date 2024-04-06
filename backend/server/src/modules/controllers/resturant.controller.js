@@ -128,14 +128,14 @@ const updateRestaurant = async (req, res) => { //{ResName, ResImg, location,ResB
             return res.status(400).json({ errors: "Not Authenticated" });
         }
 
-        const restaurant = await restaurant.findById(id);
-        if(!restaurant)  return res.status(404).json({ message: "Restaurant not found" });
+        const restaurantss = await restaurant.findById(id);
+        if(!restaurantss)  return res.status(404).json({ message: "Restaurant not found" });
 
         const updatedRestaurantData = {
-            ResName: req.body.ResName || restaurant.ResName,
-            ResImg: req.body.ResImg || restaurant.ResImg,
-            ResBanner: req.body.ResBanner || restaurant.ResBanner,
-            location:req.body.location || restaurant.location
+            ResName: req.body.ResName || restaurantss.ResName,
+            ResImg: req.body.ResImg || restaurantss.ResImg,
+            ResBanner: req.body.ResBanner || restaurantss.ResBanner,
+            location:req.body.location || restaurantss.location
         };
 
         
