@@ -25,6 +25,7 @@ function EditModal({ openModal, closeModal, resName, resId }) {
   const m = useMutation({
     mutationKey: ["updateRestaurant"],
     mutationFn: async (params) => {
+      console.log("mustafa", params);
       try {
         console.log("trying to load");
         let url = `/updateRestaurant/${resId}`;
@@ -49,15 +50,28 @@ function EditModal({ openModal, closeModal, resName, resId }) {
     },
   });
 
-  const onSubmit = async function (data) {
-    try {
-      const result = await m.mutateAsync({ name: data.ResName });
-      // You can do something with the result if needed
-    } catch (error) {
-      // Handle the error if necessary
-      console.error("Error submitting form:", error);
+  async function onSubmit(data) {
+    // console.log("submit! ADD RESTAURANT", data);
+    let resImg64;
+    let resBanner64;
+    data.location = currentLocation.value;
+    if (data.resImg) resImg64 = await convertBase64(data.resImg);
+    if (data.resBanner) resBanner64 = await convertBase64(data.resBanner);
+
+    if (resImg64) data.resImg = resImg64;
+    if (resBanner64) data.resBanner = resBanner64;
+
+    console.log("NEW DATA", data);
+
+    const ret = await m.mutateAsync(data);
+    //Handle add restaurant logic herea
+
+    if (ret) {
+      ShowSignal.value = false;
+      queryClient.invalidateQueries(["getAllresturant"]);
+      queryClient.refetchQueries(["getAllresturant"]);
     }
-  };
+  }
 
   const MyVerticallyCenteredModal = () => (
     <Modal
