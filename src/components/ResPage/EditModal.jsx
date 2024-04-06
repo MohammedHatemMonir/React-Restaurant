@@ -23,7 +23,6 @@ function EditModal({ openModal, closeModal, resName, resId }) {
   }
 
   const m = useMutation({
-    // cacheTime: 600000,
     mutationKey: ["updateRestaurant"],
     mutationFn: async (params) => {
       try {
@@ -31,25 +30,35 @@ function EditModal({ openModal, closeModal, resName, resId }) {
         let url = `/updateRestaurant/${resId}`;
         console.log("posting to ", url);
         const response = await apiClient.put(url, params);
-        return response.data; 
+        console.log("hema21421", response.data);
+        return response.data;
       } catch (error) {
-        throw new Error(error.response.data); 
+        console.error("Error updating restaurant:", error);
+        throw new Error("Failed to update restaurant."); // Throw a generic error message
       }
     },
     onSuccess: (data) => {
-      // Handle success here
-      alert(data.msg);
+      console.log("Mutation success:", data);
+      // You can handle success here, maybe update UI, show a success message, etc.
+      alert(data.msg); // For example, showing a message from the response
     },
     onError: (error) => {
       console.error("Mutation failed:", error);
+      // Handle error here, maybe show an error message to the user
       alert("Failed to update restaurant.");
     },
   });
 
   const onSubmit = async function (data) {
-    const result = await m.mutateAsync({ name: data.ResName });
-    // alert(result.data.msg);
+    try {
+      const result = await m.mutateAsync({ name: data.ResName });
+      // You can do something with the result if needed
+    } catch (error) {
+      // Handle the error if necessary
+      console.error("Error submitting form:", error);
+    }
   };
+
   const MyVerticallyCenteredModal = () => (
     <Modal
       show={openModal}
