@@ -34,7 +34,7 @@ export default function NavbarGlobal() {
     Show.value = false;
   }
   return (
-    <header className="select-res-page" style={{zIndex:"100"}}>
+    <header className="select-res-page" style={{ zIndex: "100" }}>
       <div>
         <div>
           <div className="bz c0 c1 c2 c3 c4">
@@ -207,7 +207,10 @@ export default function NavbarGlobal() {
                 >
                   <Link to="/profile" className="position-relative">
                     <img
-                      src={UserData.value.loggedIn && UserData.value.userImg}
+                      src={
+                        UserData.value.userImg ||
+                        "https://cdn.icon-icons.com/icons2/2643/PNG/512/male_boy_person_people_avatar_icon_159358.png"
+                      }
                       alt="User-Img"
                       className="i"
                     />
