@@ -120,27 +120,14 @@ const postRestaurantComment = async (req, res) => {
     }
 }
 
+
 const updateRestaurant = async (req, res) => {
     try {
         if (!req.session.user || req.session.user.role !== "ADMIN") {
             return res.status(403).json({ error: "Not Authenticated" });
         }
-
         const { id } = req.params;
-        const existingRestaurant = await restaurant.findById(id);
-
-        if (!existingRestaurant) {
-            return res.status(404).json({ error: "Restaurant not found" });
-        }
-
-        const updatedRestaurantData = {
-            ResName: req.body.ResName || existingRestaurant.ResName,
-            ResImg: req.body.ResImg || existingRestaurant.ResImg,
-            ResBanner: req.body.ResBanner || existingRestaurant.ResBanner,
-            location: req.body.location || existingRestaurant.location
-        };
-
-        const updatedRestaurant = await restaurant.findByIdAndUpdate(id, updatedRestaurantData, { new: true });
+        const updatedRestaurant = await restaurant.findByIdAndUpdate(id, req.body, { new: true });
 
         if (!updatedRestaurant) {
             return res.status(404).json({ error: "Failed to update restaurant" });
@@ -152,7 +139,6 @@ const updateRestaurant = async (req, res) => {
         res.status(500).json({ error: "Server error while updating restaurant" });
     }
 };
-
 
 
 
