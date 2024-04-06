@@ -120,33 +120,31 @@ const postRestaurantComment = async (req, res) => {
     }
 }
 
-const updateRestaurant = async (req, res) => { //{ResName, ResImg, location,ResBanner}
+const updateRestaurant = async (req, res) => {
     try {
-        const { id } = req.params;
-
-        if (req.session.user.role !== "ADMIN") {
-            return res.status(400).json({ errors: "Not Authenticated" });
+        if (!req.session.user || req.session.user.role !== "ADMIN") {
+            return res.status(403).json({ error: "Not Authenticated" });
         }
 
-        const restaurantss = await restaurant.findById(id);
-        if(!restaurantss)  return res.status(404).json({ message: "Restaurant not found" });
+        const { id } = req.params;
+        const existingRestaurant = await restaurant.findById(id);
+
+        if (!existingRestaurant) {
+            return res.status(404).json({ error: "Restaurant not found" });
+        }
 
         const updatedRestaurantData = {
-            ResName: req.body.ResName || restaurantss.ResName,
-            ResImg: req.body.ResImg || restaurantss.ResImg,
-            ResBanner: req.body.ResBanner || restaurantss.ResBanner,
-            location:req.body.location || restaurantss.location
+            ResName: req.body.ResName || existingRestaurant.ResName,
+            ResImg: req.body.ResImg || existingRestaurant.ResImg,
+            ResBanner: req.body.ResBanner || existingRestaurant.ResBanner,
+            location: req.body.location || existingRestaurant.location
         };
 
-        
-        const existingRestaurant = await restaurant.findByIdAndUpdate(id, updatedRestaurantData);
+        const updatedRestaurant = await restaurant.findByIdAndUpdate(id, updatedRestaurantData, { new: true });
 
-        
-        if (!existingRestaurant) {
-            return res.status(404).json({ message: "Restaurant not found" });
+        if (!updatedRestaurant) {
+            return res.status(404).json({ error: "Failed to update restaurant" });
         }
-
-        const updatedRestaurant = await restaurant.findById(id);
 
         res.status(200).json(updatedRestaurant);
     } catch (error) {
@@ -154,6 +152,8 @@ const updateRestaurant = async (req, res) => { //{ResName, ResImg, location,ResB
         res.status(500).json({ error: "Server error while updating restaurant" });
     }
 };
+
+
 
 
 module.exports = {
