@@ -45,13 +45,13 @@ export default function ResPage() {
   if (q.data)
     return (
       <>
-        <style
+        {/* <style
           type="text/css"
           dangerouslySetInnerHTML={{
             __html:
               ".vue-star-rating-star[data-v-34cbeed1]{display:inline-block}.vue-star-rating-pointer[data-v-34cbeed1]{cursor:pointer}.vue-star-rating[data-v-34cbeed1]{display:flex;align-items:center}.vue-star-rating-inline[data-v-34cbeed1]{display:inline-flex}.vue-star-rating-rating-text[data-v-34cbeed1]{margin-top:7px;margin-left:7px}.vue-star-rating-rtl[data-v-34cbeed1]{direction:rtl}.vue-star-rating-rtl .vue-star-rating-rating-text[data-v-34cbeed1]{margin-right:10px;direction:rtl}",
           }}
-        />
+        /> */}
         <section className="">
           <Slider />
           <Container style={{ width: "85%" }}>
@@ -169,7 +169,7 @@ function ResCard({ id, name, start1, ResImg, MealImg }) {
                         transform: "scale(0.5)",
                         position: "absolute",
                         marginLeft: "-147px",
-                        marginTop: "-23px",
+                        marginTop: "-6px",
                       }}
                     >
                       <Stars stars1={start1} />
@@ -227,7 +227,7 @@ function ResCard({ id, name, start1, ResImg, MealImg }) {
           )}
         </div>
       </Link>
-      {showDelModal.value == true && (
+      {UserData.value.role == "ADMIN" && showDelModal.value == true && (
         <DeleteModal
           ResId={id}
           resName={name}
@@ -235,7 +235,7 @@ function ResCard({ id, name, start1, ResImg, MealImg }) {
           closeModal={onCloseDel}
         />
       )}
-      {showEditModal.value == true && (
+      {UserData.value.role == "ADMIN" && showEditModal.value == true && (
         <EditModal
           resName={name}
           resId={id}
