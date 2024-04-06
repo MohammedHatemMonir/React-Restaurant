@@ -23,7 +23,7 @@ import DeleteModal from "./DeleteModal";
 export default function ResPage() {
   const q = useQuery({
     queryKey: ["getAllresturant"],
-    cacheTime: 3*60000, //3 minutes
+    cacheTime: 3 * 60000, //3 minutes
     enabled: true,
     queryFn: async () => {
       let url = "/getAllresturant";
@@ -139,24 +139,9 @@ function ResCard({ id, name, start1, ResImg, MealImg }) {
   function onCloseEdit() {
     showEditModal.value = false;
   }
-  console.log(name,id)
+  console.log(name, id);
   return (
     <>
-      {showDelModal.value == true && (
-        <DeleteModal
-          ResId={id}
-          resName={name}
-          openModal={() => (showDelModal.value = true)}
-          closeModal={onCloseDel}
-        />
-      )}
-      {showEditModal.value == true && (
-        <EditModal
-          resName={name}
-          openModal={() => (showEditModal.value = true)}
-          closeModal={onCloseEdit}
-        />
-      )}
       <Link
         to={`/restaurant/${id}/${name}`}
         className="restaurant-card restaurant-delivery-card col-md-5 col-sm-8 col-xs-16"
@@ -242,6 +227,22 @@ function ResCard({ id, name, start1, ResImg, MealImg }) {
           )}
         </div>
       </Link>
+      {showDelModal.value == true && (
+        <DeleteModal
+          ResId={id}
+          resName={name}
+          openModal={() => (showDelModal.value = true)}
+          closeModal={onCloseDel}
+        />
+      )}
+      {showEditModal.value == true && (
+        <EditModal
+          resName={name}
+          resId={id}
+          openModal={() => (showEditModal.value = true)}
+          closeModal={onCloseEdit}
+        />
+      )}
     </>
   );
 }

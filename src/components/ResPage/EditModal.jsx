@@ -5,8 +5,10 @@ import { Col, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useSignal } from "@preact/signals-react";
 import LeafletMap from "./../Map/LeafletMap";
+import { useMutation } from "react-query";
+import { apiClient } from "./../../Data/apiclient";
 
-function EditModal({ openModal, closeModal, resName }) {
+function EditModal({ openModal, closeModal, resName, resId }) {
   const {
     register,
     formState: { errors },
@@ -20,6 +22,34 @@ function EditModal({ openModal, closeModal, resName }) {
     myBtn.value = !myBtn.value;
   }
 
+  const m = useMutation({
+    // cacheTime: 600000,
+    mutationKey: ["updateRestaurant"],
+    mutationFn: async (params) => {
+      try {
+        console.log("trying to load");
+        let url = `/updateRestaurant/${resId}`;
+        console.log("posting to ", url);
+        const response = await apiClient.put(url, params);
+        return response.data; 
+      } catch (error) {
+        throw new Error(error.response.data); 
+      }
+    },
+    onSuccess: (data) => {
+      // Handle success here
+      alert(data.msg);
+    },
+    onError: (error) => {
+      console.error("Mutation failed:", error);
+      alert("Failed to update restaurant.");
+    },
+  });
+
+  const onSubmit = async function (data) {
+    const result = await m.mutateAsync({ name: data.ResName });
+    // alert(result.data.msg);
+  };
   const MyVerticallyCenteredModal = () => (
     <Modal
       show={openModal}
@@ -129,7 +159,7 @@ function EditModal({ openModal, closeModal, resName }) {
                 className={`${
                   myBtn.value
                     ? "bg-primary my-sm-3 text-end"
-                    : " bg-danger my-sm-3"
+                    : " bg-danger my-sm-3 text-end"
                 }`}
                 onClick={handleBtnClick}
               >
@@ -147,7 +177,9 @@ function EditModal({ openModal, closeModal, resName }) {
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button type="submit">Submit</Button>
+        <Button type="submit" onClick={onSubmit}>
+          Submit
+        </Button>
         <Button onClick={closeModal}>Close</Button>
       </Modal.Footer>
     </Modal>
