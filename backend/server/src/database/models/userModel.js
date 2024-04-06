@@ -36,6 +36,14 @@ const UserSchema = new Schema({
         type:String,
         required: false,
     },
+    phoneNumber:{
+        type:Number,
+        required:true
+    },
+    location: {
+        type: String,
+        required: false
+    },
     createdAt: {
         type: Date,
         immutable: true,

@@ -30,6 +30,10 @@ const resturantSchema=mongoose.Schema({
         type:Number,
         require:[true,"Enter resturant rating"]
     },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
 })
 
 module.exports = mongoose.model("restaurant", resturantSchema);

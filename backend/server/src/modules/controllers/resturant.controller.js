@@ -61,7 +61,7 @@ const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResB
                         location:req.body.location,
                         rating: rating,
                         comment_num: comment_num,
-                        creation_date: Date.now()
+                        //creation_date: createdAt
                     };
                     const newRestaurant = await restaurant.create(newRestaurantData);
                     res.status(200).json(newRestaurantData);
@@ -80,24 +80,36 @@ const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResB
     }
 }
 
+
 const deleteresturant = async (req, res) => {
     try {
         const { id } = req.params;
-        const meals= await meal.deleteMany({ ResID:id });
-        const comments= await rescomment.deleteMany({ ResID:id });
-        const resturants=await restaurant.findOneAndDelete({_id: id});
 
-
-
+        const restaurantToDelete = await restaurant.findOne({ _id: id });
         
-        if (!resturants) {
+        if (!restaurantToDelete) {
             return res.status(404).json({ message: "Restaurant Not Found" });
         }
-        res.status(200).json({ message: "Restaurant Deleted Successfully",resturants,meals});
+
+        await meal.deleteMany({ ResID: id });
+        await rescomment.deleteMany({ ResID: id });
+        
+        if (restaurantToDelete.ResImg && restaurantToDelete.ResImg.public_id) {
+            await uploadImg.deleteImage(restaurantToDelete.ResImg.public_id);
+        }
+        if (restaurantToDelete.ResBanner && restaurantToDelete.ResBanner.public_id) {
+            await uploadImg.deleteImage(restaurantToDelete.ResBanner.public_id);
+        }
+
+        await restaurant.findOneAndDelete({ _id: id });
+
+        res.status(200).json({ message: "Restaurant Deleted Successfully" });
     } catch (error) {
-        res.status(500).json({ message: error });
+        res.status(500).json({ message: error.message });
     }
-}
+};
+
+
 
 const postRestaurantComment = async (req, res) => {
     try {

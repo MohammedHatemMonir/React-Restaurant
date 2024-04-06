@@ -26,6 +26,18 @@ module.exports = (image) => { // image = > base64
         });
 }
 
+module.exports.deleteImage = (image) => {
+    return new Promise((resolve, reject) => {
+        cloudinary.uploader.destroy(image, (error, result) => {
+            if (result && result.result === 'ok') {
+                console.log("Image deleted successfully");
+                return resolve({ message: "Image deleted successfully" });
+            }
+            console.log("error", error);
+            return reject({ message: error });
+        });
+    });
+}
 
 //Delete here:
 
