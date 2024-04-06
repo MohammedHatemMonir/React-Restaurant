@@ -11,7 +11,7 @@ export default function Profile() {
           <img
             src={
               UserData.value.userImg ||
-              "https://cdn.icon-icons.com/icons2/2643/PNG/512/male_boy_person_people_avatar_icon_159358.png"
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8PyKYrBKAWWy6YCbQzWQcwIRqH8wYMPluIZiMpV1w0NYSbocTZz0ICWFkLcXhaMyvCwQ&usqp=CAU"
             }
             alt="profile-img"
             className="user-pic"

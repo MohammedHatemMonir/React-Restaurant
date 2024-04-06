@@ -11,13 +11,13 @@ import { Cart, UserData } from "../../Globals";
 import AddMealButton from "./new/AddMealButton";
 import { useSignal } from "@preact/signals-react";
 import MealDetailsModal from "./MealDetailsModal";
-import ReviewsCard from './../Reviews/ReviewsCard';
+import ReviewsCard from "./../Reviews/ReviewsCard";
 export default function SelectResPage() {
   const { resID, resName } = useParams();
   console.log("resID", resID);
 
   const q = useQuery({
-    queryKey: ["rest"+resID],
+    queryKey: ["rest" + resID],
 
     cacheTime: 60000,
     // staleTime: 60000,
@@ -37,7 +37,11 @@ export default function SelectResPage() {
       <div id="page-content restaurant-container" className="page-content">
         <div className="restaurant-cover active-on-menu-tab  menu-tab-activated">
           {/* Banner Img */}
-          <img loading="lazy" src={q.data?.data?.restaurant?.ResBanner} alt="cover photo" />
+          <img
+            loading="lazy"
+            src={q.data?.data?.restaurant?.ResBanner}
+            alt="cover photo"
+          />
         </div>
 
         <div className="container">
@@ -311,7 +315,7 @@ export default function SelectResPage() {
                                 {/* Add button for admin only*/}
                                 {UserData.value.role == "ADMIN" && (
                                   <div>
-                                    <AddMealButton Resid={resID}/>
+                                    <AddMealButton Resid={resID} />
                                   </div>
                                 )}
                                 <Container>
@@ -337,18 +341,24 @@ export default function SelectResPage() {
                               <Col sm={4} style={{ transform: "scale(1)" }}>
                                 <CommentBox resID={resID} />
                                 {/* <Reviews /> */}
-                              {!q.isLoading && q.data?.data?.resComments?.map((item, index) => {
-                                return(
-                                <ReviewsCard
-                                  key={index+"rescomment"+resID}
-                                  name ={item.user.name}
-                                  stars={item.commentSentmint[2] * 5}
-                                  emotion={item.commentSentmint[1]}
-                                  comment={item.Comment}
-                                  image={item.user.userImg || "https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png"}
-                                />
-                                )
-                              })}
+                                {!q.isLoading &&
+                                  q.data?.data?.resComments?.map(
+                                    (item, index) => {
+                                      return (
+                                        <ReviewsCard
+                                          key={index + "rescomment" + resID}
+                                          name={item.user.name}
+                                          stars={item.commentSentmint[2] * 5}
+                                          emotion={item.commentSentmint[1]}
+                                          comment={item.Comment}
+                                          image={
+                                            item.user.userImg ||
+                                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8PyKYrBKAWWy6YCbQzWQcwIRqH8wYMPluIZiMpV1w0NYSbocTZz0ICWFkLcXhaMyvCwQ&usqp=CAU"
+                                          }
+                                        />
+                                      );
+                                    }
+                                  )}
                               </Col>
                             </Row>
                           </div>

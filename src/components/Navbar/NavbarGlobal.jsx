@@ -199,20 +199,21 @@ export default function NavbarGlobal() {
               <div className="eg al eh c8">
                 <div
                   style={{
-                    width: "80px",
-                    transform: "scale(0.1)",
+                    // transform: "scale(0.3)",
                     marginRight: "10px",
-                    marginLeft: "-15px",
+                    marginLeft: "25px",
                   }}
                 >
                   <Link to="/profile" className="position-relative">
                     <img
                       src={
                         UserData.value.userImg ||
-                        "https://cdn.icon-icons.com/icons2/2643/PNG/512/male_boy_person_people_avatar_icon_159358.png"
+                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8PyKYrBKAWWy6YCbQzWQcwIRqH8wYMPluIZiMpV1w0NYSbocTZz0ICWFkLcXhaMyvCwQ&usqp=CAU"
                       }
                       alt="User-Img"
-                      className="i"
+                      className="w-5"
+                      width="45"
+                      height="45"
                     />
                   </Link>
                 </div>
