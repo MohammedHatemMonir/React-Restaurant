@@ -25,13 +25,10 @@ function EditModal({ openModal, closeModal, resName, resId }) {
   const m = useMutation({
     mutationKey: ["updateRestaurant"],
     mutationFn: async (params) => {
-      console.log("mustafa", params);
       try {
-        console.log("trying to load");
-        let url = `/updateRestaurant/${resId}`;
-        console.log("posting to ", url);
-        const response = await apiClient.put(url, params);
-        console.log("hema21421", response.data);
+        const { resId, data } = params;
+        const url = `/updateRestaurant/${resId}`;
+        const response = await apiClient.put(url, data);
         return response.data;
       } catch (error) {
         console.error("Error updating restaurant:", error);
@@ -40,38 +37,29 @@ function EditModal({ openModal, closeModal, resName, resId }) {
     },
     onSuccess: (data) => {
       console.log("Mutation success:", data);
-      // You can handle success here, maybe update UI, show a success message, etc.
       alert(data.msg); // For example, showing a message from the response
     },
     onError: (error) => {
       console.error("Mutation failed:", error);
-      // Handle error here, maybe show an error message to the user
       alert("Failed to update restaurant.");
     },
   });
-
+  
   async function onSubmit(data) {
-    // console.log("submit! ADD RESTAURANT", data);
-    let resImg64;
-    let resBanner64;
-    data.location = currentLocation.value;
-    if (data.resImg) resImg64 = await convertBase64(data.resImg);
-    if (data.resBanner) resBanner64 = await convertBase64(data.resBanner);
-
-    if (resImg64) data.resImg = resImg64;
-    if (resBanner64) data.resBanner = resBanner64;
-
-    console.log("NEW DATA", data);
-
-    const ret = await m.mutateAsync(data);
-    //Handle add restaurant logic herea
-
-    if (ret) {
-      ShowSignal.value = false;
-      queryClient.invalidateQueries(["getAllresturant"]);
-      queryClient.refetchQueries(["getAllresturant"]);
+    try {
+      data.location = currentLocation.value;
+      if (data.resImg) data.resImg = await convertBase64(data.resImg);
+      if (data.resBanner) data.resBanner = await convertBase64(data.resBanner);
+  
+      console.log("NEW DATA", data);
+  
+      const ret = await m.mutateAsync({ resId: data.resId, data });
+    } catch (error) {
+      console.error("Submission failed:", error);
+      alert("Failed to submit restaurant data.");
     }
   }
+  
 
   const MyVerticallyCenteredModal = () => (
     <Modal
