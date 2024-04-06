@@ -9,7 +9,10 @@ export default function Profile() {
       <div className="container">
         <div className="middle">
           <img
-            src={UserData.value.userImg}
+            src={
+              UserData.value.userImg ||
+              "https://cdn.icon-icons.com/icons2/2643/PNG/512/male_boy_person_people_avatar_icon_159358.png"
+            }
             alt="profile-img"
             className="user-pic"
           />
