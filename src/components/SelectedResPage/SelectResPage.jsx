@@ -394,14 +394,15 @@ function TempMealCard({
       Cart.value.ResName = resName;
       Cart.value.meals = [];
     }
+    let tempCart = Cart.value;
 
     if (
-      !Cart.value.meals.some((meal) =>
-        meal.id == id ? (meal.quantity += 1) : false
+      !tempCart.meals.some((meal) =>
+        meal.id == id ? (meal.quantity += 1 ) : false
       )
     ) {
       console.log("meal not found");
-      Cart.value.meals.push({
+      tempCart.meals.push({
         id: id,
         name: name,
         mealImg: mealImg,
@@ -410,8 +411,12 @@ function TempMealCard({
         price: price,
         quantity: 1,
       });
+
+
     }
-    console.log("Cart", Cart.value);
+    Cart.value = tempCart;
+    console.log("Cart", Cart.value, "temp cart", tempCart);
+
   }
   const displayModal = useSignal(false);
   function handleClose() {

@@ -6,12 +6,6 @@ export const UserData = signal({loggedIn:false});
 export const Cart = signal({ResId:"",meals:[]});
 
 
-
-
-
-
-
-
 export const convertBase64 = (file) => {
     return new Promise((resolve, reject) => {
       const fileReader = new FileReader();
