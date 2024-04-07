@@ -44,22 +44,20 @@ function EditModal({ openModal, closeModal, resName, resId }) {
       alert("Failed to update restaurant.");
     },
   });
-  
   async function onSubmit(data) {
     try {
       data.location = currentLocation.value;
       if (data.resImg) data.resImg = await convertBase64(data.resImg);
       if (data.resBanner) data.resBanner = await convertBase64(data.resBanner);
-  
+
       console.log("NEW DATA", data);
-  
+
       const ret = await m.mutateAsync({ resId: data.resId, data });
     } catch (error) {
       console.error("Submission failed:", error);
       alert("Failed to submit restaurant data.");
     }
   }
-  
 
   const MyVerticallyCenteredModal = () => (
     <Modal
@@ -86,15 +84,15 @@ function EditModal({ openModal, closeModal, resName, resId }) {
                 <Form.Control
                   type="text"
                   s
-                  name="mealName"
+                  name="resName"
                   defaultValue={resName}
-                  placeholder="Meal Name"
-                  {...register("MealName", {
+                  placeholder="Restaurant Name"
+                  {...register("resName", {
                     // required: "Please add new restaurant name",
                   })}
                 />
                 <span className="error" style={{ color: "red" }}>
-                  {errors["mealName"] && errors["mealName"].message}
+                  {errors["resName"] && errors["resName"].message}
                 </span>
               </Form.Group>
             </Col>
@@ -122,14 +120,14 @@ function EditModal({ openModal, closeModal, resName, resId }) {
                 <Form.Label>New Image</Form.Label>
                 <Form.Control
                   type="file"
-                  name="mealImg"
-                  placeholder="Restaurant Name"
-                  {...register("MealImg", {
+                  name="resImg"
+                  placeholder="Restaurant Image"
+                  {...register("resImg", {
                     // required: "Please add new restaurant image",
                   })}
                 />
                 <span className="error" style={{ color: "red" }}>
-                  {errors["mealImg"] && errors["mealImg"].message}
+                  {errors["resImg"] && errors["resImg"].message}
                 </span>
               </Form.Group>
             </Col>
@@ -138,14 +136,14 @@ function EditModal({ openModal, closeModal, resName, resId }) {
                 <Form.Label>New Banner</Form.Label>
                 <Form.Control
                   type="file"
-                  name="mealDesc"
+                  name="resBanner"
                   placeholder="Meal description"
-                  {...register("Description", {
+                  {...register("resBanner", {
                     // required: "Please add new restaurant banner",
                   })}
                 />
                 <span className="error" style={{ color: "red" }}>
-                  {errors["mealDesc"] && errors["mealDesc"].message}
+                  {errors["resBanner"] && errors["resBanner"].message}
                 </span>
               </Form.Group>
             </Col>
@@ -179,7 +177,7 @@ function EditModal({ openModal, closeModal, resName, resId }) {
             </Col>
             {showMap.value == true && (
               <Col sm={12}>
-                <div style={{ transition: "all", direction: "2s" }}>
+                <div>
                   <LeafletMap currentLocation={currentLocation} />
                 </div>
               </Col>
