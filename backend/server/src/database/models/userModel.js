@@ -20,16 +20,16 @@ const UserSchema = new Schema({
     },
     password: {
         type: String,
-        required: true
+        required: false
     },
     role: {
         type: String,
-        enum: ['admin','user'],
+        enum: ['admin','owner','user'],
         default: 'user'
     },
     email: {
         type: String,
-        required: false,
+        required: true,
         // lowercase: true
     },
     userImg:{
@@ -38,7 +38,7 @@ const UserSchema = new Schema({
     },
     phoneNumber:{
         type:Number,
-        required:true
+        required:false
     },
     location: {
         type: String,

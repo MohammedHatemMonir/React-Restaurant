@@ -171,7 +171,7 @@ passport.use(
           user = await myusers.create({
             name: profile.name.givenName,
             email: profile.emails[0].value,
-            password: "GooglePassword",
+
           });
           console.log("Created Google User");
         }
