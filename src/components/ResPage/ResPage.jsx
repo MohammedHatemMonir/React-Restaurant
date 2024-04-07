@@ -229,7 +229,7 @@ function ResCard({ id, name, start1, ResImg, MealImg }) {
       </Link>
       {UserData.value.role == "ADMIN" && showDelModal.value == true && (
         <DeleteModal
-          ResId={id}
+          resId={id}
           resName={name}
           openModal={() => (showDelModal.value = true)}
           closeModal={onCloseDel}

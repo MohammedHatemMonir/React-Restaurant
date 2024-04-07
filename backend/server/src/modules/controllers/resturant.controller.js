@@ -94,18 +94,19 @@ const deleteresturant = async (req, res) => {
         await meal.deleteMany({ ResID: id });
         await rescomment.deleteMany({ ResID: id });
         
-        if (restaurantToDelete.ResImg && restaurantToDelete.ResImg.public_id) {
-            await uploadImg.deleteImage(restaurantToDelete.ResImg.public_id);
+        if (restaurantToDelete.ResImg) {
+            await uploadImg.deleteImage(restaurantToDelete.ResImg);
         }
-        if (restaurantToDelete.ResBanner && restaurantToDelete.ResBanner.public_id) {
-            await uploadImg.deleteImage(restaurantToDelete.ResBanner.public_id);
+        if (restaurantToDelete.ResBanner) {
+            await uploadImg.deleteImage(restaurantToDelete.ResBanner);
         }
 
         await restaurant.findOneAndDelete({ _id: id });
 
         res.status(200).json({ message: "Restaurant Deleted Successfully" });
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        console.log("Error in deleteresturant", error)
+        res.status(500).json({ message: "error" });
     }
 };
 
