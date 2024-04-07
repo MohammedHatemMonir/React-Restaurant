@@ -20,6 +20,7 @@ import { apiClient } from "../../Data/apiclient";
 import { Link } from "react-router-dom";
 import { useSignal } from "@preact/signals-react";
 import { toast } from "react-toastify";
+import LeafletMap from "./../Map/LeafletMap";
 export default function SignUp() {
   const {
     handleSubmit,
@@ -43,7 +44,6 @@ export default function SignUp() {
     },
   });
 
-  
   const onSubmit = async function (data) {
     console.log("Form submitted", data);
     const result = await m.mutateAsync(data);
@@ -72,13 +72,22 @@ export default function SignUp() {
       });
       navigate("/login");
     }
-
-    console.log("result", result?.data);
+    // console.log("result", result?.data);
   };
+
   const showPass = useSignal(false);
   function handlePass() {
     showPass.value = !showPass.value;
   }
+  const currentLocation = useSignal("");
+  const showMap = useSignal(false);
+  const myBtn = useSignal(true);
+
+  function handleBtnClick() {
+    showMap.value = !showMap.value;
+    myBtn.value = !myBtn.value;
+  }
+
   return (
     <div className="my-login-my-singup">
       <div className="sidenav">
@@ -189,6 +198,42 @@ export default function SignUp() {
                       </span>
                     </FormGroup>
                   </Col>
+                  <Col sm={10}>
+                    <Form.Group className="mb-2 my-sm-3">
+                      <Form.Control
+                        type="text"
+                        name="resLocation"
+                        placeholder="Restaurant Location"
+                        value={currentLocation.value}
+                        {...register("resLocation", {
+                          // required: "Please enter restaurant location",
+                        })}
+                      />
+                      <span className="error" style={{ color: "red" }}>
+                        {errors["resLocation"] && errors["resLocation"].message}
+                      </span>
+                    </Form.Group>
+                  </Col>
+                  <Col sm={2}>
+                    <Button
+                      className={`${
+                        myBtn.value
+                          ? "bg-primary my-sm-3 text-end"
+                          : " bg-danger my-sm-3 text-end"
+                      }`}
+                      onClick={handleBtnClick}
+                    >
+                      {/* {myBtn.value ? "Open Map" : "Close Map"} */}
+                      Map
+                    </Button>
+                  </Col>
+                  {showMap.value && (
+                    <Col sm={12}>
+                      <div>
+                        <LeafletMap currentLocation={currentLocation} />
+                      </div>
+                    </Col>
+                  )}
                 </Row>
                 <Button variant="primary" type="submit" className="w-100 mb-3">
                   Sign up
