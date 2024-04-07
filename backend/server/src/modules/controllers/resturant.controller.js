@@ -84,37 +84,35 @@ const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResB
 const deleteresturant = async (req, res) => {
     try {
         const { id } = req.params;
-
-        const restaurantToDelete = await restaurant.findOne({ _id: id });
+        const restaurantToDelete = await restaurant.findOneAndDelete({ _id: id });
         const MealsToDelete = await meal.find({ ResID: id });
         
         if (!restaurantToDelete) {
             return res.status(404).json({ message: "Restaurant Not Found" });
         }
-
-        const meals = await meal.deleteMany({ ResID: id });
         await rescomment.deleteMany({ ResID: id });
         
         try {
-        if (restaurantToDelete.ResImg) {
-            await uploadImg.deleteImage(restaurantToDelete.ResImg);
-        }
-        if (restaurantToDelete.ResBanner) {
-            await uploadImg.deleteImage(restaurantToDelete.ResBanner);
-        }
-            if(MealsToDelete){
-                MealsToDelete.forEach(async (meal) => {
-                    if (meal.MealImg) {
-                        await uploadImg.deleteImage(meal.MealImg);
-                    }
-                });
+            if (restaurantToDelete.ResImg) {
+                await uploadImg.deleteImage(restaurantToDelete.ResImg);
             }
+            if (restaurantToDelete.ResBanner) {
+                await uploadImg.deleteImage(restaurantToDelete.ResBanner);
+            }
+            if(MealsToDelete){
+                    MealsToDelete.forEach(async (meal) => {
+                        if (meal.MealImg) {
+                            await uploadImg.deleteImage(meal.MealImg);
+                        }
+                    });
+                }
         } catch (error) {
 
             console.error('Error deleting image:', error);
         }
 
-        await restaurant.findOneAndDelete({ _id: id });
+        await meal.deleteMany({ ResID: id });
+       
        console.log("Deleted meals", MealsToDelete);
 
         res.status(200).json({ message: "Restaurant Deleted Successfully" });
