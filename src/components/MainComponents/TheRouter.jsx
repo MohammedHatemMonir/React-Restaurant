@@ -31,13 +31,13 @@ import ResetPass from './../Authentication/ResetPass';
 export default function TheRouter() {
   const navigate = useNavigate();
 
-
+    const { pathname } = useLocation();
   const protectedpaths = ["login", "signup", "forget","reset"];
 
   const navigateLogic = () => {
 
     
-    const { pathname } = useLocation();
+
 
     const firstSegment = pathname.split('/')[1];
     console.log("firstSegment", firstSegment, protectedpaths.includes(firstSegment));
