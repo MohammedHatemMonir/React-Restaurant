@@ -112,8 +112,8 @@ const deleteresturant = async (req, res) => {
         }
 
         await meal.deleteMany({ ResID: id });
-       
-       console.log("Deleted meals", MealsToDelete);
+
+        console.log("Deleted meals", MealsToDelete);
 
         res.status(200).json({ message: "Restaurant Deleted Successfully" });
     } catch (error) {
@@ -140,7 +140,23 @@ const updateRestaurant = async (req, res) => {
             return res.status(403).json({ error: "Not Authenticated" });
         }
         const { id } = req.params;
-        const updatedRestaurant = await restaurant.findByIdAndUpdate(id, req.body, { new: true });
+
+        const NewResData ={}
+
+        if(req.body.ResName){
+            NewResData.ResName = req.body.ResName;
+        }
+        if(req.body.Categoery){
+            NewResData.Categoery = req.body.Categoery;
+        }
+        if(req.body.location){
+            NewResData.location = req.body.location;
+        }
+
+
+
+
+        const updatedRestaurant = await restaurant.findByIdAndUpdate(id, NewResData, { new: true });
 
         if (!updatedRestaurant) {
             return res.status(404).json({ error: "Failed to update restaurant" });

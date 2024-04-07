@@ -36,6 +36,7 @@ function EditModal({ openModal, closeModal, resName, resId }) {
 
   const onSubmit = async (data) => {
     // console.log("new data", data); // this new data from registers in useForm hook
+    console.log("new data", data);
     const result = await m.mutateAsync(data);
     // console.log(result)
     // alert(result)
@@ -69,7 +70,7 @@ function EditModal({ openModal, closeModal, resName, resId }) {
                   name="resName"
                   defaultValue={resName}
                   placeholder="Restaurant Name"
-                  {...register("resName")}
+                  {...register("ResName")}
                 />
                 <span className="error" style={{ color: "red" }}>
                   {errors["resName"] && errors["resName"].message}
