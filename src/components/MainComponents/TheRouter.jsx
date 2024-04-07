@@ -31,6 +31,28 @@ import ResetPass from './../Authentication/ResetPass';
 export default function TheRouter() {
   const navigate = useNavigate();
 
+
+  const protectedpaths = ["login", "signup", "forget","reset"];
+
+  const navigateLogic = () => {
+
+    
+    const { pathname } = useLocation();
+
+    const firstSegment = pathname.split('/')[1];
+    console.log("firstSegment", firstSegment, protectedpaths.includes(firstSegment));
+
+    if (!UserData.value.loggedIn && !protectedpaths.includes(firstSegment)) {
+      console.log("navigate to login", protectedpaths.includes(pathname), "pathname:", pathname);
+      navigate("/login");
+    } else if (UserData.value.loggedIn && protectedpaths.includes(firstSegment)) {
+      navigate("/");
+    }
+  };
+
+
+  
+
   const OnWindowChange = ({ children }) => {
     const q = useQuery({
       queryKey: ["session"],
@@ -63,20 +85,9 @@ export default function TheRouter() {
     //   });
 
     // }, []);
+    
   };
-  const protectedpaths = ["/login", "/signup", "/forget","/reset"];
-
-  const navigateLogic = () => {
-    const { pathname } = useLocation();
-
-    if (!UserData.value.loggedIn && !protectedpaths.includes(pathname)) {
-      console.log("navigate to login", protectedpaths.includes(pathname), "pathname:", pathname);
-      navigate("/login");
-    } else if (UserData.value.loggedIn && protectedpaths.includes(pathname)) {
-      navigate("/");
-    }
-  };
-
+  
   return (
     <>
       <OnWindowChange />
