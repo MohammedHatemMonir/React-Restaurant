@@ -86,22 +86,36 @@ const deleteresturant = async (req, res) => {
         const { id } = req.params;
 
         const restaurantToDelete = await restaurant.findOne({ _id: id });
+        const MealsToDelete = await meal.find({ ResID: id });
         
         if (!restaurantToDelete) {
             return res.status(404).json({ message: "Restaurant Not Found" });
         }
 
-        await meal.deleteMany({ ResID: id });
+        const meals = await meal.deleteMany({ ResID: id });
         await rescomment.deleteMany({ ResID: id });
         
+        try {
         if (restaurantToDelete.ResImg) {
             await uploadImg.deleteImage(restaurantToDelete.ResImg);
         }
         if (restaurantToDelete.ResBanner) {
             await uploadImg.deleteImage(restaurantToDelete.ResBanner);
         }
+            if(MealsToDelete){
+                MealsToDelete.forEach(async (meal) => {
+                    if (meal.MealImg) {
+                        await uploadImg.deleteImage(meal.MealImg);
+                    }
+                });
+            }
+        } catch (error) {
+
+            console.error('Error deleting image:', error);
+        }
 
         await restaurant.findOneAndDelete({ _id: id });
+       console.log("Deleted meals", MealsToDelete);
 
         res.status(200).json({ message: "Restaurant Deleted Successfully" });
     } catch (error) {

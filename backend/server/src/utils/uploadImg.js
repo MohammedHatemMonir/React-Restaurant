@@ -28,9 +28,6 @@ module.exports = (image) => { // image = > base64
 
 module.exports.deleteImage = (image) => {
     return new Promise((resolve, reject) => {
-
-
-
         const url = image; // your image URL
         const publicId = url.split('/').pop().split('.')[0];
 

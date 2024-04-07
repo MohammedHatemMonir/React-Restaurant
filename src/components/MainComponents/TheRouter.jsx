@@ -69,7 +69,8 @@ export default function TheRouter() {
           userImg: result.data.userImg,
           loggedIn: result.data.loggedIn,
         };
-        localStorage.setItem("UserData", JSON.stringify(UserData.value));
+        UserData.value.loggedIn ?
+        localStorage.setItem("UserData",true) : localStorage.removeItem("UserData");
         // console.log("session", result.data);
 
         return result;
