@@ -7,7 +7,7 @@ import "./Login&Signup.scss";
 import logo from "../../images/DineMeLogo-modified.png";
 import { useSignal } from "@preact/signals-react";
 import { Button } from "reactstrap";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 const Login = () => {
   const m = useMutation({
@@ -21,8 +21,8 @@ const Login = () => {
   });
 
   const {
-    handleSubmit,
     register,
+    handleSubmit,
     formState: { errors },
   } = useForm();
 
@@ -81,7 +81,10 @@ const Login = () => {
       <div className="main">
         <div
           className="col-md-6 col-sm-12"
-          style={{ marginLeft: 60, paddingBottom: 30 }}
+          style={{
+            //  marginLeft: 60,
+            paddingBottom: 30,
+          }}
         >
           <div className="login-form">
             <div className="text-center">

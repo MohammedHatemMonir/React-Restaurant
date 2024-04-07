@@ -127,42 +127,44 @@ function EditModal({ openModal, closeModal, resName, resId }) {
                 </span>
               </Form.Group>
             </Col>
-            <Col sm={10}>
-              <Form.Group className="mb-2 my-sm-3">
-                <Form.Control
-                  type="text"
-                  name="resLocation"
-                  placeholder="Restaurant Location"
-                  value={currentLocation.value}
-                  {...register("resLocation", {
-                    // required: "Please enter restaurant location",
-                  })}
-                />
-                <span className="error" style={{ color: "red" }}>
-                  {errors["resLocation"] && errors["resLocation"].message}
+            <div className="form-group col-md-10">
+              <label htmlFor="location">Location</label>
+              <input
+                {...register("location", {
+                  minLength: {
+                    value: 3,
+                    message: "Location must have at least 3 characters",
+                  },
+                })}
+                type="text"
+                className="form-control"
+                id="location"
+                value={currentLocation}
+                placeholder="Location"
+              />
+              {errors.location && (
+                <span className="text-danger font-weight-bold">
+                  {errors.location.message}
                 </span>
-              </Form.Group>
-            </Col>
-            <Col sm={2}>
+              )}
+            </div>
+
+            <div className="form-group col-sm-12 col-md-2 d-flex justify-content-center align-items-end">
               <Button
-                className={`${
-                  myBtn.value
-                    ? "bg-primary my-sm-3 text-end"
-                    : " bg-danger my-sm-3 text-end"
-                }`}
+                className={`${myBtn.value ? "bg-primary" : " bg-danger"}`}
                 onClick={handleBtnClick}
               >
                 {myBtn.value ? "Open Map" : "Close Map"}
               </Button>
-            </Col>
+            </div>
+            {showMap.value && (
+              <Col sm={12}>
+                <div>
+                  <LeafletMap currentLocation={currentLocation} />
+                </div>
+              </Col>
+            )}
           </Row>
-          {showMap.value && (
-            <Col sm={12}>
-              <div>
-                <LeafletMap currentLocation={currentLocation} />
-              </div>
-            </Col>
-          )}
           <Modal.Footer>
             <Button type="submit">Submit</Button>
             <Button onClick={closeModal}>Close</Button>

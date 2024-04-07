@@ -100,159 +100,158 @@ export default function SignUp() {
           />
         </div>
       </div>
-      <div className="main" style={{ width: "100%" }}>
-        <Container>
-          <Row>
-            <Col xs={12} sm={10} md={8} lg={5} xl={5} xxl={4}>
-              <div className="text-center login-form">
-                <h3>Sign Up</h3>
-                <p>Create your account today</p>
-              </div>
-              <Button
-                variant="secondary"
-                className="w-100 mb-3"
-                onClick={() => {
-                  window.location.href = "http://localhost:5001/auth/google";
-                }}
-              >
-                Sign up with Google
-              </Button>
-              <div className="position-relative mt-4">
-                <hr className="bg-200" />
-                <div className="text-center font-weight-bold">Use Email</div>
-              </div>
 
-              <Form onSubmit={handleSubmit(onSubmit)}>
-                <FormGroup className="mb-3">
-                  <Form.Label>Name</Form.Label>
-                  <FormControl
-                    type="text"
-                    placeholder="Name"
-                    {...register("name", {
-                      required: "Name is required",
+      <Container className="main" style={{ width: "100%" }}>
+        <Row>
+          <Col xs={12} sm={10} md={8} lg={5} xl={5} xxl={4}>
+            <div className="text-center login-form">
+              <h3>Sign Up</h3>
+              <p>Create your account today</p>
+            </div>
+            <Button
+              variant="secondary"
+              className="w-100 mb-3"
+              onClick={() => {
+                window.location.href = "http://localhost:5001/auth/google";
+              }}
+            >
+              Sign up with Google
+            </Button>
+            <div className="position-relative mt-4">
+              <hr className="bg-200" />
+              <div className="text-center font-weight-bold">Use Email</div>
+            </div>
+
+            <Form onSubmit={handleSubmit(onSubmit)}>
+              <FormGroup className="mb-3">
+                <Form.Label>Name</Form.Label>
+                <FormControl
+                  type="text"
+                  placeholder="Name"
+                  {...register("name", {
+                    required: "Name is required",
+                    minLength: {
+                      value: 3,
+                      message: "Name must be 3 or more characters",
+                    },
+                  })}
+                />
+                <span className="text-danger">
+                  {errors["name"] && errors["name"].message}
+                </span>
+              </FormGroup>
+              <FormGroup className="mb-3">
+                <Form.Label>Email address</Form.Label>
+                <FormControl
+                  type="email"
+                  placeholder="dineMe@example.com"
+                  {...register("email", {
+                    required: "Email is required",
+                    pattern: {
+                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                      message: "Invalid email address",
+                    },
+                  })}
+                />
+                <span className="text-danger  ">
+                  {errors["email"] && errors["email"].message}
+                </span>
+              </FormGroup>
+              <Row className="g-3 mb-3">
+                <Col sm={6}>
+                  <FormGroup>
+                    <Form.Label>Password</Form.Label>
+                    <FormControl
+                      type="password"
+                      placeholder="*******"
+                      {...register("password", {
+                        required: "Password is required",
+                        minLength: {
+                          value: 5,
+                          message: "Password must have at least 5 characters",
+                        },
+                      })}
+                    />
+                    <span className="text-danger  ">
+                      {errors["password"] && errors["password"].message}
+                    </span>
+                  </FormGroup>
+                </Col>
+                <Col sm={6}>
+                  <FormGroup>
+                    <Form.Label>Confirm Password</Form.Label>
+                    <FormControl
+                      type="password"
+                      placeholder="*******"
+                      {...register("confirmPassword", {
+                        required: "Confirm Password is required",
+                        validate: (val) => {
+                          if (watch("password") != val) {
+                            return "Your passwords do no match";
+                          }
+                        },
+                      })}
+                    />
+                    <span className="text-danger">
+                      {errors["confirmPassword"] &&
+                        errors["confirmPassword"].message}
+                    </span>
+                  </FormGroup>
+                </Col>
+                <div className="form-group col-md-10">
+                  <label htmlFor="location">Location</label>
+                  <input
+                    {...register("location", {
                       minLength: {
                         value: 3,
-                        message: "Name must be 3 or more characters",
+                        message: "Location must have at least 3 characters",
                       },
                     })}
+                    type="text"
+                    className="form-control"
+                    id="location"
+                    value={currentLocation}
+                    placeholder="Location"
                   />
-                  <span className="text-danger">
-                    {errors["name"] && errors["name"].message}
-                  </span>
-                </FormGroup>
-                <FormGroup className="mb-3">
-                  <Form.Label>Email address</Form.Label>
-                  <FormControl
-                    type="email"
-                    placeholder="name@example.com"
-                    {...register("email", {
-                      required: "Email is required",
-                      pattern: {
-                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                        message: "Invalid email address",
-                      },
-                    })}
-                  />
-                  <span className="text-danger  ">
-                    {errors["email"] && errors["email"].message}
-                  </span>
-                </FormGroup>
-                <Row className="g-3 mb-3">
-                  <Col sm={6}>
-                    <FormGroup>
-                      <Form.Label>Password</Form.Label>
-                      <FormControl
-                        type="password"
-                        placeholder="Password"
-                        {...register("password", {
-                          required: "Password is required",
-                          minLength: {
-                            value: 5,
-                            message: "Password must have at least 5 characters",
-                          },
-                        })}
-                      />
-                      <span className="text-danger  ">
-                        {errors["password"] && errors["password"].message}
-                      </span>
-                    </FormGroup>
-                  </Col>
-                  <Col sm={6}>
-                    <FormGroup>
-                      <Form.Label>Confirm Password</Form.Label>
-                      <FormControl
-                        type="password"
-                        placeholder="Confirm Password"
-                        {...register("confirmPassword", {
-                          required: "Confirm Password is required",
-                          validate: (val) => {
-                            if (watch("password") != val) {
-                              return "Your passwords do no match";
-                            }
-                          },
-                        })}
-                      />
-                      <span className="text-danger">
-                        {errors["confirmPassword"] &&
-                          errors["confirmPassword"].message}
-                      </span>
-                    </FormGroup>
-                  </Col>
-                  <Col sm={10}>
-                    <Form.Group className="mb-2 my-sm-3">
-                      <Form.Control
-                        type="text"
-                        name="resLocation"
-                        placeholder="Restaurant Location"
-                        value={currentLocation.value}
-                        {...register("resLocation", {
-                          // required: "Please enter restaurant location",
-                        })}
-                      />
-                      <span className="error" style={{ color: "red" }}>
-                        {errors["resLocation"] && errors["resLocation"].message}
-                      </span>
-                    </Form.Group>
-                  </Col>
-                  <Col sm={2}>
-                    <Button
-                      className={`${
-                        myBtn.value
-                          ? "bg-primary my-sm-3 text-end"
-                          : " bg-danger my-sm-3 text-end"
-                      }`}
-                      onClick={handleBtnClick}
-                    >
-                      {/* {myBtn.value ? "Open Map" : "Close Map"} */}
-                      Map
-                    </Button>
-                  </Col>
-                  {showMap.value && (
-                    <Col sm={12}>
-                      <div>
-                        <LeafletMap currentLocation={currentLocation} />
-                      </div>
-                    </Col>
+                  {errors.location && (
+                    <span className="text-danger font-weight-bold">
+                      {errors.location.message}
+                    </span>
                   )}
-                </Row>
-                <Button variant="primary" type="submit" className="w-100 mb-3">
-                  Sign up
-                </Button>
-
-                <div className="text-center">
-                  <Link
-                    to="/login"
-                    style={{ textDecoration: "none", cursor: "pointer" }}
-                    className="fs--1 fw-bold"
-                  >
-                    Sign in to an existing account
-                  </Link>
                 </div>
-              </Form>
-            </Col>
-          </Row>
-        </Container>
-      </div>
+                <div className="form-group col-sm-12 col-md-2 d-flex justify-content-center align-items-end">
+                  <Button
+                    className={`${myBtn.value ? "bg-primary" : " bg-danger"}`}
+                    onClick={handleBtnClick}
+                  >
+                    {/* {myBtn.value ? "Open Map" : "Close Map"} */} Map
+                  </Button>
+                </div>
+                {showMap.value && (
+                  <Col sm={12}>
+                    <div>
+                      <LeafletMap currentLocation={currentLocation} />
+                    </div>
+                  </Col>
+                )}
+              </Row>
+              <Button variant="primary" type="submit" className="w-100 mb-3">
+                Sign up
+              </Button>
+
+              <div className="text-center">
+                <Link
+                  to="/login"
+                  style={{ textDecoration: "none", cursor: "pointer" }}
+                  className="fs--1 fw-bold"
+                >
+                  Sign in to an existing account
+                </Link>
+              </div>
+            </Form>
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 }

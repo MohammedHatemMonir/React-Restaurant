@@ -15,7 +15,7 @@ export default function AddRestaurantButton() {
   const showMap = useSignal(false);
   const myBtn = useSignal(true);
 
-  const queryClient= useQueryClient();
+  const queryClient = useQueryClient();
   function handleBtnClick() {
     showMap.value = !showMap.value;
     myBtn.value = !myBtn.value;
@@ -47,16 +47,11 @@ export default function AddRestaurantButton() {
     let resImg64;
     let resBanner64;
     data.location = currentLocation.value;
-    if(data.resImg[0])
-      resImg64 = await convertBase64(data.resImg[0]);
-    if(data.resBanner[0])
-      resBanner64 = await convertBase64(data.resBanner[0]);
+    if (data.resImg[0]) resImg64 = await convertBase64(data.resImg[0]);
+    if (data.resBanner[0]) resBanner64 = await convertBase64(data.resBanner[0]);
 
-
-    if(resImg64)
-    data.resImg = resImg64;
-    if(resBanner64)
-    data.resBanner = resBanner64;
+    if (resImg64) data.resImg = resImg64;
+    if (resBanner64) data.resBanner = resBanner64;
 
     console.log("NEW DATA", data);
 
@@ -77,10 +72,8 @@ export default function AddRestaurantButton() {
         ButtonText={<AddIcon />}
         Show={ShowSignal}
         Header={"Add new restaurant"}
-        
         submit={() => {
-          !m.isLoading &&
-          handleSubmit(submit)();
+          !m.isLoading && handleSubmit(submit)();
         }}
         onCancel={() => {
           ShowSignal.value = false;
@@ -147,9 +140,9 @@ export default function AddRestaurantButton() {
                     type="file"
                     name="resImg"
                     placeholder="Restaurant Image "
-                    {...register("resImg",{
+                    {...register("resImg", {
                       required: "Please add restaurant Image",
-                    } )}
+                    })}
                   />
                   <span className="error" style={{ color: "red" }}>
                     {errors["resImg"] && errors["resImg"].message}
@@ -163,7 +156,7 @@ export default function AddRestaurantButton() {
                     type="file"
                     name="resBanner"
                     placeholder="Restaurant Banner"
-                    {...register("resBanner",{
+                    {...register("resBanner", {
                       required: "Please add restaurant Banner",
                     })}
                   />
@@ -172,34 +165,36 @@ export default function AddRestaurantButton() {
                   </span>
                 </Form.Group>
               </Col>
-              <Col sm={10}>
-                <Form.Group className="mb-2 my-sm-3">
-                  <Form.Control
-                    type="text"
-                    name="resLocation"
-                    placeholder="Restaurant Location"
-                    value={currentLocation.value}
-                    {...register("resLocation", {
-                      required: "Please enter restaurant location",
-                    })}
-                  />
-                  <span className="error" style={{ color: "red" }}>
-                    {errors["resLocation"] && errors["resLocation"].message}
-                  </span>
-                </Form.Group>
-              </Col>
-              <Col sm={2}>
-                <Button
-                  className={`${
-                    myBtn.value
-                      ? "bg-primary my-sm-3 text-end"
-                      : " bg-danger my-sm-3"
-                  }`}
-                  onClick={handleBtnClick}
-                >
-                  {myBtn.value ? "Open Map" : "Close Map"}
-                </Button>
-              </Col>
+              <div className="form-group col-md-10">
+              <label htmlFor="location">Location</label>
+              <input
+                {...register("location", {
+                  minLength: {
+                    value: 3,
+                    message: "Location must have at least 3 characters",
+                  },
+                })}
+                type="text"
+                className="form-control"
+                id="location"
+                value={currentLocation}
+                placeholder="Location"
+              />
+              {errors.location && (
+                <span className="text-danger font-weight-bold">
+                  {errors.location.message}
+                </span>
+              )}
+            </div>
+
+            <div className="form-group col-sm-12 col-md-2 d-flex justify-content-center align-items-end">
+              <Button
+                className={`${myBtn.value ? "bg-primary" : " bg-danger"}`}
+                onClick={handleBtnClick}
+              >
+                {myBtn.value ? "Open Map" : "Close Map"}
+              </Button>
+            </div>
               {showMap.value == true && (
                 <Col sm={12}>
                   <div style={{ transition: "all", direction: "2s" }}>
