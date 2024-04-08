@@ -67,13 +67,13 @@ function EditModal({ openModal, closeModal, resName, resId }) {
                 <Form.Label>New Name</Form.Label>
                 <Form.Control
                   type="text"
-                  name="resName"
+                  name="ResName"
                   defaultValue={resName}
                   placeholder="Restaurant Name"
                   {...register("ResName")}
                 />
                 <span className="error" style={{ color: "red" }}>
-                  {errors["resName"] && errors["resName"].message}
+                  {errors["ResName"] && errors["ResName"].message}
                 </span>
               </Form.Group>
             </Col>
@@ -101,14 +101,14 @@ function EditModal({ openModal, closeModal, resName, resId }) {
                 <Form.Label>New Image</Form.Label>
                 <Form.Control
                   type="file"
-                  name="resImg"
+                  name="ResImg"
                   placeholder="Restaurant Image"
-                  {...register("resImg", {
+                  {...register("ResImg", {
                     // required: "Please add new restaurant image",
                   })}
                 />
                 <span className="error" style={{ color: "red" }}>
-                  {errors["resImg"] && errors["resImg"].message}
+                  {errors["ResImg"] && errors["ResImg"].message}
                 </span>
               </Form.Group>
             </Col>
@@ -117,14 +117,14 @@ function EditModal({ openModal, closeModal, resName, resId }) {
                 <Form.Label>New Banner</Form.Label>
                 <Form.Control
                   type="file"
-                  name="resBanner"
+                  name="ResBanner"
                   placeholder="Meal description"
-                  {...register("resBanner", {
+                  {...register("ResBanner", {
                     // required: "Please add new restaurant banner",
                   })}
                 />
                 <span className="error" style={{ color: "red" }}>
-                  {errors["resBanner"] && errors["resBanner"].message}
+                  {errors["ResBanner"] && errors["ResBanner"].message}
                 </span>
               </Form.Group>
             </Col>
