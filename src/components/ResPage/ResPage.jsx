@@ -62,18 +62,18 @@ export default function ResPage() {
           </Container>
           {/* NavBar & Loader*/}
           {/* <MainCards /> */}
-          <div className="mt-5">
+          <div className="mt-5 ">
             <div id="app" className="">
-              <div id="page-content" className="page-content">
-                <div className="container">
+              <div id="page-content" className="page-content ">
+                <div className="container ">
                   {UserData.value.role == "ADMIN" && (
                     <div>
                       <AddRestaurantButton />
                     </div>
                   )}
-                  <Filters />
+
                   {/* select-res-page */}
-                  <div className="row  select-res-page ">
+                  <div className="row select-res-page ">
                     <div className="col-header col-xs-16">
                       <h2 className="col-title inline-block">
                         Restaurants
@@ -88,6 +88,9 @@ export default function ResPage() {
                     >
                       <div className="col-body select-res-page">
                         <div className="row">
+                          <div className="col-sm-12 col-md-3">
+                            <Filters />
+                          </div>
                           {!q.isLoading &&
                             Array.isArray(q.data?.data) &&
                             q.data?.data?.map((data, index) => {
