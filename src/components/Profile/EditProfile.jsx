@@ -25,7 +25,7 @@ const EditProfile = () => {
   return (
     <div className="edit-profile">
       <div className="container form__wrapper">
-        <h2 className="font-weight-bold">Edit Your Profile</h2>
+        <h2 className="">Edit Your Profile</h2>
         <form onSubmit={handleSubmit(onSubmit)} id="myForm">
           <div className="form-row">
             <div className="form-group col-md-6">
@@ -46,9 +46,7 @@ const EditProfile = () => {
                 placeholder="Name"
               />
               {errors.firstName && (
-                <span className="text-danger font-weight-bold">
-                  {errors.firstName.message}
-                </span>
+                <span className="text-danger ">{errors.firstName.message}</span>
               )}
             </div>
             <div className="form-group col-md-6">
@@ -63,9 +61,7 @@ const EditProfile = () => {
                 id="my-img"
               />
               {errors.userImage && (
-                <span className="text-danger font-weight-bold">
-                  {errors.userImage.message}
-                </span>
+                <span className="text-danger ">{errors.userImage.message}</span>
               )}
             </div>
           </div>
@@ -87,9 +83,7 @@ const EditProfile = () => {
               placeholder="dineMe@example.com"
             />
             {errors.email && (
-              <span className="text-danger font-weight-bold">
-                {errors.email.message}
-              </span>
+              <span className="text-danger ">{errors.email.message}</span>
             )}
           </div>
           <div className="form-row">
@@ -111,9 +105,7 @@ const EditProfile = () => {
                 placeholder="*******"
               />
               {errors.oldPass && (
-                <span className="text-danger font-weight-bold">
-                  {errors.oldPass.message}
-                </span>
+                <span className="text-danger ">{errors.oldPass.message}</span>
               )}
             </div>
             <div className="form-group col-md-6">
@@ -133,13 +125,11 @@ const EditProfile = () => {
                 placeholder="*******"
               />
               {errors.newPass && (
-                <span className="text-danger font-weight-bold">
-                  {errors.newPass.message}
-                </span>
+                <span className="text-danger ">{errors.newPass.message}</span>
               )}
             </div>
           </div>
-     
+
           <div className="form-row">
             <div className="form-group col-md-5">
               <label htmlFor="phone">Phone Number</label>
@@ -147,7 +137,7 @@ const EditProfile = () => {
                 {...register("phone", {
                   minLength: {
                     value: 11,
-                    message: "Phone number must have at least 11 digits",
+                    message: "Phone must have at least 11 digits",
                   },
                 })}
                 type="tel"
@@ -156,9 +146,7 @@ const EditProfile = () => {
                 placeholder="01*********"
               />
               {errors.phone && (
-                <span className="text-danger font-weight-bold">
-                  {errors.phone.message}
-                </span>
+                <span className="text-danger ">{errors.phone.message}</span>
               )}
             </div>
 
@@ -178,24 +166,23 @@ const EditProfile = () => {
                 placeholder="Location"
               />
               {errors.location && (
-                <span className="text-danger font-weight-bold">
-                  {errors.location.message}
-                </span>
+                <span className="text-danger ">{errors.location.message}</span>
               )}
             </div>
-
-            <div className="form-group col-sm-12 col-md-2 d-flex justify-content-center align-items-end">
+            <div
+              className="form-group col-sm-12 col-md-2 text-center"
+              style={{ marginTop: "30px" }}
+            >
               <Button
-                className={`${myBtn.value ? "bg-primary" : " bg-danger"}`}
+                className={`${myBtn.value ? "bg-primary" : "bg-danger"} w-100`}
                 onClick={handleBtnClick}
               >
                 {myBtn.value ? "Open Map" : "Close Map"}
               </Button>
             </div>
-
             {showMap.value && (
               <div className="form-group col-md-12">
-                <div style={{ transition: "all 2s" }}>
+                <div>
                   <LeafletMap currentLocation={currentLocation} />
                 </div>
               </div>

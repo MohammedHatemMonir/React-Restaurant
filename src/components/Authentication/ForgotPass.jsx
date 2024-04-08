@@ -59,7 +59,7 @@ export default function ForgotPass() {
     <div className="container text-center">
       <div className="row justify-content-center" style={{ marginTop: "30vh" }}>
         <div className="col-md-6">
-          <h2>Forgot Your Password?</h2>
+          <h2>Forgot Your Password ?</h2>
           <p>Enter your email below and we will send you a reset link</p>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form-group">

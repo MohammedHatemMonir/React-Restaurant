@@ -198,10 +198,32 @@ export default function SignUp() {
                     </span>
                   </FormGroup>
                 </Col>
-                <div className="form-group col-md-10">
+
+                <div className="form-group col-md-5">
+                  <label htmlFor="phone">Phone Number</label>
+                  <input
+                    {...register("phone", {
+                      required: "Phone is required",
+                      minLength: {
+                        value: 11,
+                        message: "Phone number must have at least 11 digits",
+                      },
+                    })}
+                    type="tel"
+                    className="form-control"
+                    id="phone"
+                    placeholder="01*********"
+                  />
+                  {errors.phone && (
+                    <span className="text-danger">{errors.phone.message}</span>
+                  )}
+                </div>
+
+                <div className="form-group col-md-5">
                   <label htmlFor="location">Location</label>
                   <input
                     {...register("location", {
+                      required: "Location is required",
                       minLength: {
                         value: 3,
                         message: "Location must have at least 3 characters",
@@ -214,14 +236,19 @@ export default function SignUp() {
                     placeholder="Location"
                   />
                   {errors.location && (
-                    <span className="text-danger font-weight-bold">
+                    <span className="text-danger">
                       {errors.location.message}
                     </span>
                   )}
                 </div>
-                <div className="form-group col-sm-12 col-md-2 d-flex justify-content-center align-items-end">
+                <div
+                  className="form-group col-sm-12 col-md-2 text-center"
+                  style={{ marginTop: "50px" }}
+                >
                   <Button
-                    className={`${myBtn.value ? "bg-primary" : " bg-danger"}`}
+                    className={`${
+                      myBtn.value ? "bg-primary" : "bg-danger"
+                    } w-100`}
                     onClick={handleBtnClick}
                   >
                     {/* {myBtn.value ? "Open Map" : "Close Map"} */} Map
