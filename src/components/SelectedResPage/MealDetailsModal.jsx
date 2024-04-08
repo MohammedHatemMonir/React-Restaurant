@@ -27,18 +27,8 @@ function MealDetailsModal({
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <div className="modal-content">
+        <div className="modal-content select-res-page">
           <div className="item-cover">
-            <button
-              type="button"
-              data-dismiss="modal"
-              aria-label="Close"
-              className="close-modal"
-            >
-              <svg viewBox="0 0 25 25">
-                <use xlinkHref="#close" />
-              </svg>
-            </button>
             <div className="image image-ratio ratio-dish-cover">
               <div className="ratio-content">
                 <img src={mealImg} alt={mealImg} className="v-center" />
