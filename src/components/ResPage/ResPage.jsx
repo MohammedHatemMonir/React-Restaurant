@@ -75,7 +75,7 @@ export default function ResPage() {
                   {/* select-res-page */}
                   <div className="row select-res-page ">
                     <div className="col-header col-xs-16">
-                      <h2 className="col-title inline-block">
+                      <h2 className="col-title inline-block my-4">
                         Restaurants
                         <p style={{ display: "inline", fontSize: "17px" }}>
                           ( 1074 )
@@ -86,26 +86,24 @@ export default function ResPage() {
                       id="rest-list-col"
                       className="delivery-rest-list col-sm-13 col-xs-16"
                     >
-                      <div className="col-body select-res-page">
-                        <div className="row">
-                          <div className="col-sm-12 col-md-3">
-                            <Filters />
-                          </div>
-                          {!q.isLoading &&
-                            Array.isArray(q.data?.data) &&
-                            q.data?.data?.map((data, index) => {
-                              return (
-                                <ResCard
-                                  key={index}
-                                  id={data._id}
-                                  name={data.ResName}
-                                  ResImg={data.ResImg}
-                                  MealImg={data.MealImg}
-                                  start1={data.rating}
-                                />
-                              );
-                            })}
+                      <div className="row">
+                        <div className="col-sm-12 col-md-2">
+                          <Filters />
                         </div>
+                        {!q.isLoading &&
+                          Array.isArray(q.data?.data) &&
+                          q.data?.data?.map((data, index) => {
+                            return (
+                              <ResCard
+                                key={index}
+                                id={data._id}
+                                name={data.ResName}
+                                ResImg={data.ResImg}
+                                MealImg={data.MealImg}
+                                start1={data.rating}
+                              />
+                            );
+                          })}
                       </div>
                     </div>
                   </div>
@@ -113,6 +111,7 @@ export default function ResPage() {
               </div>
             </div>
           </div>
+
           <Footer />
         </section>
       </>
