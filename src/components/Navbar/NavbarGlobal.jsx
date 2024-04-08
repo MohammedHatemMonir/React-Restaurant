@@ -49,7 +49,7 @@ export default function NavbarGlobal() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Link to="/" className="nav-link">
+            <Link to="map" className="nav-link">
               <FaMapMarkerAlt /> Location
             </Link>
             <div>

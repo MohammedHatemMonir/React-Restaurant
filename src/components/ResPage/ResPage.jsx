@@ -145,6 +145,7 @@ function ResCard({ id, name, start1, ResImg, MealImg }) {
       <Link
         to={`/restaurant/${id}/${name}`}
         className="restaurant-card restaurant-delivery-card col-md-5 col-sm-8 col-xs-16"
+        // style={{background:"#ebebeb"}}
       >
         <div className="card-inner">
           <img
