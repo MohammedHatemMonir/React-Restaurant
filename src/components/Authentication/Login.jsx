@@ -151,8 +151,8 @@ const Login = () => {
                     border: "none",
                     background: "transparent",
                     position: "absolute",
-                    top: 53,
-                    right: 0,
+                    top: 51,
+                    right: 7,
                     transform: "translate(0, -50%)",
                   }}
                 >
@@ -164,32 +164,20 @@ const Login = () => {
                 </button>
               </div>
 
-              {/* mt-2 mb-3 */}
-              <div className="form-check mt-2 mb-3">
-                {/* <input
-                  className="form-check-input "
-                  type="checkbox"
-                  id="inlineCheckbox1"
-                  defaultValue="option1"
-                  onChange={handlePass}
-                />
-                <label className="form-check-label" htmlFor="inlineCheckbox1">
-                  Show Password
-                </label> */}
+              <div style={{ marginTop: "5px" }}>
+                <Link
+                  to="/signup"
+                  style={{ textDecoration: "none", marginRight: "10px" }}
+                >
+                  SignUp
+                </Link>
 
-                <span>
-                  <Link
-                    to="/signup"
-                    style={{ textDecoration: "none", marginRight: "10px" }}
-                  >
-                    SignUp
-                  </Link>
-                  <span>
-                    <Link className="text-decoration-none" to="/forget">
-                      Forgot Password
-                    </Link>
-                  </span>
-                </span>
+                <Link
+                  to="/forget"
+                  style={{ textDecoration: "none", marginRight: "10px" }}
+                >
+                  Forgot password ?
+                </Link>
               </div>
               <button type="submit" className="btn btn-black text-light mt-3">
                 Login
@@ -203,24 +191,3 @@ const Login = () => {
 };
 
 export default Login;
-
-{
-  /* <div style={{ marginTop: "10px" }}>
-<Link
-  to="/signup"
-  style={{ textDecoration: "none", marginRight: "10px" }}
->
-  SignUp
-</Link>
-
-<Link
-  to="/forget"
-  style={{ textDecoration: "none", marginRight: "10px" }}
->
-  Forgot password?
-</Link>
-<Button variant="primary" type="submit">
-  Login
-</Button>
-</div> */
-}
