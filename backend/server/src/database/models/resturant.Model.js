@@ -33,7 +33,8 @@ const resturantSchema=mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now
-    }
+    },
+    Categoery:{ type: String, require:true},
 })
 
 module.exports = mongoose.model("restaurant", resturantSchema);
