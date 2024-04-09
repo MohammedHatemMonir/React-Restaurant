@@ -1,7 +1,7 @@
 [
     {
       "id": 1,
-      "customerName": "John Doe",
+      "customerName": "Ibrahim Ismail",
       "productName": "Product A",
       "mealImage": "url_to_your_image1.jpg",
       "quantity": 2,
@@ -10,7 +10,7 @@
     },
     {
       "id": 2,
-      "customerName": "Jane Smith",
+      "customerName": "Mohamed Hatim",
       "productName": "Product B",
       "mealImage": "url_to_your_image2.jpg",
       "quantity": 1,
@@ -19,7 +19,16 @@
     },
     {
       "id": 3,
-      "customerName": "Michael Johnson",
+      "customerName": "Mahmoud Elhamy",
+      "productName": "Product F",
+      "mealImage": "url_to_your_image6.jpg",
+      "quantity": 1,
+      "totalPrice": 12.75,
+      "orderStatus": "In Progress"
+    },
+    {
+      "id": 4,
+      "customerName": "Mustafa Mahmoud",
       "productName": "Product C",
       "mealImage": "url_to_your_image3.jpg",
       "quantity": 3,
@@ -27,8 +36,8 @@
       "orderStatus": "Pending"
     },
     {
-      "id": 4,
-      "customerName": "Alice Brown",
+      "id": 5,
+      "customerName": "Mustafa Shehata",
       "productName": "Product D",
       "mealImage": "url_to_your_image4.jpg",
       "quantity": 1,
@@ -36,22 +45,14 @@
       "orderStatus": "Shipped"
     },
     {
-      "id": 5,
-      "customerName": "David Wilson",
+      "id": 6,
+      "customerName": "Ziad Essam",
       "productName": "Product E",
       "mealImage": "url_to_your_image5.jpg",
       "quantity": 2,
       "totalPrice": 30.50,
       "orderStatus": "Cancelled"
-    },
-    {
-      "id": 6,
-      "customerName": "Emily Taylor",
-      "productName": "Product F",
-      "mealImage": "url_to_your_image6.jpg",
-      "quantity": 1,
-      "totalPrice": 12.75,
-      "orderStatus": "Pending"
     }
+
   ]
   

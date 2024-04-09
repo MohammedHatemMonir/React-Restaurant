@@ -8,6 +8,7 @@ import logo from "../../images/DineMeLogo-modified.png";
 import { useSignal } from "@preact/signals-react";
 import { Button } from "reactstrap";
 import { toast } from "react-toastify";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const Login = () => {
   const m = useMutation({
@@ -130,6 +131,7 @@ const Login = () => {
                   type={showPass.value ? "text" : "password"}
                   className="form-control"
                   placeholder="Enter Your Password"
+                  style={{ position: "relative" }}
                   {...register("password", {
                     required: "Password is required",
                     minLength: {
@@ -144,8 +146,9 @@ const Login = () => {
                   </span>
                 )}
               </div>
+              {/* mt-2 mb-3 */}
               <div className="form-check mt-2 mb-3">
-                <input
+                {/* <input
                   className="form-check-input "
                   type="checkbox"
                   id="inlineCheckbox1"
@@ -154,9 +157,25 @@ const Login = () => {
                 />
                 <label className="form-check-label" htmlFor="inlineCheckbox1">
                   Show Password
-                </label>
-              </div>
-              <section>
+                </label> */}
+                <button
+                  onClick={handlePass}
+                  type="button"
+                  style={{
+                    border: "none",
+                    background: "transparent",
+                    position: "absolute",
+                    top: "-247%",
+                    right: "5px",
+                    transform: "translateY(50%)",
+                  }}
+                >
+                  {showPass.value ? (
+                    <AiOutlineEye />
+                  ) : (
+                    <AiOutlineEyeInvisible />
+                  )}
+                </button>
                 <span>
                   <Link
                     to="/signup"
@@ -170,7 +189,7 @@ const Login = () => {
                     </Link>
                   </span>
                 </span>
-              </section>
+              </div>
               <button type="submit" className="btn btn-black text-light mt-3">
                 Login
               </button>
