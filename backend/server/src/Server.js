@@ -11,6 +11,8 @@ const MEALrouter = require('./modules/routes/meals_routes');
 const passport = require('passport');
 const uploadImg = require('./utils/uploadImg');
 const { error } = require('console');
+const SearchRouter = require('./modules/routes/searchRoutes.js');
+
 // const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 
@@ -56,6 +58,7 @@ app.use(router)
 app.use(MEALrouter)
 app.use("/analyze", comment_routes);
 app.use("/api/users", userRouter);
+app.use(SearchRouter)
 
 
 
