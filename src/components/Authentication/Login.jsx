@@ -125,13 +125,12 @@ const Login = () => {
                   <span className="text-danger">{errors["email"].message}</span>
                 )}
               </div>
-              <div className="form-group">
+              <div className="form-group" style={{ position: "relative" }}>
                 <label>Password</label>
                 <input
                   type={showPass.value ? "text" : "password"}
                   className="form-control"
                   placeholder="Enter Your Password"
-                  style={{ position: "relative" }}
                   {...register("password", {
                     required: "Password is required",
                     minLength: {
@@ -145,7 +144,26 @@ const Login = () => {
                     {errors["password"].message}
                   </span>
                 )}
+                <button
+                  onClick={handlePass}
+                  type="button"
+                  style={{
+                    border: "none",
+                    background: "transparent",
+                    position: "absolute",
+                    top: 53,
+                    right: 0,
+                    transform: "translate(0, -50%)",
+                  }}
+                >
+                  {showPass.value ? (
+                    <AiOutlineEye />
+                  ) : (
+                    <AiOutlineEyeInvisible />
+                  )}
+                </button>
               </div>
+
               {/* mt-2 mb-3 */}
               <div className="form-check mt-2 mb-3">
                 {/* <input
@@ -158,24 +176,7 @@ const Login = () => {
                 <label className="form-check-label" htmlFor="inlineCheckbox1">
                   Show Password
                 </label> */}
-                <button
-                  onClick={handlePass}
-                  type="button"
-                  style={{
-                    border: "none",
-                    background: "transparent",
-                    position: "absolute",
-                    top: "-247%",
-                    right: "5px",
-                    transform: "translateY(50%)",
-                  }}
-                >
-                  {showPass.value ? (
-                    <AiOutlineEye />
-                  ) : (
-                    <AiOutlineEyeInvisible />
-                  )}
-                </button>
+
                 <span>
                   <Link
                     to="/signup"
