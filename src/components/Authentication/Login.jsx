@@ -69,7 +69,7 @@ const Login = () => {
   }
   return (
     <div className="my-login-my-singup">
-      <div className="sidenav">
+      <div className="sidenav ">
         <div className="login-main-text  d-flex justify-content-center align-items-center">
           <img
             src={logo}
@@ -81,13 +81,13 @@ const Login = () => {
       </div>
       <div className="main">
         <div
-          className="col-md-6 col-sm-12"
+          className="col-md-6 col-sm-12 "
           style={{
             //  marginLeft: 60,
             paddingBottom: 30,
           }}
         >
-          <div className="login-form">
+          <div className="login-form ">
             <div className="text-center">
               <h3>Login</h3>
               <p>Welcome back! Please sign in to your account</p>
@@ -112,7 +112,7 @@ const Login = () => {
                 <input
                   type="email"
                   className="form-control"
-                  placeholder="Enter Your Email"
+                  placeholder="dineMe@example.com"
                   {...register("email", {
                     required: "Email is required",
                     pattern: {
@@ -130,7 +130,7 @@ const Login = () => {
                 <input
                   type={showPass.value ? "text" : "password"}
                   className="form-control"
-                  placeholder="Enter Your Password"
+                  placeholder="*****"
                   {...register("password", {
                     required: "Password is required",
                     minLength: {

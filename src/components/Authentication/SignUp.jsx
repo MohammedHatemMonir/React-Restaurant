@@ -21,6 +21,8 @@ import { Link } from "react-router-dom";
 import { useSignal } from "@preact/signals-react";
 import { toast } from "react-toastify";
 import LeafletMap from "./../Map/LeafletMap";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+
 export default function SignUp() {
   const {
     handleSubmit,
@@ -76,8 +78,12 @@ export default function SignUp() {
   };
 
   const showPass = useSignal(false);
+  const showConfirmPass = useSignal(false);
   function handlePass() {
     showPass.value = !showPass.value;
+  }
+  function handleConfirmPass() {
+    showConfirmPass.value = !showConfirmPass.value;
   }
   const currentLocation = useSignal("");
   const showMap = useSignal(false);
@@ -89,7 +95,7 @@ export default function SignUp() {
   }
 
   return (
-    <div className="my-login-my-singup">
+    <div className="my-login-my-singup ">
       <div className="sidenav">
         <div className="login-main-text d-flex justify-content-center align-items-center">
           <img
@@ -162,7 +168,7 @@ export default function SignUp() {
                   <FormGroup>
                     <Form.Label>Password</Form.Label>
                     <FormControl
-                      type="password"
+                      type={showPass.value ? "text" : "password"}
                       placeholder="*******"
                       {...register("password", {
                         required: "Password is required",
@@ -175,13 +181,31 @@ export default function SignUp() {
                     <span className="text-danger  ">
                       {errors["password"] && errors["password"].message}
                     </span>
+                    <button
+                      onClick={handlePass}
+                      type="button"
+                      style={{
+                        border: "none",
+                        background: "transparent",
+                        position: "absolute",
+                        top: 51,
+                        right: 7,
+                        transform: "translate(0, -50%)",
+                      }}
+                    >
+                      {showPass.value ? (
+                        <AiOutlineEye />
+                      ) : (
+                        <AiOutlineEyeInvisible />
+                      )}
+                    </button>
                   </FormGroup>
                 </Col>
                 <Col sm={6}>
                   <FormGroup>
                     <Form.Label>Confirm Password</Form.Label>
                     <FormControl
-                      type="password"
+                      type={showConfirmPass.value ? "text" : "password"}
                       placeholder="*******"
                       {...register("confirmPassword", {
                         required: "Confirm Password is required",
@@ -196,6 +220,24 @@ export default function SignUp() {
                       {errors["confirmPassword"] &&
                         errors["confirmPassword"].message}
                     </span>
+                    <button
+                      onClick={handleConfirmPass}
+                      type="button"
+                      style={{
+                        border: "none",
+                        background: "transparent",
+                        position: "absolute",
+                        top: 51,
+                        right: 7,
+                        transform: "translate(0, -50%)",
+                      }}
+                    >
+                      {showConfirmPass.value ? (
+                        <AiOutlineEye />
+                      ) : (
+                        <AiOutlineEyeInvisible />
+                      )}
+                    </button>
                   </FormGroup>
                 </Col>
 
