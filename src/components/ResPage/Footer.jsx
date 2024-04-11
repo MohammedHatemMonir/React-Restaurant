@@ -32,37 +32,37 @@ const Footer = () => {
                   <ul className="thumbnail-widget">
                     <li>
                       <div className="thumb-content">
-                        <a href="#.">Get Started</a>
+                        <Link>Get Started </Link>
                       </div>
                     </li>
                     <li>
                       <div className="thumb-content">
-                        <a href="#.">Top Leaders</a>
+                        <Link>Top Leaders </Link>
                       </div>
                     </li>
                     <li>
                       <div className="thumb-content">
-                        <a href="#.">Success Stories</a>
+                        <Link>Success Stories </Link>
                       </div>
                     </li>
                     <li>
                       <div className="thumb-content">
-                        <a href="#.">Event/Tickets</a>
+                        <Link>Event/Tickets </Link>
                       </div>
                     </li>
                     <li>
                       <div className="thumb-content">
-                        <a href="#.">News</a>
+                        <Link>News </Link>
                       </div>
                     </li>
                     <li>
                       <div className="thumb-content">
-                        <a href="#.">Lifestyle</a>
+                        <Link>Lifestyle </Link>
                       </div>
                     </li>
                     <li>
                       <div className="thumb-content">
-                        <a href="#.">About</a>
+                        <Link>About </Link>
                       </div>
                     </li>
                   </ul>
@@ -75,9 +75,7 @@ const Footer = () => {
                     <span />
                   </h5>
                   <p>Get access to your full Training and Marketing Suite.</p>
-                  <a className="btn my-3" href="/">
-                    Subscribe Now
-                  </a>
+                  <Link className="btn my-3">Subscribe Now</Link>
                 </div>
               </div>
               <div className="col-xs-12 col-sm-6 col-md-3">
@@ -87,9 +85,7 @@ const Footer = () => {
                     <span />
                   </h5>
                   <p>
-                    <a href="mailto:info@domain.com" title="glorythemes">
-                      info@dineMe.com
-                    </a>
+                    <Link title="glorythemes">info@dineMe.com</Link>
                   </p>
                   <ul className="social-footer2">
                     <li className="">
