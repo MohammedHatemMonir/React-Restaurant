@@ -16,10 +16,10 @@ const Footer = () => {
                     <span />
                   </h5>
                   <p>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Vel, repellendus omnis. Minima nihil quos natus sequi
-                    numquam velit modi illum quod et quo recusandae, corrupti,
-                    mollitia obcaecati. Nulla, velit odit?
+                    Your ultimate destination for discovering great dining
+                    experiences. Explore a diverse range of restaurants, browse
+                    through enticing menus, and read authentic reviews from
+                    fellow diners.
                   </p>
                 </div>
               </div>
