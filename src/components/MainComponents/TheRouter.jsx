@@ -24,34 +24,39 @@ import CircleLoader from "../Loaders/CircleLoader";
 import CookingLoader from "./../Loaders/CookingLoader";
 import MapLoader from "./../Loaders/MapLoader";
 import Profile from "./../Profile/Profile";
-import OrdersPage from './../Orders/OrdersPage';
+import OrdersPage from "./../Orders/OrdersPage";
 import EditProfile from "../Profile/EditProfile";
-import ResetPass from './../Authentication/ResetPass';
+import ResetPass from "./../Authentication/ResetPass";
 
 export default function TheRouter() {
   const navigate = useNavigate();
 
-    const { pathname } = useLocation();
-  const protectedpaths = ["login", "signup", "forget","reset"];
+  const { pathname } = useLocation();
+  const protectedpaths = ["login", "signup", "forget", "reset"];
 
   const navigateLogic = () => {
-
-    
-
-
-    const firstSegment = pathname.split('/')[1];
-    console.log("firstSegment", firstSegment, protectedpaths.includes(firstSegment));
+    const firstSegment = pathname.split("/")[1];
+    console.log(
+      "firstSegment",
+      firstSegment,
+      protectedpaths.includes(firstSegment)
+    );
 
     if (!UserData.value.loggedIn && !protectedpaths.includes(firstSegment)) {
-      console.log("navigate to login", protectedpaths.includes(pathname), "pathname:", pathname);
+      console.log(
+        "navigate to login",
+        protectedpaths.includes(pathname),
+        "pathname:",
+        pathname
+      );
       navigate("/login");
-    } else if (UserData.value.loggedIn && protectedpaths.includes(firstSegment)) {
+    } else if (
+      UserData.value.loggedIn &&
+      protectedpaths.includes(firstSegment)
+    ) {
       navigate("/");
     }
   };
-
-
-  
 
   const OnWindowChange = ({ children }) => {
     const q = useQuery({
@@ -69,8 +74,9 @@ export default function TheRouter() {
           userImg: result.data.userImg,
           loggedIn: result.data.loggedIn,
         };
-        UserData.value.loggedIn ?
-        localStorage.setItem("UserData",true) : localStorage.removeItem("UserData");
+        UserData.value.loggedIn
+          ? localStorage.setItem("UserData", true)
+          : localStorage.removeItem("UserData");
         // console.log("session", result.data);
 
         return result;
@@ -86,24 +92,24 @@ export default function TheRouter() {
     //   });
 
     // }, []);
-    
   };
-  
+
   return (
     <>
       <OnWindowChange />
       <Routes>
-          <Route path="login" element={<Login />}></Route>
-          <Route path="signup" element={<SignUp />}></Route>
-          <Route path="Forget" element={<ForgotPass />}></Route>
-          <Route path="reset/:id/:token" element={<ResetPass />}></Route>
- 
+        <Route path="login" element={<Login />}></Route>
+        <Route path="signup" element={<SignUp />}></Route>
+        <Route path="Forget" element={<ForgotPass />}></Route>
+        <Route path="reset/:id/:token" element={<ResetPass />}></Route>
+
         {UserData.value.loggedIn && (
           <Route path="/" element={<DefaultLayout />}>
             <Route index element={<ResPage />} />
             <Route path="card" element={<Card />}></Route>
             <Route path="dash1" element={<Dashboard1 />}></Route>
             <Route path="dash2" element={<Dashboard2 />}></Route>
+            <Route path="*" element={<h1>Page Not Found</h1>}></Route>
             <Route
               path="/restaurant/:resID/:resName"
               element={<SelectResPage />}
