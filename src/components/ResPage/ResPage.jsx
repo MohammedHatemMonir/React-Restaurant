@@ -64,9 +64,11 @@ export default function ResPage() {
                   )}
 
                   {/* select-res-page */}
-                  <div className="row select-res-page ">
-                    <div className="col-header col-xs-16">
-                      <h2 className="col-title inline-block my-4">
+                  {/* row */}
+                  <div className="select-res-page">
+                    {/* col-xs-16 */}
+                    <div className="">
+                      <h2 className="inline-block my-4">
                         Restaurants
                         <p style={{ display: "inline", fontSize: "17px" }}>
                           ( 1074 )
@@ -74,27 +76,32 @@ export default function ResPage() {
                       </h2>
                     </div>
                     <div
-                      id="rest-list-col"
-                      className="delivery-rest-list col-sm-13 col-xs-16"
+                    // id="rest-list-col"
+                    // col-sm-13 col-xs-16
+                    // className="delivery-rest-list "
                     >
                       <div className="row">
                         <div className="col-sm-12 col-md-2">
                           <Filters />
                         </div>
-                        {!q.isLoading &&
-                          Array.isArray(q.data?.data) &&
-                          q.data?.data?.map((data, index) => {
-                            return (
-                              <ResCard
-                                key={index}
-                                id={data._id}
-                                name={data.ResName}
-                                ResImg={data.ResImg}
-                                MealImg={data.MealImg}
-                                start1={data.rating}
-                              />
-                            );
-                          })}
+
+                        <div className="col-sm-12 col-md-10">
+                          <div className="row">
+                            {!q.isLoading &&
+                              Array.isArray(q.data?.data) &&
+                              q.data.data.map((data, index) => (
+                                <div className="col-md-6" key={index}>
+                                  <ResCard
+                                    id={data._id}
+                                    name={data.ResName}
+                                    ResImg={data.ResImg}
+                                    MealImg={data.MealImg}
+                                    start1={data.rating}
+                                  />
+                                </div>
+                              ))}
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>

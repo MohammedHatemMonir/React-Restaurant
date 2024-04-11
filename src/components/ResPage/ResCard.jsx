@@ -33,12 +33,13 @@ export default function ResCard({ id, name, start1, ResImg, MealImg }) {
   function onCloseEdit() {
     showEditModal.value = false;
   }
-  console.log(name, id);
+  // console.log(name, id);
   return (
     <>
       <Link
         to={`/restaurant/${id}/${name}`}
-        className="restaurant-card restaurant-delivery-card col-md-5 col-sm-8 col-xs-16"
+        // col-md-5 col-sm-8 col-xs-16
+        className="restaurant-card restaurant-delivery-card "
         // style={{background:"#ebebeb"}}
       >
         <div className="card-inner">
@@ -51,7 +52,7 @@ export default function ResCard({ id, name, start1, ResImg, MealImg }) {
             style={{ width: "100%" }}
           />
           <div className="card-content clickable-item pt-1">
-            <Link className="clickable-anchor  " />
+            <Link className="clickable-anchor" />
             <div>
               <div className="pull-right flip">
                 <div
