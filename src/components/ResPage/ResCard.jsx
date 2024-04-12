@@ -9,6 +9,7 @@ import DeleteIcon from "./../../Icons/DeleteIcon";
 import EditIcon from "./../../Icons/EditIcon";
 import DeleteModal from "./DeleteModal";
 import EditModal from "./EditModal";
+import DineMeLogo from "../../images/DineMeLogo.png";
 
 export default function ResCard({ id, name, start1, ResImg, MealImg }) {
   // console.log("Hema ID",id)
@@ -36,13 +37,8 @@ export default function ResCard({ id, name, start1, ResImg, MealImg }) {
   // console.log(name, id);
   return (
     <>
-      <Link
-        to={`/restaurant/${id}/${name}`}
-        // col-md-5 col-sm-8 col-xs-16
-        className="restaurant-card restaurant-delivery-card "
-        // style={{background:"#ebebeb"}}
-      >
-        <div className="card-inner">
+      <div className="card restaurant-card py-5">
+        <Link to={`/restaurant/${id}/${name}`} className="card-inner">
           <img
             src={
               MealImg ||
@@ -55,10 +51,7 @@ export default function ResCard({ id, name, start1, ResImg, MealImg }) {
             <Link className="clickable-anchor" />
             <div>
               <div className="pull-right flip">
-                <div
-                  data-v-34cbeed1=""
-                  className="vue-star-rating vue-star-rating-inline"
-                >
+                <div className="vue-star-rating vue-star-rating-inline">
                   <div className="vue-star-rating position-relative">
                     <div
                       style={{
@@ -77,19 +70,12 @@ export default function ResCard({ id, name, start1, ResImg, MealImg }) {
             </div>
             <div className="rest-logo image-ratio ratio-square radius">
               <div className="ratio-content image-loading image-loaded">
-                <img
-                  alt={name}
-                  className="b-lazy"
-                  src={
-                    ResImg ||
-                    `https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Thumbnail/15ecd61e-51fe-44be-9e09-46d6d6cd1f9e.jpg`
-                  }
-                />
+                <img alt={name} className="b-lazy" src={ResImg || DineMeLogo} />
               </div>
             </div>
             <div className="main-data">
               <h3 className="card-title">{name}</h3>
-              <ul className="cuisines-list h-dots-list truncate p-0 ">
+              <ul className="cuisines-list h-dots-list truncate p-0">
                 <li className="list-item">American</li>
               </ul>
               <span title="staticContent.filters.onlinePayment">
@@ -99,30 +85,33 @@ export default function ResCard({ id, name, start1, ResImg, MealImg }) {
                 >
                   <IoMdCard />
                 </span>
+                {UserData.value.role == "ADMIN" && (
+                  <div className="position-relative">
+                    <Row
+                      className="justify-content-between"
+                      style={{
+                        transform: "scale(1.5)",
+                        padding: "5px 80px 0px 80px",
+                      }}
+                    >
+                      <Col sm={5} className="text-start">
+                        <div onClick={onOpenDel}>
+                          <DeleteIcon className="delete-icon" />
+                        </div>
+                      </Col>
+                      <Col sm={5} className="text-end">
+                        <div onClick={onOpenEdit}>
+                          <EditIcon className="edit-icon" />
+                        </div>
+                      </Col>
+                    </Row>
+                  </div>
+                )}
               </span>
             </div>
           </div>
-          {UserData.value.role == "ADMIN" && (
-            <div className="position-relative">
-              <Row
-                className="justify-content-between"
-                style={{ transform: "scale(1.4)", margin: "3px 40px 5px 40px" }}
-              >
-                <Col sm={6} className="text-start">
-                  <div onClick={onOpenDel}>
-                    <DeleteIcon className="delete-icon" />
-                  </div>
-                </Col>
-                <Col sm={6} className="text-end">
-                  <div onClick={onOpenEdit}>
-                    <EditIcon className="edit-icon" />
-                  </div>
-                </Col>
-              </Row>
-            </div>
-          )}
-        </div>
-      </Link>
+        </Link>
+      </div>
       {UserData.value.role == "ADMIN" && showDelModal.value == true && (
         <DeleteModal
           resId={id}

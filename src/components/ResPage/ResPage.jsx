@@ -84,7 +84,7 @@ export default function ResPage() {
                         <div className="col-sm-12 col-md-2">
                           <Filters />
                         </div>
-
+                        {/* ResCards */}
                         <div className="col-sm-12 col-md-10">
                           <div className="row">
                             {!q.isLoading &&
@@ -109,7 +109,6 @@ export default function ResPage() {
               </div>
             </div>
           </div>
-
           <Footer />
         </section>
       </>
