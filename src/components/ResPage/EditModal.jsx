@@ -22,7 +22,7 @@ function EditModal({ openModal, closeModal, resName, resId }) {
     showMap.value = !showMap.value;
     myBtn.value = !myBtn.value;
   }
-
+  const queryClient = useQueryClient();
   const m = useMutation({
     // cacheTime: 600000,
     // onSuccess: onSuccess,
@@ -41,6 +41,8 @@ function EditModal({ openModal, closeModal, resName, resId }) {
     // console.log(result)
     // alert(result)
     closeModal();
+    queryClient.invalidateQueries({ mutationKey: ["updateRestaurant"] });
+    queryClient.refetchQueries(["updateRestaurant"]);
   };
 
   return (
@@ -86,7 +88,7 @@ function EditModal({ openModal, closeModal, resName, resId }) {
                     // required: "Please select a category",
                   })}
                 >
-                  <option value="">Please Select ...</option>
+                  <option disabled>Please Select ...</option>
                   <option value="American">American</option>
                   <option value="Arabic">Arabic</option>
                   <option value="Desserts">Desserts</option>

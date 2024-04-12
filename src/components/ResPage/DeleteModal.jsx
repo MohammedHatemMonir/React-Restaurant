@@ -25,7 +25,7 @@ function DeleteModal({ resId, resName, openModal, closeModal }) {
     queryClient.invalidateQueries({ queryKey: ["getAllresturant"] });
   };
 
-  const MyVerticallyCenteredModal = () => (
+  return (
     <Modal
       show={openModal}
       onHide={closeModal}
@@ -56,8 +56,6 @@ function DeleteModal({ resId, resName, openModal, closeModal }) {
       </Modal.Footer>
     </Modal>
   );
-
-  return <MyVerticallyCenteredModal onHide={() => closeModal} />;
 }
 
 export default DeleteModal;

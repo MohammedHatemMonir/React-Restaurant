@@ -123,7 +123,7 @@ export default function AddRestaurantButton() {
                       required: "Please select a category",
                     })}
                   >
-                    <option value="">Please Select ...</option>
+                    <option disabled>Please Select ...</option>
                     <option value="American">American</option>
                     <option value="Arabic">Arabic</option>
                     <option value="Desserts">Desserts</option>
@@ -166,35 +166,37 @@ export default function AddRestaurantButton() {
                 </Form.Group>
               </Col>
               <div className="form-group col-md-10">
-              <label htmlFor="location">Location</label>
-              <input
-                {...register("location", {
-                  minLength: {
-                    value: 3,
-                    message: "Location must have at least 3 characters",
-                  },
-                })}
-                type="text"
-                className="form-control"
-                id="location"
-                value={currentLocation}
-                placeholder="Location"
-              />
-              {errors.location && (
-                <span className="text-danger font-weight-bold">
-                  {errors.location.message}
-                </span>
-              )}
-            </div>
+                <label htmlFor="location">Location</label>
+                <input
+                  {...register("location", {
+                    minLength: {
+                      value: 3,
+                      message: "Location must have at least 3 characters",
+                    },
+                  })}
+                  type="text"
+                  className="form-control"
+                  id="location"
+                  value={currentLocation}
+                  placeholder="Location"
+                />
+                {errors.location && (
+                  <span className="text-danger font-weight-bold">
+                    {errors.location.message}
+                  </span>
+                )}
+              </div>
 
-            <div className="form-group col-sm-12 col-md-2 d-flex justify-content-center align-items-end">
-              <Button
-                className={`${myBtn.value ? "bg-primary" : " bg-danger"}`}
-                onClick={handleBtnClick}
-              >
-                {myBtn.value ? "Open Map" : "Close Map"}
-              </Button>
-            </div>
+              <div className="form-group col-sm-12 col-md-2 d-flex justify-content-center align-items-end">
+                <Button
+                  className={`${
+                    myBtn.value ? "bg-primary  w-100" : " bg-danger w-100"
+                  }`}
+                  onClick={handleBtnClick}
+                >
+                  {myBtn.value ? "Open Map" : "Close Map"}
+                </Button>
+              </div>
               {showMap.value == true && (
                 <Col sm={12}>
                   <div style={{ transition: "all", direction: "2s" }}>
