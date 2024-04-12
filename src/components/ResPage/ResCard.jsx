@@ -37,7 +37,10 @@ export default function ResCard({ id, name, start1, ResImg, MealImg }) {
   // console.log(name, id);
   return (
     <div className="card restaurant-card py-5">
-      <Link to={`/restaurant/${id}/${name}`} className="">
+      <Link
+        to={`/restaurant/${id}/${name}`}
+        // className="bg-danger"
+      >
         <img
           src={
             MealImg ||
@@ -93,7 +96,7 @@ export default function ResCard({ id, name, start1, ResImg, MealImg }) {
                       justifyContent: "space-between",
                       alignItems: "center",
                       transform: "scale(1.5)",
-                      margin: "15px 100px -30px 100px",
+                      margin: "15px 17% -30px  17%",
                     }}
                   >
                     <div onClick={onOpenDel} className="">
