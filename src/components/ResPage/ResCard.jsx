@@ -36,82 +36,79 @@ export default function ResCard({ id, name, start1, ResImg, MealImg }) {
   }
   // console.log(name, id);
   return (
-    <>
-      <div className="card restaurant-card py-5">
-        <Link to={`/restaurant/${id}/${name}`} className="card-inner">
-          <img
-            src={
-              MealImg ||
-              `https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/92edf264-8a29-4efb-997a-ca2fdf9b3a92.jpg`
-            }
-            alt={name}
-            style={{ width: "100%" }}
-          />
-          <div className="card-content clickable-item pt-1">
-            <Link className="clickable-anchor" />
-            <div>
-              <div className="pull-right flip">
-                <div className="vue-star-rating vue-star-rating-inline">
-                  <div className="vue-star-rating position-relative">
-                    <div
-                      style={{
-                        transform: "scale(0.5)",
-                        position: "absolute",
-                        marginLeft: "-147px",
-                        marginTop: "-6px",
-                      }}
-                    >
-                      <Stars stars1={start1} />
+    <div className="card restaurant-card py-5">
+      <Link to={`/restaurant/${id}/${name}`} className="">
+        <img
+          src={
+            MealImg ||
+            `https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/92edf264-8a29-4efb-997a-ca2fdf9b3a92.jpg`
+          }
+          alt={name}
+          style={{ width: "100%" }}
+        />
+        <div className="card-content clickable-item pt-1">
+          <Link className="clickable-anchor" />
+          <div>
+            <div className="pull-right flip">
+              <div className="vue-star-rating vue-star-rating-inline">
+                <div className="vue-star-rating position-relative">
+                  <div
+                    style={{
+                      transform: "scale(0.5)",
+                      position: "absolute",
+                      marginLeft: "-147px",
+                      marginTop: "-6px",
+                    }}
+                  >
+                    <Stars stars1={start1} />
+                  </div>
+                </div>
+              </div>
+              <span className="reviews-count">(1593)</span>
+            </div>
+          </div>
+          <div className="rest-logo image-ratio ratio-square radius">
+            <div className="ratio-content image-loading image-loaded">
+              <img alt={name} className="b-lazy" src={ResImg || DineMeLogo} />
+            </div>
+          </div>
+          <div className="main-data">
+            <h3 className="card-title">{name}</h3>
+            <ul className="cuisines-list h-dots-list truncate p-0">
+              <li className="list-item">American</li>
+            </ul>
+            <span>
+              <span
+                className="icon online-payment-icon"
+                style={{ transform: "scale(1.3)" }}
+              >
+                <IoMdCard />
+              </span>
+              {UserData.value.role == "ADMIN" && (
+                <div className="position-relative">
+                  <div
+                    className=""
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      transform: "scale(1.5)",
+                      margin: "15px 100px -30px 100px",
+                    }}
+                  >
+                    <div onClick={onOpenDel} className="">
+                      <DeleteIcon className="delete-icon" />
+                    </div>
+                    <div onClick={onOpenEdit} className="">
+                      <EditIcon className="edit-icon" />
                     </div>
                   </div>
                 </div>
-                <span className="reviews-count">(1593)</span>
-              </div>
-            </div>
-            <div className="rest-logo image-ratio ratio-square radius">
-              <div className="ratio-content image-loading image-loaded">
-                <img alt={name} className="b-lazy" src={ResImg || DineMeLogo} />
-              </div>
-            </div>
-            <div className="main-data">
-              <h3 className="card-title">{name}</h3>
-              <ul className="cuisines-list h-dots-list truncate p-0">
-                <li className="list-item">American</li>
-              </ul>
-              <span title="staticContent.filters.onlinePayment">
-                <span
-                  className="icon online-payment-icon"
-                  style={{ transform: "scale(1.3)" }}
-                >
-                  <IoMdCard />
-                </span>
-                {UserData.value.role == "ADMIN" && (
-                  <div className="position-relative">
-                    <Row
-                      className="justify-content-between"
-                      style={{
-                        transform: "scale(1.5)",
-                        padding: "5px 80px 0px 80px",
-                      }}
-                    >
-                      <Col sm={5} className="text-start">
-                        <div onClick={onOpenDel}>
-                          <DeleteIcon className="delete-icon" />
-                        </div>
-                      </Col>
-                      <Col sm={5} className="text-end">
-                        <div onClick={onOpenEdit}>
-                          <EditIcon className="edit-icon" />
-                        </div>
-                      </Col>
-                    </Row>
-                  </div>
-                )}
-              </span>
-            </div>
+              )}
+            </span>
           </div>
-        </Link>
-      </div>
+        </div>
+      </Link>
       {UserData.value.role == "ADMIN" && showDelModal.value == true && (
         <DeleteModal
           resId={id}
@@ -128,6 +125,6 @@ export default function ResCard({ id, name, start1, ResImg, MealImg }) {
           closeModal={onCloseEdit}
         />
       )}
-    </>
+    </div>
   );
 }
