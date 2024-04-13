@@ -13,5 +13,6 @@ router.put('/updateRestaurant/:id',control.updateRestaurant)
 //router.get('/getResturantWithcomments/:id',control.getRestaurantWithComments)
 //getResturantWithcomments
 router.post('/postRestaurantComment',validateResturantInput,control.postRestaurantComment)
+router.post('/category',validateResturantInput,control.Categoery)
 
 module.exports = router;
