@@ -6,16 +6,36 @@ const rescomment = require("../../database/models/resComments_model");
 const userModel = require("../../database/models/userModel.js");
 
 const categoeryModel = require("../../database/models/Category.Model.js");
+const mealComments=require('../../database/models/Comments_model.js')
 
 
 const getResturantWithMeals = async (req, res) => {
     try {
         const { id } = req.params;
         const meals = await meal.find({ ResID: id });
+
+        let existingMeals;
+
+        const mealPromises = meals.map(async (meal) => {
+            const MealComments = await mealComments.find({ MealID: meal._id }).populate('user', 'Comment -_id');
+            
+            return { ...meal._doc, MealComments };
+        });
+
+        await Promise.all(mealPromises)
+        .then(results => {  
+                existingMeals = results.filter(result => result !== null);
+                })
+                .catch(err => {
+                console.error(err);
+                });
+                
+       // const MealComments = await mealComments.find({ MealID: id }).populate('user', 'name userImg -_id');
+
         const RestaurantData = await restaurant.findOne({ _id: id });
 
         const restaurantComments = await rescomment.find({ ResID: id }).populate('user','name userImg -_id');
-        res.status(200).json({ restaurant: RestaurantData, meals: meals,resComments: restaurantComments });
+        res.status(200).json({ restaurant: RestaurantData, meals: existingMeals,resComments: restaurantComments });
     } catch (error) {
         res.status(500).json({ message: error });
     }
