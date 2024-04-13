@@ -66,6 +66,7 @@ export default function AddRestaurantButton() {
     // queryClient.invalidateQueries({ queryKey: ["addNewCategory"] });
   };
 
+  // Add new restaurant in db
   const m = useMutation({
     mutationKey: [],
     // cacheTime: 600000,
