@@ -13,12 +13,16 @@ import { apiClient } from "../../Data/apiclient";
 export default function AddRestaurantButton() {
   const currentLocation = useSignal();
   const showMap = useSignal(false);
-  const myBtn = useSignal(true);
+  const myMapBtn = useSignal(true);
+  const myCategoryBtn = useSignal(true);
 
   const queryClient = useQueryClient();
-  function handleBtnClick() {
+  function handleMap() {
     showMap.value = !showMap.value;
-    myBtn.value = !myBtn.value;
+    myMapBtn.value = !myMapBtn.value;
+  }
+  function handleCategory() {
+    myCategoryBtn.value = !myCategoryBtn.value;
   }
   const {
     handleSubmit,
@@ -114,7 +118,7 @@ export default function AddRestaurantButton() {
                   </span>
                 </Form.Group>
               </Col>
-              <Col sm={6}>
+              <Col sm={3}>
                 <Form.Group>
                   <Form.Label>Category</Form.Label>
                   <Form.Select
@@ -133,6 +137,20 @@ export default function AddRestaurantButton() {
                   </span>
                 </Form.Group>
               </Col>
+              <div className="col-sm-12 col-md-3 d-flex justify-content-center align-items-end">
+                <Button
+                  className={`${
+                    myCategoryBtn.value
+                      ? "bg-primary  w-100 mt-3"
+                      : " bg-danger w-100 mt-3"
+                  }`}
+                  onClick={handleCategory}
+                >
+                  {myCategoryBtn.value
+                    ? "Add new Category"
+                    : "Add new Category"}
+                </Button>
+              </div>
               <Col sm={6}>
                 <Form.Group className="mb-2 mb-sm-0">
                   <Form.Label>Image</Form.Label>
@@ -190,11 +208,11 @@ export default function AddRestaurantButton() {
               <div className="form-group col-sm-12 col-md-2 d-flex justify-content-center align-items-end">
                 <Button
                   className={`${
-                    myBtn.value ? "bg-primary  w-100" : " bg-danger w-100"
+                    myMapBtn.value ? "bg-primary  w-100" : " bg-danger w-100"
                   }`}
-                  onClick={handleBtnClick}
+                  onClick={handleMap}
                 >
-                  {myBtn.value ? "Open Map" : "Close Map"}
+                  {myMapBtn.value ? "Open Map" : "Close Map"}
                 </Button>
               </div>
               {showMap.value == true && (
