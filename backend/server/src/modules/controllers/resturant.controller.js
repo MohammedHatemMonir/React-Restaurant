@@ -4,8 +4,6 @@ const meal = require("../../database/models/Meals_model");
 const uploadImg = require('../../utils/uploadImg.js');
 const rescomment = require("../../database/models/resComments_model");
 const userModel = require("../../database/models/userModel.js");
-const categoeryModel = require("../../database/models/Category.Model.js");
-
 const getResturantWithMeals = async (req, res) => {
     try {
         const { id } = req.params;
@@ -65,11 +63,6 @@ const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResB
                         //creation_date: createdAt
                     };
                     const newRestaurant = await restaurant.create(newRestaurantData);
-                    const newCategoryData = {
-                        Categoery: req.body.Categoery,
-                        ResID: newRestaurant._id
-                    };
-                    await categoeryModel.create(newCategoryData);
                     res.status(200).json(newRestaurantData);
                 } catch (error) {
                     console.error('Error creating new restaurant:', error);

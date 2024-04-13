@@ -414,6 +414,7 @@ function TempMealCard({
 
 
     }
+    Cart.value = {};
     Cart.value = tempCart;
     console.log("Cart", Cart.value, "temp cart", tempCart);
 

@@ -1,6 +1,6 @@
 const myusers = require("../../database/models/userModel");
 
-const searchForUser=async(req,res)=>{
+const searchForUser=async(req,res)=>{ //{name:""}
  try {
     const searchName=req.body.name
     const users=await myusers.aggregate([

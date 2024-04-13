@@ -7,8 +7,9 @@ const orderSchema = Schema({
     // orderMeals: [{ type: Schema.Types.ObjectId, ref: "orderMeal", required: true }],
     meals: [
         {
+            _id: false,
             // type: Schema.Types.ObjectId, ref: "orderMeal", required: true,
-            id: {type: Schema.Types.ObjectId, ref: "Meal", required: true},
+            id: {type: Schema.Types.ObjectId, required: true},
             // // type: Schema.Types.ObjectId, ref: "Meal", required: true,
             quantity: { type: Number, default: 1 },
         },
