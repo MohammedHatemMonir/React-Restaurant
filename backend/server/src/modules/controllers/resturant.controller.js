@@ -171,11 +171,22 @@ const updateRestaurant = async (req, res) => {
     }
 };
 
-const Categoery=async(req,res)=>{
-    const {Categoery}=req.body
-    const category=await categoeryModel.create({Categoery})
-    return res.json({category})
+const Categoery = async (req, res) => {
+    const { Categoery } = req.body; 
+    
+    if (!req.session.user ||req.session.user.role !== "ADMIN") {
+        return res.status(403).json({ error: "Not Authenticated" });
+    }
+
+    try {
+        const createdCategory = await categoeryModel.create({ Categoery });
+
+        return res.json({ category: createdCategory });
+    } catch (error) {
+        return res.status(500).json({ error: "Failed to create category" });
+    }
 }
+
 
 module.exports = {
     getAllresturant,
