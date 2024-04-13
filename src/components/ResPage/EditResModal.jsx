@@ -27,7 +27,7 @@ function EditResModal({ openModal, closeModal, resName, resId }) {
     showMap.value = !showMap.value;
     myMapBtn.value = !myMapBtn.value;
   }
-  function handleCategory() {
+  function handleCategoryInput() {
     showCategoryInput.value = !showCategoryInput.value;
     myCategoryBtn.value = !myCategoryBtn.value;
   }
@@ -123,7 +123,7 @@ function EditResModal({ openModal, closeModal, resName, resId }) {
                     ? "bg-primary  w-100 mt-3"
                     : "bg-danger w-100 mt-3"
                 }`}
-                onClick={handleCategory}
+                onClick={handleCategoryInput}
               >
                 {myCategoryBtn.value ? "Add new category" : "Add new category"}
               </Button>

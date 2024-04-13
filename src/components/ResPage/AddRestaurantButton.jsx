@@ -24,16 +24,47 @@ export default function AddRestaurantButton() {
   const showMap = useSignal(false);
   const showCategoryInput = useSignal(false);
   const myMapBtn = useSignal(true);
+  const newCategory = useSignal("");
   const myCategoryBtn = useSignal(true);
 
+  // Display or Hide Map
   function handleMap() {
     showMap.value = !showMap.value;
     myMapBtn.value = !myMapBtn.value;
   }
-  function handleCategory() {
+  // Display or Hide Categories Input
+  function handleCategoryInput() {
     showCategoryInput.value = !showCategoryInput.value;
     myCategoryBtn.value = !myCategoryBtn.value;
   }
+
+  function handleCategoriesChange(e) {
+    newCategory.value = e.target.value;
+    console.log("New Category", newCategory.value);
+  }
+
+  // Add new category in db
+  const addCategory = useMutation({
+    mutationKey: ["addNewCategory"],
+    // cacheTime: 600000,
+    // onSuccess: onSuccess,
+    // onError: onError,
+    mutationFn: async (params) => {
+      console.log("trying to load");
+      let url = "/category";
+      console.log("posting to ", url);
+      return await apiClient.post(url, params);
+    },
+  });
+
+  const uploadCategory = async function () {
+    const result = await addCategory.mutateAsync({
+      Categoery: newCategory.value,
+    });
+    newCategory.value = "";
+    showCategoryInput.value = false;
+    // queryClient.invalidateQueries({ queryKey: ["addNewCategory"] });
+  };
 
   const m = useMutation({
     mutationKey: [],
@@ -147,7 +178,7 @@ export default function AddRestaurantButton() {
                       ? "bg-primary  w-100 mt-3"
                       : "bg-danger w-100 mt-3"
                   }`}
-                  onClick={handleCategory}
+                  onClick={handleCategoryInput}
                 >
                   {myCategoryBtn.value
                     ? "Add new category"
@@ -160,12 +191,16 @@ export default function AddRestaurantButton() {
                     className="mt-3 mb-3 bg-warning"
                     type="text"
                     placeholder="Add new category"
+                    value={newCategory.value}
+                    onChange={handleCategoriesChange}
                   />
                 </Col>
               )}
               {showCategoryInput.value && (
                 <div className="form-group col-sm-12 col-md-2 d-flex justify-content-center align-items-end">
-                  <Button className="w-100">Submit</Button>
+                  <Button className="w-100" onClick={uploadCategory}>
+                    Submit
+                  </Button>
                 </div>
               )}
               <Col sm={6}>
