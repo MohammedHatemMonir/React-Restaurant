@@ -11,19 +11,6 @@ import { useMutation, useQueryClient } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 
 export default function AddRestaurantButton() {
-  const currentLocation = useSignal();
-  const showMap = useSignal(false);
-  const myMapBtn = useSignal(true);
-  const myCategoryBtn = useSignal(true);
-
-  const queryClient = useQueryClient();
-  function handleMap() {
-    showMap.value = !showMap.value;
-    myMapBtn.value = !myMapBtn.value;
-  }
-  function handleCategory() {
-    myCategoryBtn.value = !myCategoryBtn.value;
-  }
   const {
     handleSubmit,
     register,
@@ -31,7 +18,22 @@ export default function AddRestaurantButton() {
     reset,
   } = useForm();
 
+  const queryClient = useQueryClient();
   const ShowSignal = useSignal();
+  const currentLocation = useSignal();
+  const showMap = useSignal(false);
+  const showCategoryInput = useSignal(false);
+  const myMapBtn = useSignal(true);
+  const myCategoryBtn = useSignal(true);
+
+  function handleMap() {
+    showMap.value = !showMap.value;
+    myMapBtn.value = !myMapBtn.value;
+  }
+  function handleCategory() {
+    showCategoryInput.value = !showCategoryInput.value;
+    myCategoryBtn.value = !myCategoryBtn.value;
+  }
 
   const m = useMutation({
     mutationKey: [],
@@ -137,6 +139,7 @@ export default function AddRestaurantButton() {
                   </span>
                 </Form.Group>
               </Col>
+              {/* category btn */}
               <div className="col-sm-12 col-md-3 d-flex justify-content-center align-items-end">
                 <Button
                   className={`${
@@ -147,10 +150,24 @@ export default function AddRestaurantButton() {
                   onClick={handleCategory}
                 >
                   {myCategoryBtn.value
-                    ? "Add new Category"
-                    : "Add new Category"}
+                    ? "Add new category"
+                    : "Add new category"}
                 </Button>
               </div>
+              {showCategoryInput.value && (
+                <Col sm={10} className="d-flex justify-content-center">
+                  <Form.Control
+                    className="mt-3 mb-3 "
+                    type="text"
+                    placeholder="Add new category"
+                  />
+                </Col>
+              )}
+              {showCategoryInput.value && (
+                <div className="form-group col-sm-12 col-md-2 d-flex justify-content-center align-items-end">
+                  <Button className="w-100">Submit</Button>
+                </div>
+              )}
               <Col sm={6}>
                 <Form.Group className="mb-2 mb-sm-0">
                   <Form.Label>Image</Form.Label>
@@ -204,7 +221,7 @@ export default function AddRestaurantButton() {
                   </span>
                 )}
               </div>
-
+              {/* map btn */}
               <div className="form-group col-sm-12 col-md-2 d-flex justify-content-center align-items-end">
                 <Button
                   className={`${
@@ -217,7 +234,7 @@ export default function AddRestaurantButton() {
               </div>
               {showMap.value == true && (
                 <Col sm={12}>
-                  <div style={{ transition: "all", direction: "2s" }}>
+                  <div>
                     <LeafletMap currentLocation={currentLocation} />
                   </div>
                 </Col>
