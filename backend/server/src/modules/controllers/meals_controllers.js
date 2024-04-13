@@ -100,6 +100,48 @@ const addNewmeal = async (req, res) => { //{MealName:"",MealImg:"",Description:"
     }
   };
 
+  const updateMeal = async (req, res) => {
+    try {
+      if (!req.session.user || req.session.user.role !== "ADMIN") {
+        return res.status(403).json({ error: "Not Authenticated as Admin" });
+      }
+  
+      const { id } = req.params;
+      const NewMealData = {};
+  
+      if (req.body.MealName) {
+        NewMealData.MealName = req.body.MealName;
+      }
+      if (req.body.MealImg) {
+        NewMealData.MealImg =await uploadImg(req.body.MealImg)
+      }
+      if (req.body.Description) {
+        NewMealData.Description = req.body.Description;
+      }
+      if (req.body.Price) {
+        NewMealData.Price = req.body.Price;
+      }
+  
+      if (Object.keys(NewMealData).length === 0) {
+        return res.status(400).json({ error: "No fields to update provided" });
+      }
+  
+      const updatedMeal = await meal.findByIdAndUpdate(id, NewMealData, { new: true });
+  
+    
+      if (!updatedMeal) {
+        return res.status(404).json({ error: "Meal not found" });
+      }
+  
+      
+      res.status(200).json(updatedMeal);
+    } catch (error) {
+      console.error("Error updating meal:", error);
+      res.status(500).json({ error: "Server error while updating meal" });
+    }
+  }
+  
+
 // ========== Order ==========
 
 // Create Order in specific restaurant
@@ -177,5 +219,6 @@ const createOrder = async (req, res) => {   // {ResId:"",meals:[{id:"",quantity:
     addNewmeal,
     getAllmeals,
     createOrder,
-    GetMealsWithComments
+    GetMealsWithComments,
+    updateMeal
   };
