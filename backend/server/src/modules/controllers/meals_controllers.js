@@ -3,6 +3,18 @@ const resturant  = require("../../database/models/resturant.Model");
 const { Order } = require("../../database/models/orders");
 const { validationResult } = require("express-validator");
 const uploadImg = require("../../utils/uploadImg.js"); 
+const mealComments=require('../../database/models/Comments_model.js')
+
+const GetMealsWithComments = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const meals = await meal.find({ _id: id });
+    const Comments = await mealComments.find({ MealID: id }).populate('user', 'name userImg -_id');
+    res.status(200).json({ meal: meals, MealComments: Comments });
+  } catch (error) {
+    res.status(500).json({ message: error });
+  }
+}
 
 const addNewmeal = async (req, res) => { //{MealName:"",MealImg:"",Description:"",Price:"",Resid:""}
     try {
@@ -164,5 +176,6 @@ const createOrder = async (req, res) => {   // {ResId:"",meals:[{id:"",quantity:
   module.exports = {
     addNewmeal,
     getAllmeals,
-    createOrder
+    createOrder,
+    GetMealsWithComments
   };

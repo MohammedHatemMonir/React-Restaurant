@@ -4,6 +4,10 @@ const meal = require("../../database/models/Meals_model");
 const uploadImg = require('../../utils/uploadImg.js');
 const rescomment = require("../../database/models/resComments_model");
 const userModel = require("../../database/models/userModel.js");
+
+const categoeryModel = require("../../database/models/Category.Model.js");
+
+
 const getResturantWithMeals = async (req, res) => {
     try {
         const { id } = req.params;
@@ -168,6 +172,21 @@ const updateRestaurant = async (req, res) => {
     }
 };
 
+const Categoery = async (req, res) => {
+    const { Categoery } = req.body; 
+    
+    if (!req.session.user ||req.session.user.role !== "ADMIN") {
+        return res.status(403).json({ error: "Not Authenticated" });
+    }
+
+    try {
+        const createdCategory = await categoeryModel.create({ Categoery });
+
+        return res.json({ category: createdCategory });
+    } catch (error) {
+        return res.status(500).json({ error: "Failed to create category" });
+    }
+}
 
 
 module.exports = {
@@ -176,5 +195,6 @@ module.exports = {
     deleteresturant,
     postRestaurantComment,
     getResturantWithMeals,
-    updateRestaurant
+    updateRestaurant,
+    Categoery
 };
