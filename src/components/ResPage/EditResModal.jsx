@@ -6,6 +6,7 @@ import { useSignal } from "@preact/signals-react";
 import LeafletMap from "../Map/LeafletMap";
 import { useMutation, useQueryClient } from "react-query";
 import { apiClient } from "../../Data/apiclient";
+import { convertBase64 } from "../../Globals";
 
 function EditResModal({ openModal, closeModal, resName, resId }) {
   const {
@@ -45,6 +46,14 @@ function EditResModal({ openModal, closeModal, resName, resId }) {
   const onSubmit = async (data) => {
     // console.log("new data", data); // this new data from registers in useForm hook
     console.log("new data", data);
+    let ResImg;
+    let ResBanner;
+
+    if (data.ResImg[0]) ResImg = await convertBase64(data.resImg[0]);
+    if (data.ResBanner[0]) ResBanner = await convertBase64(data.resBanner[0]);
+
+    if (ResImg) data.ResImg = resImg64;
+    if (ResBanner) data.ResBanner = resBanner64;
     const result = await m.mutateAsync(data);
     // console.log(result)
     // alert(result)
