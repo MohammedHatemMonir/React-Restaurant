@@ -145,7 +145,7 @@ export default function AddRestaurantButton() {
                   className={`${
                     myCategoryBtn.value
                       ? "bg-primary  w-100 mt-3"
-                      : " bg-danger w-100 mt-3"
+                      : "bg-danger w-100 mt-3"
                   }`}
                   onClick={handleCategory}
                 >
@@ -157,7 +157,7 @@ export default function AddRestaurantButton() {
               {showCategoryInput.value && (
                 <Col sm={10} className="d-flex justify-content-center">
                   <Form.Control
-                    className="mt-3 mb-3 "
+                    className="mt-3 mb-3 bg-warning"
                     type="text"
                     placeholder="Add new category"
                   />
