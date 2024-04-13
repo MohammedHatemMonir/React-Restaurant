@@ -46,10 +46,10 @@ export default function AddMealButton({ Resid }) {
     queryClient.invalidateQueries({ mutationKey: ["addNewMeal"] });
     queryClient.refetchQueries(["addNewMeal"]);
 
-    // if (result) {
     //   ShowSignal.value = false;
     //   queryClient.invalidateQueries({ mutationKey: ["addMeal"] });
-    //   queryClient.refetchQueries(["addMeal"]);
+    //   queryClient.refetchQueries(["addMeal"]);    // if (result) {
+
     //   reset();
     // }
   }
