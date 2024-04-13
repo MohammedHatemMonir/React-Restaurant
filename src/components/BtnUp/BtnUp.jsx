@@ -1,17 +1,17 @@
-// ScrollUpButton.js
-import React, { useState, useEffect } from "react";
+
+import React, { useEffect } from "react";
 import "./BtnUp.scss";
-import ArrowForwardIcon from "./../../Icons/ArrowForwardIcon";
 import { FaArrowUp } from "react-icons/fa6";
+import { useSignal } from "@preact/signals-react";
 
 const BtnUp = () => {
-  const [isVisible, setIsVisible] = useState(false);
+  const isVisible = useSignal(false);
 
   const handleScroll = () => {
     if (window.scrollY > 100) {
-      setIsVisible(true);
+      isVisible.value = true;
     } else {
-      setIsVisible(false);
+      isVisible.value = false;
     }
   };
 
@@ -30,11 +30,15 @@ const BtnUp = () => {
     };
   }, []);
 
+
+
   return (
     <div className="scroll-up-button">
       <div className="arrow-up">
         <div
-          className={`scroll-up-button ${isVisible ? "visible" : "hidden"}`}
+          className={`scroll-up-button ${
+            isVisible.value ? "visible" : "hidden"
+          }`}
           onClick={scrollToTop}
         >
           <button>
