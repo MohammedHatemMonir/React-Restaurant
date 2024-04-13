@@ -155,6 +155,12 @@ const updateRestaurant = async (req, res) => {
         if(req.body.location){
             NewResData.location = req.body.location;
         }
+        if(req.body.ResImg){
+
+        }
+        if(req.body.ResBanner){
+
+        }
 
 
 
