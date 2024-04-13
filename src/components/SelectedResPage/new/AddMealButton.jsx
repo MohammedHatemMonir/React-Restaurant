@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useSignal } from "@preact/signals-react";
 import CustomModal from "./../../Prototypes/CustomModal";
 import AddIcon from "./../../../Icons/AddIcon";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { convertBase64 } from "../../../Globals";
 import { apiClient } from "../../../Data/apiclient";
 
@@ -17,9 +17,10 @@ export default function AddMealButton({ Resid }) {
   } = useForm();
 
   const ShowSignal = useSignal();
+  const queryClient = useQueryClient();
 
   const m = useMutation({
-    mutationKey: [],
+    mutationKey: ["addNewMeal"],
     // cacheTime: 600000,
     // onSuccess: onSuccess,
     // onError: onError,
@@ -41,10 +42,16 @@ export default function AddMealButton({ Resid }) {
     console.log("added meal", result);
     //Handle add meals logic here
 
-    if (result) {
-      ShowSignal.value = false;
-      reset();
-    }
+    ShowSignal.value = false;
+    queryClient.invalidateQueries({ mutationKey: ["addNewMeal"] });
+    queryClient.refetchQueries(["addNewMeal"]);
+
+    // if (result) {
+    //   ShowSignal.value = false;
+    //   queryClient.invalidateQueries({ mutationKey: ["addMeal"] });
+    //   queryClient.refetchQueries(["addMeal"]);
+    //   reset();
+    // }
   }
 
   return (
