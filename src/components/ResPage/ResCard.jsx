@@ -7,8 +7,8 @@ import Stars from "./../Stars/Stars";
 import { IoMdCard } from "react-icons/io";
 import DeleteIcon from "./../../Icons/DeleteIcon";
 import EditIcon from "./../../Icons/EditIcon";
-import DeleteModal from "./DeleteModal";
-import EditModal from "./EditModal";
+import DeleteModal from "./DeleteResModal";
+import EditModal from "./EditResModal";
 import DineMeLogo from "../../images/DineMeLogo.png";
 
 export default function ResCard({ id, name, start1, ResImg, MealImg }) {

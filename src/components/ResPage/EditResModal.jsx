@@ -3,26 +3,34 @@ import Modal from "react-bootstrap/Modal";
 import { Form, Col, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useSignal } from "@preact/signals-react";
-import LeafletMap from "./../Map/LeafletMap";
+import LeafletMap from "../Map/LeafletMap";
 import { useMutation, useQueryClient } from "react-query";
-import { apiClient } from "./../../Data/apiclient";
+import { apiClient } from "../../Data/apiclient";
 
-function EditModal({ openModal, closeModal, resName, resId }) {
+function EditResModal({ openModal, closeModal, resName, resId }) {
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm();
-  const currentLocation = useSignal("");
-  const showMap = useSignal(false);
-  const myBtn = useSignal(true);
 
-  function handleBtnClick() {
-    showMap.value = !showMap.value;
-    myBtn.value = !myBtn.value;
-  }
   const queryClient = useQueryClient();
+  const currentLocation = useSignal();
+  const showMap = useSignal(false);
+  const showCategoryInput = useSignal(false);
+  const myMapBtn = useSignal(true);
+  const myCategoryBtn = useSignal(true);
+
+  function handleMap() {
+    showMap.value = !showMap.value;
+    myMapBtn.value = !myMapBtn.value;
+  }
+  function handleCategory() {
+    showCategoryInput.value = !showCategoryInput.value;
+    myCategoryBtn.value = !myCategoryBtn.value;
+  }
+
   const m = useMutation({
     // cacheTime: 600000,
     // onSuccess: onSuccess,
@@ -79,7 +87,7 @@ function EditModal({ openModal, closeModal, resName, resId }) {
                 </span>
               </Form.Group>
             </Col>
-            <Col sm={6}>
+            <Col sm={3}>
               <Form.Group>
                 <Form.Label>New Category</Form.Label>
                 <Form.Select
@@ -98,6 +106,33 @@ function EditModal({ openModal, closeModal, resName, resId }) {
                 </span>
               </Form.Group>
             </Col>
+            {/* category btn */}
+            <div className="col-sm-12 col-md-3 d-flex justify-content-center align-items-end">
+              <Button
+                className={`${
+                  myCategoryBtn.value
+                    ? "bg-primary  w-100 mt-3"
+                    : "bg-danger w-100 mt-3"
+                }`}
+                onClick={handleCategory}
+              >
+                {myCategoryBtn.value ? "Add new category" : "Add new category"}
+              </Button>
+            </div>
+            {showCategoryInput.value && (
+              <Col sm={10} className="d-flex justify-content-center">
+                <Form.Control
+                  className="mt-3 mb-3 bg-warning"
+                  type="text"
+                  placeholder="Add new category"
+                />
+              </Col>
+            )}
+            {showCategoryInput.value && (
+              <div className="form-group col-sm-12 col-md-2 d-flex justify-content-center align-items-end">
+                <Button className="w-100">Submit</Button>
+              </div>
+            )}
             <Col sm={6}>
               <Form.Group className="mb-2 mb-sm-0">
                 <Form.Label>New Image</Form.Label>
@@ -154,10 +189,10 @@ function EditModal({ openModal, closeModal, resName, resId }) {
 
             <div className="form-group col-sm-12 col-md-2 d-flex justify-content-center align-items-end">
               <Button
-                className={`${myBtn.value ? "bg-primary" : " bg-danger"}`}
-                onClick={handleBtnClick}
+                className={`${myMapBtn.value ? "bg-primary" : " bg-danger"}`}
+                onClick={handleMap}
               >
-                {myBtn.value ? "Open Map" : "Close Map"}
+                {myMapBtn.value ? "Open Map" : "Close Map"}
               </Button>
             </div>
             {showMap.value && (
@@ -178,4 +213,4 @@ function EditModal({ openModal, closeModal, resName, resId }) {
   );
 }
 
-export default EditModal;
+export default EditResModal;

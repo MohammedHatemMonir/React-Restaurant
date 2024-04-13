@@ -1,9 +1,9 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useMutation, useQueryClient } from "react-query";
-import { apiClient } from "./../../Data/apiclient";
+import { apiClient } from "../../Data/apiclient";
 
-function DeleteModal({ resId, resName, openModal, closeModal }) {
+function DeleteResModal({ resId, resName, openModal, closeModal }) {
   const queryClient = useQueryClient();
   const m = useMutation({
     mutationKey: [],
@@ -58,4 +58,4 @@ function DeleteModal({ resId, resName, openModal, closeModal }) {
   );
 }
 
-export default DeleteModal;
+export default DeleteResModal;
