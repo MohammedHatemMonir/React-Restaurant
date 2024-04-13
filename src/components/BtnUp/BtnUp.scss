@@ -4,9 +4,12 @@
   right: 20px;
   z-index: 1;
   transition: opacity 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   button {
-    padding: 10px 20px;
+    padding-top: 0px;
     background-color: #e32207;
     color: #fff;
     border: none;
