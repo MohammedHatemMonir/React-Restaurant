@@ -12,7 +12,7 @@ const searchForUser=async(req,res)=>{ //{name:""}
     ])
     res.json(users);
  } catch (error) {
-    console.error(err);
+    console.log(error);
     res.status(500).json({ error: 'Internal Server Error' });
  }
 }
