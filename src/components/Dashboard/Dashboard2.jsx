@@ -72,6 +72,7 @@ const data1 = [
     amt: 2100,
   },
 ];
+
 // PieChart Data
 const data2 = [
   { name: "Group A", value: 400 },
@@ -134,13 +135,6 @@ export default function Dashboard2() {
                   </Col>
                 </Row>
               </Card.Body>
-              <Card.Footer>
-                <hr />
-                <div className="stats">
-                  <i className="fas fa-redo mr-1"></i>
-                  Update Now
-                </div>
-              </Card.Footer>
             </Card>
           </Col>
 
@@ -163,13 +157,6 @@ export default function Dashboard2() {
                   </Col>
                 </Row>
               </Card.Body>
-              <Card.Footer>
-                <hr />
-                <div className="stats">
-                  <i className="far fa-calendar-alt mr-1"></i>
-                  Last day
-                </div>
-              </Card.Footer>
             </Card>
           </Col>
           {/* Natural Comments */}
@@ -191,13 +178,6 @@ export default function Dashboard2() {
                   </Col>
                 </Row>
               </Card.Body>
-              <Card.Footer>
-                <hr />
-                <div className="stats">
-                  <i className="far fa-clock-o mr-1"></i>
-                  In the last hour
-                </div>
-              </Card.Footer>
             </Card>
           </Col>
           {/* Customers */}
@@ -219,13 +199,6 @@ export default function Dashboard2() {
                   </Col>
                 </Row>
               </Card.Body>
-              <Card.Footer>
-                <hr />
-                <div className="stats">
-                  <i className="far fa-clock-o mr-1"></i>
-                  In the last hour
-                </div>
-              </Card.Footer>
             </Card>
           </Col>
         </Row>
