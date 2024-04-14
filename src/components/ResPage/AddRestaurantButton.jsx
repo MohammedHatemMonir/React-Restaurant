@@ -45,7 +45,8 @@ export default function AddRestaurantButton() {
   // handle search change
   function handleSearchChange(e) {
     searchTerm.value = e.target.value;
-    returnUsers();
+    console.log(searchTerm.value);
+    // returnUsers();
   }
 
   // Handle categories change
@@ -161,7 +162,7 @@ export default function AddRestaurantButton() {
                     type="text"
                     name="search-user"
                     placeholder="Search User"
-                    value={searchTerm}
+                    value={searchTerm.value}
                     onChange={handleSearchChange}
                   />
                   <div className="dropdown-content">

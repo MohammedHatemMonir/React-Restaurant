@@ -7,6 +7,12 @@ const SearchComponent = () => {
   const searchTerm = useSignal("");
   const searchResults = useSignal([]);
 
+  const handleSearchChange = (e) => {
+    searchTerm.value = e.target.value;
+    // console.log( searchTerm.value)
+    returnUsers();
+  };
+
   const searchUsers = useMutation({
     mutationKey: ["searchUsers"],
     mutationFn: async (params) => {
@@ -15,15 +21,9 @@ const SearchComponent = () => {
     },
   });
 
-  const handleSearchChange = (e) => {
-    searchTerm.value = e.target.value;
-    // console.log( searchTerm.value)
-    returnUsers();
-  };
-
   const returnUsers = async () => {
     const result = await searchUsers.mutateAsync({
-      name: searchTerm,
+      name: searchTerm.value,
     });
     searchResults.value = result;
   };
@@ -36,13 +36,13 @@ const SearchComponent = () => {
           type="text"
           name="search-user"
           placeholder="Search User"
-          value={searchTerm}
+          value={searchTerm.value}
           onChange={handleSearchChange}
         />
+
         <div className="dropdown-content">
-          {/* Display search results */}
           {searchResults.value.map((user, index) => (
-            <Link href="#" key={index}>
+            <Link key={index} className="d-block text-decoration-none">
               {user}
             </Link>
           ))}
