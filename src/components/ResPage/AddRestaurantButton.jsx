@@ -35,26 +35,51 @@ export default function AddRestaurantButton() {
     showMap.value = !showMap.value;
     myMapBtn.value = !myMapBtn.value;
   }
+
   // Display or Hide Categories Input
   function handleCategoryInput() {
     showCategoryInput.value = !showCategoryInput.value;
     myCategoryBtn.value = !myCategoryBtn.value;
   }
 
+  // handle search change
   function handleSearchChange(e) {
     searchTerm.value = e.target.value;
-    console.log("serched", searchTerm.value);
-    const users = ["User 1", "User 2", "User 3"];
-    const filteredUsers = users.filter((user) =>
-      user.toLowerCase().includes(e.target.value.toLowerCase())
-    );
+    // console.log("serched", searchTerm.value);
+    // const users = ["User 1", "User 2", "User 3"];
+    // const filteredUsers = users.filter((user) =>
+    //   user.toLowerCase().includes(e.target.value.toLowerCase())
+    // );
     searchResults.value = filteredUsers;
   }
 
+  // Handle categories change
   function handleCategoriesChange(e) {
     newCategory.value = e.target.value;
-    console.log("New Category", newCategory.value);
+    // console.log("New Category", newCategory.value);
   }
+
+  // Search Users
+  const searchUsers = useMutation({
+    mutationKey: ["searchUsers"],
+    // cacheTime: 600000,
+    // onSuccess: onSuccess,
+    // onError: onError,
+    mutationFn: async (params) => {
+      console.log("trying to load");
+      let url = "/category";
+      console.log("posting to ", url);
+      return await apiClient.post(url, params);
+    },
+  });
+
+  const returnUsers = async function () {
+    const result = await searchUsers.mutateAsync({
+      name: searchTerm.value,
+    });
+
+    // queryClient.invalidateQueries({ queryKey: ["addNewCategory"] });
+  };
 
   // Add new category in db
   const addCategory = useMutation({
