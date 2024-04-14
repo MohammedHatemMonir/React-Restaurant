@@ -27,13 +27,17 @@ const CommentBox = ({ resID }) => {
     var j = { text: comment.value, ResID: props.resID };
     try {
       await m.mutateAsync(j);
-      queryClient.invalidateQueries({queryKey: ["rest"+resID]});
+
       comment.value = "";
 
     } catch (e) {
       console.log("Failed to post comment", e);
     }
+    queryClient.invalidateQueries({queryKey: ["rest"+resID]});
+    queryClient.refetchQueries(["rest"+resID]);
+
   }
+  
 
   const handleSubmit = () => {
 

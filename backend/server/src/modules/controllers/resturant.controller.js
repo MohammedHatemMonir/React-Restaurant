@@ -34,7 +34,7 @@ const getResturantWithMeals = async (req, res) => {
 
         const RestaurantData = await restaurant.findOne({ _id: id });
 
-        const restaurantComments = await rescomment.find({ ResID: id }).populate('user','name userImg -_id');
+        const restaurantComments = await rescomment.find({ ResID: id }).populate('user','name userImg -_id').sort({ createdAt: -1 });;
         res.status(200).json({ restaurant: RestaurantData, meals: existingMeals,resComments: restaurantComments });
     } catch (error) {
         res.status(500).json({ message: error });

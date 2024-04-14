@@ -36,19 +36,8 @@ export default function TheRouter() {
 
   const navigateLogic = () => {
     const firstSegment = pathname.split("/")[1];
-    console.log(
-      "firstSegment",
-      firstSegment,
-      protectedpaths.includes(firstSegment)
-    );
 
     if (!UserData.value.loggedIn && !protectedpaths.includes(firstSegment)) {
-      console.log(
-        "navigate to login",
-        protectedpaths.includes(pathname),
-        "pathname:",
-        pathname
-      );
       navigate("/login");
     } else if (
       UserData.value.loggedIn &&
