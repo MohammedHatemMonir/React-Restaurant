@@ -70,7 +70,7 @@ export default function SelectResPage() {
                         {q.data?.data?.restaurant?.ResName}
                         <span className="green">
                           {UserData.value.role == "ADMIN" && (
-                            <Link to="/dash2">Statistics</Link>
+                            <Link to={`/RestaurantDashboard/${resID}`}>Statistics</Link>
                           )}
                         </span>
                       </h1>

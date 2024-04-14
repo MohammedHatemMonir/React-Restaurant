@@ -10,7 +10,6 @@ import SignalPrototype from "../Prototypes/SignalPrototype";
 import Prototype from "../Prototypes/Prototype";
 import Card from "../Card/Card";
 import Dashboard1 from "../Dashboard/Dashboard1";
-import Dashboard2 from "../Dashboard/Dashboard2";
 import Tutorials from "../TestComponents/Tutorials";
 import ResPage from "./../ResPage/ResPage";
 import SelectResPage from "./../SelectedResPage/SelectResPage";
@@ -27,6 +26,7 @@ import Profile from "./../Profile/Profile";
 import OrdersPage from "./../Orders/OrdersPage";
 import EditProfile from "../Profile/EditProfile";
 import ResetPass from "./../Authentication/ResetPass";
+import RestaurantDashboard from "../Dashboard/RestaurantDashboard";
 
 export default function TheRouter() {
   const navigate = useNavigate();
@@ -97,7 +97,7 @@ export default function TheRouter() {
             <Route index element={<ResPage />} />
             <Route path="card" element={<Card />}></Route>
             <Route path="dash1" element={<Dashboard1 />}></Route>
-            <Route path="dash2" element={<Dashboard2 />}></Route>
+            <Route path="/RestaurantDashboard/:ResID" element={<RestaurantDashboard />}></Route>
             <Route path="*" element={<h1>Page Not Found</h1>}></Route>
             <Route
               path="/restaurant/:resID/:resName"

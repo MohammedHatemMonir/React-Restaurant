@@ -14,6 +14,7 @@ import {
 // import ChartistGraph from "react-chartist";
 
 import { Card, Container, Row, Col } from "react-bootstrap";
+import { useParams } from "react-router-dom";
 
 // StackedAreaChart Data
 const data1 = [
@@ -73,8 +74,10 @@ const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
 const RADIAN = Math.PI / 180;
 
-export default function Dashboard2({ myResId = useSignal() }) {
-  // PieChart
+export default function RestaurantDashboard() {
+  const {ResID}= useParams();
+
+
   const renderCustomizedLabel = ({
     cx,
     cy,
