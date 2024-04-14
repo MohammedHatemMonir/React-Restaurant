@@ -20,7 +20,7 @@ import { Link } from "react-router-dom";
 export default function SelectResPage() {
   const { resID, resName } = useParams();
   console.log("resID", resID);
-  const myResId = useSignal(resID);
+
   const q = useQuery({
     queryKey: ["rest" + resID],
     cacheTime: 60000,
@@ -80,7 +80,6 @@ export default function SelectResPage() {
                         <div className="rate-container">
                           <div className="rest-rate">
                             <div
-                              data-v-34cbeed1=""
                               className="vue-star-rating"
                               style={{
                                 transform: "scale(0.5)",

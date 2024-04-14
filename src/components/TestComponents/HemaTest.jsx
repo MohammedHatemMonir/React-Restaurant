@@ -1,50 +1,96 @@
-import React from "react";
-import { Navbar, Nav, Container, Image } from "react-bootstrap";
-import { FaShoppingCart, FaMapMarkerAlt, FaSearch } from "react-icons/fa";
 
-const NavigationBar = () => {
-  return (
-    <Navbar bg="light" expand="lg">
-      <Container>
-        <Navbar.Brand href="#home">
-          <img
-            src="/logo.png"
-            height="30"
-            className="d-inline-block align-top"
-            alt="Logo"
-          />
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto">
-            <Nav.Link href="#home">
-              <FaMapMarkerAlt /> Location
-            </Nav.Link>
-            <Nav.Link href="#link">
-              <FaShoppingCart /> Cart
-            </Nav.Link>
-          </Nav>
-          <Nav className="ml-auto">
-            <Nav.Link href="#link">
-              <FaSearch /> Search
-            </Nav.Link>
-            <Nav.Link href="#link">
-              <Image
-                src="https://cdn.icon-icons.com/icons2/2643/PNG/512/male_boy_person_people_avatar_icon_159358.png"
-                roundedCircle
-                style={{ width: "30px", height: "30px" }}
-                alt="Profile"
-              />
-            </Nav.Link>
-            <Nav.Link href="#link">Logout</Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
-  );
-};
 
-export default NavigationBar;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React from "react";
+// import { Navbar, Nav, Container, Image } from "react-bootstrap";
+// import { FaShoppingCart, FaMapMarkerAlt, FaSearch } from "react-icons/fa";
+
+// const NavigationBar = () => {
+//   return (
+//     <Navbar bg="light" expand="lg">
+//       <Container>
+//         <Navbar.Brand href="#home">
+//           <img
+//             src="/logo.png"
+//             height="30"
+//             className="d-inline-block align-top"
+//             alt="Logo"
+//           />
+//         </Navbar.Brand>
+//         <Navbar.Toggle aria-controls="basic-navbar-nav" />
+//         <Navbar.Collapse id="basic-navbar-nav">
+//           <Nav className="mr-auto">
+//             <Nav.Link href="#home">
+//               <FaMapMarkerAlt /> Location
+//             </Nav.Link>
+//             <Nav.Link href="#link">
+//               <FaShoppingCart /> Cart
+//             </Nav.Link>
+//           </Nav>
+//           <Nav className="ml-auto">
+//             <Nav.Link href="#link">
+//               <FaSearch /> Search
+//             </Nav.Link>
+//             <Nav.Link href="#link">
+//               <Image
+//                 src="https://cdn.icon-icons.com/icons2/2643/PNG/512/male_boy_person_people_avatar_icon_159358.png"
+//                 roundedCircle
+//                 style={{ width: "30px", height: "30px" }}
+//                 alt="Profile"
+//               />
+//             </Nav.Link>
+//             <Nav.Link href="#link">Logout</Nav.Link>
+//           </Nav>
+//         </Navbar.Collapse>
+//       </Container>
+//     </Navbar>
+//   );
+// };
+
+// export default NavigationBar;
 
 // import React from "react";
 // import { useForm } from "react-hook-form";

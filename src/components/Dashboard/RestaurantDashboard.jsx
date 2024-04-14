@@ -1,4 +1,3 @@
-import { useSignal } from "@preact/signals-react";
 import {
   AreaChart,
   Area,
@@ -12,10 +11,12 @@ import {
   ResponsiveContainer,
 } from "recharts";
 // import ChartistGraph from "react-chartist";
-
+import { Link } from "react-router-dom";
 import { Card, Container, Row, Col } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-
+import { useMutation, useQueryClient } from "react-query";
+import { apiClient } from "../../Data/apiclient";
+import { useSignal } from '@preact/signals-react';
 // StackedAreaChart Data
 const data1 = [
   {
@@ -75,7 +76,36 @@ const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 const RADIAN = Math.PI / 180;
 
 export default function RestaurantDashboard() {
-  const {ResID}= useParams();
+  const { ResID } = useParams();
+
+    // Fetch here
+    const queryClient = useQueryClient();
+    const allComments = useSignal([]);
+    const m = useMutation({
+      mutationKey: ["allComments"],
+      // cacheTime: 600000,
+      // onSuccess: onSuccess,
+      // onError: onError,
+      mutationFn: async (params) => {
+        console.log("trying to load");
+        let url = `/dashboard/${params.status}/${ResID}`;
+        console.log("posting to ", url);
+        return await apiClient.get(url, params);
+      },
+    });
+
+    const onSubmit = async function (stat) {
+      const result = await m.mutateAsync({ status: stat });
+      allComments.value = result;
+      // queryClient.invalidateQueries({ queryKey: ["allComments"] });
+    };
+
+    // onSubmit("positiveComments")
+    // onSubmit("negativeComments")
+    // onSubmit("neutralComments")
+
+
+
 
 
   const renderCustomizedLabel = ({
@@ -85,7 +115,6 @@ export default function RestaurantDashboard() {
     innerRadius,
     outerRadius,
     percent,
-    index,
   }) => {
     const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
@@ -111,6 +140,9 @@ export default function RestaurantDashboard() {
           <Col lg="3" sm="6">
             <Card className="card-stats">
               <Card.Body>
+                {/* <button onClick={onSubmit("positiveComments")}>
+                  test positive
+                </button> */}
                 <Row>
                   <Col xs="3" className="text-center">
                     {/* Zoomed in emoji */}
@@ -121,7 +153,10 @@ export default function RestaurantDashboard() {
                   <Col xs="9">
                     <div className="numbers">
                       <p className="card-category">Positive Comments</p>
-                      <Card.Title as="h4">1500</Card.Title>
+
+                      <Card.Title as="h4">
+                        {/* {allComments.value.lengthOfcomments} */}
+                      </Card.Title>
                     </div>
                   </Col>
                 </Row>
@@ -143,7 +178,9 @@ export default function RestaurantDashboard() {
                   <Col xs="9">
                     <div className="numbers">
                       <p className="card-category">Negative Comments</p>
-                      <Card.Title as="h4">0</Card.Title>
+                      <Card.Title as="h4">
+                        {/* {allComments.value.lengthOfcomments} */}
+                      </Card.Title>
                     </div>
                   </Col>
                 </Row>
@@ -164,7 +201,9 @@ export default function RestaurantDashboard() {
                   <Col xs="9">
                     <div className="numbers">
                       <p className="card-category">Natural Comments</p>
-                      <Card.Title as="h4">700</Card.Title>
+                      <Card.Title as="h4">
+                        {/* {allComments.value.lengthOfcomments} */}
+                      </Card.Title>
                     </div>
                   </Col>
                 </Row>
