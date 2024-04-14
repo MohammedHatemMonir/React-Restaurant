@@ -7,8 +7,8 @@ import Stars from "./../Stars/Stars";
 import { IoMdCard } from "react-icons/io";
 import DeleteIcon from "./../../Icons/DeleteIcon";
 import EditIcon from "./../../Icons/EditIcon";
-import DeleteModal from "./DeleteResModal";
-import EditModal from "./EditResModal";
+import DeleteResModal from "./DeleteResModal";
+import EditResModal from "./EditResModal";
 import DineMeLogo from "../../images/DineMeLogo.png";
 
 export default function ResCard({ id, name, start1, ResImg, MealImg }) {
@@ -113,7 +113,7 @@ export default function ResCard({ id, name, start1, ResImg, MealImg }) {
         </div>
       </Link>
       {UserData.value.role == "ADMIN" && showDelModal.value == true && (
-        <DeleteModal
+        <DeleteResModal
           resId={id}
           resName={name}
           openModal={() => (showDelModal.value = true)}
@@ -121,7 +121,7 @@ export default function ResCard({ id, name, start1, ResImg, MealImg }) {
         />
       )}
       {UserData.value.role == "ADMIN" && showEditModal.value == true && (
-        <EditModal
+        <EditResModal
           resName={name}
           resId={id}
           openModal={() => (showEditModal.value = true)}

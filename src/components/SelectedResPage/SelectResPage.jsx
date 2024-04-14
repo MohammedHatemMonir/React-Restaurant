@@ -1,7 +1,6 @@
 import { useQuery } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 import LocationDotIcon from "../../Icons/LocationDotIcon";
-import Reviews from "../Reviews/Reviews";
 import Stars from "../Stars/Stars";
 import { Container, Row, Col } from "react-bootstrap";
 import RightArrowIcon from "../../Icons/RightArrowIcon";
@@ -12,6 +11,10 @@ import AddMealButton from "./new/AddMealButton";
 import { useSignal } from "@preact/signals-react";
 import MealDetailsModal from "./MealDetailsModal";
 import ReviewsCard from "./../Reviews/ReviewsCard";
+import DeleteIcon from "./../../Icons/DeleteIcon";
+import EditIcon from "./../../Icons/EditIcon";
+import DeleteMealModal from "./DeleteMealModal";
+import EditMealModal from "./EditMealModal";
 export default function SelectResPage() {
   const { resID, resName } = useParams();
   console.log("resID", resID);
@@ -398,7 +401,7 @@ function TempMealCard({
 
     if (
       !tempCart.meals.some((meal) =>
-        meal.id == id ? (meal.quantity += 1 ) : false
+        meal.id == id ? (meal.quantity += 1) : false
       )
     ) {
       console.log("meal not found");
@@ -411,18 +414,40 @@ function TempMealCard({
         price: price,
         quantity: 1,
       });
-
-
     }
     Cart.value = {};
     Cart.value = tempCart;
     console.log("Cart", Cart.value, "temp cart", tempCart);
-
   }
   const displayModal = useSignal(false);
   function handleClose() {
     displayModal.value = false;
   }
+
+  // Hema Here
+
+  const showDelModal = useSignal(false);
+  const showEditModal = useSignal(false);
+
+  // Handle open and close popup modals
+  function onOpenDel(e) {
+    // e.stopPropagation();
+    e.preventDefault();
+    showDelModal.value = true;
+  }
+  function onOpenEdit(e) {
+    // e.stopPropagation();
+    e.preventDefault();
+    showEditModal.value = true;
+  }
+
+  function onCloseDel() {
+    showDelModal.value = false;
+  }
+  function onCloseEdit() {
+    showEditModal.value = false;
+  }
+
   return (
     <div
       style={{
@@ -497,7 +522,10 @@ function TempMealCard({
               }}
               className="meal-card__price"
             >
-              {price}
+              <div className="font-weight-bold">
+                <span className="text-danger"> {price}</span>
+                <span className="text-dark"> EGP</span>
+              </div>
             </p>
           </div>
           <div
@@ -526,7 +554,44 @@ function TempMealCard({
             Buy
           </button>
         </div>
+        {UserData.value.role == "ADMIN" && (
+          <div className="position-relative">
+            <div
+              className=""
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                transform: "scale(1.5)",
+                margin: "15px 17% 10px 17%",
+              }}
+            >
+              <div onClick={onOpenDel} className="">
+                <DeleteIcon className="delete-icon" />
+              </div>
+              <div onClick={onOpenEdit} className="">
+                <EditIcon className="edit-icon" />
+              </div>
+            </div>
+          </div>
+        )}
       </div>
+      {UserData.value.role == "ADMIN" && showDelModal.value == true && (
+        <DeleteMealModal
+          resId={id}
+          mealName={name}
+          openModal={() => (showDelModal.value = true)}
+          closeModal={onCloseDel}
+        />
+      )}
+      {UserData.value.role == "ADMIN" && showEditModal.value == true && (
+        <EditMealModal
+          mealName={name}
+          resId={id}
+          openModal={() => (showEditModal.value = true)}
+          closeModal={onCloseEdit}
+        />
+      )}
     </div>
   );
 }
