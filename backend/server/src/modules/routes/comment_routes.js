@@ -7,7 +7,7 @@ const validateCommentsInput = require("../../middlewares/validator/validation.co
 router
     .route("/mealcomment")
     .post(
-        validateCommentsInput,
+        // validateCommentsInput,
         comment_controller.analyze);
 router
     .route("/rescomment")

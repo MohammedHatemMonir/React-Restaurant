@@ -17,9 +17,10 @@ const getResturantWithMeals = async (req, res) => {
         let existingMeals;
 
         const mealPromises = meals.map(async (meal) => {
-            const MealComments = await mealComments.find({ MealID: meal._id }).populate('user', 'Comment -_id');
-            const userss = await mealComments.find({ user: meal._id }).populate('user', 'name userImg -_id');
-            return { ...meal._doc, MealComments,userss };
+            const MealComments = await mealComments.find({ MealID: meal._id })
+            //.populate('user', 'name userImg -_id');
+            // const users = await mealComments.find({ user: meal._id }).populate('user', 'name userImg -_id');
+            return { ...meal._doc, MealComments };
         });
 
         await Promise.all(mealPromises)

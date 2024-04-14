@@ -339,6 +339,7 @@ export default function SelectResPage() {
                                           mealImg={item.MealImg}
                                           resID={resID}
                                           resName={resName}
+                                          MealComments={item.MealComments}
                                         />
                                       );
                                     })}
@@ -393,6 +394,7 @@ function TempMealCard({
   rating,
   resID,
   resName,
+  MealComments,
 }) {
   function AddToCart() {
     if (Cart.value.ResId != resID) {
@@ -481,12 +483,14 @@ function TempMealCard({
       <div style={{ padding: "1rem" }} className="meal-card__content">
         {/* Modal Here */}
         <MealDetailsModal
+          id={id}
           openModal={displayModal.value}
           closeModal={handleClose}
           mealName={name}
           mealDesc={desc}
           mealImg={mealImg}
           mealPrice={price}
+          MealComments={MealComments}
         />
         <h3
           style={{

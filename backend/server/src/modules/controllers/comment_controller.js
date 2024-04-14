@@ -16,33 +16,46 @@ async function analyzeText(text) {
     const response = await axios.post(serverUrl, data, {headers: {"Content-Type": "application/json"}});
     return response.data;
   } catch (error) {
-    console.error(error);
+    console.error("ERROR IN ANALYZE TEXT",error);
     throw error; // Re-throw for proper error handling
   }
 }
 
 const analyze = async (req, res) => { //{text:"",mealid: ""}
   try {
-
+        if(!req.session?.user){
+          res.status(400).json({ error: "Not Authenticated" });
+        }
         const mealid = req.body.mealid;
         const meals = await meal.find({_id:mealid});
+
+
         if (!meals[0]) {
             res.send("STOP HACKING!!!");
           }else{
+
             const text= req.body.text
-            console.log("Python errors",errors)
+
+
+            // console.log("Python errors",errors)
             //------connecting to python---------
             const result = await analyzeText(text);
+            console.log("Result", result)
 
-            console.log("Python result",result)
+
+            // console.log("Python result",result)
             /////////////////////////////////////
             //------saving the comment---------
             const body = {
               Comment:text,
               commentSentmint:result.sentiment,
-              MealID:req.body.mealid}
+              MealID:req.body.mealid,
+              user: req.session?.user?._id
+              }
             const CommentS = new Comment(body);
+            console.log("Here!")
             await CommentS.save();
+            console.log("Here!2")
             /////////////////////////////////////////
             //------updating the meal---------
             const Comment_rating=result.sentiment[2]*5
@@ -58,15 +71,15 @@ const analyze = async (req, res) => { //{text:"",mealid: ""}
               ResID:meals[0].ResID ,
               comment_num:new_comment_num
             }
-              console.log (meal_body)
+              // console.log (meal_body)
             const meal_update = await meal.updateOne({ _id: mealid },{ $set: meal_body});
-            console.log(meals[0].rating)
+            // console.log(meals[0].rating)
             ////////////////////////////////////////
             //------updating the resturants---------
 
             const resturants = await resturant.find({_id:meals[0].ResID});
             const meals2 = await meal.find({ResID:meals[0].ResID,comment_num: { $gte: 1}});
-            console.log(meals2.length)
+            // console.log(meals2.length)
             if(new_comment_num>1){
               new_res_rating=(resturants[0].rating*(meals2.length+resturants[0].comment_num)+new_rating-meals[0].rating)/(meals2.length+resturants[0].comment_num)
             }else{
@@ -88,6 +101,7 @@ const analyze = async (req, res) => { //{text:"",mealid: ""}
 
   } catch (err) {
     res.status(400).json({ error: err });
+    // console.log("meal comment error", err)
   }
 };
 ///////////////////////////////////

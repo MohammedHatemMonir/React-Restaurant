@@ -6,6 +6,7 @@ const CommentBox = ({ resID }) => {
   const comment = useSignal("");
 
   const queryClient = useQueryClient();
+  
   const m = useMutation({
     mutationKey: [],
     // cacheTime: 600000,
