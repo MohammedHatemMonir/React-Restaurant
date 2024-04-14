@@ -9,8 +9,7 @@ import { Button } from "reactstrap";
 import { convertBase64 } from "../../Globals";
 import { useMutation, useQueryClient } from "react-query";
 import { apiClient } from "../../Data/apiclient";
-import { Link } from "react-router-dom";
-import SearchUser from './../SearchUser/SearchUser';
+import SearchUser from "./../SearchUser/SearchUser";
 
 export default function AddRestaurantButton() {
   const {

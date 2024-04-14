@@ -29,12 +29,27 @@ function MealDetailsModal({
       <Modal.Body>
         <div className="modal-content select-res-page">
           <div className="item-cover">
-            <div className="image image-ratio ratio-dish-cover">
+            <div
+              className="image image-ratio ratio-dish-cover"
+              style={{
+                height: "200px",
+              }}
+            >
               <div className="ratio-content">
-                <img src={mealImg} alt={mealImg} className="v-center" />
+                <img
+                  src={mealImg}
+                  alt={mealImg}
+                  className="v-center"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "contain",
+                  }}
+                />
               </div>
             </div>
           </div>
+
           <div className="modal-body">
             <div className="item-header">
               <h3 className="title font-weight-bold">{mealName}</h3>
