@@ -110,6 +110,22 @@ function EditResModal({ openModal, closeModal, resName, resId }) {
       <Modal.Body>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <Row>
+            <Col sm={12}>
+              <Form.Group className="mb-2 mb-sm-0">
+                <Form.Label>Search user</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="search-user"
+                  placeholder="Search User"
+                  {...register("search-user", {
+                    // required: "Please enter user name to search",
+                  })}
+                />
+                <span className="error" style={{ color: "red" }}>
+                  {errors["search-user"] && errors["search-user"].message}
+                </span>
+              </Form.Group>
+            </Col>
             <Col sm={6}>
               <Form.Group className="mb-2 mb-sm-0">
                 <Form.Label>New Name</Form.Label>
@@ -231,7 +247,9 @@ function EditResModal({ openModal, closeModal, resName, resId }) {
 
             <div className="form-group col-sm-12 col-md-2 d-flex justify-content-center align-items-end">
               <Button
-                className={`${myMapBtn.value ? "bg-primary" : " bg-danger"}`}
+                className={`${
+                  myMapBtn.value ? "bg-primary w-100" : " bg-danger w-100"
+                }`}
                 onClick={handleMap}
               >
                 {myMapBtn.value ? "Open Map" : "Close Map"}
