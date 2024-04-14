@@ -3,6 +3,6 @@ const express=require('express')
 
 const SearchRouter=express.Router()
 
-SearchRouter.get('/SearchUser',search.searchForUser)
+SearchRouter.post('/SearchUser',search.searchForUser)
 
 module.exports=SearchRouter

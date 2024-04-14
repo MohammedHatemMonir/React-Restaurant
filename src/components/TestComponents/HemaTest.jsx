@@ -9,7 +9,7 @@ const SearchComponent = () => {
 
   const handleSearchChange = (e) => {
     searchTerm.value = e.target.value;
-    // console.log( searchTerm.value)
+    console.log( searchTerm.value)
     returnUsers();
   };
 
@@ -17,16 +17,25 @@ const SearchComponent = () => {
     mutationKey: ["searchUsers"],
     mutationFn: async (params) => {
       let url = "/SearchUser";
-      return await apiClient.get(url, params);
+      return await apiClient.post(url, params);
     },
   });
 
   const returnUsers = async () => {
+
+    if(searchTerm
+      .value.length>=3){
     const result = await searchUsers.mutateAsync({
       name: searchTerm.value,
     });
-    searchResults.value = result;
-  };
+
+    console.log("Search result", result.data);
+    searchResults.value = result.data;
+  }else{
+    searchResults.value=[]
+  
+  }
+};
 
   return (
     <Col sm={12}>
@@ -43,7 +52,7 @@ const SearchComponent = () => {
         <div className="dropdown-content">
           {searchResults.value.map((user, index) => (
             <Link key={index} className="d-block text-decoration-none">
-              {user}
+              {user.name}
             </Link>
           ))}
         </div>
