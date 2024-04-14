@@ -10,6 +10,7 @@ import AddRestaurantButton from "./AddRestaurantButton";
 import { UserData } from "../../Globals";
 import CookingLoader from "./../Loaders/CookingLoader";
 import ResCard from "./ResCard";
+import { Link } from "react-router-dom";
 
 export default function ResPage() {
   const q = useQuery({
@@ -55,7 +56,7 @@ export default function ResPage() {
           {/* <MainCards /> */}
           <div className="mt-5 ">
             <div id="app" className="">
-              <div id="page-content" className="page-content ">
+              <div id="page-content" className="page-content">
                 <div className="container ">
                   {UserData.value.role == "ADMIN" && (
                     <div>

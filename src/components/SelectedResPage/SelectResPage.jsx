@@ -15,18 +15,18 @@ import DeleteIcon from "./../../Icons/DeleteIcon";
 import EditIcon from "./../../Icons/EditIcon";
 import DeleteMealModal from "./DeleteMealModal";
 import EditMealModal from "./EditMealModal";
+import { Link } from "react-router-dom";
+
 export default function SelectResPage() {
   const { resID, resName } = useParams();
   console.log("resID", resID);
-
+  const myResId = useSignal(resID);
   const q = useQuery({
     queryKey: ["rest" + resID],
-
     cacheTime: 60000,
     // staleTime: 60000,
     queryFn: async () => {
       let url = `/getResturantWithMeals/${resID}`;
-
       const ret = await apiClient.get(url);
       console.log("Returned Meals", ret);
       return ret;
@@ -68,7 +68,11 @@ export default function SelectResPage() {
                     <div className="resturant-name">
                       <h1 className="title">
                         {q.data?.data?.restaurant?.ResName}
-                        <span className="green">Order online</span>
+                        <span className="green">
+                          {UserData.value.role == "ADMIN" && (
+                            <Link to="/dash2">Statistics</Link>
+                          )}
+                        </span>
                       </h1>
                     </div>
                     <div className="subheader">
@@ -425,7 +429,6 @@ function TempMealCard({
   }
 
   // Hema Here
-
   const showDelModal = useSignal(false);
   const showEditModal = useSignal(false);
 

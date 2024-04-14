@@ -1,4 +1,4 @@
-import React, { PureComponent, useCallback, useState } from "react";
+import { useSignal } from "@preact/signals-react";
 import {
   AreaChart,
   Area,
@@ -13,19 +13,7 @@ import {
 } from "recharts";
 // import ChartistGraph from "react-chartist";
 
-import {
-  Badge,
-  Button,
-  Card,
-  Navbar,
-  Nav,
-  Table,
-  Container,
-  Row,
-  Col,
-  Form,
-  OverlayTrigger,
-} from "react-bootstrap";
+import { Card, Container, Row, Col } from "react-bootstrap";
 
 // StackedAreaChart Data
 const data1 = [
@@ -85,7 +73,7 @@ const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
 const RADIAN = Math.PI / 180;
 
-export default function Dashboard2() {
+export default function Dashboard2({ myResId = useSignal() }) {
   // PieChart
   const renderCustomizedLabel = ({
     cx,

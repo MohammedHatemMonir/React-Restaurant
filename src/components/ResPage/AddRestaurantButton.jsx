@@ -27,8 +27,6 @@ export default function AddRestaurantButton() {
   const myMapBtn = useSignal(true);
   const newCategory = useSignal("");
   const myCategoryBtn = useSignal(true);
-  const searchTerm = useSignal("");
-  const searchResults = useSignal([]);
 
   // Display or Hide Map
   function handleMap() {

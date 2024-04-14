@@ -1,5 +1,4 @@
 import { useSignal } from "@preact/signals-react";
-import { Row, Col } from "react-bootstrap";
 import { UserData } from "../../Globals";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -99,10 +98,10 @@ export default function ResCard({ id, name, start1, ResImg, MealImg }) {
                       margin: "15px 17% -30px  17%",
                     }}
                   >
-                    <div onClick={onOpenDel} className="">
+                    <div onClick={onOpenDel}>
                       <DeleteIcon className="delete-icon" />
                     </div>
-                    <div onClick={onOpenEdit} className="">
+                    <div onClick={onOpenEdit}>
                       <EditIcon className="edit-icon" />
                     </div>
                   </div>
