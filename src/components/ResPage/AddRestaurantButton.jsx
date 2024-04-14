@@ -146,9 +146,12 @@ export default function AddRestaurantButton() {
                   <div className="dropdown-content">
                     {/* Display search results */}
                     {searchResults.value.map((user, index) => (
-                      <a href="#" key={index}>
+                      <Link
+                        key={index}
+                        className="d-block text-decoration-none"
+                      >
                         {user}
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 </Form.Group>
