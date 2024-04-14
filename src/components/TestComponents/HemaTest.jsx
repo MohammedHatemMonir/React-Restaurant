@@ -9,7 +9,7 @@ const SearchComponent = () => {
 
   const handleSearchChange = (e) => {
     searchTerm.value = e.target.value;
-    console.log( searchTerm.value)
+    console.log(searchTerm.value);
     returnUsers();
   };
 
@@ -22,20 +22,17 @@ const SearchComponent = () => {
   });
 
   const returnUsers = async () => {
+    if (searchTerm.value.length >= 3) {
+      const result = await searchUsers.mutateAsync({
+        name: searchTerm.value,
+      });
 
-    if(searchTerm
-      .value.length>=3){
-    const result = await searchUsers.mutateAsync({
-      name: searchTerm.value,
-    });
-
-    console.log("Search result", result.data);
-    searchResults.value = result.data;
-  }else{
-    searchResults.value=[]
-  
-  }
-};
+      console.log("Search result", result.data);
+      searchResults.value = result.data;
+    } else {
+      searchResults.value = [];
+    }
+  };
 
   return (
     <Col sm={12}>

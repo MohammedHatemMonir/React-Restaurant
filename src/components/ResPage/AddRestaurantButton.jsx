@@ -10,6 +10,7 @@ import { convertBase64 } from "../../Globals";
 import { useMutation, useQueryClient } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 import { Link } from "react-router-dom";
+import SearchUser from './../SearchUser/SearchUser';
 
 export default function AddRestaurantButton() {
   const {
@@ -42,41 +43,11 @@ export default function AddRestaurantButton() {
     myCategoryBtn.value = !myCategoryBtn.value;
   }
 
-  // handle search change
-  function handleSearchChange(e) {
-    searchTerm.value = e.target.value;
-    console.log(searchTerm.value);
-    // returnUsers();
-  }
-
   // Handle categories change
   function handleCategoriesChange(e) {
     newCategory.value = e.target.value;
     // console.log("New Category", newCategory.value);
   }
-
-  // Search Users
-  const searchUsers = useMutation({
-    mutationKey: ["searchUsers"],
-    // cacheTime: 600000,
-    // onSuccess: onSuccess,
-    // onError: onError,
-    mutationFn: async (params) => {
-      console.log("trying to load");
-      let url = "/SearchUser";
-      console.log("posting to ", url);
-      return await apiClient.get(url, params);
-    },
-  });
-
-  const returnUsers = async function () {
-    const result = await searchUsers.mutateAsync({
-      name: searchTerm.value,
-    });
-    console.log("my searched name", result);
-    searchResults.value = result;
-    // queryClient.invalidateQueries({ queryKey: ["searchUsers"] });
-  };
 
   // Add new category in db
   const addCategory = useMutation({
@@ -155,28 +126,7 @@ export default function AddRestaurantButton() {
         <>
           <Form>
             <Row>
-              <Col sm={12}>
-                <Form.Group className="mb-2 mb-sm-0">
-                  <Form.Label>Search user</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="search-user"
-                    placeholder="Search User"
-                    value={searchTerm.value}
-                    onChange={handleSearchChange}
-                  />
-                  <div className="dropdown-content">
-                    {searchResults.value.map((user, index) => (
-                      <Link
-                        key={index}
-                        className="d-block text-decoration-none"
-                      >
-                        {user}
-                      </Link>
-                    ))}
-                  </div>
-                </Form.Group>
-              </Col>
+              <SearchUser />
               <Col sm={6}>
                 <Form.Group className="mb-2 mb-sm-0">
                   <Form.Label>Name</Form.Label>
