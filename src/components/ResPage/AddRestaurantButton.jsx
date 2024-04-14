@@ -45,12 +45,7 @@ export default function AddRestaurantButton() {
   // handle search change
   function handleSearchChange(e) {
     searchTerm.value = e.target.value;
-    // console.log("serched", searchTerm.value);
-    // const users = ["User 1", "User 2", "User 3"];
-    // const filteredUsers = users.filter((user) =>
-    //   user.toLowerCase().includes(e.target.value.toLowerCase())
-    // );
-    searchResults.value = filteredUsers;
+    returnUsers();
   }
 
   // Handle categories change
@@ -67,9 +62,9 @@ export default function AddRestaurantButton() {
     // onError: onError,
     mutationFn: async (params) => {
       console.log("trying to load");
-      let url = "/category";
+      let url = "/SearchUser";
       console.log("posting to ", url);
-      return await apiClient.post(url, params);
+      return await apiClient.get(url, params);
     },
   });
 
@@ -77,8 +72,9 @@ export default function AddRestaurantButton() {
     const result = await searchUsers.mutateAsync({
       name: searchTerm.value,
     });
-
-    // queryClient.invalidateQueries({ queryKey: ["addNewCategory"] });
+    console.log("my searched name", result);
+    searchResults.value = result;
+    // queryClient.invalidateQueries({ queryKey: ["searchUsers"] });
   };
 
   // Add new category in db
@@ -169,7 +165,6 @@ export default function AddRestaurantButton() {
                     onChange={handleSearchChange}
                   />
                   <div className="dropdown-content">
-                    {/* Display search results */}
                     {searchResults.value.map((user, index) => (
                       <Link
                         key={index}
