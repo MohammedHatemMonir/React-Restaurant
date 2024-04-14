@@ -141,7 +141,31 @@ const addNewmeal = async (req, res) => { //{MealName:"",MealImg:"",Description:"
     }
   }
   
+  const deleteMeal = async (req, res) => {
+    try {
+      if (!req.session.user || req.session.user.role !== "ADMIN") {
+        return res.status(403).json({ error: "Not Authenticated as Admin" });
+      }
+      
+      const { id } = req.params;
+  
+      const deletedMeal = await meal.findByIdAndDelete(id);
 
+      if (!deletedMeal) {
+        return res.status(404).json({ error: "Meal not found" });
+      }
+      await mealComments.deleteMany({MealID:id})
+
+      if (deletedMeal.MealImg) {
+        await uploadImg.deleteImage(deletedMeal.MealImg);
+    }
+      res.status(200).json({ message: "Meal deleted successfully" });
+    } catch (error) {
+      console.error("Error deleting meal:", error);
+      res.status(500).json({ error: "Server error while deleting meal" });
+    }
+  }
+  
 // ========== Order ==========
 
 // Create Order in specific restaurant
@@ -220,5 +244,6 @@ const createOrder = async (req, res) => {   // {ResId:"",meals:[{id:"",quantity:
     getAllmeals,
     createOrder,
     GetMealsWithComments,
-    updateMeal
+    updateMeal,
+    deleteMeal
   };
