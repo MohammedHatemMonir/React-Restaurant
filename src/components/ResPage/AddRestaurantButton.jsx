@@ -9,6 +9,7 @@ import { Button } from "reactstrap";
 import { convertBase64 } from "../../Globals";
 import { useMutation, useQueryClient } from "react-query";
 import { apiClient } from "../../Data/apiclient";
+import { Link } from "react-router-dom";
 
 export default function AddRestaurantButton() {
   const {
@@ -26,6 +27,8 @@ export default function AddRestaurantButton() {
   const myMapBtn = useSignal(true);
   const newCategory = useSignal("");
   const myCategoryBtn = useSignal(true);
+  const searchTerm = useSignal("");
+  const searchResults = useSignal([]);
 
   // Display or Hide Map
   function handleMap() {
@@ -36,6 +39,16 @@ export default function AddRestaurantButton() {
   function handleCategoryInput() {
     showCategoryInput.value = !showCategoryInput.value;
     myCategoryBtn.value = !myCategoryBtn.value;
+  }
+
+  function handleSearchChange(e) {
+    searchTerm.value = e.target.value;
+    console.log("serched", searchTerm.value);
+    const users = ["User 1", "User 2", "User 3"];
+    const filteredUsers = users.filter((user) =>
+      user.toLowerCase().includes(e.target.value.toLowerCase())
+    );
+    searchResults.value = filteredUsers;
   }
 
   function handleCategoriesChange(e) {
@@ -127,13 +140,17 @@ export default function AddRestaurantButton() {
                     type="text"
                     name="search-user"
                     placeholder="Search User"
-                    {...register("search-user", {
-                      // required: "Please enter user name to search",
-                    })}
+                    value={searchTerm}
+                    onChange={handleSearchChange}
                   />
-                  <span className="error" style={{ color: "red" }}>
-                    {errors["search-user"] && errors["search-user"].message}
-                  </span>
+                  <div className="dropdown-content">
+                    {/* Display search results */}
+                    {searchResults.value.map((user, index) => (
+                      <a href="#" key={index}>
+                        {user}
+                      </a>
+                    ))}
+                  </div>
                 </Form.Group>
               </Col>
               <Col sm={6}>
