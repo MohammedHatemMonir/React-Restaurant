@@ -1,48 +1,28 @@
+import React from "react";
+import { useParams } from "react-router-dom";
+import { useQueryClient, useMutation, useQuery } from "react-query";
+import { Card } from "react-bootstrap"; // Import Card from react-bootstrap if you haven't already
 
+function YourComponent() {
+  const { ResID } = useParams();
+  const queryClient = useQueryClient();
+  const allComments = useQuery(["allComments", ResID], async () => {
+    const response = await apiClient.get(`/dashboard/${ResID}`);
+    return response.data;
+  });
 
+  return (
+    <div>
+      <Card>
+        <Card.Title as="h4">
+          Total Comments: {allComments.data ? allComments.data.length : 0}
+        </Card.Title>
+      </Card>
+    </div>
+  );
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export default YourComponent;
 
 // import React from "react";
 // import { Navbar, Nav, Container, Image } from "react-bootstrap";

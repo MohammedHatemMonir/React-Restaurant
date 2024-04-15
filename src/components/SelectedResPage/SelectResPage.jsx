@@ -70,7 +70,9 @@ export default function SelectResPage() {
                         {q.data?.data?.restaurant?.ResName}
                         <span className="green">
                           {UserData.value.role == "ADMIN" && (
-                            <Link to={`/RestaurantDashboard/${resID}`}>Statistics</Link>
+                            <Link to={`/RestaurantDashboard/${resID}`}>
+                              Statistics
+                            </Link>
                           )}
                         </span>
                       </h1>
@@ -584,7 +586,7 @@ function TempMealCard({
       </div>
       {UserData.value.role == "ADMIN" && showDelModal.value == true && (
         <DeleteMealModal
-          resId={id}
+          mealId={id}
           mealName={name}
           openModal={() => (showDelModal.value = true)}
           closeModal={onCloseDel}
@@ -592,8 +594,8 @@ function TempMealCard({
       )}
       {UserData.value.role == "ADMIN" && showEditModal.value == true && (
         <EditMealModal
+          mealId={id}
           mealName={name}
-          resId={id}
           openModal={() => (showEditModal.value = true)}
           closeModal={onCloseEdit}
         />

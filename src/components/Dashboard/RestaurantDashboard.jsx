@@ -16,7 +16,7 @@ import { Card, Container, Row, Col } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useMutation, useQueryClient } from "react-query";
 import { apiClient } from "../../Data/apiclient";
-import { useSignal } from '@preact/signals-react';
+import { useSignal } from "@preact/signals-react";
 // StackedAreaChart Data
 const data1 = [
   {
@@ -78,35 +78,31 @@ const RADIAN = Math.PI / 180;
 export default function RestaurantDashboard() {
   const { ResID } = useParams();
 
-    // Fetch here
-    const queryClient = useQueryClient();
-    const allComments = useSignal([]);
-    const m = useMutation({
-      mutationKey: ["allComments"],
-      // cacheTime: 600000,
-      // onSuccess: onSuccess,
-      // onError: onError,
-      mutationFn: async (params) => {
-        console.log("trying to load");
-        let url = `/dashboard/${params.status}/${ResID}`;
-        console.log("posting to ", url);
-        return await apiClient.get(url, params);
-      },
-    });
+  // Fetch here
+  const queryClient = useQueryClient();
+  const allComments = useSignal([]);
+  const m = useMutation({
+    mutationKey: ["allComments"],
+    // cacheTime: 600000,
+    // onSuccess: onSuccess,
+    // onError: onError,
+    mutationFn: async (params) => {
+      console.log("trying to load");
+      let url = `/dashboard/${params.status}/${ResID}`;
+      console.log("posting to ", url);
+      return await apiClient.get(url, params);
+    },
+  });
 
-    const onSubmit = async function (stat) {
-      const result = await m.mutateAsync({ status: stat });
-      allComments.value = result;
-      // queryClient.invalidateQueries({ queryKey: ["allComments"] });
-    };
+  const onSubmit = async function (stat) {
+    const result = await m.mutateAsync({ status: stat });
+    allComments.value = result;
+    // queryClient.invalidateQueries({ queryKey: ["allComments"] });
+  };
 
-    // onSubmit("positiveComments")
-    // onSubmit("negativeComments")
-    // onSubmit("neutralComments")
-
-
-
-
+  // onSubmit("positiveComments")
+  // onSubmit("negativeComments")
+  // onSubmit("neutralComments")
 
   const renderCustomizedLabel = ({
     cx,

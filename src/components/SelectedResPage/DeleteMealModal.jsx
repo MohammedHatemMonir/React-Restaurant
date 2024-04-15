@@ -4,15 +4,16 @@ import { useMutation, useQueryClient } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 
 function DeleteMealModal({ mealId, mealName, openModal, closeModal }) {
+  console.log("hemaMeal", mealId);
   const queryClient = useQueryClient();
   const m = useMutation({
-    mutationKey: [],
+    mutationKey: ["deleteMeal"],
     // cacheTime: 600000,
     // onSuccess: onSuccess,
     // onError: onError,
     mutationFn: async (params) => {
       console.log("trying to load");
-      let url = `/deleteresturant/${mealId}`;
+      let url = `/deleteMeal/${mealId}`;
       console.log("posting to ", url);
       return await apiClient.delete(url, params);
     },
@@ -22,7 +23,8 @@ function DeleteMealModal({ mealId, mealName, openModal, closeModal }) {
     const result = await m.mutateAsync();
 
     closeModal();
-    queryClient.invalidateQueries();
+    queryClient.invalidateQueries({ mutationKey: ["deleteMeal"] });
+    queryClient.refetchQueries(["deleteMeal"]);
   };
 
   return (

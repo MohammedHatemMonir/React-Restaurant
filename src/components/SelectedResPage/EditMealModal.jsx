@@ -17,57 +17,15 @@ function EditMealModal({ openModal, closeModal, mealName, mealId }) {
   } = useForm();
 
   const queryClient = useQueryClient();
-  const currentLocation = useSignal();
-  const showMap = useSignal(false);
-  const showCategoryInput = useSignal(false);
-  const myMapBtn = useSignal(true);
-  const myCategoryBtn = useSignal(true);
-  const newCategory = useSignal("");
 
-  // Display or Hide Map
-  function handleMap() {
-    showMap.value = !showMap.value;
-    myMapBtn.value = !myMapBtn.value;
-  }
-  // Display or Hide Categories Input
-  function handleCategoryInput() {
-    showCategoryInput.value = !showCategoryInput.value;
-    myCategoryBtn.value = !myCategoryBtn.value;
-  }
-  function handleCategoriesChange(e) {
-    newCategory.value = e.target.value;
-    console.log("New Category", newCategory.value);
-  }
-
-  const addCategory = useMutation({
-    mutationKey: ["addNewCategory"],
-    // cacheTime: 600000,
-    // onSuccess: onSuccess,
-    // onError: onError,
-    mutationFn: async (params) => {
-      console.log("trying to load");
-      let url = "/category";
-      console.log("posting to ", url);
-      return await apiClient.post(url, params);
-    },
-  });
-
-  const uploadCategory = async function () {
-    const result = await addCategory.mutateAsync({
-      Categoery: newCategory.value,
-    });
-    newCategory.value = "";
-    showCategoryInput.value = false;
-    // queryClient.invalidateQueries({ queryKey: ["addNewCategory"] });
-  };
-  // Edit restaurant in db
+  // Edit meal in db
   const m = useMutation({
     // cacheTime: 600000,
     // onSuccess: onSuccess,
     // onError: onError,
-    mutationKey: ["updateRestaurant"],
+    mutationKey: ["updateMeal"],
     mutationFn: async (params) => {
-      let url = `/updateRestaurant/${mealId}`;
+      let url = `/updatemeal/${mealId}`;
       return await apiClient.put(url, params);
     },
   });
@@ -78,17 +36,17 @@ function EditMealModal({ openModal, closeModal, mealName, mealId }) {
     let ResImg;
     let ResBanner;
 
-    if (data.ResImg[0]) ResImg = await convertBase64(data.resImg[0]);
-    if (data.ResBanner[0]) ResBanner = await convertBase64(data.resBanner[0]);
+    // if (data.ResImg[0]) ResImg = await convertBase64(data.resImg[0]);
+    // if (data.ResBanner[0]) ResBanner = await convertBase64(data.resBanner[0]);
 
-    if (ResImg) data.ResImg = resImg64;
-    if (ResBanner) data.ResBanner = resBanner64;
+    // if (ResImg) data.ResImg = resImg64;
+    // if (ResBanner) data.ResBanner = resBanner64;
     const result = await m.mutateAsync(data);
     // console.log(result)
     // alert(result)
     closeModal();
-    queryClient.invalidateQueries({ mutationKey: ["updateRestaurant"] });
-    queryClient.refetchQueries(["updateRestaurant"]);
+    queryClient.invalidateQueries({ mutationKey: ["updateMeal"] });
+    queryClient.refetchQueries(["updateMeal"]);
   };
 
   return (
