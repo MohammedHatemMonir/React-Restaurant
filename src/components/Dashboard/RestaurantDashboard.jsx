@@ -64,25 +64,12 @@ const data1 = [
   },
 ];
 
-// PieChart Data
-const data2 = [
-  { name: "Group A", value: 400 },
-  { name: "Group B", value: 300 },
-  { name: "Group C", value: 300 },
-  { name: "Group D", value: 200 },
-];
-
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
-
-const RADIAN = Math.PI / 180;
-
 export default function RestaurantDashboard() {
   const { ResID } = useParams();
 
+  const RADIAN = Math.PI / 180;
   // Fetch here
-
   const queryClient = useQueryClient();
-
   const allPositiveComments = useSignal([]);
   const allNegativeComments = useSignal([]);
   const allNaturalComments = useSignal([]);
@@ -176,6 +163,36 @@ export default function RestaurantDashboard() {
     onSubmit3();
     onSubmit4();
   }, []);
+
+  // PieChart Data
+  // const mustafa = [];
+  // console.log("mustafa", mustafa);
+  const data2 = [
+    {
+      name: "Group A",
+      value:
+        (allPositiveComments.value.data?.lengthOfcomments /
+          allComments.value.data?.lengthOfcomments) *
+        100,
+    },
+    {
+      name: "Group B",
+      value:
+        (allNegativeComments.value.data?.lengthOfcomments /
+          allComments.value.data?.lengthOfcomments) *
+        100,
+    },
+    {
+      name: "Group C",
+      value:
+        (allNaturalComments.value.data?.lengthOfcomments /
+          allComments.value.data?.lengthOfcomments) *
+        100,
+    },
+    // { name: "Group D", value: (200 / 400) * 100 },
+  ];
+  // , "#FF8042"
+  const COLORS = ["#0088FE", "#00C49F", "#FFBB28"];
 
   // onSubmit("positiveComments")
   // onSubmit("negativeComments")
@@ -273,7 +290,7 @@ export default function RestaurantDashboard() {
                   </Col>
                   <Col xs="9">
                     <div className="numbers">
-                      <p className="card-category">Natural Comments</p>
+                      <p className="card-category">Neutral Comments</p>
                       <Card.Title as="h4">
                         {allNaturalComments.value.data?.lengthOfcomments}
                       </Card.Title>

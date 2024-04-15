@@ -52,6 +52,7 @@
         "serve": "^14.2.1",
         "sort-by": "^0.0.2",
         "styled-components": "^6.1.8",
+        "surge": "^0.23.1",
         "uuid": "^9.0.1",
         "web-vitals": "^2.1.4"
     },
