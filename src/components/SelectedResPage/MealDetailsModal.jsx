@@ -16,9 +16,6 @@ function MealDetailsModal({
   mealPrice,
   MealComments,
 }) {
-
-
-
   const m = useMutation({
     mutationKey: [],
     // cacheTime: 600000,
@@ -37,62 +34,60 @@ function MealDetailsModal({
   async function PostRestaurantComment() {
     var j = { text: comment.value, mealid: id };
 
-    console.log(comment.value)
+    console.log(comment.value);
     try {
       await m.mutateAsync(j);
 
       comment.value = "";
-
     } catch (e) {
       console.log("Failed to post comment", e);
     }
   }
 
-  
-console.log("MealComments",id, MealComments)
-function TextCommentBox(){
-  return(<>
-  
-  <div className="my-comment-box">
-      <div className="d-flex flex-column align-items-center mb-4">
-        <input
-          type="text"
-          value={comment.value}
-          onChange={(e) => comment.value = e.target.value}
-          className="form-control mb-3"
-          style={{
-            padding: "10px",
-            borderRadius: "5px",
-            border: "1px solid #ccc",
-            fontSize: "16px",
-            width: "80%",
-            maxWidth: "300px",
-            boxSizing: "border-box",
-          }}
-          placeholder="Add new comment"
-        />
-        <button
-          onClick={PostRestaurantComment}
-          className="btn btn-primary"
-          style={{
-            padding: "10px 20px",
-            borderRadius: "5px",
-            fontSize: "16px",
-            cursor: "pointer",
-            width: "80%",
-            maxWidth: "300px",
-            boxSizing: "border-box",
-            color: "white",
-            // fontWeight:"Bold"
-          }}
-        >
-          Add
-        </button>
-      </div>
-    </div>
-  
-  </>)
-}
+  console.log("MealComments", id, MealComments);
+  function TextCommentBox() {
+    return (
+      <>
+        <div className="my-comment-box mt-3">
+          <div className="d-flex flex-column align-items-center mb-4">
+            <input
+              type="text"
+              value={comment.value}
+              onChange={(e) => (comment.value = e.target.value)}
+              className="form-control mb-3"
+              style={{
+                padding: "10px",
+                borderRadius: "5px",
+                border: "1px solid #ccc",
+                fontSize: "16px",
+                width: "80%",
+                maxWidth: "300px",
+                boxSizing: "border-box",
+              }}
+              placeholder="Add new comment"
+            />
+            <button
+              onClick={PostRestaurantComment}
+              className="btn btn-primary"
+              style={{
+                padding: "10px 20px",
+                borderRadius: "5px",
+                fontSize: "16px",
+                cursor: "pointer",
+                width: "80%",
+                maxWidth: "300px",
+                boxSizing: "border-box",
+                color: "white",
+                // fontWeight:"Bold"
+              }}
+            >
+              Add
+            </button>
+          </div>
+        </div>
+      </>
+    );
+  }
 
   return (
     <Modal
@@ -168,18 +163,17 @@ function TextCommentBox(){
             </div>
           </div>
         </div>
-            <TextCommentBox/>
+        <TextCommentBox />
         <ReviewsCard
-              // key={index + "rescomment" + resID}
-              // name={item.user.name}
-              // stars={item.commentSentmint[2] * 5}
-              // emotion={item.commentSentmint[1]}
-              // comment={item.Comment}
-              // image={
-              //   item.user.userImg ||
-              //   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8PyKYrBKAWWy6YCbQzWQcwIRqH8wYMPluIZiMpV1w0NYSbocTZz0ICWFkLcXhaMyvCwQ&usqp=CAU"
-              // }
-        
+        // key={index + "rescomment" + resID}
+        // name={item.user.name}
+        // stars={item.commentSentmint[2] * 5}
+        // emotion={item.commentSentmint[1]}
+        // comment={item.Comment}
+        // image={
+        //   item.user.userImg ||
+        //   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8PyKYrBKAWWy6YCbQzWQcwIRqH8wYMPluIZiMpV1w0NYSbocTZz0ICWFkLcXhaMyvCwQ&usqp=CAU"
+        // }
         />
       </Modal.Body>
       <Modal.Footer>
@@ -188,8 +182,5 @@ function TextCommentBox(){
     </Modal>
   );
 }
-
-
-
 
 export default MealDetailsModal;

@@ -3,12 +3,12 @@ import Modal from "react-bootstrap/Modal";
 import { Form, Col, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useSignal } from "@preact/signals-react";
-import LeafletMap from "../Map/LeafletMap";
 import { useMutation, useQueryClient } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 import { convertBase64 } from "../../Globals";
 
 function EditMealModal({ openModal, closeModal, mealName, mealId }) {
+  // console.log("hema", mealId); worked
   const {
     register,
     handleSubmit,
@@ -23,7 +23,7 @@ function EditMealModal({ openModal, closeModal, mealName, mealId }) {
     // cacheTime: 600000,
     // onSuccess: onSuccess,
     // onError: onError,
-    mutationKey: ["updateMeal"],
+    mutationKey: ["editMeal"],
     mutationFn: async (params) => {
       let url = `/updatemeal/${mealId}`;
       return await apiClient.put(url, params);
@@ -33,8 +33,9 @@ function EditMealModal({ openModal, closeModal, mealName, mealId }) {
   const onSubmit = async (data) => {
     // console.log("new data", data); // this new data from registers in useForm hook
     console.log("new data", data);
-    let ResImg;
-    let ResBanner;
+
+    // let ResImg;
+    // let ResBanner;
 
     // if (data.ResImg[0]) ResImg = await convertBase64(data.resImg[0]);
     // if (data.ResBanner[0]) ResBanner = await convertBase64(data.resBanner[0]);
@@ -45,8 +46,9 @@ function EditMealModal({ openModal, closeModal, mealName, mealId }) {
     // console.log(result)
     // alert(result)
     closeModal();
-    queryClient.invalidateQueries({ mutationKey: ["updateMeal"] });
-    queryClient.refetchQueries(["updateMeal"]);
+    queryClient.invalidateQueries({ mutationKey: ["editMeal"] });
+    queryClient.refetchQueries(["editMeal"]);
+    reset();
   };
 
   return (

@@ -548,7 +548,7 @@ function TempMealCard({
           </div>
           <button
             style={{
-              backgroundColor: "#4f46e5",
+              backgroundColor: "#e32207",
               color: "#fff",
               border: "none",
               padding: "0.5rem 1rem",
