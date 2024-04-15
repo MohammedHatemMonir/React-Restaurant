@@ -11,7 +11,6 @@ import {
   ResponsiveContainer,
 } from "recharts";
 // import ChartistGraph from "react-chartist";
-import { Link } from "react-router-dom";
 import { Card, Container, Row, Col } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useMutation, useQueryClient } from "react-query";
@@ -169,21 +168,21 @@ export default function RestaurantDashboard() {
   // console.log("mustafa", mustafa);
   const data2 = [
     {
-      name: "Group A",
+      name: "Positive",
       value:
         (allPositiveComments.value.data?.lengthOfcomments /
           allComments.value.data?.lengthOfcomments) *
         100,
     },
     {
-      name: "Group B",
+      name: "Negative",
       value:
         (allNegativeComments.value.data?.lengthOfcomments /
           allComments.value.data?.lengthOfcomments) *
         100,
     },
     {
-      name: "Group C",
+      name: "Neutral",
       value:
         (allNaturalComments.value.data?.lengthOfcomments /
           allComments.value.data?.lengthOfcomments) *
@@ -424,10 +423,10 @@ export default function RestaurantDashboard() {
                   </ResponsiveContainer>
                 </div>
                 <div className="legend">
-                  <i className="fas fa-circle text-info"></i>
-                  Open <i className="fas fa-circle text-danger"></i>
-                  Bounce <i className="fas fa-circle text-warning"></i>
-                  Unsubscribe
+                  <i className="fas fa-circle text-info text-info"></i>
+                  Positive <i className="fas fa-circle text-success"></i>
+                  Negative <i className="fas fa-circle text-warning"></i>
+                  Neutral
                 </div>
                 {/* <hr></hr>
                 <div className="stats">
