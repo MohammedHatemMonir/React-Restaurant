@@ -381,11 +381,11 @@ export default function RestaurantDashboard() {
                   Click <i className="fas fa-circle text-warning"></i>
                   Click Second Time
                 </div>
-                <hr></hr>
+                {/* <hr></hr>
                 <div className="stats">
                   <i className="fas fa-history"></i>
                   Updated 3 minutes ago
-                </div>
+                </div> */}
               </Card.Footer>
             </Card>
           </Col>
@@ -429,11 +429,11 @@ export default function RestaurantDashboard() {
                   Bounce <i className="fas fa-circle text-warning"></i>
                   Unsubscribe
                 </div>
-                <hr></hr>
+                {/* <hr></hr>
                 <div className="stats">
                   <i className="far fa-clock"></i>
                   Campaign sent 2 days ago
-                </div>
+                </div> */}
               </Card.Body>
             </Card>
           </Col>
