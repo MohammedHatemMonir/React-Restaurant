@@ -86,7 +86,7 @@ export default function RestaurantDashboard() {
   const allPositiveComments = useSignal([]);
   const allNegativeComments = useSignal([]);
   const allNaturalComments = useSignal([]);
-
+  const allComments = useSignal([]);
   // Get AlL Positive
   const m1 = useMutation({
     mutationKey: ["allPComments"],
@@ -149,10 +149,32 @@ export default function RestaurantDashboard() {
     queryClient.invalidateQueries({ queryKey: ["allNeComments"] });
     queryClient.refetchQueries(["allNeComments"]);
   };
+
+  // Get AlL Comments
+  const m4 = useMutation({
+    mutationKey: ["allComments"],
+    // cacheTime: 600000,
+    // onSuccess: onSuccess,
+    // onError: onError,
+    mutationFn: async (params) => {
+      console.log("trying to load");
+      let url = `/dashboard/userComments/${ResID}`;
+      console.log("posting to ", url);
+      return await apiClient.get(url, params);
+    },
+  });
+
+  const onSubmit4 = async function () {
+    const result = await m4.mutateAsync();
+    allComments.value = result;
+    queryClient.invalidateQueries({ queryKey: ["allComments"] });
+    queryClient.refetchQueries(["allComments"]);
+  };
   useEffect(() => {
     onSubmit1();
     onSubmit2();
     onSubmit3();
+    onSubmit4();
   }, []);
 
   // onSubmit("positiveComments")
@@ -269,13 +291,15 @@ export default function RestaurantDashboard() {
                   <Col xs="3" className="text-center">
                     {/* Zoomed in emoji */}
                     <div className="icon-big">
-                      <p style={{ fontSize: "2em" }}>🚶</p>
+                      <p style={{ fontSize: "2em" }}>📝</p>
                     </div>
                   </Col>
                   <Col xs="9">
                     <div className="numbers">
-                      <p className="card-category">Customers</p>
-                      <Card.Title as="h4">+45K</Card.Title>
+                      <p className="card-category">All Comments</p>
+                      <Card.Title as="h4">
+                        {allComments.value.data?.lengthOfcomments}
+                      </Card.Title>
                     </div>
                   </Col>
                 </Row>
@@ -283,6 +307,7 @@ export default function RestaurantDashboard() {
             </Card>
           </Col>
         </Row>
+        <br />
         <Row>
           <Col md="8">
             <Card>
