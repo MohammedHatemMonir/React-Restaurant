@@ -32,8 +32,11 @@ function EditMealModal({ openModal, closeModal, mealName, mealId }) {
 
   const onSubmit = async (data) => {
     // console.log("new data", data); // this new data from registers in useForm hook
-    console.log("new data", data);
-
+    const result = await m.mutateAsync(data);
+    closeModal();
+    queryClient.invalidateQueries({ mutationKey: ["editMeal"] });
+    queryClient.refetchQueries(["editMeal"]);
+    reset();
     // let ResImg;
     // let ResBanner;
 
@@ -42,13 +45,9 @@ function EditMealModal({ openModal, closeModal, mealName, mealId }) {
 
     // if (ResImg) data.ResImg = resImg64;
     // if (ResBanner) data.ResBanner = resBanner64;
-    const result = await m.mutateAsync(data);
+
     // console.log(result)
     // alert(result)
-    closeModal();
-    queryClient.invalidateQueries({ mutationKey: ["editMeal"] });
-    queryClient.refetchQueries(["editMeal"]);
-    reset();
   };
 
   return (
