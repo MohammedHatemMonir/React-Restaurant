@@ -81,11 +81,14 @@ export default function RestaurantDashboard() {
 
   // Fetch here
 
-
   const queryClient = useQueryClient();
 
   const allPositiveComments = useSignal([]);
-  const m = useMutation({
+  const allNegativeComments = useSignal([]);
+  const allNaturalComments = useSignal([]);
+
+  // Get AlL Positive
+  const m1 = useMutation({
     mutationKey: ["allPComments"],
     // cacheTime: 600000,
     // onSuccess: onSuccess,
@@ -99,23 +102,58 @@ export default function RestaurantDashboard() {
   });
 
   const onSubmit1 = async function () {
-    const result = await m.mutateAsync();
+    const result = await m1.mutateAsync();
     allPositiveComments.value = result;
-    console.log("Myhema", allPositiveComments.value);
     queryClient.invalidateQueries({ queryKey: ["allPComments"] });
     queryClient.refetchQueries(["allPComments"]);
   };
 
+  // Get AlL Negative
+  const m2 = useMutation({
+    mutationKey: ["allNaComments"],
+    // cacheTime: 600000,
+    // onSuccess: onSuccess,
+    // onError: onError,
+    mutationFn: async (params) => {
+      console.log("trying to load");
+      let url = `/dashboard/negativeComments/${ResID}`;
+      console.log("posting to ", url);
+      return await apiClient.get(url, params);
+    },
+  });
+
+  const onSubmit2 = async function () {
+    const result = await m2.mutateAsync();
+    allNegativeComments.value = result;
+    queryClient.invalidateQueries({ queryKey: ["allNaComments"] });
+    queryClient.refetchQueries(["allNaComments"]);
+  };
+
+  // Get AlL Natural
+  const m3 = useMutation({
+    mutationKey: ["allNeComments"],
+    // cacheTime: 600000,
+    // onSuccess: onSuccess,
+    // onError: onError,
+    mutationFn: async (params) => {
+      console.log("trying to load");
+      let url = `/dashboard/neutralComments/${ResID}`;
+      console.log("posting to ", url);
+      return await apiClient.get(url, params);
+    },
+  });
+
+  const onSubmit3 = async function () {
+    const result = await m3.mutateAsync();
+    allNaturalComments.value = result;
+    queryClient.invalidateQueries({ queryKey: ["allNeComments"] });
+    queryClient.refetchQueries(["allNeComments"]);
+  };
   useEffect(() => {
     onSubmit1();
+    onSubmit2();
+    onSubmit3();
   }, []);
-
-
-
-
-
-
-
 
   // onSubmit("positiveComments")
   // onSubmit("negativeComments")
@@ -192,7 +230,7 @@ export default function RestaurantDashboard() {
                     <div className="numbers">
                       <p className="card-category">Negative Comments</p>
                       <Card.Title as="h4">
-                        {/* {allComments.value.lengthOfcomments} */}
+                        {allNegativeComments.value.data?.lengthOfcomments}
                       </Card.Title>
                     </div>
                   </Col>
@@ -215,7 +253,7 @@ export default function RestaurantDashboard() {
                     <div className="numbers">
                       <p className="card-category">Natural Comments</p>
                       <Card.Title as="h4">
-                        {/* {allComments.value.lengthOfcomments} */}
+                        {allNaturalComments.value.data?.lengthOfcomments}
                       </Card.Title>
                     </div>
                   </Col>
