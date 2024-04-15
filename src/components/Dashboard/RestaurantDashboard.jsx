@@ -17,6 +17,7 @@ import { useParams } from "react-router-dom";
 import { useMutation, useQueryClient } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 import { useSignal } from "@preact/signals-react";
+import { useEffect } from "react";
 // StackedAreaChart Data
 const data1 = [
   {
@@ -79,26 +80,42 @@ export default function RestaurantDashboard() {
   const { ResID } = useParams();
 
   // Fetch here
+
+
   const queryClient = useQueryClient();
-  const allComments = useSignal([]);
+
+  const allPositiveComments = useSignal([]);
   const m = useMutation({
-    mutationKey: ["allComments"],
+    mutationKey: ["allPComments"],
     // cacheTime: 600000,
     // onSuccess: onSuccess,
     // onError: onError,
     mutationFn: async (params) => {
       console.log("trying to load");
-      let url = `/dashboard/${params.status}/${ResID}`;
+      let url = `/dashboard/postiveComments/${ResID}`;
       console.log("posting to ", url);
       return await apiClient.get(url, params);
     },
   });
 
-  const onSubmit = async function (stat) {
-    const result = await m.mutateAsync({ status: stat });
-    allComments.value = result;
-    // queryClient.invalidateQueries({ queryKey: ["allComments"] });
+  const onSubmit1 = async function () {
+    const result = await m.mutateAsync();
+    allPositiveComments.value = result;
+    console.log("Myhema", allPositiveComments.value);
+    queryClient.invalidateQueries({ queryKey: ["allPComments"] });
+    queryClient.refetchQueries(["allPComments"]);
   };
+
+  useEffect(() => {
+    onSubmit1();
+  }, []);
+
+
+
+
+
+
+
 
   // onSubmit("positiveComments")
   // onSubmit("negativeComments")
@@ -151,7 +168,7 @@ export default function RestaurantDashboard() {
                       <p className="card-category">Positive Comments</p>
 
                       <Card.Title as="h4">
-                        {/* {allComments.value.lengthOfcomments} */}
+                        {allPositiveComments.value.data?.lengthOfcomments}
                       </Card.Title>
                     </div>
                   </Col>
