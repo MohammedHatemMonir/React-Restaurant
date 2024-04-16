@@ -3,7 +3,8 @@ const resturant  = require("../../database/models/resturant.Model");
 const { Order } = require("../../database/models/orders");
 const { validationResult } = require("express-validator");
 const uploadImg = require("../../utils/uploadImg.js"); 
-const mealComments=require('../../database/models/Comments_model.js')
+const mealComments=require('../../database/models/Comments_model.js');
+const mongoose = require("mongoose");
 
 const GetMealsWithComments = async (req, res) => {
   try {
@@ -235,9 +236,76 @@ const createOrder = async (req, res) => {   // {ResId:"",meals:[{id:"",quantity:
   }
 };
 
+const getMyOrders = async (req, res) => {
+ 
+  if (!req.session?.user?._id) {
+    return res.status(404).json({ message: "Not authenticated!" });
+  }
+  try {
+    const orders = await Order.find({ user: req.session.user._id }, {resId: 0, meals: 0, __v: 0 });
+    if (!orders || orders.length === 0) {
+      return res.json({ message: "No orders found" });
+    }
 
+    return res.json({ orders });
+  } catch (err) {
+    console.error("Error fetching orders: ", err);
+    return res.status(500).json({ message: "Error fetching orders" });
+  }
+};
 
-
+const getOrderDetails = async (req, res) => {
+  try {
+    if (!req.session?.user?._id) {
+      return res.status(404).json({ message: "Not authenticated!" });
+    }
+      const { orderId } = req.params;
+      const order = await Order.aggregate([
+          {
+              $match: { _id: new mongoose.Types.ObjectId(orderId)}
+          },
+          {
+              $lookup: {
+                  from: "meals",
+                  localField: "meals.id",
+                  foreignField: "_id",
+                  as: "mealDetails"
+              }
+          },
+          {
+              $unwind: "$mealDetails"
+          },
+          {
+              $lookup: {
+                  from: "restaurants",
+                  localField: "resId",
+                  foreignField: "_id",
+                  as: "restaurantDetails"
+              }
+          },
+          {
+              $unwind: "$restaurantDetails"
+          },
+          {
+              $project: {
+                  _id: 0,
+                  ResName: "$restaurantDetails.ResName",
+                  MealName: "$mealDetails.MealName",
+                  MealImg: "$mealDetails.MealImg",
+                  Quantity: "$meals.quantity",
+                  totalPrice: 1
+              }
+          }
+      ]);
+      if (!order || order.length === 0) {
+          return res.status(404).json({ message: "Order not found" });
+      }
+      res.status(200).json(order[0]);
+  } catch (error) {
+      console.error("Error fetching order details:", error);
+      res.status(500).json({ error: "Server error while fetching order details" });
+  }
+};
 
   module.exports = {
     addNewmeal,
@@ -245,5 +313,7 @@ const createOrder = async (req, res) => {   // {ResId:"",meals:[{id:"",quantity:
     createOrder,
     GetMealsWithComments,
     updateMeal,
-    deleteMeal
+    deleteMeal,
+    getMyOrders,
+    getOrderDetails
   };
