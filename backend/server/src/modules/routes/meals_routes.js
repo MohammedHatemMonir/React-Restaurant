@@ -9,6 +9,6 @@ router.put('/updatemeal/:id',control.updateMeal);
 router.delete('/deleteMeal/:id',control.deleteMeal);
 router.post('/createOrder', control.createOrder);
 router.get('/getOrder', control.getMyOrders);
-router.get('/orderDetails/:orderId', control.orderDetails);
+router.get('/getOrderDetails/:orderId', control.getOrderDetails);
 // router.delete('/deletemeal/:id',control.deleteresturant)
 module.exports = router;
