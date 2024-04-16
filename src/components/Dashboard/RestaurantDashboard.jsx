@@ -1,15 +1,3 @@
-import {
-  AreaChart,
-  Area,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  PieChart,
-  Pie,
-  Cell,
-  ResponsiveContainer,
-} from "recharts";
 // import ChartistGraph from "react-chartist";
 import { Card, Container, Row, Col } from "react-bootstrap";
 import { useParams } from "react-router-dom";
@@ -19,51 +7,8 @@ import { useSignal } from "@preact/signals-react";
 import { useEffect } from "react";
 import { FaCircle } from "react-icons/fa6";
 import { FaRegAngry, FaRegEdit, FaRegMeh, FaRegSmile } from "react-icons/fa";
-// StackedAreaChart Data
-const data1 = [
-  {
-    name: "Page A",
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: "Page B",
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: "Page C",
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: "Page D",
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: "Page E",
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: "Page F",
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-  {
-    name: "Page G",
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
-  },
-];
+import ResPieChart from "./ResPieChart";
+import ResAreaChart from "./ResAreaChart";
 
 export default function RestaurantDashboard() {
   const { ResID } = useParams();
@@ -72,8 +17,6 @@ export default function RestaurantDashboard() {
   const allNegativeComments = useSignal([]);
   const allNaturalComments = useSignal([]);
   const allComments = useSignal([]);
-  const RADIAN = Math.PI / 180;
-  const myValue = 100;
 
   // Fetch here
   // Get AlL Positive
@@ -83,9 +26,9 @@ export default function RestaurantDashboard() {
     // onSuccess: onSuccess,
     // onError: onError,
     mutationFn: async (params) => {
-      console.log("trying to load");
+      // console.log("trying to load");
       let url = `/dashboard/postiveComments/${ResID}`;
-      console.log("posting to ", url);
+      // console.log("posting to ", url);
       return await apiClient.get(url, params);
     },
   });
@@ -104,9 +47,9 @@ export default function RestaurantDashboard() {
     // onSuccess: onSuccess,
     // onError: onError,
     mutationFn: async (params) => {
-      console.log("trying to load");
+      // console.log("trying to load");
       let url = `/dashboard/negativeComments/${ResID}`;
-      console.log("posting to ", url);
+      // console.log("posting to ", url);
       return await apiClient.get(url, params);
     },
   });
@@ -125,9 +68,9 @@ export default function RestaurantDashboard() {
     // onSuccess: onSuccess,
     // onError: onError,
     mutationFn: async (params) => {
-      console.log("trying to load");
+      // console.log("trying to load");
       let url = `/dashboard/neutralComments/${ResID}`;
-      console.log("posting to ", url);
+      // console.log("posting to ", url);
       return await apiClient.get(url, params);
     },
   });
@@ -146,9 +89,9 @@ export default function RestaurantDashboard() {
     // onSuccess: onSuccess,
     // onError: onError,
     mutationFn: async (params) => {
-      console.log("trying to load");
+      // console.log("trying to load");
       let url = `/dashboard/userComments/${ResID}`;
-      console.log("posting to ", url);
+      // console.log("posting to ", url);
       return await apiClient.get(url, params);
     },
   });
@@ -166,62 +109,9 @@ export default function RestaurantDashboard() {
     onSubmit4();
   }, []);
 
-  // PieChart Data
-  const data2 = [
-    {
-      name: "Positive",
-      value:
-        (allPositiveComments.value.data?.lengthOfcomments /
-          allComments.value.data?.lengthOfcomments) *
-        myValue,
-    },
-    {
-      name: "Negative",
-      value:
-        (allNegativeComments.value.data?.lengthOfcomments /
-          allComments.value.data?.lengthOfcomments) *
-        myValue,
-    },
-    {
-      name: "Neutral",
-      value:
-        (allNaturalComments.value.data?.lengthOfcomments /
-          allComments.value.data?.lengthOfcomments) *
-        myValue,
-    },
-    // { name: "Group D", value: (200 / 400) * 100 },
-  ];
-  // , "#FF8042"
-  const COLORS = ["#0088FE", "#00C49F", "#FFBB28"];
-
-  // onSubmit("positiveComments")
-  // onSubmit("negativeComments")
-  // onSubmit("neutralComments")
-
-  const renderCustomizedLabel = ({
-    cx,
-    cy,
-    midAngle,
-    innerRadius,
-    outerRadius,
-    percent,
-  }) => {
-    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-    const x = cx + radius * Math.cos(-midAngle * RADIAN);
-    const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
-    return (
-      <text
-        x={x}
-        y={y}
-        fill="white"
-        textAnchor={x > cx ? "start" : "end"}
-        dominantBaseline="central"
-      >
-        {`${(percent * 100).toFixed(0)}%`}
-      </text>
-    );
-  };
+  // // onSubmit("positiveComments")
+  // // onSubmit("negativeComments")
+  // // onSubmit("neutralComments")
 
   return (
     <Container fluid>
@@ -339,46 +229,7 @@ export default function RestaurantDashboard() {
               <p className="card-category">24 Hours performance</p>
             </Card.Header>
             <Card.Body>
-              <div className="ct-chart" id="chartHours">
-                <ResponsiveContainer width="100%" height={400}>
-                  {/* Code Here 1 */}
-                  <AreaChart
-                    data={data1}
-                    margin={{
-                      top: 10,
-                      right: 30,
-                      left: 0,
-                      bottom: 0,
-                    }}
-                  >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="name" />
-                    <YAxis />
-                    <Tooltip />
-                    <Area
-                      type="monotone"
-                      dataKey="uv"
-                      stackId="1"
-                      stroke="#8884d8"
-                      fill="#8884d8"
-                    />
-                    <Area
-                      type="monotone"
-                      dataKey="pv"
-                      stackId="1"
-                      stroke="#82ca9d"
-                      fill="#82ca9d"
-                    />
-                    <Area
-                      type="monotone"
-                      dataKey="amt"
-                      stackId="1"
-                      stroke="#ffc658"
-                      fill="#ffc658"
-                    />
-                  </AreaChart>
-                </ResponsiveContainer>
-              </div>
+              <ResAreaChart />
             </Card.Body>
             <Card.Footer>
               <div className="legend">
@@ -397,41 +248,13 @@ export default function RestaurantDashboard() {
               <p>Last Campaign Performance</p>
             </Card.Header>
             <Card.Body>
-              {/* Code Here 2 */}
-              <ResponsiveContainer width="100%" height={400}>
-                <PieChart>
-                  <Pie
-                    data={data2}
-                    cx="50%"
-                    cy="50%"
-                    labelLine={false}
-                    label={renderCustomizedLabel}
-                    outerRadius={100}
-                    fill="#8884d8"
-                    dataKey="value"
-                  >
-                    {data2.map((entry, index) => (
-                      <Cell
-                        fill={COLORS[index % COLORS.length]}
-                        key={`cell-${index}`}
-                      />
-                    ))}
-                  </Pie>
-                </PieChart>
-              </ResponsiveContainer>
-
-              <div className="legend">
-                <FaCircle className="text-primary" />
-                Positive <FaCircle className="text-success" />
-                Negative <FaCircle className="text-warning" />
-                Neutral
-              </div>
-
-              {/* <hr></hr>
-                <div className="stats">
-                  <i className="far fa-clock"></i>
-                  Campaign sent 2 days ago
-                </div> */}
+              {/* {console.log("myHemasdasdasa", allPositiveComments.value)} */}
+              <ResPieChart
+                positive={allPositiveComments.value.data?.lengthOfcomments}
+                negative={allNegativeComments.value.data?.lengthOfcomments}
+                natural={allNaturalComments.value.data?.lengthOfcomments}
+                allComments={allComments.value.data?.lengthOfcomments}
+              />
             </Card.Body>
           </Card>
         </Col>
