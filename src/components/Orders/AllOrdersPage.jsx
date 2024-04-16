@@ -8,6 +8,28 @@ import { useEffect } from "react";
 const AllOrdersPage = () => {
   const allOrders = useSignal([]);
   const queryClient = useQueryClient();
+
+  function timeAgo(dateString) {
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffTime = Math.abs(now - date);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  
+    if (diffDays === 1) {
+      return '1 day ago';
+    } else {
+      return `${diffDays} days ago`;
+    }
+  }
+  
+  const dateStr = "2024-04-16T09:56:06.936Z";
+  console.log(timeAgo(dateStr)); // Output: e.g., "1 day ago", "2 days ago", etc.
+  
+
+
+
+
+  // Get All Orders
   const m1 = useMutation({
     mutationKey: ["allOrders"],
     // cacheTime: 600000,
@@ -24,10 +46,12 @@ const AllOrdersPage = () => {
   const onSubmit1 = async function () {
     const result = await m1.mutateAsync();
     allOrders.value = result;
-    console.log(allOrders.value.data.orders);
+    // console.log(allOrders.value.data.orders);
     queryClient.invalidateQueries({ mutationKey: ["allOrders"] });
     queryClient.refetchQueries(["allOrders"]);
   };
+
+
 
   useEffect(() => {
     onSubmit1();
@@ -46,15 +70,15 @@ const AllOrdersPage = () => {
             </tr>
           </thead>
           <tbody>
-            {console.log(allOrders.value.data?.orders)}
-            {/* {allOrders.value.data.orders.map((order) => (
-              <tr key={order.id}>
-                <td>{order.id}</td>
-                <td>${order.totalPrice.toFixed(2)}</td>
-                <td>{order.productName}</td>
-                <td>{order.orderStatus}</td>
-              </tr>
-            ))} */}
+            {allOrders.value.data?.orders &&
+              allOrders.value.data.orders.map((order) => (
+                <tr key={order._id}>
+                  <td>{order._id}</td>
+                  <td>${order.totalPrice.toFixed(2)}</td>
+                  <td>{order.dateOrdered}</td>
+                  <td>{order.status}</td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>
