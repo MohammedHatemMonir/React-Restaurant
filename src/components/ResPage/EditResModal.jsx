@@ -170,7 +170,7 @@ function EditResModal({ openModal, closeModal, resName, resId }) {
                 }`}
                 onClick={handleCategoryInput}
               >
-                {myCategoryBtn.value ? "Add new category" : "Add new category"}
+                {myCategoryBtn.value ? "Edit category" : "Edit category"}
               </Button>
             </div>
             {showCategoryInput.value && (
@@ -180,7 +180,7 @@ function EditResModal({ openModal, closeModal, resName, resId }) {
                   type="text"
                   onChange={handleCategoriesChange}
                   value={newCategory.value}
-                  placeholder="Add new category"
+                  placeholder="Edit category"
                 />
               </Col>
             )}
