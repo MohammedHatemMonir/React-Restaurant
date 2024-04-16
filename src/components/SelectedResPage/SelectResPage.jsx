@@ -19,6 +19,7 @@ import { Link } from "react-router-dom";
 
 export default function SelectResPage() {
   const { resID, resName } = useParams();
+  const userId = useSignal();
   console.log("resID", resID);
 
   const q = useQuery({
@@ -28,12 +29,14 @@ export default function SelectResPage() {
     queryFn: async () => {
       let url = `/getResturantWithMeals/${resID}`;
       const ret = await apiClient.get(url);
-      console.log("Returned Meals", ret);
+      console.log("Returned Mealsssss", ret);
       return ret;
     },
   });
 
   console.log("query data", q.data?.data);
+  userId.value = q.data?.data;
+  // console.log("user idd", userId.value);
 
   return (
     <div className="select-res-page">

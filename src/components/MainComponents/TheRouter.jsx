@@ -23,11 +23,12 @@ import CircleLoader from "../Loaders/CircleLoader";
 import CookingLoader from "./../Loaders/CookingLoader";
 import MapLoader from "./../Loaders/MapLoader";
 import Profile from "./../Profile/Profile";
-import OrdersPage from "./../Orders/OrdersPage";
 import EditProfile from "../Profile/EditProfile";
 import ResetPass from "./../Authentication/ResetPass";
 import RestaurantDashboard from "../Dashboard/RestaurantDashboard";
-import MealsOrdersPage from './../Orders/MealsOrdersPage';
+import MealsOrdersPage from "./../Orders/MealsOrdersPage";
+import AllOrdersPage from "./../Orders/AllOrdersPage";
+import MyOrdersPage from "./../Orders/MyOrdersPage";
 
 export default function TheRouter() {
   const navigate = useNavigate();
@@ -98,7 +99,10 @@ export default function TheRouter() {
             <Route index element={<ResPage />} />
             <Route path="card" element={<Card />}></Route>
             <Route path="dash1" element={<Dashboard1 />}></Route>
-            <Route path="/RestaurantDashboard/:ResID" element={<RestaurantDashboard />}></Route>
+            <Route
+              path="/RestaurantDashboard/:ResID"
+              element={<RestaurantDashboard />}
+            ></Route>
             <Route path="*" element={<h1>Page Not Found</h1>}></Route>
             <Route
               path="/restaurant/:resID/:resName"
@@ -111,9 +115,10 @@ export default function TheRouter() {
             <Route path="/maploader" element={<MapLoader />}></Route>
             <Route path="/profile" element={<Profile />}></Route>
             <Route path="/edit" element={<EditProfile />}></Route>
-            <Route path="/orders" element={<OrdersPage />}></Route>
-            <Route path="/mealsorders" element={<MealsOrdersPage />}></Route>
+            <Route path="/allorders" element={<AllOrdersPage />}></Route>
+            <Route path="/myorders" element={<MyOrdersPage />}></Route>
 
+            <Route path="/mealsorders" element={<MealsOrdersPage />}></Route>
 
             <Route path="/tutorials" element={<Tutorials />}>
               <Route path="Medotest" element={<MedoTest />}></Route>

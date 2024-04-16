@@ -10,7 +10,13 @@ import DineMeLogo from "../../images/DineMeLogo.png";
 import { useSignal } from "@preact/signals-react";
 import CartHandler from "./CartHanlder";
 import { Navbar, Nav, Container, Image } from "react-bootstrap";
-import { FaShoppingCart, FaMapMarkerAlt, FaSearch } from "react-icons/fa";
+import {
+  FaShoppingCart,
+  FaMapMarkerAlt,
+  FaSearch,
+  FaCoffee,
+} from "react-icons/fa";
+import { IoIosListBox } from "react-icons/io";
 export default function NavbarGlobal() {
   const m = useMutation({
     mutationKey: [],
@@ -51,6 +57,14 @@ export default function NavbarGlobal() {
           <Nav className="mr-auto">
             <Link to="map" className="nav-link">
               <FaMapMarkerAlt /> Location
+            </Link>
+            {UserData.value.role == "ADMIN" && (
+              <Link to="allorders" className="nav-link">
+                <IoIosListBox /> All Orders
+              </Link>
+            )}
+            <Link to="myorders" className="nav-link">
+              <FaShoppingCart /> My Orders
             </Link>
             <div>
               <CartHandler />

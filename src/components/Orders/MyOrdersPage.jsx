@@ -1,7 +1,7 @@
 import OrdersData from "./OrdersData.json";
 import EmptyOrders from "./EmptyOrders";
 
-const OrdersTable = () => {
+const MyOrdersPage = () => {
   return (
     <div className="container">
       <h2 className="text-center font-weight-bold my-4">My Orders</h2>
@@ -50,4 +50,4 @@ const OrdersPage = () => {
   return <div>{OrdersData.length > 0 ? <OrdersTable /> : <EmptyOrders />}</div>;
 };
 
-export default OrdersPage;
+export default MyOrdersPage;

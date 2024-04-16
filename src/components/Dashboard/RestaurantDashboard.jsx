@@ -36,7 +36,7 @@ export default function RestaurantDashboard() {
   const onSubmit1 = async function () {
     const result = await m1.mutateAsync();
     allPositiveComments.value = result;
-    queryClient.invalidateQueries({ queryKey: ["allPComments"] });
+    queryClient.invalidateQueries({ mutationKey: ["allPComments"] });
     queryClient.refetchQueries(["allPComments"]);
   };
 
@@ -57,7 +57,7 @@ export default function RestaurantDashboard() {
   const onSubmit2 = async function () {
     const result = await m2.mutateAsync();
     allNegativeComments.value = result;
-    queryClient.invalidateQueries({ queryKey: ["allNaComments"] });
+    queryClient.invalidateQueries({ mutationKey: ["allNaComments"] });
     queryClient.refetchQueries(["allNaComments"]);
   };
 
@@ -78,7 +78,7 @@ export default function RestaurantDashboard() {
   const onSubmit3 = async function () {
     const result = await m3.mutateAsync();
     allNaturalComments.value = result;
-    queryClient.invalidateQueries({ queryKey: ["allNeComments"] });
+    queryClient.invalidateQueries({ mutationKey: ["allNeComments"] });
     queryClient.refetchQueries(["allNeComments"]);
   };
 
@@ -99,7 +99,7 @@ export default function RestaurantDashboard() {
   const onSubmit4 = async function () {
     const result = await m4.mutateAsync();
     allComments.value = result;
-    queryClient.invalidateQueries({ queryKey: ["allComments"] });
+    queryClient.invalidateQueries({ mutationKey: ["allComments"] });
     queryClient.refetchQueries(["allComments"]);
   };
   useEffect(() => {
