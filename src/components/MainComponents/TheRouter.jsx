@@ -27,6 +27,7 @@ import OrdersPage from "./../Orders/OrdersPage";
 import EditProfile from "../Profile/EditProfile";
 import ResetPass from "./../Authentication/ResetPass";
 import RestaurantDashboard from "../Dashboard/RestaurantDashboard";
+import MealsOrdersPage from './../Orders/MealsOrdersPage';
 
 export default function TheRouter() {
   const navigate = useNavigate();
@@ -111,6 +112,8 @@ export default function TheRouter() {
             <Route path="/profile" element={<Profile />}></Route>
             <Route path="/edit" element={<EditProfile />}></Route>
             <Route path="/orders" element={<OrdersPage />}></Route>
+            <Route path="/mealsorders" element={<MealsOrdersPage />}></Route>
+
 
             <Route path="/tutorials" element={<Tutorials />}>
               <Route path="Medotest" element={<MedoTest />}></Route>
