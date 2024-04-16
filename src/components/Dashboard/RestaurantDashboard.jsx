@@ -333,44 +333,43 @@ export default function RestaurantDashboard() {
               </Card.Header>
               <Card.Body>
                 <div className="ct-chart" id="chartHours">
-                  {/* Code Here 1 */}
-                  <AreaChart
-                    width={1000}
-                    height={400}
-                    data={data1}
-                    margin={{
-                      top: 10,
-                      right: 30,
-                      left: 0,
-                      bottom: 0,
-                    }}
-                  >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="name" />
-                    <YAxis />
-                    <Tooltip />
-                    <Area
-                      type="monotone"
-                      dataKey="uv"
-                      stackId="1"
-                      stroke="#8884d8"
-                      fill="#8884d8"
-                    />
-                    <Area
-                      type="monotone"
-                      dataKey="pv"
-                      stackId="1"
-                      stroke="#82ca9d"
-                      fill="#82ca9d"
-                    />
-                    <Area
-                      type="monotone"
-                      dataKey="amt"
-                      stackId="1"
-                      stroke="#ffc658"
-                      fill="#ffc658"
-                    />
-                  </AreaChart>
+                  <ResponsiveContainer width="100%" height={400}>
+                    <AreaChart
+                      data={data1}
+                      margin={{
+                        top: 10,
+                        right: 30,
+                        left: 0,
+                        bottom: 0,
+                      }}
+                    >
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis dataKey="name" />
+                      <YAxis />
+                      <Tooltip />
+                      <Area
+                        type="monotone"
+                        dataKey="uv"
+                        stackId="1"
+                        stroke="#8884d8"
+                        fill="#8884d8"
+                      />
+                      <Area
+                        type="monotone"
+                        dataKey="pv"
+                        stackId="1"
+                        stroke="#82ca9d"
+                        fill="#82ca9d"
+                      />
+                      <Area
+                        type="monotone"
+                        dataKey="amt"
+                        stackId="1"
+                        stroke="#ffc658"
+                        fill="#ffc658"
+                      />
+                    </AreaChart>
+                  </ResponsiveContainer>
                 </div>
               </Card.Body>
               <Card.Footer>
@@ -380,11 +379,6 @@ export default function RestaurantDashboard() {
                   Click <i className="fas fa-circle text-warning"></i>
                   Click Second Time
                 </div>
-                {/* <hr></hr>
-                <div className="stats">
-                  <i className="fas fa-history"></i>
-                  Updated 3 minutes ago
-                </div> */}
               </Card.Footer>
             </Card>
           </Col>
