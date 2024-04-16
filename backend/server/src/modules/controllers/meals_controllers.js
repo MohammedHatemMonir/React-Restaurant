@@ -235,62 +235,8 @@ const createOrder = async (req, res) => {   // {ResId:"",meals:[{id:"",quantity:
   }
 };
 
-const getMyOrders = async (req, res) => {
- 
-  if (!req.session?.user?._id) {
-    return res.status(404).json({ message: "Not authenticated!" });
-  }
-  try {
-    const orders = await Order.find({ user: req.session.user._id }, { _id: 0, resId: 0, meals: 0, __v: 0 });
-    if (!orders || orders.length === 0) {
-      return res.json({ message: "No orders found" });
-    }
 
-    return res.json({ orders });
-  } catch (err) {
-    console.error("Error fetching orders: ", err);
-    return res.status(500).json({ message: "Error fetching orders" });
-  }
-};
 
-// const orderDetails = async (req, res) => {
-//   try {
-//     if (!req.session?.user?._id) {
-//       return res.status(404).json({ message: "Not authenticated!" });
-//     }
-
-//     const { orderId } = req.params;
-//     const order = await Order.findById(orderId)
-//       .populate('user', 'name email') 
-//       .populate({
-//         path: 'meals.id',
-//         select: 'MealName Price MealImg', 
-//         populate: { path: 'ResId', model: 'Restaurant', select: 'ResName' } 
-//       });
-
-//     if (!order) {
-//       return res.status(404).json({ message: "Order not found" });
-//     }
-
-//     const orderDetails = {
-//       _id: order._id,
-//       user: order.user,
-//       totalPrice: order.totalPrice,
-//       meals: order.meals.map(meal => ({
-//         _id: meal.id._id,
-//         MealName: meal.id.MealName,
-//         MealImg: meal.id.MealImg, 
-//         Price: meal.id.Price,
-//         quantity: meal.quantity 
-//       })),
-//     };
-
-//     res.status(200).json({ order: orderDetails });
-//   } catch (err) {
-//     console.error("Error fetching order details: ", err);
-//     res.status(500).json({ message: "Error fetching order details" });
-//   }
-// };
 
 
   module.exports = {
@@ -299,7 +245,5 @@ const getMyOrders = async (req, res) => {
     createOrder,
     GetMealsWithComments,
     updateMeal,
-    deleteMeal,
-    getMyOrders,
-    orderDetails
+    deleteMeal
   };
