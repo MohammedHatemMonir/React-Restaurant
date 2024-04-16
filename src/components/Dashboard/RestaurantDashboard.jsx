@@ -17,6 +17,8 @@ import { useMutation, useQueryClient } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 import { useSignal } from "@preact/signals-react";
 import { useEffect } from "react";
+import { FaCircle } from "react-icons/fa6";
+import { FaRegAngry, FaRegEdit, FaRegMeh, FaRegSmile } from "react-icons/fa";
 // StackedAreaChart Data
 const data1 = [
   {
@@ -236,13 +238,14 @@ export default function RestaurantDashboard() {
                   <Col xs="3" className="text-center">
                     {/* Zoomed in emoji */}
                     <div className="icon-big">
-                      <p style={{ fontSize: "2em" }}>🙂</p>
+                      <p style={{ fontSize: "2em" }}>
+                        <FaRegSmile style={{ color: "green" }} /> {/* 🙂 */}
+                      </p>
                     </div>
                   </Col>
                   <Col xs="9">
                     <div className="numbers">
                       <p className="card-category">Positive Comments</p>
-
                       <Card.Title as="h4">
                         {allPositiveComments.value.data?.lengthOfcomments}
                       </Card.Title>
@@ -261,7 +264,9 @@ export default function RestaurantDashboard() {
                   <Col xs="3" className="text-center">
                     {/* Zoomed in emoji */}
                     <div className="icon-big">
-                      <p style={{ fontSize: "2em" }}>😠</p>
+                      <p style={{ fontSize: "2em" }}>
+                        <FaRegAngry style={{ color: "red" }} /> {/* 😠 */}
+                      </p>
                     </div>
                   </Col>
                   <Col xs="9">
@@ -284,7 +289,9 @@ export default function RestaurantDashboard() {
                   <Col xs="3" className="text-center">
                     {/* Zoomed in emoji */}
                     <div className="icon-big">
-                      <p style={{ fontSize: "2em" }}>😐</p>
+                      <p style={{ fontSize: "2em" }}>
+                        <FaRegMeh style={{ color: "blue" }} /> {/* 😐 */}
+                      </p>
                     </div>
                   </Col>
                   <Col xs="9">
@@ -307,7 +314,9 @@ export default function RestaurantDashboard() {
                   <Col xs="3" className="text-center">
                     {/* Zoomed in emoji */}
                     <div className="icon-big">
-                      <p style={{ fontSize: "2em" }}>📝</p>
+                      <p style={{ fontSize: "2em" }}>
+                        <FaRegEdit style={{ color: "#6610f2" }} /> {/* 📝 */}
+                      </p>
                     </div>
                   </Col>
                   <Col xs="9">
@@ -334,6 +343,7 @@ export default function RestaurantDashboard() {
               <Card.Body>
                 <div className="ct-chart" id="chartHours">
                   <ResponsiveContainer width="100%" height={400}>
+                    {/* Code Here 1 */}
                     <AreaChart
                       data={data1}
                       margin={{
@@ -374,9 +384,9 @@ export default function RestaurantDashboard() {
               </Card.Body>
               <Card.Footer>
                 <div className="legend">
-                  <i className="fas fa-circle text-info"></i>
-                  Open <i className="fas fa-circle text-danger"></i>
-                  Click <i className="fas fa-circle text-warning"></i>
+                  <FaCircle className="text-info" />
+                  Open <FaCircle className="text-danger" />
+                  Click <FaCircle className="text-warning" />
                   Click Second Time
                 </div>
               </Card.Footer>
@@ -385,7 +395,7 @@ export default function RestaurantDashboard() {
           <Col md="4">
             <Card>
               <Card.Header>
-                <Card.Title as="h4">Email Statistics</Card.Title>
+                <Card.Title as="h4">Comments Statistics</Card.Title>
                 <p className="card-category">Last Campaign Performance</p>
               </Card.Header>
               <Card.Body>
@@ -417,11 +427,12 @@ export default function RestaurantDashboard() {
                   </ResponsiveContainer>
                 </div>
                 <div className="legend">
-                  <i className="fas fa-circle text-info text-info"></i>
-                  Positive <i className="fas fa-circle text-success"></i>
-                  Negative <i className="fas fa-circle text-warning"></i>
+                  <FaCircle className="text-info" />
+                  Positive <FaCircle className="text-danger" />
+                  Negative <FaCircle className="text-warning" />
                   Neutral
                 </div>
+
                 {/* <hr></hr>
                 <div className="stats">
                   <i className="far fa-clock"></i>
