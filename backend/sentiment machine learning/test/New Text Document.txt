@@ -1,0 +1,19 @@
+{'anger', 'fear', 'surprise', 'joy', 'love', 'sadness'}
+{0, 1, 2, 3, 4, 5}
+                                                     text label
+0                                 i didnt feel humiliated     0
+1       i can go from feeling so hopeless to so damned...     0
+2        im grabbing a minute to post i feel greedy wrong     3
+3       i am ever feeling nostalgic about the fireplac...     2
+4                                    i am feeling grouchy     3
+...                                                   ...   ...
+436804  that was what i felt when i was finally accept...     1
+436805  i take every day as it comes i m just focussin...     4
+436806      i just suddenly feel that everything was fake     0
+436807  im feeling more eager than ever to claw back w...     1
+436808  i give you plenty of attention even when i fee...     0
+
+[436809 rows x 2 columns]
+436809
+
+0.8235566964964053

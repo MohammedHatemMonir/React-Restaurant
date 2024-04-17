@@ -1,0 +1,3 @@
+Tweet index	Label	Tweet text
+1	1	This,is' a" dont sentence about sentiment analysis.
+2	1	Here's another example sentence.
