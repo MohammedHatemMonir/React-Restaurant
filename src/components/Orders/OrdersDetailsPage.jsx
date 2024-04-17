@@ -19,7 +19,7 @@ const MealsOrdersPage = () => {
       let url = `/getOrderDetails/${orderId}`;
       const result = await apiClient.get(url);
       // console.log("hemaaaa", result);
-      allData.value = result;
+      allData.value = result.data.data;
 
       return result;
     },
@@ -41,8 +41,8 @@ const MealsOrdersPage = () => {
           </thead>
           <tbody>
             {/* console.log(allData.value) */}
-            {/* {q.data &&
-              allData.value.data?.map((order, index) => (
+            {q.data?.data &&
+              allData.value.map((order, index) => (
                 <tr key={index}>
                   <td>{index + 1}</td>
                   <td>{order.ResName}</td>
@@ -58,7 +58,7 @@ const MealsOrdersPage = () => {
                   <td>{order.Quantity}</td>
                   <td>{order.totalPrice.toFixed(2)} $</td>
                 </tr>
-              ))} */}
+              ))}
           </tbody>
         </table>
       </div>

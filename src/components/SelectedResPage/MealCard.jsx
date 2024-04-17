@@ -82,7 +82,7 @@ export default function MealCard({
           rating={rating}
           desc={desc}
           price={price}
-          name={ name}
+          name={name}
         />
         <h3
           style={{

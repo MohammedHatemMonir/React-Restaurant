@@ -26,22 +26,27 @@ const renderCustomizedLabel = ({
     </text>
   );
 };
-export default function ResPieChart(positive, negative, natural, allComments) {
-  console.log("Hema 1234", positive);
+export default function ResPieChart({
+  positive,
+  negative,
+  natural,
+  allComments,
+}) {
+  // console.log("Hema 1234", positive);
   // PieChart Data
   const myValue = 100;
   const data = [
     {
       name: "Positive",
-      value: (positive.positive / positive.allComments) * myValue,
+      value: (positive / allComments) * myValue,
     },
     {
       name: "Negative",
-      value: (positive.negative / positive.allComments) * myValue,
+      value: (negative / allComments) * myValue,
     },
     {
       name: "Neutral",
-      value: (positive.natural / positive.allComments) * myValue,
+      value: (natural / allComments) * myValue,
     },
     // { name: "Group D", value: (200 / 400) * 100 },
   ];
