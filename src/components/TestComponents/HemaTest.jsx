@@ -1,5 +1,4 @@
-import cat1 from "./image/cat-1.png";
-import homeImg from "./image/home-img.png";
+
 
 export default function HemaTest() {
   return (
@@ -178,7 +177,7 @@ export default function HemaTest() {
           </a>
         </div>
         <div className="text-decoration-none image">
-          <img src={homeImg} alt="" className="text-decoration-none home-img" />
+          <img src="image/home-parallax-img.png" alt="" className="text-decoration-none home-img" />
           <img
             src="image/home-parallax-img.png"
             alt=""
@@ -190,7 +189,7 @@ export default function HemaTest() {
       {/* category section starts  */}
       <section className="text-decoration-none category">
         <a href="#" className="text-decoration-none box">
-          <img src={cat1} alt="" />
+          <img src="image/home-parallax-img.png" alt="" />
           <h3>combo</h3>
         </a>
         <a href="#" className="text-decoration-none box">

@@ -10,7 +10,7 @@ import AddRestaurantButton from "./AddRestaurantButton";
 import { UserData } from "../../Globals";
 import CookingLoader from "./../Loaders/CookingLoader";
 import ResCard from "./ResCard";
-import { Link } from "react-router-dom";
+import Parallax from "./Parallax";
 
 export default function ResPage() {
   const q = useQuery({
@@ -37,15 +37,11 @@ export default function ResPage() {
   if (q.data)
     return (
       <>
-        {/* <style
-          type="text/css"
-          dangerouslySetInnerHTML={{
-            __html:
-              ".vue-star-rating-star[data-v-34cbeed1]{display:inline-block}.vue-star-rating-pointer[data-v-34cbeed1]{cursor:pointer}.vue-star-rating[data-v-34cbeed1]{display:flex;align-items:center}.vue-star-rating-inline[data-v-34cbeed1]{display:inline-flex}.vue-star-rating-rating-text[data-v-34cbeed1]{margin-top:7px;margin-left:7px}.vue-star-rating-rtl[data-v-34cbeed1]{direction:rtl}.vue-star-rating-rtl .vue-star-rating-rating-text[data-v-34cbeed1]{margin-right:10px;direction:rtl}",
-          }}
-        /> */}
-        <section className="">
-          <Slider />
+        <section>
+          <Parallax />
+          <div>
+            <Slider />
+          </div>
           <Container style={{ width: "85%" }}>
             {/* Old navbar with search */}
             {/* <div className="bg-danger">

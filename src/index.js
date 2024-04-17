@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.scss";
-import "./Home.scss";
 import App from "./App";
+// import "./index.scss";
+// import "./Home.scss";
 import reportWebVitals from "./reportWebVitals";
 import "./../node_modules/bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/css/bootstrap.min.css";
