@@ -9,17 +9,19 @@ export default function SignalPrototype() {
 
   return (
     <>
-    <Container>
-      <Button
-      variant="primary"
-      style={{backgroundColor: "blue", margin: "10px"}}
-        onClick={() => {
-          test.value++;
-          setNumber(number + 1);
-        }}
-      >IncreaseSignal</Button>
-      
-      number: {test.value}
-      </Container>    </>
+      <Container>
+        <Button
+          variant="primary"
+          style={{ backgroundColor: "blue", margin: "10px" }}
+          onClick={() => {
+            test.value++;
+            setNumber(number + 1);
+          }}
+        >
+          IncreaseSignal
+        </Button>
+        number: {test.value}
+      </Container>
+    </>
   );
 }
