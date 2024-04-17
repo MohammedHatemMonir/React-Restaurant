@@ -47,8 +47,8 @@ const AllOrdersPage = () => {
 
     if (diffDays === 0) {
       return "Ordered Today";
-    } else if (diffDays === 1) {
-      return "1 day ago";
+    } else if (diffDays >= 1 && diffDays <= 9) {
+      return `${diffDays} day ago`;
     } else {
       return `${diffDays} days ago`;
     }
