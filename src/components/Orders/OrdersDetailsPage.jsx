@@ -19,11 +19,15 @@ const MealsOrdersPage = () => {
       let url = `/getOrderDetails/${orderId}`;
       const result = await apiClient.get(url);
       // console.log("hemaaaa", result);
-      allData.value = result.data.data;
 
       return result;
     },
   });
+
+  console.log("query data", q.data?.data);
+  if (q.isLoading) {
+    return <>Loading</>;
+  }
   return (
     <div className="container">
       <h2 className="text-center font-weight-bold my-4">Order Details</h2>
@@ -40,25 +44,23 @@ const MealsOrdersPage = () => {
             </tr>
           </thead>
           <tbody>
-            {/* console.log(allData.value) */}
-            {q.data?.data &&
-              allData.value.map((order, index) => (
-                <tr key={index}>
-                  <td>{index + 1}</td>
-                  <td>{order.ResName}</td>
-                  <td>{order.MealName}</td>
-                  <td>
-                    <img
-                      src={order.MealImg}
-                      alt="Meal"
-                      className="img-thumbnail"
-                      style={{ maxWidth: "100px", maxHeight: "100px" }}
-                    />
-                  </td>
-                  <td>{order.Quantity}</td>
-                  <td>{order.totalPrice.toFixed(2)} $</td>
-                </tr>
-              ))}
+            {!q.isLoading && (
+              <tr>
+                <td>{1}</td>
+                <td>{q.data?.data?.ResName}</td>
+                <td>{q.data?.data?.MealName}</td>
+                <td>
+                  <img
+                    src={q.data?.data?.MealImg}
+                    alt="Meal"
+                    className="img-thumbnail"
+                    style={{ maxWidth: "100px", maxHeight: "100px" }}
+                  />
+                </td>
+                <td>{q.data?.data?.Quantity[0]}</td>
+                <td>{q.data?.data?.totalPrice.toFixed(2)} $</td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
