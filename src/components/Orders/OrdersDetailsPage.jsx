@@ -3,7 +3,6 @@ import EmptyOrders from "./EmptyOrdersPage";
 import { useQueryClient, useQuery, useMutation } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 import { useSignal } from "@preact/signals-react";
-import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 const MealsOrdersPage = () => {
   const allData = useSignal([]);
@@ -11,34 +10,20 @@ const MealsOrdersPage = () => {
   const { orderId } = useParams();
   // console.log("orderId", orderId); worked
   // Get Order Details
-  const m1 = useMutation({
-    mutationKey: ["orderDetails"],
+  const q = useQuery({
+    queryKey: ["orderDetails"],
     // cacheTime: 600000,
     // onSuccess: onSuccess,
     // onError: onError,
-    mutationFn: async (params) => {
-      // console.log("trying to load");
+    queryFn: async () => {
       let url = `/getOrderDetails/${orderId}`;
-      // console.log("posting to ", url);
-      return await apiClient.get(url, params);
+      const result = await apiClient.get(url);
+      // console.log("hemaaaa", result);
+      allData.value = result;
+
+      return result;
     },
   });
-
-  const onSubmit1 = async function () {
-    const result = await m1.mutateAsync();
-    allData.value = result.data;
-    // console.log(allOrders.value.data.orders);
-    queryClient.invalidateQueries({ mutationKey: ["orderDetails"] });
-    queryClient.refetchQueries(["orderDetails"]);
-  };
-
-  useEffect(() => {
-    onSubmit1();
-  }, []);
-
-
-
-  
   return (
     <div className="container">
       <h2 className="text-center font-weight-bold my-4">Order Details</h2>
@@ -55,10 +40,9 @@ const MealsOrdersPage = () => {
             </tr>
           </thead>
           <tbody>
-            {/* {m1.data && console.log(allData.value.ResName)} */}
-{/* 
-            {m1.status = "success" &&
-              allData.value.map((order, index) => (
+            {/* console.log(allData.value) */}
+            {/* {q.data &&
+              allData.value.data?.map((order, index) => (
                 <tr key={index}>
                   <td>{index + 1}</td>
                   <td>{order.ResName}</td>
@@ -72,7 +56,7 @@ const MealsOrdersPage = () => {
                     />
                   </td>
                   <td>{order.Quantity}</td>
-                  <td>${order.totalPrice.toFixed(2)}</td>
+                  <td>{order.totalPrice.toFixed(2)} $</td>
                 </tr>
               ))} */}
           </tbody>
