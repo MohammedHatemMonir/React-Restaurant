@@ -18,35 +18,6 @@ export default function MealCard({
   resName,
   MealComments,
 }) {
-  function AddToCart() {
-    if (Cart.value.ResId != resID) {
-      console.log("ID NOT EQUAL");
-      Cart.value.ResId = resID;
-      Cart.value.ResName = resName;
-      Cart.value.meals = [];
-    }
-    let tempCart = Cart.value;
-
-    if (
-      !tempCart.meals.some((meal) =>
-        meal.id == id ? (meal.quantity += 1) : false
-      )
-    ) {
-      console.log("meal not found");
-      tempCart.meals.push({
-        id: id,
-        name: name,
-        mealImg: mealImg,
-        rating: rating,
-        desc: desc,
-        price: price,
-        quantity: 1,
-      });
-    }
-    Cart.value = {};
-    Cart.value = tempCart;
-    console.log("Cart", Cart.value, "temp cart", tempCart);
-  }
   const displayModal = useSignal(false);
   function handleClose() {
     displayModal.value = false;
@@ -57,14 +28,10 @@ export default function MealCard({
   const showEditModal = useSignal(false);
 
   // Handle open and close popup modals
-  function onOpenDel(e) {
-    // e.stopPropagation();
-    e.preventDefault();
+  function onOpenDel() {
     showDelModal.value = true;
   }
-  function onOpenEdit(e) {
-    // e.stopPropagation();
-    e.preventDefault();
+  function onOpenEdit() {
     showEditModal.value = true;
   }
 
@@ -78,16 +45,13 @@ export default function MealCard({
   return (
     <div
       style={{
-        backgroundColor: "#fff",
-        boxShadow:
-          "0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)",
+        backgroundColor: "#ffffff",
         borderRadius: "0.5rem",
+        boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
         overflow: "hidden",
         margin: "0.75rem 0",
         cursor: "pointer",
-        transition: "background-color 0.3s",
       }}
-      className="meal-card"
     >
       {/* Meal Img */}
       <img
@@ -113,6 +77,12 @@ export default function MealCard({
           mealImg={mealImg}
           mealPrice={price}
           MealComments={MealComments}
+          resID={resID}
+          resName={resName}
+          rating={rating}
+          desc={desc}
+          price={price}
+          name={ name}
         />
         <h3
           style={{
@@ -153,7 +123,7 @@ export default function MealCard({
             >
               <div className="font-weight-bold">
                 <span className="text-danger"> {price}</span>
-                <span className="text-dark"> EGP</span>
+                <span className="text-dark"> $</span>
               </div>
             </p>
           </div>
@@ -167,7 +137,7 @@ export default function MealCard({
           >
             <Stars stars1={rating} />
           </div>
-          <button
+          {/* <button
             style={{
               backgroundColor: "#e32207",
               color: "#fff",
@@ -181,12 +151,11 @@ export default function MealCard({
             className="btn meal-card__button"
           >
             Buy
-          </button>
+          </button> */}
         </div>
         {UserData.value.role == "ADMIN" && (
           <div className="position-relative">
             <div
-              className=""
               style={{
                 display: "flex",
                 justifyContent: "space-between",

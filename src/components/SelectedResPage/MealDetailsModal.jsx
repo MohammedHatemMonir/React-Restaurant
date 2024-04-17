@@ -5,7 +5,7 @@ import ReviewsCard from "../Reviews/ReviewsCard";
 import { useMutation } from "react-query";
 import { useSignal } from "@preact/signals-react";
 import { apiClient } from "../../Data/apiclient";
-
+import { Cart } from "../../Globals";
 function MealDetailsModal({
   id,
   openModal,
@@ -15,6 +15,12 @@ function MealDetailsModal({
   mealImg,
   mealPrice,
   MealComments,
+  resID,
+  resName,
+  rating,
+  desc,
+  price,
+  name,
 }) {
   const m = useMutation({
     mutationKey: [],
@@ -89,6 +95,37 @@ function MealDetailsModal({
     );
   }
 
+  // AddToCart Function
+  function AddToCart() {
+    if (Cart.value.ResId != resID) {
+      console.log("ID NOT EQUAL");
+      Cart.value.ResId = resID;
+      Cart.value.ResName = resName;
+      Cart.value.meals = [];
+    }
+    let tempCart = Cart.value;
+
+    if (
+      !tempCart.meals.some((meal) =>
+        meal.id == id ? (meal.quantity += 1) : false
+      )
+    ) {
+      console.log("meal not found");
+      tempCart.meals.push({
+        id: id,
+        name: name,
+        mealImg: mealImg,
+        rating: rating,
+        desc: desc,
+        price: price,
+        quantity: 1,
+      });
+    }
+    Cart.value = {};
+    Cart.value = tempCart;
+    console.log("Cart", Cart.value, "temp cart", tempCart);
+  }
+
   return (
     <Modal
       show={openModal}
@@ -155,7 +192,7 @@ function MealDetailsModal({
                     </label>
                     <div className="price pull-right font-weight-bold">
                       <span className="cost text-danger"> {mealPrice}</span>
-                      <span className="currency"> EGP</span>
+                      <span className="currency"> $</span>
                     </div>
                   </li>
                 </ul>
@@ -177,6 +214,14 @@ function MealDetailsModal({
         />
       </Modal.Body>
       <Modal.Footer>
+        <Button
+          onClick={() => {
+            AddToCart();
+            closeModal();
+          }}
+        >
+          Buy
+        </Button>
         <Button onClick={closeModal}>Close</Button>
       </Modal.Footer>
     </Modal>
