@@ -32,7 +32,6 @@ export default function ResPieChart({
   natural,
   allComments,
 }) {
-  // console.log("Hema 1234", positive);
   // PieChart Data
   const myValue = 100;
   const data = [
@@ -48,9 +47,8 @@ export default function ResPieChart({
       name: "Neutral",
       value: (natural / allComments) * myValue,
     },
-    // { name: "Group D", value: (200 / 400) * 100 },
   ];
-  // , "#FF8042"
+
   const COLORS = ["#0088FE", "#00C49F", "#FFBB28"];
 
   return (
