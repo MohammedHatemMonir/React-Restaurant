@@ -1,37 +1,29 @@
 import OrdersData from "./OrdersData.json";
 import EmptyOrders from "./EmptyOrdersPage";
-import { useQueryClient, useMutation } from "react-query";
+import { useQueryClient, useQuery } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 import { useSignal } from "@preact/signals-react";
-import { useEffect } from "react";
-import { Link } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 
 const AllOrdersPage = () => {
-  const allOrders = useSignal([]);
+  const myOrders = useSignal([]);
   const queryClient = useQueryClient();
 
   // Get All Orders
-  const m1 = useMutation({
-    mutationKey: ["allOrders"],
+  const q = useQuery({
+    queryKey: ["allOrders"],
     // cacheTime: 600000,
     // onSuccess: onSuccess,
     // onError: onError,
-    mutationFn: async (params) => {
-      // console.log("trying to load");
+    queryFn: async () => {
       let url = `/getOrder`;
-      // console.log("posting to ", url);
-      return await apiClient.get(url, params);
+      const result = await apiClient.get(url);
+      console.log("hemaaaa", result);
+      myOrders.value = result;
+      return result;
     },
   });
-
-  const onSubmit1 = async function () {
-    const result = await m1.mutateAsync();
-    allOrders.value = result;
-    // console.log(allOrders.value.data.orders);
-    queryClient.invalidateQueries({ mutationKey: ["allOrders"] });
-    queryClient.refetchQueries(["allOrders"]);
-  };
+  // console.log("query data", q.data?.data);
 
   // Convert date to 1 day ago etc...
   function timeAgo(dateString) {
@@ -47,9 +39,6 @@ const AllOrdersPage = () => {
     }
   }
 
-  useEffect(() => {
-    onSubmit1();
-  }, []);
   return (
     <div className="container">
       <h2 className="text-center font-weight-bold my-4">My Orders</h2>
@@ -64,9 +53,13 @@ const AllOrdersPage = () => {
             </tr>
           </thead>
           <tbody>
-            {allOrders.value.data?.orders &&
-              allOrders.value.data.orders.map((order, index) => (
-                <LinkContainer to={`/mealdetails/${order._id}`} key={order._id} style={{ cursor: "pointer" }}>
+            {myOrders.value.data?.orders &&
+              myOrders.value.data.orders.map((order, index) => (
+                <LinkContainer
+                  to={`/mealdetails/${order._id}`}
+                  key={order._id}
+                  style={{ cursor: "pointer" }}
+                >
                   <tr style={{ cursor: "pointer" }}>
                     <td>{index + 1}</td>
                     <td>{order.totalPrice.toFixed(2)} $</td>

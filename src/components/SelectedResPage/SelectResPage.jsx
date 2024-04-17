@@ -19,7 +19,6 @@ import { Link } from "react-router-dom";
 
 export default function SelectResPage() {
   const { resID, resName } = useParams();
-  const userId = useSignal();
   console.log("resID", resID);
 
   const q = useQuery({
@@ -35,8 +34,6 @@ export default function SelectResPage() {
   });
 
   console.log("query data", q.data?.data);
-  userId.value = q.data?.data;
-  // console.log("user idd", userId.value);
 
   return (
     <div className="select-res-page">
