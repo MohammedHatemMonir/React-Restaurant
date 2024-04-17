@@ -102,6 +102,7 @@ export default function RestaurantDashboard() {
     queryClient.invalidateQueries({ mutationKey: ["allComments"] });
     queryClient.refetchQueries(["allComments"]);
   };
+
   useEffect(() => {
     onSubmit1();
     onSubmit2();
@@ -112,7 +113,32 @@ export default function RestaurantDashboard() {
   // // onSubmit("positiveComments")
   // // onSubmit("negativeComments")
   // // onSubmit("neutralComments")
+  // PieChart Data
 
+  const myValue = 100;
+  const data = [
+    {
+      name: "Positive",
+      value:
+        (allPositiveComments.value.data?.lengthOfcomments /
+          allComments.value.data?.lengthOfcomments) *
+        myValue,
+    },
+    {
+      name: "Negative",
+      value:
+        (allNegativeComments.value.data?.lengthOfcomments /
+          allComments.value.data?.lengthOfcomments) *
+        myValue,
+    },
+    {
+      name: "Neutral",
+      value:
+        (allNaturalComments.value.data?.lengthOfcomments /
+          allComments.value.data?.lengthOfcomments) *
+        myValue,
+    },
+  ];
   return (
     <Container fluid>
       <Row>
@@ -254,6 +280,7 @@ export default function RestaurantDashboard() {
                 negative={allNegativeComments.value.data?.lengthOfcomments}
                 natural={allNaturalComments.value.data?.lengthOfcomments}
                 allComments={allComments.value.data?.lengthOfcomments}
+                data={data}
               />
             </Card.Body>
           </Card>

@@ -26,30 +26,11 @@ const renderCustomizedLabel = ({
     </text>
   );
 };
-export default function ResPieChart({
-  positive,
-  negative,
-  natural,
-  allComments,
-}) {
-  // PieChart Data
-  const myValue = 100;
-  const data = [
-    {
-      name: "Positive",
-      value: (positive / allComments) * myValue,
-    },
-    {
-      name: "Negative",
-      value: (negative / allComments) * myValue,
-    },
-    {
-      name: "Neutral",
-      value: (natural / allComments) * myValue,
-    },
-  ];
+const COLORS = ["#0088FE", "#00C49F", "#FFBB28"];
 
-  const COLORS = ["#0088FE", "#00C49F", "#FFBB28"];
+
+export default function ResPieChart({ data }) {
+
 
   return (
     <>

@@ -19,7 +19,6 @@ const MealsOrdersPage = () => {
       let url = `/getOrderDetails/${orderId}`;
       const result = await apiClient.get(url);
       // console.log("hemaaaa", result);
-
       return result;
     },
   });
