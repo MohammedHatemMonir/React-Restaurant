@@ -58,11 +58,11 @@ export default function NavbarGlobal() {
             <Link to="map" className="nav-link">
               <FaMapMarkerAlt /> Location
             </Link>
-            {UserData.value.role == "ADMIN" && (
+            {/* {UserData.value.role == "ADMIN" && (
               <Link to="allorders" className="nav-link">
                 <IoIosListBox /> All Orders
               </Link>
-            )}
+            )} */}
             <Link to="myorders" className="nav-link">
               <FaShoppingCart /> My Orders
             </Link>

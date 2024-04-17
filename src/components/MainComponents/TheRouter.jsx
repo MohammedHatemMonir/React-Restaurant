@@ -26,8 +26,8 @@ import Profile from "./../Profile/Profile";
 import EditProfile from "../Profile/EditProfile";
 import ResetPass from "./../Authentication/ResetPass";
 import RestaurantDashboard from "../Dashboard/RestaurantDashboard";
-import MealsOrdersPage from "./../Orders/MealsOrdersPage";
-import AllOrdersPage from "./../Orders/AllOrdersPage";
+import MealsOrdersPage from "../Orders/OrdersDetailsPage";
+import AllOrdersPage from "../Orders/MyOrdersPage";
 import MyOrdersPage from "./../Orders/MyOrdersPage";
 
 export default function TheRouter() {
@@ -117,6 +117,7 @@ export default function TheRouter() {
             <Route path="/edit" element={<EditProfile />}></Route>
             <Route path="/allorders" element={<AllOrdersPage />}></Route>
             <Route path="/myorders" element={<MyOrdersPage />}></Route>
+            <Route path="/mealdetails/:orderId" element={<MealsOrdersPage />}></Route>
 
             <Route path="/mealsorders" element={<MealsOrdersPage />}></Route>
 
