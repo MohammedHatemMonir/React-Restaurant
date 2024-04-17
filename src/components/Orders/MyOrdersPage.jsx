@@ -29,11 +29,26 @@ const AllOrdersPage = () => {
   function timeAgo(dateString) {
     const date = new Date(dateString);
     const now = new Date();
-    const diffTime = Math.abs(now - date);
+
+    // Set both dates to the start of the day (midnight)
+    const startOfToday = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate()
+    );
+    const startOfDate = new Date(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate()
+    );
+
+    const diffTime = Math.abs(startOfToday - startOfDate);
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-    if (diffDays >= 1 && diffDays <= 9) {
-      return `${diffDays} day ago`;
+    if (diffDays === 0) {
+      return "Ordered Today";
+    } else if (diffDays === 1) {
+      return "1 day ago";
     } else {
       return `${diffDays} days ago`;
     }
