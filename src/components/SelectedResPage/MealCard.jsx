@@ -23,7 +23,7 @@ export default function MealCard({
     displayModal.value = false;
   }
 
-  // Hema Here
+  // Hema Popup Modals Here
   const showDelModal = useSignal(false);
   const showEditModal = useSignal(false);
 
@@ -31,13 +31,15 @@ export default function MealCard({
   function onOpenDel() {
     showDelModal.value = true;
   }
-  function onOpenEdit() {
-    showEditModal.value = true;
-  }
 
   function onCloseDel() {
     showDelModal.value = false;
   }
+
+  function onOpenEdit() {
+    showEditModal.value = true;
+  }
+
   function onCloseEdit() {
     showEditModal.value = false;
   }

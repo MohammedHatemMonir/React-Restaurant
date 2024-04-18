@@ -15,6 +15,7 @@ import {
   FaMapMarkerAlt,
   FaSearch,
   FaCoffee,
+  FaClipboardList,
 } from "react-icons/fa";
 import { IoIosListBox } from "react-icons/io";
 export default function NavbarGlobal() {
@@ -64,11 +65,14 @@ export default function NavbarGlobal() {
               </Link>
             )} */}
             <Link to="myorders" className="nav-link">
-              <FaShoppingCart /> My Orders
+              <FaClipboardList /> My Orders
             </Link>
-            <div>
+            <Link to="mycart" className="nav-link">
+              <FaShoppingCart /> My Cart
+            </Link>
+            {/* <div>
               <CartHandler />
-            </div>
+            </div> */}
           </Nav>
 
           <Nav className="ml-auto">

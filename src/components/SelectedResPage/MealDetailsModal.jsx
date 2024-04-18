@@ -220,7 +220,7 @@ function MealDetailsModal({
             closeModal();
           }}
         >
-          Buy
+          Add To Cart
         </Button>
         <Button onClick={closeModal}>Close</Button>
       </Modal.Footer>

@@ -11,6 +11,7 @@ import CookingLoader from "./../Loaders/CookingLoader";
 import ResCard from "./ResCard";
 import Parallax from "./Parallax";
 import { Col } from "react-bootstrap";
+import CartBody from "../Navbar/CartBody";
 
 export default function ResPage() {
   const q = useQuery({
@@ -48,7 +49,7 @@ export default function ResPage() {
           {!q.isLoading &&
             Array.isArray(q.data?.data) &&
             q.data.data.map((data, index) => (
-              <Col sm={12} md={4} key={index} className="">
+              <Col sm={12} md={4} key={index} className="m-0">
                 <ResCard
                   id={data._id}
                   name={data.ResName}

@@ -29,6 +29,7 @@ import RestaurantDashboard from "../Dashboard/RestaurantDashboard";
 import MealsOrdersPage from "../Orders/OrdersDetailsPage";
 import AllOrdersPage from "../Orders/MyOrdersPage";
 import MyOrdersPage from "./../Orders/MyOrdersPage";
+import CartBody from "../Navbar/CartBody";
 
 export default function TheRouter() {
   const navigate = useNavigate();
@@ -117,7 +118,11 @@ export default function TheRouter() {
             <Route path="/edit" element={<EditProfile />}></Route>
             <Route path="/allorders" element={<AllOrdersPage />}></Route>
             <Route path="/myorders" element={<MyOrdersPage />}></Route>
-            <Route path="/mealdetails/:orderId" element={<MealsOrdersPage />}></Route>
+            <Route
+              path="/mealdetails/:orderId"
+              element={<MealsOrdersPage />}
+            ></Route>
+            <Route path="/mycart" element={<CartBody />}></Route>
 
             <Route path="/mealsorders" element={<MealsOrdersPage />}></Route>
 

@@ -1,0 +1,152 @@
+$green: #27ae60;
+$black: #130f40;
+$white: #fff;
+$light-color: #666;
+$light-bg: #f7f7f7;
+$border: 1px solid rgba(0, 0, 0, 0.2);
+$box-shadow: 0 16px 16px rgba(0, 0, 0, 0.05);
+
+@mixin grid($val) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax($val, 1fr));
+  gap: 1.5rem;
+}
+
+.shopping-cart-container {
+  position: fixed;
+  // top: 8.5rem;
+  top: 1.5rem;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  // height: calc(100vh - 8.5rem);
+  height: calc(100vh);
+  background: $white;
+  overflow-y: scroll;
+  padding-bottom: 8rem;
+  // display: none;
+
+  &.active {
+    display: block;
+  }
+
+  &::-webkit-scrollbar {
+    width: 1rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $white;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $black;
+    border-radius: 5rem;
+  }
+
+  .title {
+    font-size: 2.5rem;
+    padding: 1rem;
+    color: $black;
+    border-bottom: $border;
+    text-align: center;
+  }
+
+  .products-container {
+    border: $border;
+    border-radius: 0.5rem;
+    animation: fadeUp 0.4s linear;
+
+    .box-container {
+      @include grid(30rem);
+      padding: 1.5rem;
+
+      .box {
+        border-radius: 0.5rem;
+        background: $light-bg;
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 2rem;
+        position: relative;
+
+        .fa-times {
+          position: absolute;
+          top: 0.7rem;
+          right: 1rem;
+          font-size: 2rem;
+          cursor: pointer;
+          color: $black;
+
+          &:hover {
+            color: $green;
+          }
+        }
+
+        img {
+          height: 8rem;
+        }
+
+        .content {
+          h3 {
+            font-size: 2rem;
+            color: $black;
+          }
+
+          span {
+            font-size: 1.5rem;
+            color: $light-color;
+
+            &.price {
+              color: $green;
+              font-size: 1.7rem;
+            }
+          }
+
+          input {
+            width: 8rem;
+            padding: 0.5rem 1.2rem;
+            font-size: 1.5rem;
+            color: $black;
+            margin: 0.7rem 0;
+          }
+        }
+      }
+    }
+  }
+
+  .cart-total {
+    margin-top: 2rem;
+    border: $border;
+    border-radius: 0.5rem;
+    animation: fadeUp 0.4s linear 0.4s backwards;
+
+    .btn {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.7rem 1.8rem;
+      font-size: 1.7rem;
+      cursor: pointer;
+      color: $white;
+      background: $green;
+      border-radius: 0.5rem;
+
+      &:hover {
+        background: $black;
+      }
+    }
+
+    .box {
+      padding: 1.5rem;
+
+      h3 {
+        color: $black;
+        font-size: 2rem;
+        padding-bottom: 0.7rem;
+
+        span {
+          color: $green;
+        }
+      }
+    }
+  }
+}
