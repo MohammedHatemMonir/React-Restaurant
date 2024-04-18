@@ -54,7 +54,7 @@ const NavWithSlider = () => {
         className="text-center font-weight-bold"
         style={{ paddingBottom: "70px" }}
       >
-        Our Top Dishes
+        Our Top Meals
       </h1>
       <div className="my-slider">
         <div className={`slider ${direction}`}>

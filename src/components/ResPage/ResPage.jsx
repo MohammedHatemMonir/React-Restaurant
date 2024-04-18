@@ -1,16 +1,16 @@
 import "./ResPageBox.scss";
-import "./ResPage.scss";
 import Slider from "./Slider";
 import Footer from "./Footer";
 import { useQuery } from "react-query";
 import { apiClient } from "../../Data/apiclient";
-import { Container } from "reactstrap";
+import { Container, Row } from "reactstrap";
 import Filters from "./Filters";
 import AddRestaurantButton from "./AddRestaurantButton";
 import { UserData } from "../../Globals";
 import CookingLoader from "./../Loaders/CookingLoader";
 import ResCard from "./ResCard";
 import Parallax from "./Parallax";
+import { Col } from "react-bootstrap";
 
 export default function ResPage() {
   const q = useQuery({
@@ -36,78 +36,31 @@ export default function ResPage() {
 
   if (q.data)
     return (
-      <>
-        <section>
-          <div style={{ transform: "scale(0.90)" }}></div>
-          <Parallax />
-          <Slider />
-          <div style={{ transform: "scale(0.90)" }}>
-            <Filters />
-          </div>
-          <Container style={{ width: "85%" }}>
-            {/* Old navbar with search */}
-            {/* <div className="bg-danger">
-          <Header />
-        </div> */}
-          </Container>
-          {/* NavBar & Loader*/}
-          {/* <MainCards /> */}
-          <div className="mt-5 ">
-            <div id="app" className="">
-              <div id="page-content" className="page-content">
-                <div className="container ">
-                  {UserData.value.role == "ADMIN" && (
-                    <div>
-                      <AddRestaurantButton />
-                    </div>
-                  )}
+      <section>
+        <Parallax />
+        <Slider />
+        <Filters />
+        <Container>
+          {UserData.value.role == "ADMIN" && <AddRestaurantButton />}
+        </Container>
+        {/* ResCards */}
+        <Row>
+          {!q.isLoading &&
+            Array.isArray(q.data?.data) &&
+            q.data.data.map((data, index) => (
+              <Col sm={12} md={4} key={index}>
+                <ResCard
+                  id={data._id}
+                  name={data.ResName}
+                  ResImg={data.ResImg}
+                  MealImg={data.MealImg}
+                  stars1={data.rating}
+                />
+              </Col>
+            ))}
+        </Row>
 
-                  {/* select-res-page */}
-                  {/* row */}
-                  <div className="select-res-page">
-                    {/* col-xs-16 */}
-                    <div className="">
-                      <h2 className="inline-block my-4">
-                        Restaurants
-                        <p style={{ display: "inline", fontSize: "17px" }}>
-                          ( 1074 )
-                        </p>
-                      </h2>
-                    </div>
-                    <div
-                    // id="rest-list-col"
-                    // col-sm-13 col-xs-16
-                    // className="delivery-rest-list "
-                    >
-                      <div className="row">
-                        <div className="col-sm-12 col-md-2"></div>
-                        {/* ResCards */}
-                        <div className="col-sm-12 col-md-10">
-                          <div className="row">
-                            {!q.isLoading &&
-                              Array.isArray(q.data?.data) &&
-                              q.data.data.map((data, index) => (
-                                <div className="col-md-6" key={index}>
-                                  <ResCard
-                                    id={data._id}
-                                    name={data.ResName}
-                                    ResImg={data.ResImg}
-                                    MealImg={data.MealImg}
-                                    start1={data.rating}
-                                  />
-                                </div>
-                              ))}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <Footer />
-        </section>
-      </>
+        <Footer />
+      </section>
     );
 }
