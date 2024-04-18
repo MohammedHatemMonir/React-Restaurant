@@ -18,8 +18,10 @@ const AllOrdersPage = () => {
     queryFn: async () => {
       let url = `/getOrder`;
       const result = await apiClient.get(url);
-      console.log("hemaaaa", result);
+      // console.log("hemaaaa", result);
       myOrders.value = result;
+      queryClient.invalidateQueries({ queryFn: ["allOrders"] });
+      queryClient.refetchQueries(["allOrders"]);
       return result;
     },
   });
