@@ -18,31 +18,10 @@ $light-bg: #f7f7f7;
 $border: 1px solid rgba(0, 0, 0, 0.2);
 $box-shadow: 0 16px 16px rgba(0, 0, 0, 0.05);
 
-@mixin grid($val) {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax($val, 1fr));
-  gap: 1.5rem;
-}
-
 @mixin font($size) {
   font-family: "Satisfy", cursive;
   font-size: $size;
   color: $green;
-}
-
-.btn {
-  display: inline-block;
-  margin-top: 1rem;
-  padding: 0.7rem 1.8rem;
-  font-size: 1.7rem;
-  cursor: pointer;
-  color: $white;
-  background: $green;
-  border-radius: 0.5rem;
-
-  &:hover {
-    background: $black;
-  }
 }
 
 .home {
@@ -144,20 +123,7 @@ $box-shadow: 0 16px 16px rgba(0, 0, 0, 0.05);
     width: 100%;
   }
 }
-.btn {
-  display: inline-block;
-  margin-top: 1rem;
-  padding: 0.7rem 1.8rem;
-  font-size: 1.7rem;
-  cursor: pointer;
-  color: $white;
-  background: $green;
-  border-radius: 0.5rem;
 
-  &:hover {
-    background: $black;
-  }
-}
 @media (max-width: 450px) {
   html {
     font-size: 40%;

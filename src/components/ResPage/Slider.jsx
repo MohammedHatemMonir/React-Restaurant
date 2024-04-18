@@ -49,46 +49,54 @@ const NavWithSlider = () => {
   };
 
   return (
-    <div className="my-slider">
-      <div className={`slider ${direction}`}>
-        <div className="list">
-          {sliderItems.map((item, index) => (
-            <div
-              key={index}
-              className={`item ${index === activeIndex ? "active" : ""}`}
-            >
-              <img src={item.src} alt={`Slider ${index + 1}`} />
-              <div className="content">
-                <p style={{ fontSize: "70px", fontWeight: "bold" }}>
-                  Slider {index + 1}
-                </p>
-                <h4 style={{marginTop:"-30px"}}>{item.description}</h4>
+    <>
+      <h1
+        className="text-center font-weight-bold"
+        style={{ paddingBottom: "70px" }}
+      >
+        Our Top Dishes
+      </h1>
+      <div className="my-slider">
+        <div className={`slider ${direction}`}>
+          <div className="list">
+            {sliderItems.map((item, index) => (
+              <div
+                key={index}
+                className={`item ${index === activeIndex ? "active" : ""}`}
+              >
+                <img src={item.src} alt={`Slider ${index + 1}`} />
+                <div className="content">
+                  <p style={{ fontSize: "70px", fontWeight: "bold" }}>
+                    Slider {index + 1}
+                  </p>
+                  <h4 style={{ marginTop: "-30px" }}>{item.description}</h4>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
-        <div className="arrows">
-          <button id="prev" onClick={handlePrev}>
-            &lt;
-          </button>
-          <button id="next" onClick={handleNext}>
-            &gt;
-          </button>
-        </div>
-        <div className="thumbnail">
-          {sliderItems.map((item, index) => (
-            <div
-              key={index}
-              className={`item ${index === activeIndex ? "active" : ""}`}
-              onClick={() => handleThumbnailClick(index)}
-            >
-              <img src={item.src} alt={`Thumbnail ${index + 1}`} />
-              <div className="content">{`Slider ${index + 1}`}</div>
-            </div>
-          ))}
+            ))}
+          </div>
+          <div className="arrows">
+            <button id="prev" onClick={handlePrev}>
+              &lt;
+            </button>
+            <button id="next" onClick={handleNext}>
+              &gt;
+            </button>
+          </div>
+          <div className="thumbnail">
+            {sliderItems.map((item, index) => (
+              <div
+                key={index}
+                className={`item ${index === activeIndex ? "active" : ""}`}
+                onClick={() => handleThumbnailClick(index)}
+              >
+                <img src={item.src} alt={`Thumbnail ${index + 1}`} />
+                <div className="content">{`Slider ${index + 1}`}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

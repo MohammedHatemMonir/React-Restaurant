@@ -1,5 +1,3 @@
-
-
 export default function HemaTest() {
   return (
     <div className="text-decoration-none main1 text-decoration-none">
@@ -128,41 +126,6 @@ export default function HemaTest() {
           </div>
         </div>
       </section>
-      {/* login-form  */}
-      <div className="text-decoration-none login-form-container">
-        <form action="">
-          <h3>login form</h3>
-          <input
-            type="email"
-            name=""
-            placeholder="enter your email"
-            id=""
-            className="text-decoration-none box"
-          />
-          <input
-            type="password"
-            name=""
-            placeholder="enter your password"
-            id=""
-            className="text-decoration-none box"
-          />
-          <div className="text-decoration-none remember">
-            <input type="checkbox" name="" id="remember-me" />
-            <label htmlFor="remember-me">remember me</label>
-          </div>
-          <input
-            type="submit"
-            defaultValue="login now"
-            className="text-decoration-none btn"
-          />
-          <p>
-            forget password? <a href="#">click here</a>
-          </p>
-          <p>
-            don't have an account? <a href="#">create one</a>
-          </p>
-        </form>
-      </div>
       {/* home section starts  */}
       <section className="text-decoration-none home" id="home">
         <div className="text-decoration-none content">
@@ -177,7 +140,11 @@ export default function HemaTest() {
           </a>
         </div>
         <div className="text-decoration-none image">
-          <img src="image/home-parallax-img.png" alt="" className="text-decoration-none home-img" />
+          <img
+            src="image/home-parallax-img.png"
+            alt=""
+            className="text-decoration-none home-img"
+          />
           <img
             src="image/home-parallax-img.png"
             alt=""

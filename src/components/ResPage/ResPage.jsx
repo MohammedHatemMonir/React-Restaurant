@@ -38,9 +38,11 @@ export default function ResPage() {
     return (
       <>
         <section>
+          <div style={{ transform: "scale(0.90)" }}></div>
           <Parallax />
-          <div>
-            <Slider />
+          <Slider />
+          <div style={{ transform: "scale(0.90)" }}>
+            <Filters />
           </div>
           <Container style={{ width: "85%" }}>
             {/* Old navbar with search */}
@@ -78,9 +80,7 @@ export default function ResPage() {
                     // className="delivery-rest-list "
                     >
                       <div className="row">
-                        <div className="col-sm-12 col-md-2">
-                          <Filters />
-                        </div>
+                        <div className="col-sm-12 col-md-2"></div>
                         {/* ResCards */}
                         <div className="col-sm-12 col-md-10">
                           <div className="row">

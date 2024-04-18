@@ -1,37 +1,39 @@
 import "./Filters.scss";
-import Input from "./Input";
-
+import img1 from "../../images/cat-1.png";
+import img2 from "../../images/cat-2.png";
+import img3 from "../../images/cat-3.png";
+import img4 from "../../images/cat-4.png";
+import img5 from "../../images/cat-5.png";
+import img6 from "../../images/cat-6.png";
+import { Link } from "react-router-dom";
 const Filters = () => {
   return (
-    <div className="my-filters">
-      <section>
-        {/* Categories */}
-        <h2 className="sidebar-title">Category</h2>
-        <div>
-          <label className="sidebar-label-container">
-            <input type="radio" value="" name="test" />
-            <span className="checkmark"></span>All
-          </label>
-          <Input value="sneakers" title="Sneakers" name="test" />
-          <Input value="flats" title="Flats" name="test" />
-          <Input value="sandals" title="Sandals" name="test" />
-          <Input value="heels" title="Heels" name="test" />
-        </div>
-        {/* Prices */}
-
-        <div className="ml">
-          <h2 className="sidebar-title price-title">Price</h2>
-          <label className="sidebar-label-container">
-            <input type="radio" value="" name="test2" />
-            <span className="checkmark"></span>All
-          </label>
-          <Input value={50} title="$0 - 50" name="test2" />
-          <Input value={100} title="$50 - $100" name="test2" />
-          <Input value={150} title="$100 - $150" name="test2" />
-          <Input value={200} title="Over $150" name="test2" />
-        </div>
-      </section>
-    </div>
+    <section className="category" style={{ transform: "scale(0.90)" }}>
+      <Link to="#" className="box" style={{ textDecoration: "none" }}>
+        <img src={img1} alt="category-img" />
+        <h3>combo</h3>
+      </Link>
+      <Link to="#" className="box" style={{ textDecoration: "none" }}>
+        <img src={img2} alt="category-img" />
+        <h3>pizza</h3>
+      </Link>
+      <Link to="#" className="box" style={{ textDecoration: "none" }}>
+        <img src={img3} alt="category-img" />
+        <h3>burger</h3>
+      </Link>
+      <Link to="#" className="box" style={{ textDecoration: "none" }}>
+        <img src={img4} alt="category-img" />
+        <h3>chicken</h3>
+      </Link>
+      <Link to="#" className="box" style={{ textDecoration: "none" }}>
+        <img src={img5} alt="category-img" />
+        <h3>dinner</h3>
+      </Link>
+      <Link to="#" className="box" style={{ textDecoration: "none" }}>
+        <img src={img6} alt="category-img" />
+        <h3>coffee</h3>
+      </Link>
+    </section>
   );
 };
 

@@ -29,7 +29,7 @@ export default function Parallax() {
   }, []);
 
   return (
-    <div className="main1" style={{ transform: "scale(0.90)" }}>
+    <div className="main1" style={{ transform: "scale(0.85)" }}>
       <section className="text-decoration-none home" id="home">
         <div className="text-decoration-none content">
           <span>Welcome To Dine Me</span>
