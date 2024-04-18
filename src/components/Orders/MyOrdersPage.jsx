@@ -54,40 +54,43 @@ const AllOrdersPage = () => {
     }
   }
 
-  return (
-    <div className="container">
-      <h2 className="text-center font-weight-bold my-4">My Orders</h2>
-      <div className="table-responsive">
-        <table className="table table-bordered table-hover">
-          <thead className="thead-dark text-center">
-            <tr>
-              <th>Order Number</th>
-              <th>Total Price</th>
-              <th>Order Date</th>
-              <th>Order Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {myOrders.value.data?.orders &&
-              myOrders.value.data.orders.map((order, index) => (
-                <LinkContainer
-                  to={`/mealdetails/${order._id}`}
-                  key={order._id}
-                  style={{ cursor: "pointer" }}
-                >
-                  <tr style={{ cursor: "pointer" }}>
-                    <td>{index + 1}</td>
-                    <td>{order.totalPrice.toFixed(2)} $</td>
-                    <td>{timeAgo(order.dateOrdered)}</td>
-                    <td>{order.status}</td>
-                  </tr>
-                </LinkContainer>
-              ))}
-          </tbody>
-        </table>
+  if (q.data?.data.message == "No orders found") {
+    return <EmptyOrders />;
+  } else
+    return (
+      <div className="container">
+        <h2 className="text-center font-weight-bold my-4">My Orders</h2>
+        <div className="table-responsive">
+          <table className="table table-bordered table-hover">
+            <thead className="thead-dark text-center">
+              <tr>
+                <th>Order Number</th>
+                <th>Total Price</th>
+                <th>Order Date</th>
+                <th>Order Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {myOrders.value.data?.orders &&
+                myOrders.value.data.orders.map((order, index) => (
+                  <LinkContainer
+                    to={`/mealdetails/${order._id}`}
+                    key={order._id}
+                    style={{ cursor: "pointer" }}
+                  >
+                    <tr style={{ cursor: "pointer" }}>
+                      <td>{index + 1}</td>
+                      <td>{order.totalPrice.toFixed(2)} $</td>
+                      <td>{timeAgo(order.dateOrdered)}</td>
+                      <td>{order.status}</td>
+                    </tr>
+                  </LinkContainer>
+                ))}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
-  );
+    );
 };
 
 const OrdersPage = () => {
