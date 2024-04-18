@@ -9,12 +9,12 @@ $box-shadow: 0 16px 16px rgba(0, 0, 0, 0.05);
 @mixin grid($val) {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax($val, 1fr));
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 .blogs {
   .box-container {
-    @include grid(30rem);
+    @include grid(37rem);
 
     .box {
       border-radius: 0.5rem;

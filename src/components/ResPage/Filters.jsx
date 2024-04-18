@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 const Filters = () => {
   return (
     <>
-      <h1 className="text-center font-weight-bold my-5">Filters</h1>
+      <h1 className="text-center font-weight-bold my-5">Categories</h1>
       <section className="category" style={{ transform: "scale(0.90)" }}>
         <Link to="#" className="box" style={{ textDecoration: "none" }}>
           <img src={img1} alt="category-img" />

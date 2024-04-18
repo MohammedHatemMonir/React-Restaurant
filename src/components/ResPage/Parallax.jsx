@@ -29,9 +29,9 @@ export default function Parallax() {
   }, []);
 
   return (
-    <div className="main1" style={{ transform: "scale(0.85)" }}>
-      <section className="text-decoration-none home" id="home">
-        <div className="text-decoration-none content">
+    <div style={{ transform: "scale(0.85)" }}>
+      <section className="home" id="home">
+        <div className="content">
           <span>Welcome To Dine Me</span>
           <h3>different spices for the different tastes 😋</h3>
           <p>
@@ -42,12 +42,13 @@ export default function Parallax() {
             order now
           </Link> */}
         </div>
-        <div className="text-decoration-none image">
-          <img src={homeImg} alt="" className="text-decoration-none home-img" />
+        <div className="image">
           <img
-            src={parallax}
-            className="text-decoration-none home-parallax-img"
+            src={homeImg}
+            alt="homeImg"
+            className="text-decoration-none home-img"
           />
+          <img src={parallax} className="home-parallax-img" />
         </div>
       </section>
     </div>

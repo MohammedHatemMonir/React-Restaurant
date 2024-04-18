@@ -2,14 +2,13 @@ import { useSignal } from "@preact/signals-react";
 import { UserData } from "../../Globals";
 import { Link } from "react-router-dom";
 import Stars from "./../Stars/Stars";
-import { IoMdCard } from "react-icons/io";
 import DeleteIcon from "./../../Icons/DeleteIcon";
-import EditIcon from "./../../Icons/EditIcon";
 import DeleteResModal from "./DeleteResModal";
 import EditResModal from "./EditResModal";
 import DineMeLogo from "../../images/DineMeLogo.png";
 import "./ResCard.scss";
 import { FaCompass, FaTag } from "react-icons/fa";
+import { IoSettings } from "react-icons/io5";
 export default function ResCard({ id, name, stars1, ResImg, MealImg }) {
   // console.log("Hema ID",id)
   const showDelModal = useSignal(false);
@@ -35,7 +34,11 @@ export default function ResCard({ id, name, stars1, ResImg, MealImg }) {
   }
 
   return (
-    <section className="text-decoration-none blogs" id="blogs">
+    <section
+      className="text-decoration-none blogs"
+      id="blogs"
+      style={{ transform: "scale(0.85)" }}
+    >
       <div className="text-decoration-none box-container">
         <div className="text-decoration-none box">
           <div className="image">
@@ -91,10 +94,10 @@ export default function ResCard({ id, name, stars1, ResImg, MealImg }) {
                   }}
                 >
                   <div onClick={onOpenDel}>
-                    <DeleteIcon className="delete-icon" />
+                    <DeleteIcon />
                   </div>
                   <div onClick={onOpenEdit}>
-                    <EditIcon className="edit-icon" />
+                    <IoSettings />
                   </div>
                 </div>
               </div>
