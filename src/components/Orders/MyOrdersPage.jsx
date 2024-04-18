@@ -11,7 +11,7 @@ const AllOrdersPage = () => {
 
   // Get All Orders
   const q = useQuery({
-    queryKey: ["allOrders"],
+    queryKey: ["myOrders"],
     // cacheTime: 600000,
     // onSuccess: onSuccess,
     // onError: onError,
@@ -20,8 +20,8 @@ const AllOrdersPage = () => {
       const result = await apiClient.get(url);
       // console.log("hemaaaa", result);
       myOrders.value = result;
-      queryClient.invalidateQueries({ queryFn: ["allOrders"] });
-      queryClient.refetchQueries(["allOrders"]);
+      queryClient.invalidateQueries({ queryKey: ["myOrders"] });
+      queryClient.refetchQueries(["myOrders"]);
       return result;
     },
   });
