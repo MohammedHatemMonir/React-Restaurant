@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Footer from "./components/ResPage/Footer";
 
 function App() {
   const queryClient = new QueryClient({
@@ -22,9 +23,11 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
+        {/* style={{ transform: "scale(0.95)" }} */}
         <div>
           <TheRouter />
           <ToastContainer />
+          <Footer />
         </div>
       </BrowserRouter>
     </QueryClientProvider>

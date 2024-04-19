@@ -38,30 +38,34 @@ export default function ResPage() {
   if (q.data)
     return (
       <section>
-        <Parallax />
+        <div style={{ transform: "scale(0.95)" }}>
+          <Parallax />
+        </div>
         <Slider />
-        <Filters />
+        <div style={{ transform: "scale(0.95)" }}>
+          <Filters />
+        </div>
         <Container>
           {UserData.value.role == "ADMIN" && <AddRestaurantButton />}
         </Container>
         {/* ResCards */}
-        <Row>
-          {!q.isLoading &&
-            Array.isArray(q.data?.data) &&
-            q.data.data.map((data, index) => (
-              <Col sm={12} md={4} key={index} className="m-0">
-                <ResCard
-                  id={data._id}
-                  name={data.ResName}
-                  ResImg={data.ResImg}
-                  MealImg={data.MealImg}
-                  stars1={data.rating}
-                />
-              </Col>
-            ))}
-        </Row>
-
-        <Footer />
+        <div style={{ transform: "scale(0.95)" }}>
+          <Row>
+            {!q.isLoading &&
+              Array.isArray(q.data?.data) &&
+              q.data.data.map((data, index) => (
+                <Col sm={12} md={4} key={index} className="m-0 p-0">
+                  <ResCard
+                    id={data._id}
+                    name={data.ResName}
+                    ResImg={data.ResImg}
+                    MealImg={data.MealImg}
+                    stars1={data.rating}
+                  />
+                </Col>
+              ))}
+          </Row>
+        </div>
       </section>
     );
 }
