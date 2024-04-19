@@ -12,7 +12,6 @@ import ResCard from "./ResCard";
 import Parallax from "./Parallax";
 import { Col } from "react-bootstrap";
 
-
 export default function ResPage() {
   const q = useQuery({
     queryKey: ["getAllresturant"],
@@ -50,7 +49,7 @@ export default function ResPage() {
         </Container>
         {/* ResCards */}
         <div style={{ transform: "scale(0.90)" }}>
-          <Row>
+          <Row className="m-0 p-0">
             {!q.isLoading &&
               Array.isArray(q.data?.data) &&
               q.data.data.map((data, index) => (

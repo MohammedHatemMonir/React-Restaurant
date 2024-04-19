@@ -9,7 +9,7 @@ import DineMeLogo from "../../images/DineMeLogo.png";
 import "./ResCard.scss";
 import { FaCompass, FaTag } from "react-icons/fa";
 import { IoSettings } from "react-icons/io5";
-export default function GlobalCard({ id, name, stars1, ResImg, MealImg }) {
+export default function ResCard({ id, name, stars1, ResImg, MealImg }) {
   // console.log("Hema ID",id)
   const showDelModal = useSignal(false);
   const showEditModal = useSignal(false);

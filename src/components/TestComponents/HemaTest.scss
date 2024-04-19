@@ -1,0 +1,83 @@
+.menu .box-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  gap: 1.5rem;
+}
+
+.menu .box-container .box {
+  background-color: var(--white);
+  border: 0.1rem solid rgba(0, 0, 0, 0.2);
+  border-radius: 0.5rem;
+  box-shadow: var(--box-shadow);
+}
+
+.menu .box-container .box .image {
+  height: 25rem;
+  width: 100%;
+  overflow: hidden;
+  padding: 1.5rem;
+  position: relative;
+}
+
+.menu .box-container .box .image:hover a {
+  right: 2.5rem;
+}
+
+.menu .box-container .box .image img {
+  width: 100%;
+  height: 100%;
+  border-radius: 0.5rem;
+  object-fit: cover;
+}
+
+.menu .box-container .box .image a {
+  position: absolute;
+  top: 2.5rem;
+  /* right: 3rem; */
+  right: -10rem;
+  background: var(--white);
+  color: var(--black);
+  font-size: 2rem;
+  height: 5rem;
+  width: 5rem;
+  line-height: 5rem;
+  text-align: center;
+  border-radius: 50%;
+}
+
+.menu .box-container .box .image a:hover {
+  color: var(--white);
+  background-color: var(--green);
+}
+
+.menu .box-container .box .content {
+  padding: 2rem;
+  padding-top: 0;
+}
+
+.menu .box-container .box .content .stars {
+  padding-bottom: 1rem;
+}
+
+.menu .box-container .box .content .stars i {
+  font-size: 1.7rem;
+  color: var(--green);
+}
+
+.menu .box-container .box .content h3 {
+  font-size: 2.2rem;
+  color: var(--black);
+}
+
+.menu .box-container .box .content p {
+  font-size: 1.6rem;
+  color: var(--ligth-color);
+  padding: 0.5rem 0;
+  line-height: 1.5;
+}
+
+.menu .box-container .box .content .price {
+  color: var(--green);
+  font-size: 2.5rem;
+  margin-left: 1rem;
+}

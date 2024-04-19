@@ -51,7 +51,7 @@ const CommentBox = ({ resID }) => {
   };
 
   return (
-    <div className="my-comment-box">
+    <div className="my-comment-box w1">
       <div className="d-flex flex-column align-items-center mb-4">
         <input
           type="text"

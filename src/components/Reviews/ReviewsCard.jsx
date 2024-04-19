@@ -47,7 +47,7 @@ const ReviewsCard = ({ name, stars, emotion, image, comment }) => {
   }
 
   return (
-    <div className="reviews-card py-3">
+    <div className="reviews-card py-3" >
       <div className="testimonials" id="testimonials">
         <div className="container">
           <div className="box" style={{ backgroundColor: "#ebebeb" }}>

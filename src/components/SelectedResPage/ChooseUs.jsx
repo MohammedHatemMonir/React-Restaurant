@@ -10,7 +10,6 @@ import {
 } from "react-icons/fa";
 
 export default function ChooseUs({ resName }) {
-  console.log("myyy", resName);
   return (
     <div className="choose-us">
       <div class="feat bg-gray pt-5 pb-5">
@@ -20,11 +19,18 @@ export default function ChooseUs({ resName }) {
               <h4>
                 <span>Why Choose</span> Us?
               </h4>
-              <p>
-                Choose{" "}
-                <span style={{ color: "#f91942", fontWeight: "bold" }}>
+              <p style={{ fontSize: "20px" }}>
+                Choose
+                <span
+                  style={{
+                    color: "#f91942",
+                    fontWeight: "bold",
+                    marginRight: "5px",
+                    marginLeft: "5px",
+                  }}
+                >
                   {resName}
-                </span>{" "}
+                </span>
                 for an unforgettable dining experience where culinary mastery
                 meets exceptional service. Indulge in our diverse menu crafted
                 with the freshest ingredients, and savor every moment in an
