@@ -11,7 +11,7 @@ import CookingLoader from "./../Loaders/CookingLoader";
 import ResCard from "./ResCard";
 import Parallax from "./Parallax";
 import { Col } from "react-bootstrap";
-import CartBody from "../Navbar/CartBody";
+
 
 export default function ResPage() {
   const q = useQuery({
@@ -42,14 +42,14 @@ export default function ResPage() {
           <Parallax />
         </div>
         <Slider />
-        <div style={{ transform: "scale(0.95)" }}>
+        <div style={{ transform: "scale(0.90)" }}>
           <Filters />
         </div>
         <Container>
           {UserData.value.role == "ADMIN" && <AddRestaurantButton />}
         </Container>
         {/* ResCards */}
-        <div style={{ transform: "scale(0.95)" }}>
+        <div style={{ transform: "scale(0.90)" }}>
           <Row>
             {!q.isLoading &&
               Array.isArray(q.data?.data) &&

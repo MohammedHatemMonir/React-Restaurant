@@ -15,14 +15,14 @@ $box-shadow: 0 16px 16px rgba(0, 0, 0, 0.05);
 .shopping-cart-container {
   position: fixed;
   // top: 8.5rem;
-  top: 1.5rem;
+  top: 3.5rem;
   left: 0;
   right: 0;
   z-index: 1000;
   // height: calc(100vh - 8.5rem);
   height: calc(100vh);
   background: $white;
-  overflow-y: scroll;
+  // overflow-y: scroll;
   padding-bottom: 8rem;
   // display: none;
 
@@ -57,7 +57,7 @@ $box-shadow: 0 16px 16px rgba(0, 0, 0, 0.05);
     animation: fadeUp 0.4s linear;
 
     .box-container {
-      @include grid(30rem);
+      @include grid(10rem);
       padding: 1.5rem;
 
       .box {

@@ -4,7 +4,7 @@ import { useSignal } from "@preact/signals-react";
 import { useMutation } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 import { Cart } from "../../Globals";
-import "./CartBody.scss";
+
 export default function CartHandler() {
   const Show = useSignal(false);
   const count = useSignal(1);

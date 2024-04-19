@@ -4,6 +4,8 @@ import { Cart } from "../../Globals";
 import { useMutation } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 import EmptyOrders from "./../Orders/EmptyOrdersPage";
+import "./CartBody.scss";
+
 export default function CartBody() {
   // Create Order
   const m = useMutation({

@@ -122,7 +122,15 @@ export default function TheRouter() {
               path="/mealdetails/:orderId"
               element={<MealsOrdersPage />}
             ></Route>
-            <Route path="/mycart" element={<CartBody />}></Route>
+            {/* style={{ transform: "scale(0.85)" }} */}
+            <Route
+              path="/mycart"
+              element={
+                <div>
+                  <CartBody />
+                </div>
+              }
+            ></Route>
 
             <Route path="/mealsorders" element={<MealsOrdersPage />}></Route>
 

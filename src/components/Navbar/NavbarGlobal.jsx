@@ -4,15 +4,12 @@ import { UserData } from "../../Globals";
 import LogoutButton from "../Authentication/LogoutButton";
 import { useMutation } from "react-query";
 import { apiClient } from "../../Data/apiclient";
-import PersonIcon from "../../Icons/PersonIcon";
-import HomeIcon from "../../Icons/HomeIcon";
 import DineMeLogo from "../../images/DineMeLogo.png";
 import { useSignal } from "@preact/signals-react";
-import CartHandler from "./CartHanlder";
-import { Navbar, Nav, Container, Image } from "react-bootstrap";
+// import CartHandler from "./CartHanlder";
+import { Nav } from "react-bootstrap";
 import {
   FaShoppingCart,
-  FaMapMarkerAlt,
   FaSearch,
   FaClipboardList,
   FaBars,
@@ -45,7 +42,7 @@ export default function NavbarGlobal() {
   }
   return (
     <>
-      <header className="header " style={{ transform: "scale(0.75)" }}>
+      <header className="header" style={{ transform: "scale(0.90)" }}>
         <Link to="/" className="logo">
           <img
             src={DineMeLogo}
