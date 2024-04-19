@@ -48,7 +48,7 @@ const analyze = async (req, res) => { //{text:"",mealid: ""}
             //------saving the comment---------
             const body = {
               Comment:text,
-              commentSentmint:result.sentiment,
+              commentSentmint:result.sentiment[0],
               MealID:req.body.mealid,
               user: req.session?.user?._id
               }
@@ -58,7 +58,7 @@ const analyze = async (req, res) => { //{text:"",mealid: ""}
             console.log("Here!2")
             /////////////////////////////////////////
             //------updating the meal---------
-            const Comment_rating=result.sentiment[2]*5
+            const Comment_rating=result.sentiment[0][2]*5
             const new_comment_num=meals[0].comment_num+1
             const new_rating=(Comment_rating+meals[0].rating*meals[0].comment_num)/new_comment_num
 
@@ -94,7 +94,7 @@ const analyze = async (req, res) => { //{text:"",mealid: ""}
               creation_date:resturants[0].creation_date
           }
           const res_update = await resturant.updateOne({ _id: meals[0].ResID },{ $set: res_body});
-            res.status(200).json({Comment:text,commentSentmint:result.sentiment,});
+            res.status(200).json({Comment:text,commentSentmint:result.sentiment[0],});
             ///////////////////////////////////////
         
     }
@@ -135,7 +135,7 @@ const res_comment = async (req, res) => { // {text:"",ResID: "" }
           //------saving the comment---------
           const body = {
             Comment:text,
-            commentSentmint:result.sentiment,
+            commentSentmint:result.sentiment[0],
             ResID:req.body.ResID,
             user: userId
           }
@@ -143,11 +143,22 @@ const res_comment = async (req, res) => { // {text:"",ResID: "" }
           await CommentS.save();
           /////////////////////////////////////////
           //------updating the resturants---------
-          const Comment_rating=result.sentiment[2]*5
+          const Comment_rating=result.sentiment[0][2]*5
           const new_res_comment_num=resturants[0].comment_num+1
           const meals2 = await meal.find({ResID:ResID,comment_num: { $gte: 1}});
-          // console.log(meals2.length)
+                  console.log('result.sentiment:', result.sentiment);
+                  console.log('Comment_rating:', Comment_rating, typeof Comment_rating);
+                  console.log('resturants[0].rating:', resturants[0].rating, typeof resturants[0].rating);
+                  console.log('meals2.length:', meals2.length, typeof meals2.length);
+                  console.log('resturants[0].comment_num:', resturants[0].comment_num, typeof resturants[0].comment_num);
+                  console.log('new_res_comment_num:', new_res_comment_num, typeof new_res_comment_num);
+
+
+
           const new_rating=(Comment_rating+(resturants[0].rating*(meals2.length+resturants[0].comment_num)))/(meals2.length+new_res_comment_num)
+          console.log("NEW RATING",new_rating);
+
+
           const res_body={
             ResName: resturants[0].ResName,
             ResImg: resturants[0].ResImg,
@@ -157,7 +168,7 @@ const res_comment = async (req, res) => { // {text:"",ResID: "" }
             creation_date:resturants[0].creation_date
           }
           await resturant.updateOne({ _id: ResID },{ $set: res_body});
-          res.status(200).json({Comment:text,commentSentmint:result.sentiment,});
+          res.status(200).json({Comment:text,commentSentmint:result.sentiment[0],});
           ///////////////////////////////////////
         
     }
