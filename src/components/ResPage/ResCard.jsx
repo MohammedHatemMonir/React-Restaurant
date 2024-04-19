@@ -1,15 +1,15 @@
 import { useSignal } from "@preact/signals-react";
 import { UserData } from "../../Globals";
 import { Link } from "react-router-dom";
-import Stars from "./../Stars/Stars";
-import DeleteIcon from "./../../Icons/DeleteIcon";
+import Stars from "../Stars/Stars";
+import DeleteIcon from "../../Icons/DeleteIcon";
 import DeleteResModal from "./DeleteResModal";
 import EditResModal from "./EditResModal";
 import DineMeLogo from "../../images/DineMeLogo.png";
 import "./ResCard.scss";
 import { FaCompass, FaTag } from "react-icons/fa";
 import { IoSettings } from "react-icons/io5";
-export default function ResCard({ id, name, stars1, ResImg, MealImg }) {
+export default function GlobalCard({ id, name, stars1, ResImg, MealImg }) {
   // console.log("Hema ID",id)
   const showDelModal = useSignal(false);
   const showEditModal = useSignal(false);

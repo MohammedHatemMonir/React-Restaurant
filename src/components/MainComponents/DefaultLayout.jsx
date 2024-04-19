@@ -9,6 +9,7 @@ export default function DefaultLayout() {
     <>
       <main className="main" id="top">
         <BtnUp />
+        {/* style={{ transform: "scale(0.8)" }} */}
         <NavbarGlobal />
         <div className="content">
           <Outlet />

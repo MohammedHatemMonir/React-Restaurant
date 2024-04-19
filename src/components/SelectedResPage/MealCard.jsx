@@ -1,5 +1,5 @@
 import Stars from "../Stars/Stars";
-import { Cart, UserData } from "../../Globals";
+import { UserData } from "../../Globals";
 import { useSignal } from "@preact/signals-react";
 import MealDetailsModal from "./MealDetailsModal";
 import DeleteIcon from "./../../Icons/DeleteIcon";
@@ -139,21 +139,6 @@ export default function MealCard({
           >
             <Stars stars1={rating} />
           </div>
-          {/* <button
-            style={{
-              backgroundColor: "#e32207",
-              color: "#fff",
-              border: "none",
-              padding: "0.5rem 1rem",
-              borderRadius: "0.25rem",
-              cursor: "pointer",
-              transition: "background-color 0.3s",
-            }}
-            onClick={AddToCart}
-            className="btn meal-card__button"
-          >
-            Buy
-          </button> */}
         </div>
         {UserData.value.role == "ADMIN" && (
           <div className="position-relative">
