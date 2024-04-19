@@ -64,7 +64,10 @@ const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResB
 
         //  const resImgUrl = await uploadImage(req.body.ResImg);
         //  const resBannerUrl = await uploadImage(req.body.ResBanner);
-
+        let category = await categoeryModel.findOne({ Categoery: req.body.Categoery });
+        if (!category) {
+            category = await categoeryModel.create({ Categoery: req.body.Categoery });
+        }
         const restaurantname = req.body.ResName;
         const restaurants = await restaurant.find({ ResName: restaurantname });
         if (!restaurants[0]) {
@@ -81,7 +84,7 @@ const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResB
                         ResName: req.body.ResName,
                         ResImg: ResImg, 
                         ResBanner: ResBanner, 
-                        Categoery: req.body.Categoery,
+                        Categoery: category._id,
                         location:req.body.location,
                         rating: rating,
                         comment_num: comment_num,
@@ -200,20 +203,23 @@ const updateRestaurant = async (req, res) => {
 };
 
 const Categoery = async (req, res) => {
-    const { Categoery } = req.body; 
-    
-    if (!req.session.user ||req.session.user.role !== "ADMIN") {
-        return res.status(403).json({ error: "Not Authenticated" });
-    }
-
     try {
-        const createdCategory = await categoeryModel.create({ Categoery });
+        const { category } = req.query;
+        let filter = {};
+        if (category) {
+            const categorytype = await categoeryModel.findOne({ Categoery: category });
 
-        return res.json({ category: createdCategory });
+            if (categorytype) {
+                filter = { Categoery: categorytype._id };
+            }
+        }
+        const restaurants = await restaurant.find(filter);
+        res.status(200).json(restaurants);
     } catch (error) {
-        return res.status(500).json({ error: "Failed to create category" });
+        res.status(500).json({ message: error });
     }
 }
+
 
 
 module.exports = {

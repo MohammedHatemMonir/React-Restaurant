@@ -5,7 +5,7 @@ const categoerySchema=mongoose.Schema({
         type: String,
         required: true
     },
-
+    
 })
 
 const categoeryModel=mongoose.model('category',categoerySchema)

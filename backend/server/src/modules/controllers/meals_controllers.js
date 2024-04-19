@@ -259,7 +259,7 @@ const getOrderDetails = async (req, res) => {
     if (!req.session?.user?._id) {
       return res.status(404).json({ message: "Not authenticated!" });
     }
-      const { orderId } = req.params;
+    const { orderId } = req.params;
       const order = await Order.aggregate([
           {
               $match: { _id: new mongoose.Types.ObjectId(orderId)}
@@ -302,10 +302,14 @@ const getOrderDetails = async (req, res) => {
       }
       res.status(200).json(order[0]);
   } catch (error) {
-      console.error("Error fetching order details:", error);
-      res.status(500).json({ error: "Server error while fetching order details" });
+    console.error("Error fetching order details:", error);
+    res.status(500).json({ error: "Server error while fetching order details" });
   }
 };
+
+
+
+
 
   module.exports = {
     addNewmeal,

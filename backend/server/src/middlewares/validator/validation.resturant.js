@@ -11,8 +11,8 @@ const validateResturantInput = [
         // }),
     // check("rating")
     //     .isNumeric().withMessage("only numpers allowd"),
-    check('Categoery')
-        .notEmpty().withMessage('Restaurant category is required')
+    // check('Categoery')
+    //     .notEmpty().withMessage('Restaurant category is required')
 ];
 
 module.exports=validateResturantInput

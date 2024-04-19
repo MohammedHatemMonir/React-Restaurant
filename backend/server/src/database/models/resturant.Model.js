@@ -14,8 +14,9 @@ const resturantSchema=mongoose.Schema({
         require:[true,"Enter resturant ResBannar"]
     },
     Categoery:{
-        type:String,
-        require:[true,"Enter resturant Categoery"]
+        type: mongoose.Schema.Types.ObjectId, // Reference to the Category schema
+        ref: 'Category', // Name of the Category model
+        
     },
     location: {
             type: String,
