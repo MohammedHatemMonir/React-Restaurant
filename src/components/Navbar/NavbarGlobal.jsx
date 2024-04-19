@@ -45,11 +45,6 @@ export default function NavbarGlobal() {
   }
   return (
     <>
-      <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-      />
-
       <header className="header " style={{ transform: "scale(0.75)" }}>
         <Link to="/" className="logo">
           <img
@@ -63,7 +58,7 @@ export default function NavbarGlobal() {
             }}
           />
         </Link>
-        <nav className="navbar ">
+        <nav className="navbar">
           <Link to="/" className="text-decoration-none">
             home
           </Link>
@@ -73,28 +68,29 @@ export default function NavbarGlobal() {
           <Link to="/Tutorials" className="text-decoration-none">
             Tutorials
           </Link>
-          <Link to="/myorders" className="text-decoration-none">
+          {/* <Link to="/myorders" className="text-decoration-none">
             My Orders
-          </Link>
+          </Link> */}
           <Nav.Link style={{ marginLeft: "2px" }}>
             <LogoutButton />
           </Nav.Link>
         </nav>
         <div className="icons">
-          <Link
-            className="fas fa-bars text-decoration-none"
-            style={{ display: status }}
-          />
-          <Link className="fas fa-search text-decoration-none" />
-          <Link
-            to="mycart"
-            className="fas fa-shopping-cart text-decoration-none"
-          />
-          <Link
-            to="profile"
-            id="login-btn"
-            className="fas fa-user text-decoration-none"
-          />
+          <Link style={{ display: status }} className="p-5 mx-2">
+            <FaBars />
+          </Link>
+          <Link style={{ display: status }} className="p-5 mx-2">
+            <FaSearch />
+          </Link>
+          <Link to="myorders" className="p-3 mx-2">
+            <FaClipboardList />
+          </Link>
+          <Link to="mycart" className="p-3 mx-2">
+            <FaShoppingCart />
+          </Link>
+          <Link to="profile" id="login-btn" className="p-3 mx-2">
+            <FaUser />
+          </Link>
         </div>
       </header>
     </>
