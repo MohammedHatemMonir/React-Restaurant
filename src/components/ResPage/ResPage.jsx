@@ -66,6 +66,7 @@ export default function ResPage() {
               ))}
           </Row>
         </div>
+        <Footer />
       </section>
     );
 }

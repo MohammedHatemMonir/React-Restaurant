@@ -95,8 +95,8 @@ const AllOrdersPage = () => {
     );
 };
 
-const OrdersPage = () => {
-  return <div>{OrdersData.length > 0 ? <OrdersTable /> : <EmptyOrders />}</div>;
-};
+// const OrdersPage = () => {
+//   return <div>{OrdersData.length > 0 ? <OrdersTable /> : <EmptyOrders />}</div>;
+// };
 
 export default AllOrdersPage;

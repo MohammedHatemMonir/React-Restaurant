@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   return (
-    <div className="my-footer-res mt-5">
+    <div className="my-footer-res mt-5 ">
       <footer id="footer" className="footer-1">
         <div className="main-footer widgets-dark typo-light">
           <div className="container">

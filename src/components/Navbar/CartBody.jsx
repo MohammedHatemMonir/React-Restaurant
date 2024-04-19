@@ -24,7 +24,7 @@ export default function CartBody() {
     console.log(result);
   }
 
-  console.log("carttttttttt", Cart.value.meals);
+  // console.log("carttttttttt", Cart.value.meals);
 
   if (Cart.value.meals.length == 0) {
     return <EmptyOrders />;
@@ -33,7 +33,7 @@ export default function CartBody() {
       <section
         // key={index}
         className="shopping-cart-container"
-        style={{ transform: "scale(0.80)" }}
+        style={{ transform: "scale(0.75)" }}
       >
         <div className="products-container">
           <h3 className="title">My Products</h3>

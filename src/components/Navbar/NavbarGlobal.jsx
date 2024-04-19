@@ -14,11 +14,13 @@ import {
   FaShoppingCart,
   FaMapMarkerAlt,
   FaSearch,
-  FaCoffee,
   FaClipboardList,
+  FaBars,
+  FaUser,
 } from "react-icons/fa";
-import { IoIosListBox } from "react-icons/io";
+
 export default function NavbarGlobal() {
+  const status = useSignal("none");
   const m = useMutation({
     mutationKey: [],
     // cacheTime: 600000,
@@ -42,129 +44,118 @@ export default function NavbarGlobal() {
     Show.value = false;
   }
   return (
-    <Navbar bg="light" expand="lg">
-      <Container>
-        <Link to="/" className="navbar-brand">
-          <Image
+    <>
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      />
+
+      <header className="header " style={{ transform: "scale(0.75)" }}>
+        <Link to="/" className="logo">
+          <img
             src={DineMeLogo}
-            height={50}
-            className="d-inline-block align-top"
-            alt="Logo"
+            alt="DineMeLogo"
+            style={{
+              width: "80px",
+              height: "80px",
+              objectFit: "contain",
+              transform: "scale(1.4)",
+            }}
           />
         </Link>
-
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto">
-            <Link to="map" className="nav-link">
-              <FaMapMarkerAlt /> Location
-            </Link>
-            {/* {UserData.value.role == "ADMIN" && (
-              <Link to="allorders" className="nav-link">
-                <IoIosListBox /> All Orders
-              </Link>
-            )} */}
-            <Link to="myorders" className="nav-link">
-              <FaClipboardList /> My Orders
-            </Link>
-            <Link to="mycart" className="nav-link">
-              <FaShoppingCart /> My Cart
-            </Link>
-            {/* <div>
-              <CartHandler />
-            </div> */}
-          </Nav>
-
-          <Nav className="ml-auto">
-            <Link to="#link" className="nav-link">
-              <FaSearch /> Search
-            </Link>
-            <Link to="/profile" className="nav-link">
-              <Image
-                src={
-                  UserData.value.userImg ||
-                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8PyKYrBKAWWy6YCbQzWQcwIRqH8wYMPluIZiMpV1w0NYSbocTZz0ICWFkLcXhaMyvCwQ&usqp=CAU"
-                }
-                roundedCircle
-                style={{ width: "30px", height: "30px" }}
-                alt="Profile"
-              />
-            </Link>
-            <Link to={"/tutorials"} className="nav-link">
-              Tutorials
-            </Link>
-            <Nav.Link className="text-decoration-none">
-              <LogoutButton />
-            </Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
-
-    //  <Container className="navbar-container">
-    //     <input type="checkbox" name="" id="" />
-    //     <div className="hamburger-lines">
-    //       <span className="line line1" />
-    //       <span className="line line2" />
-    //       <span className="line line3" />
-    //     </div>
-    //     <button onClick={()=>{terminateSession()}}> terminate session</button>
-    //     <ul className="menu-items">
-    //       <li>
-    //         <Link to="/" className="m-1">
-    //           Home
-    //         </Link>
-    //       </li>
-    //       <li>
-    //         <Link to="/tutorials">Tutorials</Link>
-    //       </li>
-
-    //         {!UserData.value.loggedIn && <>
-    //               <li>
-    //                 <Link to="/login">LogIn</Link>
-    //               </li>
-    //               <li>
-    //                 <Link to="SignUp">SignUp</Link>
-    //               </li>
-    //               </>
-
-    //         }
-    //         {UserData.value.loggedIn &&
-    //           <>
-    //             <li>
-    //               <LogoutButton />
-    //             </li>
-    //             <li>
-    //             NAME: {UserData.value.name}
-    //             </li>
-    //           </>
-    //         }
-    //       </ul>
-    //     <Link to="/">
-    //       <h1 className="logo">DineMe</h1>
-    //     </Link>
-    //   </Container>
-
-    // <Navbar expand="lg" className="bg-body-tertiary">
-    //   <Container>
-    //     <input
-    //       type="image"
-    //       id="menu-toggle"
-    //       src="https://i.imgur.com/Afh6yfe.png"
-    //       style={{ outline: "none" }}
-    //     />
-
-    //     <ThemeController />
-    //     <div style={{ color: "var(--dineme-bg)" }}>ThemeTest</div>
-    //     <Navbar.Toggle aria-controls="basic-navbar-nav" />
-    //     <Navbar.Collapse id="basic-navbar-nav">
-    //       <Nav className="ms-auto"></Nav>
-    //     </Navbar.Collapse>
-    //   </Container>
-    // </Navbar>
+        <nav className="navbar ">
+          <Link to="/" className="text-decoration-none">
+            home
+          </Link>
+          <Link to="/map" className="text-decoration-none">
+            Location
+          </Link>
+          <Link to="/Tutorials" className="text-decoration-none">
+            Tutorials
+          </Link>
+          <Link to="/myorders" className="text-decoration-none">
+            My Orders
+          </Link>
+          <Nav.Link style={{ marginLeft: "2px" }}>
+            <LogoutButton />
+          </Nav.Link>
+        </nav>
+        <div className="icons">
+          <Link
+            className="fas fa-bars text-decoration-none"
+            style={{ display: status }}
+          />
+          <Link className="fas fa-search text-decoration-none" />
+          <Link
+            to="mycart"
+            className="fas fa-shopping-cart text-decoration-none"
+          />
+          <Link
+            to="profile"
+            id="login-btn"
+            className="fas fa-user text-decoration-none"
+          />
+        </div>
+      </header>
+    </>
   );
 }
 
-function Header() {
-  return <></>;
-}
+// <Navbar bg="light" expand="lg">
+// <Container>
+//   <Link to="/" className="navbar-brand">
+//     <Image
+//       src={DineMeLogo}
+//       height={50}
+//       className="d-inline-block align-top"
+//       alt="Logo"
+//     />
+//   </Link>
+
+//   <Navbar.Toggle aria-controls="basic-navbar-nav" />
+//   <Navbar.Collapse id="basic-navbar-nav">
+//     <Nav className="mr-auto">
+//       <Link to="map" className="nav-link">
+//         <FaMapMarkerAlt /> Location
+//       </Link>
+//       {/* {UserData.value.role == "ADMIN" && (
+//         <Link to="allorders" className="nav-link">
+//           <IoIosListBox /> All Orders
+//         </Link>
+//       )} */}
+//       <Link to="myorders" className="nav-link">
+//         <FaClipboardList /> My Orders
+//       </Link>
+//       <Link to="mycart" className="nav-link">
+//         <FaShoppingCart /> My Cart
+//       </Link>
+//       {/* <div>
+//         <CartHandler />
+//       </div> */}
+//     </Nav>
+
+//     <Nav className="ml-auto">
+//       <Link to="#link" className="nav-link">
+//         <FaSearch /> Search
+//       </Link>
+//       <Link to="/profile" className="nav-link">
+//         <Image
+//           src={
+//             UserData.value.userImg ||
+//             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8PyKYrBKAWWy6YCbQzWQcwIRqH8wYMPluIZiMpV1w0NYSbocTZz0ICWFkLcXhaMyvCwQ&usqp=CAU"
+//           }
+//           roundedCircle
+//           style={{ width: "30px", height: "30px" }}
+//           alt="Profile"
+//         />
+//       </Link>
+//       <Link to={"/tutorials"} className="nav-link">
+//         Tutorials
+//       </Link>
+//       <Nav.Link className="text-decoration-none">
+//         <LogoutButton />
+//       </Nav.Link>
+//     </Nav>
+//   </Navbar.Collapse>
+// </Container>
+// </Navbar>
