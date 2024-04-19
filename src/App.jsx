@@ -20,7 +20,6 @@ function App() {
     },
   });
   return (
-    // style={{ transform: "scale(0.9" }}
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <div>

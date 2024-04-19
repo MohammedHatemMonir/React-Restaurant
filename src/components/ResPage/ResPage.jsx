@@ -45,15 +45,11 @@ export default function ResPage() {
           {UserData.value.role == "ADMIN" && <AddRestaurantButton />}
         </Container>
         {/* ResCards */}
-        <div style={{ display: "flex", flexWrap: "wrap" }}>
+        <Row>
           {!q.isLoading &&
             Array.isArray(q.data?.data) &&
             q.data.data.map((data, index) => (
-              <div
-                key={index}
-                style={{ flex: "0 0 calc(33.333% - 1rem)", margin: "0.5rem" }}
-              >
-                {/* Set flex properties and margin */}
+              <Col sm={12} md={4} key={index} className="m-0">
                 <ResCard
                   id={data._id}
                   name={data.ResName}
@@ -61,9 +57,10 @@ export default function ResPage() {
                   MealImg={data.MealImg}
                   stars1={data.rating}
                 />
-              </div>
+              </Col>
             ))}
-        </div>
+        </Row>
+
         <Footer />
       </section>
     );
