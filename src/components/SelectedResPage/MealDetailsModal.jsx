@@ -2,7 +2,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { AiOutlineLike } from "react-icons/ai";
 import ReviewsCard from "../Reviews/ReviewsCard";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { useSignal } from "@preact/signals-react";
 import { apiClient } from "../../Data/apiclient";
 import { Cart } from "../../Globals";
@@ -22,6 +22,8 @@ function MealDetailsModal({
   price,
   name,
 }) {
+  const queryClient = useQueryClient();
+
   const m = useMutation({
     mutationKey: [],
     // cacheTime: 600000,
@@ -43,8 +45,11 @@ function MealDetailsModal({
     console.log(comment.value);
     try {
       await m.mutateAsync(j);
-
       comment.value = "";
+
+      queryClient.invalidateQueries({ mutationKey: [`/GetMealComments/${id}`] });
+      queryClient.refetchQueries([`/GetMealComments/${id}`]);
+      closeModal();
     } catch (e) {
       console.log("Failed to post comment", e);
     }
@@ -200,18 +205,25 @@ function MealDetailsModal({
             </div>
           </div>
         </div>
-        <TextCommentBox />
-        <ReviewsCard
-        // key={index + "rescomment" + resID}
-        // name={item.user.name}
-        // stars={item.commentSentmint[2] * 5}
-        // emotion={item.commentSentmint[1]}
-        // comment={item.Comment}
-        // image={
-        //   item.user.userImg ||
-        //   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8PyKYrBKAWWy6YCbQzWQcwIRqH8wYMPluIZiMpV1w0NYSbocTZz0ICWFkLcXhaMyvCwQ&usqp=CAU"
-        // }
+
+       
+         <TextCommentBox />
+
+        {MealComments && MealComments.map((item, index) => {
+        return <ReviewsCard
+
+        key={index + "rescomment" + resID}
+        name={item.user.name}
+        stars={item.commentSentmint[2] * 5}
+        emotion={item.commentSentmint[1]}
+        comment={item.Comment}
+        image={
+          item.user.userImg ||
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8PyKYrBKAWWy6YCbQzWQcwIRqH8wYMPluIZiMpV1w0NYSbocTZz0ICWFkLcXhaMyvCwQ&usqp=CAU"
+        }
         />
+      })
+    }
       </Modal.Body>
       <Modal.Footer>
         <Button

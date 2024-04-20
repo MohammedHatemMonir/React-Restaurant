@@ -8,12 +8,14 @@ const mongoose = require("mongoose");
 
 const GetMealsWithComments = async (req, res) => {
   try {
+    console.log("GetMealsWithComments")
     const { id } = req.params;
-    const meals = await meal.find({ _id: id });
-    const Comments = await mealComments.find({ MealID: id }).populate('user', 'name userImg -_id');
-    res.status(200).json({ meal: meals, MealComments: Comments });
+    // const meals = await meal.find({ _id: id });
+    const Comments = await mealComments.find({ MealID: id }).sort({ createdAt: -1 }).populate('user', 'name userImg -_id');
+    res.status(200).json({ MealComments: Comments });
   } catch (error) {
     res.status(500).json({ message: error });
+    console.log("Error fetching meal comments:", error);
   }
 }
 
