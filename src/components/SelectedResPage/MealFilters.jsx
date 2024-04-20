@@ -1,4 +1,4 @@
-import "./Filters.scss";
+import "./MealFilters.scss";
 import img1 from "../../images/cat-1.png";
 import img2 from "../../images/cat-2.png";
 import img3 from "../../images/cat-3.png";
@@ -6,7 +6,7 @@ import img4 from "../../images/cat-4.png";
 import img5 from "../../images/cat-5.png";
 import img6 from "../../images/cat-6.png";
 import { Link } from "react-router-dom";
-const Filters = () => {
+const MealFilters = () => {
   return (
     <>
       <h1 className="text-center font-weight-bold my-5">Categories</h1>
@@ -40,4 +40,4 @@ const Filters = () => {
   );
 };
 
-export default Filters;
+export default MealFilters;

@@ -1,16 +1,15 @@
 import "./ResPageBox.scss";
-import Slider from "./Slider";
+// import Slider from "./Slider";
 import Footer from "./Footer";
 import { useQuery } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 import { Container, Row } from "reactstrap";
-import Filters from "./Filters";
 import AddRestaurantButton from "./AddRestaurantButton";
 import { UserData } from "../../Globals";
 import CookingLoader from "./../Loaders/CookingLoader";
 import ResCard from "./ResCard";
 import Parallax from "./Parallax";
-import { Col } from "react-bootstrap";
+import ResFilters from "./ResFilters";
 
 export default function ResPage() {
   const q = useQuery({
@@ -41,14 +40,42 @@ export default function ResPage() {
           <Parallax />
         </div>
         {/* <Slider /> */}
-        <div style={{ transform: "scale(0.90)" }}>
-          <Filters />
-        </div>
+
         <Container>
           {UserData.value.role == "ADMIN" && <AddRestaurantButton />}
         </Container>
         {/* ResCards */}
-        <div style={{ transform: "scale(0.90)" }}>
+        <div
+        // id="rest-list-col"
+        // col-sm-13 col-xs-16
+        // className="delivery-rest-list "
+        >
+          <div className="row">
+            <div className="col-sm-12 col-md-2">
+              <ResFilters />
+            </div>
+            {/* ResCards */}
+            <div className="col-sm-12 col-md-10">
+              <div className="row">
+                {!q.isLoading &&
+                  Array.isArray(q.data?.data) &&
+                  q.data.data.map((data, index) => (
+                    <div className="col-md-6" key={index}>
+                      <ResCard
+                        id={data._id}
+                        name={data.ResName}
+                        ResImg={data.ResImg}
+                        MealImg={data.MealImg}
+                        start1={data.rating}
+                      />
+                    </div>
+                  ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* <div style={{ transform: "scale(0.90)" }}>
           <Row className="m-0 p-0">
             {!q.isLoading &&
               Array.isArray(q.data?.data) &&
@@ -64,7 +91,7 @@ export default function ResPage() {
                 </Col>
               ))}
           </Row>
-        </div>
+        </div> */}
         <Footer />
       </section>
     );

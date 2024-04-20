@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import MealCard from "./MealCard";
 import ChooseUs from "./ChooseUs";
 import Footer from "./../ResPage/Footer";
+import MealFilters from "./MealFilters";
 
 export default function SelectResPage() {
   const { resID, resName } = useParams();
@@ -125,14 +126,15 @@ export default function SelectResPage() {
                   </div>
                 </div>
               </Col>
-              {/* <div className="col-sm-4 restaurant-actions"> <span><a className="circular-btn"> <PhoneIcon /> </a></span></div> */}
             </Row>
 
             {/* Hema Here */}
             <div style={{ transform: "scale(0.90)" }}>
               <ChooseUs resName={q.data?.data?.restaurant?.ResName} />
             </div>
-
+            <div style={{ transform: "scale(0.85)" }}>
+              <MealFilters />
+            </div>
             {UserData.value.role == "ADMIN" && (
               <div>
                 <AddMealButton Resid={resID} />
