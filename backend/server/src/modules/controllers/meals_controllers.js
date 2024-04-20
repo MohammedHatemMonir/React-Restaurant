@@ -254,58 +254,107 @@ const getMyOrders = async (req, res) => {
   }
 };
 
+// const getOrderDetails = async (req, res) => {
+//   try {
+//     if (!req.session?.user?._id) {
+//       return res.status(404).json({ message: "Not authenticated!" });
+//     }
+    
+//     const { orderId } = req.params;
+
+//     const order = await Order.aggregate([
+//       {
+//         $match: { _id: new mongoose.Types.ObjectId(orderId) }
+//       },
+//       {
+//         $lookup: {
+//           from: "meals",
+//           localField: "meals.id",
+//           foreignField: "_id",
+//           as: "mealDetails"
+//         }
+//       },
+//       {
+//         $unwind: "$mealDetails"
+//       },
+//       {
+//         $lookup: {
+//           from: "restaurants",
+//           localField: "resId",
+//           foreignField: "_id",
+//           as: "restaurantDetails"
+//         }
+//       },
+//       {
+//         $unwind: "$restaurantDetails"
+//       },
+//       {
+//         $project: {
+//           _id: 0,
+//           ResName: "$restaurantDetails.ResName",
+//           MealName: "$mealDetails.MealName",
+//           MealImg: "$mealDetails.MealImg",
+//           Price: "$mealDetails.Price",
+//           Quantity: "$meals.quantity",
+//           totalPrice: 0
+//         }
+//       }
+//     ]);
+
+//     if (!order || order.length === 0) {
+//       return res.status(404).json({ message: "Order not found" });
+//     }
+
+//     res.status(200).json(order[0]);
+//   } catch (error) {
+//     console.error("Error fetching order details:", error);
+//     res.status(500).json({ error: "Server error while fetching order details" });
+//   }
+// };
 const getOrderDetails = async (req, res) => {
   try {
     if (!req.session?.user?._id) {
       return res.status(404).json({ message: "Not authenticated!" });
     }
+    
     const { orderId } = req.params;
-      const order = await Order.aggregate([
-          {
-              $match: { _id: new mongoose.Types.ObjectId(orderId)}
-          },
-          {
-              $lookup: {
-                  from: "meals",
-                  localField: "meals.id",
-                  foreignField: "_id",
-                  as: "mealDetails"
-              }
-          },
-          {
-              $unwind: "$mealDetails"
-          },
-          {
-              $lookup: {
-                  from: "restaurants",
-                  localField: "resId",
-                  foreignField: "_id",
-                  as: "restaurantDetails"
-              }
-          },
-          {
-              $unwind: "$restaurantDetails"
-          },
-          {
-              $project: {
-                  _id: 0,
-                  ResName: "$restaurantDetails.ResName",
-                  MealName: "$mealDetails.MealName",
-                  MealImg: "$mealDetails.MealImg",
-                  Quantity: "$meals.quantity",
-                  totalPrice: 1
-              }
-          }
-      ]);
-      if (!order || order.length === 0) {
-          return res.status(404).json({ message: "Order not found" });
+
+    const order = await Order.findById(orderId);
+
+    if (!order) {
+      return res.status(404).json({ message: "Order not found" });
+    }
+
+    const mealDetails = [];
+    for (const Meal of order.meals) {
+      const mealDoc = await meal.findById(Meal.id);
+      if (mealDoc) {
+        mealDetails.push({
+          MealName: mealDoc.MealName,
+          MealImg: mealDoc.MealImg,
+          Price: mealDoc.Price,
+          Quantity: Meal.quantity
+        });
       }
-      res.status(200).json(order[0]);
+    }
+
+    const resName = await resturant.findById(order.resId);
+
+    const result = {
+      _id: order._id,
+      ResName: resName ? resName.ResName : "Unknown Restaurant",
+      meals: mealDetails.map((item)=>item),
+      //totalPrice: order.totalPrice,
+    };
+
+    res.status(200).json(result);
   } catch (error) {
     console.error("Error fetching order details:", error);
     res.status(500).json({ error: "Server error while fetching order details" });
   }
 };
+
+
 
 
 

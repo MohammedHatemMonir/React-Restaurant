@@ -64,10 +64,6 @@ const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResB
 
         //  const resImgUrl = await uploadImage(req.body.ResImg);
         //  const resBannerUrl = await uploadImage(req.body.ResBanner);
-        let category = await categoeryModel.findOne({ Categoery: req.body.Categoery });
-        if (!category) {
-            category = await categoeryModel.create({ Categoery: req.body.Categoery });
-        }
         const restaurantname = req.body.ResName;
         const restaurants = await restaurant.find({ ResName: restaurantname });
         if (!restaurants[0]) {
@@ -80,6 +76,7 @@ const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResB
             const ResBanner= await uploadImg(req.body.resBanner);
             console.log("ResBanner", ResBanner)
                 try {
+                    const category = await addCategory(req.body.Categoery);
                     const newRestaurantData = {
                         ResName: req.body.ResName,
                         ResImg: ResImg, 
@@ -202,6 +199,22 @@ const updateRestaurant = async (req, res) => {
     }
 };
 
+const addCategory = async (categoryName) => {
+    let category = await categoeryModel.findOne({ Categoery: categoryName });
+    if (!category) {
+        category = await categoeryModel.create({ Categoery: categoryName });
+    }
+    return category;
+};
+const getAllCategory = async (req,res) => {
+    try {
+        let category = await categoeryModel.find({});
+        return res.json({Category:category});
+    } catch (error) {
+        console.error('Error fetching categories:', error);
+        return res.json({Message:"Error"});
+    }
+};
 const Categoery = async (req, res) => {
     try {
         const { category } = req.query;
@@ -229,5 +242,7 @@ module.exports = {
     postRestaurantComment,
     getResturantWithMeals,
     updateRestaurant,
-    Categoery
+    addCategory,
+    Categoery,
+    getAllCategory
 };
