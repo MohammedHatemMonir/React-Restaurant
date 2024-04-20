@@ -1,5 +1,5 @@
 import { FaTimes } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Cart } from "../../Globals";
 import { useMutation } from "react-query";
 import { apiClient } from "../../Data/apiclient";
@@ -7,6 +7,9 @@ import EmptyOrders from "./../Orders/EmptyOrdersPage";
 import "./CartBody.scss";
 
 export default function CartBody() {
+
+    const navigate = useNavigate();
+
   // Create Order
   const m = useMutation({
     mutationKey: [""],
@@ -23,6 +26,8 @@ export default function CartBody() {
 
   async function createOrder() {
     const result = await m.mutateAsync();
+    navigate("/myorders");
+
     console.log(result);
   }
 
@@ -71,7 +76,6 @@ export default function CartBody() {
               total : <span>$200</span>
             </h3>
             <Link
-              to="/myorders"
               className="btn"
               onClick={() => {
                 createOrder();
