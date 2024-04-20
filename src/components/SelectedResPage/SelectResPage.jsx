@@ -66,13 +66,12 @@ export default function SelectResPage() {
                       <div className="resturant-name">
                         <h1 className="title">
                           {q.data?.data?.restaurant?.ResName}
-                          <span className="green">
+
                             {UserData.value.role == "ADMIN" && (
-                              <Link to={`/RestaurantDashboard/${resID}`}>
+                              <Link className="badge badge-primary" style={{color:"white" , fontSize: '0.45em'}} to={`/RestaurantDashboard/${resID}`}>
                                 Statistics
                               </Link>
                             )}
-                          </span>
                         </h1>
                       </div>
                       <div className="subheader">
