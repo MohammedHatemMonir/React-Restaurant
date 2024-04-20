@@ -152,7 +152,7 @@ const Login = () => {
                     background: "transparent",
                     position: "absolute",
                     top: 51,
-                    right: 7,
+                    right: 15,
                     transform: "translate(0, -50%)",
                   }}
                 >

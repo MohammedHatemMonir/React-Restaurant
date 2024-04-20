@@ -189,7 +189,7 @@ export default function SignUp() {
                         background: "transparent",
                         position: "absolute",
                         top: 51,
-                        right: 7,
+                        right: 20,
                         transform: "translate(0, -50%)",
                       }}
                     >
@@ -228,7 +228,7 @@ export default function SignUp() {
                         background: "transparent",
                         position: "absolute",
                         top: 51,
-                        right: 7,
+                        right: 20,
                         transform: "translate(0, -50%)",
                       }}
                     >
