@@ -35,7 +35,7 @@ export default function ResCard({ id, name, stars1, ResImg, MealImg }) {
 
   return (
     <section
-      className="text-decoration-none blogs"
+      className="res-blogs"
       id="blogs"
       style={{ transform: "scale(0.80)" }}
     >

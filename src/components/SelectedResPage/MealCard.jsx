@@ -3,23 +3,12 @@ import { UserData } from "../../Globals";
 import { useSignal } from "@preact/signals-react";
 import MealDetailsModal from "./MealDetailsModal";
 import DeleteIcon from "./../../Icons/DeleteIcon";
-import EditIcon from "./../../Icons/EditIcon";
 import DeleteMealModal from "./DeleteMealModal";
 import EditMealModal from "./EditMealModal";
-import "../ResPage/ResCard.scss";
+import "./MealCard.scss";
 import { Link } from "react-router-dom";
-import {
-  FaCartPlus,
-  FaCompass,
-  FaPlus,
-  FaPlusSquare,
-  FaReadme,
-  FaTag,
-} from "react-icons/fa";
+import { FaTag } from "react-icons/fa";
 import { IoSettings } from "react-icons/io5";
-import { CiSquarePlus } from "react-icons/ci";
-import { HiPlusCircle } from "react-icons/hi2";
-import { IoMdArrowDropdownCircle } from "react-icons/io";
 import { useMutation } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 export default function MealCard({
@@ -32,10 +21,7 @@ export default function MealCard({
   resID,
   resName,
 }) {
-
-
-  const MealComments = useSignal([])
-
+  const MealComments = useSignal([]);
 
   const getCommentsMutation = useMutation({
     mutationKey: [],
@@ -50,7 +36,6 @@ export default function MealCard({
     },
   });
 
-  
   const displayModal = useSignal(false);
   function handleClose() {
     displayModal.value = false;
@@ -85,11 +70,7 @@ export default function MealCard({
   }
 
   return (
-    <section
-      className="blogs "
-      id="blogs"
-      style={{ transform: "scale(0.85)" }}
-    >
+    <section className="meal-blogs" id="blogs" style={{ transform: "scale(0.85)" }}>
       {/* Meal Details Modal Here */}
       <MealDetailsModal
         id={id}
@@ -138,7 +119,9 @@ export default function MealCard({
             <h3 style={{ fontSize: "25px" }}>{name}</h3>
             <p>{desc}</p>
             <Link
-              onClick={() => {onClick();}}
+              onClick={() => {
+                onClick();
+              }}
               className="w-100 btn"
               style={{ marginTop: "-10px" }}
             >
