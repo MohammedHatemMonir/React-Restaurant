@@ -10,6 +10,7 @@ import CookingLoader from "./../Loaders/CookingLoader";
 import ResCard from "./ResCard";
 import Parallax from "./Parallax";
 import ResFilters from "./ResFilters";
+import { Col } from "react-bootstrap";
 
 export default function ResPage() {
   const q = useQuery({
@@ -50,29 +51,31 @@ export default function ResPage() {
         // col-sm-13 col-xs-16
         // className="delivery-rest-list "
         >
-          <div className="row">
-            <div className="col-sm-12 col-md-2">
-              <ResFilters />
-            </div>
-            {/* ResCards */}
-            <div className="col-sm-12 col-md-10">
-              <div className="row">
-                {!q.isLoading &&
-                  Array.isArray(q.data?.data) &&
-                  q.data.data.map((data, index) => (
-                    <div className="col-md-6" key={index}>
-                      <ResCard
-                        id={data._id}
-                        name={data.ResName}
-                        ResImg={data.ResImg}
-                        MealImg={data.MealImg}
-                        start1={data.rating}
-                      />
-                    </div>
-                  ))}
-              </div>
-            </div>
-          </div>
+          <Container>
+            <Row>
+              <Col sm={12} md={2} className="mt-5">
+                <ResFilters />
+              </Col>
+              {/* ResCards */}
+              <Col sm={12} md={10}>
+                <Row>
+                  {!q.isLoading &&
+                    Array.isArray(q.data?.data) &&
+                    q.data.data.map((data, index) => (
+                      <Col key={index} md={6}>
+                        <ResCard
+                          id={data._id}
+                          name={data.ResName}
+                          ResImg={data.ResImg}
+                          MealImg={data.MealImg}
+                          stars1={data.rating}
+                        />
+                      </Col>
+                    ))}
+                </Row>
+              </Col>
+            </Row>
+          </Container>
         </div>
 
         {/* <div style={{ transform: "scale(0.90)" }}>
