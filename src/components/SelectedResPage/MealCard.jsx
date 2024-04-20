@@ -59,7 +59,7 @@ export default function MealCard({
 
   return (
     <section
-      className="text-decoration-none blogs"
+      className="blogs "
       id="blogs"
       style={{ transform: "scale(0.85)" }}
     >
@@ -115,9 +115,6 @@ export default function MealCard({
               className="w-100 btn"
               style={{ marginTop: "-10px" }}
             >
-              <span>
-                <IoMdArrowDropdownCircle style={{ color: "white" }} />
-              </span>
               <span>Read More</span>
             </Link>
             {UserData.value.role == "ADMIN" && (

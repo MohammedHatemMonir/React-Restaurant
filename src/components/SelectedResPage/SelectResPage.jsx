@@ -140,11 +140,11 @@ export default function SelectResPage() {
                 <AddMealButton Resid={resID} />
               </div>
             )}
-            <div style={{ transform: "scale(0.90)" }}>
-              <Row>
+            <div>
+              <Row className="m-0" >
                 {!q.isLoading &&
                   q.data?.data?.meals?.map((item, index) => (
-                    <Col sm={12} md={4} key={index} className="m-0 p-0">
+                    <Col sm={12} md={3} key={index + item} className="p-0" style={{ transform: "scale(0.90)" }}>
                       <MealCard
                         key={index}
                         id={item._id}
