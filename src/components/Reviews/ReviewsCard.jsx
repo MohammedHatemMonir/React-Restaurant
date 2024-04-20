@@ -47,10 +47,13 @@ const ReviewsCard = ({ name, stars, emotion, image, comment }) => {
   }
 
   return (
-    <div className="reviews-card py-3" >
+    <div className="reviews-card py-3">
       <div className="testimonials" id="testimonials">
         <div className="container">
-          <div className="box" style={{ backgroundColor: "#ebebeb" }}>
+          <div
+            className="box"
+            style={{ backgroundColor: "#ebebeb", border: "2px solid black" }}
+          >
             <img src={image} alt="img" />
             <h3>{name}</h3>
             <span className="title">
