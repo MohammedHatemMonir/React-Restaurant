@@ -13,7 +13,7 @@ router.put('/updateRestaurant/:id',control.updateRestaurant)
 //router.get('/getResturantWithcomments/:id',control.getRestaurantWithComments)
 //getResturantWithcomments
 router.post('/postRestaurantComment',validateResturantInput,control.postRestaurantComment)
-router.post('/addCategory',validateResturantInput,control.addCategory)
+router.post('/addCategory',control.addRestaurantCategory)
 router.get('/category/:category',validateResturantInput,control.Categoery)
 router.get('/getAllCategory',validateResturantInput,control.getAllCategory)
 

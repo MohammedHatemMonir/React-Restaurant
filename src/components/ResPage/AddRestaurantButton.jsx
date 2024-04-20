@@ -7,7 +7,7 @@ import { useSignal } from "@preact/signals-react";
 import LeafletMap from "./../Map/LeafletMap";
 import { Button } from "reactstrap";
 import { convertBase64 } from "../../Globals";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 import SearchUser from "./../SearchUser/SearchUser";
 
@@ -46,6 +46,23 @@ export default function AddRestaurantButton() {
     // console.log("New Category", newCategory.value);
   }
 
+
+  const getCategoryiesQuery = useQuery({
+    queryKey: ["orderDetails"],
+    // cacheTime: 600000,
+    // onSuccess: onSuccess,
+    // onError: onError,
+    queryFn: async () => {
+      let url = `/getAllCategory`;
+      const result = await apiClient.get(url);
+      // console.log("hemaaaa", result);
+      return result;
+    },
+  });
+
+
+
+  console.log("All categories",getCategoryiesQuery.data?.data)
   // Add new category in db
   const addCategory = useMutation({
     mutationKey: ["addNewCategory"],
@@ -54,7 +71,7 @@ export default function AddRestaurantButton() {
     // onError: onError,
     mutationFn: async (params) => {
       console.log("trying to load");
-      let url = "/category";
+      let url = "/addCategory";
       console.log("posting to ", url);
       return await apiClient.post(url, params);
     },
@@ -62,12 +79,15 @@ export default function AddRestaurantButton() {
 
   const uploadCategory = async function () {
     const result = await addCategory.mutateAsync({
-      Categoery: newCategory.value,
+      categoryName: newCategory.value,
     });
     newCategory.value = "";
     showCategoryInput.value = false;
-    // queryClient.invalidateQueries({ queryKey: ["addNewCategory"] });
+    console.log("New Category", result.data);
+    // queryClient.invalidateQueries({ queryKey: ["getAllCategory"] });
+    getCategoryiesQuery.refetch();
   };
+
 
   // Add new restaurant in db
   const m = useMutation({
@@ -82,6 +102,7 @@ export default function AddRestaurantButton() {
       return await apiClient.post(url, params);
     },
   });
+
 
   async function submit(data) {
     // console.log("submit! ADD RESTAURANT", data);
@@ -150,9 +171,10 @@ export default function AddRestaurantButton() {
                     })}
                   >
                     <option disabled>Please Select ...</option>
-                    <option value="American">American</option>
-                    <option value="Arabic">Arabic</option>
-                    <option value="Desserts">Desserts</option>
+                    { ShowSignal.value && !getCategoryiesQuery.isLoading && getCategoryiesQuery.data?.data?.Category.map((category,index) => (
+                      <option key={`${index}+${category._id}`} value={category._id}>{category.Categoery}</option>
+                    ))}
+
                   </Form.Select>
                   <span className="error" style={{ color: "red" }}>
                     {errors["Category"] && errors["Category"].message}

@@ -75,8 +75,9 @@ const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResB
             console.log("ResImg", ResImg)
             const ResBanner= await uploadImg(req.body.resBanner);
             console.log("ResBanner", ResBanner)
+            const category = await categoeryModel.findOne({ _id: req.body.Category } );
                 try {
-                    const category = await addCategory(req.body.Categoery);
+                    //const category = await addCategory(req.body.Categoery);
                     const newRestaurantData = {
                         ResName: req.body.ResName,
                         ResImg: ResImg, 
@@ -200,10 +201,10 @@ const updateRestaurant = async (req, res) => {
 };
 
 const addCategory = async (categoryName) => {
-    let category = await categoeryModel.findOne({ Categoery: categoryName });
-    if (!category) {
-        category = await categoeryModel.create({ Categoery: categoryName });
-    }
+
+
+    let category = categoeryModel.findOneAndUpdate({ Categoery: categoryName }, { Categoery: categoryName }, 
+                    { upsert: true, new: true });
     return category;
 };
 const getAllCategory = async (req,res) => {
@@ -215,6 +216,24 @@ const getAllCategory = async (req,res) => {
         return res.json({Message:"Error"});
     }
 };
+
+
+const addRestaurantCategory = async (req, res) => { //{categoryName: ""}
+    try {
+        if(rq.session.user.role != "ADMIN") { return res.json({Message:"Not Authenticated!"}); }
+
+
+        let category = await categoeryModel.findOneAndUpdate({ Categoery: req.body.categoryName }, { Categoery: req.body.categoryName }, 
+            { upsert: true, new: true });
+            console.log(category)
+        return res.json({category});
+    } catch (error) {
+        console.error('Error adding category', error);
+        return res.json({Message:"Error"});
+    }
+
+}
+
 const Categoery = async (req, res) => {
     try {
         const { category } = req.query;
@@ -244,5 +263,6 @@ module.exports = {
     updateRestaurant,
     addCategory,
     Categoery,
-    getAllCategory
+    getAllCategory,
+    addRestaurantCategory
 };
