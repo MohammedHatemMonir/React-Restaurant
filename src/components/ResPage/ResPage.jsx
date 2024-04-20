@@ -62,7 +62,7 @@ export default function ResPage() {
                   {!q.isLoading &&
                     Array.isArray(q.data?.data) &&
                     q.data.data.map((data, index) => (
-                      <Col key={index} md={6}>
+                      <Col key={index} sm={12} md={4}>
                         <ResCard
                           id={data._id}
                           name={data.ResName}

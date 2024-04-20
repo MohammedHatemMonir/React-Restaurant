@@ -37,13 +37,13 @@ export default function ResCard({ id, name, stars1, ResImg, MealImg }) {
     <section
       className="text-decoration-none blogs"
       id="blogs"
-      style={{ transform: "scale(0.85)" }}
+      style={{ transform: "scale(0.80)" }}
     >
       <div className="text-decoration-none box-container">
         <div className="text-decoration-none box">
           <div className="image">
             <br />
-            <h3 style={{ background: "white" }}>
+            <h3 style={{ background: "white", transform: "scale(0.9)" }}>
               <Stars stars1={stars1} /> <br />
               <br />
             </h3>
@@ -56,7 +56,7 @@ export default function ResCard({ id, name, stars1, ResImg, MealImg }) {
             />
           </div>
           <div className="text-decoration-none content">
-            <div className="text-decoration-none tags">
+            <div className="text-decoration-none tags"  style={{ transform: "scale(0.97)" }}>
               <Link>
                 <FaTag className="text-decoration-none" /> food /
               </Link>
@@ -67,7 +67,7 @@ export default function ResCard({ id, name, stars1, ResImg, MealImg }) {
                 <FaTag className="text-decoration-none" /> pizza
               </Link>
             </div>
-            <h3 style={{ fontSize: "25px" }}>{name}</h3>
+            <h3 style={{ fontSize: "20px" }}>{name}</h3>
             {/* <p>
               Lorem, ipsum dolor sit amet consectetur adipisicing elit. Autem,
               earum.
