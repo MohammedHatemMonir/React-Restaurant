@@ -40,7 +40,7 @@ export default function ResPage() {
         <div style={{ transform: "scale(0.95)" }}>
           <Parallax />
         </div>
-        <Slider />
+        {/* <Slider /> */}
         <div style={{ transform: "scale(0.90)" }}>
           <Filters />
         </div>

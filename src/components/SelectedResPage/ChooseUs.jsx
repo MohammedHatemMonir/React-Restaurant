@@ -17,7 +17,7 @@ export default function ChooseUs({ resName }) {
           <div class="row">
             <div class="section-head col-sm-12">
               <h4>
-                <span>Why Choose</span> Us?
+                <span>More About</span> Us?
               </h4>
               <p style={{ fontSize: "20px" }}>
                 Choose
@@ -38,7 +38,7 @@ export default function ChooseUs({ resName }) {
                 the perfect destination for your next culinary adventure
               </p>
             </div>
-            <div className="col-lg-4 col-sm-6">
+            {/* <div className="col-lg-4 col-sm-6">
               <div className="item">
                 <span className="icon feature_box_col_one">
                   <FaUtensils />
@@ -109,7 +109,7 @@ export default function ChooseUs({ resName }) {
                   capturing memorable moments with your loved ones.
                 </p>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

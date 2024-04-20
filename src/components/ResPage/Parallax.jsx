@@ -32,11 +32,11 @@ export default function Parallax() {
     <div style={{ transform: "scale(0.85)" }}>
       <section className="home" id="home">
         <div className="content">
-          <span>Welcome To Dine Me</span>
-          <h3>different spices for the different tastes 😋</h3>
+          <span className="font-weight-bold">Welcome To Dine Me</span>
+          <h3>Embark on a Culinary Journey: Where Passion Meets Palate 🌟</h3>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis unde
-            dolores temporibus hic quam debitis tenetur harum nemo.
+            Discover culinary excellence with our carefully curated dishes,
+            where every flavor is a delight and every bite a revelation.
           </p>
           {/* <Link to="#" className="btn">
             order now
