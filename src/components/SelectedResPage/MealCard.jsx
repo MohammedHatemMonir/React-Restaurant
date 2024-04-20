@@ -20,6 +20,8 @@ import { IoSettings } from "react-icons/io5";
 import { CiSquarePlus } from "react-icons/ci";
 import { HiPlusCircle } from "react-icons/hi2";
 import { IoMdArrowDropdownCircle } from "react-icons/io";
+import { useMutation } from "react-query";
+import { apiClient } from "../../Data/apiclient";
 export default function MealCard({
   id,
   name,
@@ -29,11 +31,36 @@ export default function MealCard({
   rating,
   resID,
   resName,
-  MealComments,
 }) {
+
+
+  const MealComments = useSignal([])
+
+
+  const getCommentsMutation = useMutation({
+    mutationKey: [],
+    // cacheTime: 600000,
+    // onSuccess: onSuccess,
+    // onError: onError,
+    mutationFn: async (params) => {
+      console.log("trying to load");
+      let url = `/GetMealComments/${id}`;
+      console.log("posting to ", url);
+      return await apiClient.get(url, params);
+    },
+  });
+
+  
   const displayModal = useSignal(false);
   function handleClose() {
     displayModal.value = false;
+  }
+
+  async function onClick() {
+    displayModal.value = true;
+    const result = await getCommentsMutation.mutateAsync();
+    MealComments.value = result.data;
+    console.log("getCommentsMutation reslut", result.data);
   }
 
   // Hema Popup Modals Here
@@ -72,7 +99,7 @@ export default function MealCard({
         mealDesc={desc}
         mealImg={mealImg}
         mealPrice={price}
-        MealComments={MealComments}
+        MealComments={MealComments.value?.MealComments}
         resID={resID}
         resName={resName}
         rating={rating}
@@ -111,7 +138,7 @@ export default function MealCard({
             <h3 style={{ fontSize: "25px" }}>{name}</h3>
             <p>{desc}</p>
             <Link
-              onClick={() => (displayModal.value = true)}
+              onClick={() => {onClick();}}
               className="w-100 btn"
               style={{ marginTop: "-10px" }}
             >
