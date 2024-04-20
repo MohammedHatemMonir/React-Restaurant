@@ -16,6 +16,7 @@ const ReviewsCard = ({ name, stars, emotion, image, comment }) => {
   const importantStyle = {
     color: "green !important",
   };
+  stars = Math.round(stars);
 
   switch (emotion) {
     case "anger":
