@@ -6,6 +6,7 @@ import { useMutation, useQueryClient } from "react-query";
 import { useSignal } from "@preact/signals-react";
 import { apiClient } from "../../Data/apiclient";
 import { Cart } from "../../Globals";
+import { Col, Row } from "reactstrap";
 function MealDetailsModal({
   id,
   openModal,
@@ -47,7 +48,9 @@ function MealDetailsModal({
       await m.mutateAsync(j);
       comment.value = "";
 
-      queryClient.invalidateQueries({ mutationKey: [`/GetMealComments/${id}`] });
+      queryClient.invalidateQueries({
+        mutationKey: [`/GetMealComments/${id}`],
+      });
       queryClient.refetchQueries([`/GetMealComments/${id}`]);
       closeModal();
     } catch (e) {
@@ -206,24 +209,27 @@ function MealDetailsModal({
           </div>
         </div>
 
-       
-         <TextCommentBox />
-
-        {MealComments && MealComments.map((item, index) => {
-        return <ReviewsCard
-
-        key={index + "rescomment" + resID}
-        name={item.user.name}
-        stars={item.commentSentmint[2] * 5}
-        emotion={item.commentSentmint[1]}
-        comment={item.Comment}
-        image={
-          item.user.userImg ||
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8PyKYrBKAWWy6YCbQzWQcwIRqH8wYMPluIZiMpV1w0NYSbocTZz0ICWFkLcXhaMyvCwQ&usqp=CAU"
-        }
-        />
-      })
-    }
+        <TextCommentBox />
+        <Row>
+          {MealComments &&
+            MealComments.map((item, index) => {
+              return (
+                <Col sm={12} md={6} key={index}>
+                  <ReviewsCard
+                    key={index + "rescomment" + resID}
+                    name={item.user.name}
+                    stars={item.commentSentmint[2] * 5}
+                    emotion={item.commentSentmint[1]}
+                    comment={item.Comment}
+                    image={
+                      item.user.userImg ||
+                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8PyKYrBKAWWy6YCbQzWQcwIRqH8wYMPluIZiMpV1w0NYSbocTZz0ICWFkLcXhaMyvCwQ&usqp=CAU"
+                    }
+                  />
+                </Col>
+              );
+            })}
+        </Row>
       </Modal.Body>
       <Modal.Footer>
         <Button

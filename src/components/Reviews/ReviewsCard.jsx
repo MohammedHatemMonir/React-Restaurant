@@ -56,7 +56,7 @@ const ReviewsCard = ({ name, stars, emotion, image, comment }) => {
 
   return (
     <div className="reviews-card py-3">
-      <div className="testimonials" id="testimonials">
+      <div className="testimonials w-100" id="testimonials">
         <div className="container">
           <div
             className="box"
@@ -67,7 +67,9 @@ const ReviewsCard = ({ name, stars, emotion, image, comment }) => {
           >
             <img src={image} alt="img" />
             <h3 className="d-inline">{name}</h3>
-            <span className="mx-1" style={{transform:"scale"}}> {emoji.value}</span>
+            <span className="mx-1" style={{ fontSize: "25px" }}>
+              {emoji.value}
+            </span>
             <span className="title"></span>
             <div
               style={{
