@@ -313,46 +313,63 @@ const getMyOrders = async (req, res) => {
 // };
 const getOrderDetails = async (req, res) => {
   try {
+    // Check if user is authenticated
     if (!req.session?.user?._id) {
       return res.status(404).json({ message: "Not authenticated!" });
     }
     
+    // Extract orderId from request parameters
     const { orderId } = req.params;
 
+    // Find the order by orderId
     const order = await Order.findById(orderId);
 
+    // If order not found, return 404 status
     if (!order) {
       return res.status(404).json({ message: "Order not found" });
     }
 
+    // Initialize an array to store meal details
     const mealDetails = [];
-    for (const Meal of order.meals) {
-      const mealDoc = await meal.findById(Meal.id);
-      if (mealDoc) {
-        mealDetails.push({
-          MealName: mealDoc.MealName,
-          MealImg: mealDoc.MealImg,
-          Price: mealDoc.Price,
-          Quantity: Meal.quantity
-        });
-      }
-    }
 
+
+    for (const Meal of order.meals) {
+  try {
+    const mealDoc = await meal.findById(Meal.id);
+    if (mealDoc) {
+      mealDetails.push({
+        MealName: mealDoc.MealName,
+        MealImg: mealDoc.MealImg,
+        Price: mealDoc.Price,
+        Quantity: Meal.quantity
+      });
+    } else {
+
+      console.log(`Meal with ID ${Meal.id} not found.`);
+      
+    }
+  } catch (error) {
+    console.log(`Error fetching meal with ID ${Meal.id}:`, error);
+    
+  }
+}
+console.log(mealDetails[1])
     const resName = await resturant.findById(order.resId);
 
+    
     const result = {
       _id: order._id,
       ResName: resName ? resName.ResName : "Unknown Restaurant",
-      meals: mealDetails.map((item)=>item),
-      //totalPrice: order.totalPrice,
+      meals: mealDetails,
+      //totalPrice: order.totalPrice, 
     };
-
     res.status(200).json(result);
   } catch (error) {
-    console.error("Error fetching order details:", error);
+    console.log("Error fetching order details:", error);
     res.status(500).json({ error: "Server error while fetching order details" });
   }
 };
+
 
 
 
