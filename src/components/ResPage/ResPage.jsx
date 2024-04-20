@@ -52,17 +52,17 @@ export default function ResPage() {
         // className="delivery-rest-list "
         >
           <Container>
-            <Row>
+            <Row className="p-0 m-0">
               <Col sm={12} md={2} className="mt-5">
                 <ResFilters />
               </Col>
               {/* ResCards */}
               <Col sm={12} md={10}>
-                <Row>
+                <Row className="p-0 m-0">
                   {!q.isLoading &&
                     Array.isArray(q.data?.data) &&
                     q.data.data.map((data, index) => (
-                      <Col key={index} sm={12} md={4}>
+                      <Col key={index} sm={12} md={4} className="p-0 m-0">
                         <ResCard
                           id={data._id}
                           name={data.ResName}
