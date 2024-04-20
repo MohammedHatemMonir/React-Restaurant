@@ -18,14 +18,14 @@ const MealsOrdersPage = () => {
     queryFn: async () => {
       let url = `/getOrderDetails/${orderId}`;
       const result = await apiClient.get(url);
-      // console.log("hemaaaa", result);
+      console.log("hemaaaa", result);
       return result;
     },
   });
 
   console.log("query data", q.data?.data);
   if (q.isLoading) {
-    return <>Loading</>;
+    return <>Loading...</>;
   }
   return (
     <div className="container">
@@ -43,23 +43,24 @@ const MealsOrdersPage = () => {
             </tr>
           </thead>
           <tbody>
-            {!q.isLoading && (
-              <tr>
-                <td>{1}</td>
-                <td>{q.data?.data?.ResName}</td>
-                <td>{q.data?.data?.MealName}</td>
-                <td>
-                  <img
-                    src={q.data?.data?.MealImg}
-                    alt="Meal"
-                    className="img-thumbnail"
-                    style={{ maxWidth: "100px", maxHeight: "100px" }}
-                  />
-                </td>
-                <td>{q.data?.data?.Quantity[0]}</td>
-                <td>{q.data?.data?.totalPrice.toFixed(2)} $</td>
-              </tr>
-            )}
+            {!q.isLoading &&
+              q.data?.data?.meals?.map((order, index) => (
+                <tr key={index + order.MealName}>
+                  <td>{index + 1}</td>
+                  <td>{q.data?.data?.ResName}</td>
+                  <td>{order.MealName}</td>
+                  <td>
+                    <img
+                      src={order.MealImg}
+                      alt="Meal"
+                      className="img-thumbnail"
+                      style={{ maxWidth: "100px", maxHeight: "100px" }}
+                    />
+                  </td>
+                  <td>{order.Quantity}</td>
+                  <td>{order.Price.toFixed(2)} $</td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>
