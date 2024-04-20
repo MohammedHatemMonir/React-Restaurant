@@ -12,7 +12,7 @@ import { useSignal } from "@preact/signals-react";
 
 const ReviewsCard = ({ name, stars, emotion, image, comment }) => {
   const emoji = useSignal(<></>);
-
+  const borderColor = useSignal("black");
   const importantStyle = {
     color: "green !important",
   };
@@ -46,19 +46,28 @@ const ReviewsCard = ({ name, stars, emotion, image, comment }) => {
       emoji.value = null;
   }
 
+  if (stars >= 0 && stars <= 2) {
+    borderColor.value = "red";
+  } else if (stars == 3) {
+    borderColor.value = "black";
+  } else {
+    borderColor.value = "green";
+  }
   return (
     <div className="reviews-card py-3">
       <div className="testimonials" id="testimonials">
         <div className="container">
           <div
             className="box"
-            style={{ backgroundColor: "#ebebeb", border: "2px solid black" }}
+            style={{
+              backgroundColor: "#ebebeb",
+              border: `4px solid ${borderColor.value}`,
+            }}
           >
             <img src={image} alt="img" />
-            <h3>{name}</h3>
-            <span className="title">
-              {emotion} <span> {emoji.value}</span>
-            </span>
+            <h3 className="d-inline">{name}</h3>
+            <span className="mx-1"> {emoji.value}</span>
+            <span className="title"></span>
             <div
               style={{
                 transform: "scale(0.5)",
