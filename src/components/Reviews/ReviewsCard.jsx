@@ -46,14 +46,14 @@ const ReviewsCard = ({ name, stars, emotion, image, comment }) => {
     default:
       emoji.value = null;
   }
-
   if (stars >= 0 && stars <= 2) {
-    borderColor.value = "red";
+    borderColor.value = "#FF6347"; // Red for negative reactions
   } else if (stars == 3) {
-    borderColor.value = "black";
+    borderColor.value = "#696969"; // Grey for neutral reactions
   } else {
-    borderColor.value = "green";
+    borderColor.value = "#32CD32"; // Green for positive reactions
   }
+
   return (
     <div className="reviews-card py-3">
       <div className="testimonials" id="testimonials">
@@ -67,7 +67,7 @@ const ReviewsCard = ({ name, stars, emotion, image, comment }) => {
           >
             <img src={image} alt="img" />
             <h3 className="d-inline">{name}</h3>
-            <span className="mx-1"> {emoji.value}</span>
+            <span className="mx-1" style={{transform:"scale"}}> {emoji.value}</span>
             <span className="title"></span>
             <div
               style={{
@@ -77,7 +77,9 @@ const ReviewsCard = ({ name, stars, emotion, image, comment }) => {
             >
               <Stars stars1={stars} />
             </div>
-            <p>{comment}</p>
+            <div>
+              <p>{comment} </p>
+            </div>
           </div>
         </div>
       </div>

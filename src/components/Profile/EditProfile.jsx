@@ -4,6 +4,7 @@ import "./Edit.scss";
 import { useSignal } from "@preact/signals-react";
 import { Button, Col } from "reactstrap";
 import LeafletMap from "./../Map/LeafletMap";
+import { Link } from "react-router-dom";
 
 const EditProfile = () => {
   const {
@@ -198,13 +199,14 @@ const EditProfile = () => {
               >
                 Save
               </button>
-              <button
+              <Link
+              to="/profile"
                 type="button"
                 id="cancel"
                 className="btn btn-outline-primary col-sm-4"
               >
                 Cancel
-              </button>
+              </Link>
             </div>
           </div>
         </form>
