@@ -6,10 +6,12 @@ import { apiClient } from "../../Data/apiclient";
 import EmptyOrders from "./../Orders/EmptyOrdersPage";
 import { toast } from "react-toastify";
 import "./CartBody.scss";
+import { useSignal } from "@preact/signals-react";
 
 export default function CartBody() {
   const navigate = useNavigate();
 
+  const totalPrice =useSignal(0);
   // Create Order
   const m = useMutation({
     mutationKey: [""],
@@ -56,6 +58,43 @@ export default function CartBody() {
     console.log(result);
   }
 
+  console.log("carttttttttt", Cart.value.meals);
+  function AddQuantity({quantity,mealId}) {
+
+    let tempCart = Cart.value;
+
+    if (
+      !tempCart.meals.some((meal) =>
+        meal.id == mealId ? (meal.quantity = quantity) : false
+      )
+    ) {
+      console.log("meal not found");
+    }
+    Cart.value = {};
+    Cart.value = tempCart;
+    console.log("Cart", Cart.value, "temp cart", tempCart);
+    getTotalPrice();
+  }
+
+  function DeleteMeal(id) {
+    let tempCart = Cart.value;
+    tempCart.meals = tempCart.meals.filter((meal) => meal.id != id);
+    Cart.value = {};
+    Cart.value = tempCart;
+    console.log("Cart", Cart.value, "temp cart", tempCart);
+    getTotalPrice();
+  }
+
+
+  function getTotalPrice(){
+
+    let price = 0;
+    Cart.value.meals.map((meal) => {
+      price = price + meal.price * meal.quantity;
+    });
+
+    return price;
+  }
   // console.log("carttttttttt", Cart.value.meals);
   if (m.isLoading) {
     return <>Loading...</>;
@@ -76,8 +115,8 @@ export default function CartBody() {
             !m.isError &&
             !m.isLoading &&
               Cart.value.meals?.map((meal, index) => (
-                <div className="box" key={index}>
-                  <FaTimes className="fas fa-times" />
+                <div className="box" key={index + meal.id}>
+                  <FaTimes className="fas fa-times" onClick={() => {DeleteMeal(meal.id)}} />
                   {console.log("meal data", meal)}
                   {/* // meal.mealImg || */}
                   <img src={meal.mealImg} alt="meal-img" />
@@ -86,11 +125,11 @@ export default function CartBody() {
                     <h3>{meal.name}</h3>
                     <span> quantity : </span>
                     {/* meal.quantity || */}
-                    <input type="number" defaultValue={meal.quantity} />
+                    <input type="number" min="0"  onChange={(e) => AddQuantity({quantity:e.target.value,mealId:meal.id })} defaultValue={meal.quantity} />
                     <br />
                     <span> price : </span>
                     {/* meal.price || */}
-                    <span className="price"> {meal.price} </span>
+                    <span className="price"> {meal.price * meal.quantity} </span>
                   </div>
                 </div>
               ))
@@ -100,11 +139,9 @@ export default function CartBody() {
       <div className="cart-total">
         <h3 className="title"> cart total </h3>
         <div className="box">
-          <h3 className="subtotal">
-            subtotal : <span>$200</span>
-          </h3>
+
           <h3 className="total">
-            total : <span>$200</span>
+            total : <span>{getTotalPrice()}</span>
           </h3>
           <Link
             className="btn"
