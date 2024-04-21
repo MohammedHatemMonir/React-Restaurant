@@ -269,6 +269,39 @@ const resetPassword = async (req, res) => {
     return res.status(500).json({ error: "Internal server error" });
   }
 };
+
+const editProfile = async (req, res) => {
+  if (!req.session?.user?._id) {
+    return res.status(404).json({ message: "Not authenticated!" });
+  }
+  try {
+    const user = await myusers.findById(req.session?.user?._id); 
+    const { name, email, password,location,phoneNumber,userImg } = req.body;
+    if (!user) {
+      return res.status(404).json({ msg: "User not found" });
+    }
+    if (name) user.name = name;
+    if (email) user.email = email;
+    if (password) {
+      const hashedPassword = await bcrypt.hash(password, 8);
+      user.password = hashedPassword;
+    }
+    if (location) user.location = location;
+    if (phoneNumber) user.phoneNumber = phoneNumber;
+    if (userImg) {
+      const updatedUserImg = await uploadImg(userImg);
+      user.userImg = updatedUserImg;
+    }
+
+    await user.save();
+
+    return res.json({ msg: "User updated successfully", user });
+  } catch (error) {
+    console.error("Error updating user:", error);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 module.exports = {
   signup,
   signin,
@@ -278,6 +311,7 @@ module.exports = {
   google,
   forgetPassword,
   resetPassword,
+  editProfile,
 };
 
 // Get

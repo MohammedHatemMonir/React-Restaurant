@@ -14,6 +14,7 @@ router.post("/reset-password/:userId/:token",validateUserInputSignUp,usersContro
 router.post("/logout",validateUserInputLogin,usersController.logout)
 router.post("/session",validateUserInputLogin,usersController.session)
 router.post("/terminateSession",validateUserInputLogin,usersController.terminateSession)
+router.put("/editProfile",usersController.editProfile)
 
     // sign up
     // .post(
