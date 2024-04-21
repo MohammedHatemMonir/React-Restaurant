@@ -95,7 +95,7 @@ export default function MealCard({
       <div className="text-decoration-none box-container">
         <div className=" box" style={{ border: `3px solid black` }}>
           <div className="image">
-            <br />
+      
             <h3 style={{ background: "white" }}>
               <Stars stars1={rating} /> <br />
               <br />

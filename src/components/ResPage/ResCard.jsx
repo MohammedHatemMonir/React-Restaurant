@@ -40,9 +40,11 @@ export default function ResCard({ id, name, stars1, ResImg, MealImg }) {
       style={{ transform: "scale(0.80)" }}
     >
       <div className="text-decoration-none box-container">
-        <div className="text-decoration-none box" style={{ border: `3px solid black` }}>
+        <div
+          className="text-decoration-none box"
+          style={{ border: `3px solid black` }}
+        >
           <div className="image">
-            <br />
             <h3 style={{ background: "white", transform: "scale(0.9)" }}>
               <Stars stars1={stars1} /> <br />
               <br />
