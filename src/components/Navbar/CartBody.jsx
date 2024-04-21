@@ -46,23 +46,18 @@ export default function CartBody() {
       <div className="products-container">
         <h3 className="title">My Products</h3>
         <div className="box-container">
-          {!m.isLoading &&
+          {m.isSuccess &&
             !m.isLoading &&
             Cart.value.meals?.map((meal, index) => (
-              <div className="box" key={index}>
-                <FaTimes className="fas fa-times" />
-                {console.log("meal data", meal)}
-                {/* // meal.mealImg || */}
+              <div className="box" key={index + meal.id}>
+                <FaTimes className="fas fa-times" key={index} />
                 <img src={meal.mealImg} alt="meal-img" />
                 <div className="content">
-                  {/* meal.name || */}
                   <h3>{meal.name}</h3>
                   <span> quantity : </span>
-                  {/* meal.quantity || */}
                   <input type="number" defaultValue={meal.quantity} />
                   <br />
                   <span> price : </span>
-                  {/* meal.price || */}
                   <span className="price"> {meal.price} </span>
                 </div>
               </div>
