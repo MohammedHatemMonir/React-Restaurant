@@ -35,7 +35,7 @@ export default function ResetPass() {
     msg.value = result.data.msg;
     notify(msg.value);
   };
-  
+
   function notify(msg) {
     if (msg === "Email Send Successfully") {
       toast.success(msg, {
@@ -63,8 +63,8 @@ export default function ResetPass() {
     <div className="container text-center" style={{ marginTop: "30vh" }}>
       <div className="row justify-content-center mt-5">
         <div className="col-md-6">
-          <h2>Reset Your Password</h2>
-          <p>Enter your new password</p>
+          <h2 style={{ color: "#ff4500" }}>Reset Your Password</h2>
+          <p style={{ color: "#795d9a" }}>Enter your new password</p>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form-group">
               <input
@@ -90,11 +90,19 @@ export default function ResetPass() {
                 </span>
               )}
             </div>
-            <button className="btn btn-primary btn-block" type="submit">
+            <button
+              className="btn btn-primary btn-block"
+              type="submit"
+              style={{ backgroundColor: "#ff4500" }}
+            >
               Submit
             </button>
             <div className="mt-3">
-              <Link to="/" className="text-decoration-none">
+              <Link
+                to="/"
+                className="text-decoration-none"
+                style={{ color: "#795d9a" }}
+              >
                 Back to Home
               </Link>
             </div>

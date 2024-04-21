@@ -84,7 +84,7 @@ export default function ForgotPass() {
             </div>
             <div className="m-0">
               <span
-                className="text-danger font-weight-bold "
+                className="text-danger font-weight-bold"
                 style={{ fontSize: "25px" }}
               >
                 {errors.email && errors.email.message}
@@ -92,7 +92,7 @@ export default function ForgotPass() {
             </div>
 
             <button
-              className="btn btn-primary btn-block"
+              className="btn btn-primary btn-block border-none"
               type="submit"
               style={{ backgroundColor: "#ff4500" }}
             >
