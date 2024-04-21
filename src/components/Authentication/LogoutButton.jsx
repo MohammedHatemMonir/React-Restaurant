@@ -2,6 +2,7 @@ import { useMutation } from "react-query";
 import { Link, useNavigate } from "react-router-dom";
 import { apiClient } from "../../Data/apiclient";
 import { Cart, UserData } from "../../Globals";
+import { AiOutlineLogin } from "react-icons/ai";
 
 export default function LogoutButton() {
   const navigate = useNavigate();
@@ -28,8 +29,8 @@ export default function LogoutButton() {
   };
 
   return (
-    <Link onClick={LogoutFunction} style={{ textDecoration: "none" }}>
-      Logout
+    <Link onClick={LogoutFunction}>
+      <AiOutlineLogin />
     </Link>
   );
 }

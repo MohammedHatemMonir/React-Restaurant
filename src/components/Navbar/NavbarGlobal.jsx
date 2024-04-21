@@ -14,7 +14,10 @@ import {
   FaClipboardList,
   FaBars,
   FaUser,
+  FaHome,
+  FaMapMarkerAlt,
 } from "react-icons/fa";
+import { AiOutlineLogin } from "react-icons/ai";
 
 export default function NavbarGlobal() {
   const status = useSignal("none");
@@ -37,9 +40,7 @@ export default function NavbarGlobal() {
   }
 
   let Show = useSignal(false);
-  function cancleModal() {
-    Show.value = false;
-  }
+
   return (
     <>
       <header className="header" style={{ transform: "scale(0.90)" }}>
@@ -55,23 +56,7 @@ export default function NavbarGlobal() {
             }}
           />
         </Link>
-        <nav className="navbar">
-          <Link to="/" className="text-decoration-none">
-            home
-          </Link>
-          <Link to="/map" className="text-decoration-none">
-            Location
-          </Link>
-          {/* <Link to="/Tutorials" className="text-decoration-none">
-            Tutorials
-          </Link> */}
-          {/* <Link to="/myorders" className="text-decoration-none">
-            My Orders
-          </Link> */}
-          <Nav.Link style={{ marginLeft: "2px" }}>
-            <LogoutButton />
-          </Nav.Link>
-        </nav>
+
         <div className="icons">
           <Link style={{ display: status }} className="p-5 mx-2">
             <FaBars />
@@ -79,14 +64,24 @@ export default function NavbarGlobal() {
           <Link style={{ display: status }} className="p-5 mx-2">
             <FaSearch />
           </Link>
-          <Link to="myorders" className="p-3 mx-2">
+          <Link to="/" id="login-btn" className="p-3 mx-2">
+            <FaHome />
+          </Link>
+          <Link to="/profile" id="login-btn" className="p-3 mx-2">
+            <FaUser />
+          </Link>
+          <Link to="/map" className="p-3 mx-2">
+            <FaMapMarkerAlt />
+          </Link>
+          <Link to="/myorders" className="p-3 mx-2">
             <FaClipboardList />
           </Link>
-          <Link to="mycart" className="p-3 mx-2">
+          <Link to="/mycart" className="p-3 mx-2">
             <FaShoppingCart />
           </Link>
-          <Link to="profile" id="login-btn" className="p-3 mx-2">
-            <FaUser />
+
+          <Link className="p-3 mx-2">
+            <LogoutButton />
           </Link>
         </div>
       </header>
