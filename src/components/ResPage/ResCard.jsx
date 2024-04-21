@@ -40,7 +40,7 @@ export default function ResCard({ id, name, stars1, ResImg, MealImg }) {
       style={{ transform: "scale(0.80)" }}
     >
       <div className="text-decoration-none box-container">
-        <div className="text-decoration-none box">
+        <div className="text-decoration-none box" style={{ border: `3px solid black` }}>
           <div className="image">
             <br />
             <h3 style={{ background: "white", transform: "scale(0.9)" }}>
@@ -56,7 +56,10 @@ export default function ResCard({ id, name, stars1, ResImg, MealImg }) {
             />
           </div>
           <div className="text-decoration-none content">
-            <div className="text-decoration-none tags"  style={{ transform: "scale(0.97)" }}>
+            <div
+              className="text-decoration-none tags"
+              style={{ transform: "scale(0.97)" }}
+            >
               <Link>
                 <FaTag className="text-decoration-none" /> food /
               </Link>
