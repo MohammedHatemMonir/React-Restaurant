@@ -48,7 +48,9 @@ export default function ResCard({ id, name, stars1, ResImg, MealImg }) {
             <h3 style={{ background: "white", transform: "scale(0.9)" }}>
               <Stars stars1={stars1} /> <br />
               <br />
+              
             </h3>
+            
             <img
               src={
                 MealImg ||
@@ -56,23 +58,32 @@ export default function ResCard({ id, name, stars1, ResImg, MealImg }) {
               }
               alt="Res-Img"
             />
+            
           </div>
-          <div className="text-decoration-none content">
+             
+          <div className="text-decoration-none content pt-0 pl-1 pr-1">
+            
             <div
-              className="text-decoration-none tags"
+              className="text-decoration-none tags d-flex  align-items-center"
               style={{ transform: "scale(0.97)" }}
             >
-              <Link>
-                <FaTag className="text-decoration-none" /> food /
-              </Link>
-              <Link>
-                <FaTag className="text-decoration-none" /> burger /
-              </Link>
-              <Link>
+              <img
+              width={100}
+              height={100}
+                  src={
+                    ResImg ||
+                    `https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/92edf264-8a29-4efb-997a-ca2fdf9b3a92.jpg`
+                  }
+                  alt="Res-Img"
+                  style={{ borderRadius: '50%' }}
+                />
+                             <h3 style={{ fontSize: "30px", margin: "10px" }}>{name}</h3>
+
+              {/* <Link>
                 <FaTag className="text-decoration-none" /> pizza
-              </Link>
+              </Link> */}
             </div>
-            <h3 style={{ fontSize: "20px" }}>{name}</h3>
+
             {/* <p>
               Lorem, ipsum dolor sit amet consectetur adipisicing elit. Autem,
               earum.
