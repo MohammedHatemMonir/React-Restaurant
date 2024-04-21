@@ -48,8 +48,12 @@ const ReviewsCard = ({ name, stars, emotion, image, comment, date }) => {
       emoji.value = <span> 😨 </span>;
       // <FaRegDizzy style={importantStyle} />;
       break;
+    case "fear":
+      emoji.value = <span> 😨 </span>;
+      // <FaRegDizzy style={importantStyle} />;
+      break;
     default:
-      emoji.value = null;
+      emoji.value = <span> 😐 </span>; // Neutral emoji
   }
   if (stars >= 0 && stars <= 2) {
     borderColor.value = "#FF6347"; // Red for negative reactions
