@@ -173,7 +173,7 @@ const Login = () => {
 
               <button
                 type="submit"
-                className="btn btn-black text-light mt-3 w-100 "
+                className="btn btn-color text-light mt-3 w-100 "
               >
                 Login
               </button>
@@ -181,16 +181,6 @@ const Login = () => {
                 style={{ marginTop: "5px" }}
                 className="d-flex justify-content-between font-weight-bold"
               >
-                <Link
-                  to="/forget"
-                  style={{
-                    textDecoration: "none",
-                    marginRight: "10px",
-                    color: "#795d9a",
-                  }}
-                >
-                  Forgot password?
-                </Link>
                 <Link
                   to="/signup"
                   style={{
@@ -200,6 +190,17 @@ const Login = () => {
                   }}
                 >
                   SignUp
+                </Link>
+
+                <Link
+                  to="/forget"
+                  style={{
+                    textDecoration: "none",
+                    marginRight: "10px",
+                    color: "#795d9a",
+                  }}
+                >
+                  Forgot password?
                 </Link>
               </div>
             </form>

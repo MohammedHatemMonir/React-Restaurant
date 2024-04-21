@@ -1,7 +1,5 @@
 .my-login-my-singup {
   font-family: "roboto", sans-serif;
-  // overflow: hidden;
-  // overflow: hidden;
   // .main-head {
   //   height: 150px;
   //   background: #fff;
@@ -10,8 +8,7 @@
   // justify-content: center;
   // align-items: center;
 
-  // overflow: hidden;
-  // overflow: hidden;
+  overflow: hidden;
   .sidenav {
     height: 100%;
     background-image: url("https://c0.wallpaperflare.com/preview/622/696/882/beef-bread-buns-burger.jpg");
@@ -37,11 +34,9 @@
 
   @media screen and (min-width: 768px) {
     .main {
-      
       margin-left: 50%;
       // background: #f5f5fa;
       background: transparent;
-      height: 80vh;
     }
 
     .sidenav {
@@ -71,7 +66,10 @@
     font-weight: 300;
   }
 
-  .btn-black {
+  .text-color {
+    color: #795d9a !important;
+  }
+  .btn-color {
     background-color: #ff4500 !important;
   }
 }
