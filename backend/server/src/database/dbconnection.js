@@ -13,6 +13,10 @@ const connectToMongoDB = async () => {
         console.log("MongoDB Server Connected");
     } catch (error) {
         console.error("Error connecting to MongoDB:", error.message);
+                // Log additional details for debugging
+                console.error("Error code:", error.code);
+                console.error("Error message:", error.message);
+                console.error("Error stack:", error.stack);
     }
 };
 
