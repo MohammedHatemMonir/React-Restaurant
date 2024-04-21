@@ -209,7 +209,7 @@ def Chart(sentences):
 
 
 
-def tweets_analising (tweets,pipe_lr,Tokenizer,analising_model):
+def tweets_analising32 (tweets,pipe_lr,Tokenizer,analising_model):
     
     prediction=[]
     tweets_2=[]
@@ -220,6 +220,7 @@ def tweets_analising (tweets,pipe_lr,Tokenizer,analising_model):
         tweets_2.append(preprocess_sentence)
         pred = pipe_lr.predict([preprocess_sentence])
         prediction.append(pred[0])
+        print(pred[0])
     emotions = {
             0: "sadness",
             1: "joy",
@@ -259,6 +260,56 @@ def tweets_analising (tweets,pipe_lr,Tokenizer,analising_model):
               # sentiment=tweets[i]+'"'':''" positive.'+prediction[i]+testr
           else:
               sentiment=['negative.',prediction_2[i],testr]
+          i+=1
+          ttt.append(sentiment)
+    return ttt
+
+
+# ////////////////////////////
+from transformers import pipeline
+emotion = pipeline('sentiment-analysis', model='arpanghoshal/EmoRoBERTa')
+# emotion_labels = emotion("I'm sorry that the order got delayed")
+# print(emotion_labels[0]['label'])
+def tweets_analising (tweets,Tokenizer,analising_model):
+    
+    prediction=[]
+    tweets_2=[]
+    prediction_2=[]
+    ttt=[]
+    for sentence in tweets:
+        preprocess_sentence=preprocess(sentence)
+        tweets_2.append(preprocess_sentence)
+        pred = emotion(sentence)
+        prediction.append(pred[0]['label'])
+    i=0
+    for t in tweets_2:
+      new_sequence1 = texts_to_sequences([t], Tokenizer)
+      new_padded = pad_sequences(new_sequence1, padding='post',truncating='post',maxlen=22)
+
+      new_padded_tensor = tf.convert_to_tensor(new_padded)
+      predictions=analising_model.predict(new_padded_tensor)
+    
+      predictions=predictions[0][0]
+      # print(predictions)
+      for numpers in new_sequence1:
+          # print(numpers)
+          embty=True
+          if len(numpers)!=0:
+            embty=False 
+          for numper in numpers:
+              # print(numper)
+              if  numper==0:
+                  predictions=(predictions+0.5)/2
+          testr=str(predictions)
+          # print(testr)
+
+          if embty==True:
+              sentiment=['not positive or negative','no emotion']
+          elif predictions > 0.5:
+              sentiment=['positive',prediction[i],testr]
+              # sentiment=tweets[i]+'"'':''" positive.'+prediction[i]+testr
+          else:
+              sentiment=['negative.',prediction[i],testr]
           i+=1
           ttt.append(sentiment)
     return ttt

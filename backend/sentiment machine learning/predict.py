@@ -6,7 +6,7 @@ import joblib
 
 toke_nizer=pickle.load(open('backend/sentiment machine learning/Tokenizer.pkl', 'rb'))
 loaded_model = tf.keras.models.load_model('backend/sentiment machine learning/analising_model.h5')
-pipe_lr=joblib.load(open("backend/sentiment machine learning/text_emotion.pkl","rb"))
+# pipe_lr=joblib.load(open("backend/sentiment machine learning/text_emotion.pkl","rb"))
 # ["i love this product it's good" , "i hate this product it's bad"]
 # print(sys.argv)
 # inputs =sys.argv
@@ -20,9 +20,9 @@ app = Flask(__name__)
 
 def analyze_sentiment(text):
     # Your sentiment analysis logic using scikit-learn or other libraries
-    sentiment= tweets_analising(text,pipe_lr,toke_nizer,loaded_model)
+    sentiment= tweets_analising(text,toke_nizer,loaded_model)
     return sentiment
-sentiment = analyze_sentiment(["this food is so good gergfef" ])
+sentiment = analyze_sentiment(["not like" ])
 print(sentiment)
 @app.route("/analyze2", methods=["POST"])
 def analyze():
