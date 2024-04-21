@@ -58,9 +58,11 @@ export default function ForgotPass() {
   return (
     <div className="container text-center">
       <div className="row justify-content-center" style={{ marginTop: "30vh" }}>
-        <div className="col-md-6">
-          <h2>Forgot Your Password ?</h2>
-          <p>Enter your email below and we will send you a reset link</p>
+        <div className="col-md-6 font-weight-bold">
+          <h2 style={{ color: "#ff4500" }}>Forgot Your Password ?</h2>
+          <p style={{ color: "#795d9a" }}>
+            Enter your email below and we will send you a reset link
+          </p>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form-group">
               <input
@@ -89,12 +91,20 @@ export default function ForgotPass() {
               </span>
             </div>
 
-            <button className="btn btn-primary btn-block" type="submit">
+            <button
+              className="btn btn-primary btn-block"
+              type="submit"
+              style={{ backgroundColor: "#ff4500" }}
+            >
               Send
             </button>
           </form>
           <div className="mt-3">
-            <Link to="/" className="text-decoration-none">
+            <Link
+              to="/"
+              className="text-decoration-none font-weight-bold"
+              style={{ color: "#795d9a" }}
+            >
               Back to Login
             </Link>
           </div>
