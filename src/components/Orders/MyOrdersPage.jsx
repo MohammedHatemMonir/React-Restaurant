@@ -27,10 +27,12 @@ const AllOrdersPage = () => {
     },
   });
   // console.log("query data", q.data?.data);
-
+  if (q.isLoading) {
+    return <>Loading...</>;
+  }
   if (q.data?.data.message == "No orders found") {
     return <EmptyOrders />;
-  } else
+  } 
     return (
       <div className="container">
         <h2 className="text-center font-weight-bold my-4">My Orders</h2>

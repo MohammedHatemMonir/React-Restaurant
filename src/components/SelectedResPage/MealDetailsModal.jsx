@@ -181,7 +181,7 @@ function MealDetailsModal({
             </div>
             <p className="item-description ">{mealDesc}</p>
             <div className="item-actions">
-              <div className="reactions">
+              {/* <div className="reactions">
                 <button
                   type="button"
                   disabled="disabled"
@@ -192,7 +192,7 @@ function MealDetailsModal({
                   </span>
                   <span className="count"> 323</span>
                 </button>
-              </div>
+              </div> */}
               <div className="item-sizes ">
                 <ul className="sizes-list custom-radio-group">
                   <li className="size">
