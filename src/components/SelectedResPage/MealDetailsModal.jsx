@@ -82,7 +82,7 @@ function MealDetailsModal({
             />
             <button
               onClick={PostRestaurantComment}
-              className="btn btn-primary"
+              className="btn"
               style={{
                 padding: "10px 20px",
                 borderRadius: "5px",
@@ -92,6 +92,7 @@ function MealDetailsModal({
                 maxWidth: "300px",
                 boxSizing: "border-box",
                 color: "white",
+                background:"#ff4500"
                 // fontWeight:"Bold"
               }}
             >
