@@ -62,9 +62,9 @@ export default function NavbarGlobal() {
           <Link to="/map" className="text-decoration-none">
             Location
           </Link>
-          <Link to="/Tutorials" className="text-decoration-none">
+          {/* <Link to="/Tutorials" className="text-decoration-none">
             Tutorials
-          </Link>
+          </Link> */}
           {/* <Link to="/myorders" className="text-decoration-none">
             My Orders
           </Link> */}
