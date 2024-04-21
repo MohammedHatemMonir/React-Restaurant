@@ -1,15 +1,18 @@
+import "./Edit.scss";
 import { useForm } from "react-hook-form";
 import { UserData } from "../../Globals";
-import "./Edit.scss";
 import { useSignal } from "@preact/signals-react";
 import { Button, Col } from "reactstrap";
 import LeafletMap from "./../Map/LeafletMap";
 import { Link } from "react-router-dom";
-
+import { useMutation, useQueryClient } from "react-query";
+import { apiClient } from "../../Data/apiclient";
 const EditProfile = () => {
+  const queryClient = useQueryClient();
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
   const currentLocation = useSignal("");
@@ -21,18 +24,49 @@ const EditProfile = () => {
     myBtn.value = !myBtn.value;
   }
 
-  const onSubmit = () => {};
+  const m = useMutation({
+    // cacheTime: 600000,
+    // onSuccess: onSuccess,
+    // onError: onError,
+    mutationKey: ["editProfile"],
+    mutationFn: async (params) => {
+      let url = "/editProfile";
+      return await apiClient.put(url, params);
+    },
+  });
+
+  const onSubmit = async (data) => {
+    console.log("new data", data); // this new data from registers in useForm hook
+    const result = await m.mutateAsync(data);
+    console.log("data added", result);
+
+    queryClient.invalidateQueries({ mutationKey: ["editProfile"] });
+    queryClient.refetchQueries(["editProfile"]);
+    reset();
+    // let ResImg;
+    // let ResBanner;
+
+    // if (data.ResImg[0]) ResImg = await convertBase64(data.resImg[0]);
+    // if (data.ResBanner[0]) ResBanner = await convertBase64(data.resBanner[0]);
+
+    // if (ResImg) data.ResImg = resImg64;
+    // if (ResBanner) data.ResBanner = resBanner64;
+
+    // console.log(result)
+    // alert(result)
+  };
+  // const onSubmit = () => {};
 
   return (
     <div className="edit-profile">
       <div className="container form__wrapper">
-        <h2 className="">Edit Your Profile</h2>
+        <h2>Edit Your Profile</h2>
         <form onSubmit={handleSubmit(onSubmit)} id="myForm">
           <div className="form-row">
             <div className="form-group col-md-6">
               <label htmlFor="firstName">Name</label>
               <input
-                {...register("firstName", {
+                {...register("name", {
                   // { required: "Name is required" }
                   minLength: {
                     value: 3,
@@ -46,14 +80,14 @@ const EditProfile = () => {
                 id="firstName"
                 placeholder="Name"
               />
-              {errors.firstName && (
-                <span className="text-danger ">{errors.firstName.message}</span>
+              {errors.name && (
+                <span className="text-danger">{errors.name.message}</span>
               )}
             </div>
-            <div className="form-group col-md-6">
+            {/* <div className="form-group col-md-6">
               <label htmlFor="my-img">Profile Image</label>
               <input
-                {...register("userImage", {
+                {...register("userImg", {
                   // required: "Profile image is required",
                 })}
                 type="file"
@@ -61,10 +95,10 @@ const EditProfile = () => {
                 className="form-control"
                 id="my-img"
               />
-              {errors.userImage && (
-                <span className="text-danger ">{errors.userImage.message}</span>
+              {errors.userImg && (
+                <span className="text-danger ">{errors.userImg.message}</span>
               )}
-            </div>
+            </div> */}
           </div>
           <div className="form-group">
             <label htmlFor="email">Email</label>
@@ -112,7 +146,7 @@ const EditProfile = () => {
             <div className="form-group col-md-6">
               <label htmlFor="new-pass">New Password</label>
               <input
-                {...register("newPass", {
+                {...register("password", {
                   // required: "New password is required",
                   minLength: {
                     value: 5,
@@ -125,8 +159,8 @@ const EditProfile = () => {
                 // required
                 placeholder="*******"
               />
-              {errors.newPass && (
-                <span className="text-danger ">{errors.newPass.message}</span>
+              {errors.password && (
+                <span className="text-danger ">{errors.password.message}</span>
               )}
             </div>
           </div>
@@ -135,7 +169,7 @@ const EditProfile = () => {
             <div className="form-group col-md-5">
               <label htmlFor="phone">Phone Number</label>
               <input
-                {...register("phone", {
+                {...register("phoneNumber", {
                   minLength: {
                     value: 11,
                     message: "Phone must have at least 11 digits",
@@ -146,8 +180,10 @@ const EditProfile = () => {
                 id="phone"
                 placeholder="01*********"
               />
-              {errors.phone && (
-                <span className="text-danger ">{errors.phone.message}</span>
+              {errors.phoneNumber && (
+                <span className="text-danger ">
+                  {errors.phoneNumber.message}
+                </span>
               )}
             </div>
 
@@ -200,7 +236,7 @@ const EditProfile = () => {
                 Save
               </button>
               <Link
-              to="/profile"
+                to="/profile"
                 type="button"
                 id="cancel"
                 className="btn btn-outline-primary col-sm-4"

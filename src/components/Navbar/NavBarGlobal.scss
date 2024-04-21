@@ -1,7 +1,8 @@
 // $green: #27ae60;
 $green: #ff4500;
-$black: #130f40;
-$white: #fff;
+$black: hsl(245, 62%, 15%);
+// $white: #fff;
+$white: #dcdcdc;
 $light-color: #666;
 $light-bg: #f7f7f7;
 $border: 0.1rem solid rgba(0, 0, 0, 0.2);
@@ -43,7 +44,8 @@ $box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.05);
     }
   }
 
-  .icons a {
+  .icons a,
+  .icons span a {
     height: 4.5rem;
     width: 4.5rem;
     line-height: 4.5rem;
