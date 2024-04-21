@@ -1,5 +1,6 @@
 import "./ReviewsCard.scss";
 import Stars from "./../Stars/Stars";
+import moment from "moment";
 // import {
 //   FaAngry,
 //   FaSadCry,
@@ -10,12 +11,16 @@ import Stars from "./../Stars/Stars";
 // } from "react-icons/fa";
 import { useSignal } from "@preact/signals-react";
 
-const ReviewsCard = ({ name, stars, emotion, image, comment }) => {
+const ReviewsCard = ({ name, stars, emotion, image, comment, date }) => {
   const emoji = useSignal(<></>);
   const borderColor = useSignal("black");
-  const importantStyle = {
-    color: "green !important",
-  };
+
+  const originalDate = moment(date);
+  const formattedDate = originalDate.format("MMM D, YYYY");
+
+  // const importantStyle = {
+  //   color: "green !important",
+  // };
   stars = Math.round(stars);
 
   switch (emotion) {
@@ -70,7 +75,8 @@ const ReviewsCard = ({ name, stars, emotion, image, comment }) => {
             <span className="mx-1" style={{ fontSize: "25px" }}>
               {emoji.value}
             </span>
-            <span className="title"></span>
+            <span className="title">{formattedDate}</span>
+
             <div
               style={{
                 transform: "scale(0.5)",
@@ -79,6 +85,7 @@ const ReviewsCard = ({ name, stars, emotion, image, comment }) => {
             >
               <Stars stars1={stars} />
             </div>
+
             <div>
               <p>{comment} </p>
             </div>

@@ -183,6 +183,7 @@ export default function SelectResPage() {
                       stars={item.commentSentmint[2] * 5}
                       emotion={item.commentSentmint[1]}
                       comment={item.Comment}
+                      date={item.createdAt}
                       image={
                         item.user.userImg ||
                         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8PyKYrBKAWWy6YCbQzWQcwIRqH8wYMPluIZiMpV1w0NYSbocTZz0ICWFkLcXhaMyvCwQ&usqp=CAU"
