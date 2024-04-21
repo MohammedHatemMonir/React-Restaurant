@@ -1,7 +1,7 @@
 import { useMutation } from "react-query";
 import { Link, useNavigate } from "react-router-dom";
 import { apiClient } from "../../Data/apiclient";
-import { UserData } from "../../Globals";
+import { Cart, UserData } from "../../Globals";
 
 export default function LogoutButton() {
   const navigate = useNavigate();
@@ -22,6 +22,7 @@ export default function LogoutButton() {
     const result = await m.mutateAsync();
     if (result.data.success) {
       UserData.value = {};
+      Cart.value = [];
       navigate("/login");
     }
   };

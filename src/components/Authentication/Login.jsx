@@ -4,7 +4,8 @@ import { useMutation } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 import { UserData } from "../../Globals";
 import "./Login&Signup.scss";
-import logo from "../../images/DineMeLogo-modified.png";
+import DineMeLogo from "../../images/DineMeLogo.png";
+import DineMeLogoModified from "../../images/DineMeLogo-modified.png";
 import { useSignal } from "@preact/signals-react";
 import { Button } from "reactstrap";
 import { toast } from "react-toastify";
@@ -69,28 +70,31 @@ const Login = () => {
   }
   return (
     <div className="my-login-my-singup">
-      <div className="sidenav ">
-        <div className="login-main-text  d-flex justify-content-center align-items-center">
-          <img
-            src={logo}
-            style={{
-              transform: "scale(0.6)",
-            }}
-          />
-        </div>
-      </div>
+      <div className="sidenav"></div>
       <div className="main">
         <div
-          className="col-md-6 col-sm-12 "
+          className="col-md-6 col-sm-12"
           style={{
             //  marginLeft: 60,
             paddingBottom: 30,
           }}
         >
-          <div className="login-form ">
+          <div className="login-form">
             <div className="text-center">
-              <h3>Login</h3>
-              <p>Welcome back! Please sign in to your account</p>
+              <div>
+                <img
+                  src={DineMeLogo}
+                  alt="logo"
+                  className="img-fluid mb-4"
+                  style={{ maxWidth: "200px" }}
+                />
+              </div>
+              <h3 className="font-weight-bold" style={{ color: "#ff4500" }}>
+                Welcome to Dine Me
+              </h3>
+              <p style={{ color: "#795d9a" }}>
+                Welcome back! Please sign in to your account
+              </p>
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -105,9 +109,9 @@ const Login = () => {
               </Button>
               <div className="position-relative mt-4">
                 <hr className="bg-200" />
-                <div className="text-center font-weight-bold">Use Email</div>
+                {/* <div className="text-center font-weight-bold">Use Email</div> */}
               </div>
-              <div className="form-group">
+              <div className="form-group" style={{ color: "#ff4500" }}>
                 <label>Email</label>
                 <input
                   type="email"
@@ -125,7 +129,10 @@ const Login = () => {
                   <span className="text-danger">{errors["email"].message}</span>
                 )}
               </div>
-              <div className="form-group" style={{ position: "relative" }}>
+              <div
+                className="form-group"
+                style={{ position: "relative", color: "#ff4500" }}
+              >
                 <label>Password</label>
                 <input
                   type={showPass.value ? "text" : "password"}
@@ -152,7 +159,7 @@ const Login = () => {
                     background: "transparent",
                     position: "absolute",
                     top: 51,
-                    right: 7,
+                    right: 15,
                     transform: "translate(0, -50%)",
                   }}
                 >
@@ -164,24 +171,38 @@ const Login = () => {
                 </button>
               </div>
 
-              <div style={{ marginTop: "5px" }}>
+              <button
+                type="submit"
+                className="btn btn-color text-light mt-3 w-100 "
+              >
+                Login
+              </button>
+              <div
+                style={{ marginTop: "5px" }}
+                className="d-flex justify-content-between font-weight-bold"
+              >
                 <Link
                   to="/signup"
-                  style={{ textDecoration: "none", marginRight: "10px" }}
+                  style={{
+                    textDecoration: "none",
+                    marginRight: "10px",
+                    color: "#795d9a",
+                  }}
                 >
                   SignUp
                 </Link>
 
                 <Link
                   to="/forget"
-                  style={{ textDecoration: "none", marginRight: "10px" }}
+                  style={{
+                    textDecoration: "none",
+                    marginRight: "10px",
+                    color: "#795d9a",
+                  }}
                 >
-                  Forgot password ?
+                  Forgot password?
                 </Link>
               </div>
-              <button type="submit" className="btn btn-black text-light mt-3">
-                Login
-              </button>
             </form>
           </div>
         </div>

@@ -18,7 +18,6 @@ const ResFilters = () => {
           <Input value="heels" title="Heels" name="test" />
         </div>
         {/* Prices */}
-
         <div className="ml">
           <h2 className="sidebar-title price-title">Price</h2>
           <label className="sidebar-label-container">

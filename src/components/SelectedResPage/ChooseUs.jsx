@@ -17,7 +17,7 @@ export default function ChooseUs({ resName }) {
           <div class="row">
             <div class="section-head col-sm-12">
               <h4>
-                <span>More About</span> Us?
+                <span>More About</span> Us
               </h4>
               <p style={{ fontSize: "20px" }}>
                 Choose

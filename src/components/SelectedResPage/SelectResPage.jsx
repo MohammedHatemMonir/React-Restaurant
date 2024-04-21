@@ -66,13 +66,16 @@ export default function SelectResPage() {
                       <div className="resturant-name">
                         <h1 className="title">
                           {q.data?.data?.restaurant?.ResName}
-                          <span className="green">
-                            {UserData.value.role == "ADMIN" && (
-                              <Link to={`/RestaurantDashboard/${resID}`}>
-                                Statistics
-                              </Link>
-                            )}
-                          </span>
+
+                          {UserData.value.role == "ADMIN" && (
+                            <Link
+                              className="badge badge-primary"
+                              style={{ color: "white", fontSize: "0.45em" }}
+                              to={`/RestaurantDashboard/${resID}`}
+                            >
+                              Statistics
+                            </Link>
+                          )}
                         </h1>
                       </div>
                       <div className="subheader">
@@ -129,9 +132,7 @@ export default function SelectResPage() {
             </Row>
 
             {/* Hema Here */}
-            <div style={{ transform: "scale(0.90)" }}>
-              <ChooseUs resName={q.data?.data?.restaurant?.ResName} />
-            </div>
+
             <div style={{ transform: "scale(0.85)" }}>
               <MealFilters />
             </div>
@@ -140,11 +141,17 @@ export default function SelectResPage() {
                 <AddMealButton Resid={resID} />
               </div>
             )}
-            <div style={{ transform: "scale(0.90)" }}>
-              <Row>
+            <div>
+              <Row className="m-0">
                 {!q.isLoading &&
                   q.data?.data?.meals?.map((item, index) => (
-                    <Col sm={12} md={4} key={index} className="m-0 p-0">
+                    <Col
+                      sm={12}
+                      md={3}
+                      key={index + item}
+                      className="p-0"
+                      style={{ transform: "scale(0.90)" }}
+                    >
                       <MealCard
                         key={index}
                         id={item._id}
@@ -176,6 +183,7 @@ export default function SelectResPage() {
                       stars={item.commentSentmint[2] * 5}
                       emotion={item.commentSentmint[1]}
                       comment={item.Comment}
+                      date={item.createdAt}
                       image={
                         item.user.userImg ||
                         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8PyKYrBKAWWy6YCbQzWQcwIRqH8wYMPluIZiMpV1w0NYSbocTZz0ICWFkLcXhaMyvCwQ&usqp=CAU"
@@ -186,6 +194,9 @@ export default function SelectResPage() {
             </Row>
           </div>
         </div>
+      </div>
+      <div style={{ transform: "scale(0.90)" }}>
+        <ChooseUs resName={q.data?.data?.restaurant?.ResName} />
       </div>
       <Footer />
     </>

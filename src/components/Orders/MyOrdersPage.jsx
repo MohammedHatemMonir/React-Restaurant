@@ -1,14 +1,15 @@
-import OrdersData from "./OrdersData.json";
 import EmptyOrders from "./EmptyOrdersPage";
 import { useQueryClient, useQuery } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 import { useSignal } from "@preact/signals-react";
 import { LinkContainer } from "react-router-bootstrap";
+import moment from "moment";
 
 const AllOrdersPage = () => {
   const myOrders = useSignal([]);
   const queryClient = useQueryClient();
-
+  let originalDate = "";
+  let formattedDate = "";
   // Get All Orders
   const q = useQuery({
     queryKey: ["myOrders"],
@@ -26,35 +27,6 @@ const AllOrdersPage = () => {
     },
   });
   // console.log("query data", q.data?.data);
-
-  // Convert date to 1 day ago etc...
-  function timeAgo(dateString) {
-    const date = new Date(dateString);
-    const now = new Date();
-
-    // Set both dates to the start of the day (midnight)
-    const startOfToday = new Date(
-      now.getFullYear(),
-      now.getMonth(),
-      now.getDate()
-    );
-    const startOfDate = new Date(
-      date.getFullYear(),
-      date.getMonth(),
-      date.getDate()
-    );
-
-    const diffTime = Math.abs(startOfToday - startOfDate);
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-    if (diffDays === 0) {
-      return "Ordered Today";
-    } else if (diffDays >= 1 && diffDays <= 9) {
-      return `${diffDays} day ago`;
-    } else {
-      return `${diffDays} days ago`;
-    }
-  }
 
   if (q.data?.data.message == "No orders found") {
     return <EmptyOrders />;
@@ -74,20 +46,25 @@ const AllOrdersPage = () => {
             </thead>
             <tbody>
               {myOrders.value.data?.orders &&
-                myOrders.value.data.orders.map((order, index) => (
-                  <LinkContainer
-                    to={`/mealdetails/${order._id}`}
-                    key={order._id}
-                    style={{ cursor: "pointer" }}
-                  >
-                    <tr style={{ cursor: "pointer" }}>
-                      <td>{index + 1}</td>
-                      <td>{order.totalPrice.toFixed(2)} $</td>
-                      <td>{timeAgo(order.dateOrdered)}</td>
-                      <td>{order.status}</td>
-                    </tr>
-                  </LinkContainer>
-                ))}
+                myOrders.value.data.orders.map((order, index) => {
+                  // Format the date for each order
+                  originalDate = moment(order.dateOrdered);
+                  formattedDate = originalDate.format("MMM D, YYYY");
+                  return (
+                    <LinkContainer
+                      to={`/mealdetails/${order._id}`}
+                      key={order._id}
+                      style={{ cursor: "pointer" }}
+                    >
+                      <tr style={{ cursor: "pointer" }}>
+                        <td>{index + 1}</td>
+                        <td>{order.totalPrice.toFixed(2)} $</td>
+                        <td>{formattedDate}</td>
+                        <td>{order.status}</td>
+                      </tr>
+                    </LinkContainer>
+                  );
+                })}
             </tbody>
           </table>
         </div>

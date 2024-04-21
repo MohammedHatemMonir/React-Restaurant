@@ -32,6 +32,42 @@ const MedoTest = () => {
     m.mutateAsync();
   }
 
+
+
+
+
+
+
+
+
+
+  // const text = "meal -best"; lable = "0"                        
+
+  // const text2 = "love meal enjoying";  lable = "1"                 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   const convertBase64 = (file) => {
     return new Promise((resolve, reject) => {
       const fileReader = new FileReader();

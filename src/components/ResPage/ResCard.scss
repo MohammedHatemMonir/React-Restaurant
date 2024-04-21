@@ -12,25 +12,25 @@ $box-shadow: 0 16px 16px rgba(0, 0, 0, 0.05);
   gap: 1rem;
 }
 
-.blogs {
+.res-blogs {
   .box-container {
-    @include grid(37rem);
+    @include grid(25rem);
 
     .box {
       border-radius: 0.5rem;
       overflow: hidden;
 
-      &:hover {
-        .image {
-          h3 {
-            left: 1.5rem;
-          }
+      // &:hover {
+      //   .image {
+      //     h3 {
+      //       left: 1.5rem;
+      //     }
 
-          img {
-            transform: scale(1.1);
-          }
-        }
-      }
+      //     img {
+      //       transform: scale(1.1);
+      //     }
+      //   }
+      // }
 
       .image {
         position: relative;
@@ -41,14 +41,16 @@ $box-shadow: 0 16px 16px rgba(0, 0, 0, 0.05);
         h3 {
           position: absolute;
           z-index: 10;
-          top: 1rem;
+          // top: 1rem;
+          top: 3rem;
           left: -100%;
           border-radius: 0.5rem;
           padding: 0.5rem 1rem;
           background: $white;
           color: $black;
           font-size: 1.5rem;
-
+          // edited here
+          left: 1rem;
           i {
             padding-right: 0.5rem;
             color: $green;

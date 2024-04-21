@@ -60,6 +60,7 @@ const analyze = async (req, res) => { //{text:"",mealid: ""}
             //------updating the meal---------
             const Comment_rating=result.sentiment[0][2]*5
             const new_comment_num=meals[0].comment_num+1
+
             const new_rating=(Comment_rating+meals[0].rating*meals[0].comment_num)/new_comment_num
 
             const meal_body = {

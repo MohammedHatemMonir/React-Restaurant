@@ -1,5 +1,6 @@
 import "./ReviewsCard.scss";
 import Stars from "./../Stars/Stars";
+import moment from "moment";
 // import {
 //   FaAngry,
 //   FaSadCry,
@@ -10,12 +11,17 @@ import Stars from "./../Stars/Stars";
 // } from "react-icons/fa";
 import { useSignal } from "@preact/signals-react";
 
-const ReviewsCard = ({ name, stars, emotion, image, comment }) => {
+const ReviewsCard = ({ name, stars, emotion, image, comment, date }) => {
   const emoji = useSignal(<></>);
+  const borderColor = useSignal("black");
 
-  const importantStyle = {
-    color: "green !important",
-  };
+  const originalDate = moment(date);
+  const formattedDate = originalDate.format("MMM D, YYYY");
+
+  // const importantStyle = {
+  //   color: "green !important",
+  // };
+  stars = Math.round(stars);
 
   switch (emotion) {
     case "anger":
@@ -45,17 +51,32 @@ const ReviewsCard = ({ name, stars, emotion, image, comment }) => {
     default:
       emoji.value = null;
   }
+  if (stars >= 0 && stars <= 2) {
+    borderColor.value = "#FF6347"; // Red for negative reactions
+  } else if (stars == 3) {
+    borderColor.value = "#696969"; // Grey for neutral reactions
+  } else {
+    borderColor.value = "#32CD32"; // Green for positive reactions
+  }
 
   return (
-    <div className="reviews-card py-3" >
-      <div className="testimonials" id="testimonials">
+    <div className="reviews-card py-3">
+      <div className="testimonials w-100" id="testimonials">
         <div className="container">
-          <div className="box" style={{ backgroundColor: "#ebebeb" }}>
+          <div
+            className="box"
+            style={{
+              backgroundColor: "#ebebeb",
+              border: `4px solid ${borderColor.value}`,
+            }}
+          >
             <img src={image} alt="img" />
-            <h3>{name}</h3>
-            <span className="title">
-              {emotion} <span> {emoji.value}</span>
+            <h3 className="d-inline">{name}</h3>
+            <span className="mx-1" style={{ fontSize: "25px" }}>
+              {emoji.value}
             </span>
+            <span className="title">{formattedDate}</span>
+
             <div
               style={{
                 transform: "scale(0.5)",
@@ -64,7 +85,10 @@ const ReviewsCard = ({ name, stars, emotion, image, comment }) => {
             >
               <Stars stars1={stars} />
             </div>
-            <p>{comment}</p>
+
+            <div>
+              <p>{comment} </p>
+            </div>
           </div>
         </div>
       </div>
