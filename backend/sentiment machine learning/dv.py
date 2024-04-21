@@ -28,6 +28,23 @@
 # # Depending on the model's output format, interpret the prediction (e.g., map class index to emotion label)
 
 from transformers import pipeline
-emotion = pipeline('sentiment-analysis', model='arpanghoshal/EmoRoBERTa')
+emotion = pipeline('sentiment-analysis', model='arpanghoshal/EmoRoBERTa', return_all_scores=True)
 emotion_labels = emotion("I'm sorry that the order got delayed")
-print(emotion_labels[0]['label'])
+print(emotion_labels)
+def get_basic_emotion(predictions):
+  basic_emotions = ['joy', 'sadness', 'anger', 'fear', 'disgust']
+  max_probability = 0
+  basic_emotion = 'neutral'
+  for item in predictions:
+    for sentiment in item:
+        label = sentiment['label']
+        score = sentiment['score']
+        if label in basic_emotions and score > max_probability:
+            max_probability = score
+            basic_emotion = label
+  return basic_emotion
+
+text = "This is a very happy sentence."  # Replace with your text
+predictions = emotion(text)
+basic_emotion = get_basic_emotion(predictions)
+print(f"Predicted basic emotion: {basic_emotion}")

@@ -267,7 +267,7 @@ def tweets_analising32 (tweets,pipe_lr,Tokenizer,analising_model):
 
 # ////////////////////////////
 from transformers import pipeline
-emotion = pipeline('sentiment-analysis', model='arpanghoshal/EmoRoBERTa')
+emotion = pipeline('sentiment-analysis', model='arpanghoshal/EmoRoBERTa', return_all_scores=True)
 # emotion_labels = emotion("I'm sorry that the order got delayed")
 # print(emotion_labels[0]['label'])
 def tweets_analising (tweets,Tokenizer,analising_model):
@@ -280,7 +280,8 @@ def tweets_analising (tweets,Tokenizer,analising_model):
         preprocess_sentence=preprocess(sentence)
         tweets_2.append(preprocess_sentence)
         pred = emotion(sentence)
-        prediction.append(pred[0]['label'])
+        basic_emotion = get_basic_emotion(pred)
+        prediction.append(basic_emotion)
     i=0
     for t in tweets_2:
       new_sequence1 = texts_to_sequences([t], Tokenizer)
@@ -313,3 +314,15 @@ def tweets_analising (tweets,Tokenizer,analising_model):
           i+=1
           ttt.append(sentiment)
     return ttt
+def get_basic_emotion(predictions): 
+  basic_emotions = ['joy', 'sadness', 'anger', 'fear', 'love','neutral','surprise']
+  max_probability = 0
+  basic_emotion = 'neutral'
+  for item in predictions:
+    for sentiment in item:
+        label = sentiment['label']
+        score = sentiment['score']
+        if label in basic_emotions and score > max_probability:
+            max_probability = score
+            basic_emotion = label
+  return basic_emotion

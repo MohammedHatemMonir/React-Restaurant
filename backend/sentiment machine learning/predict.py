@@ -22,7 +22,7 @@ def analyze_sentiment(text):
     # Your sentiment analysis logic using scikit-learn or other libraries
     sentiment= tweets_analising(text,toke_nizer,loaded_model)
     return sentiment
-sentiment = analyze_sentiment(["not like" ])
+sentiment = analyze_sentiment(["surprise" ])
 print(sentiment)
 @app.route("/analyze2", methods=["POST"])
 def analyze():
