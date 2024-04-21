@@ -4,6 +4,7 @@ import { Cart } from "../../Globals";
 import { useMutation } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 import EmptyOrders from "./../Orders/EmptyOrdersPage";
+import { toast } from "react-toastify";
 import "./CartBody.scss";
 
 export default function CartBody() {
@@ -25,6 +26,31 @@ export default function CartBody() {
 
   async function createOrder() {
     const result = await m.mutateAsync();
+
+    if (!result.data.success) {
+      // alert(result.data?.msg);
+      toast.error(result.data?.message, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else {
+      // alert(result.data?.msg);
+      toast.success(result.data?.message, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+
     navigate("/myorders");
     Cart.value.meals = [];
     console.log(result);
@@ -46,27 +72,29 @@ export default function CartBody() {
       <div className="products-container">
         <h3 className="title">My Products</h3>
         <div className="box-container">
-          {!m.isLoading &&
+          {
+            !m.isError &&
             !m.isLoading &&
-            Cart.value.meals?.map((meal, index) => (
-              <div className="box" key={index}>
-                <FaTimes className="fas fa-times" />
-                {console.log("meal data", meal)}
-                {/* // meal.mealImg || */}
-                <img src={meal.mealImg} alt="meal-img" />
-                <div className="content">
-                  {/* meal.name || */}
-                  <h3>{meal.name}</h3>
-                  <span> quantity : </span>
-                  {/* meal.quantity || */}
-                  <input type="number" defaultValue={meal.quantity} />
-                  <br />
-                  <span> price : </span>
-                  {/* meal.price || */}
-                  <span className="price"> {meal.price} </span>
+              Cart.value.meals?.map((meal, index) => (
+                <div className="box" key={index}>
+                  <FaTimes className="fas fa-times" />
+                  {console.log("meal data", meal)}
+                  {/* // meal.mealImg || */}
+                  <img src={meal.mealImg} alt="meal-img" />
+                  <div className="content">
+                    {/* meal.name || */}
+                    <h3>{meal.name}</h3>
+                    <span> quantity : </span>
+                    {/* meal.quantity || */}
+                    <input type="number" defaultValue={meal.quantity} />
+                    <br />
+                    <span> price : </span>
+                    {/* meal.price || */}
+                    <span className="price"> {meal.price} </span>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))
+          }
         </div>
       </div>
       <div className="cart-total">

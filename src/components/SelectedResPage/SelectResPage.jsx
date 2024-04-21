@@ -137,7 +137,7 @@ export default function SelectResPage() {
               <MealFilters />
             </div> */}
             {UserData.value.role == "ADMIN" && (
-              <div>
+              <div className="mt-4">
                 <AddMealButton Resid={resID} />
               </div>
             )}

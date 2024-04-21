@@ -44,12 +44,12 @@ export default function SignUp() {
   });
 
   const onSubmit = async function (data) {
-    console.log("Form submitted", data);
+    // console.log("Form submitted", data);
     const result = await m.mutateAsync(data);
-
+    
     if (!result.data.success) {
       // alert(result.data?.msg);
-      toast.error(result.data?.msg, {
+      toast.error("Error in adding this order ", {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -60,7 +60,7 @@ export default function SignUp() {
       });
     } else {
       // alert(result.data?.msg);
-      toast.success(result.data?.msg, {
+      toast.success("Added Successfully ", {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
