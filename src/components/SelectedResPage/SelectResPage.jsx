@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 import MealCard from "./MealCard";
 import ChooseUs from "./ChooseUs";
 import Footer from "./../ResPage/Footer";
-import MealFilters from "./MealFilters";
+// import MealFilters from "./MealFilters";
 
 export default function SelectResPage() {
   const { resID, resName } = useParams();
@@ -137,7 +137,7 @@ export default function SelectResPage() {
               <MealFilters />
             </div> */}
             {UserData.value.role == "ADMIN" && (
-              <div>
+              <div className="mt-4">
                 <AddMealButton Resid={resID} />
               </div>
             )}

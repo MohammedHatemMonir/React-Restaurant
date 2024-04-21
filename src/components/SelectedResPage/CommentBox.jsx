@@ -6,7 +6,7 @@ const CommentBox = ({ resID }) => {
   const comment = useSignal("");
 
   const queryClient = useQueryClient();
-  
+
   const m = useMutation({
     mutationKey: [],
     // cacheTime: 600000,
@@ -30,19 +30,15 @@ const CommentBox = ({ resID }) => {
       await m.mutateAsync(j);
 
       comment.value = "";
-
     } catch (e) {
       console.log("Failed to post comment", e);
     }
-    queryClient.invalidateQueries({queryKey: ["rest"+resID]});
-    queryClient.refetchQueries(["rest"+resID]);
-
+    queryClient.invalidateQueries({ queryKey: ["rest" + resID] });
+    queryClient.refetchQueries(["rest" + resID]);
   }
-  
 
   const handleSubmit = () => {
-
-    if(comment.value != ""){
+    if (comment.value != "") {
       PostRestaurantComment({ comment: comment.value, resID: resID });
       console.log("Submitted:", comment.value);
     }
@@ -71,7 +67,7 @@ const CommentBox = ({ resID }) => {
         />
         <button
           onClick={handleSubmit}
-          className="btn btn-primary"
+          className="btn"
           style={{
             padding: "10px 20px",
             borderRadius: "5px",
@@ -81,6 +77,7 @@ const CommentBox = ({ resID }) => {
             maxWidth: "300px",
             boxSizing: "border-box",
             color: "white",
+            background: "#ff4500",
             // fontWeight:"Bold"
           }}
         >

@@ -16,7 +16,7 @@ export default function CustomModal({
 
   return (
     <>
-      <Button variant="" onClick={() => (Show.value = true)}>
+      <Button className="bg-primary" onClick={() => (Show.value = true)}>
         {ButtonText}
       </Button>
 

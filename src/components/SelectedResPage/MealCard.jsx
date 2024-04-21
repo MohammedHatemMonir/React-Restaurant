@@ -70,7 +70,11 @@ export default function MealCard({
   }
 
   return (
-    <section className="meal-blogs" id="blogs" style={{ transform: "scale(0.85)" }}>
+    <section
+      className="meal-blogs"
+      id="blogs"
+      style={{ transform: "scale(0.85)" }}
+    >
       {/* Meal Details Modal Here */}
       <MealDetailsModal
         id={id}
@@ -89,9 +93,9 @@ export default function MealCard({
         name={name}
       />
       <div className="text-decoration-none box-container">
-        <div className="text-decoration-none box">
+        <div className=" box" style={{ border: `3px solid black` }}>
           <div className="image">
-            <br />
+      
             <h3 style={{ background: "white" }}>
               <Stars stars1={rating} /> <br />
               <br />

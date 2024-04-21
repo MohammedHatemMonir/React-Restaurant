@@ -82,7 +82,7 @@ function MealDetailsModal({
             />
             <button
               onClick={PostRestaurantComment}
-              className="btn btn-primary"
+              className="btn"
               style={{
                 padding: "10px 20px",
                 borderRadius: "5px",
@@ -92,6 +92,7 @@ function MealDetailsModal({
                 maxWidth: "300px",
                 boxSizing: "border-box",
                 color: "white",
+                background:"#ff4500"
                 // fontWeight:"Bold"
               }}
             >
@@ -180,7 +181,7 @@ function MealDetailsModal({
             </div>
             <p className="item-description ">{mealDesc}</p>
             <div className="item-actions">
-              <div className="reactions">
+              {/* <div className="reactions">
                 <button
                   type="button"
                   disabled="disabled"
@@ -191,7 +192,7 @@ function MealDetailsModal({
                   </span>
                   <span className="count"> 323</span>
                 </button>
-              </div>
+              </div> */}
               <div className="item-sizes ">
                 <ul className="sizes-list custom-radio-group">
                   <li className="size">

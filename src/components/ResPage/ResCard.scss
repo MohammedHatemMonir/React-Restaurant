@@ -1,4 +1,5 @@
-$green: #27ae60;
+// $green: #27ae60;
+$green: #ff4500;
 $black: #130f40;
 $white: #fff;
 $light-color: #666;
@@ -34,7 +35,7 @@ $box-shadow: 0 16px 16px rgba(0, 0, 0, 0.05);
 
       .image {
         position: relative;
-        height: 25rem;
+        height: 20rem;
         overflow: hidden;
         width: 100%;
 
@@ -42,7 +43,7 @@ $box-shadow: 0 16px 16px rgba(0, 0, 0, 0.05);
           position: absolute;
           z-index: 10;
           // top: 1rem;
-          top: 3rem;
+          top: 2rem;
           left: -100%;
           border-radius: 0.5rem;
           padding: 0.5rem 1rem;
