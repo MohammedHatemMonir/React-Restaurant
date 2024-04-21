@@ -9,13 +9,13 @@ const ResFilters = () => {
         <h2 className="sidebar-title">Categories</h2>
         <div>
           <label className="sidebar-label-container">
-            <input type="radio" value="" name="test" />
-            <span className="checkmark"></span>All
+            <input type="checkbox" value={"aa"} name={"aaaaa"} />
+            <span className="checkmark" style={{ backgroundColor: "red" }}></span>
+            title
           </label>
-          <Input value="sneakers" title="Sneakers" name="test" />
-          <Input value="flats" title="Flats" name="test" />
-          <Input value="sandals" title="Sandals" name="test" />
-          <Input value="heels" title="Heels" name="test" />
+          {/* <Input type="checkbox" value="flats" title="Flats" name="test" />
+          <Input type="checkbox" value="sandals" title="Sandals" name="test" />
+          <Input type="checkbox" value="heels" title="Heels" name="test" /> */}
         </div>
         {/* Prices */}
         {/* <div className="ml">

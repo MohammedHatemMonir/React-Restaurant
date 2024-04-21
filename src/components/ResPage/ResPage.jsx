@@ -11,8 +11,14 @@ import ResCard from "./ResCard";
 import Parallax from "./Parallax";
 import ResFilters from "./ResFilters";
 import { Col } from "react-bootstrap";
+import { useSignal } from "@preact/signals-react";
 
 export default function ResPage() {
+
+
+
+  const filterType = useSignal([]);
+
   const q = useQuery({
     queryKey: ["getAllresturant"],
     cacheTime: 3 * 60000, //3 minutes
@@ -26,6 +32,36 @@ export default function ResPage() {
       return ret;
     },
   });
+
+  const getCategoryiesQuery = useQuery({
+    queryKey: ["getAllCategory"],
+    // cacheTime: 600000,
+    // onSuccess: onSuccess,
+    // onError: onError,
+    queryFn: async () => {
+      let url = `/getAllCategory`;
+      const result = await apiClient.get(url);
+      // console.log("hemaaaa", result);
+      return result;
+    },
+  });
+
+
+  function setFilter({filterString}){
+
+    // var tempList = filterType.value;
+    if(filterType.value.includes(filterString)){
+  
+      filterType.value = filterType.value.filter(item => item !== filterString);
+
+    }else{
+  
+      filterType.value =  [...filterType.value, filterString];
+    }
+    console.log("filterType",filterType.value)
+  }
+
+
   if (q.isLoading) {
     return (
       <>
@@ -54,7 +90,24 @@ export default function ResPage() {
           <Container>
             <Row>
               <Col sm={12} md={2} className="mt-5">
-                <ResFilters />
+
+              <div className="my-filters">
+                <section>
+                  {/* Categories */}
+                  <h2 className="sidebar-title">Categories</h2>
+                 { !getCategoryiesQuery.isLoading && getCategoryiesQuery.data?.data?.Category.map((category,index) => (
+                      <div key={`${index}+${category._id}`} >
+                      <label className="sidebar-label-container">
+                        <input onClick={() => {setFilter({ filterString: category._id });}} type="checkbox" value={category._id} name={category.Categoery} />
+                        <span className="checkmark" ></span>
+                        {category.Categoery}
+                      </label>  
+                    </div>
+                    ))}
+                  
+                </section>
+              </div>
+                {/* <ResFilters /> */}
               </Col>
               {/* ResCards */}
               <Col sm={12} md={10}>

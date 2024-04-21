@@ -78,8 +78,8 @@ const analyze = async (req, res) => { //{text:"",mealid: ""}
             ////////////////////////////////////////
             //------updating the resturants---------
 
-            const resturants = await resturant.find({_id:meals[0].ResID});
-            const meals2 = await meal.find({ResID:meals[0].ResID,comment_num: { $gte: 1}});
+            const resturants = await resturant.find({_id:meals[0].ResID}); //restaurants
+            const meals2 = await meal.find({ResID:meals[0].ResID,comment_num: { $gte: 1}}); //Meals that have comments
             // console.log(meals2.length)
             if(new_comment_num>1){
               new_res_rating=(resturants[0].rating*(meals2.length+resturants[0].comment_num)+new_rating-meals[0].rating)/(meals2.length+resturants[0].comment_num)
@@ -147,13 +147,6 @@ const res_comment = async (req, res) => { // {text:"",ResID: "" }
           const Comment_rating=result.sentiment[0][2]*5
           const new_res_comment_num=resturants[0].comment_num+1
           const meals2 = await meal.find({ResID:ResID,comment_num: { $gte: 1}});
-                  console.log('result.sentiment:', result.sentiment);
-                  console.log('Comment_rating:', Comment_rating, typeof Comment_rating);
-                  console.log('resturants[0].rating:', resturants[0].rating, typeof resturants[0].rating);
-                  console.log('meals2.length:', meals2.length, typeof meals2.length);
-                  console.log('resturants[0].comment_num:', resturants[0].comment_num, typeof resturants[0].comment_num);
-                  console.log('new_res_comment_num:', new_res_comment_num, typeof new_res_comment_num);
-
 
 
           const new_rating=(Comment_rating+(resturants[0].rating*(meals2.length+resturants[0].comment_num)))/(meals2.length+new_res_comment_num)

@@ -41,21 +41,16 @@ const MedoTest = () => {
 
 
 
-  // const text = "meal -best"; lable = "0"                        
+  // const text = "meal -best" = [1, 3, 0]                     
 
-  // const text2 = "love meal enjoying";  lable = "1"                 
-
-
-
-
-
+  // const text2 = "love meal enjoy" = [2, 1, 4]       
+  
+  
+  // const wordIndex = {"meal": 1,"love": 2,"best":3 ,"enjoy": 4}
 
 
 
-
-
-
-
+  // model.compile(loss='binary_crossentropy',optimizer='adam',metrics=['accuracy'])
 
 
 

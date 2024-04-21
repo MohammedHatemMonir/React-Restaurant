@@ -48,7 +48,7 @@ export default function AddRestaurantButton() {
 
 
   const getCategoryiesQuery = useQuery({
-    queryKey: ["orderDetails"],
+    queryKey: ["getAllCategory"],
     // cacheTime: 600000,
     // onSuccess: onSuccess,
     // onError: onError,
@@ -60,9 +60,6 @@ export default function AddRestaurantButton() {
     },
   });
 
-
-
-  console.log("All categories",getCategoryiesQuery.data?.data)
   // Add new category in db
   const addCategory = useMutation({
     mutationKey: ["addNewCategory"],
@@ -84,7 +81,8 @@ export default function AddRestaurantButton() {
     newCategory.value = "";
     showCategoryInput.value = false;
     console.log("New Category", result.data);
-    // queryClient.invalidateQueries({ queryKey: ["getAllCategory"] });
+    queryClient.invalidateQueries({ queryKey: ["getAllCategory"] });
+    queryClient.refetchQueries({ queryKey: ["getAllCategory"] });
     getCategoryiesQuery.refetch();
   };
 
