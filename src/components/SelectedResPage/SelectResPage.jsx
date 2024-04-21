@@ -133,9 +133,9 @@ export default function SelectResPage() {
 
             {/* Hema Here */}
 
-            <div style={{ transform: "scale(0.85)" }}>
+            {/* <div style={{ transform: "scale(0.85)" }}>
               <MealFilters />
-            </div>
+            </div> */}
             {UserData.value.role == "ADMIN" && (
               <div>
                 <AddMealButton Resid={resID} />
