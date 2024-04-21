@@ -7,8 +7,7 @@ import EmptyOrders from "./../Orders/EmptyOrdersPage";
 import "./CartBody.scss";
 
 export default function CartBody() {
-
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   // Create Order
   const m = useMutation({
@@ -27,7 +26,7 @@ export default function CartBody() {
   async function createOrder() {
     const result = await m.mutateAsync();
     navigate("/myorders");
-
+    Cart.value.meals = [];
     console.log(result);
   }
 
@@ -45,7 +44,7 @@ export default function CartBody() {
         <div className="products-container">
           <h3 className="title">My Products</h3>
           <div className="box-container">
-            {Cart.value.meals.map((meal, index) => (
+            {Cart.value.meals?.map((meal, index) => (
               <div className="box" key={index}>
                 <FaTimes className="fas fa-times" />
                 {console.log("meal data", meal)}
