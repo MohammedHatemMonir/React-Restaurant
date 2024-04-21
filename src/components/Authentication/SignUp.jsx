@@ -5,13 +5,11 @@ import {
   Col,
   Button,
   Form,
-  Image,
-  InputGroup,
   FormControl,
   FormGroup,
-  FormCheck,
 } from "react-bootstrap";
-import logo from "../../images/DineMeLogo-modified.png";
+import DineMeLogo from "../../images/DineMeLogo.png";
+import DineMeLogoModified from "../../images/DineMeLogo-modified.png";
 import "./Login&Signup.scss";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -95,24 +93,26 @@ export default function SignUp() {
   }
 
   return (
-    <div className="my-login-my-singup ">
-      <div className="sidenav">
-        <div className="login-main-text d-flex justify-content-center align-items-center">
-          <img
-            src={logo}
-            style={{
-              transform: "scale(0.6)",
-            }}
-          />
-        </div>
-      </div>
+    <div className="my-login-my-singup mt-5">
+      {/* Image here */}
+      <div className="sidenav"></div>
 
       <Container className="main" style={{ width: "100%" }}>
         <Row>
           <Col xs={12} sm={10} md={8} lg={5} xl={5} xxl={4}>
-            <div className="text-center login-form">
-              <h3>Sign Up</h3>
-              <p>Create your account today</p>
+            <div className="text-center">
+              <div>
+                <img
+                  src={DineMeLogo}
+                  alt="logo"
+                  className="img-fluid mb-4"
+                  style={{ maxWidth: "200px" }}
+                />
+              </div>
+              <h3 className="font-weight-bold" style={{color:"#ff4500"}}>Welcome to Dine Me</h3>
+              <p className="text-muted">
+                Welcome back! Please sign in to your account
+              </p>
             </div>
             <Button
               variant="secondary"
@@ -304,15 +304,19 @@ export default function SignUp() {
                   </Col>
                 )}
               </Row>
-              <Button variant="primary" type="submit" className="w-100 mb-3">
+              <button
+                variant="primary"
+                type="submit"
+                className="btn btn-black text-light mb-3 w-100 hover:text-dark"
+              >
                 Sign up
-              </Button>
+              </button>
 
               <div className="text-center">
                 <Link
                   to="/login"
                   style={{ textDecoration: "none", cursor: "pointer" }}
-                  className="fs--1 fw-bold"
+                  className="fw-bold"
                 >
                   Sign in to an existing account
                 </Link>

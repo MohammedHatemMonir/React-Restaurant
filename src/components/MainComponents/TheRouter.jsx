@@ -22,7 +22,7 @@ import GoogleMaps from "./../Map/GoogleMaps";
 import CircleLoader from "../Loaders/CircleLoader";
 import CookingLoader from "./../Loaders/CookingLoader";
 import MapLoader from "./../Loaders/MapLoader";
-import Profile from "./../Profile/Profile";
+import Profile from "../Profile/ProfilePage";
 import EditProfile from "../Profile/EditProfile";
 import ResetPass from "./../Authentication/ResetPass";
 import RestaurantDashboard from "../Dashboard/RestaurantDashboard";

@@ -55,7 +55,7 @@ export default function CartBody() {
                   <h3>{meal.name}</h3>
                   <span> quantity : </span>
                   {/* meal.quantity || */}
-                  <input type="number" defaultValue={1} />
+                  <input type="number" defaultValue={meal.quantity} />
                   <br />
                   <span> price : </span>
                   {/* meal.price || */}
