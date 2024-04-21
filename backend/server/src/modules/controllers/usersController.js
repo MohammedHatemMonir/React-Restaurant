@@ -271,15 +271,20 @@ const resetPassword = async (req, res) => {
 };
 
 const editProfile = async (req, res) => {
-  if (!req.session?.user?._id) {
-    return res.status(404).json({ message: "Not authenticated!" });
-  }
   try {
-    const user = await myusers.findById(req.session?.user?._id); 
-    const { name, email, password,location,phoneNumber,userImg } = req.body;
-    if (!user) {
-      return res.status(404).json({ msg: "User not found" });
+    const userId = req.session?.user?._id;
+    if (!userId) {
+      return res.status(401).json({ message: "Not authenticated!" });
     }
+    
+    const user = await myusers.findById(userId); 
+    
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    
+    const { name, email, password, location, phoneNumber, userImg } = req.body;
+    
     if (name) user.name = name;
     if (email) user.email = email;
     if (password) {
@@ -295,12 +300,13 @@ const editProfile = async (req, res) => {
 
     await user.save();
 
-    return res.json({ msg: "User updated successfully", user });
+    return res.json({ message: "User updated successfully", user });
   } catch (error) {
     console.error("Error updating user:", error);
     return res.status(500).json({ error: "Internal server error" });
   }
 };
+
 
 module.exports = {
   signup,
