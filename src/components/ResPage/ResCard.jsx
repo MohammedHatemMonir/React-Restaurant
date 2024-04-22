@@ -6,9 +6,11 @@ import DeleteIcon from "../../Icons/DeleteIcon";
 import DeleteResModal from "./DeleteResModal";
 import EditResModal from "./EditResModal";
 import DineMeLogo from "../../images/DineMeLogo.png";
+import defaultMeal from "../../images/defaultMeal.jpg";
 import "./ResCard.scss";
 import { FaCompass, FaTag } from "react-icons/fa";
 import { IoSettings } from "react-icons/io5";
+
 export default function ResCard({ id, name, stars1, ResImg, MealImg }) {
   // console.log("Hema ID",id)
   const showDelModal = useSignal(false);
@@ -49,13 +51,7 @@ export default function ResCard({ id, name, stars1, ResImg, MealImg }) {
               <Stars stars1={stars1} /> <br />
               <br />
             </h3>
-            <img
-              src={
-                MealImg ||
-                `https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/92edf264-8a29-4efb-997a-ca2fdf9b3a92.jpg`
-              }
-              alt="Res-Img"
-            />
+            <img src={MealImg || defaultMeal} alt="Res-Img" />
           </div>
           <div className="text-decoration-none content">
             <div

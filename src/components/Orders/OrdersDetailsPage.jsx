@@ -43,7 +43,7 @@ const MealsOrdersPage = () => {
             </tr>
           </thead>
           <tbody>
-            {q.isSuccess &&
+            {!q.isError &&
               !q.isLoading &&
               q.data?.data?.meals?.map((order, index) => (
                 <tr key={index + order.MealName}>

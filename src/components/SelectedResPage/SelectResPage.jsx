@@ -2,7 +2,7 @@ import { useQuery } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 import LocationDotIcon from "../../Icons/LocationDotIcon";
 import Stars from "../Stars/Stars";
-import { Container, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import CommentBox from "./CommentBox";
 import { useParams } from "react-router-dom";
 import { UserData } from "../../Globals";
@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import MealCard from "./MealCard";
 import ChooseUs from "./ChooseUs";
 import Footer from "./../ResPage/Footer";
+import DineMeLogo from "../../images/DineMeLogo.png";
 // import MealFilters from "./MealFilters";
 
 export default function SelectResPage() {
@@ -53,7 +54,7 @@ export default function SelectResPage() {
                     {/* Res Image */}
                     <img
                       loading="lazy"
-                      src={q.data?.data?.restaurant?.ResImg}
+                      src={q.data?.data?.restaurant?.ResImg || DineMeLogo}
                       alt={q.data?.data?.restaurant?.ResName}
                       className="v-center"
                     />

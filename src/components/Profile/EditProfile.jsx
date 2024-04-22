@@ -30,7 +30,7 @@ const EditProfile = () => {
     // onError: onError,
     mutationKey: ["editProfile"],
     mutationFn: async (params) => {
-      let url = "/editProfile";
+      let url = "/api/users/editProfile";
       return await apiClient.put(url, params);
     },
   });

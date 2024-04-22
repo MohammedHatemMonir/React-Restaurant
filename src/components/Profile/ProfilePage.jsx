@@ -2,7 +2,7 @@ import { FaGrin } from "react-icons/fa";
 import { UserData } from "../../Globals";
 import "./Profile.scss";
 import { Link } from "react-router-dom";
-
+import defaultProfile from "../../images/defaultProfile.png";
 export default function ProfilePage() {
   return (
     <div className="main-profile">
@@ -12,7 +12,7 @@ export default function ProfilePage() {
           <img
             src={
               UserData.value.userImg ||
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8PyKYrBKAWWy6YCbQzWQcwIRqH8wYMPluIZiMpV1w0NYSbocTZz0ICWFkLcXhaMyvCwQ&usqp=CAU"
+              defaultProfile
             }
             alt="profile-img"
             className="user-pic"

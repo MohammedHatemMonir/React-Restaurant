@@ -1,15 +1,12 @@
 import { Link } from "react-router-dom";
+import noOrders from "../../images/no-orders.svg";
 
 export default function EmptyOrders() {
   return (
     <div className="my-orders-page container">
       <div className="text-center" style={{ marginTop: "100px" }}>
         <h1 className="font-weight-bold ">My Orders</h1>
-        <img
-          src="https://elmenus.com/public/img/svg-icons/no-orders.svg"
-          alt="no-orders-img"
-          className="mt-4"
-        />
+        <img src={noOrders} alt="no-orders-img" className="mt-4" />
         <h3 className="font-weight-bold mt-3">
           You're missing out! You haven't placed any orders yet
         </h3>
