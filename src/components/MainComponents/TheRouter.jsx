@@ -9,7 +9,6 @@ import SignUp from "../Authentication/SignUp";
 import SignalPrototype from "../Prototypes/SignalPrototype";
 import Prototype from "../Prototypes/Prototype";
 import Card from "../Card/Card";
-import Dashboard1 from "../Dashboard/Dashboard1";
 import Tutorials from "../TestComponents/Tutorials";
 import ResPage from "./../ResPage/ResPage";
 import SelectResPage from "./../SelectedResPage/SelectResPage";
@@ -18,7 +17,6 @@ import { UserData } from "../../Globals";
 import { useQuery } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 import LeafletMap from "./../Map/LeafletMap";
-import GoogleMaps from "./../Map/GoogleMaps";
 import CircleLoader from "../Loaders/CircleLoader";
 import CookingLoader from "./../Loaders/CookingLoader";
 import MapLoader from "./../Loaders/MapLoader";
@@ -99,7 +97,6 @@ export default function TheRouter() {
           <Route path="/" element={<DefaultLayout />}>
             <Route index element={<ResPage />} />
             <Route path="card" element={<Card />}></Route>
-            <Route path="dash1" element={<Dashboard1 />}></Route>
             <Route
               path="/RestaurantDashboard/:ResID"
               element={<RestaurantDashboard />}
@@ -112,7 +109,6 @@ export default function TheRouter() {
             <Route path="/cooking" element={<CookingLoader />}></Route>
             <Route path="/circle" element={<CircleLoader />}></Route>
             <Route path="/map" element={<LeafletMap />}></Route>
-            <Route path="/googlemap" element={<GoogleMaps />}></Route>
             <Route path="/maploader" element={<MapLoader />}></Route>
             <Route path="/profile" element={<Profile />}></Route>
             <Route path="/edit" element={<EditProfile />}></Route>

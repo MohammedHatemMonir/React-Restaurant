@@ -11,7 +11,7 @@ import { useSignal } from "@preact/signals-react";
 export default function CartBody() {
   const navigate = useNavigate();
 
-  const totalPrice =useSignal(0);
+  const totalPrice = useSignal(0);
   // Create Order
   const m = useMutation({
     mutationKey: [""],
@@ -59,8 +59,7 @@ export default function CartBody() {
   }
 
   console.log("carttttttttt", Cart.value.meals);
-  function AddQuantity({quantity,mealId}) {
-
+  function AddQuantity({ quantity, mealId }) {
     let tempCart = Cart.value;
 
     if (
@@ -85,9 +84,7 @@ export default function CartBody() {
     getTotalPrice();
   }
 
-
-  function getTotalPrice(){
-
+  function getTotalPrice() {
     let price = 0;
     Cart.value.meals.map((meal) => {
       price = price + meal.price * meal.quantity;
@@ -111,35 +108,44 @@ export default function CartBody() {
       <div className="products-container">
         <h3 className="title">My Products</h3>
         <div className="box-container">
-          {
-            !m.isError &&
+          {!m.isError &&
             !m.isLoading &&
-              Cart.value.meals?.map((meal, index) => (
-                <div className="box" key={index + meal.id}>
-                  <FaTimes className="fas fa-times" onClick={() => {DeleteMeal(meal.id)}} />
-                  {console.log("meal data", meal)}
-                  {/* // meal.mealImg || */}
-                  <img src={meal.mealImg} alt="meal-img" />
-                  <div className="content">
-                    {/* meal.name || */}
-                    <h3>{meal.name}</h3>
-                    <span> quantity : </span>
-                    {/* meal.quantity || */}
-                    <input type="number" min="0"  onChange={(e) => AddQuantity({quantity:e.target.value,mealId:meal.id })} defaultValue={meal.quantity} />
-                    <br />
-                    <span> price : </span>
-                    {/* meal.price || */}
-                    <span className="price"> {meal.price * meal.quantity} </span>
-                  </div>
+            Cart.value.meals?.map((meal, index) => (
+              <div className="box" key={index + meal.id}>
+                <FaTimes
+                  className="fas fa-times"
+                  onClick={() => {
+                    DeleteMeal(meal.id);
+                  }}
+                />
+                {console.log("meal data", meal)}
+                {/* // meal.mealImg || */}
+                <img src={meal.mealImg} alt="meal-img" />
+                <div className="content">
+                  {/* meal.name || */}
+                  <h3>{meal.name}</h3>
+                  <span> quantity : </span>
+                  {/* meal.quantity || */}
+                  <input
+                    type="number"
+                    min="0"
+                    onChange={(e) =>
+                      AddQuantity({ quantity: e.target.value, mealId: meal.id })
+                    }
+                    defaultValue={meal.quantity}
+                  />
+                  <br />
+                  <span> price : </span>
+                  {/* meal.price || */}
+                  <span className="price"> {meal.price * meal.quantity} </span>
                 </div>
-              ))
-          }
+              </div>
+            ))}
         </div>
       </div>
       <div className="cart-total">
         <h3 className="title"> cart total </h3>
         <div className="box">
-
           <h3 className="total">
             total : <span>{getTotalPrice()}</span>
           </h3>
