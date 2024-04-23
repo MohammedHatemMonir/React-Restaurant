@@ -33,7 +33,7 @@ const addNewmeal = async (req, res) => { //{MealName:"",MealImg:"",Description:"
       const MealName = req.body.MealName;
 
       const meals = await meal.find({MealName:MealName});
-      if (!meals[0]) {
+    
         // console.log(req.body.MealImg.split('.').pop() )
             const Resid = req.body.Resid;
             const resturants = await resturant.find({_id:Resid});
@@ -70,9 +70,9 @@ const addNewmeal = async (req, res) => { //{MealName:"",MealImg:"",Description:"
                     // console.log(req.body)
 
             }
-      } else {
-        res.send("MEAL EXEST");
-      }}
+     
+    
+    }
     } catch (err) {
       res.status(400).json({ error: err });
     }

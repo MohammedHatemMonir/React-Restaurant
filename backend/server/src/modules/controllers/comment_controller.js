@@ -83,7 +83,6 @@ const analyze = async (req, res) => { //{text:"",mealid: ""}
 
             //OPTIMIZED
             const meals2 = await meal.countDocuments({ResID:meals[0].ResID,comment_num: { $gte: 1}}); //Meals that have comments
-            console.log("MEALS2",meals2)
             // console.log(meals2.length)
             if(new_comment_num>1){
               new_res_rating=(resturants[0].rating*(meals2+resturants[0].comment_num)+new_rating-meals[0].rating)/(meals2+resturants[0].comment_num)
@@ -121,7 +120,7 @@ const res_comment = async (req, res) => { // {text:"",ResID: "" }
     //   res.status(400).json(errors.array())
 
     // }else{
-        if(!req.session.user){
+        if(!req.session?.user){
           res.status(400).json({ error: "Not Authenticated" });
         }
 
@@ -150,10 +149,12 @@ const res_comment = async (req, res) => { // {text:"",ResID: "" }
           //------updating the resturants---------
           const Comment_rating=result.sentiment[0][2]*5
           const new_res_comment_num=resturants[0].comment_num+1
-          const meals2 = await meal.find({ResID:ResID,comment_num: { $gte: 1}});
+
+          //OPTIMIZED
+          const meals2 = await meal.countDocuments({ResID:ResID,comment_num: { $gte: 1}});
 
 
-          const new_rating=(Comment_rating+(resturants[0].rating*(meals2.length+resturants[0].comment_num)))/(meals2.length+new_res_comment_num)
+          const new_rating=(Comment_rating+(resturants[0].rating*(meals2+resturants[0].comment_num)))/(meals2+new_res_comment_num)
           console.log("NEW RATING",new_rating);
 
 
