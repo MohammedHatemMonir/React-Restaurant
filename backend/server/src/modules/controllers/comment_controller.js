@@ -34,7 +34,7 @@ const analyze = async (req, res) => { //{text:"",mealid: ""}
             res.send("STOP HACKING!!!");
           }else{
 
-            const text= req.body.text
+            const text=req.body.text
 
 
             // console.log("Python errors",errors)
@@ -79,12 +79,16 @@ const analyze = async (req, res) => { //{text:"",mealid: ""}
             //------updating the resturants---------
 
             const resturants = await resturant.find({_id:meals[0].ResID}); //restaurants
-            const meals2 = await meal.find({ResID:meals[0].ResID,comment_num: { $gte: 1}}); //Meals that have comments
+
+
+            //OPTIMIZED
+            const meals2 = await meal.countDocuments({ResID:meals[0].ResID,comment_num: { $gte: 1}}); //Meals that have comments
+            console.log("MEALS2",meals2)
             // console.log(meals2.length)
             if(new_comment_num>1){
-              new_res_rating=(resturants[0].rating*(meals2.length+resturants[0].comment_num)+new_rating-meals[0].rating)/(meals2.length+resturants[0].comment_num)
+              new_res_rating=(resturants[0].rating*(meals2+resturants[0].comment_num)+new_rating-meals[0].rating)/(meals2+resturants[0].comment_num)
             }else{
-              new_res_rating=(resturants[0].rating*(meals2.length+resturants[0].comment_num-1)+new_rating-meals[0].rating)/(meals2.length+resturants[0].comment_num)
+              new_res_rating=(resturants[0].rating*(meals2+resturants[0].comment_num-1)+new_rating-meals[0].rating)/(meals2+resturants[0].comment_num)
             }
             const res_body={
               ResName: resturants[0].ResName,
