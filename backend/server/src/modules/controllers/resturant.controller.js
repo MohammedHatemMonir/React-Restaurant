@@ -44,7 +44,7 @@ const getResturantWithMeals = async (req, res) => {
 
 const getAllresturant = async (req, res) => {
     try {
-        const restaurants = await restaurant.find({})//.populate('Categoery', 'Categoery -_id');;
+        const restaurants = await restaurant.find({}).sort({ createdAt: -1 })//.populate('Categoery', 'Categoery -_id');;
         res.status(200).json(restaurants);
     } catch (error) {
         res.status(500).json({ message: "Error retrieving restaurants" });

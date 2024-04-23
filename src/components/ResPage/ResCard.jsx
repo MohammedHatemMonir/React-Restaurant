@@ -51,7 +51,7 @@ export default function ResCard({ id, name, stars1, ResImg, MealImg }) {
               <Stars stars1={stars1} /> <br />
               <br />
             </h3>
-            <img src={MealImg || defaultMeal} alt="Res-Img" />
+            <img src={ResImg || defaultMeal} alt="Res-Img" />
           </div>
           <div className="text-decoration-none content">
             <div
