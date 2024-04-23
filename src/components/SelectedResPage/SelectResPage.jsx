@@ -171,7 +171,7 @@ export default function SelectResPage() {
             </div>
             {/* style={{ transform: "scale(0.9)" }} */}
             <div>
-              <CommentBox resID={resID} />
+              <CommentBox query={q} resID={resID} />
             </div>
 
             <Row>

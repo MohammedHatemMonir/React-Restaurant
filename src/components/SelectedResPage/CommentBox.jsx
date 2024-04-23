@@ -2,7 +2,7 @@ import { useSignal } from "@preact/signals-react";
 import { useMutation, useQueryClient } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 
-const CommentBox = ({ resID }) => {
+const CommentBox = ({ query, resID }) => {
   const comment = useSignal("");
 
   const queryClient = useQueryClient();
@@ -35,6 +35,7 @@ const CommentBox = ({ resID }) => {
     }
     queryClient.invalidateQueries({ queryKey: ["rest" + resID] });
     queryClient.refetchQueries(["rest" + resID]);
+    query.refetch();
   }
 
   const handleSubmit = () => {
