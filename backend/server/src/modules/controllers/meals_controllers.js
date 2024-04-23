@@ -87,7 +87,7 @@ const addNewmeal = async (req, res) => { //{MealName:"",MealImg:"",Description:"
 
             const meals = await meal.find({ResID:req.body.ResID});
             // console.log(myuser[0].password)
-            if (!meals.length > 0) {
+            if (!meals?.length > 0) {
                 res.status(201).send("NO MEALS EXIST");
             }else{
                 // console.log(meals)
@@ -153,11 +153,11 @@ const addNewmeal = async (req, res) => { //{MealName:"",MealImg:"",Description:"
         return res.status(404).json({ error: "Meal not found" });
       }
       await mealComments.deleteMany({MealID:id})
+      res.status(200).json({ message: "Meal deleted successfully" }); //Responded here to optimize the response time
 
       if (deletedMeal.MealImg) {
         await uploadImg.deleteImage(deletedMeal.MealImg);
     }
-      res.status(200).json({ message: "Meal deleted successfully" });
     } catch (error) {
       console.error("Error deleting meal:", error);
       res.status(500).json({ error: "Server error while deleting meal" });
@@ -235,11 +235,12 @@ const createOrder = async (req, res) => {   // {ResId:"",meals:[{id:"",quantity:
 };
 
 const getMyOrders = async (req, res) => {
- 
-  if (!req.session?.user?._id) {
-    return res.status(404).json({ message: "Not authenticated!" });
-  }
+
   try {
+  
+    if (!req.session?.user?._id) {
+      return res.status(404).json({ message: "Not authenticated!" });
+    }
     const orders = await Order.find({ user: req.session.user._id }, {resId: 0, meals: 0, __v: 0 });
     if (!orders || orders.length === 0) {
       return res.json({ message: "No orders found" });
