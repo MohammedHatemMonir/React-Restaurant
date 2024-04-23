@@ -78,26 +78,21 @@ const addNewmeal = async (req, res) => { //{MealName:"",MealImg:"",Description:"
     }
 };
 
-  const getAllmeals = async (req, res) => {
+  const getAllmeals = async (req, res) => { //{ResID:""}
     try {
       const errors =validationResult(req)
       if(!errors.isEmpty()){
         res.status(400).json(errors.array()[0].msg)
       }else{
-        const restaurantname = req.body.ResName; // Res
-        const resturants = await resturant.find({ResName:restaurantname});
-        if (!resturants[0]) {
-            res.send("RESTURAND DOSENT EXEST");
-        }else{
-            const ResID =resturants[0]._id.toString();
-            const meals = await meal.find({ResID:ResID});
+
+            const meals = await meal.find({ResID:req.body.ResID});
             // console.log(myuser[0].password)
-            if (!meals[0]) {
+            if (!meals.length > 0) {
                 res.status(201).send("NO MEALS EXIST");
             }else{
                 // console.log(meals)
                 res.status(201).json(meals);
-            }}}
+            }}
     } catch (err) {
       res.status(400).json({ error: err });
     }
