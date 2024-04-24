@@ -1,6 +1,6 @@
 import { FaGrin } from "react-icons/fa";
 import { UserData } from "../../Globals";
-import "./Profile.scss";
+import "./ProfilePage.scss";
 import { Link } from "react-router-dom";
 import defaultProfile from "../../images/defaultProfile.png";
 export default function ProfilePage() {
@@ -10,10 +10,7 @@ export default function ProfilePage() {
       <div className="container">
         <div className="middle">
           <img
-            src={
-              UserData.value.userImg ||
-              defaultProfile
-            }
+            src={UserData.value.userImg || defaultProfile}
             alt="profile-img"
             className="user-pic"
           />

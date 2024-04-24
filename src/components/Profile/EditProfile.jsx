@@ -1,4 +1,4 @@
-import "./Edit.scss";
+import "./EditProfile.scss";
 import { useForm } from "react-hook-form";
 import { UserData } from "../../Globals";
 import { useSignal } from "@preact/signals-react";

@@ -8,7 +8,6 @@ import ForgotPass from "../Authentication/ForgotPass";
 import SignUp from "../Authentication/SignUp";
 import SignalPrototype from "../Prototypes/SignalPrototype";
 import Prototype from "../Prototypes/Prototype";
-import Card from "../Card/Card";
 import Tutorials from "../TestComponents/Tutorials";
 import ResPage from "./../ResPage/ResPage";
 import SelectResPage from "./../SelectedResPage/SelectResPage";
@@ -96,7 +95,6 @@ export default function TheRouter() {
         {UserData.value.loggedIn && (
           <Route path="/" element={<DefaultLayout />}>
             <Route index element={<ResPage />} />
-            <Route path="card" element={<Card />}></Route>
             <Route
               path="/RestaurantDashboard/:ResID"
               element={<RestaurantDashboard />}
@@ -132,7 +130,7 @@ export default function TheRouter() {
 
             <Route path="/tutorials" element={<Tutorials />}>
               <Route path="Medotest" element={<MedoTest />}></Route>
-              <Route path="Hema" element={<HemaTest />}></Route>
+              <Route path="hema" element={<HemaTest />}></Route>
               <Route path="ZyadTest" element={<ZyadTest />}></Route>
               <Route path="Prototype" element={<Prototype />}>
                 <Route path="Signal" element={<SignalPrototype />}></Route>

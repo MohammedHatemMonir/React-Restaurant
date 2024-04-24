@@ -3,35 +3,35 @@
 //   background: #f5f5fa !important;
 // }
 
+// $green: #27ae60;
+// $black: #130f40;
+// $white: #fff;
+// $light-color: #666;
+// $light-bg: #f7f7f7;
+// $border: 1px solid rgba(0, 0, 0, 0.2);
+// $box-shadow: 0 16px 16px rgba(0, 0, 0, 0.05);
 
 // media queries
-$green: #27ae60;
-$black: #130f40;
-$white: #fff;
-$light-color: #666;
-$light-bg: #f7f7f7;
-$border: 1px solid rgba(0, 0, 0, 0.2);
-$box-shadow: 0 16px 16px rgba(0, 0, 0, 0.05);
 
 // @media (max-width: 991px) {
 //     html {
 //       font-size: 55%;
 //     }
-  
+
 //     .header {
 //       padding: 2rem;
 //     }
-  
+
 //     section {
 //       padding: 2rem;
 //     }
 //   }
-  
+
 //   @media (max-width: 768px) {
 //     #menu-btn {
 //       display: inline-block;
 //     }
-  
+
 //     .header .navbar {
 //       position: absolute;
 //       top: 99%;
@@ -41,44 +41,44 @@ $box-shadow: 0 16px 16px rgba(0, 0, 0, 0.05);
 //       border-top: $border;
 //       border-bottom: $border;
 //       clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-  
+
 //       &.active {
 //         clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
 //       }
-  
+
 //       a {
 //         font-size: 2rem;
 //         margin: 2rem;
 //         display: block;
 //       }
 //     }
-  
+
 //     .home .home-parallax-img {
 //       top: 0;
 //       right: 0;
 //       width: 130%;
 //     }
-  
+
 //     .order form .flex .inputBox {
 //       width: 100%;
 //     }
 //   }
-  
+
 //   @media (max-width: 450px) {
 //     html {
 //       font-size: 40%;
 //     }
-  
+
 //     .shopping-cart-container .cart-total {
 //       .box {
 //         text-align: center;
-  
+
 //         .btn {
 //           width: 100%;
 //         }
 //       }
 //     }
-  
+
 //     .home .content {
 //       h3 {
 //         font-size: 3rem;
@@ -88,4 +88,3 @@ $box-shadow: 0 16px 16px rgba(0, 0, 0, 0.05);
 //       }
 //     }
 //   }
-  

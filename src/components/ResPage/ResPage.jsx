@@ -1,6 +1,6 @@
 import "./ResPageBox.scss";
 // import Slider from "./Slider";
-import Footer from "./Footer";
+import Footer from "../Footer/Footer";
 import { useQuery } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 import { Container, Row } from "reactstrap";

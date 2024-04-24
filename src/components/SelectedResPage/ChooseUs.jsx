@@ -1,14 +1,5 @@
 import "./ChooseUs.scss";
 
-import {
-  FaUtensils,
-  FaHeart,
-  FaRegClock,
-  FaMoneyBillWave,
-  FaComments,
-  FaCamera,
-} from "react-icons/fa";
-
 export default function ChooseUs({ resName }) {
   return (
     <div className="choose-us">

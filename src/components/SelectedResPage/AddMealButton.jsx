@@ -2,11 +2,11 @@ import { Form } from "react-bootstrap";
 import { Col, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useSignal } from "@preact/signals-react";
-import CustomModal from "./../../Prototypes/CustomModal";
-import AddIcon from "./../../../Icons/AddIcon";
+import CustomModal from "../Prototypes/CustomModal";
+import AddIcon from "../../Icons/AddIcon";
 import { useMutation, useQueryClient } from "react-query";
-import { convertBase64 } from "../../../Globals";
-import { apiClient } from "../../../Data/apiclient";
+import { convertBase64 } from "../../Globals";
+import { apiClient } from "../../Data/apiclient";
 
 export default function AddMealButton({ Resid }) {
   const {

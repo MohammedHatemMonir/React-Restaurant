@@ -6,14 +6,14 @@ import { Row, Col } from "react-bootstrap";
 import CommentBox from "./CommentBox";
 import { useParams } from "react-router-dom";
 import { UserData } from "../../Globals";
-import AddMealButton from "./new/AddMealButton";
+import AddMealButton from "./AddMealButton";
 import ReviewsCard from "./../Reviews/ReviewsCard";
 import { Link } from "react-router-dom";
 import MealCard from "./MealCard";
 import ChooseUs from "./ChooseUs";
-import Footer from "./../ResPage/Footer";
+import Footer from "../Footer/Footer";
 import DineMeLogo from "../../images/DineMeLogo.png";
-// import MealFilters from "./MealFilters";
+import MealFilters from "./MealFilters";
 
 export default function SelectResPage() {
   const { resID, resName } = useParams();
@@ -133,15 +133,16 @@ export default function SelectResPage() {
             </Row>
 
             {/* Hema Here */}
-
-            {/* <div style={{ transform: "scale(0.85)" }}>
-              <MealFilters />
-            </div> */}
             {UserData.value.role == "ADMIN" && (
               <div className="mt-4">
                 <AddMealButton Resid={resID} />
               </div>
             )}
+            
+            <div style={{ transform: "scale(0.85)" }}>
+              <MealFilters />
+            </div>
+
             <div>
               <Row className="m-0">
                 {!q.isLoading &&

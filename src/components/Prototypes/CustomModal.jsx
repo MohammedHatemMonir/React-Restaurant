@@ -1,6 +1,4 @@
 import { signal, useSignal } from "@preact/signals-react";
-import "./Modal.scss";
-import React from "react";
 
 import { Button, Modal } from "react-bootstrap";
 

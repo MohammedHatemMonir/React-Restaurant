@@ -1,4 +1,3 @@
-import OrdersData from "./OrdersData.json";
 import EmptyOrders from "./EmptyOrdersPage";
 import { useQueryClient, useQuery, useMutation } from "react-query";
 import { apiClient } from "../../Data/apiclient";
@@ -67,10 +66,6 @@ const MealsOrdersPage = () => {
       </div>
     </div>
   );
-};
-
-const OrdersPage = () => {
-  return <div>{OrdersData.length > 0 ? <OrdersTable /> : <EmptyOrders />}</div>;
 };
 
 export default MealsOrdersPage;

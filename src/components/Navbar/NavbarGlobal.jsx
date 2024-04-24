@@ -7,7 +7,7 @@ import { apiClient } from "../../Data/apiclient";
 import DineMeLogo from "../../images/DineMeLogo.png";
 import { useSignal } from "@preact/signals-react";
 // import CartHandler from "./CartHanlder";
-import { Nav } from "react-bootstrap";
+
 import {
   FaShoppingCart,
   FaSearch,
@@ -18,6 +18,7 @@ import {
   FaMapMarkerAlt,
 } from "react-icons/fa";
 import { AiOutlineLogin } from "react-icons/ai";
+import Tutorials from './../TestComponents/Tutorials';
 
 export default function NavbarGlobal() {
   const status = useSignal("none");
@@ -82,6 +83,7 @@ export default function NavbarGlobal() {
           <Link className="p-3 mx-2">
             <LogoutButton />
           </Link>
+
         </div>
       </header>
     </>
