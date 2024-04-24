@@ -62,9 +62,37 @@ filtered_test_text, filtered_test_labels = remove_neutral_elements(test_sentence
 sarcastic_tr =pd.read_csv('backend/sentiment machine learning/SemEval2018-T3-train-taskA.txt', sep='\t')
 sentences_ts =pd.read_csv('backend/sentiment machine learning/SemEval2018-T3_input_test_taskA.txt', sep='\t')
 sarcastic_ts =pd.read_csv('backend/sentiment machine learning/SemEval2018-T3_gold_test_taskA_emoji.txt', sep='\t')
-for i,r in sarcastic_tr.iterrows():
-    filtered_train_text.append(preprocess(r['Tweet text']))
-    filtered_train_labels.append(r['Label'])
+j=int(len(sarcastic_tr)/4)
+s=j+j
+z=s+j
+print(len(sarcastic_tr))
+print(j)
+for i in range(0,int(len(sarcastic_tr)/4)+1):
+    filtered_train_text.append(preprocess(sarcastic_tr.iloc[i]['Tweet text']))
+    filtered_train_text.append(preprocess(sarcastic_tr.iloc[j]['Tweet text']))
+    filtered_train_text.append(preprocess(sarcastic_tr.iloc[s]['Tweet text']))
+    filtered_train_text.append(preprocess(sarcastic_tr.iloc[z]['Tweet text']))
+    filtered_train_labels.append(sarcastic_tr.iloc[i]['Label'])
+    filtered_train_labels.append(sarcastic_tr.iloc[j]['Label'])
+    filtered_train_labels.append(sarcastic_tr.iloc[s]['Label'])
+    filtered_train_labels.append(sarcastic_tr.iloc[z]['Label'])
+    j+=1;s+=1;z+=1
+
+
+# j=int(len(sarcastic_tr)/2)
+# print(len(sarcastic_tr))
+# print(j)
+# for i in range(0,int(len(sarcastic_tr)/2)+1):
+#     filtered_train_text.append(preprocess(sarcastic_tr.iloc[i]['Tweet text']))
+#     filtered_train_text.append(preprocess(sarcastic_tr.iloc[j]['Tweet text']))
+#     filtered_train_labels.append(sarcastic_tr.iloc[i]['Label'])
+#     filtered_train_labels.append(sarcastic_tr.iloc[j]['Label'])
+#     j+=1
+
+    
+# for i,r in sarcastic_tr.iterrows():
+#     filtered_train_text.append(preprocess(r['Tweet text']))
+#     filtered_train_labels.append(r['Label'])
 
 for i,r in sentences_ts.iterrows():
     filtered_test_text.append(preprocess(r['tweet text']))
