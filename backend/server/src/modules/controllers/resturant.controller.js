@@ -18,8 +18,7 @@ const getResturantWithMeals = async (req, res) => {
 
         const mealPromises = meals.map(async (meal) => {
             const MealComments = await mealComments.find({ MealID: meal._id })
-            //.populate('user', 'name userImg -_id');
-            // const users = await mealComments.find({ user: meal._id }).populate('user', 'name userImg -_id');
+
             return { ...meal._doc, MealComments };
         });
 
@@ -31,14 +30,13 @@ const getResturantWithMeals = async (req, res) => {
                 console.error(err);
                 });
                 
-       // const MealComments = await mealComments.find({ MealID: id }).populate('user', 'name userImg -_id');
 
         const RestaurantData = await restaurant.findOne({ _id: id });
 
         const restaurantComments = await rescomment.find({ ResID: id }).populate('user','name userImg -_id').sort({ createdAt: -1 });;
         res.status(200).json({ restaurant: RestaurantData, meals: existingMeals,resComments: restaurantComments });
     } catch (error) {
-        res.status(500).json({ message: error });
+        res.status(500).json({ message: "Error Retrieving Restaurants" }); //removed err for securrity reasons
     }
 }
 
@@ -66,16 +64,12 @@ const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResB
         //  const resImgUrl = await uploadImage(req.body.ResImg);
         //  const resBannerUrl = await uploadImage(req.body.ResBanner);
         const restaurantname = req.body.ResName;
-        const restaurants = await restaurant.find({ ResName: restaurantname });
-        if (!restaurants[0]) {
+        const restaurants = await restaurant.countDocuments({ ResName: restaurantname });
+        if (!restaurants > 0) {
             const rating = 0;
-            const Meals_num = 0;
             const comment_num = 0;
-            console.log("Upload image here")
             const ResImg = await uploadImg(req.body.resImg);
-            console.log("ResImg", ResImg)
             const ResBanner= await uploadImg(req.body.resBanner);
-            console.log("ResBanner", ResBanner)
             const category = await categoeryModel.findOne({ _id: req.body.Category } );
                 try {
                     //const category = await addCategory(req.body.Categoery);
@@ -150,14 +144,6 @@ const deleteresturant = async (req, res) => {
 
 
 
-const postRestaurantComment = async (req, res) => {
-    try {
-        res.status(200).json({ message: "ADDED COMMENT!" });
-        console.log("Added comment!", `resID: ${req.body.resID} + Comment: ${req.body.comment}`);
-    } catch (e) {
-        console.log("Failed to post comment", e);
-    }
-}
 
 
 const updateRestaurant = async (req, res) => {
@@ -259,7 +245,6 @@ module.exports = {
     getAllresturant,
     addNewresturant,
     deleteresturant,
-    postRestaurantComment,
     getResturantWithMeals,
     updateRestaurant,
     addCategory,
