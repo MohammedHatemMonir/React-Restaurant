@@ -89,7 +89,7 @@ const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResB
                         comment_num: comment_num,
                         //creation_date: createdAt
                     };
-                    const newRestaurant = await restaurant.create(newRestaurantData);
+                    await restaurant.create(newRestaurantData);
                     res.status(200).json(newRestaurantData);
                 } catch (error) {
                     console.error('Error creating new restaurant:', error);
