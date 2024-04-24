@@ -73,7 +73,7 @@ const analyze = async (req, res) => { //{text:"",mealid: ""}
               comment_num:new_comment_num
             }
               // console.log (meal_body)
-            const meal_update = await meal.updateOne({ _id: mealid },{ $set: meal_body});
+            await meal.updateOne({ _id: mealid },{ $set: meal_body});
             // console.log(meals[0].rating)
             ////////////////////////////////////////
             //------updating the resturants---------
