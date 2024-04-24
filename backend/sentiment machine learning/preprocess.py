@@ -1,5 +1,6 @@
 from nltk.stem.porter import PorterStemmer
 import re
+from collections import Counter
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 import matplotlib.pyplot as plt
@@ -8,20 +9,33 @@ import numpy  as np
 import tensorflow as tf
 ps = PorterStemmer()
 import pandas as pd
-def remove_neutral_elements(text_array, label_array):
-  filtered_labels2=[]
-  # Handle potential mismatched array lengths (safety check)
-  if len(text_array) != len(label_array):
-    raise ValueError("Text and label arrays must have the same length.")
 
-  # Filter both arrays simultaneously using list comprehension
-  filtered_text, filtered_labels = zip(*[(text, label) for text, label in zip(text_array, label_array) if label != "neutral"])
-  for label in filtered_labels:
-      if label=="positive":
-        filtered_labels2.append(1)  
-      else:
-        filtered_labels2.append(0)
-  return list(filtered_text), list(filtered_labels2)
+
+# def remove_neutral_elements(text_array, label_array):
+#   filtered_labels2=[]
+#   # Handle potential mismatched array lengths (safety check)
+#   if len(text_array) != len(label_array):
+#     raise ValueError("Text and label arrays must have the same length.")
+
+#   # Filter both arrays simultaneously using list comprehension
+#   filtered_text, filtered_labels = zip(*[(text, label) for text, label in zip(text_array, label_array) if label != "neutral"])
+#   for label in filtered_labels:
+#       if label=="positive":
+#         filtered_labels2.append(1)  
+#       else:
+#         filtered_labels2.append(0)
+#   return list(filtered_text), list(filtered_labels2)
+
+def remove_neutral_elements(text_array, label_array):
+    # Handle potential mismatched array lengths (safety check)
+    if len(text_array) != len(label_array):
+        raise ValueError("Text and label arrays must have the same length.")
+    
+    # Filter and transform labels simultaneously using list comprehension
+    filtered_text = [text for text, label in zip(text_array, label_array) if label != "neutral"]
+    filtered_labels = [1 if label == "positive" else 0 for label in label_array if label != "neutral"]
+    
+    return filtered_text, filtered_labels
 
 # ----------------------------------------
 # example 
@@ -38,33 +52,41 @@ def remove_neutral_elements(text_array, label_array):
 
 
 idv=0
-def preprocess(sentence):
-    step1=[]
-    step2=[]
-    step3=[]
-    step4=""
-    # print(sentence)
-    # global idv
-    # idv+=1 
-    # print(idv)
-    sentence=str(sentence)
-    step1+=sentence.split(" ")
-    for word in step1:
-       if not word.startswith("@") and not word.startswith("#") and not word.startswith("http:") and not word.startswith("/") :
-            step2+=(re.sub(pattern="[^a-zA-Z\s]",repl=" ",string=str(word))).split(" ")
-            # print(step2)
-    for word in step2:
-        if word in ['not', 'no']:
-            step3.append('-')
-        elif word not in set(stopwords.words('english')):
-            stem_word=ps.stem(word)
-            lower_sentence =stem_word.lower()
-            if len(step3)<29:
-              step3.append(lower_sentence+' ')
-    step4="".join(step3)
-    return step4
+stop_words = set(stopwords.words('english'))
+# def preprocess(sentence):
+#     step1=[]
+#     step2=[]
+#     step3=[]
+#     step4=""
+#     # print(sentence)
+#     # global idv
+#     # idv+=1 
+#     # print(idv)
+#     sentence=str(sentence)
+#     step1+=sentence.split(" ")
+#     for word in step1:
+#        if not word.startswith("@") and not word.startswith("#") and not word.startswith("http:") and not word.startswith("/") :
+#             step2+=(re.sub(pattern="[^a-zA-Z\s]",repl=" ",string=str(word))).split(" ")
+#             # print(step2)
+#     for word in step2:
+#         if word in ['not', 'no']:
+#             step3.append('-')
+#         elif word not in stop_words:
+#             stem_word=ps.stem(word)
+#             lower_sentence =stem_word.lower()
+#             if len(step3)<29:
+#               step3.append(lower_sentence+' ')
+#     step4="".join(step3)
+#     return step4
 
- 
+
+def preprocess(sentence):
+    sentence = str(sentence)
+    words = [word for word in sentence.split() if not (word.startswith(("@", "#", "http:", "/")) or word in stop_words)]
+    words = [re.sub(pattern="[^a-zA-Z\s]", repl=" ", string=word) for word in words]
+    words = ['-' if word in ['not', 'no'] else ps.stem(word).lower() + ' ' for word in words[:29]]
+    return "".join(words)
+
 # ----------------------------------------
 # example 
 # sentence ="i Good'good_day not good @good"
@@ -76,28 +98,38 @@ def preprocess(sentence):
 
 
 
+# def create_word_index(text_data):
+
+#   # Initialize an empty dictionary to store word counts
+#   word_counts = {}
+
+#   # Loop through each text string
+#   for text in text_data:
+#     # Split the text into words (lowercase and remove punctuation)
+#     words = text.split(' ')
+
+#     # Count occurrences of each word
+#     for word in words:
+#       if word in word_counts:
+#         word_counts[word] += 1
+#       else:
+#         word_counts[word] = 1
+
+#   # Create a unique integer mapping for each word
+#   word_index = {word: i for i, word in enumerate(word_counts)}
+
+#   return word_index
 def create_word_index(text_data):
-
-  # Initialize an empty dictionary to store word counts
-  word_counts = {}
-
-  # Loop through each text string
-  for text in text_data:
-    # Split the text into words (lowercase and remove punctuation)
-    words = text.split(' ')
+    # Split each text into words and flatten the list of lists
+    words = [word for text in text_data for word in text.split(' ')]
 
     # Count occurrences of each word
-    for word in words:
-      if word in word_counts:
-        word_counts[word] += 1
-      else:
-        word_counts[word] = 1
+    word_counts = Counter(words)
 
-  # Create a unique integer mapping for each word
-  word_index = {word: i for i, word in enumerate(word_counts)}
+    # Create a unique integer mapping for each word
+    word_index = {word: i for i, word in enumerate(word_counts)}
 
-  return word_index
-
+    return word_index
 
 # ----------------------------------------
 # example 

@@ -87,11 +87,11 @@ print("FINISHED LABLES AND TWEET TEXT")
 #     filtered_train_labels.append(r['Label'])
 
 filtered_test_text = sentences_ts['tweet text'].apply(preprocess).tolist()
-print("FINISHED TWEET TEXT")
+print("FINISHED TWEET TEXT", len(filtered_test_text))
 
 
 filtered_test_labels = sarcastic_ts['Label'].tolist()
-print("FINISHED LABLES")
+print("FINISHED LABLES", len(filtered_test_labels))
 
 
     
