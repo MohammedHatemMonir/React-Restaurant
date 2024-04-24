@@ -32,28 +32,43 @@ import matplotlib.pyplot as plt
 # ---------------------------------------------
 # ACCESSING THE FIRST TRAIN AND TEST DATA
 
-train_data =pd.read_csv('backend/sentiment machine learning/train.csv', encoding="latin-1")
-test_data =pd.read_csv('backend/sentiment machine learning/test.csv', encoding="latin-1")
-train_sentences = []
-train_sarcastic= []
-test_sentences = []
-test_sarcastic= []
-testl2=1
-for i,r in train_data.iterrows():
-    if (testl2 <27482):
-        testl2+=1
-        # print(testl2)
-    train_sentences.append(preprocess(r['text']))
-    train_sarcastic.append(r['sentiment'])
-testl=1   
-for i,r in test_data.iterrows():
-    if (testl <3535):
-        testl+=1
-        # print(testl)
-        test_sentences.append(preprocess(r['text']))
-        test_sarcastic.append(r['sentiment'])
+# train_data =pd.read_csv('backend/sentiment machine learning/train.csv', encoding="latin-1")
+# test_data =pd.read_csv('backend/sentiment machine learning/test.csv', encoding="latin-1")
+# train_sentences = []
+# train_sarcastic= []
+# test_sentences = []
+# test_sarcastic= []
+# testl2=1
+# for i,r in train_data.iterrows():
+#     if (testl2 <27482):
+#         testl2+=1
+#         # print(testl2)
+#     train_sentences.append(preprocess(r['text']))
+#     train_sarcastic.append(r['sentiment'])
+# testl=1   
+# for i,r in test_data.iterrows():
+#     if (testl <3535):
+#         testl+=1
+#         # print(testl)
+#         test_sentences.append(preprocess(r['text']))
+#         test_sarcastic.append(r['sentiment'])
+# filtered_train_text, filtered_train_labels = remove_neutral_elements(train_sentences, train_sarcastic)
+# filtered_test_text, filtered_test_labels = remove_neutral_elements(test_sentences, test_sarcastic)
+
+
+
+train_data = pd.read_csv('backend/sentiment machine learning/train.csv', encoding="latin-1")
+test_data = pd.read_csv('backend/sentiment machine learning/test.csv', encoding="latin-1")
+
+train_sentences = train_data['text'].apply(preprocess).tolist()
+train_sarcastic = train_data['sentiment'].tolist()
+
+train_sentences.extend(test_data['text'].apply(preprocess).tolist())
+
+train_sarcastic.extend(test_data['sentiment'].tolist())
+
 filtered_train_text, filtered_train_labels = remove_neutral_elements(train_sentences, train_sarcastic)
-filtered_test_text, filtered_test_labels = remove_neutral_elements(test_sentences, test_sarcastic)
+# filtered_test_text, filtered_test_labels = remove_neutral_elements(test_sentences, test_sarcastic)
 
 
 
@@ -65,47 +80,43 @@ sarcastic_ts =pd.read_csv('backend/sentiment machine learning/SemEval2018-T3_gol
 
 
 
-filtered_train_text = sarcastic_tr['Tweet text'].apply(preprocess).tolist()
-filtered_train_labels = sarcastic_tr['Label'].tolist()
-
-print("FINISHED LABLES AND TWEET TEXT")
-
-
-# j=int(len(sarcastic_tr)/2)
-# print(len(sarcastic_tr))
-# print(j)
-# for i in range(0,int(len(sarcastic_tr)/2)+1):
-#     filtered_train_text.append(preprocess(sarcastic_tr.iloc[i]['Tweet text']))
-#     filtered_train_text.append(preprocess(sarcastic_tr.iloc[j]['Tweet text']))
-#     filtered_train_labels.append(sarcastic_tr.iloc[i]['Label'])
-#     filtered_train_labels.append(sarcastic_tr.iloc[j]['Label'])
-#     j+=1
-
-    
 # for i,r in sarcastic_tr.iterrows():
 #     filtered_train_text.append(preprocess(r['Tweet text']))
 #     filtered_train_labels.append(r['Label'])
 
-filtered_test_text = sentences_ts['tweet text'].apply(preprocess).tolist()
-print("FINISHED TWEET TEXT", len(filtered_test_text))
+
+# for i,r in sentences_ts.iterrows():
+#     filtered_test_text.append(preprocess(r['tweet text']))
+
+# for i,r in sarcastic_ts.iterrows():
+#     filtered_test_labels.append(r['Label'])
+
+print("sarcastic_tr",len(sarcastic_tr))
+
+filtered_train_text.extend(sarcastic_tr['Tweet text'].apply(preprocess).tolist())
+filtered_train_labels.extend(sarcastic_tr['Label'].tolist())
+
+print("FINISHED LABLES AND TWEET TEXT")
 
 
-filtered_test_labels = sarcastic_ts['Label'].tolist()
-print("FINISHED LABLES", len(filtered_test_labels))
+filtered_train_text.extend(sentences_ts['tweet text'].apply(preprocess).tolist())
+print("FINISHED TWEET TEXT", len(filtered_train_text))
 
 
-    
+filtered_train_labels.extend(sarcastic_ts['Label'].tolist())
+print("FINISHED LABLES", len(filtered_train_labels))
+
+
+
 
 
 
 # ---------------------------------------------
 # SPLITING THE DATA 30/70
 text_train= pd.DataFrame(filtered_train_text)
-text_test1= pd.DataFrame(filtered_test_text)
 label_train= pd.DataFrame(filtered_train_labels)
-label_test= pd.DataFrame(filtered_test_labels)
-data=pd.concat([text_train,text_test1], ignore_index=True)
-label=pd.concat([label_train,label_test], ignore_index=True)
+data= text_train #pd.concat([text_train,[]], ignore_index=True)
+label= label_train #pd.concat([label_train,[]], ignore_index=True)
 data.columns=['text']
 label.columns=['label']
 
@@ -237,35 +248,48 @@ history=model.fit(train_padded_tensor, train_sarcastic_tensor, epochs=num_epochs
 
 
 
+# train_acc = history.history['accuracy']
+# val_acc = history.history['val_accuracy']
+# print(val_acc)
+# print(train_acc)
+# train_acc_list=[]
+# val_acc_list=[]
+# epoch_num=1
+# for acc in train_acc:
+#     for i in range(1,int(round(acc*100))+1):
+#         i+=1
+#         train_acc_list.append(epoch_num)
+#     epoch_num+=1 
+# print(epoch_num)
+# epoch_num=1
+# for acc in val_acc:
+#     for i in range(1,int(round(acc*100))+1):
+#         i+=1
+#         val_acc_list.append(epoch_num)
+#     epoch_num+=1 
+# print(epoch_num)
+# # Define bins (5 bins in this example)
+# # bins = range(min(data1 + data2), max(data1 + data2) )
+# list1=[]
+# bin_labels = []
+# # print ( max(data1 + data2))
+# for i in range(1, len(train_acc)+2):
+#     list1.append(i)
+#     bin_labels.append('epoch_'+str(i))
+#     i+=1
+# print(list1)
 train_acc = history.history['accuracy']
 val_acc = history.history['val_accuracy']
-print(val_acc)
-print(train_acc)
-train_acc_list=[]
-val_acc_list=[]
-epoch_num=1
-for acc in train_acc:
-    for i in range(1,int(round(acc*100))+1):
-        i+=1
-        train_acc_list.append(epoch_num)
-    epoch_num+=1 
-print(epoch_num)
-epoch_num=1
-for acc in val_acc:
-    for i in range(1,int(round(acc*100))+1):
-        i+=1
-        val_acc_list.append(epoch_num)
-    epoch_num+=1 
-print(epoch_num)
-# Define bins (5 bins in this example)
-# bins = range(min(data1 + data2), max(data1 + data2) )
-list1=[]
-bin_labels = []
-# print ( max(data1 + data2))
-for i in range(1, len(train_acc)+2):
-    list1.append(i)
-    bin_labels.append('epoch_'+str(i))
-    i+=1
+
+train_acc_list = [epoch for epoch, acc in enumerate(train_acc, start=1) for _ in range(int(round(acc*100)))]
+val_acc_list = [epoch for epoch, acc in enumerate(val_acc, start=1) for _ in range(int(round(acc*100)))]
+
+print(len(train_acc_list))
+print(len(val_acc_list))
+
+list1 = list(range(1, len(train_acc) + 2))
+bin_labels = ['epoch_' + str(i) for i in list1]
+
 print(list1)
 
 # Plotting the histograms
