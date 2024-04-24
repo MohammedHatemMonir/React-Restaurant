@@ -59,9 +59,9 @@ filtered_test_text, filtered_test_labels = remove_neutral_elements(test_sentence
 
 # ---------------------------------------------
 # ACCESSING THE SECOND TRAIN AND TEST DATA
-sarcastic_tr =pd.read_csv('/backend/sentiment machine learning/SemEval2018-T3-train-taskA.txt', sep='\t')
-sentences_ts =pd.read_csv('/backend/sentiment machine learning/SemEval2018-T3_input_test_taskA.txt', sep='\t')
-sarcastic_ts =pd.read_csv('/backend/sentiment machine learning/SemEval2018-T3_gold_test_taskA_emoji.txt', sep='\t')
+sarcastic_tr =pd.read_csv('backend/sentiment machine learning/SemEval2018-T3-train-taskA.txt', sep='\t')
+sentences_ts =pd.read_csv('backend/sentiment machine learning/SemEval2018-T3_input_test_taskA.txt', sep='\t')
+sarcastic_ts =pd.read_csv('backend/sentiment machine learning/SemEval2018-T3_gold_test_taskA_emoji.txt', sep='\t')
 for i,r in sarcastic_tr.iterrows():
     filtered_train_text.append(preprocess(r['Tweet text']))
     filtered_train_labels.append(r['Label'])
@@ -194,7 +194,7 @@ num_epochs=30
 #,varbose=2
 early_stopping = tf.keras.callbacks.EarlyStopping(monitor='val_accuracy', patience=2)
 history=model.fit(train_padded_tensor, train_sarcastic_tensor, epochs=num_epochs,callbacks=[early_stopping], 
-                  validation_data=(test_padded_tensor, test_sarcastic_tensor))
+                validation_data=(test_padded_tensor, test_sarcastic_tensor))
 # batch_size=10
 
 

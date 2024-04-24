@@ -152,12 +152,15 @@ const addNewmeal = async (req, res) => { //{MealName:"",MealImg:"",Description:"
       if (!deletedMeal) {
         return res.status(404).json({ error: "Meal not found" });
       }
-      await mealComments.deleteMany({MealID:id})
       res.status(200).json({ message: "Meal deleted successfully" }); //Responded here to optimize the response time
+      
+      await mealComments.deleteMany({MealID:id})
 
       if (deletedMeal.MealImg) {
         await uploadImg.deleteImage(deletedMeal.MealImg);
-    }
+      }
+    
+
     } catch (error) {
       console.error("Error deleting meal:", error);
       res.status(500).json({ error: "Server error while deleting meal" });
