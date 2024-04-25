@@ -14,9 +14,6 @@ import { Col } from "react-bootstrap";
 import { useSignal } from "@preact/signals-react";
 
 export default function ResPage() {
-
-
-
   const filterType = useSignal([]);
 
   const q = useQuery({
@@ -46,21 +43,17 @@ export default function ResPage() {
     },
   });
 
-
-  function setFilter({filterString}){
-
+  function setFilter({ filterString }) {
     // var tempList = filterType.value;
-    if(filterType.value.includes(filterString)){
-  
-      filterType.value = filterType.value.filter(item => item !== filterString);
-
-    }else{
-  
-      filterType.value =  [...filterType.value, filterString];
+    if (filterType.value.includes(filterString)) {
+      filterType.value = filterType.value.filter(
+        (item) => item !== filterString
+      );
+    } else {
+      filterType.value = [...filterType.value, filterString];
     }
-    console.log("filterType",filterType.value)
+    console.log("filterType", filterType.value);
   }
-
 
   if (q.isLoading) {
     return (
@@ -90,23 +83,31 @@ export default function ResPage() {
           <Container>
             <Row>
               <Col sm={12} md={2} className="mt-5">
-
-              <div className="my-filters">
-                <section>
-                  {/* Categories */}
-                  <h2 className="sidebar-title">Categories</h2>
-                 { !getCategoryiesQuery.isLoading && getCategoryiesQuery.data?.data?.Category.map((category,index) => (
-                      <div key={`${index}+${category._id}`} >
-                      <label className="sidebar-label-container">
-                        <input onClick={() => {setFilter({ filterString: category._id });}} type="checkbox" value={category._id} name={category.Categoery} />
-                        <span className="checkmark" ></span>
-                        {category.Categoery}
-                      </label>  
-                    </div>
-                    ))}
-                  
-                </section>
-              </div>
+                <div className="my-filters">
+                  <section>
+                    {/* Categories */}
+                    <h2 className="sidebar-title">Categories</h2>
+                    {!getCategoryiesQuery.isLoading &&
+                      getCategoryiesQuery.data?.data?.Category.map(
+                        (category, index) => (
+                          <div key={`${index}+${category._id}`}>
+                            <label className="sidebar-label-container">
+                              <input
+                                onClick={() => {
+                                  setFilter({ filterString: category._id });
+                                }}
+                                type="checkbox"
+                                value={category._id}
+                                name={category.Categoery}
+                              />
+                              <span className="checkmark"></span>
+                              {category.Categoery}
+                            </label>
+                          </div>
+                        )
+                      )}
+                  </section>
+                </div>
                 {/* <ResFilters /> */}
               </Col>
               {/* ResCards */}

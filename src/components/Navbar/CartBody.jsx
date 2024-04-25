@@ -7,6 +7,7 @@ import EmptyOrders from "./../Orders/EmptyOrdersPage";
 import { toast } from "react-toastify";
 import "./CartBody.scss";
 import { useSignal } from "@preact/signals-react";
+import PayPalButton from "./../Payment/PayPalButton";
 
 export default function CartBody() {
   const navigate = useNavigate();
@@ -25,6 +26,8 @@ export default function CartBody() {
       return await apiClient.post(url, Cart.value);
     },
   });
+
+  // Paypal Btn Here
 
   async function createOrder() {
     const result = await m.mutateAsync();
@@ -106,7 +109,7 @@ export default function CartBody() {
       style={{ transform: "scale(0.75)" }}
     >
       <div className="products-container">
-        <h3 className="title">My Products</h3>
+        <h3 className="title font-weight-bold">My Products</h3>
         <div className="box-container">
           {!m.isError &&
             !m.isLoading &&
@@ -144,7 +147,7 @@ export default function CartBody() {
         </div>
       </div>
       <div className="cart-total">
-        <h3 className="title"> cart total </h3>
+        <h3 className="title font-weight-bold"> Payment </h3>
         <div className="box">
           <h3 className="total">
             total : <span>{getTotalPrice()}</span>
@@ -157,6 +160,7 @@ export default function CartBody() {
           >
             Buy
           </Link>
+          <PayPalButton totalPrice={getTotalPrice()} />
         </div>
       </div>
     </section>

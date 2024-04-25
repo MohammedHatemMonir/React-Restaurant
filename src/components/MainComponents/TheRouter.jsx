@@ -127,7 +127,7 @@ export default function TheRouter() {
             ></Route>
 
             <Route path="/mealsorders" element={<MealsOrdersPage />}></Route>
-
+            <Route path="hema" element={<HemaTest />}></Route>
             <Route path="/tutorials" element={<Tutorials />}>
               <Route path="Medotest" element={<MedoTest />}></Route>
               <Route path="hema" element={<HemaTest />}></Route>
