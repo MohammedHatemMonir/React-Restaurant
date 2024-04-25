@@ -1,9 +1,6 @@
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
-export default function PayPalButton({ totalPrice }) {
-  const navigate = useNavigate();
 
+export default function PayPalButton({ totalPrice, createOrder }) {
   const clientId =
     "AfVlkPHMVLVRZjih6wQ8jQIzqfZJOmdV2MbLq96wWHR1GeQBeqbh8Lwl3ixqdGjGaSkc9o3Frmb0luKy";
 
@@ -26,17 +23,7 @@ export default function PayPalButton({ totalPrice }) {
             const name = details.payer.name.given_name;
             // alert(`Transaction completed by ${name}`);
             console.log("Transaction completed successfully");
-
-            toast.success(`Transaction completed by ${name}`, {
-              position: "top-center",
-              autoClose: 3000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-            });
-            navigate("/myorders");
+            createOrder();
           });
         }}
         onError={(err) => {

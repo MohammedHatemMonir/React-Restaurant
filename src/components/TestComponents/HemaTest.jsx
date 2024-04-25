@@ -12,7 +12,7 @@ export default function HemaTest() {
             purchase_units: [
               {
                 amount: {
-                  value: "555",
+                  value: "0.1",
                 },
               },
             ],

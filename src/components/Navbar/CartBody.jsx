@@ -42,6 +42,7 @@ export default function CartBody() {
         progress: undefined,
       });
     } else {
+      navigate("/myorders");
       // alert(result.data?.msg);
       toast.success(result.data?.message, {
         position: "top-center",
@@ -159,7 +160,12 @@ export default function CartBody() {
             >
               Cash On Delivery
             </button>
-            <PayPalButton totalPrice={getTotalPrice()} />
+            <PayPalButton
+              totalPrice={getTotalPrice()}
+              createOrder={() => {
+                createOrder();
+              }}
+            />
           </div>
         </div>
       </div>
