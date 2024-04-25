@@ -36,6 +36,10 @@ const UserSchema = new Schema({
         type:String,
         required: false,
     },
+    OwnedResId:{
+        type:String,
+        required: false,
+    },
     phoneNumber:{
         type:Number,
         required:false
