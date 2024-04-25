@@ -27,8 +27,6 @@ export default function CartBody() {
     },
   });
 
-  // Paypal Btn Here
-
   async function createOrder() {
     const result = await m.mutateAsync();
 
@@ -106,9 +104,8 @@ export default function CartBody() {
     <section
       // key={index}
       className="shopping-cart-container"
-      style={{ transform: "scale(0.75)" }}
     >
-      <div className="products-container">
+      <div className="products-container" style={{ transform: "scale(0.75)" }}>
         <h3 className="title font-weight-bold">My Products</h3>
         <div className="box-container">
           {!m.isError &&
@@ -149,18 +146,20 @@ export default function CartBody() {
       <div className="cart-total">
         <h3 className="title font-weight-bold"> Payment </h3>
         <div className="box">
-          <h3 className="total">
+          <h3 className="total font-weight-bold text-center">
             total : <span>{getTotalPrice()}</span>
           </h3>
-          <Link
-            className="btn"
-            onClick={() => {
-              createOrder();
-            }}
-          >
-            Buy
-          </Link>
-          <PayPalButton totalPrice={getTotalPrice()} />
+          <div className="d-flex justify-content-between">
+            <PayPalButton totalPrice={getTotalPrice()} />
+            <Link
+              className="btn"
+              onClick={() => {
+                createOrder();
+              }}
+            >
+              Cash On Delivery
+            </Link>
+          </div>
         </div>
       </div>
     </section>

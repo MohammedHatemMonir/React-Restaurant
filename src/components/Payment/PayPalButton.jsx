@@ -1,6 +1,9 @@
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 export default function PayPalButton({ totalPrice }) {
+  const navigate = useNavigate();
+
   const clientId =
     "AfVlkPHMVLVRZjih6wQ8jQIzqfZJOmdV2MbLq96wWHR1GeQBeqbh8Lwl3ixqdGjGaSkc9o3Frmb0luKy";
 
@@ -33,6 +36,7 @@ export default function PayPalButton({ totalPrice }) {
               draggable: true,
               progress: undefined,
             });
+            navigate("/myorders");
           });
         }}
         onError={(err) => {
