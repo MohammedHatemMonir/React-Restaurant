@@ -147,7 +147,7 @@ export default function CartBody() {
         <h3 className="title font-weight-bold"> Payment </h3>
         <div className="box">
           <h3 className="total font-weight-bold text-center">
-            total : <span>{getTotalPrice()}</span>
+            total : <span>{getTotalPrice()}$</span>
           </h3>
           <div className="d-flex justify-content-between align-items-center">
             <button
