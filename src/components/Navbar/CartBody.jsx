@@ -149,16 +149,17 @@ export default function CartBody() {
           <h3 className="total font-weight-bold text-center">
             total : <span>{getTotalPrice()}</span>
           </h3>
-          <div className="d-flex justify-content-between">
-            <PayPalButton totalPrice={getTotalPrice()} />
-            <Link
-              className="btn"
+          <div className="d-flex justify-content-between align-items-center">
+            <button
+              type="button"
+              className="btn btn-warning"
               onClick={() => {
                 createOrder();
               }}
             >
               Cash On Delivery
-            </Link>
+            </button>
+            <PayPalButton totalPrice={getTotalPrice()} />
           </div>
         </div>
       </div>
