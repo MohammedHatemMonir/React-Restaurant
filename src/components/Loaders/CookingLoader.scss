@@ -1,3 +1,5 @@
+@use "sass:math";
+
 .Cooking-Loader {
   display: flex;
   justify-content: center;
@@ -5,6 +7,7 @@
   background-color: #dbf4ee;
   height: 100vh;
   transform: scale(1.5);
+  z-index: 999999;
   
   $bg-bubble: linear-gradient(
     173deg,
@@ -15,11 +18,11 @@
   );
   $bubble-timing: 2000ms;
   $nb-bubble: 6;
-  $bubble-delay: $bubble-timing / $nb-bubble;
+  $bubble-delay: math.div($bubble-timing , $nb-bubble);
 
   $cook-timing: 1500ms;
   $nb-food: 3;
-  $cook-delay: ($cook-timing / $nb-food);
+  $cook-delay: math.div($cook-timing , $nb-food);
 
   @keyframes bubble {
     0% {
