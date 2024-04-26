@@ -106,7 +106,7 @@ export default function CartBody() {
   }
   return (
     <section className="shopping-cart-container">
-      <div className="products-container" style={{ transform: "scale(0.35)" }}>
+      <div className="products-container" style={{ transform: "scale(0.75)" }}>
         <h3 className="title font-weight-bold">My Products</h3>
         <div className="box-container">
           {!m.isError &&
@@ -142,9 +142,9 @@ export default function CartBody() {
                 </div>
               </div>
             ))}
+      
         </div>
-      </div>
-      <div className="cart-total">
+        <div className="cart-total">
         <h3 className="title font-weight-bold"> Payment </h3>
         <div className="box">
           <h3 className="total font-weight-bold text-center">
@@ -167,6 +167,8 @@ export default function CartBody() {
           </div>
         </div>
       </div>
+      </div>
+  
       {showModal.value == true && (
         <DeliveryModal
           createOrder={() => {

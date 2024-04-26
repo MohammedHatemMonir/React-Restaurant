@@ -21,15 +21,13 @@ export default function DeliveryModal({ openModal, closeModal, createOrder }) {
       <Modal.Body>
         <h3>
           Are you sure you want to
-          <span className="text-danger font-weight-bold">
-           
-            cash on delivery
-          </span>
-          restaurant
+          <p className="text-danger font-weight-bold d-inline ml-2">
+            Cash on delivery
+          </p>
         </h3>
       </Modal.Body>
       <Modal.Footer>
-        <Button type="submit" onClick={createOrder()}>
+        <Button type="submit" onClick={() => createOrder()}>
           Yes
         </Button>
         <Button onClick={closeModal}>No</Button>
