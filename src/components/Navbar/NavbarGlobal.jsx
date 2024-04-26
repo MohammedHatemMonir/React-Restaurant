@@ -80,9 +80,9 @@ export default function NavbarGlobal() {
           <Link to="/mycart" className="p-3 mx-2">
             <FaShoppingCart />
           </Link>
-          <Link className="p-3 mx-2">
-            <LogoutButton />
-          </Link>
+
+          <LogoutButton className="p-3 mx-2" />
+
 
         </div>
       </header>

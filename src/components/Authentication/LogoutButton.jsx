@@ -4,7 +4,7 @@ import { apiClient } from "../../Data/apiclient";
 import { Cart, UserData } from "../../Globals";
 import { AiOutlineLogin } from "react-icons/ai";
 
-export default function LogoutButton() {
+export default function LogoutButton(props) {
   const navigate = useNavigate();
   const m = useMutation({
     mutationKey: [],
@@ -29,7 +29,7 @@ export default function LogoutButton() {
   };
 
   return (
-    <Link onClick={LogoutFunction}>
+    <Link {...props} onClick={LogoutFunction}>
       <AiOutlineLogin />
     </Link>
   );

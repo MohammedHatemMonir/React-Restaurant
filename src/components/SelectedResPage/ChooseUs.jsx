@@ -3,10 +3,10 @@ import "./ChooseUs.scss";
 export default function ChooseUs({ resName }) {
   return (
     <div className="choose-us">
-      <div class="feat bg-gray pt-5 pb-5">
-        <div class="container">
-          <div class="row">
-            <div class="section-head col-sm-12">
+      <div className="feat bg-gray pt-5 pb-5">
+        <div className="container">
+          <div className="row">
+            <div className="section-head col-sm-12">
               <h4>
                 <span>More About</span> Us
               </h4>

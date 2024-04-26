@@ -37,14 +37,14 @@ export default function FileUpload({file=signal(),
             
   return (
         <>
-        <div class="col-md-12">
-          <div class="form-group">
-            <label class="control-label">Upload CV</label>
-            <div class="preview-zone hidden">
+        <div className="col-md-12">
+          <div className="form-group">
+            <label className="control-label">Upload CV</label>
+            <div className="preview-zone hidden">
             </div>
-            <div class="dropzone-wrapper"  
+            <div className="dropzone-wrapper"  
             onDrop={handleDrop}>
-              <div class="dropzone-desc">
+              <div className="dropzone-desc">
                 {!file.value && <p>Choose a file or drag it here.</p>}
 
                 {file.value && <>
@@ -53,7 +53,7 @@ export default function FileUpload({file=signal(),
                 {file.value.name}
                 </>}
               </div>
-              <input type="file" name="img_logo" class="dropzone"  onChange={handleFileInputChange}/>
+              <input type="file" name="img_logo" className="dropzone"  onChange={handleFileInputChange}/>
             </div>
           </div>
         </div>
