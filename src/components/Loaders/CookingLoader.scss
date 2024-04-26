@@ -5,7 +5,7 @@
   background-color: #dbf4ee;
   height: 100vh;
   transform: scale(1.5);
-  
+
   $bg-bubble: linear-gradient(
     173deg,
     rgba(255, 121, 218, 1) 0%,
@@ -15,7 +15,7 @@
   );
   $bubble-timing: 2000ms;
   $nb-bubble: 6;
-  $bubble-delay: $bubble-timing / $nb-bubble;
+  $cook-delay: ($cook-timing / $nb-food);
 
   $cook-timing: 1500ms;
   $nb-food: 3;

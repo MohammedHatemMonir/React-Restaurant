@@ -8,9 +8,12 @@ import { toast } from "react-toastify";
 import "./CartBody.scss";
 import { useSignal } from "@preact/signals-react";
 import PayPalButton from "./../Payment/PayPalButton";
+import DeliveryModal from "./DeliveryModal";
 
 export default function CartBody() {
   const navigate = useNavigate();
+
+  const showModal = useSignal(false);
 
   const totalPrice = useSignal(0);
   // Create Order
@@ -102,11 +105,8 @@ export default function CartBody() {
     return <EmptyOrders />;
   }
   return (
-    <section
-      // key={index}
-      className="shopping-cart-container"
-    >
-      <div className="products-container" style={{ transform: "scale(0.75)" }}>
+    <section className="shopping-cart-container">
+      <div className="products-container" style={{ transform: "scale(0.35)" }}>
         <h3 className="title font-weight-bold">My Products</h3>
         <div className="box-container">
           {!m.isError &&
@@ -138,7 +138,7 @@ export default function CartBody() {
                   <br />
                   <span> price : </span>
                   {/* meal.price || */}
-                  <span className="price"> {meal.price * meal.quantity} </span>
+                  <span className="price"> {meal.price * meal.quantity}$ </span>
                 </div>
               </div>
             ))}
@@ -154,9 +154,7 @@ export default function CartBody() {
             <button
               type="button"
               className="btn btn-warning"
-              onClick={() => {
-                createOrder();
-              }}
+              onClick={() => (showModal.value = true)}
             >
               Cash On Delivery
             </button>
@@ -169,6 +167,15 @@ export default function CartBody() {
           </div>
         </div>
       </div>
+      {showModal.value == true && (
+        <DeliveryModal
+          createOrder={() => {
+            createOrder();
+          }}
+          openModal={() => (showModal.value = true)}
+          closeModal={() => (showModal.value = false)}
+        />
+      )}
     </section>
   );
 }

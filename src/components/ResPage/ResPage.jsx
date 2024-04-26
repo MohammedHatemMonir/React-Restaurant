@@ -59,6 +59,7 @@ export default function ResPage() {
     return (
       <>
         <CookingLoader />
+        {/* Loading... */}
       </>
     );
   }
