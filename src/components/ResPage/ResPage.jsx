@@ -58,8 +58,8 @@ export default function ResPage() {
   if (q.isLoading) {
     return (
       <>
-        {/* <CookingLoader /> */}
-        Loading...
+        <CookingLoader />
+        {/* Loading... */}
       </>
     );
   }
