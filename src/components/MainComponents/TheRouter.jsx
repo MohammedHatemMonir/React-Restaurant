@@ -17,7 +17,7 @@ import { useQuery } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 import LeafletMap from "./../Map/LeafletMap";
 import CircleLoader from "../Loaders/CircleLoader";
-import CookingLoader from "./../Loaders/CookingLoader";
+// import CookingLoader from "./../Loaders/CookingLoader";
 import MapLoader from "./../Loaders/MapLoader";
 import Profile from "../Profile/ProfilePage";
 import EditProfile from "../Profile/EditProfile";
@@ -104,7 +104,7 @@ export default function TheRouter() {
               path="/restaurant/:resID/:resName"
               element={<SelectResPage />}
             ></Route>
-            <Route path="/cooking" element={<CookingLoader />}></Route>
+            {/* <Route path="/cooking" element={<CookingLoader />}></Route> */}
             <Route path="/circle" element={<CircleLoader />}></Route>
             <Route path="/map" element={<LeafletMap />}></Route>
             <Route path="/maploader" element={<MapLoader />}></Route>

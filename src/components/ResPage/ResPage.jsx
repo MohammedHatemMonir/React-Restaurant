@@ -6,7 +6,7 @@ import { apiClient } from "../../Data/apiclient";
 import { Container, Row } from "reactstrap";
 import AddRestaurantButton from "./AddRestaurantButton";
 import { UserData } from "../../Globals";
-import CookingLoader from "./../Loaders/CookingLoader";
+// import CookingLoader from "./../Loaders/CookingLoader";
 import ResCard from "./ResCard";
 import Parallax from "./Parallax";
 import ResFilters from "./ResFilters";
@@ -58,8 +58,8 @@ export default function ResPage() {
   if (q.isLoading) {
     return (
       <>
-        <CookingLoader />
-        {/* Loading... */}
+        {/* <CookingLoader /> */}
+        Loading...
       </>
     );
   }
