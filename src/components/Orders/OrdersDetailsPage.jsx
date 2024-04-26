@@ -45,7 +45,7 @@ const MealsOrdersPage = () => {
             {!q.isError &&
               !q.isLoading &&
               q.data?.data?.meals?.map((order, index) => (
-                <tr key={index + order.MealName}>
+                <tr key={index + order.MealName} className="text-center"> 
                   <td>{index + 1}</td>
                   <td>{q.data?.data?.ResName}</td>
                   <td>{order.MealName}</td>

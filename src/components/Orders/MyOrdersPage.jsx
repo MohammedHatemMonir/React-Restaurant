@@ -44,6 +44,7 @@ const AllOrdersPage = () => {
               <th>Total Price</th>
               <th>Order Date</th>
               <th>Order Status</th>
+              <th>Payment Method</th>
             </tr>
           </thead>
           <tbody>
@@ -59,11 +60,12 @@ const AllOrdersPage = () => {
                     key={order._id}
                     style={{ cursor: "pointer" }}
                   >
-                    <tr style={{ cursor: "pointer" }}>
+                    <tr className="text-center">
                       <td>{index + 1}</td>
                       <td>{order.totalPrice.toFixed(2)} $</td>
                       <td>{formattedDate}</td>
                       <td>{order.status}</td>
+                      <td>PayPal</td>
                     </tr>
                   </LinkContainer>
                 );
@@ -74,6 +76,5 @@ const AllOrdersPage = () => {
     </div>
   );
 };
-
 
 export default AllOrdersPage;
