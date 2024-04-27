@@ -1,5 +1,7 @@
 const resComments_model = require("../../database/models/resComments_model.js");
 const mealComments=require('../../database/models/Comments_model.js')
+const { Order } = require("../../database/models/orders");
+const meal = require("../../database/models/Meals_model");
 
 const getPositiveComments = async (req, res) => {
     try {
@@ -161,4 +163,25 @@ const getNegativeComments = async (req, res) => {
       });
     }
   };
-module.exports = { getPositiveComments,getNegativeComments,getNeutralComments,getUserWriteComments,allRestaurantOrders };
+
+  const getAllMealsAndOrders = async (req, res) => {
+    try {
+        const allMeals = await meal.find({});
+        const mealsWithOrderCount = await Promise.all(allMeals.map(async (mealItem) => {
+            const orderCount = await Order.countDocuments({
+                'meals.id': mealItem._id 
+            });
+            return { meal: mealItem, orderCount };
+        }));
+
+        res.status(200).json(mealsWithOrderCount);
+    } catch (error) {
+        console.log("Error fetching all meals and orders:", error);
+        res.status(500).json({
+            success: false,
+            message: "An error occurred while fetching all meals and orders."
+        });
+    }
+};
+
+module.exports = { getPositiveComments,getNegativeComments,getNeutralComments,getUserWriteComments,allRestaurantOrders,getAllMealsAndOrders };
