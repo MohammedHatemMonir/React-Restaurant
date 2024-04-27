@@ -143,4 +143,22 @@ const getNegativeComments = async (req, res) => {
       });
     }
   };
-module.exports = { getPositiveComments,getNegativeComments,getNeutralComments,getUserWriteComments };
+
+  const allRestaurantOrders = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const lenofResturantorder = await Order.find({ resId: id });
+  
+      res.status(200).json({
+        ResOrders: lenofResturantorder,
+        ResOrder: lenofResturantorder.length
+      });
+    } catch (error) {
+      console.log("Error fetching restaurant orders:", error);
+      res.status(500).json({
+        success: false,
+        message: "An error occurred while fetching restaurant orders."
+      });
+    }
+  };
+module.exports = { getPositiveComments,getNegativeComments,getNeutralComments,getUserWriteComments,allRestaurantOrders };
