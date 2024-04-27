@@ -13,10 +13,14 @@ const uploadImg = require('./utils/uploadImg');
 const { error } = require('console');
 const SearchRouter = require('./modules/routes/searchRoutes.js');
 const routerTypeComments = require('./modules/routes/dashboard/dashboardRoutes.js');
-
+const {Server} = require('socket.io');
 // const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
-
+const io = new Server({
+  cors: {
+    origin: "http://localhost:3000"
+  }
+});
 
 // Generate a random secret key
 const generateSecretKey = () => {
@@ -119,6 +123,29 @@ app.get('/auth/google',
 );
 
 
+io.on('connection', (socket) => {
+  console.log('a user connected',socket);
+  
+
+  socket.on('send-notification', (data) => {
+    console.log('Socket message: ' + msg);
+    io.emit("new-notification", data);
+  }
+  );
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  }
+  );
+});
+
+
+
+
+
+
+io.listen(4000, () => {
+  console.log('Socket.io listening on port 4000');
+});
 
 
 app.listen(5001,()=>{

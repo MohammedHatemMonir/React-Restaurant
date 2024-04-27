@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import CustomModal from '../Prototypes/CustomModal';
 import { useMutation } from 'react-query';
@@ -6,31 +6,65 @@ import { apiClient } from '../../Data/apiclient';
 import { Button } from 'react-bootstrap';
 import FileUpload from '../FileUpload';
 import { useSignal } from '@preact/signals-react';
+import { io } from 'socket.io-client';
 
 const MedoTest = () => {
-  const m = useMutation({
-    mutationKey: [],
-    // cacheTime: 600000,
-    // onSuccess: onSuccess,
-    // onError: onError,
-    mutationFn: async (params) => {
+  const socket = io('http://localhost:4000');
 
 
-      if(!file.value){ console.log("no file"); return;}
 
-      const base64 = await convertBase64(file.value);
-      console.log("base64",base64);
-      console.log("trying to load");
-      let url = "/uploadImage";
-      console.log("posting to ", url);
-      return await apiClient.post(url, {image: base64});
-    },
-  });
-
-  function uploadImage(){
-    console.log("uploading image");
-    m.mutateAsync();
+  useEffect(() => {
+  function onConnect() {
+    console.log("connected");
   }
+
+  function onDisconnect() {
+    console.log("disconnected");
+  }
+  socket.on('connect', onConnect);
+  socket.on('disconnect', onDisconnect);
+}, []);
+
+// function SendMessage(){
+// Socket.emit("send-notification", {message: "hello"});
+// }
+
+
+
+  return (
+    <>
+
+
+    {/* <Button onClick={() => {uploadImage()}}>Upload</Button>
+        <div>
+        <FileUpload file={file} />      
+    </div> */}
+    </>
+  );
+
+  // const m = useMutation({
+  //   mutationKey: [],
+  //   // cacheTime: 600000,
+  //   // onSuccess: onSuccess,
+  //   // onError: onError,
+  //   mutationFn: async (params) => {
+
+
+  //     if(!file.value){ console.log("no file"); return;}
+
+  //     const base64 = await convertBase64(file.value);
+  //     console.log("base64",base64);
+  //     console.log("trying to load");
+  //     let url = "/uploadImage";
+  //     console.log("posting to ", url);
+  //     return await apiClient.post(url, {image: base64});
+  //   },
+  // });
+
+  // function uploadImage(){
+  //   console.log("uploading image");
+  //   m.mutateAsync();
+  // }
 
 
 
@@ -63,34 +97,27 @@ const MedoTest = () => {
 
 
 
-  const convertBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(file);
+//   const convertBase64 = (file) => {
+//     return new Promise((resolve, reject) => {
+//       const fileReader = new FileReader();
+//       fileReader.readAsDataURL(file);
 
-      fileReader.onload = () => {
-        resolve(fileReader.result);
-      };
+//       fileReader.onload = () => {
+//         resolve(fileReader.result);
+//       };
 
-      fileReader.onerror = (error) => {
-        reject(error);
-      };
-    });
-  };
+//       fileReader.onerror = (error) => {
+//         reject(error);
+//       };
+//     });
+//   };
 
 
 
-const file = useSignal();
-console.log("file",file.value);
+// const file = useSignal();
+// console.log("file",file.value);
 
-  return (
-    <>
-    <Button onClick={() => {uploadImage()}}>Upload</Button>
-        <div>
-        <FileUpload file={file} />      
-    </div>
-    </>
-  );
+
 }
 
 export default MedoTest;
