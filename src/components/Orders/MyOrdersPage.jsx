@@ -5,7 +5,7 @@ import { useSignal } from "@preact/signals-react";
 import { LinkContainer } from "react-router-bootstrap";
 import moment from "moment";
 
-const AllOrdersPage = () => {
+const MyOrdersPage = () => {
   const myOrders = useSignal([]);
   const queryClient = useQueryClient();
   let originalDate = "";
@@ -51,6 +51,7 @@ const AllOrdersPage = () => {
             {!q.isError &&
               !q.isLoading &&
               myOrders.value.data?.orders?.map((order, index) => {
+                console.log(order)
                 // Format the date for each order
                 originalDate = moment(order.dateOrdered);
                 formattedDate = originalDate.format("MMM D, YYYY");
@@ -77,4 +78,4 @@ const AllOrdersPage = () => {
   );
 };
 
-export default AllOrdersPage;
+export default MyOrdersPage;
