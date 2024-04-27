@@ -14,12 +14,19 @@ const { error } = require('console');
 const SearchRouter = require('./modules/routes/searchRoutes.js');
 const routerTypeComments = require('./modules/routes/dashboard/dashboardRoutes.js');
 const {Server} = require('socket.io');
-// const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const server = require("http").createServer(app);
 
-const io = new Server({
-  cors: {
-    origin: "http://localhost:3000"
-  }
+// const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const wrap = (expressMiddleWare) => (socket, next) => expressMiddleWare(socket.request, {}, next);
+
+
+const corsOptions = {
+  origin: ['http://localhost:3000', 'http://localhost:5000', 'http://localhost:5001'],
+  credentials: true,
+  preflightContinue: true
+};
+const io = new Server(server,{
+  cors: corsOptions
 });
 
 // Generate a random secret key
@@ -33,15 +40,18 @@ console.log('Secret Key:', secretKey);
 
 app.use(express.urlencoded({ limit: '50mb', extended: true}));
 
+const sessionMiddleware =  session({
+  secret: secretKey,
+  resave: true,
+  saveUninitialized: true,
+  cookie: { maxAge: 5 * 60 * 60 * 1000 }, //5 hours
+})
 
-app.use(
-  session({
-    secret: secretKey,
-    resave: false,
-    saveUninitialized: false,
-    cookie: { maxAge: 5 * 60 * 60 * 1000 }, //5 hours
-  })
-);
+
+app.use(sessionMiddleware);
+
+//const sharedsession = require("express-socket.io-session");
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -49,11 +59,6 @@ connectToMongoDB();
 
 app.use(express.json({limit: '50mb'}));
 
-const corsOptions = {
-  origin: ['http://localhost:3000', 'http://localhost:5000', 'http://localhost:5001'],
-  credentials: true,
-  preflightContinue: true
-};
 app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));
 
@@ -65,11 +70,48 @@ app.use("/analyze", comment_routes);
 app.use("/api/users", userRouter);
 app.use(SearchRouter)
 app.use('/dashboard',routerTypeComments)
+io.use(wrap(sessionMiddleware)); 
 
 
 
 
+let clients = {};
 
+io.on('connection', (socket) => {
+
+  if (!socket.request.session.user) {
+    console.log('User not authenticated.');
+    socket.disconnect();
+    return;
+  }
+  socket.join(socket.request.session.user._id);
+
+  const rooms = io.sockets.adapter.rooms;
+console.log('List of rooms:', rooms);
+  // console.log(socket.request.session.user._id);
+  clients[socket.request.session.user._id] = socket.id;
+
+  console.log(clients);
+  console.log('a user connected');
+
+
+
+  socket.on('send-notification', (data) => {
+    console.log('Socket message: ' + data.SendToId + ' ' + data.message);
+
+    console.log("My Id",socket.id);
+    console.log("Sending to",clients[data.SendToId]);
+    io.to(data.SendToId).emit("new-notification", data);
+  }
+  );
+
+
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+    delete clients[socket.request.session.user._id];
+  }
+  );
+});
 
 
 //Mohammed hatem image upload here  .then((url) => res.send(url)).catch((err) => res.status(500).send(err))
@@ -113,6 +155,16 @@ app.get('/auth/google',
     try {
     // Redirect back to the React.js application with the authentication token {name:req.user.name.givenName, email:req.user.emails[0].value, role:"user", id:req.user.id, loggedIn:true};
     req.session.user = req.user;
+    req.session.save(err => {
+      if(err) {
+        // handle error
+        console.log(err);
+      } else {
+        // session saved
+        console.log('Session saved successfully.');
+      }
+    });
+
     console.log("req user",req.user) // Use req.
     console.log("req session",req.session.user)
         res.redirect('http://localhost:3000/');
@@ -123,32 +175,17 @@ app.get('/auth/google',
 );
 
 
-io.on('connection', (socket) => {
-  console.log('a user connected',socket);
-  
-
-  socket.on('send-notification', (data) => {
-    console.log('Socket message: ' + msg);
-    io.emit("new-notification", data);
-  }
-  );
-  socket.on('disconnect', () => {
-    console.log('user disconnected');
-  }
-  );
-});
 
 
 
 
 
+// io.listen(4000, () => {
+//   console.log('Socket.io listening on port 4000');
+// });
 
-io.listen(4000, () => {
-  console.log('Socket.io listening on port 4000');
-});
 
-
-app.listen(5001,()=>{
+server.listen(5001,()=>{
     console.log("Server Running in 5001")
 })
 

@@ -76,6 +76,15 @@ const signin = async (req, res) => {
       // return res.json({ msg: `Welcome ${user.name}`, role: user.role, token });
 
       req.session.user = user;
+      req.session.save(err => {
+        if(err) {
+          // handle error
+          console.log(err);
+        } else {
+          // session saved
+          console.log('Session saved successfully.');
+        }
+      });
       console.log("Seission User!", req.session.user);
       return res.json({
         success: true,

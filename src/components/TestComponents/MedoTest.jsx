@@ -9,7 +9,7 @@ import { useSignal } from '@preact/signals-react';
 import { io } from 'socket.io-client';
 
 const MedoTest = () => {
-  const socket = io('http://localhost:4000');
+  const socket = io('http://localhost:5001',{withCredentials: true});
 
 
 
@@ -21,9 +21,22 @@ const MedoTest = () => {
   function onDisconnect() {
     console.log("disconnected");
   }
+
+  function onNotification(data) {
+    console.log("Received new notification:", data);
+  }
+
+
   socket.on('connect', onConnect);
   socket.on('disconnect', onDisconnect);
+  socket.on('new-notification', onNotification);
+
 }, []);
+
+function SendNotif(){
+  socket.emit("send-notification", {message: "hello", SendToId: "6612fe5f92bc6238601048bb"});
+
+}
 
 // function SendMessage(){
 // Socket.emit("send-notification", {message: "hello"});
@@ -33,8 +46,9 @@ const MedoTest = () => {
 
   return (
     <>
-
-
+<button onClick={SendNotif}>
+SOCKETS
+</button>
     {/* <Button onClick={() => {uploadImage()}}>Upload</Button>
         <div>
         <FileUpload file={file} />      
