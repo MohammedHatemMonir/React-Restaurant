@@ -120,13 +120,12 @@ export default function CartBody() {
                   }}
                 />
                 {console.log("meal data", meal)}
-                {/* // meal.mealImg || */}
+
                 <img src={meal.mealImg} alt="meal-img" />
                 <div className="content">
-                  {/* meal.name || */}
                   <h3>{meal.name}</h3>
                   <span> quantity : </span>
-                  {/* meal.quantity || */}
+
                   <input
                     type="number"
                     min="0"
@@ -137,38 +136,36 @@ export default function CartBody() {
                   />
                   <br />
                   <span> price : </span>
-                  {/* meal.price || */}
                   <span className="price"> {meal.price * meal.quantity}$ </span>
                 </div>
               </div>
             ))}
-      
         </div>
         <div className="cart-total">
-        <h3 className="title font-weight-bold"> Payment </h3>
-        <div className="box">
-          <h3 className="total font-weight-bold text-center">
-            total : <span>{getTotalPrice()}$</span>
-          </h3>
-          <div className="d-flex justify-content-between align-items-center">
-            <button
-              type="button"
-              className="btn btn-warning"
-              onClick={() => (showModal.value = true)}
-            >
-              Cash On Delivery
-            </button>
-            <PayPalButton
-              totalPrice={getTotalPrice()}
-              createOrder={() => {
-                createOrder();
-              }}
-            />
+          <h3 className="title font-weight-bold"> Payment </h3>
+          <div className="box">
+            <h3 className="total font-weight-bold text-center">
+              total : <span>{getTotalPrice()}$</span>
+            </h3>
+            <div className="d-flex justify-content-between align-items-center">
+              <button
+                type="button"
+                className="btn btn-warning"
+                onClick={() => (showModal.value = true)}
+              >
+                Cash On Delivery
+              </button>
+              <PayPalButton
+                totalPrice={getTotalPrice()}
+                createOrder={() => {
+                  createOrder();
+                }}
+              />
+            </div>
           </div>
         </div>
       </div>
-      </div>
-  
+
       {showModal.value == true && (
         <DeliveryModal
           createOrder={() => {
