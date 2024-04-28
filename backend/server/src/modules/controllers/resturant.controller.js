@@ -51,6 +51,8 @@ const getAllresturant = async (req, res) => {
 }
 
 const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResBanner,location, ownerId} Remove validation of .png,add banner to database ,Upload image from request body
+    let ResImg;
+    let ResBanner;
     try {
         console.log("Get all res started, body:", req.body)
         if (req.session.user.role != "ADMIN")
@@ -70,8 +72,12 @@ const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResB
             const rating = 0;
             const comment_num = 0;
             const ResImg = await uploadImg(req.body.resImg);
-            const ResBanner= await uploadImg(req.body.resBanner);
-            const category = await categoeryModel.findOne({ _id: req.body.Category } );
+            try{
+            ResBanner= await uploadImg(req.body.resBanner);
+            category = await categoeryModel.findOne({ _id: req.body.Category } );
+            }catch(err){
+                console.log("Error in uploading RESTAURANT img",err);
+            }
 
 
                 try {
@@ -86,10 +92,17 @@ const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResB
                         comment_num: comment_num,
                         //creation_date: createdAt
                     };
+                    await restaurant.create(newRestaurantData);
                     res.status(200).json(newRestaurantData);
                 } catch (error) {
                     console.error('Error creating new restaurant:', error);
                     res.status(500).json({ error: 'Server error while adding new restaurant' });
+                    if(ResImg){
+                        await uploadImg.deleteImage(ResImg);
+                    }
+                    if(ResBanner){
+                        await uploadImg.deleteImage(ResBanner);
+                    }
                 }
 
         } else {
@@ -98,6 +111,12 @@ const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResB
 
     } catch (error) {
         console.log("Error in addNewresturant", error);
+        if(ResImg){
+            await uploadImg.deleteImage(ResImg);
+        }
+        if(ResBanner){
+            await uploadImg.deleteImage(ResBanner);
+        }
         res.status(500).json({ message: "Could not add restaurant" });
     }
 }

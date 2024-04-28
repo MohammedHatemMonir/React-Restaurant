@@ -136,7 +136,7 @@ passport.deserializeUser(function(user, done) {
 app.get('/auth/google',
   passport.authenticate('google', { scope: ['profile','email'] }));
 
-  app.get('/auth/google/callback',
+app.get('/auth/google/callback',
   passport.authenticate('google', { session: true, failureRedirect: '/login'}),
   (req, res) => {
     try {
@@ -154,7 +154,7 @@ app.get('/auth/google',
 
     console.log("req user",req.user) // Use req.
     console.log("req session",req.session.user)
-        res.redirect('http://localhost:3000/');
+    res.redirect('http://localhost:3000/');
     } catch (error) {
       console.error("Error during auth/google/callback:", error);
     }
