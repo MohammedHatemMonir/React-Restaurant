@@ -4,6 +4,9 @@ const { Router } = require("express");
 const { validateUserInputSignUp,validateUserInputLogin} = require("../../middlewares/validator/validation.user.js");
 const router = express.Router();
 
+
+router.post("/TestNotifs",usersController.TestNotifs)
+
 router.post("/signup",validateUserInputSignUp,usersController.signup)
 router.post("/signin",validateUserInputLogin,usersController.signin)
 router.post("/terminateSession",validateUserInputLogin,usersController.terminateSession)

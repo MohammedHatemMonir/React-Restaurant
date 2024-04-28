@@ -35,9 +35,20 @@ const MedoTest = () => {
 
 function SendNotif(){
   socket.emit("send-notification", {message: "hello", SendToId: "6612fe5f92bc6238601048bb"});
-
 }
 
+const m = useMutation({
+  mutationKey: [],
+  // cacheTime: 600000,
+  // onSuccess: onSuccess,
+  // onError: onError,
+  mutationFn: async (params) => {
+    console.log("trying to load");
+    let url = "/api/users/TestNotifs";
+    console.log("posting to ", url);
+    return await apiClient.post(url, params);
+  },
+});
 // function SendMessage(){
 // Socket.emit("send-notification", {message: "hello"});
 // }
@@ -48,6 +59,10 @@ function SendNotif(){
     <>
 <button onClick={SendNotif}>
 SOCKETS
+</button>
+
+<button onClick={() => {m.mutateAsync();}}>
+TestNotifs
 </button>
     {/* <Button onClick={() => {uploadImage()}}>Upload</Button>
         <div>

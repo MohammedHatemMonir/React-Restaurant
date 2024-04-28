@@ -10,7 +10,7 @@ const router = require('./modules/routes/resturant.router');
 const MEALrouter = require('./modules/routes/meals_routes');
 const passport = require('passport');
 const uploadImg = require('./utils/uploadImg');
-const { error } = require('console');
+const { error, Console } = require('console');
 const SearchRouter = require('./modules/routes/searchRoutes.js');
 const routerTypeComments = require('./modules/routes/dashboard/dashboardRoutes.js');
 const {Server} = require('socket.io');
@@ -75,7 +75,7 @@ io.use(wrap(sessionMiddleware));
 
 
 
-let clients = {};
+// let clients = {};
 
 io.on('connection', (socket) => {
 
@@ -84,23 +84,10 @@ io.on('connection', (socket) => {
     socket.disconnect();
     return;
   }
-  socket.join(socket.request.session.user._id);
-
-  const rooms = io.sockets.adapter.rooms;
-console.log('List of rooms:', rooms);
-  // console.log(socket.request.session.user._id);
-  clients[socket.request.session.user._id] = socket.id;
-
-  console.log(clients);
-  console.log('a user connected');
-
-
+  socket.join(socket.request.session.user._id); //Join a room with your user ID
 
   socket.on('send-notification', (data) => {
     console.log('Socket message: ' + data.SendToId + ' ' + data.message);
-
-    console.log("My Id",socket.id);
-    console.log("Sending to",clients[data.SendToId]);
     io.to(data.SendToId).emit("new-notification", data);
   }
   );
@@ -108,7 +95,7 @@ console.log('List of rooms:', rooms);
 
   socket.on('disconnect', () => {
     console.log('user disconnected');
-    delete clients[socket.request.session.user._id];
+    // delete clients[socket.request.session.user._id];
   }
   );
 });
@@ -185,8 +172,8 @@ app.get('/auth/google',
 // });
 
 
+global.io = io;
 server.listen(5001,()=>{
     console.log("Server Running in 5001")
 })
-
 

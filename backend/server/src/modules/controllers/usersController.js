@@ -7,7 +7,21 @@ const uploadImg = require("../../utils/uploadImg.js");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const nodemailer = require("nodemailer");
 const jwt = require("jsonwebtoken");
+// const { io } = require("../../Server.js");
 // const generateToken = require("../../utils/GenerateToken.js");
+const TestNotifs = async (req, res) => {
+    try {
+    
+      console.log("TestNotifs", io);
+      global.io.emit("new-notification", { message: "Hello" });
+      // return res.json({ success: true, msg: "Notification sent" });
+    } catch (error) {
+
+      console.error("Error during TestNotifs:", error);
+    }
+
+}
+
 
 const signup = async (req, res) => {
   const { name, email, password, userImg } = req.body;
@@ -327,6 +341,7 @@ module.exports = {
   forgetPassword,
   resetPassword,
   editProfile,
+  TestNotifs
 };
 
 // Get
