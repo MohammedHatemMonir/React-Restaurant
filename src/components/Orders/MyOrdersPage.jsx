@@ -51,7 +51,7 @@ const MyOrdersPage = () => {
             {!q.isError &&
               !q.isLoading &&
               myOrders.value.data?.orders?.map((order, index) => {
-                console.log(order)
+                console.log(order);
                 // Format the date for each order
                 originalDate = moment(order.dateOrdered);
                 formattedDate = originalDate.format("MMM D, YYYY");
@@ -67,6 +67,7 @@ const MyOrdersPage = () => {
                       <td>{formattedDate}</td>
                       <td>{order.status}</td>
                       <td>PayPal</td>
+                      {/* <td>{order.totalPrice > 50 ? "Delivery" : "PayPal"}</td> */}
                     </tr>
                   </LinkContainer>
                 );

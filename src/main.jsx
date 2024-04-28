@@ -5,7 +5,7 @@ import reportWebVitals from "./reportWebVitals";
 import "./../node_modules/bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 // import "@fortawesome/fontawesome-free/css/all.min.css";
-import "chartist/dist/chartist.min.css";
+// import "chartist/dist/chartist.min.css";
 import { QueryClient, QueryClientProvider } from "react-query";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 
