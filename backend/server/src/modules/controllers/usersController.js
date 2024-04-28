@@ -13,7 +13,7 @@ const TestNotifs = async (req, res) => {
     try {
     
       console.log("TestNotifs", io);
-      global.io.emit("new-notification", { message: "Hello" });
+      global.io.to("UserIdHere").emit("new-notification", { message: "Hello" });
       // return res.json({ success: true, msg: "Notification sent" });
     } catch (error) {
 
