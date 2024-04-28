@@ -211,7 +211,7 @@ const updateRestaurant = async (req, res) => {
 const addCategory = async (categoryName) => {
 
 
-    let category = categoeryModel.findOneAndUpdate({ Categoery: categoryName }, { Categoery: categoryName }, 
+    let category = await categoeryModel.findOneAndUpdate({ Categoery: categoryName }, { Categoery: categoryName }, 
                     { upsert: true, new: true });
     return category;
 };
