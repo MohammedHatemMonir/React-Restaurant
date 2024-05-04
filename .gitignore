@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/backend/sentiment machine learning/__pycache__
 /build
 /dist
 /.pnp

@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 /sentiment machine learning/text_emotion.pkl
+/sentiment machine learning/__pycache__
 /.pnp
 .pnp.js
 
