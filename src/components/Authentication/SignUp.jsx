@@ -112,7 +112,7 @@ export default function SignUp() {
                 <h3 className="font-weight-bold" style={{ color: "#ff4500" }}>
                   Welcome to Dine Me
                 </h3>
-                <p className="text-muted">
+                <p className="text-muted" style={{color:"#795d9a"}}>
                   Welcome back! Please sign in to your account
                 </p>
               </div>
@@ -132,7 +132,7 @@ export default function SignUp() {
 
               <Form onSubmit={handleSubmit(onSubmit)}>
                 <FormGroup className="mb-3">
-                  <Form.Label>Name</Form.Label>
+                  <Form.Label style={{color:"#ff4500"}}>Name</Form.Label>
                   <FormControl
                     type="text"
                     placeholder="Name"
@@ -149,7 +149,7 @@ export default function SignUp() {
                   </span>
                 </FormGroup>
                 <FormGroup className="mb-3">
-                  <Form.Label>Email address</Form.Label>
+                  <Form.Label style={{color:"#ff4500"}}>Email address</Form.Label>
                   <FormControl
                     type="email"
                     placeholder="dineMe@example.com"
@@ -168,7 +168,7 @@ export default function SignUp() {
                 <Row className="g-3 mb-3">
                   <Col sm={6}>
                     <FormGroup>
-                      <Form.Label>Password</Form.Label>
+                      <Form.Label style={{color:"#ff4500"}}>Password</Form.Label>
                       <FormControl
                         type={showPass.value ? "text" : "password"}
                         placeholder="*******"
@@ -205,7 +205,7 @@ export default function SignUp() {
                   </Col>
                   <Col sm={6}>
                     <FormGroup>
-                      <Form.Label>Confirm Password</Form.Label>
+                      <Form.Label style={{color:"#ff4500"}}>Confirm Password</Form.Label>
                       <FormControl
                         type={showConfirmPass.value ? "text" : "password"}
                         placeholder="*******"
@@ -244,7 +244,7 @@ export default function SignUp() {
                   </Col>
 
                   <div className="form-group col-md-5">
-                    <label htmlFor="phone">Phone Number</label>
+                    <label style={{color:"#ff4500"}} htmlFor="phone">Phone Number</label>
                     <input
                       {...register("phone", {
                         required: "Phone is required",
@@ -266,7 +266,7 @@ export default function SignUp() {
                   </div>
 
                   <div className="form-group col-md-5">
-                    <label htmlFor="location">Location</label>
+                    <label style={{color:"#ff4500"}} htmlFor="location">Location</label>
                     <input
                       {...register("location", {
                         required: "Location is required",
