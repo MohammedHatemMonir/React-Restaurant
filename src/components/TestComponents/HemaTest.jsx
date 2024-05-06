@@ -1,30 +1,36 @@
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import React, { useState, useEffect } from "react";
+import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
 
-export default function HemaTest() {
-  const clientId =
-    "AfVlkPHMVLVRZjih6wQ8jQIzqfZJOmdV2MbLq96wWHR1GeQBeqbh8Lwl3ixqdGjGaSkc9o3Frmb0luKy";
+function CommentReviewAutocomplete() {
+  const [completions, setCompletions] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("https://api.datamuse.com/words?ml=keypad&max=10000000") // Fetch words related to "keyboard"
+      .then((response) => response.json())
+      .then((data) => {
+        const words = data.map((item) => item.word);
+        setCompletions(words);
+        setLoading(false);
+      })
+      .catch((error) => console.error("Error fetching words:", error));
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
-    <PayPalScriptProvider options={{ "client-id": clientId }}>
-      <PayPalButtons
-        createOrder={(data, actions) => {
-          return actions.order.create({
-            purchase_units: [
-              {
-                amount: {
-                  value: "0.1",
-                },
-              },
-            ],
-          });
-        }}
-        onApprove={(data, actions) => {
-          return actions.order.capture().then((details) => {
-            const name = details.payer.name.given_name;
-            alert(`Transaction completed by ${name}`);
-          });
-        }}
+    <div style={{ width: 300 }}>
+      <Autocomplete
+        options={completions}
+        renderInput={(params) => (
+          <TextField {...params} label="Leave a review" />
+        )}
       />
-    </PayPalScriptProvider>
+    </div>
   );
 }
+
+export default CommentReviewAutocomplete;
