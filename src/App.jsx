@@ -1,5 +1,5 @@
 import "./App.scss";
-import "./TemplateCss.scss";
+import "./Globals.scss";
 import TheRouter from "./components/MainComponents/TheRouter";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter } from "react-router-dom";
