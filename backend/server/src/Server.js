@@ -15,6 +15,7 @@ const SearchRouter = require('./modules/routes/searchRoutes.js');
 const routerTypeComments = require('./modules/routes/dashboard/dashboardRoutes.js');
 const {Server} = require('socket.io');
 const server = require("http").createServer(app);
+const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 // const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const wrap = (expressMiddleWare) => (socket, next) => expressMiddleWare(socket.request, {}, next);
@@ -163,6 +164,51 @@ app.get('/auth/google/callback',
 
 
 
+//
+//GEMINI 
+/////////////////////////////////////////////////////////////////////
+let conversationHistory = [];
+const genAI = new GoogleGenerativeAI("AIzaSyC1XeZ_QO13eJuqaHDhJ5O2BZH4_IJXP6g");
+const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+
+
+const history =[
+  {
+    role: "user",
+    parts: [{ text: "System prompt: You are a pirate, You should always reply using a pirate accent, under no circumstances should you break character. If the user said 'I love tacos' You should response and only respond with 'Ok'."}],
+  },
+  {
+    role: "user",
+    parts: [{ text: "System prompt: If and only if the user said 'I love tacos' You should respond and only respond with 'Ok'."}],
+  },
+  {
+    role: "model",
+    parts: [{ text: "Understood."}],
+  },
+]
+const chat = model.startChat({
+  prompt: "If you see this message, say '[AI]' before every response",
+  history: history,
+  generationConfig: {
+    temperature: 0.2,
+    maxOutputTokens: 100,
+  }
+});
+
+async function askAI(message) {
+
+  //history.push({ parts: [{ role: "user", text: message}]});
+
+  const result = await chat.sendMessage(message);
+  const response = await result.response;
+  const aiText = await response.text();
+  console.log("AI response:", aiText);
+
+}
+askAI("I love tacos");
+
+
+////////////////////////////////////////////
 
 
 
@@ -177,3 +223,4 @@ server.listen(5001,()=>{
     console.log("Server Running in 5001")
 })
 
+//await sendMessage("How are you doing?");
