@@ -16,6 +16,7 @@ const routerTypeComments = require('./modules/routes/dashboard/dashboardRoutes.j
 const {Server} = require('socket.io');
 const server = require("http").createServer(app);
 const { GoogleGenerativeAI } = require("@google/generative-ai");
+const ChatRouter = require('./modules/Chat/chatRouter.js');
 
 // const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const wrap = (expressMiddleWare) => (socket, next) => expressMiddleWare(socket.request, {}, next);
@@ -64,7 +65,7 @@ app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));
 
 
-
+app.use(ChatRouter)
 app.use(router)
 app.use(MEALrouter)
 app.use("/analyze", comment_routes);
