@@ -21,6 +21,7 @@ const LiveChat = () => {
   useEffect(() => {}, []);
 
   return (
+    <div className="my-live">
     <div id="live-chat">
       <header className="clearfix" onClick={toggleChat}>
         <Link className="chat-close text-decoration-none" onClick={closeChat}>
@@ -85,6 +86,8 @@ const LiveChat = () => {
         </div>
       )}
     </div>
+    </div>
+
   );
 };
 
