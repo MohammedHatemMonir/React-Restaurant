@@ -4,16 +4,11 @@ import DineMeLogo from "../../images/DineMeLogo.png";
 import "./LiveChat.scss";
 
 const LiveChat = () => {
-  const isChatVisible = useSignal(false);
+  const isChatVisible = useSignal(true);
 
   const toggleChat = () => {
     isChatVisible.value = !isChatVisible.value;
   };
-
-  // const closeChat = (e) => {
-  //   e.preventDefault();
-  //   document.getElementById("live-chat").style.display = "none";
-  // };
 
   useEffect(() => {}, []);
 
@@ -21,60 +16,35 @@ const LiveChat = () => {
     <div className="my-live">
       <div id="live-chat">
         <header className="clearfix" onClick={toggleChat}>
-          {/* <Link className="chat-close text-decoration-none" onClick={closeChat}>
-          X
-        </Link> */}
           <h4>DineMe</h4>
         </header>
 
         {isChatVisible.value && (
           <div className="chat">
-            <div className="chat-history">
-              <div className="chat-message clearfix">
-                <img src={DineMeLogo} alt="" width="32" height="32" />
-                <div className="chat-message-content clearfix">
-                  <span className="chat-time">13:35</span>
-                  <h5>DineMe</h5>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Error, explicabo quasi ratione odio dolorum harum.
-                  </p>
+            <div class="chat-container">
+              <span class="chatter_msg_item chatter_msg_item_admin">
+                <a href="https://lukepeters.tech" class="chatter_avatar">
+                  <img src="https://img.lukepeters.me/avatar.jpg" />
+                </a>
+                <div class="message-content">
+                  <strong class="chatter_name">Hema</strong>Hello!
                 </div>
-              </div>
-              <hr />
-              <div className="chat-message clearfix">
-                <img
-                  src="http://gravatar.com/avatar/2c0ad52fc5943b78d6abe069cc08f320?s=32"
-                  alt=""
-                  width="32"
-                  height="32"
-                />
-                <div className="chat-message-content clearfix">
-                  <span className="chat-time">13:37</span>
-                  <h5>Marco Biedermann</h5>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Blanditiis, nulla accusamus magni vel debitis numquam qui
-                    tempora rem voluptatem delectus!
-                  </p>
+              </span>
+
+              <span class="chatter_msg_item chatter_msg_item_user">
+                <div class="message-content">
+                  <strong class="chatter_name">Dine Me</strong>Oh hello. Who is
+                  this?
                 </div>
-              </div>
-              <hr />
-              <div className="chat-message clearfix">
-                <img src={DineMeLogo} alt="" width="32" height="32" />
-                <div className="chat-message-content clearfix">
-                  <span className="chat-time">13:38</span>
-                  <h5>DineMe</h5>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
-                </div>
-              </div>
-              <hr />
+                <a href="https://lukepeters.tech" class="chatter_avatar">
+                  <img src={DineMeLogo} />
+                </a>
+              </span>
             </div>
-            {/* <p className="chat-feedback">Yazıyor..</p> */}
+
             <form>
               <fieldset>
                 <input type="text" placeholder="Massage DineMe" autoFocus />
-                <input type="hidden" />
               </fieldset>
             </form>
           </div>
