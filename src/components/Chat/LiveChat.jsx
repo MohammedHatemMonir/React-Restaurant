@@ -3,8 +3,9 @@ import { useSignal } from "@preact/signals-react";
 import DineMeLogo from "../../images/DineMeLogo.png";
 import "./LiveChat.scss";
 
+
 const LiveChat = () => {
-  const isChatVisible = useSignal(true);
+  const isChatVisible = useSignal(false);
 
   const toggleChat = () => {
     isChatVisible.value = !isChatVisible.value;
@@ -23,9 +24,9 @@ const LiveChat = () => {
           <div className="chat">
             <div class="chat-container">
               <span class="chatter_msg_item chatter_msg_item_admin">
-                <a href="https://lukepeters.tech" class="chatter_avatar">
+                <div class="chatter_avatar">
                   <img src="https://img.lukepeters.me/avatar.jpg" />
-                </a>
+                </div>
                 <div class="message-content">
                   <strong class="chatter_name">Hema</strong>Hello!
                 </div>
@@ -36,9 +37,9 @@ const LiveChat = () => {
                   <strong class="chatter_name">Dine Me</strong>Oh hello. Who is
                   this?
                 </div>
-                <a href="https://lukepeters.tech" class="chatter_avatar">
+                <div class="chatter_avatar">
                   <img src={DineMeLogo} />
-                </a>
+                </div>
               </span>
             </div>
 
