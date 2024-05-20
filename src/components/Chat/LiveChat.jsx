@@ -3,7 +3,6 @@ import { useSignal } from "@preact/signals-react";
 import DineMeLogo from "../../images/DineMeLogo.png";
 import "./LiveChat.scss";
 
-
 const LiveChat = () => {
   const isChatVisible = useSignal(false);
 
@@ -22,22 +21,22 @@ const LiveChat = () => {
 
         {isChatVisible.value && (
           <div className="chat">
-            <div class="chat-container">
-              <span class="chatter_msg_item chatter_msg_item_admin">
-                <div class="chatter_avatar">
+            <div className="chat-container">
+              <span className="chatter_msg_item chatter_msg_item_admin">
+                <div className="chatter_avatar">
                   <img src="https://img.lukepeters.me/avatar.jpg" />
                 </div>
-                <div class="message-content">
-                  <strong class="chatter_name">Hema</strong>Hello!
+                <div className="message-content">
+                  <strong className="chatter_name">Hema</strong>Hello!
                 </div>
               </span>
 
-              <span class="chatter_msg_item chatter_msg_item_user">
-                <div class="message-content">
-                  <strong class="chatter_name">Dine Me</strong>Oh hello. Who is
+              <span className="chatter_msg_item chatter_msg_item_user">
+                <div className="message-content">
+                  <strong className="chatter_name">Dine Me</strong>Oh hello. Who is
                   this?
                 </div>
-                <div class="chatter_avatar">
+                <div className="chatter_avatar">
                   <img src={DineMeLogo} />
                 </div>
               </span>
