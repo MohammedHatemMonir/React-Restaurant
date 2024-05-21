@@ -83,8 +83,8 @@ const EditProfile = () => {
               {errors.name && (
                 <span className="text-danger">{errors.name.message}</span>
               )}
-            </div>
-            <div className="form-group col-md-6">
+            </div>  </div>
+            {/* <div className="form-group col-md-6">
               <label htmlFor="my-img">Profile Image</label>
               <input
                 {...register("userImg", {
@@ -99,7 +99,7 @@ const EditProfile = () => {
                 <span className="text-danger ">{errors.userImg.message}</span>
               )}
             </div>
-          </div>
+          </div> */}
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input

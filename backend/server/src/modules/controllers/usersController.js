@@ -24,7 +24,7 @@ const TestNotifs = async (req, res) => {
 
 
 const signup = async (req, res) => {
-  const { name, email, password, userImg } = req.body;
+  const { name, email, password, userImg , phoneNumber, location} = req.body;
 
   try {
     const errors = validationResult(req);
@@ -58,6 +58,8 @@ const signup = async (req, res) => {
       name,
       email,
       userImg: newUser.userImg,
+      phoneNumber, 
+      location
     });
   } catch (error) {
     console.error("Error during signup:", error);

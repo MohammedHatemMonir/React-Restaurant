@@ -98,7 +98,7 @@ const LiveChat = () => {
               <fieldset className="d-flex align-items-center">
                 <button
                   type="button"
-                  className="btn btn-icon"
+                  className="mr-2"
                   onClick={toggleRecognition}
                 >
                   <FiMic size={24} />
@@ -107,7 +107,7 @@ const LiveChat = () => {
                   type="text"
                   placeholder="Message DineMe"
                   autoFocus
-                  value={query}
+                  defaultValue={query}
                   className="form-control"
                 />
                 <button type="submit" className="btn btn-icon ml-2">
