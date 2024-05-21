@@ -138,7 +138,13 @@ const Login = () => {
                   type={showPass.value ? "text" : "password"}
                   className="form-control"
                   placeholder="*****"
-              
+                  {...register("password", {
+                    required: "Password is required",
+                    minLength: {
+                      value: 5,
+                      message: "Password must have at least 5 characters",
+                    },
+                  })}
                 />
                 {errors["password"] && (
                   <span className="text-danger">
