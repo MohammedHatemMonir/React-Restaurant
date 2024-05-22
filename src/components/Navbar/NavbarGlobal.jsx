@@ -18,7 +18,8 @@ import {
   FaMapMarkerAlt,
 } from "react-icons/fa";
 import { AiOutlineLogin } from "react-icons/ai";
-import Tutorials from './../TestComponents/Tutorials';
+import Tutorials from "./../TestComponents/Tutorials";
+import NotificationDropdown from "./Notifications";
 
 export default function NavbarGlobal() {
   const status = useSignal("none");
@@ -58,6 +59,7 @@ export default function NavbarGlobal() {
           />
         </Link>
 
+       <NotificationDropdown />
         <div className="icons">
           <Link style={{ display: status }} className="p-5 mx-2">
             <FaBars />
@@ -65,15 +67,16 @@ export default function NavbarGlobal() {
           <Link style={{ display: status }} className="p-5 mx-2">
             <FaSearch />
           </Link>
-          <Link to="/" id="login-btn" className="p-3 mx-2">
+
+          <Link to="/" className="p-3 mx-2">
             <FaHome />
           </Link>
           <Link to="/profile" id="login-btn" className="p-3 mx-2">
             <FaUser />
           </Link>
-          <Link to="/map" className="p-3 mx-2">
+          {/* <Link to="/map" className="p-3 mx-2">
             <FaMapMarkerAlt />
-          </Link>
+          </Link> */}
           <Link to="/myorders" className="p-3 mx-2">
             <FaClipboardList />
           </Link>
@@ -81,70 +84,9 @@ export default function NavbarGlobal() {
             <FaShoppingCart />
           </Link>
 
-          <LogoutButton className="p-3 mx-2" />
-
-
+          <LogoutButton className="p-3 mx-2" /> 
         </div>
       </header>
     </>
   );
 }
-
-// <Navbar bg="light" expand="lg">
-// <Container>
-//   <Link to="/" className="navbar-brand">
-//     <Image
-//       src={DineMeLogo}
-//       height={50}
-//       className="d-inline-block align-top"
-//       alt="Logo"
-//     />
-//   </Link>
-
-//   <Navbar.Toggle aria-controls="basic-navbar-nav" />
-//   <Navbar.Collapse id="basic-navbar-nav">
-//     <Nav className="mr-auto">
-//       <Link to="map" className="nav-link">
-//         <FaMapMarkerAlt /> Location
-//       </Link>
-//       {/* {UserData.value.role == "ADMIN" && (
-//         <Link to="allorders" className="nav-link">
-//           <IoIosListBox /> All Orders
-//         </Link>
-//       )} */}
-//       <Link to="myorders" className="nav-link">
-//         <FaClipboardList /> My Orders
-//       </Link>
-//       <Link to="mycart" className="nav-link">
-//         <FaShoppingCart /> My Cart
-//       </Link>
-//       {/* <div>
-//         <CartHandler />
-//       </div> */}
-//     </Nav>
-
-//     <Nav className="ml-auto">
-//       <Link to="#link" className="nav-link">
-//         <FaSearch /> Search
-//       </Link>
-//       <Link to="/profile" className="nav-link">
-//         <Image
-//           src={
-//             UserData.value.userImg ||
-//             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8PyKYrBKAWWy6YCbQzWQcwIRqH8wYMPluIZiMpV1w0NYSbocTZz0ICWFkLcXhaMyvCwQ&usqp=CAU"
-//           }
-//           roundedCircle
-//           style={{ width: "30px", height: "30px" }}
-//           alt="Profile"
-//         />
-//       </Link>
-//       <Link to={"/tutorials"} className="nav-link">
-//         Tutorials
-//       </Link>
-//       <Nav.Link className="text-decoration-none">
-//         <LogoutButton />
-//       </Nav.Link>
-//     </Nav>
-//   </Navbar.Collapse>
-// </Container>
-// </Navbar>
