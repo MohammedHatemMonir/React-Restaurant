@@ -1,6 +1,6 @@
 import "./EditProfile.scss";
 import { useForm } from "react-hook-form";
-import { UserData } from "../../Globals";
+import { UserData, convertBase64 } from "../../Globals";
 import { useSignal } from "@preact/signals-react";
 import { Button, Col } from "reactstrap";
 import LeafletMap from "./../Map/LeafletMap";
@@ -36,21 +36,20 @@ const EditProfile = () => {
   });
 
   const onSubmit = async (data) => {
-    console.log("new data", data); // this new data from registers in useForm hook
+     // this new data from registers in useForm hook
+    let userImg = null;
+
+    if (data.userImg[0]) userImg = await convertBase64(data.userImg[0]);
+
+          data.userImg = userImg;
+
+      console.log("new data", data);
     const result = await m.mutateAsync(data);
     console.log("data added", result);
 
     queryClient.invalidateQueries({ mutationKey: ["editProfile"] });
     queryClient.refetchQueries(["editProfile"]);
     reset();
-    // let ResImg;
-    // let ResBanner;
-
-    // if (data.ResImg[0]) ResImg = await convertBase64(data.resImg[0]);
-    // if (data.ResBanner[0]) ResBanner = await convertBase64(data.resBanner[0]);
-
-    // if (ResImg) data.ResImg = resImg64;
-    // if (ResBanner) data.ResBanner = resBanner64;
 
     // console.log(result)
     // alert(result)
@@ -83,8 +82,8 @@ const EditProfile = () => {
               {errors.name && (
                 <span className="text-danger">{errors.name.message}</span>
               )}
-            </div>  </div>
-            {/* <div className="form-group col-md-6">
+            </div>  
+             <div className="form-group col-md-6">
               <label htmlFor="my-img">Profile Image</label>
               <input
                 {...register("userImg", {
@@ -99,7 +98,7 @@ const EditProfile = () => {
                 <span className="text-danger ">{errors.userImg.message}</span>
               )}
             </div>
-          </div> */}
+          </div> 
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
