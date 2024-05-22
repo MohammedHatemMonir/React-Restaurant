@@ -1,6 +1,12 @@
 const mongoose = require("mongoose");
 
 const resturantSchema=mongoose.Schema({
+    ownerId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        // required: true,
+        default: null
+    },
     ResName:{
         type:String,
         require:[true,"Enter resturant name "]
@@ -16,7 +22,7 @@ const resturantSchema=mongoose.Schema({
     Categoery:{
         type: mongoose.Schema.Types.ObjectId, // Reference to the Category schema
         ref: 'Category', // Name of the Category model
-        
+
     },
     location: {
             type: String,

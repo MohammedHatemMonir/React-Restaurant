@@ -32,6 +32,12 @@ const UserSchema = new Schema({
         required: true,
         // lowercase: true
     },
+    // new field for restaurantId with default value as null
+    resId: {
+        type: Schema.Types.ObjectId,
+        ref: "restaurant",
+        default: null
+    },
     userImg:{
         type:String,
         required: false,
