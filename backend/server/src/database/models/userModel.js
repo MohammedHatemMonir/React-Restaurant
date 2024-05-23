@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const addressSchema = new Schema({
+const locationSchema = new Schema({
     street: String,
     city: String,
     country: String
@@ -38,22 +38,26 @@ const UserSchema = new Schema({
         ref: "restaurant",
         default: null
     },
+    location: {
+        type: locationSchema,
+        default: null
+    },
     userImg:{
         type:String,
         required: false,
     },
-    OwnedResId:{
-        type:String,
-        required: false,
-    },
+    // OwnedResId:{
+    //     type:String,
+    //     required: false,
+    // },
     phoneNumber:{
         type:Number,
         required:false
     },
-    location: {
-        type: String,
-        required: false
-    },
+    // location: {
+    //     type: String,
+    //     required: false
+    // },
     createdAt: {
         type: Date,
         immutable: true,
@@ -63,7 +67,6 @@ const UserSchema = new Schema({
         type: Date,
         default: () => Date.now()
     },
-    address: addressSchema
 });
 
 // const User = mongoose.model("User", UserSchema);
