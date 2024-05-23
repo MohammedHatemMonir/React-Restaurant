@@ -10,7 +10,7 @@ const notifications = [
 const NotificationDropdown = () => {
   return (
     <Dropdown>
-      <Dropdown.Toggle variant="light" id="dropdown-basic">
+      <Dropdown.Toggle variant="transparent" id="dropdown-basic">
         <IoMdNotificationsOutline size={24} />
         <Badge pill bg="danger">
           {notifications.length}

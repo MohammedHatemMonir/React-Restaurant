@@ -55,7 +55,6 @@ export default function NavbarGlobal() {
             style={{
               width: "80px",
               height: "80px",
-
               objectFit: "contain",
               transform: "scale(1.4)",
             }}
@@ -68,9 +67,10 @@ export default function NavbarGlobal() {
 
             {/* Orders dropdown */}
             <NavDropdown
+              style={{ width: "90%" }}
               title={
                 <span>
-                  <FaShoppingCart className="mx-1 text-dark" />
+                  <FaShoppingCart className="mx-2 text-dark" />
                   Order
                 </span>
               }
