@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useSignal } from "@preact/signals-react";
 import { useForm } from "react-hook-form";
 import { FiMic } from "react-icons/fi";
@@ -16,14 +16,19 @@ const LiveChat = () => {
   } = useForm();
   const inputData = useSignal(null);
   const isChatVisible = useSignal(false);
-  const [query, setQuery] = useState("");
-  const [error, setError] = useState(null);
-  const [listening, setListening] = useState(false);
+  const inputRef = useRef(null);
+  const query = useSignal("");
+  const error = useSignal(null);
+  const listening = useSignal(false);
+
   const toggleChat = () => {
     isChatVisible.value = !isChatVisible.value;
   };
 
   useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
     let recognition = null;
     const startRecognition = () => {
       recognition = new window.webkitSpeechRecognition();
@@ -32,22 +37,22 @@ const LiveChat = () => {
       // recognition.lang = "ar-SA";
       // recognition.lang = "ar-EG";
       recognition.onstart = () => {
-        setListening(true);
+        listening.value = true;
       };
 
       recognition.onresult = (event) => {
         const transcript = event.results[0][0].transcript;
-        setQuery(transcript);
-        fetchMovies(transcript);
+        query.value = transcript;
+        // fetchMovies(transcript);
       };
 
       recognition.onerror = (event) => {
-        setError(`Voice recognition error: ${event.error}`);
-        setListening(false);
+        error.value = `Voice recognition error: ${event.error}`;
+        listening.value = false;
       };
 
       recognition.onend = () => {
-        setListening(false);
+        listening.value = false;
       };
 
       recognition.start();
@@ -59,17 +64,17 @@ const LiveChat = () => {
       }
     };
 
-    if (listening) {
+    if (listening.value) {
       startRecognition();
     }
 
     return () => {
       stopRecognition();
     };
-  }, [listening]);
+  }, [listening.value]);
 
   const toggleRecognition = () => {
-    setListening(!listening);
+    listening.value = !listening.value;
   };
 
   const onSubmit = (data) => {
@@ -107,21 +112,23 @@ const LiveChat = () => {
                   })}
                   type="text"
                   placeholder="Message DineMe"
-                  autoFocus
-                  defaultValue={query}
+                  defaultValue={query.value}
                   className="form-control"
+                  // ref={inputRef}
                 />
                 <button type="submit" className="btn btn-icon ml-2">
                   <AiOutlineSend size={24} />
                 </button>
               </fieldset>
-              {listening && (
+              {listening.value && (
                 <p className="text-center font-weight-bold mt-2">
                   Listening...
                 </p>
               )}
-              {error && (
-                <p className="text-center font-weight-bold mt-2">{error}</p>
+              {error.value && (
+                <p className="text-center font-weight-bold mt-2">
+                  {error.value}
+                </p>
               )}
             </form>
           </div>
