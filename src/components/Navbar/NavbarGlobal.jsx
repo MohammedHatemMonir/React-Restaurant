@@ -46,15 +46,16 @@ export default function NavbarGlobal() {
   let Show = useSignal(false);
 
   return (
-    <Navbar bg="info" variant="dark" expand="lg">
+    <Navbar expand="lg">
       <Container fluid>
-        <Link to="/" className="logo">
+        <Link to="/" className="logo ml-5">
           <img
             src={DineMeLogo}
             alt="DineMeLogo"
             style={{
               width: "80px",
               height: "80px",
+
               objectFit: "contain",
               transform: "scale(1.4)",
             }}
@@ -68,13 +69,13 @@ export default function NavbarGlobal() {
             {/* Orders dropdown */}
             <NavDropdown
               title={
-                <span className="text-white">
-                  <FaShoppingCart className="mx-1" />
+                <span>
+                  <FaShoppingCart className="mx-1 text-dark" />
                   Order
                 </span>
               }
             >
-              <NavDropdown.Item>
+              <NavDropdown.Item variant="light">
                 <Link className="text-decoration-none text-dark" to="/myorders">
                   My Orders
                 </Link>
@@ -85,11 +86,12 @@ export default function NavbarGlobal() {
                 </Link>
               </NavDropdown.Item>
             </NavDropdown>
+
             {/* Profile dropdown */}
             <NavDropdown
               title={
-                <span className="text-white">
-                  <FaUser className="mx-1" /> Profile
+                <span>
+                  <FaUser className="mx-1 text-dark" /> Profile
                 </span>
               }
             >
