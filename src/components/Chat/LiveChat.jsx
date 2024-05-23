@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSignal } from "@preact/signals-react";
+import { useForm } from "react-hook-form";
 import { FiMic } from "react-icons/fi";
 import { AiOutlineSend } from "react-icons/ai";
 import "./LiveChat.scss";
@@ -7,6 +8,13 @@ import Me from "./Me";
 import Gemini from "./Gemini";
 
 const LiveChat = () => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+  const inputData = useSignal(null);
   const isChatVisible = useSignal(false);
   const [query, setQuery] = useState("");
   const [error, setError] = useState(null);
@@ -17,7 +25,6 @@ const LiveChat = () => {
 
   useEffect(() => {
     let recognition = null;
-
     const startRecognition = () => {
       recognition = new window.webkitSpeechRecognition();
       recognition.continuous = false;
@@ -65,6 +72,12 @@ const LiveChat = () => {
     setListening(!listening);
   };
 
+  const onSubmit = (data) => {
+    console.log("form data", data);
+    inputData.value = data.main;
+    console.log("form data input", inputData.value);
+  };
+
   return (
     <div className="my-live">
       <div id="live-chat">
@@ -75,12 +88,11 @@ const LiveChat = () => {
         {isChatVisible.value && (
           <div className="chat">
             <div className="chat-container">
-              {/* message={} */}
-              <Me />
               <Gemini />
+              <Me message={inputData.value} />
             </div>
 
-            <form>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <fieldset className="d-flex align-items-center">
                 <button
                   type="button"
@@ -90,6 +102,9 @@ const LiveChat = () => {
                   <FiMic size={24} />
                 </button>
                 <input
+                  {...register("main", {
+                    // required: "Profile image is required",
+                  })}
                   type="text"
                   placeholder="Message DineMe"
                   autoFocus

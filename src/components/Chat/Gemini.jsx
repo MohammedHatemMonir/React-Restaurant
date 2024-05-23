@@ -4,7 +4,7 @@ export default function Gemini() {
   return (
     <span className="chatter_msg_item chatter_msg_item_user">
       <div className="message-content">
-        <strong className="chatter_name">Dine Me</strong>Oh hello. Who is this?
+        <strong className="chatter_name">Dine Me</strong>Ask me anything
       </div>
       <div className="chatter_avatar">
         <img src={DineMeLogo} />
