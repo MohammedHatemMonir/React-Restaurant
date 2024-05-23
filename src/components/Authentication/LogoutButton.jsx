@@ -30,7 +30,8 @@ export default function LogoutButton(props) {
 
   return (
     <Link {...props} onClick={LogoutFunction}>
-      <AiOutlineLogin />
+      {/* <AiOutlineLogin />  */}
+      Log out
     </Link>
   );
 }
