@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useSignal } from "@preact/signals-react";
-import DineMeLogo from "../../images/DineMeLogo.png";
 import { FiMic } from "react-icons/fi";
 import { AiOutlineSend } from "react-icons/ai";
 import "./LiveChat.scss";
+import Me from "./Me";
+import Gemini from "./Gemini";
 
 const LiveChat = () => {
   const isChatVisible = useSignal(false);
@@ -74,24 +75,9 @@ const LiveChat = () => {
         {isChatVisible.value && (
           <div className="chat">
             <div className="chat-container">
-              <span className="chatter_msg_item chatter_msg_item_admin">
-                <div className="chatter_avatar">
-                  <img src="https://img.lukepeters.me/avatar.jpg" />
-                </div>
-                <div className="message-content">
-                  <strong className="chatter_name">Hema</strong>Hello!
-                </div>
-              </span>
-
-              <span className="chatter_msg_item chatter_msg_item_user">
-                <div className="message-content">
-                  <strong className="chatter_name">Dine Me</strong>Oh hello. Who
-                  is this?
-                </div>
-                <div className="chatter_avatar">
-                  <img src={DineMeLogo} />
-                </div>
-              </span>
+              {/* message={} */}
+              <Me />
+              <Gemini />
             </div>
 
             <form>
