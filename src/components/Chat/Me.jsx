@@ -8,7 +8,7 @@ export default function Me() {
         <img  src={UserData.value.userImg || defaultProfile} />
       </div>
       <div className="message-content">
-        <strong className="chatter_name">Hema</strong>Hello!
+        <strong className="chatter_name">{UserData.value.name}</strong>Hello!
       </div>
     </span>
   );
