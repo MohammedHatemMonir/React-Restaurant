@@ -96,7 +96,6 @@ const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResB
                         //creation_date: createdAt
                     };
                     await restaurant.create(newRestaurantData);
-                    res.status(200).json(newRestaurantData);
                     await userModel.updateOne(
                         { _id: owner._id },
                         {
@@ -106,6 +105,7 @@ const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResB
                             },
                         }
                     );
+                    res.status(200).json(newRestaurantData);
                 } catch (error) {
                     console.error('Error creating new restaurant:', error);
                     res.status(500).json({ error: 'Server error while adding new restaurant' });
