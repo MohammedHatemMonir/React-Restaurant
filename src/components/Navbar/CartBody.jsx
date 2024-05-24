@@ -14,7 +14,7 @@ export default function CartBody() {
   const navigate = useNavigate();
 
   const showModal = useSignal(false);
-
+  const showPaypal = useSignal(false);
   const totalPrice = useSignal(0);
   // Create Order
   const m = useMutation({
@@ -145,7 +145,7 @@ export default function CartBody() {
           <h3 className="title font-weight-bold"> Payment </h3>
           <div className="box">
             <h3 className="total font-weight-bold text-center">
-              total : <span>{getTotalPrice()}$</span>
+              Total : <span>{getTotalPrice()}$</span>
             </h3>
             <div className="d-flex justify-content-between align-items-center">
               <button
@@ -155,14 +155,27 @@ export default function CartBody() {
               >
                 Cash On Delivery
               </button>
+              <button
+                type="button"
+                className="btn btn-warning"
+                onClick={() => (showPaypal.value = !showPaypal.value)}
+              >
+                Payment Getway
+              </button>
+            </div>
+          </div>
+          {/* d-flex justify-content-center   style={{ margin: "20px auto" }}  */}
+          {showPaypal.value == true && (
+            <div className="d-flex justify-content-center w-100">
               <PayPalButton
+                style={{ width: "100%" }}
                 totalPrice={getTotalPrice()}
                 createOrder={() => {
                   createOrder();
                 }}
               />
             </div>
-          </div>
+          )}
         </div>
       </div>
 
