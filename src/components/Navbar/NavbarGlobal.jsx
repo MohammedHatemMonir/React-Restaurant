@@ -65,33 +65,23 @@ export default function NavbarGlobal() {
           <Nav className="ms-auto">
             <NotificationDropdown />
 
-            {/* Orders dropdown */}
-            <NavDropdown
-              style={{ width: "90%" }}
-              title={
-                <span>
-                  <FaShoppingCart className="mx-2 text-dark" />
-                  Order
-                </span>
-              }
-            >
-              <NavDropdown.Item variant="light">
-                <Link className="text-decoration-none text-dark" to="/myorders">
-                  My Orders
-                </Link>
-              </NavDropdown.Item>
-              <NavDropdown.Item>
-                <Link className="text-decoration-none text-dark" to="/mycart">
-                  My Cart
-                </Link>
-              </NavDropdown.Item>
-            </NavDropdown>
+            <Nav.Link to="/myorders" className="text-dark">
+              <Link to="/myorders" className="text-dark text-decoration-none">
+                <FaClipboardList /> My Orders
+              </Link>
+            </Nav.Link>
+
+            <Nav.Link className="text-dark">
+              <Link to="/mycart" className="text-dark text-decoration-none">
+                <FaShoppingCart /> My Cart
+              </Link>
+            </Nav.Link>
 
             {/* Profile dropdown */}
             <NavDropdown
               title={
-                <span>
-                  <FaUser className="mx-1 text-dark" /> Profile
+                <span className="text-dark">
+                  <FaUser className="mx-1" /> Profile
                 </span>
               }
             >

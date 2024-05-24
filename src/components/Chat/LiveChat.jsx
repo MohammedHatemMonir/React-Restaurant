@@ -22,11 +22,7 @@ const LiveChat = () => {
   const error = useSignal(null);
   const listening = useSignal(false);
 
-
-
-if(query.value)
-  setValue("main", query.value)
-
+  if (query.value) setValue("main", query.value);
 
   const toggleChat = () => {
     isChatVisible.value = !isChatVisible.value;
@@ -50,7 +46,6 @@ if(query.value)
       recognition.onresult = (event) => {
         const transcript = event.results[0][0].transcript;
         query.value = transcript;
-        // fetchMovies(transcript);
       };
 
       recognition.onerror = (event) => {
