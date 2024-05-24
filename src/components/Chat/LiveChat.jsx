@@ -16,7 +16,7 @@ const LiveChat = () => {
     formState: { errors },
   } = useForm();
 
-  const initialData = ["Allah Akbar", "Hello", "Welcome"];
+  const initialData = [];
 
   const data = useSignal(initialData);
   const inputValue = useSignal("");
