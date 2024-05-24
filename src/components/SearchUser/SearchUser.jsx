@@ -4,7 +4,7 @@ import { apiClient } from "../../Data/apiclient";
 import { Link } from "react-router-dom";
 import { useSignal } from "@preact/signals-react";
 
-const SearchUser = () => {
+const SearchUser = ({ setValue }) => {
   const searchTerm = useSignal("");
   const searchResults = useSignal([]);
 
@@ -35,6 +35,9 @@ const SearchUser = () => {
     }
   };
 
+  function selectOwner(id) {
+    setValue("ownerId", id);
+  }
   return (
     <Col sm={12}>
       <Form.Group className="mb-2 mb-sm-0">
@@ -49,7 +52,11 @@ const SearchUser = () => {
 
         <div className="dropdown-content">
           {searchResults.value.map((user, index) => (
-            <Link key={index} className="d-block text-decoration-none">
+            <Link
+              key={index}
+              className="d-block text-decoration-none"
+              onClick={() => selectOwner(user._id)}
+            >
               {user.name}
             </Link>
           ))}

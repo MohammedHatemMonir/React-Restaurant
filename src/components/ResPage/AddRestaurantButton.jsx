@@ -15,6 +15,7 @@ export default function AddRestaurantButton() {
   const {
     handleSubmit,
     register,
+    setValue,
     formState: { errors, isDirty },
     reset,
   } = useForm();
@@ -45,7 +46,6 @@ export default function AddRestaurantButton() {
     newCategory.value = e.target.value;
     // console.log("New Category", newCategory.value);
   }
-
 
   const getCategoryiesQuery = useQuery({
     queryKey: ["getAllCategory"],
@@ -86,7 +86,6 @@ export default function AddRestaurantButton() {
     getCategoryiesQuery.refetch();
   };
 
-
   // Add new restaurant in db
   const m = useMutation({
     mutationKey: [],
@@ -100,7 +99,6 @@ export default function AddRestaurantButton() {
       return await apiClient.post(url, params);
     },
   });
-
 
   async function submit(data) {
     // console.log("submit! ADD RESTAURANT", data);
@@ -142,7 +140,7 @@ export default function AddRestaurantButton() {
         <>
           <Form>
             <Row>
-              <SearchUser />
+              <SearchUser setValue={setValue} />
               <Col sm={6}>
                 <Form.Group className="mb-2 mb-sm-0">
                   <Form.Label>Name</Form.Label>
@@ -169,10 +167,18 @@ export default function AddRestaurantButton() {
                     })}
                   >
                     <option disabled>Please Select ...</option>
-                    { ShowSignal.value && !getCategoryiesQuery.isLoading && getCategoryiesQuery.data?.data?.Category.map((category,index) => (
-                      <option key={`${index}+${category._id}`} value={category._id}>{category.Categoery}</option>
-                    ))}
-
+                    {ShowSignal.value &&
+                      !getCategoryiesQuery.isLoading &&
+                      getCategoryiesQuery.data?.data?.Category.map(
+                        (category, index) => (
+                          <option
+                            key={`${index}+${category._id}`}
+                            value={category._id}
+                          >
+                            {category.Categoery}
+                          </option>
+                        )
+                      )}
                   </Form.Select>
                   <span className="error" style={{ color: "red" }}>
                     {errors["Category"] && errors["Category"].message}

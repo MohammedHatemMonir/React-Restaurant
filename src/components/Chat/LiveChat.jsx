@@ -32,6 +32,7 @@ const LiveChat = () => {
     if (inputRef.current) {
       inputRef.current.focus();
     }
+    
     let recognition = null;
     const startRecognition = () => {
       recognition = new window.webkitSpeechRecognition();
