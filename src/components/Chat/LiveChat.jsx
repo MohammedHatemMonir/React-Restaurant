@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useSignal } from "@preact/signals-react";
 import { useForm } from "react-hook-form";
 import { FiMic } from "react-icons/fi";
@@ -16,19 +16,19 @@ const LiveChat = () => {
   } = useForm();
   const inputData = useSignal(null);
   const isChatVisible = useSignal(false);
+  const inputRef = useRef(null);
   const query = useSignal("");
   const error = useSignal(null);
   const listening = useSignal(false);
 
-  register("main", {
-    value: query.value,
-    // required: "Profile image is required",
-  });
   const toggleChat = () => {
     isChatVisible.value = !isChatVisible.value;
   };
 
   useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
     let recognition = null;
     const startRecognition = () => {
       recognition = new window.webkitSpeechRecognition();
@@ -43,6 +43,7 @@ const LiveChat = () => {
       recognition.onresult = (event) => {
         const transcript = event.results[0][0].transcript;
         query.value = transcript;
+        // fetchMovies(transcript);
       };
 
       recognition.onerror = (event) => {
@@ -113,6 +114,7 @@ const LiveChat = () => {
                   placeholder="Message DineMe"
                   defaultValue={query.value}
                   className="form-control"
+                  // ref={inputRef}
                 />
                 <button type="submit" className="btn btn-icon ml-2">
                   <AiOutlineSend size={24} />
