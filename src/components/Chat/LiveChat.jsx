@@ -39,7 +39,7 @@ const LiveChat = () => {
     const updatedData = [...data.value, inputValue.value];
     data.value = updatedData;
     // Clear the input field
-    inputValue.value = "";
+    reset();
   };
 
   useEffect(() => {
