@@ -11,6 +11,7 @@ const LiveChat = () => {
   const {
     register,
     handleSubmit,
+    setValue,
     reset,
     formState: { errors },
   } = useForm();
@@ -20,6 +21,12 @@ const LiveChat = () => {
   const query = useSignal("");
   const error = useSignal(null);
   const listening = useSignal(false);
+
+
+
+if(query.value)
+  setValue("main", query.value)
+
 
   const toggleChat = () => {
     isChatVisible.value = !isChatVisible.value;
