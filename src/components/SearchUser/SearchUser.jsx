@@ -36,10 +36,8 @@ const SearchUser = ({ setValue }) => {
   };
 
   function selectOwner(id) {
-
     console.log("Selected Owner", id);
     setValue("ownerId", id);
-
   }
   return (
     <Col sm={12}>
@@ -58,7 +56,19 @@ const SearchUser = ({ setValue }) => {
             <div
               key={index}
               className="d-block text-decoration-none"
-              onClick={() => {selectOwner(user._id); searchTerm.value = user.name}}
+              style={{
+                cursor: "pointer",
+                padding: "10px",
+                color: "#fff",
+                backgroundColor: "#007bff",
+                borderRadius: "5px",
+                transition: "background-color 0.3s ease",
+                boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
+              }}
+              onClick={() => {
+                selectOwner(user._id);
+                searchTerm.value = user.name;
+              }}
             >
               {user.name}
             </div>

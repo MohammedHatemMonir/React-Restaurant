@@ -16,12 +16,10 @@ const LiveChat = () => {
     formState: { errors },
   } = useForm();
 
-  const initialData = [];
-
-  const data = useSignal(initialData);
+  const data = useSignal([]);
   const inputValue = useSignal("");
   const isChatVisible = useSignal(false);
-  const inputRef = useRef(null);
+  // const inputRef = useRef(null);
   const query = useSignal("");
   const error = useSignal(null);
   const listening = useSignal(false);
@@ -32,8 +30,9 @@ const LiveChat = () => {
     isChatVisible.value = !isChatVisible.value;
   };
 
+  // useForm hook function here
   const onSubmit = (data1) => {
-    // console.log("form data", data);
+    // console.log("form data", data1);
     inputValue.value = data1.main;
     // Add the new value to the data array
     const updatedData = [...data.value, inputValue.value];
@@ -43,10 +42,11 @@ const LiveChat = () => {
   };
 
   useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
+    // if (inputRef.current) {
+    //   inputRef.current.focus();
+    // }
 
+    // Speech to text to text function here
     let recognition = null;
     const startRecognition = () => {
       recognition = new window.webkitSpeechRecognition();
