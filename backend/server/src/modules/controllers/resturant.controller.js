@@ -95,7 +95,7 @@ const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResB
                     ownerId: owner._id
                     //creation_date: createdAt
                 };
-                const ownerRole=owner.role=='ADMIN'?owner.role='ADMIN':owner.role='owner'
+                const ownerRole=owner.role=='ADMIN'?owner.role:owner.role='owner'
                 const newRestaurant = await restaurant.create(newRestaurantData);
                 await userModel.updateOne(
                     { _id: owner._id },
