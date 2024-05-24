@@ -53,12 +53,13 @@ const getAllresturant = async (req, res) => {
 const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResBanner,location, ownerId} Remove validation of .png,add banner to database ,Upload image from request body
     let ResImg;
     let ResBanner;
+    let owner
     try {
         console.log("Get all res started, body:", req.body)
         if (req.session.user.role != "ADMIN")
             return res.status(400).json({ errors: "Not Authenticated" });
 
-            const ownerId = req.body.ownerId;
+            
         // const errors = validationResult(req);
         // if (!errors.isEmpty()) {
         //     return res.status(400).json({ errors: errors.array() });
@@ -75,6 +76,7 @@ const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResB
             try{
             ResBanner= await uploadImg(req.body.resBanner);
             category = await categoeryModel.findOne({ _id: req.body.Category } );
+            owner = await userModel.findOne({ _id: req.body.ownerId});
             }catch(err){
                 console.log("Error in uploading RESTAURANT img",err);
             }
@@ -90,10 +92,20 @@ const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResB
                         location:req.body.location,
                         rating: rating,
                         comment_num: comment_num,
+                        ownerId:owner._id
                         //creation_date: createdAt
                     };
                     await restaurant.create(newRestaurantData);
                     res.status(200).json(newRestaurantData);
+                    await userModel.updateOne(
+                        { _id: owner._id },
+                        {
+                            $set: {
+                                resId: newRestaurantData._id,
+                                role: 'owner',
+                            },
+                        }
+                    );
                 } catch (error) {
                     console.error('Error creating new restaurant:', error);
                     res.status(500).json({ error: 'Server error while adding new restaurant' });
