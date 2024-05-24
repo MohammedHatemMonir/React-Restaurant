@@ -2,7 +2,7 @@ import { UserData } from "../../Globals";
 import defaultProfile from "../../images/defaultProfile.png";
 
 export default function Me({ message }) {
-  // console.log("my message", message);
+  console.log("my message", message);
   return (
     <>
       {message != null && (

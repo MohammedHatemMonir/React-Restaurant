@@ -15,7 +15,11 @@ const LiveChat = () => {
     reset,
     formState: { errors },
   } = useForm();
-  const inputData = useSignal(null);
+
+  const initialData = ["Allah Akbar", "Hello", "Welcome"];
+
+  const data = useSignal(initialData);
+  const inputValue = useSignal("");
   const isChatVisible = useSignal(false);
   const inputRef = useRef(null);
   const query = useSignal("");
@@ -28,11 +32,21 @@ const LiveChat = () => {
     isChatVisible.value = !isChatVisible.value;
   };
 
+  const onSubmit = (data1) => {
+    // console.log("form data", data);
+    inputValue.value = data1.main;
+    // Add the new value to the data array
+    const updatedData = [...data.value, inputValue.value];
+    data.value = updatedData;
+    // Clear the input field
+    inputValue.value = "";
+  };
+
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();
     }
-    
+
     let recognition = null;
     const startRecognition = () => {
       recognition = new window.webkitSpeechRecognition();
@@ -80,24 +94,23 @@ const LiveChat = () => {
     listening.value = !listening.value;
   };
 
-  const onSubmit = (data) => {
-    console.log("form data", data);
-    inputData.value = data.main;
-    console.log("form data input", inputData.value);
-  };
-
   return (
     <div className="my-live">
       <div id="live-chat">
         <header className="clearfix" onClick={toggleChat}>
           <h4>DineMe</h4>
         </header>
+        {/* {console.log("chatData", chatData)} */}
 
         {isChatVisible.value && (
           <div className="chat">
             <div className="chat-container">
               <Gemini />
-              <Me message={inputData.value} />
+              {/* <Me message={inputData.value} /> */}
+
+              {data.value.map((comment, index) => (
+                <Me message={comment} key={index} />
+              ))}
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)}>
