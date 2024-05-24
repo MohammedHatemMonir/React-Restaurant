@@ -29,6 +29,8 @@ export default function AddRestaurantButton() {
   const newCategory = useSignal("");
   const myCategoryBtn = useSignal(true);
 
+    if(currentLocation.value)
+    setValue("location", currentLocation.value);
   // Display or Hide Map
   function handleMap() {
     showMap.value = !showMap.value;

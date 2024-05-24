@@ -36,7 +36,10 @@ const SearchUser = ({ setValue }) => {
   };
 
   function selectOwner(id) {
+
+    console.log("Selected Owner", id);
     setValue("ownerId", id);
+
   }
   return (
     <Col sm={12}>
@@ -52,13 +55,13 @@ const SearchUser = ({ setValue }) => {
 
         <div className="dropdown-content">
           {searchResults.value.map((user, index) => (
-            <Link
+            <div
               key={index}
               className="d-block text-decoration-none"
-              onClick={() => selectOwner(user._id)}
+              onClick={() => {selectOwner(user._id); searchTerm.value = user.name}}
             >
               {user.name}
-            </Link>
+            </div>
           ))}
         </div>
       </Form.Group>
