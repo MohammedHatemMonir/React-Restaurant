@@ -16,10 +16,10 @@ $box-shadow: 0 16px 16px rgba(0, 0, 0, 0.05);
 .shopping-cart-container {
   position: fixed;
   // top: 8.5rem;
-  top: 7.5rem;
+  top: 20px;
   left: 0;
   right: 0;
-  z-index: 1000;
+  // z-index: 1000;
   // height: calc(100vh - 8.5rem);
   height: calc(100vh);
   background: $white;

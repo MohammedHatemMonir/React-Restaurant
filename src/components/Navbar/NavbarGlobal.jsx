@@ -46,7 +46,7 @@ export default function NavbarGlobal() {
   let Show = useSignal(false);
 
   return (
-    <Navbar expand="lg">
+    <Navbar expand="lg" style={{ background:"#ffffff",zIndex: "1000" }}>
       <Container fluid>
         <Link to="/" className="logo ml-5">
           <img

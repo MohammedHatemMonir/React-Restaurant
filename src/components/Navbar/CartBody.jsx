@@ -106,7 +106,7 @@ export default function CartBody() {
   }
   return (
     <section className="shopping-cart-container">
-      <div className="products-container" style={{ transform: "scale(0.75)" }}>
+      <div className="products-container" style={{ transform: "scale(0.80)" }}>
         <h3 className="title font-weight-bold ">My Products</h3>
         <div className="box-container">
           <div className="row">
