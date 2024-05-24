@@ -139,9 +139,12 @@ const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResB
 const deleteresturant = async (req, res) => {
     try {
         const { id } = req.params;
+        if (req.session.user.role !== "ADMIN") {
+            return res.status(403).json({ message: "Unauthorized" });
+        }
         const restaurantToDelete = await restaurant.findOneAndDelete({ _id: id });
         const MealsToDelete = await meal.find({ ResID: id });
-
+        await userModel.deleteOne({resId:id})
         if (!restaurantToDelete) {
             return res.status(404).json({ message: "Restaurant Not Found" });
         }
@@ -183,10 +186,13 @@ const deleteresturant = async (req, res) => {
 
 const updateRestaurant = async (req, res) => {
     try {
-        if (!req.session.user || req.session.user.role !== "ADMIN") {
-            return res.status(403).json({ error: "Not Authenticated" });
-        }
         const { id } = req.params;
+        const userId = req.session?.user?._id;
+        const checkOwner = await restaurant.findOne({ _id: id, ownerId: userId });
+        if (req.session.user.role !== "owner" && !checkOwner) {
+            return res.status(403).json({ error: "Unauthorized" });
+        }
+        
 
         const NewResData = {}
 
