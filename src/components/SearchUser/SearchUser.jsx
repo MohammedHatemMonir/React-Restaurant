@@ -44,11 +44,11 @@ const SearchUser = ({ setValue }) => {
   return (
     <Col sm={12}>
       <Form.Group className="mb-2 mb-sm-0">
-        <Form.Label className="dropdown">Search user</Form.Label>
+        <Form.Label className="dropdown">Choose Owner</Form.Label>
         <Form.Control
           type="text"
           name="search-user"
-          placeholder="Search User"
+          placeholder="Choose Owner"
           value={searchTerm.value}
           onChange={handleSearchChange}
         />
