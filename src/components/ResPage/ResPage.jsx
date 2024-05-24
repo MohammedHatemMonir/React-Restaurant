@@ -9,7 +9,7 @@ import { UserData } from "../../Globals";
 import CookingLoader from "./../Loaders/CookingLoader";
 import ResCard from "./ResCard";
 import Parallax from "./Parallax";
-// import ResFilters from "./ResFilters";
+import ResFilters from "./ResFilters";
 import { Col } from "react-bootstrap";
 import { useSignal } from "@preact/signals-react";
 
