@@ -14,7 +14,7 @@ export default function CartBody() {
   const navigate = useNavigate();
 
   const showModal = useSignal(false);
-
+  const showPaypal = useSignal(false);
   const totalPrice = useSignal(0);
   // Create Order
   const m = useMutation({
@@ -106,46 +106,54 @@ export default function CartBody() {
   }
   return (
     <section className="shopping-cart-container">
-      <div className="products-container" style={{ transform: "scale(0.75)" }}>
-        <h3 className="title font-weight-bold">My Products</h3>
+      <div className="products-container" style={{ transform: "scale(0.80)" }}>
+        <h3 className="title font-weight-bold ">My Products</h3>
         <div className="box-container">
-          {!m.isError &&
-            !m.isLoading &&
-            Cart.value.meals?.map((meal, index) => (
-              <div className="box" key={index + meal.id}>
-                <FaTimes
-                  className="fas fa-times"
-                  onClick={() => {
-                    DeleteMeal(meal.id);
-                  }}
-                />
-                {console.log("meal data", meal)}
-
-                <img src={meal.mealImg} alt="meal-img" />
-                <div className="content">
-                  <h3>{meal.name}</h3>
-                  <span> quantity : </span>
-
-                  <input
-                    type="number"
-                    min="0"
-                    onChange={(e) =>
-                      AddQuantity({ quantity: e.target.value, mealId: meal.id })
-                    }
-                    defaultValue={meal.quantity}
+          <div className="row">
+            {!m.isError &&
+              !m.isLoading &&
+              Cart.value.meals?.map((meal, index) => (
+                <div style={{ transform: "scale(0.95)" }}
+                  className="box col-sm-12 col-md-6 col-lg-4 mb-3 "
+                  key={index + meal.id}
+                >
+                  <FaTimes
+                    className="fas fa-times"
+                    onClick={() => {
+                      DeleteMeal(meal.id);
+                    }}
                   />
-                  <br />
-                  <span> price : </span>
-                  <span className="price"> {meal.price * meal.quantity}$ </span>
+                  {console.log("meal data", meal)}
+
+                  <img src={meal.mealImg} alt="meal-img" />
+                  <div className="content">
+                    <h3>{meal.name}</h3>
+                    <span> quantity : </span>
+
+                    <input
+                      type="number"
+                      min="0"
+                      onChange={(e) =>
+                        AddQuantity({
+                          quantity: e.target.value,
+                          mealId: meal.id,
+                        })
+                      }
+                      defaultValue={meal.quantity}
+                    />
+                    <br />
+                    <span> price : </span>
+                    <span className="price">{meal.price * meal.quantity}$</span>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+          </div>
         </div>
         <div className="cart-total">
           <h3 className="title font-weight-bold"> Payment </h3>
           <div className="box">
             <h3 className="total font-weight-bold text-center">
-              total : <span>{getTotalPrice()}$</span>
+              Total : <span>{getTotalPrice()}$</span>
             </h3>
             <div className="d-flex justify-content-between align-items-center">
               <button
@@ -155,14 +163,27 @@ export default function CartBody() {
               >
                 Cash On Delivery
               </button>
+              <button
+                type="button"
+                className="btn btn-warning"
+                onClick={() => (showPaypal.value = !showPaypal.value)}
+              >
+                Payment Getway
+              </button>
+            </div>
+          </div>
+          {/* d-flex justify-content-center   style={{ margin: "20px auto" }}  */}
+          {showPaypal.value == true && (
+            <div className="d-flex justify-content-center w-100">
               <PayPalButton
+                style={{ width: "100%" }}
                 totalPrice={getTotalPrice()}
                 createOrder={() => {
                   createOrder();
                 }}
               />
             </div>
-          </div>
+          )}
         </div>
       </div>
 
