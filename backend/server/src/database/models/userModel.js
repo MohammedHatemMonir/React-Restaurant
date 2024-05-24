@@ -34,7 +34,7 @@ const UserSchema = new Schema({
     },
     // new field for restaurantId with default value as null
     resId: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "restaurant",
         default: null
     },
