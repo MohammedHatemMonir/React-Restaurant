@@ -33,7 +33,6 @@ const LiveChat = () => {
   // useForm hook function here
   const onSubmit = (data1) => {
     // console.log("form data", data1);
-
     data1.main.length === 0 ? inputValue.value = null :  inputValue.value = data1.main;
     // inputValue.value = data1.main;
     // Add the new value to the data array
