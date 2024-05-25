@@ -1,10 +1,10 @@
 const meal = require("../../database/models/Meals_model");
-const resturant  = require("../../database/models/resturant.Model");
+const resturant = require("../../database/models/resturant.Model");
 const userModel = require("../../database/models/userModel.js");
 const { Order } = require("../../database/models/orders");
 const { validationResult } = require("express-validator");
-const uploadImg = require("../../utils/uploadImg.js"); 
-const mealComments=require('../../database/models/Comments_model.js');
+const uploadImg = require("../../utils/uploadImg.js");
+const mealComments = require('../../database/models/Comments_model.js');
 const mongoose = require("mongoose");
 
 const GetMealsWithComments = async (req, res) => {
@@ -71,102 +71,91 @@ const addNewmeal = async (req, res) => {
   }
 };
 
-  const getAllmeals = async (req, res) => { //{ResID:""}
-    try {
-      const errors =validationResult(req)
-      if(!errors.isEmpty()){
-        res.status(400).json(errors.array()[0].msg)
-      }else{
+const getAllmeals = async (req, res) => { //{ResID:""}
+  try {
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      res.status(400).json(errors.array()[0].msg)
+    } else {
 
-            const meals = await meal.find({ResID:req.body.ResID});
-            // console.log(myuser[0].password)
-            if (!meals?.length > 0) {
-                res.status(201).send("NO MEALS EXIST");
-            }else{
-                // console.log(meals)
-                res.status(201).json(meals);
-            }}
-    } catch (err) {
-      res.status(400).json({ error: err });
+      const meals = await meal.find({ ResID: req.body.ResID });
+      // console.log(myuser[0].password)
+      if (!meals?.length > 0) {
+        res.status(201).send("NO MEALS EXIST");
+      } else {
+        // console.log(meals)
+        res.status(201).json(meals);
+      }
     }
-  };
-
-  const updateMeal = async (req, res) => {
-    try {
-      const { id } = req.params;
-        const userId = req.session?.user?._id;
-        const resId=await meal.find({_id:id})
-        const checkOwner = await resturant.findOne({ _id: resId.resId, ownerId: userId });
-      if (!checkOwner) {
-        return res.status(403).json({ error: "Not Authenticated as Owner" });
-      }
-  
-      const NewMealData = {};
-  
-      if (req.body.MealName) {
-        NewMealData.MealName = req.body.MealName;
-      }
-      if (req.body.MealImg) {
-        NewMealData.MealImg =await uploadImg(req.body.MealImg)
-      }
-      if (req.body.Description) {
-        NewMealData.Description = req.body.Description;
-      }
-      if (req.body.Price) {
-        NewMealData.Price = req.body.Price;
-      }
-  
-      if (Object.keys(NewMealData).length === 0) {
-        return res.status(400).json({ error: "No fields to update provided" });
-      }
-  
-      const updatedMeal = await meal.findByIdAndUpdate(id, NewMealData, { new: true });
-  
-    
-      if (!updatedMeal) {
-        return res.status(404).json({ error: "Meal not found" });
-      }
-  
-      
-      res.status(200).json(updatedMeal);
-    } catch (error) {
-      console.error("Error updating meal:", error);
-      res.status(500).json({ error: "Server error while updating meal" });
-    }
+  } catch (err) {
+    res.status(400).json({ error: err });
   }
-  
-  const deleteMeal = async (req, res) => {
-    try {
-      const { id } = req.params;
-        const userId = req.session?.user?._id;
-        const resId=await meal.find({_id:id})
-        const checkOwner = await resturant.findOne({ _id: resId.resId, ownerId: userId });
-      if (!checkOwner) {
-        return res.status(403).json({ error: "Not Authenticated as owner" });
-      }
-      
-      
-  
-      const deletedMeal = await meal.findByIdAndDelete(id);
+};
 
-      if (!deletedMeal) {
-        return res.status(404).json({ error: "Meal not found" });
-      }
-      res.status(200).json({ message: "Meal deleted successfully" }); //Responded here to optimize the response time
+const updateMeal = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const userId = req.session?.user?._id;
 
-
-      await mealComments.deleteMany({MealID:id})
-
-      if (deletedMeal.MealImg) {
-        await uploadImg.deleteImage(deletedMeal.MealImg);
-      }
-
-    } catch (error) {
-      console.error("Error deleting meal:", error);
-      res.status(500).json({ error: "Server error while deleting meal" });
+    const mealToUpdate = await meal.findById(id);
+    if (!mealToUpdate) {
+      return res.status(404).json({ error: "Meal not found" });
     }
+
+    const restaurant = await resturant.findOne({ _id: mealToUpdate.ResID, ownerId: userId });
+    if (!restaurant) {
+      return res.status(403).json({ error: "Not authenticated as owner" });
+    }
+
+    const newMealData = {};
+    if (req.body.MealName) newMealData.MealName = req.body.MealName;
+    if (req.body.MealImg) newMealData.MealImg = await uploadImg(req.body.MealImg);
+    if (req.body.Description) newMealData.Description = req.body.Description;
+    if (req.body.Price) newMealData.Price = req.body.Price;
+
+    if (Object.keys(newMealData).length === 0) {
+      return res.status(400).json({ error: "No fields to update provided" });
+    }
+
+    const updatedMeal = await meal.findByIdAndUpdate(id, newMealData, { new: true });
+    res.status(200).json(updatedMeal);
+
+  } catch (error) {
+    console.error("Error updating meal:", error);
+    res.status(500).json({ error: "Server error while updating meal" });
   }
-  
+};
+
+const deleteMeal = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const userId = req.session?.user?._id;
+
+    const mealToDelete = await meal.findById(id);
+    if (!mealToDelete) {
+      return res.status(404).json({ error: "Meal not found" });
+    }
+
+    const restaurant = await resturant.findOne({ _id: mealToDelete.ResID, ownerId: userId });
+    if (!restaurant) {
+      return res.status(403).json({ error: "Not authenticated as owner" });
+    }
+
+    await meal.findByIdAndDelete(id);
+    res.status(200).json({ message: "Meal deleted successfully" });
+
+    await mealComments.deleteMany({ MealID: id });
+
+    if (mealToDelete.MealImg) {
+      await uploadImg.deleteImage(mealToDelete.MealImg);
+    }
+
+  } catch (error) {
+    console.error("Error deleting meal:", error);
+    res.status(500).json({ error: "Server error while deleting meal" });
+  }
+};
+
 // ========== Order ==========
 
 // Create Order in specific restaurant
@@ -174,7 +163,7 @@ const createOrder = async (req, res) => {   // {ResId:"",meals:[{id:"",quantity:
   try {
     // 
 
-    if(!req.session?.user?._id)  return res.status(404).json({ message: "Not authenticated!" });
+    if (!req.session?.user?._id) return res.status(404).json({ message: "Not authenticated!" });
 
     const restaurantId = req.body.ResId;
     const restaurant = await resturant.findById(restaurantId);
@@ -186,7 +175,7 @@ const createOrder = async (req, res) => {   // {ResId:"",meals:[{id:"",quantity:
     const mealPromises = req.body.meals.map(Meal => {
       return meal.findOne({ _id: Meal.id, ResID: restaurantId }).then(mealDoc => {
         if (mealDoc) {
-          return { id: mealDoc.id,Price:mealDoc.Price, quantity: Meal.quantity };
+          return { id: mealDoc.id, Price: mealDoc.Price, quantity: Meal.quantity };
         } else {
           return null;
         }
@@ -198,19 +187,19 @@ const createOrder = async (req, res) => {   // {ResId:"",meals:[{id:"",quantity:
     let totalPrice;
 
     await Promise.all(mealPromises)
-            .then(results => {  
-              existingMeals = results.filter(result => result !== null);
+      .then(results => {
+        existingMeals = results.filter(result => result !== null);
 
 
-              totalPrice = existingMeals.reduce((total, mealObj) => {
-                return total + mealObj.Price * mealObj.quantity;
-              }, 0);
+        totalPrice = existingMeals.reduce((total, mealObj) => {
+          return total + mealObj.Price * mealObj.quantity;
+        }, 0);
 
-              console.log("Existing meals",existingMeals, "total Price", totalPrice); // This will be an array of objects, each containing a meal and a quantity
-            })
-            .catch(err => {
-              console.error(err);
-            });
+        console.log("Existing meals", existingMeals, "total Price", totalPrice); // This will be an array of objects, each containing a meal and a quantity
+      })
+      .catch(err => {
+        console.error(err);
+      });
 
     let order = new Order({
       resId: restaurantId,
@@ -220,7 +209,7 @@ const createOrder = async (req, res) => {   // {ResId:"",meals:[{id:"",quantity:
     });
 
 
-    console.log("order",order);
+    console.log("order", order);
     order = await order.save();
 
 
@@ -240,11 +229,11 @@ const createOrder = async (req, res) => {   // {ResId:"",meals:[{id:"",quantity:
 const getMyOrders = async (req, res) => {
 
   try {
-  
+
     if (!req.session?.user?._id) {
       return res.status(404).json({ message: "Not authenticated!" });
     }
-    const orders = await Order.find({ user: req.session.user._id }, {resId: 0, meals: 0, __v: 0 });
+    const orders = await Order.find({ user: req.session.user._id }, { resId: 0, meals: 0, __v: 0 });
     if (!orders || orders.length === 0) {
       return res.json({ message: "No orders found" });
     }
@@ -261,7 +250,7 @@ const getMyOrders = async (req, res) => {
 //     if (!req.session?.user?._id) {
 //       return res.status(404).json({ message: "Not authenticated!" });
 //     }
-    
+
 //     const { orderId } = req.params;
 
 //     const order = await Order.aggregate([
@@ -319,7 +308,7 @@ const getOrderDetails = async (req, res) => {
     if (!req.session?.user?._id) {
       return res.status(404).json({ message: "Not authenticated!" });
     }
-    
+
     // Extract orderId from request parameters
     const { orderId } = req.params;
 
@@ -336,29 +325,29 @@ const getOrderDetails = async (req, res) => {
 
 
     for (const Meal of order.meals) {
-  try {
-    const mealDoc = await meal.findById(Meal.id);
-    if (mealDoc) {
-      mealDetails.push({
-        MealName: mealDoc.MealName,
-        MealImg: mealDoc.MealImg,
-        Price: mealDoc.Price,
-        Quantity: Meal.quantity
-      });
-    } else {
+      try {
+        const mealDoc = await meal.findById(Meal.id);
+        if (mealDoc) {
+          mealDetails.push({
+            MealName: mealDoc.MealName,
+            MealImg: mealDoc.MealImg,
+            Price: mealDoc.Price,
+            Quantity: Meal.quantity
+          });
+        } else {
 
-      console.log(`Meal with ID ${Meal.id} not found.`);
-      
+          console.log(`Meal with ID ${Meal.id} not found.`);
+
+        }
+      } catch (error) {
+        console.log(`Error fetching meal with ID ${Meal.id}:`, error);
+
+      }
     }
-  } catch (error) {
-    console.log(`Error fetching meal with ID ${Meal.id}:`, error);
-    
-  }
-}
-console.log(mealDetails[1])
+    console.log(mealDetails[1])
     const resName = await resturant.findById(order.resId);
 
-    
+
     const result = {
       _id: order._id,
       ResName: resName ? resName.ResName : "Unknown Restaurant",
@@ -379,13 +368,13 @@ console.log(mealDetails[1])
 
 
 
-  module.exports = {
-    addNewmeal,
-    getAllmeals,
-    createOrder,
-    GetMealsWithComments,
-    updateMeal,
-    deleteMeal,
-    getMyOrders,
-    getOrderDetails
-  };
+module.exports = {
+  addNewmeal,
+  getAllmeals,
+  createOrder,
+  GetMealsWithComments,
+  updateMeal,
+  deleteMeal,
+  getMyOrders,
+  getOrderDetails
+};
