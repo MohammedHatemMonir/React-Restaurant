@@ -113,7 +113,8 @@ export default function CartBody() {
             {!m.isError &&
               !m.isLoading &&
               Cart.value.meals?.map((meal, index) => (
-                <div style={{ transform: "scale(0.95)" }}
+                <div
+                  style={{ transform: "scale(0.95)" }}
                   className="box col-sm-12 col-md-6 col-lg-4 mb-3 "
                   key={index + meal.id}
                 >

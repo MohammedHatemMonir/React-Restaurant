@@ -46,7 +46,7 @@ export default function NavbarGlobal() {
   let Show = useSignal(false);
 
   return (
-    <Navbar expand="lg" style={{ background:"#ffffff",zIndex: "1000" }}>
+    <Navbar expand="lg" style={{ background: "#ffffff", zIndex: "1000" }}>
       <Container fluid>
         <Link to="/" className="logo ml-5">
           <img
@@ -65,18 +65,21 @@ export default function NavbarGlobal() {
           <Nav className="ms-auto">
             <NotificationDropdown />
 
-            <Nav.Link to="/myorders" className="text-dark">
-              <Link to="/myorders" className="text-dark text-decoration-none">
-                <FaClipboardList /> My Orders
-              </Link>
+            <Nav.Link
+              as={Link}
+              to="/myorders"
+              className="text-dark text-decoration-none"
+            >
+              <FaClipboardList /> My Orders
             </Nav.Link>
 
-            <Nav.Link className="text-dark">
-              <Link to="/mycart" className="text-dark text-decoration-none">
-                <FaShoppingCart /> My Cart
-              </Link>
+            <Nav.Link
+              as={Link}
+              to="/mycart"
+              className="text-dark text-decoration-none"
+            >
+              <FaShoppingCart /> My Cart
             </Nav.Link>
-
             {/* Profile dropdown */}
             <NavDropdown
               title={
