@@ -9,7 +9,8 @@ import "./CartBody.scss";
 import { useSignal } from "@preact/signals-react";
 import DeliveryModal from "./DeliveryModal";
 import PaypalModal from "./PaypalModal";
-
+import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
 export default function CartBody() {
   const navigate = useNavigate();
   const showDeliveryModal = useSignal(false);
@@ -155,9 +156,31 @@ export default function CartBody() {
           <div className="box">
             <h3 className="total font-weight-bold text-center">
               Total:
-              <span className="ml-2">{new Intl.NumberFormat().format(getTotalPrice())}$</span>
+              <span className="ml-2">
+                {new Intl.NumberFormat().format(getTotalPrice())}$
+              </span>
             </h3>
-            <div className="d-flex justify-content-between align-items-center">
+
+            <div className="row text-center mt-3">
+              <div className="col-12">
+                <Button
+                  onClick={() => (showDeliveryModal.value = true)}
+                  className="btn btn-primary col-sm-4 my-3 mr-4"
+                >
+                  Cash On Delivery
+                </Button>
+                <Button
+                  type="button"
+                  id="cancel"
+                  onClick={() => (showPaypalModal.value = true)}
+                  className="btn btn-outline-primary col-sm-4 my-3"
+                >
+                  Payment Gateway
+                </Button>
+              </div>
+            </div>
+
+            {/* <div className="d-flex justify-content-between align-items-center">
               <button
                 type="button"
                 className="btn btn-warning"
@@ -172,7 +195,7 @@ export default function CartBody() {
               >
                 Payment Getway
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
