@@ -134,7 +134,7 @@ export default function CartBody() {
 
                     <input
                       type="number"
-                      min="0"
+                      min="1"
                       onChange={(e) =>
                         AddQuantity({
                           quantity: e.target.value,
