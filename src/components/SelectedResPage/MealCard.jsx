@@ -20,6 +20,7 @@ export default function MealCard({
   mealImg,
   rating,
   resID,
+  ownerID,
   resName,
 }) {
   const MealComments = useSignal([]);
@@ -125,7 +126,7 @@ export default function MealCard({
             >
               <span>Read More</span>
             </Link>
-            {UserData.value.role == "owner" || UserData.value.role == "ADMIN" && (
+            {UserData.value.role === "owner" && resID === ownerID && (
               <div className="position-relative">
                 <div
                   style={{
@@ -143,6 +144,7 @@ export default function MealCard({
                   <div onClick={onOpenDel}>
                     <DeleteIcon />
                   </div>
+
                   <div onClick={onOpenEdit}>
                     <IoSettings />
                   </div>
@@ -152,7 +154,7 @@ export default function MealCard({
           </div>
         </div>
       </div>
-      {UserData.value.role == "owner" || UserData.value.role == "ADMIN" && showDelModal.value == true && (
+      {showDelModal.value == true && (
         <DeleteMealModal
           mealId={id}
           mealName={name}
@@ -160,7 +162,7 @@ export default function MealCard({
           closeModal={onCloseDel}
         />
       )}
-      {UserData.value.role == "owner" || UserData.value.role == "ADMIN" && showEditModal.value == true && (
+      {showEditModal.value == true && (
         <EditMealModal
           mealId={id}
           mealName={name}

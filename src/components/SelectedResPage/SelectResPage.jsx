@@ -19,7 +19,7 @@ export default function SelectResPage() {
   const { resID, resName } = useParams();
   console.log("resID", resID);
 
-  const q = useQuery({
+  const q1 = useQuery({
     queryKey: ["rest" + resID],
     cacheTime: 60000,
     // staleTime: 60000,
@@ -31,7 +31,21 @@ export default function SelectResPage() {
     },
   });
 
-  console.log("query data", q.data?.data);
+  console.log("query data", q1.data?.data);
+
+  const q2 = useQuery({
+    queryKey: ["ownerId"],
+    // cacheTime: 60000,
+    // staleTime: 60000,
+    queryFn: async () => {
+      let url = `/updateRestaurant/${resID}`;
+      const ret = await apiClient.put(url);
+      console.log("res owner", ret);
+      return ret;
+    },
+  });
+
+  console.log("query data", q2.data?.data.resID);
 
   return (
     <>
@@ -41,7 +55,7 @@ export default function SelectResPage() {
             {/* Banner Img */}
             <img
               loading="lazy"
-              src={q.data?.data?.restaurant?.ResBanner}
+              src={q1.data?.data?.restaurant?.ResBanner}
               alt="cover photo"
             />
           </div>
@@ -54,8 +68,8 @@ export default function SelectResPage() {
                     {/* Res Image */}
                     <img
                       loading="lazy"
-                      src={q.data?.data?.restaurant?.ResImg || DineMeLogo}
-                      alt={q.data?.data?.restaurant?.ResName}
+                      src={q1.data?.data?.restaurant?.ResImg || DineMeLogo}
+                      alt={q1.data?.data?.restaurant?.ResName}
                       className="v-center"
                     />
                   </div>
@@ -66,9 +80,11 @@ export default function SelectResPage() {
                     <div className="content">
                       <div className="resturant-name">
                         <h1 className="title">
-                          {q.data?.data?.restaurant?.ResName}
+                          {q1.data?.data?.restaurant?.ResName}
 
-                          {UserData.value.role == "owner" || UserData.value.role == "ADMIN" && (
+                          {(UserData.value.role === "ADMIN" ||
+                            (UserData.value.role === "owner" &&
+                              resID === q2.data?.data._id)) && (
                             <Link
                               className="badge badge-primary"
                               style={{ color: "white", fontSize: "0.45em" }}
@@ -93,7 +109,7 @@ export default function SelectResPage() {
                                 }}
                               >
                                 <Stars
-                                  stars1={q.data?.data?.restaurant?.rating}
+                                  stars1={q1.data?.data?.restaurant?.rating}
                                 />
                               </div>
                             </div>
@@ -108,7 +124,7 @@ export default function SelectResPage() {
                                 marginTop: "-23px",
                               }}
                             >
-                              {q.data?.data?.restaurant?.Categoery}
+                              {q1.data?.data?.restaurant?.Categoery}
                             </li>
                           </ul>
                         </div>
@@ -122,7 +138,7 @@ export default function SelectResPage() {
                             </svg>
                           </span>
                           <p className="info-value">
-                            {q.data?.data?.restaurant?.location}
+                            {q1.data?.data?.restaurant?.location}
                           </p>
                         </div>
                       </div>
@@ -133,20 +149,20 @@ export default function SelectResPage() {
             </Row>
 
             {/* Hema Here */}
-            {UserData.value.role == "owner" || UserData.value.role == "ADMIN" && (
+            {UserData.value.role === "owner" && resID === q2.data?.data._id && (
               <div className="mt-4">
                 <AddMealButton Resid={resID} />
               </div>
             )}
-            
+
             <div style={{ transform: "scale(0.85)" }}>
               <MealFilters />
             </div>
 
             <div>
               <Row className="m-0">
-                {!q.isLoading &&
-                  q.data?.data?.meals?.map((item, index) => (
+                {!q1.isLoading &&
+                  q1.data?.data?.meals?.map((item, index) => (
                     <Col
                       sm={12}
                       md={3}
@@ -164,6 +180,7 @@ export default function SelectResPage() {
                         mealImg={item.MealImg}
                         resID={resID}
                         resName={resName}
+                        ownerID={q2.data?.data._id}
                         MealComments={item.MealComments}
                       />
                     </Col>
@@ -172,12 +189,12 @@ export default function SelectResPage() {
             </div>
             {/* style={{ transform: "scale(0.9)" }} */}
             <div>
-              <CommentBox query={q} resID={resID} />
+              <CommentBox query={q1} resID={resID} />
             </div>
 
             <Row>
-              {!q.isLoading &&
-                q.data?.data?.resComments?.map((item, index) => (
+              {!q1.isLoading &&
+                q1.data?.data?.resComments?.map((item, index) => (
                   <Col sm={12} md={4} key={index}>
                     <ReviewsCard
                       key={item.id}
@@ -198,7 +215,7 @@ export default function SelectResPage() {
         </div>
       </div>
       <div style={{ transform: "scale(0.90)" }}>
-        <ChooseUs resName={q.data?.data?.restaurant?.ResName} />
+        <ChooseUs resName={q1.data?.data?.restaurant?.ResName} />
       </div>
       <Footer />
     </>
