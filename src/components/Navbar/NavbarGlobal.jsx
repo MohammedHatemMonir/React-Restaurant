@@ -88,10 +88,12 @@ export default function NavbarGlobal() {
                 </span>
               }
             >
-              <NavDropdown.Item>
-                <Link className="text-decoration-none text-dark" to="/profile">
-                  My account
-                </Link>
+              <NavDropdown.Item
+                as={Link}
+                className="text-decoration-none text-dark"
+                to="/profile"
+              >
+                My account
               </NavDropdown.Item>
               <NavDropdown.Item>
                 <LogoutButton className="text-decoration-none text-dark" />
