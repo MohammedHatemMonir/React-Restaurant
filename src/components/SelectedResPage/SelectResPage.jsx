@@ -68,7 +68,7 @@ export default function SelectResPage() {
                         <h1 className="title">
                           {q.data?.data?.restaurant?.ResName}
 
-                          {UserData.value.role == "ADMIN" && (
+                          {UserData.value.role == "owner" || UserData.value.role == "ADMIN" && (
                             <Link
                               className="badge badge-primary"
                               style={{ color: "white", fontSize: "0.45em" }}
@@ -133,7 +133,7 @@ export default function SelectResPage() {
             </Row>
 
             {/* Hema Here */}
-            {UserData.value.role == "ADMIN" && (
+            {UserData.value.role == "owner" || UserData.value.role == "ADMIN" && (
               <div className="mt-4">
                 <AddMealButton Resid={resID} />
               </div>

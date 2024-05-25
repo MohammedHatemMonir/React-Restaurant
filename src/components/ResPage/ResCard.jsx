@@ -75,34 +75,35 @@ export default function ResCard({ id, name, stars1, ResImg, MealImg }) {
               </span>
               <span> Explore</span>
             </Link>
-            {UserData.value.role == "ADMIN" && (
-              <div className="position-relative">
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-around",
-                    alignItems: "center",
-                    cursor: "pointer",
-                    // marginTop: "30px",
-                    // marginRight: "-20px",
-                    // objectFit: "content",
-                    margin: "25px -10% 0px  -10%",
-                    transform: "scale(1.5)",
-                  }}
-                >
-                  <div onClick={onOpenDel}>
-                    <DeleteIcon />
-                  </div>
-                  <div onClick={onOpenEdit}>
-                    <IoSettings />
+            {UserData.value.role == "owner" ||
+              (UserData.value.role == "ADMIN" && (
+                <div className="position-relative">
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-around",
+                      alignItems: "center",
+                      cursor: "pointer",
+                      // marginTop: "30px",
+                      // marginRight: "-20px",
+                      // objectFit: "content",
+                      margin: "25px -10% 0px  -10%",
+                      transform: "scale(1.5)",
+                    }}
+                  >
+                    <div onClick={onOpenDel}>
+                      <DeleteIcon />
+                    </div>
+                    <div onClick={onOpenEdit}>
+                      <IoSettings />
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
+              ))}
           </div>
         </div>
       </div>
-      {UserData.value.role == "ADMIN" && showDelModal.value == true && (
+      {UserData.value.role == "owner" || UserData.value.role == "ADMIN" && showDelModal.value == true && (
         <DeleteResModal
           resId={id}
           resName={name}
@@ -110,7 +111,7 @@ export default function ResCard({ id, name, stars1, ResImg, MealImg }) {
           closeModal={onCloseDel}
         />
       )}
-      {UserData.value.role == "ADMIN" && showEditModal.value == true && (
+      {UserData.value.role == "owner" || UserData.value.role == "ADMIN" && showEditModal.value == true && (
         <EditResModal
           resName={name}
           resId={id}

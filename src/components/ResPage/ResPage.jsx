@@ -73,7 +73,7 @@ export default function ResPage() {
         {/* <Slider /> */}
 
         <Container>
-          {UserData.value.role == "ADMIN" && <AddRestaurantButton />}
+          {UserData.value.role == "owner" || UserData.value.role == "ADMIN" && <AddRestaurantButton />}
         </Container>
         {/* ResCards */}
         <div
