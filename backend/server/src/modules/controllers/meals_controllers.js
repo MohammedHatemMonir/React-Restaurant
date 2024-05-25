@@ -20,63 +20,55 @@ const GetMealsWithComments = async (req, res) => {
   }
 }
 
-const addNewmeal = async (req, res) => { //{MealName:"",MealImg:"",Description:"",Price:"",Resid:""}
-    try {
-      const errors =validationResult(req)
-      if(!errors.isEmpty()){
-        res.status(400).json(errors.array()[0].msg)
-      }else{
-        
-        if(req.session?.user?.role!="ADMIN") {
-          res.status(500).json({message:"You are not Authenticated to add a meal"});
-          return;
-        }
-      const MealName = req.body.MealName;
-
-      const meals = await meal.find({MealName:MealName});
-    
-        // console.log(req.body.MealImg.split('.').pop() )
-            const Resid = req.body.Resid;
-            const resturants = await resturant.find({_id:Resid});
-            if (!resturants[0]) {
-                res.send("RESTURAND DOSENT EXEST");
-            }else{
-              let mealimage=await uploadImg(req.body.MealImg)
-              const comment_num=0
-              const rating = 0
-                const body = {
-                  MealName:req.body.MealName,
-                  MealImg:mealimage,
-                  Description:req.body.Description,
-                  Price:req.body.Price,
-                  ResID:req.body.Resid,
-                  rating:rating,
-                  comment_num:comment_num}
-                const meals = new meal(body);
-                await meals.save();
-                    // const meals=await meal.create(body)
-                  //   new_Meals_num=resturants[0].Meals_num+1
-                  //   test1=resturants[0].Meals_num+resturants[0].comment_num
-                  //   new_res_rating=(resturants[0].rating*(test1))/(test1+1)
-                  //   const res_body={
-                  //     ResName: resturants[0].ResName,
-                  //     ResImg: resturants[0].ResImg,
-                  //     Categoery: resturants[0].Categoery,
-                  //     rating:new_res_rating,
-                  //     Meals_num:new_Meals_num,
-                  //     comment_num:resturants[0].comment_num
-                  // }
-                  // const res_update = await resturant.updateOne({ _id: Resid },{ $set: res_body});
-                res.status(201).json(body);
-                    // console.log(req.body)
-
-            }
-     
-    
+const addNewmeal = async (req, res) => {
+  try {
+    // Validate request
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array()[0].msg });
     }
-    } catch (err) {
-      res.status(400).json({ error: err });
+
+    // Ensure user is authenticated and is an owner
+    if (!req.session?.user || req.session.user.role !== "owner") {
+      return res.status(403).json({ message: "You are not authenticated to add a meal" });
     }
+
+    const { MealName, MealImg, Description, Price, Resid } = req.body;
+
+    // Check if restaurant exists and if the user is the owner
+    const restaurant = await resturant.findOne({ _id: Resid, ownerId: req.session.user._id });
+    if (!restaurant) {
+      return res.status(404).json({ message: "Restaurant does not exist or you are not the owner" });
+    }
+
+    // Check if the meal already exists
+    const existingMeal = await meal.findOne({ MealName, ResID: Resid });
+    if (existingMeal) {
+      return res.status(400).json({ message: "Meal already exists" });
+    }
+
+    // Upload meal image
+    const mealImage = await uploadImg(MealImg);
+
+    // Create meal
+    const newMeal = new meal({
+      MealName,
+      MealImg: mealImage,
+      Description,
+      Price,
+      ResID: Resid,
+      rating: 0,
+      comment_num: 0
+    });
+
+    // Save meal to database
+    await newMeal.save();
+
+    res.status(201).json(newMeal);
+  } catch (err) {
+    console.error("Error adding new meal:", err);
+    res.status(500).json({ error: "Server error while adding new meal" });
+  }
 };
 
   const getAllmeals = async (req, res) => { //{ResID:""}
