@@ -125,7 +125,7 @@ export default function MealCard({
             >
               <span>Read More</span>
             </Link>
-            {UserData.value.role == "ADMIN" && (
+            {UserData.value.role == "owner" || UserData.value.role == "ADMIN" && (
               <div className="position-relative">
                 <div
                   style={{
@@ -152,7 +152,7 @@ export default function MealCard({
           </div>
         </div>
       </div>
-      {UserData.value.role == "ADMIN" && showDelModal.value == true && (
+      {UserData.value.role == "owner" || UserData.value.role == "ADMIN" && showDelModal.value == true && (
         <DeleteMealModal
           mealId={id}
           mealName={name}
@@ -160,7 +160,7 @@ export default function MealCard({
           closeModal={onCloseDel}
         />
       )}
-      {UserData.value.role == "ADMIN" && showEditModal.value == true && (
+      {UserData.value.role == "owner" || UserData.value.role == "ADMIN" && showEditModal.value == true && (
         <EditMealModal
           mealId={id}
           mealName={name}
