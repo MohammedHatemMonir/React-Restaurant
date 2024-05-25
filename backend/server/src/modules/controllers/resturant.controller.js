@@ -95,7 +95,7 @@ const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResB
                     ownerId: owner._id
                     //creation_date: createdAt
                 };
-                const ownerRole=owner.role=='ADMIN'?owner.role:owner.role='owner'
+                const ownerRole = owner.role == 'ADMIN' ? owner.role : owner.role = 'owner'
                 const newRestaurant = await restaurant.create(newRestaurantData);
                 await userModel.updateOne(
                     { _id: owner._id },
@@ -144,7 +144,7 @@ const deleteresturant = async (req, res) => {
         }
         const restaurantToDelete = await restaurant.findOneAndDelete({ _id: id });
         const MealsToDelete = await meal.find({ ResID: id });
-        await userModel.deleteOne({resId:id})
+        await userModel.updateOne({ _id: restaurantToDelete.ownerId }, { $unset: { resId: 1 } });
         if (!restaurantToDelete) {
             return res.status(404).json({ message: "Restaurant Not Found" });
         }
@@ -193,7 +193,7 @@ const updateRestaurant = async (req, res) => {
         if (!checkOwner) {
             return res.status(403).json({ error: "Unauthorized" });
         }
-        
+
 
         const NewResData = {}
 
