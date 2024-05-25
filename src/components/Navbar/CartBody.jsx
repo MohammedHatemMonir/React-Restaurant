@@ -12,8 +12,7 @@ import PaypalModal from "./PaypalModal";
 
 export default function CartBody() {
   const navigate = useNavigate();
-
-  const showModal = useSignal(false);
+  const showDeliveryModal = useSignal(false);
   const showPaypalModal = useSignal(false);
 
   // Create Order
@@ -95,7 +94,7 @@ export default function CartBody() {
       price = price + meal.price * meal.quantity;
     });
 
-    return new Intl.NumberFormat().format(price);
+    return price;
   }
   // console.log("carttttttttt", Cart.value.meals);
   if (m.isLoading) {
@@ -155,13 +154,14 @@ export default function CartBody() {
           <h3 className="title font-weight-bold"> Payment </h3>
           <div className="box">
             <h3 className="total font-weight-bold text-center">
-              Total : <span>{getTotalPrice()}$</span>
+              Total :
+              <span>{new Intl.NumberFormat().format(getTotalPrice())}$</span>
             </h3>
             <div className="d-flex justify-content-between align-items-center">
               <button
                 type="button"
                 className="btn btn-warning"
-                onClick={() => (showModal.value = true)}
+                onClick={() => (showDeliveryModal.value = true)}
               >
                 Cash On Delivery
               </button>
@@ -177,13 +177,13 @@ export default function CartBody() {
         </div>
       </div>
 
-      {showModal.value == true && (
+      {showDeliveryModal.value == true && (
         <DeliveryModal
           createOrder={() => {
             createOrder();
           }}
-          openModal={() => (showModal.value = true)}
-          closeModal={() => (showModal.value = false)}
+          openModal={() => (showDeliveryModal.value = true)}
+          closeModal={() => (showDeliveryModal.value = false)}
         />
       )}
 
