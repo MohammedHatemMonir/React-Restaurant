@@ -126,7 +126,8 @@ export default function MealCard({
             >
               <span>Read More</span>
             </Link>
-            {UserData.value.role === "owner" && resID === ownerID && (
+            {(UserData.value.role === "ADMIN" ||
+              (UserData.value.role === "owner" && resID === ownerID)) && (
               <div className="position-relative">
                 <div
                   style={{

@@ -149,7 +149,10 @@ export default function SelectResPage() {
             </Row>
 
             {/* Hema Here */}
-            {UserData.value.role === "owner" && resID === q2.data?.data._id && (
+
+            {(UserData.value.role === "ADMIN" ||
+              (UserData.value.role === "owner" &&
+                resID === q2.data?.data._id)) && (
               <div className="mt-4">
                 <AddMealButton Resid={resID} />
               </div>

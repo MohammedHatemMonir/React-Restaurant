@@ -107,7 +107,10 @@ export default function ResCard({ id, name, stars1, ResImg, MealImg }) {
                     <DeleteIcon />
                   </div>
                 )}
-                {UserData.value.role === "owner" && id === q.data?.data._id && (
+
+                {(UserData.value.role === "ADMIN" ||
+                  (UserData.value.role === "owner" &&
+                    id === q.data?.data._id)) && (
                   <div onClick={onOpenEdit}>
                     <IoSettings />
                   </div>
