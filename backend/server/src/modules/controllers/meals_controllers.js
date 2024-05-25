@@ -105,7 +105,7 @@ const addNewmeal = async (req, res) => { //{MealName:"",MealImg:"",Description:"
         const userId = req.session?.user?._id;
         const resId=await meal.find({_id:id})
         const checkOwner = await resturant.findOne({ _id: resId.resId, ownerId: userId });
-      if (req.session.user.role !== "ADMIN"||(req.session.user.role !== "owner" && !checkOwner)) {
+      if (!checkOwner) {
         return res.status(403).json({ error: "Not Authenticated as Owner" });
       }
   
@@ -149,7 +149,7 @@ const addNewmeal = async (req, res) => { //{MealName:"",MealImg:"",Description:"
         const userId = req.session?.user?._id;
         const resId=await meal.find({_id:id})
         const checkOwner = await resturant.findOne({ _id: resId.resId, ownerId: userId });
-      if (req.session.user.role !== "ADMIN"||(req.session.user.role !== "owner" && !checkOwner)) {
+      if (!checkOwner) {
         return res.status(403).json({ error: "Not Authenticated as owner" });
       }
       

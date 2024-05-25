@@ -109,7 +109,7 @@ const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResB
 
                 res.status(200).json(newRestaurantData);
             } catch (error) {
-                console.error('Error creating new restaurant:', error);
+                console.log('Error creating new restaurant:', error);
                 res.status(500).json({ error: 'Server error while adding new restaurant' });
                 if (ResImg) {
                     await uploadImg.deleteImage(ResImg);
