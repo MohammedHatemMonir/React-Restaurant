@@ -95,7 +95,7 @@ export default function CartBody() {
       price = price + meal.price * meal.quantity;
     });
 
-    return price;
+    return new Intl.NumberFormat().format(price);
   }
   // console.log("carttttttttt", Cart.value.meals);
   if (m.isLoading) {
