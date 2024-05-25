@@ -1,5 +1,6 @@
 const meal = require("../../database/models/Meals_model");
 const resturant  = require("../../database/models/resturant.Model");
+const userModel = require("../../database/models/userModel.js");
 const { Order } = require("../../database/models/orders");
 const { validationResult } = require("express-validator");
 const uploadImg = require("../../utils/uploadImg.js"); 
@@ -100,11 +101,14 @@ const addNewmeal = async (req, res) => { //{MealName:"",MealImg:"",Description:"
 
   const updateMeal = async (req, res) => {
     try {
-      if (!req.session.user || req.session.user.role !== "ADMIN") {
-        return res.status(403).json({ error: "Not Authenticated as Admin" });
+      const { id } = req.params;
+        const userId = req.session?.user?._id;
+        const resId=await meal.find({_id:id})
+        const checkOwner = await resturant.findOne({ _id: resId.resId, ownerId: userId });
+      if (req.session.user.role !== "ADMIN"||(req.session.user.role !== "owner" && !checkOwner)) {
+        return res.status(403).json({ error: "Not Authenticated as Owner" });
       }
   
-      const { id } = req.params;
       const NewMealData = {};
   
       if (req.body.MealName) {
@@ -141,11 +145,15 @@ const addNewmeal = async (req, res) => { //{MealName:"",MealImg:"",Description:"
   
   const deleteMeal = async (req, res) => {
     try {
-      if (!req.session.user || req.session.user.role !== "ADMIN") {
-        return res.status(403).json({ error: "Not Authenticated as Admin" });
+      const { id } = req.params;
+        const userId = req.session?.user?._id;
+        const resId=await meal.find({_id:id})
+        const checkOwner = await resturant.findOne({ _id: resId.resId, ownerId: userId });
+      if (req.session.user.role !== "ADMIN"||(req.session.user.role !== "owner" && !checkOwner)) {
+        return res.status(403).json({ error: "Not Authenticated as owner" });
       }
       
-      const { id } = req.params;
+      
   
       const deletedMeal = await meal.findByIdAndDelete(id);
 

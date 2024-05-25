@@ -189,7 +189,7 @@ const updateRestaurant = async (req, res) => {
         const { id } = req.params;
         const userId = req.session?.user?._id;
         const checkOwner = await restaurant.findOne({ _id: id, ownerId: userId });
-        if (req.session.user.role !== "owner" && !checkOwner) {
+        if (req.session.user.role !== "ADMIN"||(req.session.user.role !== "owner" && !checkOwner)) {
             return res.status(403).json({ error: "Unauthorized" });
         }
         
