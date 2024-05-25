@@ -154,8 +154,8 @@ export default function CartBody() {
           <h3 className="title font-weight-bold"> Payment </h3>
           <div className="box">
             <h3 className="total font-weight-bold text-center">
-              Total :
-              <span>{new Intl.NumberFormat().format(getTotalPrice())}$</span>
+              Total:
+              <span className="ml-2">{new Intl.NumberFormat().format(getTotalPrice())}$</span>
             </h3>
             <div className="d-flex justify-content-between align-items-center">
               <button

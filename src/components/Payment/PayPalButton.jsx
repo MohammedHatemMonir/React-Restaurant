@@ -1,11 +1,20 @@
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-
+import { useSignal } from "@preact/signals-react";
+import { Spinner } from "react-bootstrap";
 export default function PayPalButton({ totalPrice, createOrder }) {
+  const loading = useSignal(true);
   const clientId =
     "AfVlkPHMVLVRZjih6wQ8jQIzqfZJOmdV2MbLq96wWHR1GeQBeqbh8Lwl3ixqdGjGaSkc9o3Frmb0luKy";
 
   return (
     <PayPalScriptProvider options={{ "client-id": clientId }}>
+      {loading.value && (
+        <div className="loading-spinner">
+          <Spinner animation="border" role="status">
+            <span className="sr-only">Loading...</span>
+          </Spinner>
+        </div>
+      )}
       <PayPalButtons
         createOrder={(data, actions) => {
           return actions.order.create({
@@ -39,6 +48,7 @@ export default function PayPalButton({ totalPrice, createOrder }) {
             progress: undefined,
           });
         }}
+        onInit={() => (loading.value = false)}
       />
     </PayPalScriptProvider>
   );
