@@ -62,7 +62,7 @@ export default function NavbarGlobal() {
         </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto">
+          <Nav className="ms-auto pr-5">
             <NotificationDropdown />
 
             <Nav.Link
