@@ -1,5 +1,5 @@
 import { FaTimes } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Cart } from "../../Globals";
 import { useMutation } from "react-query";
 import { apiClient } from "../../Data/apiclient";
@@ -7,15 +7,15 @@ import EmptyOrders from "./../Orders/EmptyOrdersPage";
 import { toast } from "react-toastify";
 import "./CartBody.scss";
 import { useSignal } from "@preact/signals-react";
-import PayPalButton from "./../Payment/PayPalButton";
 import DeliveryModal from "./DeliveryModal";
+import PaypalModal from "./PaypalModal";
 
 export default function CartBody() {
   const navigate = useNavigate();
 
   const showModal = useSignal(false);
-  const showPaypal = useSignal(false);
-  const totalPrice = useSignal(0);
+  const showPaypalModal = useSignal(false);
+
   // Create Order
   const m = useMutation({
     mutationKey: [""],
@@ -104,6 +104,7 @@ export default function CartBody() {
   if (Cart.value.meals.length == 0) {
     return <EmptyOrders />;
   }
+
   return (
     <section className="shopping-cart-container">
       <div className="products-container" style={{ transform: "scale(0.80)" }}>
@@ -167,24 +168,12 @@ export default function CartBody() {
               <button
                 type="button"
                 className="btn btn-warning"
-                onClick={() => (showPaypal.value = !showPaypal.value)}
+                onClick={() => (showPaypalModal.value = true)}
               >
                 Payment Getway
               </button>
             </div>
           </div>
-          {/* d-flex justify-content-center   style={{ margin: "20px auto" }}  */}
-          {showPaypal.value == true && (
-            <div className="d-flex justify-content-center w-100">
-              <PayPalButton
-                style={{ width: "100%" }}
-                totalPrice={getTotalPrice()}
-                createOrder={() => {
-                  createOrder();
-                }}
-              />
-            </div>
-          )}
         </div>
       </div>
 
@@ -195,6 +184,13 @@ export default function CartBody() {
           }}
           openModal={() => (showModal.value = true)}
           closeModal={() => (showModal.value = false)}
+        />
+      )}
+
+      {showPaypalModal.value == true && (
+        <PaypalModal
+          openModal={() => (showPaypalModal.value = true)}
+          closeModal={() => (showPaypalModal.value = false)}
         />
       )}
     </section>
