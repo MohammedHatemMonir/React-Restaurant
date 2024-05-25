@@ -189,6 +189,10 @@ export default function CartBody() {
 
       {showPaypalModal.value == true && (
         <PaypalModal
+          totalPrice={getTotalPrice()}
+          createOrder={() => {
+            createOrder();
+          }}
           openModal={() => (showPaypalModal.value = true)}
           closeModal={() => (showPaypalModal.value = false)}
         />

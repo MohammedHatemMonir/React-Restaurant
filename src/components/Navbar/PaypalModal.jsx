@@ -2,7 +2,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import PayPalButton from "../Payment/PayPalButton";
 
-function PaypalModal({ openModal, closeModal }) {
+function PaypalModal({ openModal, closeModal, totalPrice, createOrder }) {
   return (
     <Modal
       show={openModal}
@@ -25,7 +25,12 @@ function PaypalModal({ openModal, closeModal }) {
           <span className="text-danger font-weight-bold"> Payment </span>
           Method
         </h3>
-        <PayPalButton />
+        <PayPalButton
+          totalPrice={totalPrice}
+          createOrder={() => {
+            createOrder();
+          }}
+        />
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={closeModal}>Close</Button>
