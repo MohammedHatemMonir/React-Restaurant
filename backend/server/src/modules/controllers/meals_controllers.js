@@ -29,7 +29,7 @@ const addNewmeal = async (req, res) => {
     }
 
     // Ensure user is authenticated and is an owner
-    if (!req.session?.user || req.session.user.role !== "owner"||req.session.user.role !== "ADMIN") {
+    if (!req.session?.user || req.session.user.role !== "owner") {
       return res.status(403).json({ message: "You are not authenticated to add a meal" });
     }
 
@@ -103,7 +103,7 @@ const updateMeal = async (req, res) => {
     }
 
     const restaurant = await resturant.findOne({ _id: mealToUpdate.ResID, ownerId: userId });
-    if (!restaurant||req.session.user.role !== "ADMIN") {
+    if (!restaurant) {
       return res.status(403).json({ error: "Not authenticated as owner" });
     }
 
@@ -137,7 +137,7 @@ const deleteMeal = async (req, res) => {
     }
 
     const restaurant = await resturant.findOne({ _id: mealToDelete.ResID, ownerId: userId });
-    if (!restaurant||req.session.user.role !== "ADMIN") {
+    if (!restaurant) {
       return res.status(403).json({ error: "Not authenticated as owner" });
     }
 
