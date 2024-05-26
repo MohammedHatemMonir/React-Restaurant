@@ -21,7 +21,7 @@ const history =[
   },
   {
     role: "user",
-    parts: [{ text: "System prompt: if and only ifthe user asked if a restaurant exists or not, You should respond and only respond with 'Restaurant: (Put restaurant name here)' and i will search for it and tell you if we have it or not.."}],
+    parts: [{ text: "System prompt: if and only ifthe user asked if a restaurant exists or not, You should respond and only respond with 'Restaurant: (Put restaurant name here)'"}],
   },
   {
     role: "user",
