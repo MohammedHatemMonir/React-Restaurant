@@ -91,7 +91,7 @@ export default function CartBody() {
 
   function getTotalPrice() {
     let price = 0;
-    Cart.value.meals.map((meal) => {
+    Cart.value?.meals?.map((meal) => {
       price = price + meal.price * meal.quantity;
     });
 
@@ -101,7 +101,7 @@ export default function CartBody() {
   if (m.isLoading) {
     return <>Loading...</>;
   }
-  if (Cart.value.meals.length == 0) {
+  if (Cart.value?.meals?.length == 0) {
     return <EmptyOrders />;
   }
 

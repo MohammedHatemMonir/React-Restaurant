@@ -10,7 +10,8 @@ import defaultMeal from "../../images/defaultMeal.jpg";
 import "./ResCard.scss";
 import { FaCompass, FaTag } from "react-icons/fa";
 import { IoSettings } from "react-icons/io5";
-
+import { useQuery } from "react-query";
+import { apiClient } from "../../Data/apiclient";
 export default function ResCard({ id, name, stars1, ResImg, MealImg }) {
   // console.log("Hema ID",id)
   const showDelModal = useSignal(false);
@@ -34,6 +35,20 @@ export default function ResCard({ id, name, stars1, ResImg, MealImg }) {
   function onCloseEdit() {
     showEditModal.value = false;
   }
+
+  const q = useQuery({
+    queryKey: ["ownerId"],
+    // cacheTime: 60000,
+    // staleTime: 60000,
+    queryFn: async () => {
+      let url = `/updateRestaurant/${id}`;
+      const ret = await apiClient.put(url);
+      console.log("res owner", ret);
+      return ret;
+    },
+  });
+
+  console.log("query data", q.data?.data._id);
 
   return (
     <section
@@ -75,35 +90,38 @@ export default function ResCard({ id, name, stars1, ResImg, MealImg }) {
               </span>
               <span> Explore</span>
             </Link>
-            {UserData.value.role == "owner" ||
-              (UserData.value.role == "ADMIN" && (
-                <div className="position-relative">
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-around",
-                      alignItems: "center",
-                      cursor: "pointer",
-                      // marginTop: "30px",
-                      // marginRight: "-20px",
-                      // objectFit: "content",
-                      margin: "25px -10% 0px  -10%",
-                      transform: "scale(1.5)",
-                    }}
-                  >
-                    <div onClick={onOpenDel}>
-                      <DeleteIcon />
-                    </div>
-                    <div onClick={onOpenEdit}>
-                      <IoSettings />
-                    </div>
+
+            <div className="position-relative">
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-around",
+                  alignItems: "center",
+                  cursor: "pointer",
+                  margin: "25px -10% 0px  -10%",
+                  transform: "scale(1.5)",
+                }}
+              >
+                {UserData.value.role === "ADMIN" && (
+                  <div onClick={onOpenDel}>
+                    <DeleteIcon />
                   </div>
-                </div>
-              ))}
+                )}
+
+                {(UserData.value.role === "ADMIN" ||
+                  (UserData.value.role === "owner" &&
+                    id === q.data?.data._id)) && (
+                  <div onClick={onOpenEdit}>
+                    <IoSettings />
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      {UserData.value.role == "owner" || UserData.value.role == "ADMIN" && showDelModal.value == true && (
+
+      {showDelModal.value == true && (
         <DeleteResModal
           resId={id}
           resName={name}
@@ -111,7 +129,7 @@ export default function ResCard({ id, name, stars1, ResImg, MealImg }) {
           closeModal={onCloseDel}
         />
       )}
-      {UserData.value.role == "owner" || UserData.value.role == "ADMIN" && showEditModal.value == true && (
+      {showEditModal.value == true && (
         <EditResModal
           resName={name}
           resId={id}
