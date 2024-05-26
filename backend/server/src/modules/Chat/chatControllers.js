@@ -71,7 +71,10 @@ const SendMessageAI=async(req,res)=>{
             if(containedWord === "Restaurant:"){
                 const ResToSearch = aiText.replace(/Restaurant: /g, '').replace(/\.$/, '');;
                 console.log("Restaurant to search:", ResToSearch)
-                const FindRestaurant = await restaurant.findOne({ResName: new RegExp(ResToSearch, 'i')})
+                const FindRestaurant = await restaurant.aggregate([
+                    { $match: { ResName: { $regex: ResToSearch, $options: "i" } } },
+                    { $limit: 1 }
+                ]);
                 if(FindRestaurant){
                     CmdChatText = "System prompt: Found the restaurant! Tell the user that we have that restaurant and you'll navigate them soon."
                 }else{
@@ -81,7 +84,10 @@ const SendMessageAI=async(req,res)=>{
             if(containedWord === "Meal:"){
                 const mealToSearch = aiText.replace(/Meal: /g, '').replace(/\.$/, '');;
                 console.log("Meal to search:", mealToSearch)
-                const FindMeal = await meal.findOne({MealName: new RegExp(mealToSearch, 'i')})
+                const FindMeal = await meal.aggregate([
+                    { $match: { MealName: { $regex: mealToSearch, $options: "i" } } },
+                    { $limit: 1 }
+                ]);
                 if(FindMeal){
                     CmdChatText = "System prompt: Found the Meal! Tell the user that we have that Meal and you'll navigate them soon."
                 }else{
