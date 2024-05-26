@@ -7,7 +7,7 @@ export default function Gemini({text}) {
         <strong className="chatter_name">Dine Me</strong>{text}
       </div>
       <div className="chatter_avatar">
-        <img src={DineMeLogo} />
+        <img src={DineMeLogo} className="bg-light"/>
       </div>
     </span>
   );

@@ -150,7 +150,7 @@ const LiveChat = () => {
               <fieldset className="d-flex align-items-center">
                 <button
                   type="button"
-                  className="mr-2"
+                  className="mr-2 bg-transparent"
                   onClick={toggleRecognition}
                 >
                   <FiMic size={24} />
@@ -165,7 +165,7 @@ const LiveChat = () => {
                   className="form-control"
                   // ref={inputRef}
                 />
-                <button type="submit" className="btn btn-icon ml-2">
+                <button type="submit" className="bg-transparent ml-2">
                   <AiOutlineSend size={24} />
                 </button>
               </fieldset>
