@@ -31,21 +31,7 @@ export default function SelectResPage() {
     },
   });
 
-  console.log("query data", q1.data?.data);
-
-  const q2 = useQuery({
-    queryKey: ["ownerId"],
-    // cacheTime: 60000,
-    // staleTime: 60000,
-    queryFn: async () => {
-      let url = `/updateRestaurant/${resID}`;
-      const ret = await apiClient.put(url);
-      console.log("res owner", ret);
-      return ret;
-    },
-  });
-
-  console.log("query data", q2.data?.data.resID);
+  console.log("query data", q1.data?.data.restaurant.ownerId);
 
   return (
     <>
@@ -84,7 +70,8 @@ export default function SelectResPage() {
 
                           {(UserData.value.role === "ADMIN" ||
                             (UserData.value.role === "owner" &&
-                              resID === q2.data?.data._id)) && (
+                              UserData.value.id ===
+                                q1.data?.data?.restaurant?.ownerId)) && (
                             <Link
                               className="badge badge-primary"
                               style={{ color: "white", fontSize: "0.45em" }}
@@ -152,7 +139,7 @@ export default function SelectResPage() {
 
             {(UserData.value.role === "ADMIN" ||
               (UserData.value.role === "owner" &&
-                resID === q2.data?.data._id)) && (
+                UserData.value.id === q1.data?.data?.restaurant?.ownerId)) && (
               <div className="mt-4">
                 <AddMealButton Resid={resID} />
               </div>
@@ -183,7 +170,7 @@ export default function SelectResPage() {
                         mealImg={item.MealImg}
                         resID={resID}
                         resName={resName}
-                        ownerID={q2.data?.data._id}
+                        ownerID={q1.data?.data?.restaurant?.ownerId}
                         MealComments={item.MealComments}
                       />
                     </Col>
