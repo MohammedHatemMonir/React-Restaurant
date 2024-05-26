@@ -32,8 +32,6 @@ const LiveChat = () => {
     isChatVisible.value = !isChatVisible.value;
   };
 
-
-
   const m = useMutation({
     mutationKey: [],
     // cacheTime: 600000,
@@ -46,22 +44,30 @@ const LiveChat = () => {
       return await apiClient.post(url, params);
     },
   });
-  
+
   // useForm hook function here
-  const onSubmit = async (data1) =>{
-    if(m.isLoading) return;
+  const onSubmit = async (data1) => {
+    if (m.isLoading) return;
     // console.log("form data", data1);
-    data1.message.length === 0 ? inputValue.value = null :  inputValue.value = data1.message;
+    data1.message.length === 0
+      ? (inputValue.value = null)
+      : (inputValue.value = data1.message);
     // inputValue.value = data1.message;
     // Add the new value to the data array
-    let updatedData = [...data.value, {message: inputValue.value, role: "user"}];
+    let updatedData = [
+      ...data.value,
+      { message: inputValue.value, role: "user" },
+    ];
     data.value = updatedData;
 
     const result = await m.mutateAsync({ message: inputValue.value });
     console.log("result", result);
-    updatedData = [...data.value,{message: result.data.response, role: "model"} ];
+    updatedData = [
+      ...data.value,
+      { message: result.data.response, role: "model" },
+    ];
     data.value = updatedData;
-    
+
     // Clear the input field
     reset();
   };
@@ -122,7 +128,7 @@ const LiveChat = () => {
   return (
     <div className="my-live">
       <div id="live-chat">
-        <header className="clearfix" onClick={toggleChat}>
+        <header onClick={toggleChat}>
           <h4>DineMe</h4>
         </header>
         {/* {console.log("chatData", chatData)} */}
@@ -130,14 +136,14 @@ const LiveChat = () => {
         {isChatVisible.value && (
           <div className="chat">
             <div className="chat-container">
-            <Gemini text={"How can i help you today?"} />
-            {data.value.map((comment, index) => {
-              if(comment.role === "model"){
-                return <Gemini key={index} text={comment.message} />
-              }else if(comment.role === "user"){
-                return <Me message={comment.message} key={index} />
-              }
-}         )}
+              <Gemini text={"How can i help you today?"} />
+              {data.value.map((comment, index) => {
+                if (comment.role === "model") {
+                  return <Gemini key={index} text={comment.message} />;
+                } else if (comment.role === "user") {
+                  return <Me message={comment.message} key={index} />;
+                }
+              })}
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)}>
