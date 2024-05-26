@@ -28,20 +28,23 @@ const addNewmeal = async (req, res) => {
       return res.status(400).json({ errors: errors.array()[0].msg });
     }
 
-    // Ensure user is authenticated and is an owner
-    if (req.session.user.role !== "owner" || req.session.user.role !== "ADMIN") {
+    const { role ,_id} = req.session.user
+    if (role !== "owner" && role !== "ADMIN") {
       return res.status(403).json({ message: "You are not authenticated to add a meal" });
     }
 
     const { MealName, MealImg, Description, Price, Resid } = req.body;
 
     // Check if restaurant exists and if the user is the owner
-    const restaurant = await resturant.findOne({ _id: Resid, ownerId: req.session.user._id });
+    const restaurant = await resturant.findOne({ _id: Resid });
     if (!restaurant) {
       return res.status(404).json({ message: "Restaurant does not exist or you are not the owner" });
     }
 
-    // Check if the meal already exists
+    if (role === "owner" && restaurant.ownerId.toString() !== _id.toString()) {
+      return res.status(403).json({ message: "You do not own this restaurant" });
+    }
+
     const existingMeal = await meal.findOne({ MealName, ResID: Resid });
     if (existingMeal) {
       return res.status(400).json({ message: "Meal already exists" });
