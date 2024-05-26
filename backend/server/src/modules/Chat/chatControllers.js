@@ -17,7 +17,7 @@ function containsAnyWord(string, wordList) {
 const history =[
   {
     role: "user",
-    parts: [{ text: "System prompt: You are a Restaurant website Chatbot, It's called DineMe. You should respond to the user's messages and help know their preferences. Be friendly and a bit funny!"}],
+    parts: [{ text: "System prompt: You are a Restaurant website Chatbot, It's called DineMe. You should respond to the user's messages and help know their preferences. Be friendly and a bit funny! act Like you are a chef at a restaurant not a chat bot."}],
   },
   {
     role: "user",
@@ -66,35 +66,38 @@ const SendMessageAI=async(req,res)=>{
             console.log("Do database function!");
 
             //CmdChatText = "System prompt: Found the restaurant! Tell the user that we have that restaurant."
-            CmdChatText = "System prompt: I could not find it, Tell the user that we don't have it"
-            
-            if(containedWord === "Restaurant:"){
+            let CmdChatText = null;
+            let navigationLink = null;
+            // if(containedWord === "Restaurant:"){
                 const ResToSearch = aiText.replace(/Restaurant: /g, '').replace(/\.$/, '');;
                 console.log("Restaurant to search:", ResToSearch)
                 const FindRestaurant = await restaurant.aggregate([
                     { $match: { ResName: { $regex: ResToSearch, $options: "i" } } },
                     { $limit: 1 }
                 ]);
-                if(FindRestaurant){
+                if(FindRestaurant[0]){
                     CmdChatText = "System prompt: Found the restaurant! Tell the user that we have that restaurant and you'll navigate them soon."
-                }else{
-                    CmdChatText = "System prompt: I could not find it, Tell the user that we don't have it"
+                    navigationLink = `/restaurant/${FindRestaurant[0]._id}/${FindRestaurant[0].ResName}`
                 }
-            }
-            if(containedWord === "Meal:"){
+            // }
+            // if(containedWord === "Meal:"){
+                if(CmdChatText === null){
                 const mealToSearch = aiText.replace(/Meal: /g, '').replace(/\.$/, '');;
                 console.log("Meal to search:", mealToSearch)
                 const FindMeal = await meal.aggregate([
                     { $match: { MealName: { $regex: mealToSearch, $options: "i" } } },
                     { $limit: 1 }
                 ]);
-                if(FindMeal){
+                if(FindMeal[0]){
                     CmdChatText = "System prompt: Found the Meal! Tell the user that we have that Meal and you'll navigate them soon."
-                }else{
-                    CmdChatText = "System prompt: I could not find it, Tell the user that we don't have it"
+                    navigationLink = `/restaurant/${FindMeal[0].ResID}/${FindMeal[0].MealName}`
                 }
-
             }
+            // else{
+            //         CmdChatText = "System prompt: I could not find it, Tell the user that we don't have it"
+            //     }
+
+            // }
             // const CommandedChat = await model.startChat({
             //     history: req.session.history,
             //     generationConfig: {
@@ -102,6 +105,9 @@ const SendMessageAI=async(req,res)=>{
             //     maxOutputTokens: 100,
             //     }
             // });
+            if(CmdChatText === null){
+                CmdChatText = "System prompt: I could not find it, Tell the user that we don't have it";
+            }
             const result = await chat.sendMessage(CmdChatText);
             const response = await result.response;
             req.session.history.push({role: "user", parts: 
@@ -110,7 +116,11 @@ const SendMessageAI=async(req,res)=>{
             req.session.history.push({role: "model", parts: [{ text: aiText2}]})
 
             console.log("AI DATABASE RES:", aiText2);
+            if(navigationLink){
+                res.send({response: aiText2, redirect:navigationLink })
+            }else{
             res.send({response: aiText2})
+            }
         }else{
         console.log("AI response:", aiText);
         res.send({response: aiText})

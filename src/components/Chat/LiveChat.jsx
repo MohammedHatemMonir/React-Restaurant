@@ -8,6 +8,7 @@ import Me from "./Me";
 import Gemini from "./Gemini";
 import { useMutation } from "react-query";
 import { apiClient } from "./../../Data/apiclient";
+import {useNavigate} from "react-router-dom";
 
 const LiveChat = () => {
   const {
@@ -17,7 +18,8 @@ const LiveChat = () => {
     reset,
     formState: { errors },
   } = useForm();
-
+  
+const navigate = useNavigate();
   const data = useSignal([{}]);
   const inputValue = useSignal("");
   const isChatVisible = useSignal(false);
@@ -67,6 +69,10 @@ const LiveChat = () => {
       { message: result.data.response, role: "model" },
     ];
     data.value = updatedData;
+
+    if(result.data.redirect){
+      navigate(result.data.redirect);
+    }
 
     // Clear the input field
     reset();
