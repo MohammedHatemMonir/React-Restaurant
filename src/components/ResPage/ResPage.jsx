@@ -67,20 +67,15 @@ export default function ResPage() {
   if (q.data)
     return (
       <section>
-        <div style={{ transform: "scale(0.95)" }}>
+        <div>
           <Parallax />
         </div>
         {/* <Slider /> */}
-
         <Container>
           {UserData.value.role == "ADMIN" && <AddRestaurantButton />}
         </Container>
         {/* ResCards */}
-        <div
-        // id="rest-list-col"
-        // col-sm-13 col-xs-16
-        // className="delivery-rest-list "
-        >
+        <div>
           <Container>
             <Row>
               <Col sm={12} md={2} className="mt-5">

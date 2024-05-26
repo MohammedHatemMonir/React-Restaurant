@@ -9,6 +9,7 @@ import { FaCircle } from "react-icons/fa6";
 import { FaRegAngry, FaRegEdit, FaRegMeh, FaRegSmile } from "react-icons/fa";
 import ResPieChart from "./ResPieChart";
 import ResAreaChart from "./ResAreaChart";
+import { useQuery } from "react-query";
 
 export default function RestaurantDashboard() {
   const { ResID } = useParams();
@@ -19,7 +20,22 @@ export default function RestaurantDashboard() {
   const allComments = useSignal([]);
 
   // Fetch here
-  // Get AlL Positive
+  // All Restaurant Orders
+  const q = useQuery({
+    queryKey: ["allRestaurantOrders"],
+    // cacheTime: 60000,
+    // staleTime: 60000,
+    queryFn: async () => {
+      let url = `/dashboard/allRestaurantOrders/${ResID}`;
+      const ret = await apiClient.get(url);
+      // console.log("allRestaurantOrders", ret);
+      return ret;
+    },
+  });
+
+  console.log(" All Restaurant Orders", q.data?.data);
+
+  // Get All Positive
   const m1 = useMutation({
     mutationKey: ["allPComments"],
     // cacheTime: 600000,
