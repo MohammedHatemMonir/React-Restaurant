@@ -29,7 +29,7 @@ const addNewmeal = async (req, res) => {
     }
 
     // Ensure user is authenticated and is an owner
-    if (req.session.user.role !== "owner" && req.session.user.role !== "ADMIN") {
+    if (req.session.user.role !== "owner" || req.session.user.role !== "ADMIN") {
       return res.status(403).json({ message: "You are not authenticated to add a meal" });
     }
 
