@@ -16,7 +16,7 @@ function PaypalModal({ openModal, closeModal, totalPrice, createOrder }) {
           id="contained-modal-title-vcenter"
           className="font-weight-bold"
         >
-          Payment Getway
+          Payment Gateway
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>

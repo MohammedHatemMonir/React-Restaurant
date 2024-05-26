@@ -96,7 +96,10 @@ export default function NavbarGlobal() {
                 My account
               </NavDropdown.Item>
               <NavDropdown.Item as={Link}>
-                <LogoutButton className="text-decoration-none text-dark" />
+                <LogoutButton
+                  as={Link}
+                  className="text-decoration-none text-dark"
+                />
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>
