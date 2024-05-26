@@ -271,16 +271,8 @@ export default function RestaurantDashboard() {
               <p className="card-category">24 Hours performance</p>
             </Card.Header>
             <Card.Body>
-              <ResAreaChart />
+              <ResAreaChart ResID={ResID} />
             </Card.Body>
-            <Card.Footer>
-              <div className="legend">
-                <FaCircle className="text-info" />
-                Open <FaCircle className="text-danger" />
-                Click <FaCircle className="text-warning" />
-                Click Second Time
-              </div>
-            </Card.Footer>
           </Card>
         </Col>
         <Col md="4">
