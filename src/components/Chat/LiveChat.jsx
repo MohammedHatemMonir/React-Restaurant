@@ -6,6 +6,8 @@ import { AiOutlineSend } from "react-icons/ai";
 import "./LiveChat.scss";
 import Me from "./Me";
 import Gemini from "./Gemini";
+import { useMutation } from "react-query";
+import { apiClient } from "./../../Data/apiclient";
 
 const LiveChat = () => {
   const {
@@ -16,7 +18,7 @@ const LiveChat = () => {
     formState: { errors },
   } = useForm();
 
-  const data = useSignal([]);
+  const data = useSignal([{}]);
   const inputValue = useSignal("");
   const isChatVisible = useSignal(false);
   // const inputRef = useRef(null);
@@ -24,20 +26,42 @@ const LiveChat = () => {
   const error = useSignal(null);
   const listening = useSignal(false);
 
-  if (query.value) setValue("main", query.value);
+  if (query.value) setValue("message", query.value);
 
   const toggleChat = () => {
     isChatVisible.value = !isChatVisible.value;
   };
 
+
+
+  const m = useMutation({
+    mutationKey: [],
+    // cacheTime: 600000,
+    // onSuccess: onSuccess,
+    // onError: onError,
+    mutationFn: async (params) => {
+      console.log("trying to load");
+      let url = "/SendMessageAI";
+      console.log("posting to ", url);
+      return await apiClient.post(url, params);
+    },
+  });
+  
   // useForm hook function here
-  const onSubmit = (data1) => {
+  const onSubmit = async (data1) =>{
+    if(m.isLoading) return;
     // console.log("form data", data1);
-    data1.main.length === 0 ? inputValue.value = null :  inputValue.value = data1.main;
-    // inputValue.value = data1.main;
+    data1.message.length === 0 ? inputValue.value = null :  inputValue.value = data1.message;
+    // inputValue.value = data1.message;
     // Add the new value to the data array
-    const updatedData = [...data.value, inputValue.value];
+    let updatedData = [...data.value, {message: inputValue.value, role: "user"}];
     data.value = updatedData;
+
+    const result = await m.mutateAsync({ message: inputValue.value });
+    console.log("result", result);
+    updatedData = [...data.value,{message: result.data.response, role: "model"} ];
+    data.value = updatedData;
+    
     // Clear the input field
     reset();
   };
@@ -106,12 +130,14 @@ const LiveChat = () => {
         {isChatVisible.value && (
           <div className="chat">
             <div className="chat-container">
-              <Gemini />
-              {/* <Me message={inputData.value} /> */}
-
-              {data.value.map((comment, index) => (
-                <Me message={comment} key={index} />
-              ))}
+            <Gemini text={"How can i help you today?"} />
+            {data.value.map((comment, index) => {
+              if(comment.role === "model"){
+                return <Gemini key={index} text={comment.message} />
+              }else if(comment.role === "user"){
+                return <Me message={comment.message} key={index} />
+              }
+}         )}
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -124,7 +150,7 @@ const LiveChat = () => {
                   <FiMic size={24} />
                 </button>
                 <input
-                  {...register("main", {
+                  {...register("message", {
                     // required: "Profile image is required",
                   })}
                   type="text"

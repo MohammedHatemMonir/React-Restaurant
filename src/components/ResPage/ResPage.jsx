@@ -119,6 +119,7 @@ export default function ResPage() {
                           ResImg={data.ResImg}
                           MealImg={data.MealImg}
                           stars1={data.rating}
+                          ownerId={data.ownerId}
                         />
                       </Col>
                     ))}

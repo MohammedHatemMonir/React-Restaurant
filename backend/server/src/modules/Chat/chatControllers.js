@@ -85,7 +85,7 @@ const SendMessageAI=async(req,res)=>{
                 if(FindMeal){
                     CmdChatText = "System prompt: Found the Meal! Tell the user that we have that Meal and you'll navigate them soon."
                 }else{
-                    FindMeal = "System prompt: I could not find it, Tell the user that we don't have it"
+                    CmdChatText = "System prompt: I could not find it, Tell the user that we don't have it"
                 }
 
             }

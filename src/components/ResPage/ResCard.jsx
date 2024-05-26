@@ -12,7 +12,7 @@ import { FaCompass, FaTag } from "react-icons/fa";
 import { IoSettings } from "react-icons/io5";
 import { useQuery } from "react-query";
 import { apiClient } from "../../Data/apiclient";
-export default function ResCard({ id, name, stars1, ResImg, MealImg }) {
+export default function ResCard({ id, name, stars1, ResImg, MealImg, ownerId }) {
   // console.log("Hema ID",id)
   const showDelModal = useSignal(false);
   const showEditModal = useSignal(false);
@@ -36,19 +36,7 @@ export default function ResCard({ id, name, stars1, ResImg, MealImg }) {
     showEditModal.value = false;
   }
 
-  const q = useQuery({
-    queryKey: ["ownerId"],
-    // cacheTime: 60000,
-    // staleTime: 60000,
-    queryFn: async () => {
-      let url = `/updateRestaurant/${id}`;
-      const ret = await apiClient.put(url);
-      console.log("res owner", ret);
-      return ret;
-    },
-  });
 
-  console.log("query data", q.data?.data._id);
 
   return (
     <section
@@ -110,7 +98,7 @@ export default function ResCard({ id, name, stars1, ResImg, MealImg }) {
 
                 {(UserData.value.role === "ADMIN" ||
                   (UserData.value.role === "owner" &&
-                    id === q.data?.data._id)) && (
+                    id === ownerId)) && (
                   <div onClick={onOpenEdit}>
                     <IoSettings />
                   </div>
