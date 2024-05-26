@@ -26,12 +26,9 @@ const renderCustomizedLabel = ({
     </text>
   );
 };
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28"];
-
+const COLORS = ["#0088FE", "#00c49f", "#FFBB28"];
 
 export default function ResPieChart({ data }) {
-
-
   return (
     <>
       <ResponsiveContainer width="100%" height={400}>
@@ -58,7 +55,7 @@ export default function ResPieChart({ data }) {
 
       <div className="legend">
         <FaCircle className="text-primary" />
-        Positive <FaCircle className="text-success" />
+        Positive <FaCircle style={{ color: "#00c49f" }} />
         Negative <FaCircle className="text-warning" />
         Neutral
       </div>
