@@ -112,7 +112,13 @@ export default function ResPage() {
                   {!q.isLoading &&
                     Array.isArray(q.data?.data) &&
                     q.data.data.map((data, index) => (
-                      <Col key={index} sm={12} md={4} className="p-0 m-0">
+                      <Col
+                        key={index}
+                        sm={12}
+                        md={6}
+                        lg={4}
+                        className="p-0 m-0"
+                      >
                         <ResCard
                           id={data._id}
                           name={data.ResName}

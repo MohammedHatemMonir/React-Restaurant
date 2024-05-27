@@ -45,7 +45,7 @@ export default function ResCard({
     <section
       className="res-blogs"
       id="blogs"
-      style={{ transform: "scale(0.80)" }}
+      style={{ transform: "scale(0.75)" }}
     >
       <div className="text-decoration-none box-container">
         <div
