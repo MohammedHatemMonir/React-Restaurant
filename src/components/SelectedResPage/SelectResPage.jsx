@@ -75,7 +75,7 @@ export default function SelectResPage() {
                             <Link
                               className="badge badge-primary"
                               style={{ color: "white", fontSize: "0.45em" }}
-                              to={`/RestaurantDashboard/${resID}`}
+                              to={`/OwnerDashboard/${resID}`}
                             >
                               Statistics
                             </Link>

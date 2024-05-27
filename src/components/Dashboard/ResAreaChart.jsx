@@ -1,5 +1,3 @@
-import { useQuery } from "react-query";
-import { apiClient } from "../../Data/apiclient";
 import {
   AreaChart,
   Area,
@@ -10,24 +8,9 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-export default function MyAreaChart({ ResID }) {
-  // All Restaurant Orders
-  const q = useQuery({
-    queryKey: ["allRestaurantOrders"],
-    // cacheTime: 60000,
-    // staleTime: 60000,
-    queryFn: async () => {
-      let url = `/dashboard/allRestaurantOrders/${ResID}`;
-      const ret = await apiClient.get(url);
-      // console.log("allRestaurantOrders", ret);
-      return ret;
-    },
-  });
-
-  console.log("All Restaurant Orders", q.data?.data.ResOrders);
-
+export default function MyAreaChart({ ResOrders }) {
   // Transform data to extract date and totalPrice
-  const transformedData = q.data?.data?.ResOrders.map((item) => ({
+  const transformedData = ResOrders.map((item) => ({
     date: new Date(item.dateOrdered).toLocaleDateString(),
     "Total Price($)": item.totalPrice,
   }));
