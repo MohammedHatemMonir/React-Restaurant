@@ -230,7 +230,7 @@ export default function RestaurantDashboard() {
               {/* <p className="card-category">24 Hours performance</p> */}
             </Card.Header>
             <Card.Body>
-              <ResAreaChart ResOrders={q1.data?.data.ResOrders} />
+              <ResAreaChart ResOrders={q1.data?.data?.ResOrders} />
             </Card.Body>
           </Card>
         </Col>
