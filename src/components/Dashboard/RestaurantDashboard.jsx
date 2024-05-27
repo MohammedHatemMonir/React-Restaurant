@@ -37,95 +37,60 @@ export default function RestaurantDashboard() {
   console.log("allRestaurantOrders", q1.data?.data.ResOrders);
 
   // Get All Positive
-  const m1 = useMutation({
-    mutationKey: ["allPComments"],
-    // cacheTime: 600000,
-    // onSuccess: onSuccess,
-    // onError: onError,
-    mutationFn: async (params) => {
-      // console.log("trying to load");
+  const q2 = useQuery({
+    queryKey: ["postiveComments"],
+    // cacheTime: 60000,
+    // staleTime: 60000,
+    queryFn: async () => {
       let url = `/dashboard/postiveComments/${ResID}`;
-      // console.log("posting to ", url);
-      return await apiClient.get(url, params);
+      const ret = await apiClient.get(url);
+      // console.log("allRestaurantOrders", ret);
+      return ret;
     },
   });
-
-  const onSubmit1 = async function () {
-    const result = await m1.mutateAsync();
-    allPositiveComments.value = result;
-    queryClient.invalidateQueries({ mutationKey: ["allPComments"] });
-    queryClient.refetchQueries(["allPComments"]);
-  };
+  console.log("postiveComments", q2.data?.data?.lengthOfcomments);
 
   // Get All Negative
-  const m2 = useMutation({
-    mutationKey: ["allNaComments"],
-    // cacheTime: 600000,
-    // onSuccess: onSuccess,
-    // onError: onError,
-    mutationFn: async (params) => {
-      // console.log("trying to load");
+  const q3 = useQuery({
+    queryKey: ["negativeComments"],
+    // cacheTime: 60000,
+    // staleTime: 60000,
+    queryFn: async () => {
       let url = `/dashboard/negativeComments/${ResID}`;
-      // console.log("posting to ", url);
-      return await apiClient.get(url, params);
+      const ret = await apiClient.get(url);
+      // console.log("allRestaurantOrders", ret);
+      return ret;
     },
   });
+  console.log("negativeComments", q3.data?.data?.lengthOfcomments);
 
-  const onSubmit2 = async function () {
-    const result = await m2.mutateAsync();
-    allNegativeComments.value = result;
-    queryClient.invalidateQueries({ mutationKey: ["allNaComments"] });
-    queryClient.refetchQueries(["allNaComments"]);
-  };
-
-  // Get AlL Natural
-  const m3 = useMutation({
-    mutationKey: ["allNeComments"],
-    // cacheTime: 600000,
-    // onSuccess: onSuccess,
-    // onError: onError,
-    mutationFn: async (params) => {
-      // console.log("trying to load");
+  // Get AlL Neutral
+  const q4 = useQuery({
+    queryKey: ["neutralComments"],
+    // cacheTime: 60000,
+    // staleTime: 60000,
+    queryFn: async () => {
       let url = `/dashboard/neutralComments/${ResID}`;
-      // console.log("posting to ", url);
-      return await apiClient.get(url, params);
+      const ret = await apiClient.get(url);
+      // console.log("allRestaurantOrders", ret);
+      return ret;
     },
   });
+  console.log("neutralComments", q4.data?.data?.lengthOfcomments);
 
-  const onSubmit3 = async function () {
-    const result = await m3.mutateAsync();
-    allNaturalComments.value = result;
-    queryClient.invalidateQueries({ mutationKey: ["allNeComments"] });
-    queryClient.refetchQueries(["allNeComments"]);
-  };
-
-  // Get AlL Comments
-  const m4 = useMutation({
-    mutationKey: ["allComments"],
-    // cacheTime: 600000,
-    // onSuccess: onSuccess,
-    // onError: onError,
-    mutationFn: async (params) => {
-      // console.log("trying to load");
+  // Get All Comments
+  const q5 = useQuery({
+    queryKey: ["userComments"],
+    // cacheTime: 60000,
+    // staleTime: 60000,
+    queryFn: async () => {
       let url = `/dashboard/userComments/${ResID}`;
-      // console.log("posting to ", url);
-      return await apiClient.get(url, params);
+      const ret = await apiClient.get(url);
+      // console.log("allRestaurantOrders", ret);
+      return ret;
     },
   });
-
-  const onSubmit4 = async function () {
-    const result = await m4.mutateAsync();
-    allComments.value = result;
-    queryClient.invalidateQueries({ mutationKey: ["allComments"] });
-    queryClient.refetchQueries(["allComments"]);
-  };
-
-  useEffect(() => {
-    onSubmit1();
-    onSubmit2();
-    onSubmit3();
-    onSubmit4();
-  }, []);
+  console.log("userComments", q5.data?.data?.lengthOfcomments);
 
   // // onSubmit("positiveComments")
   // // onSubmit("negativeComments")
@@ -137,22 +102,19 @@ export default function RestaurantDashboard() {
     {
       name: "Positive",
       value:
-        (allPositiveComments.value.data?.lengthOfcomments /
-          allComments.value.data?.lengthOfcomments) *
+        (q2.data?.data?.lengthOfcomments / q5.data?.data?.lengthOfcomments) *
         myValue,
     },
     {
       name: "Negative",
       value:
-        (allNegativeComments.value.data?.lengthOfcomments /
-          allComments.value.data?.lengthOfcomments) *
+        (q3.data?.data?.lengthOfcomments / q5.data?.data?.lengthOfcomments) *
         myValue,
     },
     {
       name: "Neutral",
       value:
-        (allNaturalComments.value.data?.lengthOfcomments /
-          allComments.value.data?.lengthOfcomments) *
+        (q4.data?.data?.lengthOfcomments / q5.data?.data?.lengthOfcomments) *
         myValue,
     },
   ];
@@ -162,9 +124,6 @@ export default function RestaurantDashboard() {
         <Col lg="3" sm="6">
           <Card className="card-stats">
             <Card.Body>
-              {/* <button onClick={onSubmit("positiveComments")}>
-                  test positive
-                </button> */}
               <Row>
                 <Col xs="3" className="text-center">
                   {/* Zoomed in emoji */}
@@ -178,7 +137,7 @@ export default function RestaurantDashboard() {
                   <div className="numbers">
                     <p className="card-category">Positive Comments</p>
                     <Card.Title as="h4">
-                      {allPositiveComments.value.data?.lengthOfcomments}
+                      {q2.data?.data?.lengthOfcomments}
                     </Card.Title>
                   </div>
                 </Col>
@@ -186,7 +145,6 @@ export default function RestaurantDashboard() {
             </Card.Body>
           </Card>
         </Col>
-
         {/* Negative Comments */}
         <Col lg="3" sm="6">
           <Card className="card-stats">
@@ -204,7 +162,7 @@ export default function RestaurantDashboard() {
                   <div className="numbers">
                     <p className="card-category">Negative Comments</p>
                     <Card.Title as="h4">
-                      {allNegativeComments.value.data?.lengthOfcomments}
+                      {q3.data?.data?.lengthOfcomments}
                     </Card.Title>
                   </div>
                 </Col>
@@ -229,7 +187,7 @@ export default function RestaurantDashboard() {
                   <div className="numbers">
                     <p className="card-category">Neutral Comments</p>
                     <Card.Title as="h4">
-                      {allNaturalComments.value.data?.lengthOfcomments}
+                      {q4.data?.data?.lengthOfcomments}
                     </Card.Title>
                   </div>
                 </Col>
@@ -254,7 +212,7 @@ export default function RestaurantDashboard() {
                   <div className="numbers">
                     <p className="card-category">All Comments</p>
                     <Card.Title as="h4">
-                      {allComments.value.data?.lengthOfcomments}
+                      {q5.data?.data?.lengthOfcomments}
                     </Card.Title>
                   </div>
                 </Col>

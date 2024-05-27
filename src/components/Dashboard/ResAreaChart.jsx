@@ -1,5 +1,3 @@
-import { useQuery } from "react-query";
-import { apiClient } from "../../Data/apiclient";
 import {
   AreaChart,
   Area,
