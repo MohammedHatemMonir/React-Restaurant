@@ -150,14 +150,15 @@ export default function SelectResPage() {
             </div>
 
             <div>
-              <Row className="m-0">
+              <Row>
                 {!q1.isLoading &&
                   q1.data?.data?.meals?.map((item, index) => (
                     <Col
                       sm={12}
-                      md={3}
+                      md={6}
+                      lg={4}
+                      xl={3}
                       key={index + item}
-                      className="p-0"
                       style={{ transform: "scale(0.90)" }}
                     >
                       <MealCard
@@ -185,7 +186,7 @@ export default function SelectResPage() {
             <Row>
               {!q1.isLoading &&
                 q1.data?.data?.resComments?.map((item, index) => (
-                  <Col sm={12} md={4} key={index}>
+                  <Col sm={12} md={6} lg={4} xl={3} key={index}>
                     <ReviewsCard
                       key={item.id}
                       name={item.user.name}
