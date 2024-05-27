@@ -20,6 +20,22 @@ export default function RestaurantDashboard() {
   const allComments = useSignal([]);
 
   // Fetch here
+
+  // All Restaurant Orders
+  const q1 = useQuery({
+    queryKey: ["allRestaurantOrders"],
+    // cacheTime: 60000,
+    // staleTime: 60000,
+    queryFn: async () => {
+      let url = `/dashboard/allRestaurantOrders/${ResID}`;
+      const ret = await apiClient.get(url);
+      // console.log("allRestaurantOrders", ret);
+      return ret;
+    },
+  });
+
+  console.log("allRestaurantOrders", q1.data?.data.ResOrders);
+
   // Get All Positive
   const m1 = useMutation({
     mutationKey: ["allPComments"],
@@ -256,7 +272,7 @@ export default function RestaurantDashboard() {
               {/* <p className="card-category">24 Hours performance</p> */}
             </Card.Header>
             <Card.Body>
-              <ResAreaChart ResID={ResID} />
+              <ResAreaChart ResOrders={q1.data?.data.ResOrders} />
             </Card.Body>
           </Card>
         </Col>
