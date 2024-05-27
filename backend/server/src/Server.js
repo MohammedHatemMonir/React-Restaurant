@@ -16,6 +16,7 @@ const routerTypeComments = require('./modules/routes/dashboard/dashboardRoutes.j
 const {Server} = require('socket.io');
 const server = require("http").createServer(app);
 const ChatRouter = require('./modules/Chat/chatRouter.js');
+const dashboardRouterAdmin = require('./modules/routes/dashboard/dashboardRoutesAdmin.js');
 
 // const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const wrap = (expressMiddleWare) => (socket, next) => expressMiddleWare(socket.request, {}, next);
@@ -71,6 +72,7 @@ app.use("/analyze", comment_routes);
 app.use("/api/users", userRouter);
 app.use(SearchRouter)
 app.use('/dashboard',routerTypeComments)
+app.use('/dashboardAdmin',dashboardRouterAdmin)
 io.use(wrap(sessionMiddleware)); 
 
 
