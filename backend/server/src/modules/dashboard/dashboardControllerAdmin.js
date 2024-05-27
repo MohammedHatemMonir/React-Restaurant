@@ -2,39 +2,28 @@ const { Order } = require("../../database/models/orders");
 
 const allRestaurantOrders = async (req, res) => {
     try {
-        
+        // Get the current date and set the time to the start of the day
         const startOfDay = new Date();
         startOfDay.setHours(0, 0, 0, 0);
 
-        const todayOrders = await Order.find({
-            createdAt: { $gte: startOfDay }
-        });
+        // Query orders made today
+        const todayOrders = await Order.find({ createdAt: { $gte: startOfDay } });
 
-        
+        // Group orders by restaurant ID and calculate totals
         const restaurantOrders = todayOrders.reduce((acc, order) => {
-            if (!acc[order.resId]) {
-                acc[order.resId] = {
-                    orders: [],
-                    totalOrders: 0,
-                    totalPrice: 0
-                };
+            const { resId, price } = order;
+            if (!acc[resId]) {
+                acc[resId] = { orders: [], totalOrders: 0, totalPrice: 0 };
             }
-            acc[order.resId].orders.push(order);
-            acc[order.resId].totalOrders += 1;
-            acc[order.resId].totalPrice += order.price;
+            acc[resId].orders.push(order);
+            acc[resId].totalOrders += 1;
+            acc[resId].totalPrice += price;
             return acc;
         }, {});
 
-        const responseData = Object.keys(restaurantOrders).map(resId => ({
-            resId,
-            orders: restaurantOrders[resId].orders.reverse(),
-            totalOrders: restaurantOrders[resId].totalOrders,
-            totalPrice: restaurantOrders[resId].totalPrice
-        }));
-
         res.status(200).json({
             success: true,
-            data: responseData
+            data: restaurantOrders
         });
     } catch (error) {
         console.log("Error fetching restaurant orders:", error);
