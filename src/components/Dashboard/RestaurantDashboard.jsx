@@ -1,15 +1,17 @@
+// import ChartistGraph from "react-chartist";
 import { Card, Container, Row, Col } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useMutation, useQueryClient } from "react-query";
+import { apiClient } from "../../Data/apiclient";
 import { useSignal } from "@preact/signals-react";
 import { useEffect } from "react";
+import { FaCircle } from "react-icons/fa6";
 import { FaRegAngry, FaRegEdit, FaRegMeh, FaRegSmile } from "react-icons/fa";
 import ResPieChart from "./ResPieChart";
 import ResAreaChart from "./ResAreaChart";
 import { useQuery } from "react-query";
-import { apiClient } from "../../Data/apiclient";
 
-export default function OwnerDashboard() {
+export default function RestaurantDashboard() {
   const { ResID } = useParams();
   const queryClient = useQueryClient();
   const allPositiveComments = useSignal([]);
@@ -18,20 +20,6 @@ export default function OwnerDashboard() {
   const allComments = useSignal([]);
 
   // Fetch here
-  // All Restaurant Orders
-  const q1 = useQuery({
-    queryKey: ["allRestaurantOrders"],
-    // cacheTime: 60000,
-    // staleTime: 60000,
-    queryFn: async () => {
-      let url = `/dashboard/allRestaurantOrders/${ResID}`;
-      const ret = await apiClient.get(url);
-      // console.log("allRestaurantOrders", ret);
-      return ret;
-    },
-  });
-
-  console.log("All Restaurant Orders", q1.data?.data?.ResOrders);
   // Get All Positive
   const m1 = useMutation({
     mutationKey: ["allPComments"],
@@ -152,7 +140,6 @@ export default function OwnerDashboard() {
         myValue,
     },
   ];
-
   return (
     <Container fluid>
       <Row>
@@ -269,10 +256,7 @@ export default function OwnerDashboard() {
               {/* <p className="card-category">24 Hours performance</p> */}
             </Card.Header>
             <Card.Body>
-              {/* <ResAreaChart
-                ResID={ResID}
-                ResOrders={q1.data?.data?.ResOrders}
-              /> */}
+              <ResAreaChart ResID={ResID} />
             </Card.Body>
           </Card>
         </Col>

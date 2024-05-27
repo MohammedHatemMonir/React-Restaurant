@@ -22,7 +22,7 @@ import MapLoader from "./../Loaders/MapLoader";
 import Profile from "../Profile/ProfilePage";
 import EditProfile from "../Profile/EditProfile";
 import ResetPass from "./../Authentication/ResetPass";
-import OwnerDashboard from "../Dashboard/OwnerDashboard";
+import RestaurantDashboard from "../Dashboard/RestaurantDashboard";
 import MealsOrdersPage from "../Orders/OrdersDetailsPage";
 import AllOrdersPage from "../Orders/MyOrdersPage";
 import MyOrdersPage from "./../Orders/MyOrdersPage";
@@ -96,8 +96,8 @@ export default function TheRouter() {
           <Route path="/" element={<DefaultLayout />}>
             <Route index element={<ResPage />} />
             <Route
-              path="/OwnerDashboard/:ResID"
-              element={<OwnerDashboard />}
+              path="/RestaurantDashboard/:ResID"
+              element={<RestaurantDashboard />}
             ></Route>
             <Route path="*" element={<h1>Page Not Found</h1>}></Route>
             <Route
