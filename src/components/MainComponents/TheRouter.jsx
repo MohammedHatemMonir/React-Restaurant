@@ -27,6 +27,7 @@ import MealsOrdersPage from "../Orders/OrdersDetailsPage";
 import AllOrdersPage from "../Orders/MyOrdersPage";
 import MyOrdersPage from "./../Orders/MyOrdersPage";
 import CartBody from "../Navbar/CartBody";
+import AdminDashboard from "./../Dashboard/AdminDashboard";
 
 export default function TheRouter() {
   const navigate = useNavigate();
@@ -71,16 +72,6 @@ export default function TheRouter() {
         return result;
       },
     });
-
-    // useEffect(() => {
-
-    //   window.scrollTo({
-
-    //     top: 0,
-    //     behavior: "instant",
-    //   });
-
-    // }, []);
   };
 
   return (
@@ -95,11 +86,12 @@ export default function TheRouter() {
         {UserData.value.loggedIn && (
           <Route path="/" element={<DefaultLayout />}>
             <Route index element={<ResPage />} />
+            <Route path="*" element={<h1>Page Not Found</h1>}></Route>
             <Route
               path="/RestaurantDashboard/:ResID"
               element={<RestaurantDashboard />}
             ></Route>
-            <Route path="*" element={<h1>Page Not Found</h1>}></Route>
+            <Route path="/AdminDashboard" element={<AdminDashboard />}></Route>
             <Route
               path="/restaurant/:resID/:resName"
               element={<SelectResPage />}
@@ -125,7 +117,6 @@ export default function TheRouter() {
                 </div>
               }
             ></Route>
-
             <Route path="/mealsorders" element={<MealsOrdersPage />}></Route>
             <Route path="hema" element={<HemaTest />}></Route>
             <Route path="/tutorials" element={<Tutorials />}>

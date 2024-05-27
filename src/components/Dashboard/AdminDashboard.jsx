@@ -1,121 +1,37 @@
 import { Card, Container, Row, Col } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useMutation, useQueryClient } from "react-query";
-import { apiClient } from "../../Data/apiclient";
 import { useSignal } from "@preact/signals-react";
+import { useEffect } from "react";
 import { FaRegAngry, FaRegEdit, FaRegMeh, FaRegSmile } from "react-icons/fa";
 import ResPieChart from "./ResPieChart";
 import ResAreaChart from "./ResAreaChart";
 import { useQuery } from "react-query";
+import { apiClient } from "../../Data/apiclient";
 
-export default function RestaurantDashboard() {
-  const { ResID } = useParams();
-  const queryClient = useQueryClient();
-  const allPositiveComments = useSignal([]);
-  const allNegativeComments = useSignal([]);
-  const allNaturalComments = useSignal([]);
-  const allComments = useSignal([]);
-
-  // Fetch here
-  // All Restaurant Orders
-  const q1 = useQuery({
-    queryKey: ["allRestaurantOrders"],
-    // cacheTime: 60000,
-    // staleTime: 60000,
+export default function AdminDashboard() {
+  const q = useQuery({
+    queryKey: ["getAllresturant"],
+    // cacheTime: 3 * 60000, //3 minutes
+    // enabled: true,
     queryFn: async () => {
-      let url = `/dashboard/allRestaurantOrders/${ResID}`;
-      const ret = await apiClient.get(url);
-      // console.log("allRestaurantOrders", ret);
+      let url = "/getAllresturant";
+      var ret = await apiClient.get(url);
+    //   console.log("admin dash", ret.data);
+
       return ret;
     },
   });
-
-  console.log("allRestaurantOrders", q1.data?.data.ResOrders);
-
-  // Get All Positive
-  const q2 = useQuery({
-    queryKey: ["postiveComments"],
-    // cacheTime: 60000,
-    // staleTime: 60000,
-    queryFn: async () => {
-      let url = `/dashboard/postiveComments/${ResID}`;
-      const ret = await apiClient.get(url);
-      // console.log("allRestaurantOrders", ret);
-      return ret;
-    },
-  });
-  console.log("postiveComments", q2.data?.data?.lengthOfcomments);
-
-  // Get All Negative
-  const q3 = useQuery({
-    queryKey: ["negativeComments"],
-    // cacheTime: 60000,
-    // staleTime: 60000,
-    queryFn: async () => {
-      let url = `/dashboard/negativeComments/${ResID}`;
-      const ret = await apiClient.get(url);
-      // console.log("allRestaurantOrders", ret);
-      return ret;
-    },
-  });
-  console.log("negativeComments", q3.data?.data?.lengthOfcomments);
-
-  // Get AlL Neutral
-  const q4 = useQuery({
-    queryKey: ["neutralComments"],
-    // cacheTime: 60000,
-    // staleTime: 60000,
-    queryFn: async () => {
-      let url = `/dashboard/neutralComments/${ResID}`;
-      const ret = await apiClient.get(url);
-      // console.log("allRestaurantOrders", ret);
-      return ret;
-    },
-  });
-  console.log("neutralComments", q4.data?.data?.lengthOfcomments);
-
-  // Get All Comments
-  const q5 = useQuery({
-    queryKey: ["userComments"],
-    // cacheTime: 60000,
-    // staleTime: 60000,
-    queryFn: async () => {
-      let url = `/dashboard/userComments/${ResID}`;
-      const ret = await apiClient.get(url);
-      // console.log("allRestaurantOrders", ret);
-      return ret;
-    },
-  });
-  console.log("userComments", q5.data?.data?.lengthOfcomments);
-
-  // PieChart Data
-  const myValue = 100;
-  const data = [
-    {
-      name: "Positive",
-      value:
-        (q2.data?.data?.lengthOfcomments / q5.data?.data?.lengthOfcomments) *
-        myValue,
-    },
-    {
-      name: "Negative",
-      value:
-        (q3.data?.data?.lengthOfcomments / q5.data?.data?.lengthOfcomments) *
-        myValue,
-    },
-    {
-      name: "Neutral",
-      value:
-        (q4.data?.data?.lengthOfcomments / q5.data?.data?.lengthOfcomments) *
-        myValue,
-    },
-  ];
+  console.log("admin dash", q.data?.data);
   return (
     <Container fluid>
       <Row>
         <Col lg="3" sm="6">
           <Card className="card-stats">
             <Card.Body>
+              {/* <button onClick={onSubmit("positiveComments")}>
+                  test positive
+                </button> */}
               <Row>
                 <Col xs="3" className="text-center">
                   {/* Zoomed in emoji */}
@@ -129,7 +45,7 @@ export default function RestaurantDashboard() {
                   <div className="numbers">
                     <p className="card-category">Positive Comments</p>
                     <Card.Title as="h4">
-                      {q2.data?.data?.lengthOfcomments}
+                      {/* {allPositiveComments.value.data?.lengthOfcomments} */}
                     </Card.Title>
                   </div>
                 </Col>
@@ -137,6 +53,7 @@ export default function RestaurantDashboard() {
             </Card.Body>
           </Card>
         </Col>
+
         {/* Negative Comments */}
         <Col lg="3" sm="6">
           <Card className="card-stats">
@@ -154,7 +71,7 @@ export default function RestaurantDashboard() {
                   <div className="numbers">
                     <p className="card-category">Negative Comments</p>
                     <Card.Title as="h4">
-                      {q3.data?.data?.lengthOfcomments}
+                      {/* {allNegativeComments.value.data?.lengthOfcomments} */}
                     </Card.Title>
                   </div>
                 </Col>
@@ -179,7 +96,7 @@ export default function RestaurantDashboard() {
                   <div className="numbers">
                     <p className="card-category">Neutral Comments</p>
                     <Card.Title as="h4">
-                      {q4.data?.data?.lengthOfcomments}
+                      {/* {allNaturalComments.value.data?.lengthOfcomments} */}
                     </Card.Title>
                   </div>
                 </Col>
@@ -204,7 +121,7 @@ export default function RestaurantDashboard() {
                   <div className="numbers">
                     <p className="card-category">All Comments</p>
                     <Card.Title as="h4">
-                      {q5.data?.data?.lengthOfcomments}
+                      {/* {allComments.value.data?.lengthOfcomments} */}
                     </Card.Title>
                   </div>
                 </Col>
@@ -222,7 +139,10 @@ export default function RestaurantDashboard() {
               {/* <p className="card-category">24 Hours performance</p> */}
             </Card.Header>
             <Card.Body>
-              <ResAreaChart ResOrders={q1.data?.data?.ResOrders} />
+              {/* <ResAreaChart
+                ResID={ResID}
+                ResOrders={q1.data?.data?.ResOrders}
+              /> */}
             </Card.Body>
           </Card>
         </Col>
@@ -234,13 +154,13 @@ export default function RestaurantDashboard() {
             </Card.Header>
             <Card.Body>
               {/* {console.log("myHemasdasdasa", allPositiveComments.value)} */}
-              <ResPieChart
-                positive={allPositiveComments.value.data?.lengthOfcomments}
-                negative={allNegativeComments.value.data?.lengthOfcomments}
-                natural={allNaturalComments.value.data?.lengthOfcomments}
-                allComments={allComments.value.data?.lengthOfcomments}
-                data={data}
-              />
+              {/* <ResPieChart
+                // positive={allPositiveComments.value.data?.lengthOfcomments}
+                // negative={allNegativeComments.value.data?.lengthOfcomments}
+                // natural={allNaturalComments.value.data?.lengthOfcomments}
+                // allComments={allComments.value.data?.lengthOfcomments}
+                // data={data}
+              /> */}
             </Card.Body>
           </Card>
         </Col>

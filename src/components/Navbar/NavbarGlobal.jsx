@@ -95,6 +95,17 @@ export default function NavbarGlobal() {
               >
                 My account
               </NavDropdown.Item>
+              {/* Dashboard for admin only */}
+              {UserData.value.role == "ADMIN" && (
+                <NavDropdown.Item
+                  as={Link}
+                  className="text-decoration-none text-dark"
+                  to="/AdminDashboard"
+                >
+                  Dashboard
+                </NavDropdown.Item>
+              )}
+
               <NavDropdown.Item as={Link}>
                 <LogoutButton
                   as={Link}

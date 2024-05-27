@@ -21,7 +21,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        {/* style={{ transform: "scale(0.95)" }} */}
+        {/* style={{ transform: "scale(0.95)" }} style={{overflowY:"scroll"}} */}
         <div>
           <TheRouter />
           <ToastContainer />
