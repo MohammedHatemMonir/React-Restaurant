@@ -51,6 +51,8 @@ const navigate = useNavigate();
   // useForm hook function here
   const onSubmit = async (data1) => {
     if (m.isLoading) return;
+    reset();
+
     // console.log("form data", data1);
     data1.message.length === 0
       ? (inputValue.value = null)
@@ -81,7 +83,6 @@ const navigate = useNavigate();
     }
 
     // Clear the input field
-    reset();
   };
 
   useEffect(() => {
