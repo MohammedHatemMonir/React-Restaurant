@@ -149,10 +149,10 @@ const getNegativeComments = async (req, res) => {
   const allRestaurantOrders = async (req, res) => {
     try {
       const { id } = req.params;
-      const lenofResturantorder = await Order.find({ resId: id }).sort({ createdAt: -1 });
+      const lenofResturantorder = await Order.find({ resId: id });
   
       res.status(200).json({
-        ResOrders: lenofResturantorder,
+        ResOrders: lenofResturantorder.reverse(),
         ResOrder: lenofResturantorder.length
       });
     } catch (error) {
