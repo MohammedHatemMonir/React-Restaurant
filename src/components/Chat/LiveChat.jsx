@@ -9,6 +9,7 @@ import Gemini from "./Gemini";
 import { useMutation } from "react-query";
 import { apiClient } from "./../../Data/apiclient";
 import {useNavigate} from "react-router-dom";
+import { AIMealID } from "../../Globals";
 
 const LiveChat = () => {
   const {
@@ -63,13 +64,18 @@ const navigate = useNavigate();
     data.value = updatedData;
 
     const result = await m.mutateAsync({ message: inputValue.value });
-    console.log("result", result);
     updatedData = [
       ...data.value,
       { message: result.data.response, role: "model" },
     ];
     data.value = updatedData;
 
+    console.log("result", result.data);
+    if(result.data.MealID){
+      AIMealID.value = result.data.MealID;
+    }
+
+    console.log("AIMealID", AIMealID.value);
     if(result.data.redirect){
       navigate(result.data.redirect);
     }

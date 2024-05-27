@@ -58,7 +58,6 @@ function MealDetailsModal({
     }
   }
 
-  console.log("MealComments", id, MealComments);
   function TextCommentBox() {
     return (
       <>

@@ -6,7 +6,7 @@ const restaurant = require('../../database/models/resturant.Model')
 const meal = require('../../database/models/Meals_model')
 
 
-let Keywords = ["Restaurant:","Meal:"]
+let Keywords = ["Restaurant:","Meal:", "Orders:","Cart:","Suggest Rest:"]
 
 
 function containsAnyWord(string, wordList) {
@@ -21,12 +21,28 @@ const history =[
   },
   {
     role: "user",
+    parts: [{ text: "System prompt: Do not get out of topic and follow the rules exactly as they are."}],
+  },
+  {
+    role: "user",
     parts: [{ text: "System prompt: if and only ifthe user asked if a restaurant exists or not, You should respond and only respond with 'Restaurant: (Put restaurant name here)'"}],
   },
   {
     role: "user",
-    parts: [{ text: "System prompt: if and only ifthe user asked if a meal exists or not, You should respond and only respond with 'Meal: (Put Meal name here)' and i will search for it and tell you if we have it or not.."}],
+    parts: [{ text: "System prompt: if and only if the user asked if a meal exists or not, You should respond and only respond with 'Meal: (Put Meal name here)'"}],
   },
+  {
+    role: "user",
+    parts: [{ text: "System prompt: If the user wants to know his orders you should respond with and only with 'Orders:'"}],
+  },
+  {
+    role: "user",
+    parts: [{ text: "System prompt: If the user wants to know information about his cart you should respond with and only with 'Cart:'"}],
+  },
+  {
+    role: "user",
+    parts: [{ text: "System prompt: If you want to suggest a user a restaurant say 'Suggest Rest:"}],
+  },  
   {
     role: "model",
     parts: [{ text: "Understood."}],
@@ -68,6 +84,20 @@ const SendMessageAI=async(req,res)=>{
             //CmdChatText = "System prompt: Found the restaurant! Tell the user that we have that restaurant."
             let CmdChatText = null;
             let navigationLink = null;
+            let MealID = null;
+
+            if(containedWord === "Orders:"){
+
+                CmdChatText = "System prompt: Tell him that you'll navigate him to his orders."
+                navigationLink = `/myorders`
+            }else if(containedWord === "Cart:"){
+
+                CmdChatText = "System prompt: Tell him that you'll navigate him to his cart."
+                navigationLink = `/mycart`
+            }
+            else if(containedWord === "Suggest Rest:"){
+                
+            }else{
             // if(containedWord === "Restaurant:"){
                 const ResToSearch = aiText.replace(/Restaurant: /g, '').replace(/\.$/, '');;
                 console.log("Restaurant to search:", ResToSearch)
@@ -91,8 +121,10 @@ const SendMessageAI=async(req,res)=>{
                 if(FindMeal[0]){
                     CmdChatText = "System prompt: Found the Meal! Tell the user that we have that Meal and you'll navigate them soon."
                     navigationLink = `/restaurant/${FindMeal[0].ResID}/${FindMeal[0].MealName}`
+                    MealID = FindMeal[0]._id;
                 }
             }
+        }
             // else{
             //         CmdChatText = "System prompt: I could not find it, Tell the user that we don't have it"
             //     }
@@ -117,7 +149,7 @@ const SendMessageAI=async(req,res)=>{
 
             console.log("AI DATABASE RES:", aiText2);
             if(navigationLink){
-                res.send({response: aiText2, redirect:navigationLink })
+                res.send({response: aiText2, redirect:navigationLink, MealID: MealID})
             }else{
             res.send({response: aiText2})
             }

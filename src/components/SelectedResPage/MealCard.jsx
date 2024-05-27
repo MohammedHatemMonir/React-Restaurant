@@ -1,5 +1,5 @@
 import Stars from "../Stars/Stars";
-import { UserData } from "../../Globals";
+import { AIMealID, UserData } from "../../Globals";
 import { useSignal } from "@preact/signals-react";
 import MealDetailsModal from "./MealDetailsModal";
 import DeleteIcon from "./../../Icons/DeleteIcon";
@@ -38,7 +38,8 @@ export default function MealCard({
     },
   });
 
-  const displayModal = useSignal(false);
+  console.log("aimealid: ", AIMealID.value," id: ", id)
+  const displayModal = useSignal(AIMealID.value === id? true: false);
   function handleClose() {
     displayModal.value = false;
   }
