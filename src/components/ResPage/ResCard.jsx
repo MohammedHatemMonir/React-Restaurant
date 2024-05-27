@@ -57,8 +57,31 @@ export default function ResCard({
               <Stars stars1={stars1} /> <br />
               <br />
             </h3>
+            {/* Edit for owner only */}
+            {UserData.value.role === "owner" &&
+              UserData.value.id === ownerId && (
+                <div
+                  onClick={onOpenEdit}
+                  className="position-absolute top-0 end-0"
+                  style={{ margin: "20px" }}
+                >
+                  <IoSettings
+                    style={{
+                      cursor: "pointer",
+                      transform: "scale(3)",
+                      color: "black",
+                      backgroundColor: "white",
+                      padding: "2px",
+                      borderRadius: "50%",
+                      boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+                    }}
+                  />
+                </div>
+              )}
+
             <img src={ResImg || defaultMeal} alt="Res-Img" />
           </div>
+
           <div className="text-decoration-none content">
             <div
               className="text-decoration-none tags"
@@ -88,22 +111,19 @@ export default function ResCard({
                   display: "flex",
                   justifyContent: "space-around",
                   alignItems: "center",
-                  cursor: "pointer",
                   margin: "25px -10% 0px  -10%",
                   transform: "scale(1.5)",
                 }}
               >
                 {UserData.value.role === "ADMIN" && (
                   <div onClick={onOpenDel}>
-                    <DeleteIcon />
+                    <DeleteIcon style={{ cursor: "pointer" }} />
                   </div>
                 )}
-
-                {(UserData.value.role === "ADMIN" ||
-                  (UserData.value.role === "owner" &&
-                    UserData.value.id === ownerId)) && (
+                {/* Edit for admin only */}
+                {UserData.value.role === "ADMIN" && (
                   <div onClick={onOpenEdit}>
-                    <IoSettings />
+                    <IoSettings style={{ cursor: "pointer" }} />
                   </div>
                 )}
               </div>

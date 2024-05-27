@@ -135,20 +135,16 @@ export default function MealCard({
                     display: "flex",
                     justifyContent: "space-around",
                     alignItems: "center",
-                    cursor: "pointer",
-                    // marginTop: "30px",
-                    // marginRight: "-20px",
-                    // objectFit: "content",
                     margin: "25px -10% 0px  -10%",
                     transform: "scale(1.5)",
                   }}
                 >
                   <div onClick={onOpenDel}>
-                    <DeleteIcon />
+                    <DeleteIcon style={{ cursor: "pointer" }} />
                   </div>
 
                   <div onClick={onOpenEdit}>
-                    <IoSettings />
+                    <IoSettings style={{ cursor: "pointer" }} />
                   </div>
                 </div>
               </div>

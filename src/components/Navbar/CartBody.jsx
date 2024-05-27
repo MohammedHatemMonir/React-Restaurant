@@ -101,7 +101,7 @@ export default function CartBody() {
   if (m.isLoading) {
     return <>Loading...</>;
   }
-  if (Cart.value?.meals?.length == 0) {
+  if (Cart.value?.meals?.length <= 0) {
     return <EmptyOrders />;
   }
 

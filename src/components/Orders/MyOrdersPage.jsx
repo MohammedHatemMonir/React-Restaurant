@@ -30,7 +30,7 @@ const MyOrdersPage = () => {
   if (q.isLoading) {
     return <>Loading...</>;
   }
-  if (q.data?.data.message == "No orders found") {
+  if (q.data?.data?.message == "No orders found") {
     return <EmptyOrders />;
   }
   return (
