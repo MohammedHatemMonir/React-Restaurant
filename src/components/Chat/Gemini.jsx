@@ -19,13 +19,17 @@ export default function Gemini({ text }) {
   return (
     <span className="chatter_msg_item chatter_msg_item_user">
       <div className="message-content">
-        <span className="chatter_name display-inline">Dine Me</span>
-        {/* text  to speech btn */}
-        <div className="display-inline">
-          <button className="bg-transparent" onClick={handleSpeak} style={{}}>
-            {isSpeaking.value ? <FaStop /> : <FaPlay />}
+        <span className="chatter_name">
+          Dine Me
+          {/* text  to speech btn */}
+          <button className="bg-transparent ml-1" onClick={handleSpeak}>
+            {isSpeaking.value ? (
+              <FaStop className="mb-1" />
+            ) : (
+              <FaPlay className="mb-1" />
+            )}
           </button>
-        </div>
+        </span>
         {text}
       </div>
       <div className="chatter_avatar">
