@@ -1,29 +1,27 @@
 import { Card, Container, Row, Col } from "react-bootstrap";
-import { useParams } from "react-router-dom";
-import { useMutation, useQueryClient } from "react-query";
 import { useSignal } from "@preact/signals-react";
-import { useEffect } from "react";
 import { FaRegAngry, FaRegEdit, FaRegMeh, FaRegSmile } from "react-icons/fa";
 import { FcBusinessman } from "react-icons/fc";
 import ResPieChart from "./ResPieChart";
 import ResAreaChart from "./ResAreaChart";
 import { useQuery } from "react-query";
 import { apiClient } from "../../Data/apiclient";
+import AdminAreaChart from "./AdminAreaChart";
 
 export default function AdminDashboard() {
   // Get all orders
-  // const q1 = useQuery({
-  //   queryKey: ["getAllresturant"],
-  //   // cacheTime: 3 * 60000, //3 minutes
-  //   // enabled: true,
-  //   queryFn: async () => {
-  //     let url = "/getAllresturant";
-  //     var ret = await apiClient.get(url);
-  //     //   console.log("admin dash", ret.data);
-  //     return ret;
-  //   },
-  // });
-  // console.log("admin dash", q1.data?.data);
+  const q1 = useQuery({
+    queryKey: ["getAllOrders"],
+    // cacheTime: 3 * 60000, //3 minutes
+    // enabled: true,
+    queryFn: async () => {
+      let url = "/dashboardAdmin/getLastTenDaysOrders";
+      var ret = await apiClient.get(url);
+      //   console.log("admin dash", ret.data);
+      return ret;
+    },
+  });
+  console.log("getAllOrders", q1.data?.data?.data?.restaurantOrders);
 
   // Get All Positive
   const q2 = useQuery({
@@ -37,7 +35,7 @@ export default function AdminDashboard() {
       return ret;
     },
   });
-  console.log("postiveComments", q2.data?.data?.lengthOfcomments);
+  // console.log("postiveComments", q2.data?.data?.lengthOfcomments);
 
   // Get All Negative
   const q3 = useQuery({
@@ -51,7 +49,7 @@ export default function AdminDashboard() {
       return ret;
     },
   });
-  console.log("negativeComments", q3.data?.data?.lengthOfcomments);
+  // console.log("negativeComments", q3.data?.data?.lengthOfcomments);
 
   // Get AlL Neutral
   const q4 = useQuery({
@@ -65,7 +63,7 @@ export default function AdminDashboard() {
       return ret;
     },
   });
-  console.log("neutralComments", q4.data?.data?.lengthOfcomments);
+  // console.log("neutralComments", q4.data?.data?.lengthOfcomments);
 
   // Get All Comments
   const q5 = useQuery({
@@ -79,7 +77,7 @@ export default function AdminDashboard() {
       return ret;
     },
   });
-  console.log("getAllOwner", q5.data?.data?.lengthOfowners);
+  // console.log("getAllOwner", q5.data?.data?.lengthOfowners);
 
   const allPositiveComments = useSignal([]);
   const allNegativeComments = useSignal([]);
@@ -111,7 +109,7 @@ export default function AdminDashboard() {
     <Container fluid>
       <Row>
         {/* Owner */}
-        <Col lg="3" sm="6">
+        <Col lg="4" sm="6">
           <Card className="card-stats">
             <Card.Body>
               <Row>
@@ -137,7 +135,7 @@ export default function AdminDashboard() {
         </Col>
 
         {/* Positive Comments */}
-        <Col lg="3" sm="6">
+        <Col lg="4" sm="6">
           <Card className="card-stats">
             <Card.Body>
               <Row>
@@ -163,7 +161,7 @@ export default function AdminDashboard() {
         </Col>
 
         {/* Negative Comments */}
-        <Col lg="3" sm="6">
+        <Col lg="4" sm="6">
           <Card className="card-stats">
             <Card.Body>
               <Row>
@@ -188,7 +186,7 @@ export default function AdminDashboard() {
           </Card>
         </Col>
         {/* Natural Comments */}
-        <Col lg="3" sm="6">
+        <Col lg="4" sm="6">
           <Card className="card-stats">
             <Card.Body>
               <Row>
@@ -213,7 +211,7 @@ export default function AdminDashboard() {
           </Card>
         </Col>
         {/* Customers */}
-        <Col lg="3" sm="6">
+        <Col lg="4" sm="6">
           <Card className="card-stats">
             <Card.Body>
               <Row>
@@ -241,14 +239,14 @@ export default function AdminDashboard() {
         <Col md="8">
           <Card>
             <Card.Header>
-              <Card.Title as="h4">All Orders Statistics</Card.Title>
+              <Card.Title as="h4">Last 10 Days Orders Statistics</Card.Title>
               {/* <p className="card-category">24 Hours performance</p> */}
             </Card.Header>
             <Card.Body>
-              {/* <ResAreaChart
-                ResID={ResID}
-                ResOrders={q1.data?.data?.ResOrders}
-              /> */}
+              {/* <ResAreaChart ResOrders={q1.data?.data?.restaurantOrders} /> */}
+              {!q1.isLoading && (
+                <AdminAreaChart rawData1={q1.data?.data?.data} />
+              )}
             </Card.Body>
           </Card>
         </Col>

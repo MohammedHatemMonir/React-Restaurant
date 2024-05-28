@@ -52,7 +52,7 @@ const getLastTenDaysOrders = async (req, res) => {
 
       // Query orders within the last 10 days using dateOrdered if createdAt is not present
       const lastTenDaysOrders = await Order.find({ dateOrdered: { $gte: startDate, $lte: endDate } });
-      console.log("Orders Found:", JSON.stringify(lastTenDaysOrders, null, 2)); // Log the orders found
+      console.log("Orders Found:", JSON.stringify(lastTenDaysOrders.reverse(), null, 2)); // Log the orders found
 
       if (!lastTenDaysOrders || lastTenDaysOrders.length === 0) {
           console.log("No orders found in the last 10 days."); // Log if no orders found
