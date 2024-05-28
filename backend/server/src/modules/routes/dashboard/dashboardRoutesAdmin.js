@@ -2,6 +2,8 @@ const dashboardControllerAdmin = require("../../dashboard/dashboardControllerAdm
 const express=require('express')
 const dashboardRouterAdmin=express.Router()
 
-dashboardRouterAdmin.get('/dashboardControllerAdmin',dashboardControllerAdmin.allRestaurantOrders)
-
+dashboardRouterAdmin.get('/allRestaurantOrders',dashboardControllerAdmin.allRestaurantOrders)
+dashboardRouterAdmin.get('/getPositiveComments',dashboardControllerAdmin.getPositiveComments)
+dashboardRouterAdmin.get('/getNegativeComments',dashboardControllerAdmin.getNegativeComments)
+dashboardRouterAdmin.get('/getNeutralComments',dashboardControllerAdmin.getNeutralComments)
 module.exports=dashboardRouterAdmin
