@@ -81,6 +81,32 @@ export default function AdminDashboard() {
   });
   console.log("getAllOwner", q5.data?.data?.lengthOfowners);
 
+  const allPositiveComments = useSignal([]);
+  const allNegativeComments = useSignal([]);
+  const allNaturalComments = useSignal([]);
+  const allComments = useSignal([]);
+
+  allComments.value =
+    q2.data?.data?.lengthOfcomments +
+    q3.data?.data?.lengthOfcomments +
+    q4.data?.data?.lengthOfcomments;
+  // PieChart Data
+  const myValue = 100;
+  const data = [
+    {
+      name: "Positive",
+      value: (q2.data?.data?.lengthOfcomments / allComments.value) * myValue,
+    },
+    {
+      name: "Negative",
+      value: (q3.data?.data?.lengthOfcomments / allComments.value) * myValue,
+    },
+    {
+      name: "Neutral",
+      value: (q4.data?.data?.lengthOfcomments / allComments.value) * myValue,
+    },
+  ];
+
   return (
     <Container fluid>
       <Row>
@@ -202,11 +228,7 @@ export default function AdminDashboard() {
                 <Col xs="9">
                   <div className="numbers">
                     <p className="card-category">All Comments</p>
-                    <Card.Title as="h4">
-                      {q2.data?.data?.lengthOfcomments +
-                        q3.data?.data?.lengthOfcomments +
-                        q4.data?.data?.lengthOfcomments}
-                    </Card.Title>
+                    <Card.Title as="h4">{allComments.value}</Card.Title>
                   </div>
                 </Col>
               </Row>
@@ -238,13 +260,13 @@ export default function AdminDashboard() {
             </Card.Header>
             <Card.Body>
               {/* {console.log("myHemasdasdasa", allPositiveComments.value)} */}
-              {/* <ResPieChart
-                // positive={allPositiveComments.value.data?.lengthOfcomments}
-                // negative={allNegativeComments.value.data?.lengthOfcomments}
-                // natural={allNaturalComments.value.data?.lengthOfcomments}
-                // allComments={allComments.value.data?.lengthOfcomments}
-                // data={data}
-              /> */}
+              <ResPieChart
+                positive={q2.data?.data?.lengthOfcomments}
+                negative={q3.data?.data?.lengthOfcomments}
+                natural={q4.data?.data?.lengthOfcomments}
+                allComments={allComments.value}
+                data={data}
+              />
             </Card.Body>
           </Card>
         </Col>
