@@ -88,12 +88,21 @@ io.on('connection', (socket) => {
     return;
   }
   socket.join(socket.request.session.user._id); //Join a room with your user ID
+  console.log('User connected:', socket.request.session.user.name);
 
-  socket.on('send-notification', (data) => {
-    console.log('Socket message: ' + data.SendToId + ' ' + data.message);
-    io.to(data.SendToId).emit("new-notification", data);
-  }
-  );
+
+  // io.to(socket.request.session.user._id).emit("new-notification", {message: "hello", time: new Date().toString()});
+
+  
+  // socket.on('send-notification', (data) => {
+  //   console.log('Socket message: ' + data.SendToId + ' ' + data.message);
+
+
+  //   io.to(data.SendToId).emit("new-notification", data);
+  // }
+
+
+  // );
 
 
   socket.on('disconnect', () => {

@@ -9,6 +9,7 @@ import { useSignal } from '@preact/signals-react';
 import { io } from 'socket.io-client';
 
 const MedoTest = () => {
+
   const socket = io('http://localhost:5001',{withCredentials: true});
 
 
@@ -27,8 +28,18 @@ const MedoTest = () => {
   }
 
 
+
+
+
   socket.on('connect', onConnect);
+
+
+
   socket.on('disconnect', onDisconnect);
+
+
+
+
   socket.on('new-notification', onNotification);
 
 }, []);

@@ -167,6 +167,12 @@ const res_comment = async (req, res) => { // {text:"",ResID: "" }
             creation_date:resturants[0].creation_date
           }
           await resturant.updateOne({ _id: ResID },{ $set: res_body});
+
+
+          global.io.to(resturants[0].ownerId).emit("new-notification", {message: "Your restaurant has recieved a new Rating.", time: Date.now().toString() });
+          global.io.to(req.session.user._id).emit("new-notification", {message: `You have placed a new rating at ${resturants[0].ResName}`, time: Date.now().toString() });
+
+
           res.status(200).json({Comment:text,commentSentmint:result.sentiment[0],});
           ///////////////////////////////////////
         

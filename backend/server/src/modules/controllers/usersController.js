@@ -13,7 +13,9 @@ const TestNotifs = async (req, res) => {
     try {
     
       console.log("TestNotifs", io);
-      global.io.to("UserIdHere").emit("new-notification", { message: "Hello" });
+
+
+      global.io.to("UserIdHere").emit("new-notification", {message: "You have recieved a new Rating.", time: Date.now().toString() });
       // return res.json({ success: true, msg: "Notification sent" });
     } catch (error) {
 
