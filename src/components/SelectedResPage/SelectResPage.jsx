@@ -110,9 +110,7 @@ export default function SelectResPage() {
                               style={{
                                 marginTop: "-23px",
                               }}
-                            >
-                              {q1.data?.data?.restaurant?.Categoery}
-                            </li>
+                            ></li>
                           </ul>
                         </div>
                         <div

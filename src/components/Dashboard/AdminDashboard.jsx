@@ -3,12 +3,14 @@ import { useSignal } from "@preact/signals-react";
 import { FaRegAngry, FaRegEdit, FaRegMeh, FaRegSmile } from "react-icons/fa";
 import { FcBusinessman } from "react-icons/fc";
 import ResPieChart from "./ResPieChart";
-import ResAreaChart from "./ResAreaChart";
 import { useQuery } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 import AdminAreaChart from "./AdminAreaChart";
 
 export default function AdminDashboard() {
+  const allComments = useSignal(0);
+
+  // Fetch here
   // Get all orders
   const q1 = useQuery({
     queryKey: ["getAllOrders"],
@@ -21,7 +23,7 @@ export default function AdminDashboard() {
       return ret;
     },
   });
-  console.log("getAllOrders", q1.data?.data?.data?.restaurantOrders);
+  // console.log("getAllOrders", q1.data?.data?.data?.restaurantOrders);
 
   // Get All Positive
   const q2 = useQuery({
@@ -78,11 +80,6 @@ export default function AdminDashboard() {
     },
   });
   // console.log("getAllOwner", q5.data?.data?.lengthOfowners);
-
-  const allPositiveComments = useSignal([]);
-  const allNegativeComments = useSignal([]);
-  const allNaturalComments = useSignal([]);
-  const allComments = useSignal([]);
 
   allComments.value =
     q2.data?.data?.lengthOfcomments +

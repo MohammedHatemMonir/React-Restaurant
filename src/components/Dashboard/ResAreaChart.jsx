@@ -14,7 +14,7 @@ export default function ResAreaChart({ ResOrders }) {
   // Transform data to extract date and totalPrice
   const transformedData = ResOrders?.map((item) => ({
     date: new Date(item.dateOrdered).toLocaleDateString(),
-    "Total Price($)": item.totalPrice,
+    "Total Price": item.totalPrice,
   }));
 
   return (
@@ -26,7 +26,7 @@ export default function ResAreaChart({ ResOrders }) {
         <Tooltip />
         <Area
           type="monotone"
-          dataKey="Total Price($)"
+          dataKey="Total Price"
           stroke="#8884d8"
           fill="#8884d8"
         />
