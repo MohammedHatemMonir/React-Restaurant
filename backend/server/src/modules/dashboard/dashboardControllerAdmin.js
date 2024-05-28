@@ -1,5 +1,6 @@
 const { Order } = require("../../database/models/orders");
 const resComments_model = require("../../database/models/resComments_model.js");
+const userModel = require("../../database/models/userModel.js");
 
 const allRestaurantOrders = async (req, res) => {
     try {
@@ -37,7 +38,6 @@ const allRestaurantOrders = async (req, res) => {
 
 const getPositiveComments = async (req, res) => {
     try {
-      const { id } = req.params;
       const positiveCommentsInRes = await resComments_model.aggregate([
         {
           $match: {
@@ -69,7 +69,6 @@ const getPositiveComments = async (req, res) => {
 
   const getNegativeComments = async (req, res) => {
     try {
-      const {id}=req.params
       const NegativeCommentsInRes = await resComments_model.aggregate([
         {
           $match: {
@@ -105,7 +104,6 @@ const getPositiveComments = async (req, res) => {
 
   const getNeutralComments = async (req, res) => {
     try {
-      const {id}=req.params
       const NeutralCommentsInRes = await resComments_model.aggregate([
         {
           $match: {
@@ -137,4 +135,38 @@ const getPositiveComments = async (req, res) => {
       });
     }
   };
-module.exports = { allRestaurantOrders, getPositiveComments, getNegativeComments, getNeutralComments};
+
+  const getAllOwner = async (req, res) => {
+    try {
+      const AllOwner = await userModel.aggregate([
+        {
+          $match: {
+            "role": "owner" 
+          }
+        }
+      ]);
+    //   const NeutralCommentsInMeal = await mealComments.aggregate([
+    //       {
+    //         $match: {
+    //           "commentSentmint.0": "neutral" 
+    //         }
+    //       }
+    //     ]);
+  
+      res.status(200).json({
+      //   success: true,
+      //   message: "Positive comments retrieved successfully.",
+        owners: AllOwner,
+        lengthOfowners: AllOwner.length
+        //+NeutralCommentsInMeal
+      });
+    } catch (error) {
+      // Handle errors
+      console.log("Error fetching positive comments:", error);
+      res.status(500).json({
+        success: false,
+        message: "An error occurred while fetching positive comments."
+      });
+    }
+  };
+module.exports = { allRestaurantOrders, getPositiveComments, getNegativeComments, getNeutralComments, getAllOwner};
