@@ -8,8 +8,9 @@ import Me from "./Me";
 import Gemini from "./Gemini";
 import { useMutation } from "react-query";
 import { apiClient } from "./../../Data/apiclient";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AIMealID } from "../../Globals";
+import ChatLoader from "./../Loaders/ChatLoader";
 
 const LiveChat = () => {
   const {
@@ -19,11 +20,12 @@ const LiveChat = () => {
     reset,
     formState: { errors },
   } = useForm();
-  
-const navigate = useNavigate();
+
+  const navigate = useNavigate();
   const data = useSignal([{}]);
   const inputValue = useSignal("");
   const isChatVisible = useSignal(false);
+  const chatLoader = useSignal(true);
   // const inputRef = useRef(null);
   const query = useSignal("");
   const error = useSignal(null);
@@ -73,16 +75,14 @@ const navigate = useNavigate();
     data.value = updatedData;
 
     console.log("result", result.data);
-    if(result.data.MealID){
+    if (result.data.MealID) {
       AIMealID.value = result.data.MealID;
     }
 
     console.log("AIMealID", AIMealID.value);
-    if(result.data.redirect){
+    if (result.data.redirect) {
       navigate(result.data.redirect);
     }
-
-    // Clear the input field
   };
 
   useEffect(() => {
@@ -157,6 +157,7 @@ const navigate = useNavigate();
                   return <Me message={comment.message} key={index} />;
                 }
               })}
+              {m.isLoading && <ChatLoader />}
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)}>

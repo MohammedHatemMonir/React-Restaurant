@@ -1,0 +1,59 @@
+.chat-loader {
+  .container {
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    flex-direction: column;
+    font-family: Helvetica;
+  }
+
+  .dot-loader {
+    position: relative;
+    background: #dedede;
+    width: 50px;
+    height: 30px;
+    border-radius: 30px;
+
+    @mixin bubble() {
+      position: absolute;
+      top: 16px;
+      width: 8px;
+      height: 8px;
+      border-radius: 8px;
+      background: #aaa;
+      animation: anim 0.5s ease alternate infinite;
+    }
+
+    @keyframes anim {
+      0% {
+        transform: translateY(0);
+      }
+      100% {
+        transform: translateY(-5px);
+      }
+    }
+
+    div {
+      &:nth-child(1) {
+        @include bubble();
+        left: 10px;
+      }
+
+      &:nth-child(2) {
+        @include bubble();
+        left: 22px;
+        animation-delay: 0.2s;
+      }
+
+      &:nth-child(3) {
+        @include bubble();
+        left: 34px;
+        animation-delay: 0.3s;
+      }
+    }
+  }
+}
