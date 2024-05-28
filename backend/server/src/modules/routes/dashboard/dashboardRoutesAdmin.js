@@ -6,4 +6,5 @@ dashboardRouterAdmin.get('/allRestaurantOrders',dashboardControllerAdmin.allRest
 dashboardRouterAdmin.get('/getPositiveComments',dashboardControllerAdmin.getPositiveComments)
 dashboardRouterAdmin.get('/getNegativeComments',dashboardControllerAdmin.getNegativeComments)
 dashboardRouterAdmin.get('/getNeutralComments',dashboardControllerAdmin.getNeutralComments)
+dashboardRouterAdmin.get('/getAllOwner',dashboardControllerAdmin.getAllOwner)
 module.exports=dashboardRouterAdmin
