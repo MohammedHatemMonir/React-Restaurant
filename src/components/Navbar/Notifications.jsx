@@ -3,15 +3,16 @@ import { useEffect } from "react";
 import { Dropdown, Badge } from "react-bootstrap";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { io } from "socket.io-client";
-
+import { useNavigate } from "react-router-dom";
 
 
 const NotificationDropdown = () => {
 
+  const navigate = useNavigate();
   const  notifications = useSignal([
-    {  message: "New comment on your post", time: "2 mins ago" },
-    {  message: "You have a new follower", time: "10 mins ago" },
-    { message: "Your post was liked", time: "1 hour ago" },
+    {  message: "New comment on your post", time: "2 mins ago", link: "" },
+    {  message: "You have a new follower", time: "10 mins ago", link: "" },
+    { message: "Your post was liked", time: "1 hour ago",link: "" },
   ]);
   const socket = io('http://localhost:5001',{withCredentials: true});
 
@@ -52,7 +53,7 @@ const NotificationDropdown = () => {
         ) : (
           notifications.value?.map((notification, index) => (
             <Dropdown.Item key={index}>
-              <div>
+              <div onClick={ () => navigate(notification.link)}>
                 <strong>{notification.message}</strong>
                 <div className="text-muted">
                   <small>{notification.time}</small>

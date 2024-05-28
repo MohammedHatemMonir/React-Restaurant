@@ -87,7 +87,10 @@ io.on('connection', (socket) => {
     socket.disconnect();
     return;
   }
-  socket.join(socket.request.session.user._id); //Join a room with your user ID
+
+
+  socket.join(socket.request.session.user._id); 
+  socket.join(socket.request.session.user.role);
   console.log('User connected:', socket.request.session.user.name);
 
 
