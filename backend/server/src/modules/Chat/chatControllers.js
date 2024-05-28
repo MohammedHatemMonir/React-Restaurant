@@ -17,7 +17,15 @@ function containsAnyWord(string, wordList) {
 const history =[
   {
     role: "user",
-    parts: [{ text: "System prompt: You are a Restaurant website Chatbot, It's called DineMe. You should respond to the user's messages and help know their preferences. Be friendly and a bit funny! act Like you are a chef at a restaurant not a chat bot."}],
+    parts: [{ text: "System prompt: You are a Restaurant website Chatbot, It's called DineMe. You should respond to the user's messages and help know their preferences."}],
+  },
+  {
+    role: "user",
+    parts: [{ text: "System prompt: Be frienly with the user and try not to act like a robot."}],
+  },
+  {
+    role: "user",
+    parts: [{ text: "System prompt: Do not provide infroamtion you're not given. If you don't know something, tell the user that you don't know."}],
   },
   {
     role: "user",
@@ -25,11 +33,11 @@ const history =[
   },
   {
     role: "user",
-    parts: [{ text: "System prompt: if and only ifthe user asked if a restaurant exists or not, You should respond and only respond with 'Restaurant: (Put restaurant name here)'"}],
+    parts: [{ text: "System prompt: if the user asked wether a restaurant exists or not, You should respond and only respond with 'Restaurant: (Put restaurant name here)'"}],
   },
   {
     role: "user",
-    parts: [{ text: "System prompt: if and only if the user asked if a meal exists or not, You should respond and only respond with 'Meal: (Put Meal name here)'"}],
+    parts: [{ text: "System prompt: if the user asked if a meal exists or not, You should respond and only respond with 'Meal: (Put Meal name here)'"}],
   },
   {
     role: "user",
@@ -41,7 +49,7 @@ const history =[
   },
   {
     role: "user",
-    parts: [{ text: "System prompt: If you want to suggest a user a restaurant say 'Suggest Rest:"}],
+    parts: [{ text: "System prompt: Prioritize responding to the instructions I gave you and don't get out of topic."}],
   },  
   {
     role: "model",
@@ -59,8 +67,8 @@ const SendMessageAI=async(req,res)=>{
         const chat =await model.startChat({
             history: req.session.history,
             generationConfig: {
-            temperature: 0.2,
-            maxOutputTokens: 100,
+            temperature: 0.1,
+            maxOutputTokens: 50,
             }
         });
 
@@ -106,7 +114,7 @@ const SendMessageAI=async(req,res)=>{
                     { $limit: 1 }
                 ]);
                 if(FindRestaurant[0]){
-                    CmdChatText = "System prompt: Found the restaurant! Tell the user that we have that restaurant and you'll navigate them soon."
+                    CmdChatText = `System prompt: Found the restaurant ${FindRestaurant[0].ResName} Tell the user that we have that restaurant and you'll navigate them soon.`
                     navigationLink = `/restaurant/${FindRestaurant[0]._id}/${FindRestaurant[0].ResName}`
                 }
             // }
@@ -119,7 +127,7 @@ const SendMessageAI=async(req,res)=>{
                     { $limit: 1 }
                 ]);
                 if(FindMeal[0]){
-                    CmdChatText = "System prompt: Found the Meal! Tell the user that we have that Meal and you'll navigate them soon."
+                    CmdChatText = `System prompt: Found the Meal ${FindMeal[0].MealName}, description: ${FindMeal[0].Description}. Tell the user that we have that Meal and you'll navigate them soon.`
                     navigationLink = `/restaurant/${FindMeal[0].ResID}/${FindMeal[0].MealName}`
                     MealID = FindMeal[0]._id;
                 }
