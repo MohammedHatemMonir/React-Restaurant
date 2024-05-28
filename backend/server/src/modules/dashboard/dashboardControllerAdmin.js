@@ -138,13 +138,15 @@ const getPositiveComments = async (req, res) => {
 
   const getAllOwner = async (req, res) => {
     try {
-      const AllOwner = await userModel.aggregate([
-        {
-          $match: {
-            "role": "owner" 
-          }
-        }
-      ]);
+      const AllOwner =await userModel.find({})
+      const haveresId=AllOwner.filter(owner=>owner.resId)
+      // const AllOwner = await userModel.aggregate([
+      //   {
+      //     $match: {
+      //       "role": "owner" 
+      //     }
+      //   }
+      // ]);
     //   const NeutralCommentsInMeal = await mealComments.aggregate([
     //       {
     //         $match: {
@@ -156,8 +158,8 @@ const getPositiveComments = async (req, res) => {
       res.status(200).json({
       //   success: true,
       //   message: "Positive comments retrieved successfully.",
-        owners: AllOwner,
-        lengthOfowners: AllOwner.length
+        owners: haveresId,
+        lengthOfowners: haveresId.length
         //+NeutralCommentsInMeal
       });
     } catch (error) {
