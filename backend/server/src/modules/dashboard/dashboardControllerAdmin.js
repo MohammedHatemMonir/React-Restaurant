@@ -36,6 +36,66 @@ const allRestaurantOrders = async (req, res) => {
     }
 };
 
+
+
+const getLastTenDaysOrders = async (req, res) => {
+  try {
+      const endDate = new Date();
+      endDate.setHours(23, 59, 59, 999);
+
+      const startDate = new Date();
+      startDate.setDate(startDate.getDate() - 10);
+      startDate.setHours(0, 0, 0, 0);
+
+      console.log("Start Date:", startDate.toISOString()); // Log start date in ISO format
+      console.log("End Date:", endDate.toISOString()); // Log end date in ISO format
+
+      // Query orders within the last 10 days using dateOrdered if createdAt is not present
+      const lastTenDaysOrders = await Order.find({ dateOrdered: { $gte: startDate, $lte: endDate } });
+      console.log("Orders Found:", JSON.stringify(lastTenDaysOrders, null, 2)); // Log the orders found
+
+      if (!lastTenDaysOrders || lastTenDaysOrders.length === 0) {
+          console.log("No orders found in the last 10 days."); // Log if no orders found
+          res.status(404).json({
+              success: false,
+              message: "No orders found in the last 10 days."
+          });
+          return;
+      }
+
+      const restaurantOrders = lastTenDaysOrders.reduce((acc, order) => {
+          const { resId, totalPrice } = order;
+          if (!acc[resId]) {
+              acc[resId] = { orders: [], totalOrders: 0, totalPrice: 0 };
+          }
+          acc[resId].orders.push(order);
+          acc[resId].totalOrders += 1;
+          acc[resId].totalPrice += totalPrice;
+          return acc;
+      }, {});
+
+      // Calculate overall totals
+      const totalOrders = lastTenDaysOrders.length;
+      const totalPrice = lastTenDaysOrders.reduce((sum, order) => sum + order.totalPrice, 0);
+
+      console.log("Restaurant Orders:", JSON.stringify(restaurantOrders, null, 2)); // Log the grouped orders
+
+      res.status(200).json({
+          success: true,
+          data: {
+              restaurantOrders,
+              totalOrders,
+              totalPrice
+          }
+      });
+  } catch (error) {
+      console.log("Error fetching last 10 days restaurant orders:", error);
+      res.status(500).json({
+          success: false,
+          message: "An error occurred while fetching last 10 days restaurant orders."
+      });
+  }
+};
 const getPositiveComments = async (req, res) => {
     try {
       const positiveCommentsInRes = await resComments_model.aggregate([
@@ -171,4 +231,4 @@ const getPositiveComments = async (req, res) => {
       });
     }
   };
-module.exports = { allRestaurantOrders, getPositiveComments, getNegativeComments, getNeutralComments, getAllOwner};
+module.exports = { allRestaurantOrders, getPositiveComments, getNegativeComments, getNeutralComments, getAllOwner, getLastTenDaysOrders};
