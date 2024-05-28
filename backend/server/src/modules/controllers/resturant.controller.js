@@ -106,7 +106,9 @@ const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResB
                         }
                     }
                 );
-
+                global.io.to(newRestaurant.ownerId).emit("new-notification", {message: "Your restaurant has been successfully added to the site", time: Date.now().toString(), link: "/tutorials" });
+                global.io.to(req.session.user._id).emit("new-notification", {message: `The restaurant has been added`, time: Date.now().toString(), link: "/tutorials" });
+                global.io.to("ADMIN").emit("new-notification", {message: `The admin ${req.session.user.name} has added it ${newRestaurant.ResName}`, time: Date.now().toString(), link: "/tutorials" });
                 res.status(200).json(newRestaurantData);
             } catch (error) {
                 console.log('Error creating new restaurant:', error);
@@ -172,7 +174,7 @@ const deleteresturant = async (req, res) => {
         await meal.deleteMany({ ResID: id });
 
         console.log("Deleted meals", MealsToDelete);
-
+        global.io.to("ADMIN").emit("new-notification", {message: `The admin ${req.session.user.name} has deleted the ${restaurantToDelete.ResName}`, time: Date.now().toString(), link: "/tutorials" });
         res.status(200).json({ message: "Restaurant Deleted Successfully" });
     } catch (error) {
         console.log("Error in deleteresturant", error)
@@ -221,7 +223,7 @@ const updateRestaurant = async (req, res) => {
         if (!updatedRestaurant) {
             return res.status(404).json({ error: "Failed to update restaurant" });
         }
-
+        global.io.to(checkOwner.ownerId).emit("new-notification", {message: `Modified successfully`, time: Date.now().toString(), link: "/tutorials" });
         res.status(200).json(updatedRestaurant);
     } catch (error) {
         console.error("Error updating restaurant:", error);

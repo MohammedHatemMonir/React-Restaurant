@@ -66,6 +66,7 @@ const addNewmeal = async (req, res) => {
 
     // Save meal to database
     await newMeal.save();
+    global.io.to(restaurant.ownerId).emit("new-notification", {message: `The meal has been successfully added`, time: Date.now().toString(), link: "/tutorials" });
 
     res.status(201).json(newMeal);
   } catch (err) {
@@ -121,6 +122,8 @@ const updateMeal = async (req, res) => {
     }
 
     const updatedMeal = await meal.findByIdAndUpdate(id, newMealData, { new: true });
+    global.io.to(restaurant.ownerId).emit("new-notification", {message: `Meal updated`, time: Date.now().toString(), link: "/tutorials" });
+
     res.status(200).json(updatedMeal);
 
   } catch (error) {
@@ -152,7 +155,7 @@ const deleteMeal = async (req, res) => {
     if (mealToDelete.MealImg) {
       await uploadImg.deleteImage(mealToDelete.MealImg);
     }
-
+    global.io.to(restaurant.ownerId).emit("new-notification", {message: `Meal deleted`, time: Date.now().toString(), link: "/tutorials" });
   } catch (error) {
     console.error("Error deleting meal:", error);
     res.status(500).json({ error: "Server error while deleting meal" });
@@ -215,6 +218,8 @@ const createOrder = async (req, res) => {   // {ResId:"",meals:[{id:"",quantity:
     console.log("order", order);
     order = await order.save();
 
+    global.io.to(restaurant.ownerId).emit("new-notification", {message: `Someone created an order`, time: Date.now().toString(), link: "/tutorials" });
+    global.io.to(req.session?.user?._id).emit("new-notification", {message: `Your order has been successfully created`, time: Date.now().toString(), link: "/tutorials" });
 
     res.status(201).json({
       success: true,
