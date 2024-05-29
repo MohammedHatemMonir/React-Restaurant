@@ -194,6 +194,7 @@ const SendMessageAI=async(req,res)=>{
         }
     } catch (error) {
         console.log("Error in AI",error)
+        res.send({response: "Error: TIME OUT"})
     }
 }
 

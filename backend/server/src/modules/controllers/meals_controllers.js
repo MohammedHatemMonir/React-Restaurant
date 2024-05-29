@@ -115,14 +115,15 @@ const updateMeal = async (req, res) => {
       return res.status(404).json({ error: "Meal not found" });
     }
 
-    const restaurant = await resturant.findOne({ _id: mealToUpdate.ResID, ownerId: userId });
+    const restaurant = await resturant.findOne({ _id: mealToUpdate.ResID });
     if (!restaurant && req.session.user.role !== "ADMIN") {
       return res.status(403).json({ error: "Not authenticated as owner" });
     }
 
     const newMealData = {};
+    console.log("Meal img",req.body.MealImg)
     if (req.body.MealName) newMealData.MealName = req.body.MealName;
-    if (req.body.MealImg) newMealData.MealImg = await uploadImg(req.body.MealImg);
+    if (req.body.MealImg != null) newMealData.MealImg = await uploadImg(req.body.MealImg);
     if (req.body.Description) newMealData.Description = req.body.Description;
     if (req.body.Price) newMealData.Price = req.body.Price;
 
@@ -131,7 +132,7 @@ const updateMeal = async (req, res) => {
     }
 
     const updatedMeal = await meal.findByIdAndUpdate(id, newMealData, { new: true });
-    global.io.to(restaurant.ownerId.toString()).emit("new-notification", {message: `Meal updated`, time: Date.now().toString(), link: "/tutorials" });
+    global.io.to(restaurant.ownerId?.toString()).emit("new-notification", {message: `Meal updated`, time: Date.now().toString(), link: "/tutorials" });
 
     res.status(200).json(updatedMeal);
 
