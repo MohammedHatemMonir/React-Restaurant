@@ -189,7 +189,7 @@ export default function AddRestaurantButton() {
                 </Form.Group>
               </Col>
               {/* category btn */}
-              <div className="col-sm-12 col-md-3 d-flex justify-content-center align-items-end">
+              <div className="col-sm-12 col-lg-3 d-flex justify-content-center align-items-end">
                 <Button
                   className={`${
                     myCategoryBtn.value
@@ -215,7 +215,7 @@ export default function AddRestaurantButton() {
                 </Col>
               )}
               {showCategoryInput.value && (
-                <div className="form-group col-sm-12 col-md-2 d-flex justify-content-center align-items-end">
+                <div className="form-group col-sm-12 col-lg-2 d-flex justify-content-center align-items-end">
                   <Button className="w-100" onClick={uploadCategory}>
                     Submit
                   </Button>
@@ -253,7 +253,7 @@ export default function AddRestaurantButton() {
                   </span>
                 </Form.Group>
               </Col>
-              <div className="form-group col-md-10">
+              <div className="form-group col-lg-10">
                 <label htmlFor="location">Location</label>
                 <input
                   {...register("location", {
@@ -275,7 +275,7 @@ export default function AddRestaurantButton() {
                 )}
               </div>
               {/* map btn */}
-              <div className="form-group col-sm-12 col-md-2 d-flex justify-content-center align-items-end">
+              <div className="form-group col-sm-12 col-lg-2 d-flex justify-content-center align-items-end">
                 <Button
                   className={`${
                     myMapBtn.value ? "bg-primary  w-100" : " bg-danger w-100"

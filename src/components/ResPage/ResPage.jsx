@@ -14,16 +14,22 @@ import { Col } from "react-bootstrap";
 import { useSignal } from "@preact/signals-react";
 
 export default function ResPage() {
-  const categoryName = useSignal(); // []
+  const categoryName = useSignal([]); // []
   const categoryMap = useSignal([]);
   const filterType = useSignal([]);
 
   const getCategoryName = (e) => {
-    // categoryName.value = [...categoryName.value, e.target.name];
-    categoryName.value = e.target.name;
+    categoryName.value = [...categoryName.value, e.target.name];
+    // categoryName.value = e.target.name;
     console.log("categoryName", categoryName.value);
   };
 
+  const categoryNames = ["Burger", "Pizza", "Dessert"];
+
+  // Using forEach to print each category name on a new line
+  categoryMap.value = categoryNames.forEach((category) => category);
+  categoryMap.value;
+  console.log("categoryMap.value", categoryMap.value);
   const q = useQuery({
     queryKey: ["getAllresturant"],
     cacheTime: 3 * 60000, //3 minutes

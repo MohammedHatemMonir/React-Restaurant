@@ -140,7 +140,7 @@ function EditResModal({ openModal, closeModal, resName, resId }) {
                 </span>
               </Form.Group>
             </Col>
-            <Col sm={3}>
+            <Col sm={6} lg={3}>
               <Form.Group>
                 <Form.Label>New Category</Form.Label>
                 <Form.Select
@@ -160,7 +160,7 @@ function EditResModal({ openModal, closeModal, resName, resId }) {
               </Form.Group>
             </Col>
             {/* category btn */}
-            <div className="col-sm-12 col-md-3 d-flex justify-content-center align-items-end">
+            <div className="col-sm-12 col-lg-3 d-flex justify-content-center align-items-end">
               <Button
                 className={`${
                   myCategoryBtn.value
@@ -173,7 +173,7 @@ function EditResModal({ openModal, closeModal, resName, resId }) {
               </Button>
             </div>
             {showCategoryInput.value && (
-              <Col sm={10} className="d-flex justify-content-center">
+              <Col sm={12}>
                 <Form.Control
                   className="mt-3 mb-3 bg-warning"
                   type="text"
@@ -184,7 +184,7 @@ function EditResModal({ openModal, closeModal, resName, resId }) {
               </Col>
             )}
             {showCategoryInput.value && (
-              <div className="form-group col-sm-12 col-md-2 d-flex justify-content-center align-items-end">
+              <div className="form-group col-sm-12 col-lg-2 d-flex justify-content-center align-items-end">
                 <Button className="w-100" onClick={uploadCategory}>
                   Submit
                 </Button>
@@ -222,7 +222,7 @@ function EditResModal({ openModal, closeModal, resName, resId }) {
                 </span>
               </Form.Group>
             </Col>
-            <div className="form-group col-md-10">
+            <div className="form-group col-lg-10">
               <label htmlFor="location">Location</label>
               <input
                 {...register("location", {
@@ -244,7 +244,7 @@ function EditResModal({ openModal, closeModal, resName, resId }) {
               )}
             </div>
 
-            <div className="form-group col-sm-12 col-md-2 d-flex justify-content-center align-items-end">
+            <div className="form-group col-sm-12 col-lg-2 d-flex justify-content-center align-items-end">
               <Button
                 className={`${
                   myMapBtn.value ? "bg-primary w-100" : " bg-danger w-100"
