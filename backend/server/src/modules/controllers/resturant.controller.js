@@ -40,15 +40,24 @@ const getResturantWithMeals = async (req, res) => {
     }
 }
 
+
 const getAllresturant = async (req, res) => {
     try {
-        const restaurants = await restaurant.find({}).sort({ createdAt: -1 })//.populate('Categoery', 'Categoery -_id');;
+        const restaurants = await restaurant.find({})
+            .populate('categoryId', '_id category')
+            .sort({ createdAt: -1 });
+
+        console.log(restaurants);
         res.status(200).json(restaurants);
     } catch (error) {
-        res.status(500).json({ message: "Error retrieving restaurants" });
+        res.status(500).json({ message: "Error retrieving restaurants", error: error.message });
         console.error('Error fetching restaurants:', error);
     }
 }
+
+//module.exports = { getAllresturant };
+
+
 
 const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResBanner,location, ownerId} Remove validation of .png,add banner to database ,Upload image from request body
     let ResImg;
@@ -88,7 +97,7 @@ const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResB
                     ResName: req.body.ResName,
                     ResImg: ResImg,
                     ResBanner: ResBanner,
-                    Categoery: category._id,
+                    categoryId: category._id,
                     location: req.body.location,
                     rating: rating,
                     comment_num: comment_num,
@@ -203,7 +212,7 @@ const updateRestaurant = async (req, res) => {
             NewResData.ResName = req.body.ResName;
         }
         if (req.body.Categoery) {
-            NewResData.Categoery = req.body.Categoery;
+            NewResData.categoryId = req.body.Categoery;
         }
         if (req.body.location) {
             NewResData.location = req.body.location;
