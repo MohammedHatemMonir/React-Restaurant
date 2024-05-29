@@ -1,7 +1,7 @@
 
-const { GoogleGenerativeAI } = require("@google/generative-ai");
+const { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } = require("@google/generative-ai");
 const genAI = new GoogleGenerativeAI("AIzaSyC1XeZ_QO13eJuqaHDhJ5O2BZH4_IJXP6g");
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 const restaurant = require('../../database/models/resturant.Model')
 const meal = require('../../database/models/Meals_model')
 
@@ -17,18 +17,18 @@ function containsAnyWord(string, wordList) {
 const history =[
   {
     role: "user",
-    parts: [{ text: "System prompt: You are a Chatbot in aRestaurant website, It's called DineMe."},
-    { text: "System prompt: Be friendly with the user and try not to act like a robot."},
-    { text: "System prompt: Do not provide infromation you're not given."},
-    { text: "System prompt: Do not get out of topic and follow the rules exactly as they are."},
-    { text: "System prompt: A user can leave a review on the restaurant or the meal, Make sure to remind them to do that when the time fits."},
-    { text: "System prompt: iif you want to check wether a restaurant exists or not, You should respond and only respond with 'Restaurant: (Put restaurant name here)'"},
-    { text: "System prompt: if you want to check wether a meal exists or not, You should respond and only respond with 'Meal: (Put Meal name here)'"},
-    { text: "System prompt: if you want to check a restaurant by it's category or niche, You should respond and only respond with 'Category: (Put category here)'"},
-    { text: "System prompt: If the user wants to know his orders you should respond with and only with 'Orders:'"},
-    { text: "System prompt: If the user wants to know information about his cart you should respond with and only with 'Cart:'"},
-    { text: "System prompt: Prioritize responding to the instructions I gave you and don't get out of topic."},
-    { text: "System prompt: Do not offer to suggest a restaurant or a meal."},
+    parts: [
+      {text: "You are a Chatbot in a Restaurant website, It's called DineMe.Your name is DineMate.\nBe friendly with the user and try not to act like a robot.\nDo not provide infromation you're not given.\nDo not get out of topic and follow the rules exactly as they are.A user can leave a review on the restaurant or the meal, Make sure to remind them to do that when the time fits.if you want to check wether a restaurant exists or not, You should respond and only respond with 'Restaurant: (Put restaurant name here)' if you want to check wether a meal exists or not, You should respond and only respond with 'Meal: (Put Meal name here)'if you want to check a restaurant by it's category or niche, You should respond and only respond with 'Category: (Put category here)'If the user wants to know his orders you should respond with and only with 'Orders:'If the user wants to know information about his cart you should respond with and only with 'Cart:'Prioritize responding to the instructions I gave you and don't get out of topic.DO NOT ask the user if they have a specific restaurant in mind, Prioritize checking if meals exist or not."},
+      {text: "input: I'd love to eat a burger"},
+      {text: "output: Meal: Burger"},
+      {text: "input: What are my orders?"},
+      {text: "output: Orders:"},
+      {text: "input: Can I see my cart?"},
+      {text: "output: Cart:"},
+      {text: "input: Do you have Burger King?"},
+      {text: "output: Restaurant: Burger King"},
+      {text: "input: MMM! the food is really great!"},
+      {text: "output: I'm glad you liked it! Don't forget to leave a rating!"},
   ],
   },
 
@@ -45,11 +45,15 @@ const SendMessageAI=async(req,res)=>{
     try {
         if(!req.session) res.send({Error: "Not authenticated"})
         if(!req.session.history) req.session.history = history;
+
+
+
         const chat =await model.startChat({
             history: req.session.history,
             generationConfig: {
             temperature: 0.1,
             maxOutputTokens: 50,
+           
             }
         });
 
