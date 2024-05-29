@@ -32,6 +32,11 @@ function EditMealModal({ openModal, closeModal, mealName, mealId }) {
 
   const onSubmit = async (data) => {
     // console.log("new data", data); // this new data from registers in useForm hook
+
+      let MealImg = null;
+        if (data.MealImg[0] != null) MealImg = await convertBase64(data.MealImg[0]);
+        data.MealImg = MealImg;
+console.log("Data To Send", data);
     const result = await m.mutateAsync(data);
     closeModal();
     queryClient.invalidateQueries({ mutationKey: ["editMeal"] });
