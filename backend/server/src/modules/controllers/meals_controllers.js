@@ -66,8 +66,10 @@ const addNewmeal = async (req, res) => {
 
     let savedMeal = await newMeal.save();
 
-    const orders = await Order.find({ resId: Resid }).select('user');
+    const orders = await Order.find({ resId: Resid }).select('user'); 
+    console.log("darsh orders",orders.user)
     const users = orders.map(order => order.user.toString());
+    console.log("darsh users", users)
     const uniqueUsers = [...new Set(users)];
 
     console.log(`Notifying ${uniqueUsers.length} users about the new meal`);

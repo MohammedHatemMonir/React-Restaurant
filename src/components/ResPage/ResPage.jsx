@@ -14,6 +14,7 @@ import { Col } from "react-bootstrap";
 import { useSignal } from "@preact/signals-react";
 
 export default function ResPage() {
+  const categoryName = useSignal();
   const filterType = useSignal([]);
 
   const q = useQuery({
@@ -22,10 +23,8 @@ export default function ResPage() {
     enabled: true,
     queryFn: async () => {
       let url = "/getAllresturant";
-
       var ret = await apiClient.get(url);
       console.log("restaurants", ret.data);
-
       return ret;
     },
   });
@@ -135,24 +134,6 @@ export default function ResPage() {
             </Row>
           </Container>
         </div>
-
-        {/* <div style={{ transform: "scale(0.90)" }}>
-          <Row className="m-0 p-0">
-            {!q.isLoading &&
-              Array.isArray(q.data?.data) &&
-              q.data.data.map((data, index) => (
-                <Col sm={12} md={4} key={index} className="m-0 p-0">
-                  <ResCard
-                    id={data._id}
-                    name={data.ResName}
-                    ResImg={data.ResImg}
-                    MealImg={data.MealImg}
-                    stars1={data.rating}
-                  />
-                </Col>
-              ))}
-          </Row>
-        </div> */}
         <Footer />
       </section>
     );

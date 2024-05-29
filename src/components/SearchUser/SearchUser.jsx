@@ -1,7 +1,7 @@
 import { Col, Form } from "react-bootstrap";
 import { useMutation } from "react-query";
 import { apiClient } from "../../Data/apiclient";
-import { Link } from "react-router-dom";
+import { Spinner } from "react-bootstrap";
 import { useSignal } from "@preact/signals-react";
 
 const SearchUser = ({ setValue }) => {
@@ -50,30 +50,37 @@ const SearchUser = ({ setValue }) => {
           value={searchTerm.value}
           onChange={handleSearchChange}
         />
-
-        <div className="dropdown-content">
-          {searchResults.value.map((user, index) => (
-            <div
-              key={index}
-              className="d-block text-decoration-none"
-              style={{
-                cursor: "pointer",
-                padding: "10px",
-                color: "#fff",
-                backgroundColor: "#007bff",
-                borderRadius: "5px",
-                transition: "background-color 0.3s ease",
-                boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
-              }}
-              onClick={() => {
-                selectOwner(user._id);
-                searchTerm.value = user.name;
-              }}
-            >
-              {user.name}
-            </div>
-          ))}
-        </div>
+        {searchUsers.isLoading ? (
+          <div className="loading-spinner">
+            <Spinner animation="border" role="status">
+              <span className="sr-only">Loading...</span>
+            </Spinner>
+          </div>
+        ) : (
+          <div className="dropdown-content">
+            {searchResults.value.map((user, index) => (
+              <div
+                key={index}
+                className="d-block text-decoration-none"
+                style={{
+                  cursor: "pointer",
+                  padding: "10px",
+                  color: "#fff",
+                  backgroundColor: "#007bff",
+                  borderRadius: "5px",
+                  transition: "background-color 0.3s ease",
+                  boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
+                }}
+                onClick={() => {
+                  selectOwner(user._id);
+                  searchTerm.value = user.name;
+                }}
+              >
+                {user.name}
+              </div>
+            ))}
+          </div>
+        )}
       </Form.Group>
     </Col>
   );
