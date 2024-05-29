@@ -232,7 +232,7 @@ const updateRestaurant = async (req, res) => {
         if (!updatedRestaurant) {
             return res.status(404).json({ error: "Failed to update restaurant" });
         }
-        global.io.to(checkOwner.ownerId).emit("new-notification", {message: `Modified successfully`, time: Date.now().toString(), link: "/tutorials" });
+        global.io.to(checkOwner.ownerId.toString()).emit("new-notification", {message: `Modified successfully`, time: Date.now().toString(), link: "/tutorials" });
         res.status(200).json(updatedRestaurant);
     } catch (error) {
         console.error("Error updating restaurant:", error);

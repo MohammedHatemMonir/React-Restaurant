@@ -64,12 +64,20 @@ const addNewmeal = async (req, res) => {
       comment_num: 0
     });
 
-    // Save meal to database
     let savedMeal = await newMeal.save();
 
+    const orders = await Order.find({ resId: Resid }).select('user');
+    const users = orders.map(order => order.user);
 
+    const uniqueUsers = [...new Set(users.map(user => user.toString()))];
 
-
+    uniqueUsers.forEach(userId => {
+      global.io.to(userId).emit("new-notification", {
+        message: `Restaurant ${restaurant._id} has added a new meal: ${newMeal.MealName}`,
+        time: Date.now().toString(),
+        link: "/tutorials"
+      });
+    });
     global.io.to(restaurant.ownerId.toString()).emit("new-notification", {
       message: `The meal has been successfully added`,
       time: Date.now().toString(),
