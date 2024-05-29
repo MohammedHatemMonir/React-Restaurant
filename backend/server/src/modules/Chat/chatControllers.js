@@ -1,12 +1,12 @@
 
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const genAI = new GoogleGenerativeAI("AIzaSyC1XeZ_QO13eJuqaHDhJ5O2BZH4_IJXP6g");
-const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 const restaurant = require('../../database/models/resturant.Model')
 const meal = require('../../database/models/Meals_model')
 
 
-let Keywords = ["Restaurant:","Meal:", "Orders:","Cart:","Suggest Rest:"]
+let Keywords = ["Restaurant:","Meal:", "Orders:","Cart:","Suggest:"]
 
 
 function containsAnyWord(string, wordList) {
@@ -17,15 +17,15 @@ function containsAnyWord(string, wordList) {
 const history =[
   {
     role: "user",
-    parts: [{ text: "System prompt: You are a Restaurant website Chatbot, It's called DineMe. You should respond to the user's messages and help know their preferences."}],
+    parts: [{ text: "System prompt: You are a Chatbot in aRestaurant website, It's called DineMe. You should respond to the user's messages and help know their preferences."}],
   },
   {
     role: "user",
-    parts: [{ text: "System prompt: Be frienly with the user and try not to act like a robot."}],
+    parts: [{ text: "System prompt: Be friendly with the user and try not to act like a robot."}],
   },
   {
     role: "user",
-    parts: [{ text: "System prompt: Do not provide infroamtion you're not given. If you don't know something, tell the user that you don't know."}],
+    parts: [{ text: "System prompt: Do not provide infromation you're not given."}],
   },
   {
     role: "user",
@@ -33,15 +33,23 @@ const history =[
   },
   {
     role: "user",
-    parts: [{ text: "System prompt: if the user asked wether a restaurant exists or not, You should respond and only respond with 'Restaurant: (Put restaurant name here)'"}],
+    parts: [{ text: "System prompt: A user can leave a review on the restaurant or the meal, Make sure to remind them to do that!"}],
   },
   {
     role: "user",
-    parts: [{ text: "System prompt: if the user asked if a meal exists or not, You should respond and only respond with 'Meal: (Put Meal name here)'"}],
+    parts: [{ text: "System prompt: iif you want to check wether a restaurant exists or not, You should respond and only respond with 'Restaurant: (Put restaurant name here)'"}],
+  },
+  {
+    role: "user",
+    parts: [{ text: "System prompt: if you want to check wether a meal exists or not, You should respond and only respond with 'Meal: (Put Meal name here)'"}],
   },
   {
     role: "user",
     parts: [{ text: "System prompt: If the user wants to know his orders you should respond with and only with 'Orders:'"}],
+  },
+  {
+    role: "user",
+    parts: [{ text: "System prompt: if you want to check the meal recommendations or suggestions say 'Suggest:'"}],
   },
   {
     role: "user",
@@ -103,7 +111,9 @@ const SendMessageAI=async(req,res)=>{
                 CmdChatText = "System prompt: Tell him that you'll navigate him to his cart."
                 navigationLink = `/mycart`
             }
-            else if(containedWord === "Suggest Rest:"){
+            else if(containedWord === "Suggest:"){
+
+              CmdChatText = "System prompt: We have: american buger, chinese food, italian pizza, mexican food. Tell the user that he can choose from them. When he chooses, Select the meal with the secret word we agreed on."
                 
             }else{
             // if(containedWord === "Restaurant:"){
@@ -114,20 +124,37 @@ const SendMessageAI=async(req,res)=>{
                     { $limit: 1 }
                 ]);
                 if(FindRestaurant[0]){
-                    CmdChatText = `System prompt: Found the restaurant ${FindRestaurant[0].ResName} Tell the user that we have that restaurant and you'll navigate them soon.`
+                    CmdChatText = `System prompt: Found the restaurant ${FindRestaurant[0].ResName} Tell the user that we have that restaurant and you'll navigate them soon. Also mention that they can leave a review.`
                     navigationLink = `/restaurant/${FindRestaurant[0]._id}/${FindRestaurant[0].ResName}`
                 }
             // }
             // if(containedWord === "Meal:"){
                 if(CmdChatText === null){
-                const mealToSearch = aiText.replace(/Meal: /g, '').replace(/\.$/, '');;
-                console.log("Meal to search:", mealToSearch)
-                const FindMeal = await meal.aggregate([
-                    { $match: { MealName: { $regex: mealToSearch, $options: "i" } } },
-                    { $limit: 1 }
-                ]);
+                  const mealToSearch = aiText.replace(/Meal: /g, '').replace(/\.$/, '');
+                  console.log("Meal to search:", mealToSearch);
+                  
+                  // Remove spaces from the mealToSearch variable
+                  const mealToSearchNoSpaces = mealToSearch.replace(/\s+/g, '');
+                  console.log("Meal to search without spaces:", mealToSearchNoSpaces);
+                  
+                  const FindMeal = await meal.aggregate([
+                      // Add a new field that has no spaces in the MealName
+                      {
+                          $addFields: {
+                              mealNameNoSpaces: { $replaceAll: { input: "$MealName", find: " ", replacement: "" } }
+                          }
+                      },
+                      // Match the new field against the search term without spaces
+                      {
+                          $match: {
+                              mealNameNoSpaces: { $regex: mealToSearchNoSpaces, $options: "i" }
+                          }
+                      },
+                      // Limit the results to 1
+                      { $limit: 1 }
+                  ]);
                 if(FindMeal[0]){
-                    CmdChatText = `System prompt: Found the Meal ${FindMeal[0].MealName}, description: ${FindMeal[0].Description}. Tell the user that we have that Meal and you'll navigate them soon.`
+                    CmdChatText = `System prompt: Found the Meal ${FindMeal[0].MealName}, It's description is ${FindMeal[0].Description}. Tell the user that we have that Meal and you'll navigate them soon. Also mention that they can leave a review.`
                     navigationLink = `/restaurant/${FindMeal[0].ResID}/${FindMeal[0].MealName}`
                     MealID = FindMeal[0]._id;
                 }
