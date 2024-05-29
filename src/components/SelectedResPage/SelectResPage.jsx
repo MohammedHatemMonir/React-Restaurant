@@ -34,179 +34,182 @@ export default function SelectResPage() {
   console.log("query data", q1.data?.data.restaurant.ownerId);
 
   return (
-    <>
-      <div className="select-res-page">
-        <div id="page-content restaurant-container" className="page-content">
-          <div className="restaurant-cover active-on-menu-tab  menu-tab-activated">
-            {/* Banner Img */}
-            <img
-              loading="lazy"
-              src={q1.data?.data?.restaurant?.ResBanner}
-              alt="cover photo"
-            />
-          </div>
+    !q1.isLoading && (
+      <>
+        <div className="select-res-page">
+          <div id="page-content restaurant-container" className="page-content">
+            <div className="restaurant-cover active-on-menu-tab  menu-tab-activated">
+              {/* Banner Img */}
+              <img
+                loading="lazy"
+                src={q1.data?.data?.restaurant?.ResBanner}
+                alt="cover photo"
+              />
+            </div>
 
-          <div className="container">
-            <Row className="section separator restaurant-details-section active-on-menu-tab  menu-tab-activated">
-              <Col sm={12} className="section-header">
-                <div className="restaurant-image-container">
-                  <div className="restaurant-image image-ratio ratio-square">
-                    {/* Res Image */}
-                    <img
-                      loading="lazy"
-                      src={q1.data?.data?.restaurant?.ResImg || DineMeLogo}
-                      alt={q1.data?.data?.restaurant?.ResName}
-                      className="v-center"
-                    />
+            <div className="container">
+              <Row className="section separator restaurant-details-section active-on-menu-tab  menu-tab-activated">
+                <Col sm={12} className="section-header">
+                  <div className="restaurant-image-container">
+                    <div className="restaurant-image image-ratio ratio-square">
+                      {/* Res Image */}
+                      <img
+                        loading="lazy"
+                        src={q1.data?.data?.restaurant?.ResImg || DineMeLogo}
+                        alt={q1.data?.data?.restaurant?.ResName}
+                        className="v-center"
+                      />
+                    </div>
                   </div>
-                </div>
 
-                <div className="resturant-info-container">
-                  <div className="header-content-container">
-                    <div className="content">
-                      <div className="resturant-name">
-                        <h1 className="title">
-                          {q1.data?.data?.restaurant?.ResName}
+                  <div className="resturant-info-container">
+                    <div className="header-content-container">
+                      <div className="content">
+                        <div className="resturant-name">
+                          <h1 className="title">
+                            {q1.data?.data?.restaurant?.ResName}
 
-                          {(UserData.value.role === "ADMIN" ||
-                            (UserData.value.role === "owner" &&
-                              UserData.value.id ===
-                                q1.data?.data?.restaurant?.ownerId)) && (
-                            <Link
-                              className="badge badge-primary"
-                              style={{ color: "white", fontSize: "0.45em" }}
-                              to={`/RestaurantDashboard/${resID}`}
-                            >
-                              Statistics
-                            </Link>
-                          )}
-                        </h1>
-                      </div>
-                      <div className="subheader">
-                        <div className="tags-rate-container">
-                          <div className="rate-container">
-                            <div className="rest-rate">
-                              <div
-                                className="vue-star-rating"
-                                style={{
-                                  transform: "scale(0.5)",
-                                  marginLeft: "-45px",
-                                  marginBottom: "35px",
-                                  // marginTop: "-10px",
-                                }}
+                            {(UserData.value.role === "ADMIN" ||
+                              (UserData.value.role === "owner" &&
+                                UserData.value.id ===
+                                  q1.data?.data?.restaurant?.ownerId)) && (
+                              <Link
+                                className="badge badge-primary"
+                                style={{ color: "white", fontSize: "0.45em" }}
+                                to={`/RestaurantDashboard/${resID}`}
                               >
-                                <Stars
-                                  stars1={q1.data?.data?.restaurant?.rating}
-                                />
+                                Statistics
+                              </Link>
+                            )}
+                          </h1>
+                        </div>
+                        <div className="subheader">
+                          <div className="tags-rate-container">
+                            <div className="rate-container">
+                              <div className="rest-rate">
+                                <div
+                                  className="vue-star-rating"
+                                  style={{
+                                    transform: "scale(0.5)",
+                                    marginLeft: "-45px",
+                                    marginBottom: "35px",
+                                    // marginTop: "-10px",
+                                  }}
+                                >
+                                  <Stars
+                                    stars1={q1.data?.data?.restaurant?.rating}
+                                  />
+                                </div>
                               </div>
                             </div>
+                            <ul
+                              className="cuisines-list h-dots-list"
+                              style={{ marginTop: "8px" }}
+                            >
+                              <li
+                                className="list-item"
+                                style={{
+                                  marginTop: "-23px",
+                                }}
+                              ></li>
+                            </ul>
                           </div>
-                          <ul
-                            className="cuisines-list h-dots-list"
-                            style={{ marginTop: "8px" }}
+                          <div
+                            className="info-item"
+                            style={{ margin: "-10px -5px" }}
                           >
-                            <li
-                              className="list-item"
-                              style={{
-                                marginTop: "-23px",
-                              }}
-                            ></li>
-                          </ul>
-                        </div>
-                        <div
-                          className="info-item"
-                          style={{ margin: "-10px -5px" }}
-                        >
-                          <span className="info-icon">
-                            <svg viewBox="0 0 15 20">
-                              <LocationDotIcon />
-                            </svg>
-                          </span>
-                          <p className="info-value">
-                            {q1.data?.data?.restaurant?.location}
-                          </p>
+                            <span className="info-icon">
+                              <svg viewBox="0 0 15 20">
+                                <LocationDotIcon />
+                              </svg>
+                            </span>
+                            <p className="info-value">
+                              {q1.data?.data?.restaurant?.location}
+                            </p>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
+                </Col>
+              </Row>
+
+              {/* Hema Here */}
+
+              {(UserData.value.role === "ADMIN" ||
+                (UserData.value.role === "owner" &&
+                  UserData.value.id ===
+                    q1.data?.data?.restaurant?.ownerId)) && (
+                <div className="mt-4">
+                  <AddMealButton Resid={resID} />
                 </div>
-              </Col>
-            </Row>
+              )}
 
-            {/* Hema Here */}
+              {/* <div style={{ transform: "scale(0.85)" }}>
+                <MealFilters />
+              </div> */}
 
-            {(UserData.value.role === "ADMIN" ||
-              (UserData.value.role === "owner" &&
-                UserData.value.id === q1.data?.data?.restaurant?.ownerId)) && (
-              <div className="mt-4">
-                <AddMealButton Resid={resID} />
+              <div>
+                <Row>
+                  {!q1.isLoading &&
+                    q1.data?.data?.meals?.map((item, index) => (
+                      <Col
+                        sm={12}
+                        md={6}
+                        lg={4}
+                        xl={3}
+                        key={index + item}
+                        style={{ transform: "scale(0.90)" }}
+                      >
+                        <MealCard
+                          key={index}
+                          id={item._id}
+                          name={item.MealName}
+                          price={item.Price}
+                          desc={item.Description}
+                          rating={item.rating}
+                          mealImg={item.MealImg}
+                          resID={resID}
+                          resName={resName}
+                          ownerID={q1.data?.data?.restaurant?.ownerId}
+                          MealComments={item.MealComments}
+                        />
+                      </Col>
+                    ))}
+                </Row>
               </div>
-            )}
+              {/* style={{ transform: "scale(0.9)" }} */}
+              <div>
+                <CommentBox query={q1} resID={resID} />
+              </div>
 
-            <div style={{ transform: "scale(0.85)" }}>
-              <MealFilters />
-            </div>
-
-            <div>
               <Row>
                 {!q1.isLoading &&
-                  q1.data?.data?.meals?.map((item, index) => (
-                    <Col
-                      sm={12}
-                      md={6}
-                      lg={4}
-                      xl={3}
-                      key={index + item}
-                      style={{ transform: "scale(0.90)" }}
-                    >
-                      <MealCard
-                        key={index}
-                        id={item._id}
-                        name={item.MealName}
-                        price={item.Price}
-                        desc={item.Description}
-                        rating={item.rating}
-                        mealImg={item.MealImg}
-                        resID={resID}
-                        resName={resName}
-                        ownerID={q1.data?.data?.restaurant?.ownerId}
-                        MealComments={item.MealComments}
+                  q1.data?.data?.resComments?.map((item, index) => (
+                    <Col sm={12} md={6} lg={4} xl={3} key={index}>
+                      <ReviewsCard
+                        key={item.id}
+                        name={item.user.name}
+                        stars={item.commentSentmint[2] * 5}
+                        emotion={item.commentSentmint[1]}
+                        comment={item.Comment}
+                        date={item.createdAt}
+                        image={
+                          item.user.userImg ||
+                          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8PyKYrBKAWWy6YCbQzWQcwIRqH8wYMPluIZiMpV1w0NYSbocTZz0ICWFkLcXhaMyvCwQ&usqp=CAU"
+                        }
                       />
                     </Col>
                   ))}
               </Row>
             </div>
-            {/* style={{ transform: "scale(0.9)" }} */}
-            <div>
-              <CommentBox query={q1} resID={resID} />
-            </div>
-
-            <Row>
-              {!q1.isLoading &&
-                q1.data?.data?.resComments?.map((item, index) => (
-                  <Col sm={12} md={6} lg={4} xl={3} key={index}>
-                    <ReviewsCard
-                      key={item.id}
-                      name={item.user.name}
-                      stars={item.commentSentmint[2] * 5}
-                      emotion={item.commentSentmint[1]}
-                      comment={item.Comment}
-                      date={item.createdAt}
-                      image={
-                        item.user.userImg ||
-                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8PyKYrBKAWWy6YCbQzWQcwIRqH8wYMPluIZiMpV1w0NYSbocTZz0ICWFkLcXhaMyvCwQ&usqp=CAU"
-                      }
-                    />
-                  </Col>
-                ))}
-            </Row>
           </div>
         </div>
-      </div>
-      <div style={{ transform: "scale(0.90)" }}>
-        <ChooseUs resName={q1.data?.data?.restaurant?.ResName} />
-      </div>
-      <Footer />
-    </>
+        <div style={{ transform: "scale(0.90)" }}>
+          <ChooseUs resName={q1.data?.data?.restaurant?.ResName} />
+        </div>
+        <Footer />
+      </>
+    )
   );
 }

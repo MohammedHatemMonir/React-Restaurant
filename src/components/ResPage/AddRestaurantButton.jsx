@@ -60,7 +60,7 @@ export default function AddRestaurantButton() {
       return result;
     },
   });
-  console.log("getCategoryiesQuery", getCategoryiesQuery.data?.data);
+  console.log("getAllCategory", getCategoryiesQuery.data?.data);
 
   // Add new category in db
   const addCategory = useMutation({
@@ -75,6 +75,7 @@ export default function AddRestaurantButton() {
       return await apiClient.post(url, params);
     },
   });
+  console.log("addCategory", addCategory.data?.data);
 
   const uploadCategory = async function () {
     const result = await addCategory.mutateAsync({
@@ -101,9 +102,9 @@ export default function AddRestaurantButton() {
       return await apiClient.post(url, params);
     },
   });
-
+  console.log("add new res", m.data?.data);
   async function submit(data) {
-    // console.log("submit! ADD RESTAURANT", data);
+    console.log("submit! ADD RESTAURANT", data);
     let resImg64;
     let resBanner64;
     data.location = currentLocation.value;
@@ -164,7 +165,7 @@ export default function AddRestaurantButton() {
                   <Form.Label>Category</Form.Label>
                   <Form.Select
                     // value={null}
-                    {...register("Category", {
+                    {...register("category", {
                       required: "Please select a category",
                     })}
                   >
@@ -183,7 +184,7 @@ export default function AddRestaurantButton() {
                       )}
                   </Form.Select>
                   <span className="error" style={{ color: "red" }}>
-                    {errors["Category"] && errors["Category"].message}
+                    {errors["category"] && errors["category"].message}
                   </span>
                 </Form.Group>
               </Col>
