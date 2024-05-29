@@ -1,7 +1,7 @@
 
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const genAI = new GoogleGenerativeAI("AIzaSyC1XeZ_QO13eJuqaHDhJ5O2BZH4_IJXP6g");
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
 const restaurant = require('../../database/models/resturant.Model')
 const meal = require('../../database/models/Meals_model')
 
@@ -17,51 +17,24 @@ function containsAnyWord(string, wordList) {
 const history =[
   {
     role: "user",
-    parts: [{ text: "System prompt: You are a Chatbot in aRestaurant website, It's called DineMe. You should respond to the user's messages and help know their preferences."}],
+    parts: [{ text: "System prompt: You are a Chatbot in aRestaurant website, It's called DineMe."},
+    { text: "System prompt: Be friendly with the user and try not to act like a robot."},
+    { text: "System prompt: Do not provide infromation you're not given."},
+    { text: "System prompt: Do not get out of topic and follow the rules exactly as they are."},
+    { text: "System prompt: A user can leave a review on the restaurant or the meal, Make sure to remind them to do that when the time fits."},
+    { text: "System prompt: iif you want to check wether a restaurant exists or not, You should respond and only respond with 'Restaurant: (Put restaurant name here)'"},
+    { text: "System prompt: if you want to check wether a meal exists or not, You should respond and only respond with 'Meal: (Put Meal name here)'"},
+    { text: "System prompt: if you want to check a restaurant by it's category or niche, You should respond and only respond with 'Category: (Put category here)'"},
+    { text: "System prompt: If the user wants to know his orders you should respond with and only with 'Orders:'"},
+    { text: "System prompt: If the user wants to know information about his cart you should respond with and only with 'Cart:'"},
+    { text: "System prompt: Prioritize responding to the instructions I gave you and don't get out of topic."},
+    { text: "System prompt: Do not offer to suggest a restaurant or a meal."},
+  ],
   },
-  {
-    role: "user",
-    parts: [{ text: "System prompt: Be friendly with the user and try not to act like a robot."}],
-  },
-  {
-    role: "user",
-    parts: [{ text: "System prompt: Do not provide infromation you're not given."}],
-  },
-  {
-    role: "user",
-    parts: [{ text: "System prompt: Do not get out of topic and follow the rules exactly as they are."}],
-  },
-  {
-    role: "user",
-    parts: [{ text: "System prompt: A user can leave a review on the restaurant or the meal, Make sure to remind them to do that!"}],
-  },
-  {
-    role: "user",
-    parts: [{ text: "System prompt: iif you want to check wether a restaurant exists or not, You should respond and only respond with 'Restaurant: (Put restaurant name here)'"}],
-  },
-  {
-    role: "user",
-    parts: [{ text: "System prompt: if you want to check wether a meal exists or not, You should respond and only respond with 'Meal: (Put Meal name here)'"}],
-  },
-  {
-    role: "user",
-    parts: [{ text: "System prompt: If the user wants to know his orders you should respond with and only with 'Orders:'"}],
-  },
-  {
-    role: "user",
-    parts: [{ text: "System prompt: if you want to check the meal recommendations or suggestions say 'Suggest:'"}],
-  },
-  {
-    role: "user",
-    parts: [{ text: "System prompt: If the user wants to know information about his cart you should respond with and only with 'Cart:'"}],
-  },
-  {
-    role: "user",
-    parts: [{ text: "System prompt: Prioritize responding to the instructions I gave you and don't get out of topic."}],
-  },  
+
   {
     role: "model",
-    parts: [{ text: "Understood."}],
+    parts: [{ text: "I Understood. I'll do exactly as I'm ordered to do."}],
   },
 ]
 
@@ -113,7 +86,7 @@ const SendMessageAI=async(req,res)=>{
             }
             else if(containedWord === "Suggest:"){
 
-              CmdChatText = "System prompt: We have: american buger, chinese food, italian pizza, mexican food. Tell the user that he can choose from them. When he chooses, Select the meal with the secret word we agreed on."
+              CmdChatText = "System prompt: We have: american buger, chinese food, italian pizza, mexican food. Tell the user that he can choose from them."
                 
             }else{
             // if(containedWord === "Restaurant:"){
