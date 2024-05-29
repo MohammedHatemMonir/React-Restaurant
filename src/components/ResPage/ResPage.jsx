@@ -14,8 +14,15 @@ import { Col } from "react-bootstrap";
 import { useSignal } from "@preact/signals-react";
 
 export default function ResPage() {
-  const categoryName = useSignal();
+  const categoryName = useSignal(); // []
+  const categoryMap = useSignal([]);
   const filterType = useSignal([]);
+
+  const getCategoryName = (e) => {
+    // categoryName.value = [...categoryName.value, e.target.name];
+    categoryName.value = e.target.name;
+    console.log("categoryName", categoryName.value);
+  };
 
   const q = useQuery({
     queryKey: ["getAllresturant"],
@@ -88,6 +95,7 @@ export default function ResPage() {
                           <div key={`${index}+${category._id}`}>
                             <label className="sidebar-label-container">
                               <input
+                                onChange={getCategoryName}
                                 onClick={() => {
                                   setFilter({ filterString: category._id });
                                 }}
@@ -105,8 +113,38 @@ export default function ResPage() {
                 </div>
                 {/* <ResFilters /> */}
               </Col>
-              {/* ResCards */}
+              {/* ResCards based on category name */}
               <Col sm={12} md={10}>
+                <Row>
+                  {!q.isLoading &&
+                    Array.isArray(q.data?.data) &&
+                    q.data.data.map(
+                      (data, index) =>
+                        categoryName.value == data.categoryId.category && (
+                          <Col
+                            key={index}
+                            sm={12}
+                            md={6}
+                            lg={4}
+                            className="p-0 m-0"
+                          >
+                            <ResCard
+                              id={data._id}
+                              name={data.ResName}
+                              ResImg={data.ResImg}
+                              MealImg={data.MealImg}
+                              stars1={data.rating}
+                              category={data.categoryId.category}
+                              ownerId={data.ownerId}
+                            />
+                          </Col>
+                        )
+                    )}
+                </Row>
+              </Col>
+
+              {/* All */}
+              {/* <Col sm={12} md={10}>
                 <Row>
                   {!q.isLoading &&
                     Array.isArray(q.data?.data) &&
@@ -130,7 +168,7 @@ export default function ResPage() {
                       </Col>
                     ))}
                 </Row>
-              </Col>
+              </Col> */}
             </Row>
           </Container>
         </div>

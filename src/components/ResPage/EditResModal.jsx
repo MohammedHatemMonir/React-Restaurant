@@ -7,6 +7,7 @@ import LeafletMap from "../Map/LeafletMap";
 import { useMutation, useQueryClient } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 import { convertBase64 } from "../../Globals";
+import SearchUser from "../SearchUser/SearchUser";
 
 function EditResModal({ openModal, closeModal, resName, resId }) {
   const {
@@ -111,9 +112,7 @@ function EditResModal({ openModal, closeModal, resName, resId }) {
         <Form onSubmit={handleSubmit(onSubmit)}>
           <Row>
             <Col sm={12}>
-              <Form.Group className="mb-2 mb-sm-0">
-                <Form.Label>Search user</Form.Label>
-                <Form.Control
+              {/* <Form.Control
                   type="text"
                   name="search-user"
                   placeholder="Search User"
@@ -123,8 +122,8 @@ function EditResModal({ openModal, closeModal, resName, resId }) {
                 />
                 <span className="error" style={{ color: "red" }}>
                   {errors["search-user"] && errors["search-user"].message}
-                </span>
-              </Form.Group>
+                </span> */}
+              {/* <SearchUser /> */}
             </Col>
             <Col sm={6}>
               <Form.Group className="mb-2 mb-sm-0">
