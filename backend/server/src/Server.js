@@ -88,9 +88,8 @@ io.on('connection', (socket) => {
     return;
   }
 
-
-  socket.join(socket.request.session.user._id); 
   socket.join(socket.request.session.user.role);
+  socket.join(socket.request.session.user._id); 
   console.log('User connected:', socket.request.session.user.name);
 
 
