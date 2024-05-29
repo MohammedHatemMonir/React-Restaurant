@@ -84,7 +84,7 @@ const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResB
             const ResImg = await uploadImg(req.body.resImg);
             try {
                 ResBanner = await uploadImg(req.body.resBanner);
-                category = await categoeryModel.findOne({ _id: req.body.Category });
+                category = await categoeryModel.findOne({ _id: req.body.category });
                 owner = await userModel.findOne({ _id: req.body.ownerId });
             } catch (err) {
                 console.log("Error in uploading RESTAURANT img", err);
@@ -211,7 +211,7 @@ const updateRestaurant = async (req, res) => {
         if (req.body.ResName) {
             NewResData.ResName = req.body.ResName;
         }
-        if (req.body.Categoery) {
+        if (req.body.category) {
             NewResData.categoryId = req.body.Categoery;
         }
         if (req.body.location) {
@@ -243,7 +243,7 @@ const updateRestaurant = async (req, res) => {
 const addCategory = async (categoryName) => {
 
 
-    let category = await categoeryModel.findOneAndUpdate({ Categoery: categoryName }, { Categoery: categoryName },
+    let category = await categoeryModel.findOneAndUpdate({ categoryId: categoryName }, { categoryId: categoryName },
         { upsert: true, new: true });
     return category;
 };
