@@ -161,7 +161,7 @@ const res_comment = async (req, res) => { // {text:"",ResID: "" }
           const res_body={
             ResName: resturants[0].ResName,
             ResImg: resturants[0].ResImg,
-            Categoery: resturants[0].Categoery,
+            categoryId: resturants[0].categoryId,
             rating:new_rating,
             comment_num:new_res_comment_num,
             creation_date:resturants[0].creation_date

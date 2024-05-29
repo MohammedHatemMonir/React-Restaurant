@@ -6,15 +6,15 @@ const restaurantSchema = new mongoose.Schema({
         ref: "User",
         default: null
     },
-    resName: {
+    ResName: {
         type: String,
         required: [true, "Enter restaurant name"]
     },
-    resImg: {
+    ResImg: {
         type: String,
         required: [true, "Enter restaurant image"]
     },
-    resBanner: {
+    ResBanner: {
         type: String,
         required: [true, "Enter restaurant banner"]
     },
