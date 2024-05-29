@@ -250,7 +250,7 @@ const addCategory = async (categoryName) => {
 const getAllCategory = async (req, res) => {
     try {
         let category = await categoeryModel.find({});
-        return res.json({ Category: category });
+        return res.json({ categories: category });
     } catch (error) {
         console.error('Error fetching categories:', error);
         return res.json({ Message: "Error" });
