@@ -84,7 +84,7 @@ export default function ResPage() {
                     {/* Categories */}
                     <h2 className="sidebar-title">Categories</h2>
                     {!getCategoryiesQuery.isLoading &&
-                      getCategoryiesQuery.data?.data?.Category.map(
+                      getCategoryiesQuery.data?.data?.categories.map(
                         (category, index) => (
                           <div key={`${index}+${category._id}`}>
                             <label className="sidebar-label-container">
@@ -94,10 +94,10 @@ export default function ResPage() {
                                 }}
                                 type="checkbox"
                                 value={category._id}
-                                name={category.Categoery}
+                                name={category.category}
                               />
                               <span className="checkmark"></span>
-                              {category.Categoery}
+                              {category.category}
                             </label>
                           </div>
                         )

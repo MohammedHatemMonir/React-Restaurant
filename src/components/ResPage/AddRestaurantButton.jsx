@@ -29,8 +29,7 @@ export default function AddRestaurantButton() {
   const newCategory = useSignal("");
   const myCategoryBtn = useSignal(true);
 
-    if(currentLocation.value)
-    setValue("location", currentLocation.value);
+  if (currentLocation.value) setValue("location", currentLocation.value);
   // Display or Hide Map
   function handleMap() {
     showMap.value = !showMap.value;
@@ -61,6 +60,7 @@ export default function AddRestaurantButton() {
       return result;
     },
   });
+  console.log("getCategoryiesQuery", getCategoryiesQuery.data?.data);
 
   // Add new category in db
   const addCategory = useMutation({
@@ -163,7 +163,7 @@ export default function AddRestaurantButton() {
                 <Form.Group>
                   <Form.Label>Category</Form.Label>
                   <Form.Select
-                    value={null}
+                    // value={null}
                     {...register("Category", {
                       required: "Please select a category",
                     })}
@@ -171,13 +171,13 @@ export default function AddRestaurantButton() {
                     <option disabled>Please Select ...</option>
                     {ShowSignal.value &&
                       !getCategoryiesQuery.isLoading &&
-                      getCategoryiesQuery.data?.data?.Category.map(
+                      getCategoryiesQuery.data?.data?.categories?.map(
                         (category, index) => (
                           <option
                             key={`${index}+${category._id}`}
                             value={category._id}
                           >
-                            {category.Categoery}
+                            {category.category}
                           </option>
                         )
                       )}
