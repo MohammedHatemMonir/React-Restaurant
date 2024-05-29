@@ -4,6 +4,7 @@ import { apiClient } from "../../Data/apiclient";
 import { useSignal } from "@preact/signals-react";
 import { LinkContainer } from "react-router-bootstrap";
 import moment from "moment";
+import CookingLoader from "../Loaders/CookingLoader";
 
 const MyOrdersPage = () => {
   const myOrders = useSignal([]);
@@ -28,7 +29,7 @@ const MyOrdersPage = () => {
   });
   // console.log("query data", q.data?.data);
   if (q.isLoading) {
-    return <>Loading...</>;
+    return <CookingLoader />;
   }
   if (q.data?.data?.message == "No orders found") {
     return <EmptyOrders />;
@@ -44,7 +45,7 @@ const MyOrdersPage = () => {
               <th>Total Price</th>
               <th>Order Date</th>
               <th>Order Status</th>
-              <th>Payment Method</th>
+              {/* <th>Payment Method</th> */}
             </tr>
           </thead>
           <tbody>
@@ -66,7 +67,7 @@ const MyOrdersPage = () => {
                       <td>{order.totalPrice.toFixed(2)} $</td>
                       <td>{formattedDate}</td>
                       <td>{order.status}</td>
-                      <td>PayPal</td>
+                      {/* <td>PayPal</td> */}
                       {/* <td>{order.totalPrice > 50 ? "Delivery" : "PayPal"}</td> */}
                     </tr>
                   </LinkContainer>

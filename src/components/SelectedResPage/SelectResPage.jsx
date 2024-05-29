@@ -14,6 +14,7 @@ import ChooseUs from "./ChooseUs";
 import Footer from "../Footer/Footer";
 import DineMeLogo from "../../images/DineMeLogo.png";
 import MealFilters from "./MealFilters";
+import CookingLoader from "../Loaders/CookingLoader";
 
 export default function SelectResPage() {
   const { resID, resName } = useParams();
@@ -33,8 +34,9 @@ export default function SelectResPage() {
 
   console.log("query data", q1.data?.data.restaurant.ownerId);
 
-  return (
-    !q1.isLoading && (
+  if (q1.isLoading) return <CookingLoader />;
+  else
+    return (
       <>
         <div className="select-res-page">
           <div id="page-content restaurant-container" className="page-content">
@@ -210,6 +212,5 @@ export default function SelectResPage() {
         </div>
         <Footer />
       </>
-    )
-  );
+    );
 }

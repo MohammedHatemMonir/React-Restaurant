@@ -6,9 +6,9 @@
   align-items: center;
   background-color: #dbf4ee;
   height: 100vh;
-  transform: scale(1.5);
+  width: 100%;
   z-index: 999999;
-  
+
   $bg-bubble: linear-gradient(
     173deg,
     rgba(255, 121, 218, 1) 0%,
@@ -18,11 +18,11 @@
   );
   $bubble-timing: 2000ms;
   $nb-bubble: 6;
-  $bubble-delay: math.div($bubble-timing , $nb-bubble);
+  $bubble-delay: math.div($bubble-timing, $nb-bubble);
 
   $cook-timing: 1500ms;
   $nb-food: 3;
-  $cook-delay: math.div($cook-timing , $nb-food);
+  $cook-delay: math.div($cook-timing, $nb-food);
 
   @keyframes bubble {
     0% {
@@ -146,6 +146,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transform: scale(1.5);
   }
 
   .spinner {
