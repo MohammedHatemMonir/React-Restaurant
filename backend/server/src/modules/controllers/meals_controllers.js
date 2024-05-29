@@ -67,9 +67,10 @@ const addNewmeal = async (req, res) => {
     let savedMeal = await newMeal.save();
 
     const orders = await Order.find({ resId: Resid }).select('user');
-    const users = orders.map(order => order.user);
+    const users = orders.map(order => order.user.toString());
+    const uniqueUsers = [...new Set(users)];
 
-    const uniqueUsers = [...new Set(users.map(user => user.toString()))];
+    console.log(`Notifying ${uniqueUsers.length} users about the new meal`);
 
     uniqueUsers.forEach(userId => {
       global.io.to(userId).emit("new-notification", {
