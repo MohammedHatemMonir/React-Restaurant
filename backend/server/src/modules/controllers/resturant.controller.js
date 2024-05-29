@@ -263,7 +263,7 @@ const addRestaurantCategory = async (req, res) => { //{categoryName: ""}
         if (req.session.user.role != "ADMIN") { return res.json({ Message: "Not Authenticated!" }); }
 
 
-        let category = await categoeryModel.findOneAndUpdate({ Categoery: req.body.categoryName }, { Categoery: req.body.categoryName },
+        let category = await categoeryModel.findOneAndUpdate({ category: req.body.categoryName }, { category: req.body.categoryName },
             { upsert: true, new: true });
         console.log(category)
         return res.json({ category });
