@@ -239,7 +239,7 @@ const createOrder = async (req, res) => {   // {ResId:"",meals:[{id:"",quantity:
     console.log("order", order);
     order = await order.save();
 
-    global.io.to(restaurant.ownerId.toString()).emit("new-notification", {message: `Someone created an order`, time: Date.now().toString(), link: "/tutorials" });
+    global.io.to(restaurant.ownerId?.toString()).emit("new-notification", {message: `Someone created an order`, time: Date.now().toString(), link: "/tutorials" });
     global.io.to(req.session?.user?._id).emit("new-notification", {message: `Your order has been successfully created`, time: Date.now().toString(), link: "/tutorials" });
 
     res.status(201).json({
