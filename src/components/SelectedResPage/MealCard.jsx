@@ -38,8 +38,8 @@ export default function MealCard({
     },
   });
 
-  console.log("aimealid: ", AIMealID.value," id: ", id)
-  const displayModal = useSignal(AIMealID.value === id? true: false);
+  console.log("aimealid: ", AIMealID.value, " id: ", id);
+  const displayModal = useSignal(AIMealID.value === id ? true : false);
   function handleClose() {
     displayModal.value = false;
   }
@@ -105,17 +105,6 @@ export default function MealCard({
             <img src={mealImg || defaultMeal} alt="Res-Img" />
           </div>
           <div className="text-decoration-none content">
-            <div className="text-decoration-none tags">
-              <Link>
-                <FaTag className="text-decoration-none" /> food /
-              </Link>
-              <Link>
-                <FaTag className="text-decoration-none" /> burger /
-              </Link>
-              <Link>
-                <FaTag className="text-decoration-none" /> pizza
-              </Link>
-            </div>
             <h3 style={{ fontSize: "25px" }}>{name}</h3>
             <p>{desc}</p>
             <Link

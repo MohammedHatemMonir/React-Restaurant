@@ -16,6 +16,7 @@ export default function ResCard({
   stars1,
   ResImg,
   MealImg,
+  category,
   ownerId,
 }) {
   // console.log("Hema ID",id)
@@ -88,13 +89,7 @@ export default function ResCard({
               style={{ transform: "scale(0.97)" }}
             >
               <Link>
-                <FaTag className="text-decoration-none" /> food /
-              </Link>
-              <Link>
-                <FaTag className="text-decoration-none" /> burger /
-              </Link>
-              <Link>
-                <FaTag className="text-decoration-none" /> pizza
+                <FaTag className="text-decoration-none" /> {category}
               </Link>
             </div>
             <h3 style={{ fontSize: "20px" }}>{name}</h3>
