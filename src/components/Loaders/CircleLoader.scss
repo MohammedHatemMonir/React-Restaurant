@@ -1,15 +1,16 @@
 .Circle-Loader {
-transform: scale(0.7);
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  // width: 40%;
+  height: 50vh;
+  // transform: scale(1.1);
   overflow: hidden;
 
   .stopp1 {
     stop-color: #f700a8;
   }
-
+  
   .stopp2 {
     stop-color: #ff8000;
   }
@@ -21,6 +22,7 @@ transform: scale(0.7);
     stroke: url(#gradient);
     stroke-width: 15;
     stroke-linecap: round;
+    width: 100%;
   }
 
   .strecken {

@@ -3,6 +3,7 @@ import { useQueryClient, useQuery, useMutation } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 import { useSignal } from "@preact/signals-react";
 import { useParams } from "react-router-dom";
+import CookingLoader from "./../Loaders/CookingLoader";
 const MealsOrdersPage = () => {
   const allData = useSignal([]);
   const queryClient = useQueryClient();
@@ -24,7 +25,7 @@ const MealsOrdersPage = () => {
 
   console.log("query data", q.data?.data);
   if (q.isLoading) {
-    return <>Loading...</>;
+    return <CookingLoader />;
   }
   return (
     <div className="container">
@@ -45,7 +46,7 @@ const MealsOrdersPage = () => {
             {!q.isError &&
               !q.isLoading &&
               q.data?.data?.meals?.map((order, index) => (
-                <tr key={index + order.MealName} className="text-center"> 
+                <tr key={index + order.MealName} className="text-center">
                   <td>{index + 1}</td>
                   <td>{q.data?.data?.ResName}</td>
                   <td>{order.MealName}</td>
