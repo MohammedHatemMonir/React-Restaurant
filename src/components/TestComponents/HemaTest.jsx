@@ -1,46 +1,29 @@
 import React, { useState } from "react";
-import { Dropdown, FormControl, Container } from "react-bootstrap";
+import Select from "react-select";
 
-const SearchDropdown = () => {
-  const items = ["Apple", "Banana", "Orange", "Mango", "Pineapple", "Grape"];
-  const [searchTerm, setSearchTerm] = useState("");
-  const [filteredItems, setFilteredItems] = useState(items);
+const MyComponent = () => {
+  const [inputValue, setInputValue] = useState(""); // state to hold input value
 
-  const handleSearch = (event) => {
-    const value = event.target.value;
-    setSearchTerm(value);
-    setFilteredItems(
-      items.filter((item) => item.toLowerCase().includes(value.toLowerCase()))
-    );
+  // options for the Select component
+  const options = [
+    { value: "option1", label: "Option 1" },
+    { value: "option2", label: "Option 2" },
+    { value: "option3", label: "Option 3" },
+  ];
+
+  // function to handle input change
+  const handleInputChange = (newValue) => {
+    setInputValue(newValue); // set input value to state
+    console.log("inputValue", inputValue);
   };
 
   return (
-    <Container className="mt-5">
-      <h1>Search Dropdown Example</h1>
-      <Dropdown>
-        <Dropdown.Toggle variant="success" id="dropdown-basic">
-          Search
-        </Dropdown.Toggle>
-
-        <Dropdown.Menu>
-          <FormControl
-            autoFocus
-            className="mx-3 my-2 w-auto"
-            placeholder="Search..."
-            onChange={handleSearch}
-            value={searchTerm}
-          />
-          {filteredItems.length > 0 ? (
-            filteredItems.map((item, index) => (
-              <Dropdown.Item key={index}>{item}</Dropdown.Item>
-            ))
-          ) : (
-            <Dropdown.Item>No results found</Dropdown.Item>
-          )}
-        </Dropdown.Menu>
-      </Dropdown>
-    </Container>
+    <Select
+      inputValue={inputValue} // set the inputValue prop to the state value
+      options={options}
+      onInputChange={handleInputChange} // pass the handler to onInputChange event
+    />
   );
 };
 
-export default SearchDropdown;
+export default MyComponent;
