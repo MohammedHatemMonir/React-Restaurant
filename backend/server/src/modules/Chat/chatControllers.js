@@ -3,7 +3,8 @@ const { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } = require("@googl
 const genAI = new GoogleGenerativeAI("AIzaSyC1XeZ_QO13eJuqaHDhJ5O2BZH4_IJXP6g");
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 const restaurant = require('../../database/models/resturant.Model')
-const meal = require('../../database/models/Meals_model')
+const meal = require('../../database/models/Meals_model');
+const Category = require("../../database/models/Category.Model.js");
 
 
 let Keywords = ["Restaurant:","Meal:", "Orders:","Cart:","Suggest:"]
@@ -90,8 +91,22 @@ const SendMessageAI=async(req,res)=>{
                 navigationLink = `/mycart`
             }
             else if(containedWord === "Suggest:"){
+                let oneCategory = 'Pizza';
 
-
+                try {
+                  const category = await Category.findOne({ category: oneCategory });
+                  
+                  if (category) {
+                    const restaurants = await restaurant.find({ categoryId: category._id }).sort({ rating: -1 }).limit(5);
+                    res.json({restaurants:restaurants})
+                    console.log(restaurants);
+                  } else {
+                    console.log('Category not found');
+                  }
+                } catch (error) {
+                  console.log('Error finding category or restaurants:', error);
+                }
+                
 
                 //Mostafa mahmnoud's code Here
 
