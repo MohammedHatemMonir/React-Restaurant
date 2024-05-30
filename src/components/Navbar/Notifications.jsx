@@ -8,19 +8,22 @@ import { useNavigate } from "react-router-dom";
 const NotificationDropdown = () => {
   const navigate = useNavigate();
   const displayNewNotifications = useSignal("none");
-  // const notifications = useSignal([
-  //   { message: "New comment on your post", time: "2 mins ago", link: "" },
-  //   { message: "You have a new follower", time: "10 mins ago", link: "" },
-  //   { message: "Your post was liked", time: "1 hour ago", link: "" },
-  // ]);
   const notifications = useSignal([]);
+  const newNotifications = useSignal(0);
   const socket = io("http://localhost:5001", { withCredentials: true });
 
   function onNotification(data) {
     console.log("Received new notification:", data);
     notifications.value = [data, ...notifications.value];
-    notifications.value
+    newNotifications.value = newNotifications.value + 1;
+    newNotifications.value > 0
+      ? (displayNewNotifications.value = "")
+      : (displayNewNotifications.value = "none");
+
+    // console.log("notifications.value", notifications.value);
   }
+  console.log("newNotifications.value", newNotifications.value);
+  // console.log("notifications.value", notifications.value);
 
   useEffect(() => {
     function onConnect() {
@@ -36,7 +39,12 @@ const NotificationDropdown = () => {
     socket.on("new-notification", onNotification);
   }, []);
   return (
-    <Dropdown onClick={() => (displayNewNotifications.value = "none")}>
+    <Dropdown
+      onClick={() => {
+        displayNewNotifications.value = "none";
+        newNotifications.value = 0;
+      }}
+    >
       <Dropdown.Toggle variant="transparent" id="dropdown-basic">
         <IoMdNotificationsOutline size={24} />
         <Badge
@@ -44,7 +52,7 @@ const NotificationDropdown = () => {
           bg="danger"
           style={{ display: displayNewNotifications.value }}
         >
-          {notifications.value.length}
+          {newNotifications.value}
         </Badge>
       </Dropdown.Toggle>
 
