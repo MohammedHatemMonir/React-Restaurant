@@ -7,7 +7,6 @@ import LeafletMap from "../Map/LeafletMap";
 import { useMutation, useQueryClient } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 import { convertBase64 } from "../../Globals";
-import SearchUser from "../SearchUser/SearchUser";
 
 function EditResModal({ openModal, closeModal, resName, resId }) {
   const {
@@ -111,20 +110,6 @@ function EditResModal({ openModal, closeModal, resName, resId }) {
       <Modal.Body>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <Row>
-            <Col sm={12}>
-              {/* <Form.Control
-                  type="text"
-                  name="search-user"
-                  placeholder="Search User"
-                  {...register("search-user", {
-                    // required: "Please enter user name to search",
-                  })}
-                />
-                <span className="error" style={{ color: "red" }}>
-                  {errors["search-user"] && errors["search-user"].message}
-                </span> */}
-              {/* <SearchUser /> */}
-            </Col>
             <Col sm={6}>
               <Form.Group className="mb-2 mb-sm-0">
                 <Form.Label>New Name</Form.Label>
@@ -169,23 +154,27 @@ function EditResModal({ openModal, closeModal, resName, resId }) {
                 }`}
                 onClick={handleCategoryInput}
               >
-                {myCategoryBtn.value ? "Edit category" : "Edit category"}
+                {myCategoryBtn.value ? "Add category" : "Add category"}
               </Button>
             </div>
             {showCategoryInput.value && (
-              <Col sm={12}>
+              <Col sm={12} lg={10}>
                 <Form.Control
                   className="mt-3 mb-3 bg-warning"
                   type="text"
                   onChange={handleCategoriesChange}
                   value={newCategory.value}
-                  placeholder="Edit category"
+                  placeholder="Add category"
                 />
               </Col>
             )}
             {showCategoryInput.value && (
               <div className="form-group col-sm-12 col-lg-2 d-flex justify-content-center align-items-end">
-                <Button className="w-100" onClick={uploadCategory}>
+                <Button
+                  variant="secondary"
+                  className="w-100"
+                  onClick={uploadCategory}
+                >
                   Submit
                 </Button>
               </div>
