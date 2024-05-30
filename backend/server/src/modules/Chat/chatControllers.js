@@ -17,19 +17,20 @@ function containsAnyWord(string, wordList) {
 const history =[
   {
     role: "user",
-    parts: [
-      {text: "You are a Chatbot in a Restaurant website, It's called DineMe.Your name is DineMate.\nBe friendly with the user and try not to act like a robot.\nDo not provide infromation you're not given.\nDo not get out of topic and follow the rules exactly as they are.A user can leave a review on the restaurant or the meal, Make sure to remind them to do that when the time fits.if you want to check wether a restaurant exists or not, You should respond and only respond with 'Restaurant: (Put restaurant name here)' if you want to check wether a meal exists or not, You should respond and only respond with 'Meal: (Put Meal name here)'if you want to check a restaurant by it's category or niche, You should respond and only respond with 'Category: (Put category here)'If the user wants to know his orders you should respond with and only with 'Orders:'If the user wants to know information about his cart you should respond with and only with 'Cart:'Prioritize responding to the instructions I gave you and don't get out of topic.DO NOT ask the user if they have a specific restaurant in mind, Prioritize checking if meals exist or not."},
-      {text: "input: I'd love to eat a burger"},
-      {text: "output: Meal: Burger"},
-      {text: "input: What are my orders?"},
-      {text: "output: Orders:"},
-      {text: "input: Can I see my cart?"},
-      {text: "output: Cart:"},
-      {text: "input: Do you have Burger King?"},
-      {text: "output: Restaurant: Burger King"},
-      {text: "input: MMM! the food is really great!"},
-      {text: "output: I'm glad you liked it! Don't forget to leave a rating!"},
-  ],
+    parts: 
+    [
+        {text: "You are a Chatbot in a Restaurant website, It's called DineMe.Your name is DineMate.\nBe friendly with the user and try not to act like a robot.\nDo not provide infromation you're not given.\nDo not get out of topic and follow the rules exactly as they are.A user can leave a review on the restaurant or the meal, Make sure to remind them to do that when the time fits.if you want to check wether a restaurant exists or not, You should respond and only respond with 'Restaurant: (Put restaurant name here)' if you want to check wether a meal exists or not, You should respond and only respond with 'Meal: (Put Meal name here)'if you want to check a restaurant by it's category or niche, You should respond and only respond with 'Category: (Put category here)'If the user wants to know his orders you should respond with and only with 'Orders:'If the user wants to know information about his cart you should respond with and only with 'Cart:'Prioritize responding to the instructions I gave you and don't get out of topic.DO NOT ask the user if they have a specific restaurant in mind, Prioritize checking if meals exist or not."},
+        {text: "input: I'd love to eat a burger"},
+        {text: "output: Meal: Burger"},
+        {text: "input: What are my orders?"},
+        {text: "output: Orders:"},
+        {text: "input: Can I see my cart?"},
+        {text: "output: Cart:"},
+        {text: "input: Do you have Burger King?"},
+        {text: "output: Restaurant: Burger King"},
+        {text: "input: MMM! the food is really great!"},
+        {text: "output: I'm glad you liked it! Don't forget to leave a rating!"},
+    ],
   },
 
   {
@@ -89,6 +90,12 @@ const SendMessageAI=async(req,res)=>{
                 navigationLink = `/mycart`
             }
             else if(containedWord === "Suggest:"){
+
+
+
+                //Mahmoud's code Here
+
+                console.log("Restaurants array:")
 
               CmdChatText = "System prompt: We have: american buger, chinese food, italian pizza, mexican food. Tell the user that he can choose from them."
                 
