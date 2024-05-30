@@ -1,18 +1,13 @@
 import { Col, Form } from "react-bootstrap";
 import { useMutation } from "react-query";
 import { apiClient } from "../../Data/apiclient";
-import { Spinner } from "react-bootstrap";
 import { useSignal } from "@preact/signals-react";
+import Select from "react-select";
 
 const SearchUser = ({ setValue }) => {
   const searchTerm = useSignal("");
   const searchResults = useSignal([]);
-
-  const handleSearchChange = (e) => {
-    searchTerm.value = e.target.value;
-    console.log(searchTerm.value);
-    returnUsers();
-  };
+  const selectedOwner = useSignal();
 
   const searchUsers = useMutation({
     mutationKey: ["searchUsers"],
@@ -35,52 +30,32 @@ const SearchUser = ({ setValue }) => {
     }
   };
 
-  function selectOwner(id) {
-    console.log("Selected Owner", id);
-    setValue("ownerId", id);
-  }
+  const options = searchResults.value.map((user) => ({
+    value: user._id,
+    label: user.name,
+  }));
+  console.log("searchResults", searchResults);
+
   return (
     <Col sm={12}>
-      <Form.Group className="mb-2 mb-sm-0">
+      <Form.Group className="mb-2">
         <Form.Label className="dropdown">Choose Owner</Form.Label>
-        <Form.Control
-          type="text"
-          name="search-user"
-          placeholder="Choose Owner"
-          value={searchTerm.value}
-          onChange={handleSearchChange}
+        <Select
+          className="basic-single"
+          classNamePrefix="select"
+          onInputChange={(e) => {
+            console.log(("searchTerm", (searchTerm.value = e)));
+            searchTerm.value = e;
+            returnUsers();
+          }}
+          onChange={(e) => {
+            selectedOwner.value = e;
+            console.log(("selectedOwner", selectedOwner.value.label));
+            setValue("ownerId", selectedOwner.value.label);
+          }}
+          isLoading={searchUsers.isLoading}
+          options={options}
         />
-        {searchUsers.isLoading ? (
-          <div className="loading-spinner">
-            <Spinner animation="border" role="status">
-              <span className="sr-only">Loading...</span>
-            </Spinner>
-          </div>
-        ) : (
-          <div className="dropdown-content">
-            {searchResults.value.map((user, index) => (
-              <div
-                key={index}
-                className="d-block text-decoration-none"
-                style={{
-                  cursor: "pointer",
-                  padding: "10px",
-                  color: "#fff",
-                  backgroundColor: "#007bff",
-                  borderRadius: "5px",
-                  transition: "background-color 0.3s ease",
-                  boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
-                }}
-                onClick={() => {
-                  selectOwner(user._id);
-                  searchTerm.value = user.name;
-                }}
-              >
-                {user.name}
-              </div>
-            ))}
-          </div>
-        )}
       </Form.Group>
     </Col>
   );
