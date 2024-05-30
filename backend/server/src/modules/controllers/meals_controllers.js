@@ -81,6 +81,7 @@ const addNewmeal = async (req, res) => {
         link: "/tutorials"
       });
     });
+    
     global.io.to(restaurant.ownerId.toString()).emit("new-notification", {
       message: `The meal has been successfully added`,
       time: Date.now().toString(),
