@@ -160,7 +160,7 @@ export default function AddRestaurantButton() {
                   </span>
                 </Form.Group>
               </Col>
-              <Col sm={6} lg={3}>
+              <Col sm={3}>
                 <Form.Group>
                   <Form.Label>Category</Form.Label>
                   <Form.Select
@@ -204,7 +204,7 @@ export default function AddRestaurantButton() {
                 </Button>
               </div>
               {showCategoryInput.value && (
-                <Col sm={12} lg={10}>
+                <Col sm={10} className="d-flex justify-content-center">
                   <Form.Control
                     className="mt-3 mb-3 bg-warning"
                     type="text"

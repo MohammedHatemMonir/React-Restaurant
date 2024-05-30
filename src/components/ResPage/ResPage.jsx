@@ -14,14 +14,14 @@ import { Col } from "react-bootstrap";
 import { useSignal } from "@preact/signals-react";
 
 export default function ResPage() {
-  const categoryName = useSignal(null); // []
+  const categoryName = useSignal([]); // []
   const categoryMap = useSignal([]);
   const filterType = useSignal([]);
 
   const getCategoryName = (e) => {
-    // categoryName.value = [...categoryName.value, e.target.name];
-    categoryName.value = e.target.name;
-    // console.log("categoryName", categoryName.value);
+    categoryName.value = [...categoryName.value, e.target.name];
+    // categoryName.value = e.target.name;
+    console.log("categoryName", categoryName.value);
   };
 
   const categoryNames = ["Burger", "Pizza", "Dessert"];
@@ -68,7 +68,12 @@ export default function ResPage() {
   }
 
   if (q.isLoading) {
-    return <CookingLoader />;
+    return (
+      <>
+        <CookingLoader />
+        {/* Loading... */}
+      </>
+    );
   }
 
   if (q.data)
