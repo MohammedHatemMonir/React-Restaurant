@@ -8,7 +8,12 @@ import { useNavigate } from "react-router-dom";
 const NotificationDropdown = () => {
   const navigate = useNavigate();
   const displayNewNotifications = useSignal("none");
-  const notifications = useSignal([]);
+
+  // Get notification from local storage
+  const notifications = useSignal(
+    JSON.parse(localStorage.getItem("myNotification"))
+  );
+
   const newNotifications = useSignal(0);
   const socket = io("http://localhost:5001", { withCredentials: true });
 
@@ -20,10 +25,13 @@ const NotificationDropdown = () => {
       ? (displayNewNotifications.value = "")
       : (displayNewNotifications.value = "none");
 
-    // console.log("notifications.value", notifications.value);
+    // Set notification in local storage
+    localStorage.setItem(
+      "myNotification",
+      JSON.stringify(notifications.value.slice(-5))
+    );
   }
   console.log("newNotifications.value", newNotifications.value);
-  // console.log("notifications.value", notifications.value);
 
   useEffect(() => {
     function onConnect() {
@@ -58,7 +66,8 @@ const NotificationDropdown = () => {
 
       <Dropdown.Menu style={{ minWidth: "300px" }}>
         <Dropdown.Header>Notifications</Dropdown.Header>
-        {notifications.value.length === 0 ? (
+        {/* Edited here */}
+        {notifications.value?.length === 0 ? (
           <Dropdown.Item text>No new notifications</Dropdown.Item>
         ) : (
           notifications.value?.map((notification, index) => (
