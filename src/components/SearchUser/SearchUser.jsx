@@ -50,8 +50,8 @@ const SearchUser = ({ setValue }) => {
           }}
           onChange={(e) => {
             selectedOwner.value = e;
-            console.log(("selectedOwner", selectedOwner.value.label));
-            setValue("ownerId", selectedOwner.value.label);
+            console.log(("selectedOwner", selectedOwner.value.value));
+            setValue("ownerId", selectedOwner.value.value);
           }}
           isLoading={searchUsers.isLoading}
           options={options}
