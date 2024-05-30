@@ -6,7 +6,8 @@ const rescomment = require("../../database/models/resComments_model");
 const userModel = require("../../database/models/userModel.js");
 
 const categoeryModel = require("../../database/models/Category.Model.js");
-const mealComments = require('../../database/models/Comments_model.js')
+const mealComments = require('../../database/models/Comments_model.js');
+const Time = require("../../utils/Date.js");
 
 
 const getResturantWithMeals = async (req, res) => {
@@ -135,9 +136,9 @@ const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResB
                     }
                 }
             );
-                // global.io.to(newRestaurant.ownerId.toString()).emit("new-notification", {message: "Your restaurant has been successfully added to the site", time: Date.now().toString(), link: "/tutorials" });
-                // global.io.to(req.session.user._id).emit("new-notification", {message: `The restaurant has been added`, time: Date.now().toString(), link: "/tutorials" });
-                // global.io.to("ADMIN").emit("new-notification", {message: `The admin ${req.session.user.name} has added it ${newRestaurant.ResName}`, time: Date.now().toString(), link: "/tutorials" });
+                global.io.to(newRestaurant.ownerId.toString()).emit("new-notification", {message: "Your restaurant has been successfully added to the site", time:Time, link: "/tutorials" });
+                global.io.to(req.session.user._id).emit("new-notification", {message: `The restaurant has been added`, time: Time, link: "/tutorials" });
+                global.io.to("ADMIN").emit("new-notification", {message: `The admin ${req.session.user.name} has added it ${newRestaurant.ResName}`, time: Time, link: "/tutorials" });
                 res.status(200).json(newRestaurantData);
             }
             catch (error) {
