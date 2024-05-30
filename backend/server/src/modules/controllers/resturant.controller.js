@@ -60,11 +60,14 @@ const getAllresturant = async (req, res) => {
 
 
 const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResBanner,location, ownerId} Remove validation of .png,add banner to database ,Upload image from request body
-    let ResImg;
-    let ResBanner;
-    let owner
+        let ResImg;
+        let ResBanner;
+        let owner;
+        let category;
     try {
-        console.log("Get all res started, body:", req.body)
+        // let owner;
+        // let category;
+        // console.log("Get all res started, body:", req.body);
         if (req.session.user.role != "ADMIN")
             return res.status(400).json({ errors: "Not Authenticated" });
 
@@ -77,49 +80,67 @@ const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResB
         //  const resImgUrl = await uploadImage(req.body.ResImg);
         //  const resBannerUrl = await uploadImage(req.body.ResBanner);
         const restaurantname = req.body.ResName;
-        const restaurants = await restaurant.countDocuments({ ResName: restaurantname });
-        if (!restaurants > 0) {
-            const rating = 0;
-            const comment_num = 0;
-            const ResImg = await uploadImg(req.body.resImg);
-            try {
-                ResBanner = await uploadImg(req.body.resBanner);
-                category = await categoeryModel.findOne({ _id: req.body.category });
-                owner = await userModel.findOne({ _id: req.body.ownerId });
-            } catch (err) {
-                console.log("Error in uploading RESTAURANT img", err);
-            }
+        if(!restaurantname) return res.status(400).json({ message: "Restaurant name is required" });
 
 
-            try {
+
+        // const restaurants = await restaurant.countDocuments({ ResName: restaurantname });
+        // Finding the restaurant by its name
+        const restaurants = await restaurant.findOne({ ResName: restaurantname });
+
+        if (restaurants) return res.status(409).json ({ message: "Restaurant is already exited"});
+
+        if(!req.body.category) return res.status(403).json({success: false, message: "Category required"});
+
+            // const rating = 0;
+            // const comment_num = 0;
+            // ResImg = await uploadImg(req.body.resImg);
+            [ResImg, ResBanner, category, owner] = await Promise.all([
+                uploadImg(req.body.resImg),
+                uploadImg(req.body.resBanner),
+                categoeryModel.findOne({_id: req.body.category}),
+                userModel.findOne({_id: req.body.ownerId})
+            ]);
+            // try {
+            //     ResBanner = await uploadImg(req.body.resBanner);
+            //     category = await categoeryModel.findOne({ _id: req.body.category });
+            //     owner = await userModel.findOne({ _id: req.body.ownerId });
+            // } catch (err) {
+            //     console.log("Error in uploading RESTAURANT img", err);
+            // }
+            if (!category) return res.status(404).json({ success: false, message: "Category not found"});
+            if (!owner) return res.status(404).json({ success: false, message: "Owner not found"});
+
+            // try {
                 //const category = await addCategory(req.body.Categoery);
-                const newRestaurantData = {
-                    ResName: req.body.ResName,
-                    ResImg: ResImg,
-                    ResBanner: ResBanner,
-                    categoryId: category._id,
-                    location: req.body.location,
-                    rating: rating,
-                    comment_num: comment_num,
-                    ownerId: owner._id
-                    //creation_date: createdAt
-                };
-                const ownerRole = owner.role == 'ADMIN' ? owner.role : owner.role = 'owner'
-                const newRestaurant = await restaurant.create(newRestaurantData);
-                await userModel.updateOne(
-                    { _id: owner._id },
-                    {
-                        $set: {
-                            role: ownerRole,
-                            resId: newRestaurant._id
-                        }
+            const newRestaurantData = {
+                ResName: req.body.ResName,
+                ResImg: ResImg,
+                ResBanner: ResBanner,
+                categoryId: category._id,
+                location: req.body.location,
+                rating: 0,
+                comment_num: 0,
+                ownerId: owner._id
+                //creation_date: createdAt
+            };
+            const ownerRole = owner.role === 'ADMIN' ? owner.role : 'owner';
+            const newRestaurant = await restaurant.create(newRestaurantData);
+            await userModel.updateOne(
+                { _id: owner._id },
+                {
+                    $set: {
+                        role: ownerRole,
+                        resId: newRestaurant._id
                     }
-                );
-                global.io.to(newRestaurant.ownerId.toString()).emit("new-notification", {message: "Your restaurant has been successfully added to the site", time: Date.now().toString(), link: "/tutorials" });
-                global.io.to(req.session.user._id).emit("new-notification", {message: `The restaurant has been added`, time: Date.now().toString(), link: "/tutorials" });
-                global.io.to("ADMIN").emit("new-notification", {message: `The admin ${req.session.user.name} has added it ${newRestaurant.ResName}`, time: Date.now().toString(), link: "/tutorials" });
+                }
+            );
+                // global.io.to(newRestaurant.ownerId.toString()).emit("new-notification", {message: "Your restaurant has been successfully added to the site", time: Date.now().toString(), link: "/tutorials" });
+                // global.io.to(req.session.user._id).emit("new-notification", {message: `The restaurant has been added`, time: Date.now().toString(), link: "/tutorials" });
+                // global.io.to("ADMIN").emit("new-notification", {message: `The admin ${req.session.user.name} has added it ${newRestaurant.ResName}`, time: Date.now().toString(), link: "/tutorials" });
                 res.status(200).json(newRestaurantData);
-            } catch (error) {
+            }
+            catch (error) {
                 console.log('Error creating new restaurant:', error);
                 res.status(500).json({ error: 'Server error while adding new restaurant' });
                 if (ResImg) {
@@ -128,23 +149,27 @@ const addNewresturant = async (req, res) => { //{ResName, ResImg, Categoery,ResB
                 if (ResBanner) {
                     await uploadImg.deleteImage(ResBanner);
                 }
+                res.status(500).json({ message: "Could not add restaurant" });
             }
+        }
+        // catch (error) {
+        // console.log("Error in addNewresturant", error);
+        // if (ResImg) {
+        //     await uploadImg.deleteImage(ResImg);
+        // }
+        // if (ResBanner) {
+        //     await uploadImg.deleteImage(ResBanner);
+        // }
+        // res.status(500).json({ message: "Could not add restaurant" });
+        // }
+    // }
+        // }
+        //  else {
+        //     res.send("Restaurant already exists");
+        // }
 
-        } else {
-            res.send("Restaurant already exists");
-        }
-
-    } catch (error) {
-        console.log("Error in addNewresturant", error);
-        if (ResImg) {
-            await uploadImg.deleteImage(ResImg);
-        }
-        if (ResBanner) {
-            await uploadImg.deleteImage(ResBanner);
-        }
-        res.status(500).json({ message: "Could not add restaurant" });
-    }
-}
+    // }
+// }
 
 
 const deleteresturant = async (req, res) => {
