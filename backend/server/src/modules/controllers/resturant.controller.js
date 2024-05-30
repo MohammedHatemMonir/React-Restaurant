@@ -317,7 +317,23 @@ const Categoery = async (req, res) => {
     }
 }
 
+// const getress=async(req,res)=>{
+//     let oneCategory = 'Arabic';
 
+//     try {
+//       const category = await categoeryModel.findOne({ category: oneCategory });
+      
+//       if (category) {
+//         const restaurants = await restaurant.find({ categoryId: category._id }).sort({ rating: -1 }).limit(5);
+//         console.log(restaurants);
+//         res.json({restaurants:restaurants})
+//       } else {
+//         console.log('Category not found');
+//       }
+//     } catch (error) {
+//       console.log('Error finding category or restaurants:', error);
+//     }
+// }
 
 module.exports = {
     getAllresturant,
@@ -328,5 +344,6 @@ module.exports = {
     addCategory,
     Categoery,
     getAllCategory,
-    addRestaurantCategory
+    addRestaurantCategory,
+    // getress
 };

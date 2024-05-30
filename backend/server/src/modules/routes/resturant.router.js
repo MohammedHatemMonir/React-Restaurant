@@ -15,5 +15,5 @@ router.put('/updateRestaurant/:id',control.updateRestaurant)
 router.post('/addCategory',control.addRestaurantCategory)
 router.get('/category/:category',validateResturantInput,control.Categoery)
 router.get('/getAllCategory',validateResturantInput,control.getAllCategory)
-
+//router.get('/test',validateResturantInput,control.getress)
 module.exports = router;
