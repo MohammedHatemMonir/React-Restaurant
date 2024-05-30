@@ -19,8 +19,8 @@ export default function ResPage() {
   const filterType = useSignal([]);
 
   const getCategoryName = (e) => {
-    categoryName.value = [...categoryName.value, e.target.name];
-    // categoryName.value = e.target.name;
+    // categoryName.value = [...categoryName.value, e.target.name];
+    categoryName.value = e.target.name;
     console.log("categoryName", categoryName.value);
   };
 
