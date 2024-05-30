@@ -151,7 +151,7 @@ app.get('/auth/google',
   passport.authenticate('google', { scope: ['profile','email'] }));
 
 app.get('/auth/google/callback',
-  passport.authenticate('google', { session: true, failureRedirect: '/login'}),
+  passport.authenticate('google', { session: true, failureRedirect: 'http://localhost:3000/login'}),
   (req, res) => {
     try {
     // Redirect back to the React.js application with the authentication token {name:req.user.name.givenName, email:req.user.emails[0].value, role:"user", id:req.user.id, loggedIn:true};
