@@ -207,8 +207,13 @@ const deleteresturant = async (req, res) => {
         }
 
         await meal.deleteMany({ ResID: id });
-
-        console.log("Deleted meals", MealsToDelete);
+        const ownerDeleted=await userModel.updateOne({_id:restaurantToDelete.ownerId},{
+            $set: {
+                role: 'user',
+                resId: null
+            }
+        })
+        console.log("Deleted meals", MealsToDelete,ownerDeleted);
         global.io.to("ADMIN").emit("new-notification", {message: `The admin ${req.session.user.name} has deleted the ${restaurantToDelete.ResName}`, time: Date.now().toString(), link: "/tutorials" });
         res.status(200).json({ message: "Restaurant Deleted Successfully" });
     } catch (error) {
