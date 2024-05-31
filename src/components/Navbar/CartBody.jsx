@@ -172,7 +172,7 @@ export default function CartBody() {
                     onClick={() => (showDeliveryModal.value = true)}
                     className="btn btn-primary col-sm-4 my-3 mr-4"
                   >
-                    Cash On Delivery
+                    Delivery
                   </Button>
                   <Button
                     type="button"
@@ -180,7 +180,7 @@ export default function CartBody() {
                     onClick={() => (showPaypalModal.value = true)}
                     className="btn btn-outline-primary col-sm-4 my-3"
                   >
-                    Payment Gateway
+                    Online
                   </Button>
                 </div>
               </div>
