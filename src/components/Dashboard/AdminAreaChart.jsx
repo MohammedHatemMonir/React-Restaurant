@@ -15,7 +15,7 @@ export default function AdminAreaChart({ rawData1 }) {
   const transformData = (data) => {
     console.log("my dat", data);
 
-    const orders = Object.values(data.restaurantOrders).flatMap((res) =>
+    const orders = Object.values(data?.restaurantOrders)?.flatMap((res) =>
       res.orders.map((order) => ({
         date: order.dateOrdered.split("T")[0],
         "Total Price": order.totalPrice,

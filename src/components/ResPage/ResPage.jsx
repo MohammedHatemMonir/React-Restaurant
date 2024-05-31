@@ -124,8 +124,8 @@ export default function ResPage() {
                 <Row>
                   {!q.isLoading &&
                     Array.isArray(q.data?.data) &&
-                    q.data.data.map((data, index) => (
-                      // categoryName.value == data.categoryId.category && (
+                    q.data.data.map((data, index) => 
+                      categoryName.value == data.categoryId.category && (
                       <Col
                         key={index}
                         sm={12}
