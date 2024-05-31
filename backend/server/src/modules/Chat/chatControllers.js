@@ -20,7 +20,7 @@ const history =[
     role: "user",
     parts: 
     [
-        {text: "You are a Chatbot in a Restaurant website, It's called DineMe.Your name is DineMate.\nBe friendly with the user and try not to act like a robot.\nDo not provide infromation you're not given.\nDo not get out of topic and follow the rules exactly as they are.A user can leave a review on the restaurant or the meal, Make sure to remind them to do that when the time fits.if you want to check wether a restaurant exists or not, You should respond and only respond with 'Restaurant: (Put restaurant name here)' if you want to check wether a meal exists or not, You should respond and only respond with 'Meal: (Put Meal name here)'if you want to check a restaurant by it's category or niche, You should respond and only respond with 'Category: (Put category here)'If the user wants to know his orders you should respond with and only with 'Orders:'If the user wants to know information about his cart you should respond with and only with 'Cart:'Prioritize responding to the instructions I gave you and don't get out of topic.DO NOT ask the user if they have a specific restaurant in mind, Prioritize checking if meals exist or not."},
+        {text: "You are a Chatbot in a Restaurant website, It's called DineMe.Your name is DineMate.\nBe friendly with the user and try not to act like a robot.\nDo not provide infromation you're not given.\nDo not get out of topic and follow the rules exactly as they are.A user can leave a review on the restaurant or the meal, Make sure to remind them to do that when the time fits.if you want to check wether a restaurant exists or not, You should respond and only respond with 'Restaurant: (Put restaurant name here)'. \n If you want to suggest a restaurant based on a category respond with and only with 'Suggest: (put category name here)'. if you want to check wether a meal exists or not, You should respond and only respond with 'Meal: (Put Meal name here)'if you want to check a restaurant by it's category or niche, You should respond and only respond with 'Category: (Put category here)'If the user wants to know his orders you should respond with and only with 'Orders:'If the user wants to know information about his cart you should respond with and only with 'Cart:'Prioritize responding to the instructions I gave you and don't get out of topic.DO NOT ask the user if they have a specific restaurant in mind, Prioritize checking if meals exist or not."},
         {text: "input: I'd love to eat a burger"},
         {text: "output: Meal: Burger"},
         {text: "input: What are my orders?"},
@@ -29,6 +29,10 @@ const history =[
         {text: "output: Cart:"},
         {text: "input: Do you have Burger King?"},
         {text: "output: Restaurant: Burger King"},
+        {text: "input: I'd love to eat desserts"},
+        {text: "output: Suggest: desserts"},
+        {text: "input: can you suggest me a good shawerma place?"},
+        {text: "output: Suggest: shawerma"},
         {text: "input: MMM! the food is really great!"},
         {text: "output: I'm glad you liked it! Don't forget to leave a rating!"},
     ],
@@ -59,7 +63,7 @@ const SendMessageAI=async(req,res)=>{
             }
         });
 
-        
+
 
         const result = await chat.sendMessage(req.body.message);
         const response = await result.response;
@@ -91,32 +95,26 @@ const SendMessageAI=async(req,res)=>{
                 navigationLink = `/mycart`
             }
             else if(containedWord === "Suggest:"){
-                let oneCategory = 'Pizza';
-
-                try {
-                  const category = await Category.findOne({ category: oneCategory });
-                  
-                  if (category) {
-                    const restaurants = await restaurant.find({ categoryId: category._id }).sort({ rating: -1 }).limit(5);
-                    res.json({restaurants:restaurants})
-                    console.log(restaurants);
-                  } else {
-                    console.log('Category not found');
-                  }
-                } catch (error) {
-                  console.log('Error finding category or restaurants:', error);
+                const CategoryToSearch = aiText.trim().replace(/Suggest: /g, '').replace(/\.$/, '').replace(/^\s+/, '');
+                const category = await Category.aggregate([
+                    { $match: { category: { $regex: CategoryToSearch, $options: "i" } } },
+                    { $limit: 1 }
+                ]);;
+                if (category[0]) {
+                    const restaurants = await restaurant.find({ categoryId: category[0]._id }).sort({ rating: -1 }).limit(5);
+                    const restaurantNames = restaurants.map(restaurant => restaurant.ResName).join(', ');
+                    CmdChatText = `System prompt: We have: ${restaurantNames}. Tell the user that he can choose from these restaurants then you can search for the one he chooses.`
+                } else {
+                    CmdChatText = "System prompt: I could not find a category with that name, Tell the user that we don't have it"
                 }
                 
 
                 //Mostafa mahmnoud's code Here
 
-                console.log("Restaurants array:")
-
-              CmdChatText = "System prompt: We have: american buger, chinese food, italian pizza, mexican food. Tell the user that he can choose from them."
-                
+              
             }else{
             // if(containedWord === "Restaurant:"){
-                const ResToSearch = aiText.replace(/Restaurant: /g, '').replace(/\.$/, '');;
+                const ResToSearch = aiText.replace(/Restaurant:\s*/, '').trim();
                 console.log("Restaurant to search:", ResToSearch)
                 const FindRestaurant = await restaurant.aggregate([
                     { $match: { ResName: { $regex: ResToSearch, $options: "i" } } },
@@ -129,7 +127,7 @@ const SendMessageAI=async(req,res)=>{
             // }
             // if(containedWord === "Meal:"){
                 if(CmdChatText === null){
-                  const mealToSearch = aiText.replace(/Meal: /g, '').replace(/\.$/, '');
+                  const mealToSearch = aiText.trim().replace(/Meal: /g, '').replace(/\.$/, '').trim();;
                   console.log("Meal to search:", mealToSearch);
                   
                   // Remove spaces from the mealToSearch variable
