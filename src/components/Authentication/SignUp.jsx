@@ -50,7 +50,7 @@ export default function SignUp() {
 
     if (!result.data.success) {
       // alert(result.data?.msg);
-      toast.error("Error in adding email ", {
+      toast.error("Error in adding email", {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -61,7 +61,7 @@ export default function SignUp() {
       });
     } else {
       // alert(result.data?.msg);
-      toast.success("Added Successfully ", {
+      toast.success("Added Successfully", {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,

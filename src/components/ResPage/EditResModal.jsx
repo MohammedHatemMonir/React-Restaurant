@@ -13,6 +13,7 @@ function EditResModal({ openModal, closeModal, resName, resId }) {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm();
 
@@ -246,7 +247,10 @@ function EditResModal({ openModal, closeModal, resName, resId }) {
             {showMap.value && (
               <Col sm={12}>
                 <div>
-                  <LeafletMap currentLocation={currentLocation} />
+                  <LeafletMap
+                    currentLocation={currentLocation}
+                    setValue={setValue}
+                  />
                 </div>
               </Col>
             )}

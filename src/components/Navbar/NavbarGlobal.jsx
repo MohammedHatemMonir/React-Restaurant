@@ -91,9 +91,9 @@ export default function NavbarGlobal() {
               <NavDropdown.Item
                 as={Link}
                 className="text-decoration-none text-dark"
-                to="/profile"
+                to="/edit"
               >
-                My account
+                Edit Profile
               </NavDropdown.Item>
               {/* Dashboard for admin only */}
               {UserData.value.role == "ADMIN" && (

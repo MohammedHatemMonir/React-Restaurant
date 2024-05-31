@@ -13,6 +13,7 @@ const EditProfile = () => {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm();
   const currentLocation = useSignal("");
@@ -36,14 +37,14 @@ const EditProfile = () => {
   });
 
   const onSubmit = async (data) => {
-     // this new data from registers in useForm hook
+    // this new data from registers in useForm hook
     let userImg = null;
 
     if (data.userImg[0]) userImg = await convertBase64(data.userImg[0]);
 
-          data.userImg = userImg;
+    data.userImg = userImg;
 
-      console.log("new data", data);
+    console.log("new data", data);
     const result = await m.mutateAsync(data);
     console.log("data added", result);
 
@@ -82,8 +83,8 @@ const EditProfile = () => {
               {errors.name && (
                 <span className="text-danger">{errors.name.message}</span>
               )}
-            </div>  
-             <div className="form-group col-md-6">
+            </div>
+            <div className="form-group col-md-6">
               <label htmlFor="my-img">Profile Image</label>
               <input
                 {...register("userImg", {
@@ -98,7 +99,7 @@ const EditProfile = () => {
                 <span className="text-danger ">{errors.userImg.message}</span>
               )}
             </div>
-          </div> 
+          </div>
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
@@ -219,7 +220,10 @@ const EditProfile = () => {
             {showMap.value && (
               <div className="form-group col-md-12">
                 <div>
-                  <LeafletMap currentLocation={currentLocation} />
+                  <LeafletMap
+                    currentLocation={currentLocation}
+                    setValue={setValue}
+                  />
                 </div>
               </div>
             )}
