@@ -8,6 +8,7 @@ const searchForUser=async(req,res)=>{ //{name:""}
      const users=await myusers.aggregate([
         {
             $match: {
+               "role":"user",
                 name: { $regex: searchName, $options: "i" } 
               }
         },{$limit:10}
