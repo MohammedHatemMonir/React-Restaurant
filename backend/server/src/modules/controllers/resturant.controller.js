@@ -211,6 +211,7 @@ const deleteresturant = async (req, res) => {
             $set: {
                 role: 'user',
                 resId: null
+                //$unset: { resId: '' }
             }
         })
         console.log("Deleted meals", MealsToDelete,ownerDeleted);
