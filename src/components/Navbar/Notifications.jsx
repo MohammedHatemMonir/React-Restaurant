@@ -17,7 +17,7 @@ const NotificationDropdown = () => {
       ? JSON.parse(localStorage.getItem(`myData-${UserData.value.id}`))
       : []
   );
-  console.log("medooo", localStorage.getItem(`myData-${UserData.value.id}`));
+  // console.log("medooo", localStorage.getItem(`myData-${UserData.value.id}`));
   // console.log("UserData.value.id", UserData.value.id);
   const newNotifications = useSignal(0);
   const socket = io("http://localhost:5001", { withCredentials: true });
