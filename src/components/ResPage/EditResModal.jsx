@@ -7,6 +7,7 @@ import LeafletMap from "../Map/LeafletMap";
 import { useMutation, useQueryClient } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 import { convertBase64 } from "../../Globals";
+import { useQuery } from "react-query";
 
 function EditResModal({ openModal, closeModal, resName, resId }) {
   const {
@@ -24,6 +25,19 @@ function EditResModal({ openModal, closeModal, resName, resId }) {
   const myMapBtn = useSignal(true);
   const myCategoryBtn = useSignal(true);
   const newCategory = useSignal("");
+
+  const getCategoryiesQuery = useQuery({
+    queryKey: ["getAllCategory"],
+    // cacheTime: 600000,
+    // onSuccess: onSuccess,
+    // onError: onError,
+    queryFn: async () => {
+      let url = `/getAllCategory`;
+      const result = await apiClient.get(url);
+      // console.log("hemaaaa", result);
+      return result;
+    },
+  });
 
   // Display or Hide Map
   function handleMap() {
@@ -131,17 +145,24 @@ function EditResModal({ openModal, closeModal, resName, resId }) {
                 <Form.Label>New Category</Form.Label>
                 <Form.Select
                   value={null}
-                  {...register("Category", {
+                  {...register("category", {
                     // required: "Please select a category",
                   })}
                 >
-                  <option disabled>Please Select ...</option>
-                  <option value="American">American</option>
-                  <option value="Arabic">Arabic</option>
-                  <option value="Desserts">Desserts</option>
+                  {!getCategoryiesQuery.isLoading &&
+                    getCategoryiesQuery.data?.data?.categories?.map(
+                      (category, index) => (
+                        <option
+                          key={`${index}+${category._id}`}
+                          value={category._id}
+                        >
+                          {category.category}
+                        </option>
+                      )
+                    )}
                 </Form.Select>
                 <span className="error" style={{ color: "red" }}>
-                  {errors["Category"] && errors["Category"].message}
+                  {errors["category"] && errors["category"].message}
                 </span>
               </Form.Group>
             </Col>
