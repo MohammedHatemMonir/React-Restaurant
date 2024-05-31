@@ -19,7 +19,12 @@ export default function ResPage() {
   const filterType = useSignal([]);
 
   const getCategoryName = (e) => {
-    categoryName.value = [...categoryName.value, e.target.name];
+
+    if(categoryName.value.includes(e.target.name)){
+      categoryName.value = categoryName.value.filter((item) => item !== e.target.name);
+    }else{
+      categoryName.value = [...categoryName.value, e.target.name];
+    }
     // categoryName.value = e.target.name;
     console.log("categoryName", categoryName.value);
   };
@@ -125,7 +130,7 @@ export default function ResPage() {
                   {!q.isLoading &&
                     Array.isArray(q.data?.data) &&
                     q.data.data.map((data, index) => 
-                      categoryName.value == data.categoryId.category && (
+                      (categoryName.value?.length === 0 || categoryName.value?.includes(data.categoryId.category)) &&(
                       <Col
                         key={index}
                         sm={12}
