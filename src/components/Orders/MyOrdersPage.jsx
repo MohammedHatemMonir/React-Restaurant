@@ -67,7 +67,7 @@ const MyOrdersPage = () => {
                       <td>{order.totalPrice.toFixed(2)} $</td>
                       <td>{formattedDate}</td>
                       <td>{order.status}</td>
-                      {/* <td>PayPal</td> */}
+                      {/* <td>PayPal</td> */} 
                       {/* <td>{order.totalPrice > 50 ? "Delivery" : "PayPal"}</td> */}
                     </tr>
                   </LinkContainer>

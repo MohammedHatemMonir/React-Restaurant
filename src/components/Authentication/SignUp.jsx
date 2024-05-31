@@ -25,6 +25,7 @@ export default function SignUp() {
     handleSubmit,
     register,
     watch,
+    setValue,
     formState: { errors },
   } = useForm();
 
@@ -49,7 +50,7 @@ export default function SignUp() {
 
     if (!result.data.success) {
       // alert(result.data?.msg);
-      toast.error("Error in adding this order ", {
+      toast.error("Error in adding email ", {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -315,7 +316,10 @@ export default function SignUp() {
                   {showMap.value && (
                     <Col sm={12}>
                       <div>
-                        <LeafletMap currentLocation={currentLocation} />
+                        <LeafletMap
+                          currentLocation={currentLocation}
+                          setValue={setValue}
+                        />
                       </div>
                     </Col>
                   )}

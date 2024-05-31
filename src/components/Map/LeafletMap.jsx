@@ -22,6 +22,7 @@ const customMarkerIcon = L.icon({
 function LeafletMap({
   userLocation = useSignal([51.505, -0.09]),
   currentLocation = useSignal("Your Location"),
+  setValue,
 }) {
   const isLoading = useSignal(true);
   const defaultZoom = 14;
@@ -43,6 +44,7 @@ function LeafletMap({
         );
         const data = await response.json();
         currentLocation.value = data.display_name;
+        setValue("location", data.display_name);
       } catch (error) {
         console.error("Error getting user location:", error);
         isLoading.value = false;
@@ -62,6 +64,7 @@ function LeafletMap({
       console.log("New marker position:", [lat, lng]);
       console.log("New location:", data.display_name);
       currentLocation.value = data.display_name;
+      setValue("location", data.display_name);
     } catch (error) {
       console.error("Error fetching location:", error);
     }
@@ -82,7 +85,6 @@ function LeafletMap({
 
   return (
     <div>
-      {/* <h1 className="text-center font-weight-bold p-2">Leaflet Map</h1> */}
       {isLoading.value ? (
         <MapLoader />
       ) : (
