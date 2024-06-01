@@ -7,6 +7,8 @@ import LeafletMap from "./../Map/LeafletMap";
 import { Link } from "react-router-dom";
 import { useMutation, useQueryClient } from "react-query";
 import { apiClient } from "../../Data/apiclient";
+import { toast } from "react-toastify";
+
 const EditProfile = () => {
   const queryClient = useQueryClient();
   const {
@@ -48,6 +50,29 @@ const EditProfile = () => {
     const result = await m.mutateAsync(data);
     console.log("data added", result);
 
+    // Toaster here
+    if (m.data?.success) {
+      toast.error(m.data?.data?.message, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else {
+      toast.success(m.data?.data?.message, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+    console.log("m.data?.data", m.data?.data.message);
     queryClient.invalidateQueries({ mutationKey: ["editProfile"] });
     queryClient.refetchQueries(["editProfile"]);
     reset();
