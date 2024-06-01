@@ -255,7 +255,7 @@ export default function SignUp() {
                       Phone Number
                     </label>
                     <input
-                      {...register("phone", {
+                      {...register("phoneNumber", {
                         required: "Phone is required",
                         minLength: {
                           value: 11,
