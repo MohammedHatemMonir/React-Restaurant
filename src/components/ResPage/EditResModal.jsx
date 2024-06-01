@@ -92,8 +92,8 @@ function EditResModal({ openModal, closeModal, resName, resId }) {
     let ResImg = null;
     let ResBanner = null;
 console.log("ResBanner", data.ResBanner[0])
-    if (data.ResImg[0] != null) ResImg = await convertBase64(data.resImg[0]);
-    if (data.ResBanner[0] != null) ResBanner = await convertBase64(data.resBanner[0]);
+    if (data.ResImg[0] != null) ResImg = await convertBase64(data.ResImg[0]);
+    if (data.ResBanner[0] != null) ResBanner = await convertBase64(data.ResBanner[0]);
 
         data.ResImg = ResImg;
         data.ResBanner = ResBanner;
