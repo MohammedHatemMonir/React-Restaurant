@@ -156,7 +156,7 @@ app.get('/auth/google/callback',
     try {
     // Redirect back to the React.js application with the authentication token {name:req.user.name.givenName, email:req.user.emails[0].value, role:"user", id:req.user.id, loggedIn:true};
     req.session.user = req.user;
-    req.session.user.google = true;
+    req.session.google = true;
 
     req.session.save(err => {
       if(err) {

@@ -70,6 +70,8 @@ export default function TheRouter() {
           : localStorage.removeItem("UserData");
         // console.log("session", result.data);
 
+
+        console.log("session", result.data);
         return result;
       },
     });

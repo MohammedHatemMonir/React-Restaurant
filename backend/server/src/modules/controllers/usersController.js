@@ -164,7 +164,7 @@ const session = async (req, res) => {
         email: user.email,
         userImg: user.userImg,
         msg: `Welcome ${user.name}`,
-        google: user.google,
+        google: req.session.google,
         loggedIn: true,
       });
     } else {
