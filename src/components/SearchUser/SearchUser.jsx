@@ -3,8 +3,12 @@ import { useMutation } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 import { useSignal } from "@preact/signals-react";
 import Select from "react-select";
+import { useEffect } from "react";
 
-const SearchUser = ({ setValue }) => {
+const SearchUser = ({ setValue, setError }) => {
+  // useEffect(() => {
+  //   setError("ownerId", { type: "custom", message: "custom message" });
+  // }, []);
   const searchTerm = useSignal("");
   const searchResults = useSignal([]);
   const selectedOwner = useSignal();

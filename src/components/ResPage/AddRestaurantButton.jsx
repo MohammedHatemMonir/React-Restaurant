@@ -10,12 +10,14 @@ import { convertBase64 } from "../../Globals";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 import SearchUser from "./../SearchUser/SearchUser";
+import { toast } from "react-toastify";
 
 export default function AddRestaurantButton() {
   const {
     handleSubmit,
     register,
     setValue,
+    setError,
     formState: { errors, isDirty },
     reset,
   } = useForm();
@@ -87,6 +89,28 @@ export default function AddRestaurantButton() {
     queryClient.invalidateQueries({ queryKey: ["getAllCategory"] });
     queryClient.refetchQueries({ queryKey: ["getAllCategory"] });
     getCategoryiesQuery.refetch();
+
+    if (!result?.data) {
+      toast.error("Error adding category", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else {
+      toast.success("Category added successfully", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
   };
 
   // Add new restaurant in db
@@ -119,11 +143,34 @@ export default function AddRestaurantButton() {
     const ret = await m.mutateAsync(data);
     //Handle add restaurant logic herea
 
+    // Toaster here
     if (ret) {
       ShowSignal.value = false;
       queryClient.invalidateQueries(["getAllresturant"]);
       queryClient.refetchQueries(["getAllresturant"]);
       reset();
+
+      if (!ret?.data) {
+        toast.error("Error adding restaurant", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      } else {
+        toast.success("Restaurant added Successfully", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
     }
   }
 
@@ -143,7 +190,10 @@ export default function AddRestaurantButton() {
         <>
           <Form>
             <Row>
-              <SearchUser setValue={setValue} />
+              <SearchUser setValue={setValue} setError={setError} />
+              <span className="error" style={{ color: "red" }}>
+                {errors["ownerId"] && errors["ownerId"].message}
+              </span>
               <Col sm={6}>
                 <Form.Label>Name</Form.Label>
                 <Form.Group className="mb-2 mb-sm-0">

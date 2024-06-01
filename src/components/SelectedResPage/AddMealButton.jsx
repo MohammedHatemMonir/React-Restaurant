@@ -7,6 +7,7 @@ import AddIcon from "../../Icons/AddIcon";
 import { useMutation, useQueryClient } from "react-query";
 import { convertBase64 } from "../../Globals";
 import { apiClient } from "../../Data/apiclient";
+import { toast } from "react-toastify";
 
 export default function AddMealButton({ Resid }) {
   const {
@@ -45,6 +46,30 @@ export default function AddMealButton({ Resid }) {
     ShowSignal.value = false;
     queryClient.invalidateQueries({ mutationKey: ["addNewMeal"] });
     queryClient.refetchQueries(["addNewMeal"]);
+
+    if (!result?.data) {
+      // alert(result.data?.msg);
+      toast.error("Error in adding meal", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else {
+      // alert(result.data?.msg);
+      toast.success("Added Successfully", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
 
     //   ShowSignal.value = false;
     //   queryClient.invalidateQueries({ mutationKey: ["addMeal"] });

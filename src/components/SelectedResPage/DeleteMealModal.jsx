@@ -2,6 +2,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useMutation, useQueryClient } from "react-query";
 import { apiClient } from "../../Data/apiclient";
+import { toast } from "react-toastify";
 
 function DeleteMealModal({ mealId, mealName, openModal, closeModal }) {
   console.log("hemaMeal", mealId);
@@ -25,6 +26,32 @@ function DeleteMealModal({ mealId, mealName, openModal, closeModal }) {
     closeModal();
     queryClient.invalidateQueries({ mutationKey: ["deleteMeal"] });
     queryClient.refetchQueries(["deleteMeal"]);
+
+    if (!result?.data) {
+      toast.error("Error deleting meal", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else {
+      toast.success("Meal added successfully", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+
+
+
+
   };
 
   return (
