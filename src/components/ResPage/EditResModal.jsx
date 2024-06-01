@@ -8,6 +8,7 @@ import { useMutation, useQueryClient } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 import { convertBase64 } from "../../Globals";
 import { useQuery } from "react-query";
+import { toast } from "react-toastify";
 
 function EditResModal({ openModal, closeModal, resName, resId }) {
   const {
@@ -91,12 +92,13 @@ function EditResModal({ openModal, closeModal, resName, resId }) {
     // console.log("new data", data); // this new data from registers in useForm hook
     let ResImg = null;
     let ResBanner = null;
-console.log("ResBanner", data.ResBanner[0])
+    console.log("ResBanner", data.ResBanner[0]);
     if (data.ResImg[0] != null) ResImg = await convertBase64(data.ResImg[0]);
-    if (data.ResBanner[0] != null) ResBanner = await convertBase64(data.ResBanner[0]);
+    if (data.ResBanner[0] != null)
+      ResBanner = await convertBase64(data.ResBanner[0]);
 
-        data.ResImg = ResImg;
-        data.ResBanner = ResBanner;
+    data.ResImg = ResImg;
+    data.ResBanner = ResBanner;
 
     console.log("new data", data);
 
@@ -106,6 +108,29 @@ console.log("ResBanner", data.ResBanner[0])
     closeModal();
     queryClient.invalidateQueries({ mutationKey: ["updateRestaurant"] });
     queryClient.refetchQueries(["updateRestaurant"]);
+
+    // Toaster here
+    if (!result?.data) {
+      toast.error("Error updating restaurant", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else {
+      toast.success("Restaurant updated successfully", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
   };
 
   return (

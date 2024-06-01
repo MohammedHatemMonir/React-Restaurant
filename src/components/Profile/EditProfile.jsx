@@ -51,10 +51,10 @@ const EditProfile = () => {
     console.log("data added", result);
 
     // Toaster here
-    if (m.data?.success) {
-      toast.error(m.data?.data?.message, {
+    if (!result?.data) {
+      toast.error("Error updating profile", {
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -62,9 +62,9 @@ const EditProfile = () => {
         progress: undefined,
       });
     } else {
-      toast.success(m.data?.data?.message, {
+      toast.success("Updated Successfully", {
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
