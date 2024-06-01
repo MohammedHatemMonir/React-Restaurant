@@ -46,7 +46,8 @@ export default function AddMealButton({ Resid }) {
     ShowSignal.value = false;
     queryClient.invalidateQueries({ mutationKey: ["addNewMeal"] });
     queryClient.refetchQueries(["addNewMeal"]);
-
+    reset();
+    // Toaster here
     if (!result?.data) {
       // alert(result.data?.msg);
       toast.error("Error in adding meal", {
@@ -70,13 +71,6 @@ export default function AddMealButton({ Resid }) {
         progress: undefined,
       });
     }
-
-    //   ShowSignal.value = false;
-    //   queryClient.invalidateQueries({ mutationKey: ["addMeal"] });
-    //   queryClient.refetchQueries(["addMeal"]);    // if (result) {
-
-    //   reset();
-    // }
   }
 
   return (
