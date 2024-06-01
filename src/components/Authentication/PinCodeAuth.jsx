@@ -1,26 +1,26 @@
-import React, { useState } from "react";
 import "./PinCodeAuth.scss";
+import React, { useState } from "react";
 import { Button, Form, FormGroup, Input } from "reactstrap";
 
 const PinCodeAuth = () => {
   const [pins, setPins] = useState(Array(6).fill(""));
   const [message, setMessage] = useState("");
 
-  const handleChange = (e, index) => {
+  const handleChange = (index, value) => {
     const newPins = [...pins];
-    newPins[index] = e.target.value;
+    newPins[index] = value;
     setPins(newPins);
 
     // Focus the next input
-    if (e.target.value && index < 5) {
+    if (value && index < 5) {
       document.getElementById(`pin-${index + 1}`).focus();
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Replace this with actual authentication logic
-    if (pins.join("") === "123456") {
+    const enteredPin = pins.join("");
+    if (enteredPin === "123456") {
       setMessage("PIN code is correct!");
     } else {
       setMessage("Invalid PIN code.");
@@ -28,7 +28,7 @@ const PinCodeAuth = () => {
   };
 
   return (
-    <div className="pin-auth-container">
+    <div className="pin-auth-container" style={{ marginTop: "25vh" }}>
       <h2 className="text-center">Enter PIN Code</h2>
       <Form onSubmit={handleSubmit} className="pin-form">
         <FormGroup className="pin-inputs">
@@ -38,7 +38,7 @@ const PinCodeAuth = () => {
               id={`pin-${index}`}
               type="text"
               value={pin}
-              onChange={(e) => handleChange(e, index)}
+              onChange={(e) => handleChange(index, e.target.value)}
               maxLength="1"
               className="pin-input"
             />

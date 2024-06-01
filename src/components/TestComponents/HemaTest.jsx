@@ -5,7 +5,7 @@ import "./HemaTest.scss";
 import { useSignal } from "@preact/signals-react";
 import { useForm } from "react-hook-form";
 
-const PinCodeAuth = () => {
+const HemaTest = () => {
   const msg = useSignal("");
   const {
     register,
@@ -107,4 +107,4 @@ const PinCodeAuth = () => {
   );
 };
 
-export default PinCodeAuth;
+export default HemaTest;

@@ -29,13 +29,13 @@ import MyOrdersPage from "./../Orders/MyOrdersPage";
 import CartBody from "../Navbar/CartBody";
 import AdminDashboard from "./../Dashboard/AdminDashboard";
 import PhoneAuth from "./../Authentication/PhoneAuth";
-import PinCodeAuth from "./../TestComponents/HemaTest";
+import PinCodeAuth from './../Authentication/PinCodeAuth';
 
 export default function TheRouter() {
   const navigate = useNavigate();
 
   const { pathname } = useLocation();
-  const protectedpaths = ["login", "signup", "forget", "reset", "phoneAuth"];
+  const protectedpaths = ["login", "signup", "forget", "reset", "phoneAuth" , "PinCodeAuth"];
 
   const navigateLogic = () => {
     const firstSegment = pathname.split("/")[1];

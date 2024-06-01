@@ -267,9 +267,9 @@ export default function SignUp() {
                       id="phone"
                       placeholder="01*********"
                     />
-                    {errors.phone && (
+                    {errors.phoneNumber && (
                       <span className="text-danger">
-                        {errors.phone.message}
+                        {errors.phoneNumber.message}
                       </span>
                     )}
                   </div>

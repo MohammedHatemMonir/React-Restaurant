@@ -1,15 +1,20 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSignal } from "@preact/signals-react";
 import { useForm } from "react-hook-form";
 
 const PinCodeAuth = () => {
   const msg = useSignal("");
+  const navigate = useNavigate();
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
+  // /PinCodeAuth
 
+  function onSubmit() {
+    navigate("/PinCodeAuth");
+  }
   return (
     <div className="container text-center">
       <div className="row justify-content-center" style={{ marginTop: "30vh" }}>
@@ -21,7 +26,7 @@ const PinCodeAuth = () => {
             Enter your phone and email below and we will send you a reset code
           </p>
           {/* onSubmit={handleSubmit(onSubmit)} */}
-          <form onSubmit={handleSubmit()}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             {/* 1 */}
             <div className="form-group">
               <input
