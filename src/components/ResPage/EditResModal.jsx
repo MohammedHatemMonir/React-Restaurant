@@ -272,7 +272,7 @@ function EditResModal({ openModal, closeModal, resName, resId }) {
                 type="text"
                 className="form-control"
                 id="location"
-                value={currentLocation}
+                defaultValue={currentLocation}
                 placeholder="Location"
               />
               {errors.location && (

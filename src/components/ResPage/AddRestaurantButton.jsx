@@ -190,10 +190,12 @@ export default function AddRestaurantButton() {
         <>
           <Form>
             <Row>
-              <SearchUser setValue={setValue} setError={setError} 
-              {...register("ownerId", {
-                required: "Please select an owner",
-              })}
+              <SearchUser
+                setValue={setValue}
+                setError={setError}
+                {...register("ownerId", {
+                  required: "Please select an owner",
+                })}
               />
 
               <span className="error" style={{ color: "red" }}>
@@ -321,7 +323,7 @@ export default function AddRestaurantButton() {
                   type="text"
                   className="form-control"
                   id="location"
-                  value={currentLocation}
+                  defaultValue={currentLocation}
                   placeholder="Location"
                 />
                 <span className="error" style={{ color: "red" }}>
