@@ -189,7 +189,7 @@ export default function AddRestaurantButton() {
                 </Form.Group>
               </Col>
               {/* category btn */}
-              <div className="col-sm-12 col-lg-3 d-flex justify-content-center align-items-end">
+              <div className="col-sm-12 col-lg-3 d-flex justify-content-center align-items-center">
                 <Button
                   className={`${
                     myCategoryBtn.value
@@ -257,6 +257,7 @@ export default function AddRestaurantButton() {
                 <label htmlFor="location">Location</label>
                 <input
                   {...register("location", {
+                    required: "Location is required",
                     minLength: {
                       value: 3,
                       message: "Location must have at least 3 characters",
@@ -268,11 +269,9 @@ export default function AddRestaurantButton() {
                   value={currentLocation}
                   placeholder="Location"
                 />
-                {errors.location && (
-                  <span className="text-danger font-weight-bold">
-                    {errors.location.message}
-                  </span>
-                )}
+                <span className="error" style={{ color: "red" }}>
+                  {errors["location"] && errors["location"].message}
+                </span>
               </div>
               {/* map btn */}
               <div className="form-group col-sm-12 col-lg-2 d-flex justify-content-center align-items-end">
@@ -288,7 +287,10 @@ export default function AddRestaurantButton() {
               {showMap.value == true && (
                 <Col sm={12}>
                   <div>
-                    <LeafletMap currentLocation={currentLocation} />
+                    <LeafletMap
+                      currentLocation={currentLocation}
+                      setValue={setValue}
+                    />
                   </div>
                 </Col>
               )}

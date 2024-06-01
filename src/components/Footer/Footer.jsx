@@ -74,7 +74,7 @@ const Footer = () => {
                     Get Started
                     <span />
                   </h5>
-                  <p>Get access to your full Training and Marketing Suite.</p>
+                  <p>Get access to your full Marketing Suite.</p>
                   <Link className="btn my-3">Subscribe Now</Link>
                 </div>
               </div>

@@ -92,7 +92,7 @@ export default function ResCard({
                 <FaTag className="text-decoration-none" /> {category}
               </Link>
             </div>
-            <h3 style={{ fontSize: "20px" }}>{name}</h3>
+            <h3 style={{ fontSize: "20px", fontWeight: "bold" }}>{name}</h3>
             <Link to={`/restaurant/${id}/${name}`} className="w-100 btn">
               <span>
                 <FaCompass />
