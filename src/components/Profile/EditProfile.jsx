@@ -83,8 +83,8 @@ const EditProfile = () => {
   // const onSubmit = () => {};
 
   return (
-    <div className="edit-profile">
-      <div className="container form__wrapper">
+    <div className="edit-profile ">
+      <div className="container form__wrapper mt-0">
         <h2>Edit Your Profile</h2>
         <form onSubmit={handleSubmit(onSubmit)} id="myForm">
           <div className="form-row">
@@ -224,7 +224,7 @@ const EditProfile = () => {
                 type="text"
                 className="form-control"
                 id="location"
-                value={currentLocation}
+                defaultValue={currentLocation}
                 placeholder="Location"
               />
               {errors.location && (
