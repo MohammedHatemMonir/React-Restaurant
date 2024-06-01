@@ -147,28 +147,31 @@ const EditProfile = () => {
             )}
           </div>
           <div className="form-row">
-            <div className="form-group col-md-6">
-              <label htmlFor="old-pass">Old Password</label>
-              <input
-                {...register("oldPass", {
-                  // required: "Old password is required",
-                  minLength: {
-                    value: 5,
-                    message: "Password must have at least 5 characters",
-                  },
-                })}
-                type="password"
-                defaultValue={UserData.value.password}
-                // required
-                className="form-control"
-                id="old-pass"
-                placeholder="*******"
-              />
-              {errors.oldPass && (
-                <span className="text-danger ">{errors.oldPass.message}</span>
-              )}
-            </div>
-            <div className="form-group col-md-6">
+            {!UserData.value.google && (
+              <div className="form-group col-md-12">
+                <label htmlFor="old-pass">Old Password</label>
+                <input
+                  {...register("oldPass", {
+                    // required: "Old password is required",
+                    minLength: {
+                      value: 5,
+                      message: "Password must have at least 5 characters",
+                    },
+                  })}
+                  type="password"
+                  defaultValue={UserData.value.password}
+                  // required
+                  className="form-control"
+                  id="old-pass"
+                  placeholder="*******"
+                />
+                {errors.oldPass && (
+                  <span className="text-danger ">{errors.oldPass.message}</span>
+                )}
+              </div>
+            )}
+
+            <div className="form-group col-md-12">
               <label htmlFor="new-pass">New Password</label>
               <input
                 {...register("password", {
