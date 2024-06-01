@@ -2,7 +2,6 @@ import { useMutation } from "react-query";
 import { Link, useNavigate } from "react-router-dom";
 import { apiClient } from "../../Data/apiclient";
 import { Cart, UserData } from "../../Globals";
-import { AiOutlineLogin } from "react-icons/ai";
 
 export default function LogoutButton(props) {
   const navigate = useNavigate();
@@ -30,7 +29,6 @@ export default function LogoutButton(props) {
 
   return (
     <Link {...props} onClick={LogoutFunction}>
-      {/* <AiOutlineLogin />  */}
       Log out
     </Link>
   );

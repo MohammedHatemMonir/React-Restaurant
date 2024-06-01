@@ -1,29 +1,40 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Navbar, Nav, NavDropdown, Container } from "react-bootstrap";
-import { FaEnvelope, FaCog } from "react-icons/fa";
-// import "./NavBarGlobal.scss";
-import { UserData } from "../../Globals";
-import LogoutButton from "../Authentication/LogoutButton";
+import { UserData, Cart } from "../../Globals";
+// import LogoutButton from "../Authentication/LogoutButton";
 import { useMutation } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 import DineMeLogo from "../../images/DineMeLogo.png";
 import { useSignal } from "@preact/signals-react";
-// import CartHandler from "./CartHanlder";
-
-import {
-  FaShoppingCart,
-  FaSearch,
-  FaClipboardList,
-  FaBars,
-  FaUser,
-  FaHome,
-  FaMapMarkerAlt,
-} from "react-icons/fa";
-import { AiOutlineLogin } from "react-icons/ai";
+import { FaShoppingCart, FaClipboardList, FaUser } from "react-icons/fa";
 import Tutorials from "./../TestComponents/Tutorials";
 import NotificationDropdown from "./Notifications";
 
 export default function NavbarGlobal() {
+  // Log out here
+  const navigate = useNavigate();
+  const m1 = useMutation({
+    mutationKey: [],
+    // cacheTime: 600000,
+    // onSuccess: onSuccess,
+    // onError: onError,
+    mutationFn: async (params) => {
+      console.log("trying to load");
+      let url = "/api/users/logout";
+      console.log("posting to ", url);
+      return await apiClient.post(url, params);
+    },
+  });
+
+  const LogoutFunction = async function () {
+    const result = await m1.mutateAsync();
+    if (result.data.success) {
+      UserData.value = {};
+      Cart.value = [];
+      navigate("/login");
+    }
+  };
+
   const status = useSignal("none");
   const m = useMutation({
     mutationKey: [],
@@ -106,51 +117,13 @@ export default function NavbarGlobal() {
                 </NavDropdown.Item>
               )}
 
-              <NavDropdown.Item as={Link}>
-                <LogoutButton
-                  as={Link}
-                  className="text-decoration-none text-dark"
-                />
+              <NavDropdown.Item as={Link} onClick={LogoutFunction}>
+                Log out
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
-
-    // <>
-    //   <header className="header" style={{ transform: "scale(0.90)" }}>
-    //     <Link to="/" className="logo">
-    //       <img
-    //         src={DineMeLogo}
-    //         alt="DineMeLogo"
-    //         style={{
-    //           width: "80px",
-    //           height: "80px",
-    //           objectFit: "contain",
-    //           transform: "scale(1.4)",
-    //         }}
-    //       />
-    //     </Link>
-
-    //     <div className="icons">
-
-    //       <Link to="/profile" id="login-btn" className="p-3 mx-2">
-    //         <FaUser />
-    //       </Link>
-    //       {/* <Link to="/map" className="p-3 mx-2">
-    //         <FaMapMarkerAlt />
-    //       </Link> */}
-    //       <Link to="/myorders" className="p-3 mx-2">
-    //         <FaClipboardList />
-    //       </Link>
-    //       <Link to="/mycart" className="p-3 mx-2">
-    //         <FaShoppingCart />
-    //       </Link>
-
-    //       <LogoutButton className="p-3 mx-2" />
-    //     </div>
-    //   </header>
-    // </>
   );
 }
