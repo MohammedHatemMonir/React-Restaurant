@@ -52,6 +52,7 @@ const signup = async (req, res) => {
       email,
       password: hashedPassword,
       userImg: UserImage,
+      phoneNumber: phoneNumber,
     });
 
     return res.json({
