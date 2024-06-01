@@ -42,7 +42,7 @@ const EditProfile = () => {
     // this new data from registers in useForm hook
     let userImg = null;
 
-    if (data.userImg[0]) userImg = await convertBase64(data.userImg[0]);
+    if (data.userImg[0] != null) userImg = await convertBase64(data.userImg[0]);
 
     data.userImg = userImg;
 

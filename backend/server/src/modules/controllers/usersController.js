@@ -326,7 +326,7 @@ const editProfile = async (req, res) => {
     }
 
     await user.save();
-
+    req.session.user = user;
     return res.json({ message: "User updated successfully", user });
   } catch (error) {
     console.error("Error updating user:", error);

@@ -35,6 +35,7 @@ function EditMealModal({ openModal, closeModal, mealName, mealId }) {
 
     let MealImg = null;
     if (data.MealImg[0] != null) MealImg = await convertBase64(data.MealImg[0]);
+    
     data.MealImg = MealImg;
     console.log("Data To Send", data);
     const result = await m.mutateAsync(data);
