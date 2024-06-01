@@ -15,7 +15,7 @@ $box-shadow: 0 16px 16px rgba(0, 0, 0, 0.05);
 
 .res-blogs {
   .box-container {
-    @include grid(25rem);
+    @include grid(22rem);
 
     .box {
       border-radius: 0.5rem;
@@ -41,7 +41,7 @@ $box-shadow: 0 16px 16px rgba(0, 0, 0, 0.05);
 
         h3 {
           position: absolute;
-          z-index: 10;
+          // z-index: 10;
           // top: 1rem;
           top: 2rem;
           left: -100%;

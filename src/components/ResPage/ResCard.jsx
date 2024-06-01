@@ -46,7 +46,7 @@ export default function ResCard({
     <section
       className="res-blogs"
       id="blogs"
-      style={{ transform: "scale(0.75)" }}
+      style={{ transform: "scale(0.80)" }}
     >
       <div className="text-decoration-none box-container">
         <div
@@ -64,7 +64,7 @@ export default function ResCard({
                 <div
                   onClick={onOpenEdit}
                   className="position-absolute top-0 end-0"
-                  style={{ margin: "20px" }}
+                  style={{ margin: "40px" }}
                 >
                   <IoSettings
                     style={{

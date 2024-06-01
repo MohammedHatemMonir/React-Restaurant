@@ -148,49 +148,55 @@ const EditProfile = () => {
           </div>
           <div className="form-row">
             {!UserData.value.google && (
-              <div className="form-group col-md-12">
-                <label htmlFor="old-pass">Old Password</label>
-                <input
-                  {...register("oldPass", {
-                    // required: "Old password is required",
-                    minLength: {
-                      value: 5,
-                      message: "Password must have at least 5 characters",
-                    },
-                  })}
-                  type="password"
-                  defaultValue={UserData.value.password}
-                  // required
-                  className="form-control"
-                  id="old-pass"
-                  placeholder="*******"
-                />
-                {errors.oldPass && (
-                  <span className="text-danger ">{errors.oldPass.message}</span>
-                )}
-              </div>
-            )}
+              <>
+                <div className="form-group col-md-12">
+                  <label htmlFor="old-pass">Old Password</label>
+                  <input
+                    {...register("oldPass", {
+                      // required: "Old password is required",
+                      minLength: {
+                        value: 5,
+                        message: "Password must have at least 5 characters",
+                      },
+                    })}
+                    type="password"
+                    defaultValue={UserData.value.password}
+                    // required
+                    className="form-control"
+                    id="old-pass"
+                    placeholder="*******"
+                  />
+                  {errors.oldPass && (
+                    <span className="text-danger ">
+                      {errors.oldPass.message}
+                    </span>
+                  )}
+                </div>
 
-            <div className="form-group col-md-12">
-              <label htmlFor="new-pass">New Password</label>
-              <input
-                {...register("password", {
-                  // required: "New password is required",
-                  minLength: {
-                    value: 5,
-                    message: "Password must have at least 5 characters",
-                  },
-                })}
-                type="password"
-                className="form-control"
-                id="new-pass"
-                // required
-                placeholder="*******"
-              />
-              {errors.password && (
-                <span className="text-danger ">{errors.password.message}</span>
-              )}
-            </div>
+                <div className="form-group col-md-12">
+                  <label htmlFor="new-pass">New Password</label>
+                  <input
+                    {...register("password", {
+                      // required: "New password is required",
+                      minLength: {
+                        value: 5,
+                        message: "Password must have at least 5 characters",
+                      },
+                    })}
+                    type="password"
+                    className="form-control"
+                    id="new-pass"
+                    // required
+                    placeholder="*******"
+                  />
+                  {errors.password && (
+                    <span className="text-danger ">
+                      {errors.password.message}
+                    </span>
+                  )}
+                </div>
+              </>
+            )}
           </div>
 
           <div className="form-row">
