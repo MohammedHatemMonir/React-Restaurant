@@ -200,7 +200,7 @@ function MealDetailsModal({
                     </label>
                     <div className="price pull-right font-weight-bold">
                       <span className="cost text-danger"> {mealPrice}</span>
-                      <span className="currency"> $</span>
+                      <span className="currency">$</span>
                     </div>
                   </li>
                 </ul>
