@@ -60,7 +60,7 @@ const signup = async (req, res) => {
       msg: "Signup successful",
       name,
       email,
-      userImg: newUser.userImg,
+      userImg: newUser.userImg, 
       phoneNumber, 
       location
     });
