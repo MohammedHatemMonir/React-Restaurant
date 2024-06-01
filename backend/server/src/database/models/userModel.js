@@ -52,7 +52,7 @@ const UserSchema = new Schema({
     // },
     phoneNumber:{
         type:Number,
-        required:false
+        required: true
     },
     // location: {
     //     type: String,
@@ -67,6 +67,14 @@ const UserSchema = new Schema({
         type: Date,
         default: () => Date.now()
     },
+    resetCode: {
+        type: String,
+        required: false
+    },
+    resetCodeExp: {
+        type: Date,
+        required: false
+    }
 });
 
 // const User = mongoose.model("User", UserSchema);

@@ -17,6 +17,7 @@ const {Server} = require('socket.io');
 const server = require("http").createServer(app);
 const ChatRouter = require('./modules/Chat/chatRouter.js');
 const dashboardRouterAdmin = require('./modules/routes/dashboard/dashboardRoutesAdmin.js');
+const resetRouter = require('./modules/routes/reset_pass_routes.js');
 
 // const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const wrap = (expressMiddleWare) => (socket, next) => expressMiddleWare(socket.request, {}, next);
@@ -73,7 +74,8 @@ app.use("/api/users", userRouter);
 app.use(SearchRouter)
 app.use('/dashboard',routerTypeComments)
 app.use('/dashboardAdmin',dashboardRouterAdmin)
-io.use(wrap(sessionMiddleware)); 
+app.use(resetRouter);
+io.use(wrap(sessionMiddleware));
 
 
 
@@ -89,13 +91,13 @@ io.on('connection', (socket) => {
   }
 
   socket.join(socket.request.session.user.role);
-  socket.join(socket.request.session.user._id); 
+  socket.join(socket.request.session.user._id);
   console.log('User connected:', socket.request.session.user.name);
 
 
   // io.to(socket.request.session.user._id).emit("new-notification", {message: "hello", time: new Date().toString()});
 
-  
+
   // socket.on('send-notification', (data) => {
   //   console.log('Socket message: ' + data.SendToId + ' ' + data.message);
 
@@ -180,7 +182,7 @@ app.get('/auth/google/callback',
 
 
 //
-//GEMINI 
+//GEMINI
 /////////////////////////////////////////////////////////////////////
 let conversationHistory = [];
 
