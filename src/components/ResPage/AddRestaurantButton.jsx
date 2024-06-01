@@ -145,8 +145,8 @@ export default function AddRestaurantButton() {
             <Row>
               <SearchUser setValue={setValue} />
               <Col sm={6}>
+                <Form.Label>Name</Form.Label>
                 <Form.Group className="mb-2 mb-sm-0">
-                  <Form.Label>Name</Form.Label>
                   <Form.Control
                     type="text"
                     name="ResName"
@@ -188,13 +188,13 @@ export default function AddRestaurantButton() {
                   </span>
                 </Form.Group>
               </Col>
-              {/* category btn */}
-              <div className="col-sm-12 col-lg-3 d-flex justify-content-center align-items-center">
+              <Col sm={12} lg={3}>
+                <Form.Label>Add Category</Form.Label>
                 <Button
                   className={`${
                     myCategoryBtn.value
-                      ? "bg-primary  w-100 mt-3"
-                      : "bg-danger w-100 mt-3"
+                      ? "bg-primary  w-100"
+                      : "bg-danger w-100"
                   }`}
                   onClick={handleCategoryInput}
                 >
@@ -202,7 +202,7 @@ export default function AddRestaurantButton() {
                     ? "Add new category"
                     : "Add new category"}
                 </Button>
-              </div>
+              </Col>
               {showCategoryInput.value && (
                 <Col sm={12} lg={10} className="d-flex justify-content-center">
                   <Form.Control
@@ -227,7 +227,7 @@ export default function AddRestaurantButton() {
                   <Form.Control
                     type="file"
                     name="resImg"
-                    placeholder="Restaurant Image "
+                    placeholder="Restaurant Image"
                     {...register("resImg", {
                       required: "Please add restaurant Image",
                     })}
@@ -253,8 +253,8 @@ export default function AddRestaurantButton() {
                   </span>
                 </Form.Group>
               </Col>
+              <label htmlFor="location">Location</label>
               <div className="form-group col-lg-10">
-                <label htmlFor="location">Location</label>
                 <input
                   {...register("location", {
                     required: "Location is required",
@@ -274,7 +274,7 @@ export default function AddRestaurantButton() {
                 </span>
               </div>
               {/* map btn */}
-              <div className="form-group col-sm-12 col-lg-2 d-flex justify-content-center align-items-end">
+              <div className="col-sm-12 col-lg-2">
                 <Button
                   className={`${
                     myMapBtn.value ? "bg-primary  w-100" : " bg-danger w-100"
