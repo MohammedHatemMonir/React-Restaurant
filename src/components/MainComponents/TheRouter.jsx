@@ -62,6 +62,7 @@ export default function TheRouter() {
           role: result.data.role,
           id: result.data.id,
           userImg: result.data.userImg,
+          google: result.data.google,
           loggedIn: result.data.loggedIn,
         };
         UserData.value.loggedIn
