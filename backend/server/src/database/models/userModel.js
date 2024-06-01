@@ -39,7 +39,7 @@ const UserSchema = new Schema({
         default: null
     },
     location: {
-        type: locationSchema,
+        type: String,
         default: null
     },
     userImg:{
