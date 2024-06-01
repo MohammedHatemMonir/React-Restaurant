@@ -1,4 +1,3 @@
-import "./ResPageBox.scss";
 // import Slider from "./Slider";
 import Footer from "../Footer/Footer";
 import { useQuery } from "react-query";
@@ -9,32 +8,26 @@ import { UserData } from "../../Globals";
 import CookingLoader from "./../Loaders/CookingLoader";
 import ResCard from "./ResCard";
 import Parallax from "./Parallax";
-import ResFilters from "./ResFilters";
+import "./ResFilters.scss";
 import { Col } from "react-bootstrap";
 import { useSignal } from "@preact/signals-react";
 
 export default function ResPage() {
-  const categoryName = useSignal([]); // []
-  const categoryMap = useSignal([]);
+  const categoryName = useSignal([]);
   const filterType = useSignal([]);
 
   const getCategoryName = (e) => {
-
-    if(categoryName.value.includes(e.target.name)){
-      categoryName.value = categoryName.value.filter((item) => item !== e.target.name);
-    }else{
+    if (categoryName.value.includes(e.target.name)) {
+      categoryName.value = categoryName.value.filter(
+        (item) => item !== e.target.name
+      );
+    } else {
       categoryName.value = [...categoryName.value, e.target.name];
     }
     // categoryName.value = e.target.name;
     console.log("categoryName", categoryName.value);
   };
 
-  const categoryNames = ["Burger", "Pizza", "Dessert"];
-
-  // Using forEach to print each category name on a new line
-  categoryMap.value = categoryNames.forEach((category) => category);
-  categoryMap.value;
-  console.log("categoryMap.value", categoryMap.value);
   const q = useQuery({
     queryKey: ["getAllresturant"],
     cacheTime: 3 * 60000, //3 minutes
@@ -73,12 +66,7 @@ export default function ResPage() {
   }
 
   if (q.isLoading) {
-    return (
-      <>
-        <CookingLoader />
-        {/* Loading... */}
-      </>
-    );
+    return <CookingLoader />;
   }
 
   if (q.data)
@@ -124,60 +112,38 @@ export default function ResPage() {
                 </div>
                 {/* <ResFilters /> */}
               </Col>
-              {/* ResCards based on category name */}
+              {/* ResCards */}
               <Col sm={12} md={10}>
                 <Row>
                   {!q.isLoading &&
                     Array.isArray(q.data?.data) &&
-                    q.data.data.map((data, index) => 
-                      (categoryName.value?.length === 0 || categoryName.value?.includes(data.categoryId.category)) &&(
-                      <Col
-                        key={index}
-                        sm={12}
-                        md={6}
-                        lg={4}
-                        className="p-0 m-0"
-                      >
-                        <ResCard
-                          id={data._id}
-                          name={data.ResName}
-                          ResImg={data.ResImg}
-                          MealImg={data.MealImg}
-                          stars1={data.rating}
-                          category={data.categoryId.category}
-                          ownerId={data.ownerId}
-                        />
-                      </Col>
-                    ))}
+                    q.data.data.map(
+                      (data, index) =>
+                        (categoryName.value?.length === 0 ||
+                          categoryName.value?.includes(
+                            data.categoryId.category
+                          )) && (
+                          <Col
+                            key={index}
+                            sm={12}
+                            md={6}
+                            lg={4}
+                            className="p-0 m-0"
+                          >
+                            <ResCard
+                              id={data._id}
+                              name={data.ResName}
+                              ResImg={data.ResImg}
+                              MealImg={data.MealImg}
+                              stars1={data.rating}
+                              category={data.categoryId.category}
+                              ownerId={data.ownerId}
+                            />
+                          </Col>
+                        )
+                    )}
                 </Row>
               </Col>
-
-              {/* All */}
-              {/* <Col sm={12} md={10}>
-                <Row>
-                  {!q.isLoading &&
-                    Array.isArray(q.data?.data) &&
-                    q.data.data.map((data, index) => (
-                      <Col
-                        key={index}
-                        sm={12}
-                        md={6}
-                        lg={4}
-                        className="p-0 m-0"
-                      >
-                        <ResCard
-                          id={data._id}
-                          name={data.ResName}
-                          ResImg={data.ResImg}
-                          MealImg={data.MealImg}
-                          stars1={data.rating}
-                          category={data.categoryId.category}
-                          ownerId={data.ownerId}
-                        />
-                      </Col>
-                    ))}
-                </Row>
-              </Col> */}
             </Row>
           </Container>
         </div>
