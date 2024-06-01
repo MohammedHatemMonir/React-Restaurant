@@ -121,7 +121,7 @@ const SendMessageAI=async(req,res)=>{
                     { $limit: 1 }
                 ]);
                 if(FindRestaurant[0]){
-                    CmdChatText = `System prompt: Found the restaurant ${FindRestaurant[0].ResName} Tell the user that we have that restaurant and you'll navigate them soon. Also mention that they can leave a review.`
+                    CmdChatText = `System prompt: Found the restaurant ${FindRestaurant[0].ResName},With a rating of ${FindRestaurant[0].rating*5} . Tell the user that we have that restaurant and you'll navigate them soon. Also mention that they can leave a review.`
                     navigationLink = `/restaurant/${FindRestaurant[0]._id}/${FindRestaurant[0].ResName}`
                 }
             // }
@@ -151,7 +151,7 @@ const SendMessageAI=async(req,res)=>{
                       { $limit: 1 }
                   ]);
                 if(FindMeal[0]){
-                    CmdChatText = `System prompt: Found the Meal ${FindMeal[0].MealName}, It's description is ${FindMeal[0].Description}. Tell the user that we have that Meal and you'll navigate them soon. Also mention that they can leave a review.`
+                    CmdChatText = `System prompt: Found the Meal ${FindMeal[0].MealName}, It's description is ${FindMeal[0].Description}, with a rating of ${FindMeal[0].rating}. Tell the user that we have that Meal and you'll navigate them soon. Also mention that they can leave a review.`
                     navigationLink = `/restaurant/${FindMeal[0].ResID}/${FindMeal[0].MealName}`
                     MealID = FindMeal[0]._id;
                 }

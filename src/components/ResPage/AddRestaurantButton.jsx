@@ -190,7 +190,12 @@ export default function AddRestaurantButton() {
         <>
           <Form>
             <Row>
-              <SearchUser setValue={setValue} setError={setError} />
+              <SearchUser setValue={setValue} setError={setError} 
+              {...register("ownerId", {
+                required: "Please select an owner",
+              })}
+              />
+
               <span className="error" style={{ color: "red" }}>
                 {errors["ownerId"] && errors["ownerId"].message}
               </span>
