@@ -41,7 +41,7 @@ const addNewmeal = async (req, res) => {
       return res.status(404).json({ message: "Restaurant does not exist or you are not the owner" });
     }
 
-    if (role === "owner" && restaurant.ownerId.toString() !== _id.toString()) {
+    if (role === "owner" && restaurant.ownerId?.toString() !== _id.toString()) {
       return res.status(403).json({ message: "You do not own this restaurant" });
     }
 
