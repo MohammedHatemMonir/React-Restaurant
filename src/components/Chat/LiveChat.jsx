@@ -25,7 +25,7 @@ const LiveChat = () => {
   const data = useSignal([{}]);
   const inputValue = useSignal("");
   const isChatVisible = useSignal(false);
-  const chatLoader = useSignal(true);
+  const alwaysScroll = useRef(null);
   // const inputRef = useRef(null);
   const query = useSignal("");
   const error = useSignal(null);
@@ -138,6 +138,9 @@ const LiveChat = () => {
     listening.value = !listening.value;
   };
 
+  useEffect(() => {
+    alwaysScroll.current?.scrollIntoView();
+  }, [data.value]);
   return (
     <div className="my-live">
       <div id="live-chat">
@@ -157,6 +160,7 @@ const LiveChat = () => {
                   return <Me message={comment.message} key={index} />;
                 }
               })}
+              <div ref={alwaysScroll} />
               {m.isLoading && <ChatLoader />}
             </div>
 
