@@ -59,7 +59,9 @@ export default function ForgotPass() {
     <div className="container text-center">
       <div className="row justify-content-center" style={{ marginTop: "30vh" }}>
         <div className="col-md-6 font-weight-bold">
-          <h2 style={{ color: "#ff4500" }}>Forgot Your Password ?</h2>
+          <h2 style={{ color: "#ff4500", fontWeight: "bold" }}>
+            Forgot Your Password?
+          </h2>
           <p style={{ color: "#795d9a" }}>
             Enter your email below and we will send you a reset link
           </p>
@@ -99,6 +101,15 @@ export default function ForgotPass() {
               Send
             </button>
           </form>
+          <div className="mt-3">
+            <Link
+              to="/phoneAuth"
+              className="text-decoration-none font-weight-bold"
+              style={{ color: "#795d9a" }}
+            >
+              Also you can use your phone number
+            </Link>
+          </div>
           <div className="mt-3">
             <Link
               to="/"

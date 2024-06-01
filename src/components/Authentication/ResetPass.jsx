@@ -63,7 +63,9 @@ export default function ResetPass() {
     <div className="container text-center" style={{ marginTop: "30vh" }}>
       <div className="row justify-content-center mt-5">
         <div className="col-md-6">
-          <h2 style={{ color: "#ff4500" }}>Reset Your Password</h2>
+          <h2 style={{ color: "#ff4500", fontWeight: "bold" }}>
+            Reset Your Password
+          </h2>
           <p style={{ color: "#795d9a" }}>Enter your new password</p>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form-group">

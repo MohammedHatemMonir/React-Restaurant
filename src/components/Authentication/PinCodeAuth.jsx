@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
-// import './PinCodeAuth.scss'; 
-import './HemaTest.scss';
-import { Button, Form, FormGroup, Input } from 'reactstrap';
+import React, { useState } from "react";
+import "./PinCodeAuth.scss";
+import { Button, Form, FormGroup, Input } from "reactstrap";
 
 const PinCodeAuth = () => {
-  const [pins, setPins] = useState(Array(6).fill(''));
-  const [message, setMessage] = useState('');
+  const [pins, setPins] = useState(Array(6).fill(""));
+  const [message, setMessage] = useState("");
 
   const handleChange = (e, index) => {
     const newPins = [...pins];
@@ -21,10 +20,10 @@ const PinCodeAuth = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Replace this with actual authentication logic
-    if (pins.join('') === '123456') {
-      setMessage('PIN code is correct!');
+    if (pins.join("") === "123456") {
+      setMessage("PIN code is correct!");
     } else {
-      setMessage('Invalid PIN code.');
+      setMessage("Invalid PIN code.");
     }
   };
 
@@ -45,7 +44,9 @@ const PinCodeAuth = () => {
             />
           ))}
         </FormGroup>
-        <Button type="submit" className="btn-orange btn-block">Submit</Button>
+        <Button type="submit" className="btn-orange btn-block">
+          Submit
+        </Button>
       </Form>
       {message && <p className="text-center message">{message}</p>}
     </div>

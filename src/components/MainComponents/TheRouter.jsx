@@ -28,6 +28,8 @@ import AllOrdersPage from "../Orders/MyOrdersPage";
 import MyOrdersPage from "./../Orders/MyOrdersPage";
 import CartBody from "../Navbar/CartBody";
 import AdminDashboard from "./../Dashboard/AdminDashboard";
+import PhoneAuth from "./../Authentication/PhoneAuth";
+import PinCodeAuth from "./../TestComponents/HemaTest";
 
 export default function TheRouter() {
   const navigate = useNavigate();
@@ -70,7 +72,6 @@ export default function TheRouter() {
           : localStorage.removeItem("UserData");
         // console.log("session", result.data);
 
-
         console.log("session", result.data);
         return result;
       },
@@ -84,6 +85,8 @@ export default function TheRouter() {
         <Route path="login" element={<Login />}></Route>
         <Route path="signup" element={<SignUp />}></Route>
         <Route path="Forget" element={<ForgotPass />}></Route>
+        <Route path="phoneAuth" element={<PhoneAuth />}></Route>
+        <Route path="PinCodeAuth" element={<PinCodeAuth />}></Route>
         <Route path="reset/:id/:token" element={<ResetPass />}></Route>
 
         {UserData.value.loggedIn && (

@@ -1,0 +1,53 @@
+$orange-color: #ff4500;
+$orange-hover-color: darken(#ff4500, 10%);
+$background-color: #fff8e1;
+$border-radius: 10px;
+
+.pin-auth-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid $orange-color;
+  border-radius: $border-radius;
+  background-color: $background-color;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  .pin-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .pin-inputs {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  .pin-input {
+    border: 2px solid $orange-color;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 18px;
+    text-align: center;
+    color: $orange-color;
+    width: 50px;
+    height: 50px;
+    margin: 0 5px;
+  }
+
+  .btn-orange {
+    background-color: $orange-color;
+    border: none;
+
+    &:hover {
+      background-color: $orange-hover-color;
+    }
+  }
+
+  .message {
+    margin-top: 15px;
+    font-size: 16px;
+    color: $orange-color;
+  }
+}
