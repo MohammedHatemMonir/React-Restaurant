@@ -102,7 +102,7 @@ export default function AddMealButton({ Resid }) {
                     })}
                   />
                   <span className="error" style={{ color: "red" }}>
-                    {errors["mealName"] && errors["mealName"].message}
+                    {errors["MealName"] && errors["MealName"].message}
                   </span>
                 </Form.Group>
               </Col>
@@ -118,7 +118,7 @@ export default function AddMealButton({ Resid }) {
                     })}
                   />
                   <span className="error" style={{ color: "red" }}>
-                    {errors["mealImg"] && errors["mealImg"].message}
+                    {errors["MealImg"] && errors["MealImg"].message}
                   </span>
                 </Form.Group>
               </Col>
@@ -134,7 +134,7 @@ export default function AddMealButton({ Resid }) {
                     })}
                   />
                   <span className="error" style={{ color: "red" }}>
-                    {errors["mealDesc"] && errors["mealDesc"].message}
+                    {errors["Description"] && errors["Description"].message}
                   </span>
                 </Form.Group>
               </Col>
@@ -151,7 +151,7 @@ export default function AddMealButton({ Resid }) {
                     })}
                   />
                   <span className="error" style={{ color: "red" }}>
-                    {errors["mealPrice"] && errors["mealPrice"].message}
+                    {errors["Price"] && errors["Price"].message}
                   </span>
                 </Form.Group>
               </Col>
