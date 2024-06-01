@@ -249,10 +249,10 @@ const updateRestaurant = async (req, res) => {
         if (req.body.location) {
             NewResData.location = req.body.location;
         }
-        if (req.body.ResImg) {
+        if (req.body.ResImg != null) {
             NewResData.ResImg = await uploadImg(req.body.ResImg);
         }
-        if (req.body.ResBanner) {
+        if (req.body.ResBanner != null) {
             NewResData.ResBanner = await uploadImg(req.body.ResImg);
         }
 

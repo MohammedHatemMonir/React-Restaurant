@@ -90,8 +90,8 @@ function EditResModal({ openModal, closeModal, resName, resId }) {
   const onSubmit = async (data) => {
     // console.log("new data", data); // this new data from registers in useForm hook
     console.log("new data", data);
-    let ResImg;
-    let ResBanner;
+    let ResImg = null;
+    let ResBanner = null;
 
     if (data.ResImg[0]) ResImg = await convertBase64(data.resImg[0]);
     if (data.ResBanner[0]) ResBanner = await convertBase64(data.resBanner[0]);

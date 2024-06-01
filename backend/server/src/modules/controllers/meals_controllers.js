@@ -141,7 +141,7 @@ const updateMeal = async (req, res) => {
     const newMealData = {};
     console.log("Meal img",req.body.MealImg)
     if (req.body.MealName) newMealData.MealName = req.body.MealName;
-    if (req.body.MealImg) newMealData.MealImg = await uploadImg(req.body.MealImg);
+    if (req.body.MealImg != null) newMealData.MealImg = await uploadImg(req.body.MealImg);
     if (req.body.Description) newMealData.Description = req.body.Description;
     if (req.body.Price) newMealData.Price = req.body.Price;
 
