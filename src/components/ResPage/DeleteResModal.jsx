@@ -2,6 +2,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useMutation, useQueryClient } from "react-query";
 import { apiClient } from "../../Data/apiclient";
+import { toast } from "react-toastify";
 
 function DeleteResModal({ resId, resName, openModal, closeModal }) {
   const queryClient = useQueryClient();
@@ -23,6 +24,28 @@ function DeleteResModal({ resId, resName, openModal, closeModal }) {
 
     closeModal();
     queryClient.invalidateQueries({ queryKey: ["getAllresturant"] });
+
+    if (!result?.data) {
+      toast.error("Error in deleting restaurant", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else {
+      toast.success("Deleted Successfully", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
   };
 
   return (

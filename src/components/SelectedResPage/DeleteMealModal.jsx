@@ -38,7 +38,7 @@ function DeleteMealModal({ mealId, mealName, openModal, closeModal }) {
         progress: undefined,
       });
     } else {
-      toast.success("Meal added successfully", {
+      toast.success("Meal deleted successfully", {
         position: "top-center",
         autoClose: 3000,
         hideProgressBar: false,
@@ -48,10 +48,6 @@ function DeleteMealModal({ mealId, mealName, openModal, closeModal }) {
         progress: undefined,
       });
     }
-
-
-
-
   };
 
   return (
