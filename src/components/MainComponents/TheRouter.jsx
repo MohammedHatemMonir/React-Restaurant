@@ -35,7 +35,7 @@ export default function TheRouter() {
   const navigate = useNavigate();
 
   const { pathname } = useLocation();
-  const protectedpaths = ["login", "signup", "forget", "reset"];
+  const protectedpaths = ["login", "signup", "forget", "reset", "phoneAuth"];
 
   const navigateLogic = () => {
     const firstSegment = pathname.split("/")[1];
