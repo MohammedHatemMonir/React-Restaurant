@@ -119,8 +119,14 @@ const getAllmeals = async (req, res) => { //{ResID:""}
 
 const updateMeal = async (req, res) => {
   try {
+    if (!req.session?.user?._id) return res.status(404).json({ message: "Not authenticated!" });
+    if (req.session?.user?.role === "user") {
+      return res.status(403).json({ message: "You are not authenticated to update a meal" });
+    }
     const { id } = req.params;
     const userId = req.session?.user?._id;
+    
+
 
     const mealToUpdate = await meal.findById(id);
     if (!mealToUpdate) {
@@ -156,20 +162,26 @@ const updateMeal = async (req, res) => {
 
 const deleteMeal = async (req, res) => {
   try {
-    const { id } = req.params;
-    const userId = req.session?.user?._id;
 
+
+    if (!req.session?.user?._id) return res.status(404).json({ message: "Not authenticated!" });
+    if (req.session?.user?.role === "user") {
+      return res.status(403).json({ message: "You are not authenticated to delete a meal" });
+    }
+    const { id } = req.params;
     const mealToDelete = await meal.findById(id);
     if (!mealToDelete) {
       return res.status(404).json({ error: "Meal not found" });
     }
 
-    const restaurant = await resturant.findOne({ _id: mealToDelete.ResID, ownerId: userId });
+    const restaurant = await resturant.findOne({ _id: mealToDelete.ResID});
     if (!restaurant && req.session.user.role !== "ADMIN") {
       return res.status(403).json({ error: "Not authenticated as owner" });
     }
 
     await meal.findByIdAndDelete(id);
+    global.io.to(restaurant.ownerId?.toString()).emit("new-notification", {message: `Meal deleted`, time: Date.now().toString(), link: "/tutorials" });
+
     res.status(200).json({ message: "Meal deleted successfully" });
 
     await mealComments.deleteMany({ MealID: id });
@@ -177,7 +189,6 @@ const deleteMeal = async (req, res) => {
     if (mealToDelete.MealImg) {
       await uploadImg.deleteImage(mealToDelete.MealImg);
     }
-    global.io.to(restaurant.ownerId?.toString()).emit("new-notification", {message: `Meal deleted`, time: Date.now().toString(), link: "/tutorials" });
   } catch (error) {
     console.error("Error deleting meal:", error);
     res.status(500).json({ error: "Server error while deleting meal" });
