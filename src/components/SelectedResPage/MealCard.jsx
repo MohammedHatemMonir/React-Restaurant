@@ -154,6 +154,8 @@ export default function MealCard({
         <EditMealModal
           mealId={id}
           mealName={name}
+          desc={desc}
+          price={price}
           openModal={() => (showEditModal.value = true)}
           closeModal={onCloseEdit}
         />

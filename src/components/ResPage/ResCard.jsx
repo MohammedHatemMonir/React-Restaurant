@@ -18,6 +18,7 @@ export default function ResCard({
   MealImg,
   category,
   ownerId,
+  location,
 }) {
   // console.log("Hema ID",id)
   const showDelModal = useSignal(false);
@@ -139,6 +140,8 @@ export default function ResCard({
         <EditResModal
           resName={name}
           resId={id}
+          location={location}
+          currentCategory={category}
           openModal={() => (showEditModal.value = true)}
           closeModal={onCloseEdit}
         />

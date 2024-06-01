@@ -137,6 +137,7 @@ export default function ResPage() {
                               MealImg={data.MealImg}
                               stars1={data.rating}
                               category={data.categoryId.category}
+                              location={data.location}
                               ownerId={data.ownerId}
                             />
                           </Col>

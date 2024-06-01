@@ -10,7 +10,14 @@ import { convertBase64 } from "../../Globals";
 import { useQuery } from "react-query";
 import { toast } from "react-toastify";
 
-function EditResModal({ openModal, closeModal, resName, resId }) {
+function EditResModal({
+  openModal,
+  closeModal,
+  resName,
+  resId,
+  location,
+  currentCategory,
+}) {
   const {
     register,
     handleSubmit,
@@ -183,6 +190,7 @@ function EditResModal({ openModal, closeModal, resName, resId }) {
                           key={`${index}+${category._id}`}
                           value={category._id}
                         >
+                          {/* currentCategory */}
                           {category.category}
                         </option>
                       )
@@ -272,7 +280,7 @@ function EditResModal({ openModal, closeModal, resName, resId }) {
                 type="text"
                 className="form-control"
                 id="location"
-                defaultValue={currentLocation}
+                defaultValue={location || currentLocation}
                 placeholder="Location"
               />
               {errors.location && (

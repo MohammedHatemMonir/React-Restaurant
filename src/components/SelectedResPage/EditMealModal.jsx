@@ -7,7 +7,7 @@ import { useMutation, useQueryClient } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 import { convertBase64 } from "../../Globals";
 
-function EditMealModal({ openModal, closeModal, mealName, mealId }) {
+function EditMealModal({ openModal, closeModal, mealName, mealId ,desc,price}) {
   // console.log("hema", mealId); worked
   const {
     register,
@@ -115,6 +115,7 @@ function EditMealModal({ openModal, closeModal, mealName, mealId }) {
                 <Form.Control
                   type="text"
                   name="Description"
+                  defaultValue={desc}
                   placeholder="Meal description"
                   {...register("Description", {
                     // required: "Please add meal description",
@@ -131,6 +132,7 @@ function EditMealModal({ openModal, closeModal, mealName, mealId }) {
                 <Form.Control
                   type="number"
                   name="Price"
+                  defaultValue={price}
                   min={1}
                   placeholder="Meal Price"
                   {...register("Price", {
