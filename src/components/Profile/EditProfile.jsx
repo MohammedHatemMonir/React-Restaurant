@@ -1,5 +1,6 @@
 import "./EditProfile.scss";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { UserData, convertBase64 } from "../../Globals";
 import { useSignal } from "@preact/signals-react";
 import { Button, Col } from "reactstrap";
@@ -10,6 +11,7 @@ import { apiClient } from "../../Data/apiclient";
 import { toast } from "react-toastify";
 
 const EditProfile = () => {
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
   const {
     register,
@@ -76,7 +78,7 @@ const EditProfile = () => {
     queryClient.invalidateQueries({ mutationKey: ["editProfile"] });
     queryClient.refetchQueries(["editProfile"]);
     reset();
-
+    navigate("/");
     // console.log(result)
     // alert(result)
   };
