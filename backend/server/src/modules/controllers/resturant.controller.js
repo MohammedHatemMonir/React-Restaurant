@@ -253,7 +253,7 @@ const updateRestaurant = async (req, res) => {
             NewResData.ResImg = await uploadImg(req.body.ResImg);
         }
         if (req.body.ResBanner != null) {
-            NewResData.ResBanner = await uploadImg(req.body.ResImg);
+            NewResData.ResBanner = await uploadImg(req.body.ResBanner);
         }
 
 
