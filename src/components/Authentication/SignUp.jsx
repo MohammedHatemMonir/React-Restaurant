@@ -289,7 +289,7 @@ export default function SignUp() {
                       type="text"
                       className="form-control"
                       id="location"
-                      value={currentLocation}
+                      defaultValue={currentLocation}
                       placeholder="Location"
                     />
                     {errors.location && (
@@ -332,7 +332,7 @@ export default function SignUp() {
                   Sign up
                 </button>
 
-                <div className="text-center ">
+                <div className="text-center mb-3">
                   <Link
                     to="/login"
                     style={{ textDecoration: "none", cursor: "pointer" }}

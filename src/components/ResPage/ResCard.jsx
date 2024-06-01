@@ -106,8 +106,8 @@ export default function ResCard({
                   display: "flex",
                   justifyContent: "space-around",
                   alignItems: "center",
-                  margin: "25px -10% 0px  -10%",
-                  transform: "scale(1.5)",
+                  margin: "25px 5% 0px  5%",
+                  transform: "scale(1.8)",
                 }}
               >
                 {UserData.value.role === "ADMIN" && (

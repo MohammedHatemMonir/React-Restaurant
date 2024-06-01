@@ -124,6 +124,7 @@ export default function AddMealButton({ Resid }) {
                   <Form.Label>Price</Form.Label>
                   <Form.Control
                     type="number"
+                    min="1"
                     name="mealPrice"
                     placeholder="Meal price"
                     {...register("Price", {
