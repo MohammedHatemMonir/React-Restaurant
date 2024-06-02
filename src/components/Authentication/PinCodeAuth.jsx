@@ -32,13 +32,16 @@ const PinCodeAuth = () => {
     console.log("reset-password-sms", result.data?.data);
   };
 
-  const [pins, setPins] = useState(Array(6).fill(""));
-  const [message, setMessage] = useState("");
+  // const [pins, setPins] = useState(Array(6).fill(""));
+  // const [message, setMessage] = useState("");
+
+  const pins = useSignal(Array(6).fill(""));
+  const message = useSignal("");
 
   const handleChange = (index, value) => {
-    const newPins = [...pins];
+    const newPins = [...pins.value];
     newPins[index] = value;
-    setPins(newPins);
+    pins.value = newPins;
 
     // Focus the next input
     if (value && index < 5) {
@@ -48,15 +51,15 @@ const PinCodeAuth = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const enteredPin = pins.join("");
+    const enteredPin = pins.value.join("");
     if (enteredPin === "123456") {
-      setMessage("PIN code is correct!");
+      message.value = "PIN code is correct!";
     } else {
-      setMessage("Invalid PIN code.");
+      message.value = "Invalid PIN code.";
     }
   };
 
-  console.log("My Code", pins.join(""));
+  console.log("My Code", pins.value.join(""));
   // To get phone and email
   useEffect(() => {
     console.log("emailRef", emailRef.current.value);
@@ -72,7 +75,7 @@ const PinCodeAuth = () => {
         <input type="text" value={email} ref={emailRef} />
         <input type="text" value={phoneNumber} ref={phoneRef} />
         <FormGroup className="pin-inputs">
-          {pins.map((pin, index) => (
+          {pins.value.map((pin, index) => (
             <Input
               key={index}
               id={`pin-${index}`}
