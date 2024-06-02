@@ -5,7 +5,7 @@ const validateUserInputSignUp=[
     .isLength({ min: 3 }).withMessage("Length must be more than 3 digits"),
     body("password")
     .notEmpty().withMessage("Enter the password")
-    .isLength({ min: 3 }).withMessage("week password"),
+    .isLength({ min: 5 }).withMessage("week password"),
     body("email")
     .notEmpty().withMessage("Enter your Email")
     .isEmail().withMessage("Please enter a valid email address"),
