@@ -353,7 +353,7 @@ const editProfile = async (req, res) => {
     return res.status(200).json({success: true, message: responseMessage, user });
   } catch (error) {
     console.error("Error updating user:", error);
-    return res.status(500).json({success: true,, error: "Internal server error" });
+    return res.status(500).json({success: true, error: "Internal server error" });
   }
 };
 
