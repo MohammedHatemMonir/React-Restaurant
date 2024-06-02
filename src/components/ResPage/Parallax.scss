@@ -56,6 +56,7 @@ $box-shadow: 0 16px 16px rgba(0, 0, 0, 0.05);
 
 @media (min-width: 1200px) {
   .home {
+    flex-direction: row;
     .content {
       span {
         font-size: 28px;
@@ -72,6 +73,7 @@ $box-shadow: 0 16px 16px rgba(0, 0, 0, 0.05);
       .home-img {
         margin-top: 64px;
         transform: scale(0.8);
+        // display: none;
       }
     }
 
@@ -79,6 +81,7 @@ $box-shadow: 0 16px 16px rgba(0, 0, 0, 0.05);
       top: -50px;
       right: -80px;
       width: 70vw;
+      // display: none;
     }
   }
 }
@@ -114,7 +117,6 @@ $box-shadow: 0 16px 16px rgba(0, 0, 0, 0.05);
     }
   }
 }
-
 
 @media (max-width: 992px) {
   .home {
