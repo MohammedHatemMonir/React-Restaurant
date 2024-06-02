@@ -10,23 +10,23 @@ const jwt = require("jsonwebtoken");
 // const { io } = require("../../Server.js");
 // const generateToken = require("../../utils/GenerateToken.js");
 const TestNotifs = async (req, res) => {
-    try {
-    
-      console.log("TestNotifs", io);
+  try {
+
+    console.log("TestNotifs", io);
 
 
-      global.io.to("User Or Room ID here").emit("new-notification", {message: "You have recieved a new Rating.", time: Date.now().toString() });
-      // return res.json({ success: true, msg: "Notification sent" });
-    } catch (error) {
+    global.io.to("User Or Room ID here").emit("new-notification", { message: "You have recieved a new Rating.", time: Date.now().toString() });
+    // return res.json({ success: true, msg: "Notification sent" });
+  } catch (error) {
 
-      console.error("Error during TestNotifs:", error);
-    }
+    console.error("Error during TestNotifs:", error);
+  }
 
 }
 
 
 const signup = async (req, res) => {
-  const { name, email, password, userImg , phoneNumber, location} = req.body;
+  const { name, email, password, userImg, phoneNumber, location } = req.body;
 
   try {
     const errors = validationResult(req);
@@ -60,8 +60,8 @@ const signup = async (req, res) => {
       msg: "Signup successful",
       name,
       email,
-      userImg: newUser.userImg, 
-      phoneNumber, 
+      userImg: newUser.userImg,
+      phoneNumber,
       location
     });
   } catch (error) {
@@ -96,7 +96,7 @@ const signin = async (req, res) => {
 
       req.session.user = user;
       req.session.save(err => {
-        if(err) {
+        if (err) {
           // handle error
           console.log(err);
         } else {
@@ -305,13 +305,13 @@ const editProfile = async (req, res) => {
     if (!userId) {
       return res.status(401).json({ message: "Not authenticated!" });
     }
-    
-    const user = await myusers.findById(userId); 
-    
+
+    const user = await myusers.findById(userId);
+
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-    
+
     const { name, email, password, oldPass, location, phoneNumber, userImg } = req.body;
 
     if (name) user.name = name;
@@ -319,12 +319,20 @@ const editProfile = async (req, res) => {
 
 
     if (password && oldPass) {
-
-
-
-
-      const hashedPassword = await bcrypt.hash(password, 8);
-      user.password = hashedPassword;
+      try {
+        const compare = await bcrypt.compare(oldPass, user.password);
+        if (compare) {
+          const hashedPassword = await bcrypt.hash(password, 8);
+          user.password = hashedPassword;
+          await user.save();
+          return { success: true, message: 'Password updated successfully.' };
+        } else {
+          return { success: false, message: 'Old password is incorrect.' };
+        }
+      } catch (error) {
+        console.log(error)
+        return { success: false, message: 'An error occurred while updating the password.', error: error.message };
+      }
     }
 
     if (location) user.location = location;
