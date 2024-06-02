@@ -1,7 +1,7 @@
 import { useSignal } from "@preact/signals-react";
 import { useMutation, useQueryClient } from "react-query";
 import { apiClient } from "../../Data/apiclient";
-
+import "./CommentBox.scss";
 const CommentBox = ({ query, resID }) => {
   const comment = useSignal("");
 
@@ -54,7 +54,7 @@ const CommentBox = ({ query, resID }) => {
           type="text"
           value={comment}
           onChange={handleInputChange}
-          className="form-control mb-3"
+          className="form-control mb-2"
           style={{
             padding: "10px",
             borderRadius: "5px",
@@ -78,11 +78,10 @@ const CommentBox = ({ query, resID }) => {
             maxWidth: "300px",
             boxSizing: "border-box",
             color: "white",
-            background: "#ff4500",
-            // fontWeight:"Bold"
+            transition: "background-color 0.3s ease", // Adding transition for smoother effect
           }}
         >
-          Add
+          Add New Comment
         </button>
       </div>
     </div>

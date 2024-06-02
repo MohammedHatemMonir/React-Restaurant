@@ -95,7 +95,7 @@ function MealDetailsModal({
                 // fontWeight:"Bold"
               }}
             >
-              Add
+              Add New Comment
             </button>
           </div>
         </div>
