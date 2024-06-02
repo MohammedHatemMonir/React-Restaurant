@@ -67,7 +67,9 @@ export default function ResetPass() {
           <h2 style={{ color: "#ff4500", fontWeight: "bold" }}>
             Reset Your Password
           </h2>
-          <p style={{ color: "#795d9a" }}>Enter your new password</p>
+          <p style={{ color: "#795d9a" }} className="font-weight-bold">
+            Enter your new password
+          </p>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form-group">
               <input
@@ -103,7 +105,7 @@ export default function ResetPass() {
             <div className="mt-3">
               <Link
                 to="/"
-                className="text-decoration-none"
+                className="text-decoration-none font-weight-bold"
                 style={{ color: "#795d9a" }}
               >
                 Back to Home
