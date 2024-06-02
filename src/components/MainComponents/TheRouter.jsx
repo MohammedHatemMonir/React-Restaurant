@@ -29,13 +29,20 @@ import MyOrdersPage from "./../Orders/MyOrdersPage";
 import CartBody from "../Navbar/CartBody";
 import AdminDashboard from "./../Dashboard/AdminDashboard";
 import PhoneAuth from "./../Authentication/PhoneAuth";
-import PinCodeAuth from './../Authentication/PinCodeAuth';
+import PinCodeAuth from "./../Authentication/PinCodeAuth";
 
 export default function TheRouter() {
   const navigate = useNavigate();
 
   const { pathname } = useLocation();
-  const protectedpaths = ["login", "signup", "forget", "reset", "phoneAuth" , "PinCodeAuth"];
+  const protectedpaths = [
+    "login",
+    "signup",
+    "forget",
+    "reset",
+    "phoneAuth",
+    "PinCodeAuth",
+  ];
 
   const navigateLogic = () => {
     const firstSegment = pathname.split("/")[1];
@@ -85,8 +92,11 @@ export default function TheRouter() {
         <Route path="login" element={<Login />}></Route>
         <Route path="signup" element={<SignUp />}></Route>
         <Route path="Forget" element={<ForgotPass />}></Route>
-        <Route path="phoneAuth" element={<PhoneAuth />}></Route>
-        <Route path="PinCodeAuth" element={<PinCodeAuth />}></Route>
+        <Route
+          path="phoneAuth"
+          element={<PhoneAuth />}
+        ></Route>
+        <Route path="PinCodeAuth/:email/:phoneNumber" element={<PinCodeAuth />}></Route>
         <Route path="reset/:id/:token" element={<ResetPass />}></Route>
 
         {UserData.value.loggedIn && (

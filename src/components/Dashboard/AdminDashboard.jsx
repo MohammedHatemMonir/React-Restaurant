@@ -5,6 +5,7 @@ import { FcBusinessman } from "react-icons/fc";
 import ResPieChart from "./ResPieChart";
 import { useQuery } from "react-query";
 import { apiClient } from "../../Data/apiclient";
+
 import AdminAreaChart from "./AdminAreaChart";
 import CookingLoader from "./../Loaders/CookingLoader";
 

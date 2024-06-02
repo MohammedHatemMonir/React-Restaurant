@@ -74,7 +74,7 @@ const EditProfile = () => {
         progress: undefined,
       });
     }
-    console.log("m.data?.data", m.data?.data.message);
+    // console.log("m.data?.data", m.data?.data.message);
     queryClient.invalidateQueries({ mutationKey: ["editProfile"] });
     queryClient.refetchQueries(["editProfile"]);
     reset();
