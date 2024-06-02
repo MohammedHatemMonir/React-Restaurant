@@ -188,7 +188,7 @@ export default function SelectResPage() {
               <Row>
                 {!q1.isLoading &&
                   q1.data?.data?.resComments?.map((item, index) => (
-                    <Col sm={12} md={6} lg={3} key={index}>
+                    <Col sm={12} md={6} lg={4} key={index}>
                       <ReviewsCard
                         key={item.id}
                         name={item.user.name}

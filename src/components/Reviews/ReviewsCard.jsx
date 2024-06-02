@@ -24,33 +24,97 @@ const ReviewsCard = ({ name, stars, emotion, image, comment, date }) => {
   stars = Math.round(stars);
 
   switch (emotion) {
+    case "admiration":
+      emoji.value = <span> 😍 </span>;
+      break;
+    case "amusement":
+      emoji.value = <span> 😆 </span>;
+      break;
     case "anger":
       emoji.value = <span> 😠 </span>;
       // <FaAngry style={importantStyle} />;
       break;
-    case "sadness":
-      emoji.value = <span> 😢 </span>;
-      // <FaSadCry style={importantStyle} />;
+    case "annoyance":
+      emoji.value = <span> 😒 </span>;
       break;
-    case "joy":
-      emoji.value = <span> 😄 </span>;
-      // <FaGrin style={importantStyle} />;
+    case "approval":
+      emoji.value = <span> 👍 </span>;
       break;
-    case "surprise":
-      emoji.value = <span> 😲 </span>;
-      // <FaSurprise style={importantStyle} />;
+    case "caring":
+      emoji.value = <span> 🤗 </span>;
       break;
-    case "love":
-      emoji.value = <span> ❤️ </span>;
-      //  <FaHeart style={importantStyle} />;
+    case "confusion":
+      emoji.value = <span> 😕 </span>;
+      break;
+    case "curiosity":
+      emoji.value = <span> 🧐 </span>;
+      break;
+    case "desire":
+      emoji.value = <span> 😍 </span>; // Same as admiration, consider changing if necessary
+      break;
+    case "disappointment":
+      emoji.value = <span> 😞 </span>;
+      break;
+    case "disapproval":
+      emoji.value = <span> 👎 </span>;
+      break;
+    case "disgust":
+      emoji.value = <span> 🤮 </span>;
+      break;
+    case "embarrassment":
+      emoji.value = <span> 😳 </span>;
+      break;
+    case "excitement":
+      emoji.value = <span> 🤩 </span>;
       break;
     case "fear":
       emoji.value = <span> 😨 </span>;
       // <FaRegDizzy style={importantStyle} />;
       break;
+    case "gratitude":
+      emoji.value = <span> 🥰 </span>;
+      break;
+    case "grief":
+      emoji.value = <span> 😭 </span>;
+      break;
+    case "joy":
+      emoji.value = <span> 😄 </span>;
+      // <FaGrin style={importantStyle} />;
+      break;
+    case "love":
+      emoji.value = <span> ❤️ </span>;
+      //  <FaHeart style={importantStyle} />;
+      break;
+    case "nervousness":
+      emoji.value = <span> 😬 </span>;
+      break;
+    case "optimism":
+      emoji.value = <span> 😊 </span>;
+      break;
+    case "pride":
+      emoji.value = <span> 😌 </span>;
+      break;
+    case "realization":
+      emoji.value = <span> 💡 </span>;
+      break;
+    case "relief":
+      emoji.value = <span> 😌 </span>; // Same as pride, consider changing if necessary
+      break;
+    case "remorse":
+      emoji.value = <span> 😔 </span>;
+      break;
+    case "sadness":
+      emoji.value = <span> 😢 </span>;
+      // <FaSadCry style={importantStyle} />;
+      break;
+    case "surprise":
+      emoji.value = <span> 😲 </span>;
+      // <FaSurprise style={importantStyle} />;
+      break;
     default:
       emoji.value = <span> 😐 </span>; // Neutral emoji
   }
+
   if (stars >= 0 && stars <= 2) {
     borderColor.value = "#FF6347"; // Red for negative reactions
   } else if (stars == 3) {
