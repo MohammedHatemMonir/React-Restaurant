@@ -101,7 +101,11 @@ export default function CartBody() {
   if (m.isLoading) {
     return <CircleLoader />;
   }
-  if (Cart.value?.meals?.length <= 0 || Cart.value?.meals === "undefined") {
+  if (
+    Cart.value?.meals?.length <= 0 ||
+    Cart.value?.meals === "undefined" ||
+    !Cart.value?.meals
+  ) {
     return <EmptyOrders />;
   } else
     return (
