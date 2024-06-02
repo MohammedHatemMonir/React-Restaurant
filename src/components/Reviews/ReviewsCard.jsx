@@ -59,7 +59,7 @@ const ReviewsCard = ({ name, stars, emotion, image, comment, date }) => {
       emoji.value = <span> 👎 </span>;
       break;
     case "disgust":
-      emoji.value = <span> 🤮 </span>;
+      emoji.value = <span> 😫 </span>;
       break;
     case "embarrassment":
       emoji.value = <span> 😳 </span>;
@@ -95,7 +95,7 @@ const ReviewsCard = ({ name, stars, emotion, image, comment, date }) => {
       emoji.value = <span> 😌 </span>;
       break;
     case "realization":
-      emoji.value = <span> 💡 </span>;
+      emoji.value = <span> 🤔 </span>;
       break;
     case "relief":
       emoji.value = <span> 😌 </span>;
