@@ -78,15 +78,6 @@ const PinCodeAuth = () => {
                 onChange={(e) => (pass.value = e.target.value)}
               />
             </div>
-            <div className="mt-3">
-              <Link
-                to="/"
-                className="text-decoration-none"
-                style={{ color: "#795d9a" }}
-              >
-                Back to Home
-              </Link>
-            </div>
           <FormGroup className="pin-inputs">
             {pins.value.map((pin, index) => (
               <Input
