@@ -24,8 +24,8 @@ def analyze_sentiment(text):
     sentiment= tweets_analising(text,toke_nizer,loaded_model)
     return sentiment
 
-sentiment = analyze_sentiment(["this is lovely"])
-print(sentiment)
+# sentiment = analyze_sentiment(["this is lovely"])
+# print(sentiment)
 @app.route("/analyze2", methods=["POST"])
 def analyze():
     try:
