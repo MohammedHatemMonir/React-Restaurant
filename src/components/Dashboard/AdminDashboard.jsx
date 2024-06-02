@@ -1,6 +1,13 @@
 import { Card, Container, Row, Col } from "react-bootstrap";
 import { useSignal } from "@preact/signals-react";
-import { FaRegAngry, FaRegEdit, FaRegMeh, FaRegSmile } from "react-icons/fa";
+import {
+  FaMoneyBillAlt,
+  FaRegAngry,
+  FaRegEdit,
+  FaRegMeh,
+  FaListAlt,
+  FaRegSmile,
+} from "react-icons/fa";
 import { FcBusinessman } from "react-icons/fc";
 import ResPieChart from "./ResPieChart";
 import { useQuery } from "react-query";
@@ -14,6 +21,7 @@ export default function AdminDashboard() {
 
   // Fetch here
   // Get all orders
+  // totalPrice
   const q1 = useQuery({
     queryKey: ["getAllOrders"],
     // cacheTime: 3 * 60000, //3 minutes
@@ -114,10 +122,11 @@ export default function AdminDashboard() {
     return <CookingLoader />;
   else
     return (
+      // q1.data?.data?.data
       <Container fluid>
         <Row>
           {/* Owner */}
-          <Col lg="4" sm="6">
+          <Col lg="3" sm="6">
             <Card className="card-stats">
               <Card.Body>
                 <Row>
@@ -143,7 +152,7 @@ export default function AdminDashboard() {
           </Col>
 
           {/* Positive Comments */}
-          <Col lg="4" sm="6">
+          <Col lg="3" sm="6">
             <Card className="card-stats">
               <Card.Body>
                 <Row>
@@ -169,7 +178,7 @@ export default function AdminDashboard() {
           </Col>
 
           {/* Negative Comments */}
-          <Col lg="4" sm="6">
+          <Col lg="3" sm="6">
             <Card className="card-stats">
               <Card.Body>
                 <Row>
@@ -194,7 +203,7 @@ export default function AdminDashboard() {
             </Card>
           </Col>
           {/* Natural Comments */}
-          <Col lg="4" sm="6">
+          <Col lg="3" sm="6">
             <Card className="card-stats">
               <Card.Body>
                 <Row>
@@ -241,8 +250,63 @@ export default function AdminDashboard() {
               </Card.Body>
             </Card>
           </Col>
+
+          <Col lg="4" sm="6">
+            <Card className="card-stats">
+              <Card.Body>
+                <Row>
+                  <Col xs="3" className="text-center">
+                    {/* Zoomed in emoji */}
+                    <div className="icon-big">
+                      <p style={{ fontSize: "2em" }}>
+                        <FaListAlt size={32} color="blue" /> {/* 🙂 */}
+                      </p>
+                    </div>
+                  </Col>
+                  <Col xs="9">
+                    <div className="numbers">
+                      <p className="card-category">
+                        Total price for last 10 days
+                      </p>
+                      <Card.Title as="h4">
+                        {q1.data?.data?.data.totalPrice}
+                      </Card.Title>
+                    </div>
+                  </Col>
+                </Row>
+              </Card.Body>
+            </Card>
+          </Col>
+
+          <Col lg="4" sm="6">
+            <Card className="card-stats">
+              <Card.Body>
+                <Row>
+                  <Col xs="3" className="text-center">
+                    {/* Zoomed in emoji */}
+                    <div className="icon-big">
+                      <p style={{ fontSize: "2em" }}>
+                        <FaMoneyBillAlt size={32} color="green" /> {/* 🙂 */}
+                      </p>
+                    </div>
+                  </Col>
+                  <Col xs="9">
+                    <div className="numbers">
+                      <p className="card-category">
+                        Total price for last 10 days
+                      </p>
+                      <Card.Title as="h4">
+                        {q1.data?.data?.data.totalPrice}
+                        {/* {q1.data?.data?.data.totalOrders} */}
+                      </Card.Title>
+                    </div>
+                  </Col>
+                </Row>
+              </Card.Body>
+            </Card>
+          </Col>
         </Row>
-        <br />
+
         <Row>
           <Col md="8">
             <Card>
@@ -258,6 +322,7 @@ export default function AdminDashboard() {
               </Card.Body>
             </Card>
           </Col>
+
           <Col md="4">
             <Card>
               <Card.Header>
