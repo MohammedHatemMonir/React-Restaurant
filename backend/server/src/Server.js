@@ -1,7 +1,7 @@
 const express=require('express');
 const path = require("path");
-const dotenv=require('dotenv');
-require("dotenv").config({ path: `./.env` });
+// const dotenv=require('dotenv');
+// require("dotenv").config({ path: `./.env` });
 // dotenv.config({ path: path.resolve('./.env')});
 const cors=require('cors');
 const app=express();
@@ -61,7 +61,7 @@ app.use(sessionMiddleware);
 app.use(passport.initialize());
 app.use(passport.session());
 
-connectToMongoDB(process.env.DB_CONNECTION);
+connectToMongoDB();
 
 app.use(express.json({limit: '50mb'}));
 

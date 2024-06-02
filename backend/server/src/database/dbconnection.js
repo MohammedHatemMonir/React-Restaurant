@@ -4,10 +4,11 @@ const mongoose = require("mongoose");
 
 // Define the connection function
 
-const connectToMongoDB = async (api_key) => {
+const connectToMongoDB = async () => {
     try {
         // encryption this  mongoDB Link To DB
-        await mongoose.connect(api_key, {
+        await mongoose.connect( "mongodb+srv://mahmoud:graduationproject@graduationproject.depfjap.mongodb.net/graduationproject"
+, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             // Optionally, you can add more options here
