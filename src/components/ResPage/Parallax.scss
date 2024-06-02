@@ -71,43 +71,46 @@ $box-shadow: 0 16px 16px rgba(0, 0, 0, 0.05);
     .image {
       .home-img {
         margin-top: 64px;
-        transform: scale(0.7);
+        transform: scale(0.8);
       }
     }
 
     .home-parallax-img {
-      top: -10px;
-      right: 170px;
-      width: 100vw;
+      top: -50px;
+      right: -80px;
+      width: 70vw;
     }
   }
 }
 
 @media (min-width: 993px) and (max-width: 1199px) {
   .home {
+    flex-direction: column;
     .content {
+      flex: 1 1 auto;
       span {
-        font-size: 28px;
+        font-size: 24px;
       }
       h3 {
-        font-size: 56px;
+        font-size: 48px;
       }
       p {
-        font-size: 20px;
+        font-size: 18px;
       }
     }
 
     .image {
+      flex: 1 1 auto;
       .home-img {
-        margin-top: 64px;
-        transform: scale(0.8);
+        margin-top: 48px;
+        width: 70vw;
       }
     }
 
     .home-parallax-img {
-      top: 20px;
-      right: 20px;
-      width: 60vw;
+      top: 150px;
+      right: 15px;
+      width: 120vw;
     }
   }
 }
