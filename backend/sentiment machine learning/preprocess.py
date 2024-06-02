@@ -10,7 +10,6 @@ import tensorflow as tf
 ps = PorterStemmer()
 import pandas as pd
 
-
 # def remove_neutral_elements(text_array, label_array):
 #   filtered_labels2=[]
 #   # Handle potential mismatched array lengths (safety check)
@@ -82,14 +81,18 @@ stop_words = set(stopwords.words('english'))
 
 def preprocess(sentence):
     sentence = str(sentence)
-    words = [word for word in sentence.split() if not (word.startswith(("@", "#", "http:", "/")) or word in stop_words)]
-    words = [re.sub(pattern="[^a-zA-Z\s]", repl=" ", string=word) for word in words]
-    words = ['-' if word in ['not', 'no'] else ps.stem(word).lower() + ' ' for word in words[:29]]
+    words = [word for word in sentence.split() if word =='be' or  not (word.startswith(("@", "#", "http:", "/")) or word in stop_words)]
+    words = [re.sub(pattern="[^a-zA-Z\s]", repl="", string=word) for word in words]
+    words = ['-' if word in ['not', 'no','dont'] else ps.stem(word).lower() + ' ' for word in words]#[:29]
+    words=['as' if words[i] in ("like ") and i>0 and words[i-1] in ("be ", "seem ", "feel ", "look ", "sound ") else words[i] for i in range(0,len(words))] 
     return "".join(words)
-
+# i like flower , i look like you, i feel like 
 # ----------------------------------------
 # example 
-# sentence ="i Good'good_day not good @good"
+# sentence ="i dont want to be like you"#output => -want be as
+# sentence ="i want to be like you"#output => want be as 
+# sentence ="i dont like you"#output =>-like
+# sentence ="i like! you"#output => like
 # preprocessed_sentence = preprocess(sentence)
 # print(preprocessed_sentence)
 # -----------------------------------------
@@ -240,6 +243,33 @@ def Chart(sentences):
 
 
 
+def try_it(text):
+    # Import libraries
+    from textblob import TextBlob
+
+    # Example text with sentiment
+    # text = "This movie was absolutely fantastic! The acting was superb and the story was very engaging."
+
+    # Create a TextBlob object
+    blob = TextBlob(text)
+
+    # Analyze sentiment - polarity ranges from -1 (negative) to 1 (positive)
+    sentiment = blob.sentiment.polarity
+
+    # Analyze subjectivity - ranges from 0 (objective) to 1 (subjective)
+    subjectivity = blob.sentiment.subjectivity
+    return sentiment
+    # Print sentiment results
+#     if sentiment > 0:
+#         print("Sentiment: Positive")
+#     elif sentiment < 0:
+#         print("Sentiment: Negative")
+#     else:
+#         print("Sentiment: Neutral")
+
+#     print(f"Subjectivity: {subjectivity:.2f}")  
+# try_it("i hate this rusturant")
+
 
 def tweets_analising32 (tweets,pipe_lr,Tokenizer,analising_model):
     
@@ -309,15 +339,19 @@ def tweets_analising (tweets,Tokenizer,analising_model):
     prediction_2=[]
     ttt=[]
     for sentence in tweets:
+        test=try_it(sentence)
         preprocess_sentence=preprocess(sentence)
         tweets_2.append(preprocess_sentence)
+        print(tweets_2)
         pred = emotion(sentence)
+        print(pred)
         basic_emotion = get_basic_emotion(pred)
         prediction.append(basic_emotion)
     i=0
     for t in tweets_2:
-      new_sequence1 = texts_to_sequences([t], Tokenizer)
-      new_padded = pad_sequences(new_sequence1, padding='post',truncating='post',maxlen=22)
+      new_sequence1 = Tokenizer.texts_to_sequences([t])
+      print(new_sequence1)
+      new_padded = pad_sequences(new_sequence1, padding='post',truncating='post',maxlen=168)
 
       new_padded_tensor = tf.convert_to_tensor(new_padded)
       predictions=analising_model.predict(new_padded_tensor)
@@ -333,11 +367,22 @@ def tweets_analising (tweets,Tokenizer,analising_model):
               # print(numper)
               if  numper==0:
                   predictions=(predictions+0.5)/2
-          testr=str(predictions)
+          
           # print(testr)
-
+          if predictions<0.9:
+            predictions+=0.1
+          if test<0 and predictions>0.5:
+             predictions=0.5-abs(test/2)
+            #  print("from_pretrained model")
+          elif test>0 and predictions<0.5:
+             predictions=0.5+abs(test/2)
+            #  print("from_pretrained model")
+          elif test==0:
+             embty=True
+             predictions=0.5
+          testr=str(predictions)
           if embty==True:
-              sentiment=['not positive or negative','no emotion']
+              sentiment=['neutral',prediction[i],testr]
           elif predictions > 0.5:
               sentiment=['positive',prediction[i],testr]
               # sentiment=tweets[i]+'"'':''" positive.'+prediction[i]+testr
@@ -354,7 +399,7 @@ def get_basic_emotion(predictions):
     for sentiment in item:
         label = sentiment['label']
         score = sentiment['score']
-        if label in basic_emotions and score > max_probability:
+        if score > max_probability:
             max_probability = score
             basic_emotion = label
   return basic_emotion
