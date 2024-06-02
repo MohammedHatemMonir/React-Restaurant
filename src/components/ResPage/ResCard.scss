@@ -1,5 +1,5 @@
-// $green: #27ae60;
-$green: #ff4500;
+// $orange: #27ae60;
+$orange: #ff4500;
 $black: #130f40;
 $white: #fff;
 $light-color: #666;
@@ -54,7 +54,7 @@ $box-shadow: 0 16px 16px rgba(0, 0, 0, 0.05);
           left: 1rem;
           i {
             padding-right: 0.5rem;
-            color: $green;
+            color: $orange;
           }
         }
 
@@ -75,7 +75,7 @@ $box-shadow: 0 16px 16px rgba(0, 0, 0, 0.05);
           font-size: 1.7rem;
           cursor: pointer;
           color: $white;
-          background: $green;
+          background: $orange;
           border-radius: 0.5rem;
 
           &:hover {
@@ -92,7 +92,7 @@ $box-shadow: 0 16px 16px rgba(0, 0, 0, 0.05);
             text-decoration: none;
 
             &:hover {
-              color: $green;
+              color: $orange;
             }
           }
         }

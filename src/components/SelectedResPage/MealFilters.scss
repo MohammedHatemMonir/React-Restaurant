@@ -1,5 +1,5 @@
-// $green: #27ae60;
-$green: #ff4500;
+// $orange: #27ae60;
+$orange: #ff4500;
 $black: #130f40;
 $white: #fff;
 $light-color: #666;
@@ -24,7 +24,7 @@ $box-shadow: 0 16px 16px rgba(0, 0, 0, 0.05);
     background: $light-bg;
 
     &:hover {
-      background: $green;
+      background: $orange;
 
       h3 {
         color: $white;

@@ -1,5 +1,5 @@
-// $green: #27ae60;
-$green: #ff4500;
+// $orange: #27ae60;
+$orange: #ff4500;
 $black: hsl(245, 62%, 15%);
 // $white: #fff;
 $white: #ffffff;
@@ -28,7 +28,7 @@ $box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.05);
 
     i {
       padding-right: 0.5rem;
-      color: $green;
+      color: $orange;
     }
   }
 
@@ -39,7 +39,7 @@ $box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.05);
       color: $light-color;
 
       &:hover {
-        color: $green;
+        color: $orange;
       }
     }
   }
@@ -59,7 +59,7 @@ $box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.05);
 
     &:hover {
       color: $white;
-      background: $green;
+      background: $orange;
     }
   }
 }

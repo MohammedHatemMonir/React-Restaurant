@@ -33,14 +33,14 @@ export default function Parallax() {
       <section className="home" id="home">
         <div className="content">
           <span className="font-weight-bold">Welcome To Dine Me</span>
-          <h3>Voice Your Palate: Elevate Your Dining Experience Through Feedback 🌟</h3>
+          <h3>
+            Voice Your Palate: Elevate Your Dining Experience Through Feedback
+            🌟
+          </h3>
           <p>
             Discover culinary excellence with our carefully curated dishes,
             where every flavor is a delight and every bite a revelation.
           </p>
-          {/* <Link to="#" className="btn">
-            order now
-          </Link> */}
         </div>
         <div className="image">
           <img
