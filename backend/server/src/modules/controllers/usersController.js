@@ -318,7 +318,7 @@ const editProfile = async (req, res) => {
     if (email) user.email = email;
 
 
-    if (password.length > 5 && oldPass) {
+    if (password.length >= 5 && oldPass) {
       try {
         const compare = await bcrypt.compare(oldPass, user.password);
         if (compare) {
@@ -334,9 +334,9 @@ const editProfile = async (req, res) => {
         return res.status(500).json({ success: false, message: 'An error occurred while updating the password.', error: error.message });
       }
     } else {
-      return res.status(404).json({ success: false, message: 'New password must be longer than 5 characters and old password must be provided.' });
+      res.status(404).json({ success: false, message: 'New password must be longer than 5 characters and old password must be provided.' });
     }
-    
+
 
     if (location) user.location = location;
     if (phoneNumber) user.phoneNumber = phoneNumber;
