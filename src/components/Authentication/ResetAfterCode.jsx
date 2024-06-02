@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { apiClient } from "../../Data/apiclient";
@@ -14,13 +14,13 @@ export default function ResetAfterCode() {
   } = useForm();
 
   const m = useMutation({
-    mutationKey: [],
+    mutationKey: ["reset-password-sms"],
     // cacheTime: 600000,
     // onSuccess: onSuccess,
     // onError: onError,
     mutationFn: async (params) => {
       console.log("trying to load");
-      let url = `/api/users/reset-password/${id}/${token}`;
+      let url = `/reset-password-sms`;
       console.log("posting to ", url);
       return await apiClient.post(url, params);
     },
@@ -39,7 +39,7 @@ export default function ResetAfterCode() {
     if (msg === "Email Send Successfully") {
       toast.success(msg, {
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -49,7 +49,7 @@ export default function ResetAfterCode() {
     } else {
       toast.error(msg, {
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,

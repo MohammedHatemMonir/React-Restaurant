@@ -105,24 +105,16 @@ const PinCodeAuth = () => {
               Request Code
             </button>
           </form>
-          {/* <div className="mt-3">
-            <Link
-              to="/phoneAuth"
-              className="text-decoration-none font-weight-bold"
-              style={{ color: "#795d9a" }}
-            >
-              Also you can use your phone number
-            </Link>
-          </div>
+
           <div className="mt-3">
             <Link
               to="/"
-              className="text-decoration-none font-weight-bold"
+              className="text-decoration-none text-align-center font-weight-bold"
               style={{ color: "#795d9a" }}
             >
               Back to Login
             </Link>
-          </div> */}
+          </div>
         </div>
       </div>
     </div>
