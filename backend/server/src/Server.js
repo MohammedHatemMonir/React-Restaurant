@@ -1,4 +1,6 @@
 const express=require('express');
+const dotenv=require('dotenv');
+dotenv.config()
 const cors=require('cors');
 const app=express();
 const session = require('express-session');
@@ -13,12 +15,11 @@ const uploadImg = require('./utils/uploadImg');
 const { error, Console } = require('console');
 const SearchRouter = require('./modules/routes/searchRoutes.js');
 const routerTypeComments = require('./modules/routes/dashboard/dashboardRoutes.js');
-const {Server} = require('socket.io');
+const {Server} = require('socket.io'); 
 const server = require("http").createServer(app);
 const ChatRouter = require('./modules/Chat/chatRouter.js');
 const dashboardRouterAdmin = require('./modules/routes/dashboard/dashboardRoutesAdmin.js');
 const resetRouter = require('./modules/routes/reset_pass_routes.js');
-
 // const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const wrap = (expressMiddleWare) => (socket, next) => expressMiddleWare(socket.request, {}, next);
 
