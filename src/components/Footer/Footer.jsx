@@ -26,38 +26,43 @@ const Footer = () => {
               <div className="col-xs-12 col-sm-6 col-md-3">
                 <div className="widget no-box">
                   <h5 className="widget-title">
-                    Restaurant Quick Links
+                    Quick Links
                     <span />
                   </h5>
                   <ul className="thumbnail-widget">
                     <li>
                       <div className="thumb-content">
-                        <a href="#">Menu</a>
+                        <Link>Get Started </Link>
                       </div>
                     </li>
                     <li>
                       <div className="thumb-content">
-                        <a href="#">Chef's Specials</a>
+                        <Link>Top Leaders </Link>
                       </div>
                     </li>
                     <li>
                       <div className="thumb-content">
-                        <a href="#">Customer Reviews</a>
+                        <Link>Success Stories </Link>
                       </div>
                     </li>
                     <li>
                       <div className="thumb-content">
-                        <a href="#">Events/Bookings</a>
+                        <Link>Event/Tickets </Link>
                       </div>
                     </li>
                     <li>
                       <div className="thumb-content">
-                        <a href="#">News & Updates</a>
+                        <Link>News </Link>
                       </div>
                     </li>
                     <li>
                       <div className="thumb-content">
-                        <a href="#">About Us</a>
+                        <Link>Lifestyle </Link>
+                      </div>
+                    </li>
+                    <li>
+                      <div className="thumb-content">
+                        <Link>About </Link>
                       </div>
                     </li>
                   </ul>
@@ -70,12 +75,9 @@ const Footer = () => {
                     <span />
                   </h5>
                   <p>Get access to your full Marketing Suite.</p>
-                  <a href="#" className="btn my-3">
-                    Subscribe Now
-                  </a>
+                  <Link className="btn my-3">Subscribe Now</Link>
                 </div>
               </div>
-
               <div className="col-xs-12 col-sm-6 col-md-3">
                 <div className="widget no-box">
                   <h5 className="widget-title">

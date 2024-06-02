@@ -125,7 +125,7 @@ export default function MealCard({
                     display: "flex",
                     justifyContent: "space-around",
                     alignItems: "center",
-                    margin: "25px 5% 0px  5%",
+                    margin: "25px 10% 0px  10%",
                     transform: "scale(1.8)",
                   }}
                 >
