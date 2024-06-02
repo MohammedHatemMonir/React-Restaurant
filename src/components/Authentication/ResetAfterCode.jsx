@@ -4,7 +4,7 @@ import { useMutation } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 import { useSignal } from "@preact/signals-react";
 
-export default function ResetPass() {
+export default function ResetAfterCode() {
   const msg = useSignal("");
 
   const {

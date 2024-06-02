@@ -30,6 +30,7 @@ import CartBody from "../Navbar/CartBody";
 import AdminDashboard from "./../Dashboard/AdminDashboard";
 import PhoneAuth from "./../Authentication/PhoneAuth";
 import PinCodeAuth from "./../Authentication/PinCodeAuth";
+import ResetAfterCode from "../Authentication/ResetAfterCode";
 
 export default function TheRouter() {
   const navigate = useNavigate();
@@ -99,6 +100,7 @@ export default function TheRouter() {
         ></Route>
         <Route path="PinCodeAuth/:email/:phoneNumber" element={<PinCodeAuth />}></Route>
         <Route path="reset/:id/:token" element={<ResetPass />}></Route>
+        <Route path="ResetAfterCode" element={<ResetAfterCode />}></Route>
 
         {UserData.value.loggedIn && (
           <Route path="/" element={<DefaultLayout />}>
