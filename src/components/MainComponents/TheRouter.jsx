@@ -42,6 +42,7 @@ export default function TheRouter() {
     "reset",
     "phoneAuth",
     "PinCodeAuth",
+    "ResetAfterCode"
   ];
 
   const navigateLogic = () => {

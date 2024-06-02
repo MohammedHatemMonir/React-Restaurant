@@ -6,8 +6,7 @@ import { useSignal } from "@preact/signals-react";
 
 export default function ResetPass() {
   const msg = useSignal("");
-  const { id, token } = useParams();
-  console.log("id and token", id, token);
+
   const {
     register,
     handleSubmit,
