@@ -13,11 +13,19 @@ const NotificationDropdown = () => {
   const newNotifications = useSignal(0);
   const socket = io("http://localhost:5001", { withCredentials: true });
 
+  function updateNotificationTimes() {
+    notifications.value = notifications.value.map((notification) => ({
+      ...notification,
+      time: moment(notification.originalTime).fromNow(),
+    }));
+  }
+
   function onNotification(data) {
     console.log("Received new notification:", data);
-    const formattedTime = moment(data.time).fromNow(); // Format the time using moment
+    const originalTime = data.time;
+    const formattedTime = moment(originalTime).fromNow(); // Format the time using moment
     notifications.value = [
-      { ...data, time: formattedTime },
+      { ...data, time: formattedTime, originalTime },
       ...notifications.value,
     ];
     newNotifications.value = newNotifications.value + 1;
@@ -42,6 +50,9 @@ const NotificationDropdown = () => {
     socket.on("disconnect", onDisconnect);
 
     socket.on("new-notification", onNotification);
+
+    const intervalId = setInterval(updateNotificationTimes, 60000);
+    return () => clearInterval(intervalId);
   }, []);
   return (
     <Dropdown
