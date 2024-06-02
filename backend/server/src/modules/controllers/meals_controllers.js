@@ -45,10 +45,10 @@ const addNewmeal = async (req, res) => {
       return res.status(403).json({ message: "You do not own this restaurant" });
     }
 
-    const existingMeal = await meal.findOne({ MealName, ResID: Resid });
-    if (existingMeal) {
-      return res.status(400).json({ message: "Meal already exists" });
-    }
+    // const existingMeal = await meal.findOne({ MealName, ResID: Resid });
+    // if (existingMeal) {
+    //   return res.status(400).json({ message: "Meal already exists" });
+    // }
 
     // Upload meal image
     const mealImage = await uploadImg(MealImg);
