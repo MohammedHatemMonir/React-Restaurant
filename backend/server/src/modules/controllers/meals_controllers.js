@@ -202,13 +202,13 @@ const createOrder = async (req, res) => {   // {ResId:"",meals:[{id:"",quantity:
   try {
     // 
 
-    if (!req.session?.user?._id) return res.status(404).json({ message: "Not authenticated!" });
+    if (!req.session?.user?._id) return res.json({ message: "Not authenticated!" });
 
     const restaurantId = req.body.ResId;
     const restaurant = await resturant.findById(restaurantId);
 
     if (!restaurant) {
-      return res.status(404).json({ message: "Restaurant not found" });
+      return res.json({ message: "Restaurant not found" });
     }
 
     const mealPromises = req.body.meals.map(Meal => {
