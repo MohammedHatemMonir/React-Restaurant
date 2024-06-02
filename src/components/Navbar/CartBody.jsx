@@ -9,7 +9,6 @@ import "./CartBody.scss";
 import { useSignal } from "@preact/signals-react";
 import DeliveryModal from "./DeliveryModal";
 import PaypalModal from "./PaypalModal";
-import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import CircleLoader from "./../Loaders/CircleLoader";
 export default function CartBody() {
@@ -102,7 +101,7 @@ export default function CartBody() {
   if (m.isLoading) {
     return <CircleLoader />;
   }
-  if (Cart.value?.meals?.length <= 0) {
+  if (Cart.value?.meals?.length <= 0 || Cart.value?.meals === "undefined") {
     return <EmptyOrders />;
   } else
     return (
