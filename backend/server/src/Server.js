@@ -1,6 +1,8 @@
 const express=require('express');
+const path = require("path");
 const dotenv=require('dotenv');
-dotenv.config()
+require("dotenv").config({ path: `./.env` });
+// dotenv.config({ path: path.resolve('./.env')});
 const cors=require('cors');
 const app=express();
 const session = require('express-session');
@@ -15,7 +17,7 @@ const uploadImg = require('./utils/uploadImg');
 const { error, Console } = require('console');
 const SearchRouter = require('./modules/routes/searchRoutes.js');
 const routerTypeComments = require('./modules/routes/dashboard/dashboardRoutes.js');
-const {Server} = require('socket.io'); 
+const {Server} = require('socket.io');
 const server = require("http").createServer(app);
 const ChatRouter = require('./modules/Chat/chatRouter.js');
 const dashboardRouterAdmin = require('./modules/routes/dashboard/dashboardRoutesAdmin.js');
@@ -59,7 +61,7 @@ app.use(sessionMiddleware);
 app.use(passport.initialize());
 app.use(passport.session());
 
-connectToMongoDB();
+connectToMongoDB(process.env.DB_CONNECTION);
 
 app.use(express.json({limit: '50mb'}));
 
