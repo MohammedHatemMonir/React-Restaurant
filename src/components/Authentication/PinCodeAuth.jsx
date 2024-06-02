@@ -67,17 +67,17 @@ const PinCodeAuth = () => {
         <h2 className="text-center">Enter PIN Code</h2>
 
         <Form onSubmit={handleSubmit} className="pin-form">
-        <div className="form-group">
-              <input
-                className="form-control"
-                type="password"
-                id="pass"
-                required
-                placeholder="Password"
-                value={pass.value}
-                onChange={(e) => (pass.value = e.target.value)}
-              />
-            </div>
+          <div className="form-group">
+            <input
+              className="form-control"
+              type="password"
+              id="pass"
+              required
+              placeholder="New Password"
+              value={pass.value}
+              onChange={(e) => (pass.value = e.target.value)}
+            />
+          </div>
           <FormGroup className="pin-inputs">
             {pins.value.map((pin, index) => (
               <Input
