@@ -53,7 +53,7 @@ const EditProfile = () => {
     console.log("data added", result);
 
     // Toaster here
-    if (!result?.data) {
+    if (!result?.data?.success) {
       toast.error("Error updating profile", {
         position: "top-center",
         autoClose: 3000,
@@ -73,12 +73,12 @@ const EditProfile = () => {
         draggable: true,
         progress: undefined,
       });
+      navigate("/");
     }
     // console.log("m.data?.data", m.data?.data.message);
     queryClient.invalidateQueries({ mutationKey: ["editProfile"] });
     queryClient.refetchQueries(["editProfile"]);
     reset();
-    navigate("/");
     // console.log(result)
     // alert(result)
   };

@@ -303,12 +303,12 @@ const editProfile = async (req, res) => {
   try {
     const userId = req.session?.user?._id;
     if (!userId) {
-      return res.status(401).json({ message: "Not authenticated!" });
+      return resizeTo.json({success: false, message: "Not authenticated!" });
     }
 
     const user = await myusers.findById(userId);
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res.json({success: false, message: "User not found" });
     }
 
     const { name, email, password, oldPass, location, phoneNumber, userImg } = req.body;
@@ -325,10 +325,10 @@ const editProfile = async (req, res) => {
         user.password = hashedPassword;
         passwordUpdated = true;
       } else {
-        return res.status(400).json({ success: false, message: 'Old password is incorrect.' });
+        return res.json({ success: false, message: 'Old password is incorrect.' });
       }
     } else if (password || oldPass) {
-      return res.status(400).json({ success: false, message: 'New password must be longer than 5 characters and old password must be provided.' });
+      return res.json({ success: false, message: 'New password must be longer than 5 characters and old password must be provided.' });
     }
 
     if (location) user.location = location;
