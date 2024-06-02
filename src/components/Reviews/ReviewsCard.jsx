@@ -21,7 +21,12 @@ const ReviewsCard = ({ name, stars, emotion, image, comment, date }) => {
   // const importantStyle = {
   //   color: "green !important",
   // };
-  stars = Math.round(stars);
+  if (Math.round(stars) == 3 && stars != 2.5) {
+    stars = Math.round(stars);
+    stars += 1;
+  } else {
+    stars = Math.round(stars);
+  }
 
   switch (emotion) {
     case "admiration":
