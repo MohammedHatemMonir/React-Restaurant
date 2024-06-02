@@ -307,7 +307,6 @@ const editProfile = async (req, res) => {
     }
 
     const user = await myusers.findById(userId);
-
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
@@ -317,37 +316,41 @@ const editProfile = async (req, res) => {
     if (name) user.name = name;
     if (email) user.email = email;
 
+    let passwordUpdated = false;
 
-    if (password.length >= 5 && oldPass) {
-      try {
-        const compare = await bcrypt.compare(oldPass, user.password);
-        if (compare) {
-          const hashedPassword = await bcrypt.hash(password, 8);
-          user.password = hashedPassword;
-          await user.save();
-          res.status(200).json({ success: true, message: 'Password updated successfully.' });
-        } else {
-          res.status(404).json({ success: false, message: 'Old password is incorrect.' });
-        }
-      } catch (error) {
-        console.log(error);
-        return res.status(500).json({ success: false, message: 'An error occurred while updating the password.', error: error.message });
+    if (password && password.length >= 5 && oldPass) {
+      const compare = await bcrypt.compare(oldPass, user.password);
+      if (compare) {
+        const hashedPassword = await bcrypt.hash(password, 8);
+        user.password = hashedPassword;
+        passwordUpdated = true;
+      } else {
+        return res.status(400).json({ success: false, message: 'Old password is incorrect.' });
       }
-    } else {
-      res.status(404).json({ success: false, message: 'New password must be longer than 5 characters and old password must be provided.' });
+    } else if (password || oldPass) {
+      return res.status(400).json({ success: false, message: 'New password must be longer than 5 characters and old password must be provided.' });
     }
-
 
     if (location) user.location = location;
     if (phoneNumber) user.phoneNumber = phoneNumber;
     if (userImg) {
-      const updatedUserImg = await uploadImg(userImg);
-      user.userImg = updatedUserImg;
+      try {
+        const updatedUserImg = await uploadImg(userImg);
+        user.userImg = updatedUserImg;
+      } catch (error) {
+        console.error("Error uploading image:", error);
+        return res.status(500).json({ success: false, message: 'An error occurred while uploading the image.', error: error.message });
+      }
     }
 
     await user.save();
     req.session.user = user;
-    return res.json({ message: "User updated successfully", user });
+
+    const responseMessage = passwordUpdated 
+      ? 'User and password updated successfully' 
+      : 'User updated successfully';
+    
+    return res.status(200).json({ message: responseMessage, user });
   } catch (error) {
     console.error("Error updating user:", error);
     return res.status(500).json({ error: "Internal server error" });
