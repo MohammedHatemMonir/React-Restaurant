@@ -11,10 +11,6 @@ const PinCodeAuth = () => {
   const msg = useSignal();
   const { email, phoneNumber } = useParams();
 
-  const emailRef = useRef();
-  const phoneRef = useRef();
-  console.log("email and phoneNumber", email, phoneNumber);
-
   const m = useMutation({
     mutationKey: ["reset-password-pinCode"],
     mutationFn: async (params) => {
@@ -26,10 +22,7 @@ const PinCodeAuth = () => {
   });
 
   const onSubmit = async function (data) {
-    console.log("Data to send", data);
-    const result = await m.mutateAsync(data);
 
-    console.log("reset-password-sms", result.data?.data);
   };
 
   // const [pins, setPins] = useState(Array(6).fill(""));
@@ -49,22 +42,22 @@ const PinCodeAuth = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const enteredPin = pins.value.join("");
-    if (enteredPin === "123456") {
+
+    const result = await m.mutateAsync({resetCode: enteredPin,email: email, phoneNumber: phoneNumber});
+
+    console.log("reset-password-sms", result.data?.data);
+    if (result.data?.success) {
       message.value = "PIN code is correct!";
+
     } else {
       message.value = "Invalid PIN code.";
     }
   };
 
   console.log("My Code", pins.value.join(""));
-  // To get phone and email
-  useEffect(() => {
-    console.log("emailRef", emailRef.current.value);
-    console.log("phoneRef", phoneRef.current.value);
-  }, []);
 
   return (
     <div className="pin-auth-container" style={{ marginTop: "25vh" }}>
@@ -72,8 +65,6 @@ const PinCodeAuth = () => {
 
       <Form onSubmit={handleSubmit} className="pin-form">
         {/* style={{ display: "none" }} */}
-        <input type="text" value={email} ref={emailRef} />
-        <input type="text" value={phoneNumber} ref={phoneRef} />
         <FormGroup className="pin-inputs">
           {pins.value.map((pin, index) => (
             <Input

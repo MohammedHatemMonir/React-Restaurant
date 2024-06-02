@@ -24,7 +24,7 @@ const requestReset = async (req, res) => {
   const { email, phoneNumber } = req.body;
   const existUser = await User.findOne({ email, phoneNumber });
 
-  if (!existUser) return res.status(404).json({ success: false, message: "User not found" });
+  if (!existUser) return res.json({ success: false, message: "User not found" });
 
   const resetCode = generateResetCode();
   const resetCodeExpire = new Date(Date.now() + 5 * 60000); // 5 minutes expiry
@@ -52,8 +52,8 @@ const resetPassSms = async (req, res) => {
   const { email, phoneNumber, resetCode } = req.body;
   const existUser = await User.findOne({ email, phoneNumber, resetCode });
 
-  if (!existUser) return res.status(404).json({ success: false, message: "Invalid email, phone number, or reset code" });
-  if (existUser.resetCodeExp < new Date()) return res.status(400).json({ success: false, message: "Reset code has expired" });
+  if (!existUser) return res.json({ success: false, message: "Invalid email, phone number, or reset code" });
+  if (existUser.resetCodeExp < new Date()) return res.json({ success: false, message: "Reset code has expired" });
 
   try {
     const {newPassword}=req.body

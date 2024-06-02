@@ -27,8 +27,11 @@ const PinCodeAuth = () => {
   const onSubmit = async function (data) {
     console.log("Data to send", data);
     const result = await m.mutateAsync(data);
+    console.log("reset-password", result);
+    // if(result.data?.success) {
     // console.log("reset-password", result.data?.data);
     navigate(`/PinCodeAuth/${data.email}/${data.phoneNumber}`);
+    // }
   };
 
   return (

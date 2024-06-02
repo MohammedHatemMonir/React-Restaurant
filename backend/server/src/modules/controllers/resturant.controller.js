@@ -48,7 +48,6 @@ const getAllresturant = async (req, res) => {
             .populate('categoryId', '_id category')
             .sort({ createdAt: -1 });
 
-        console.log(restaurants);
         res.status(200).json(restaurants);
     } catch (error) {
         res.status(500).json({ message: "Error retrieving restaurants", error: error.message });
