@@ -4,6 +4,7 @@
 /node_modules
 /sentiment machine learning/text_emotion.pkl
 /sentiment machine learning/__pycache__
+/sentiment machine learning/analising_model.h5
 /.pnp
 .pnp.js
 
