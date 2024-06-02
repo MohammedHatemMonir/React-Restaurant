@@ -113,7 +113,7 @@ export default function SignUp() {
                 <h3 className="font-weight-bold" style={{ color: "#ff4500" }}>
                   Welcome to Dine Me
                 </h3>
-                <p className="text-muted" style={{ color: "#795d9a" }}>
+                <p style={{ color: "#795d9a" }}>
                   Welcome back! Please sign in to your account
                 </p>
               </div>
