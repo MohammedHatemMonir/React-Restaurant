@@ -325,9 +325,9 @@ const editProfile = async (req, res) => {
           const hashedPassword = await bcrypt.hash(password, 8);
           user.password = hashedPassword;
           await user.save();
-          return res.status(200).json({ success: true, message: 'Password updated successfully.' });
+          res.status(200).json({ success: true, message: 'Password updated successfully.' });
         } else {
-          return res.status(404).json({ success: false, message: 'Old password is incorrect.' });
+          res.status(404).json({ success: false, message: 'Old password is incorrect.' });
         }
       } catch (error) {
         console.log(error);
