@@ -266,10 +266,10 @@ export default function AdminDashboard() {
                   <Col xs="9">
                     <div className="numbers">
                       <p className="card-category">
-                        Total price for last 10 days
+                        Total orders for last 10 days
                       </p>
                       <Card.Title as="h4">
-                        {q1.data?.data?.data.totalPrice}
+                        {q1.data?.data?.data.totalOrders}
                       </Card.Title>
                     </div>
                   </Col>
@@ -297,7 +297,6 @@ export default function AdminDashboard() {
                       </p>
                       <Card.Title as="h4">
                         {q1.data?.data?.data.totalPrice}
-                        {/* {q1.data?.data?.data.totalOrders} */}
                       </Card.Title>
                     </div>
                   </Col>
