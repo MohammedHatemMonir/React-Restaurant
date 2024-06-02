@@ -350,10 +350,10 @@ const editProfile = async (req, res) => {
       ? 'User and password updated successfully' 
       : 'User updated successfully';
     
-    return res.status(200).json({ message: responseMessage, user });
+    return res.status(200).json({success: true, message: responseMessage, user });
   } catch (error) {
     console.error("Error updating user:", error);
-    return res.status(500).json({ error: "Internal server error" });
+    return res.status(500).json({success: true,, error: "Internal server error" });
   }
 };
 

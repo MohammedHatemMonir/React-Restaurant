@@ -117,7 +117,7 @@ function EditResModal({
     queryClient.refetchQueries(["updateRestaurant"]);
 
     // Toaster here
-    if (!result?.data) {
+    if (!result?.data?.success) {
       toast.error("Error updating restaurant", {
         position: "top-center",
         autoClose: 5000,
