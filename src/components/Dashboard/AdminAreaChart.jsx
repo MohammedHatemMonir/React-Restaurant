@@ -8,20 +8,24 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-
+import moment from "moment";
 export default function AdminAreaChart({ rawData1 }) {
   console.log("rawData1", rawData1);
 
   const transformData = (data) => {
     console.log("my dat", data);
 
-    const orders = Object.values(data?.restaurantOrders)?.flatMap((res) =>
-      res.orders.map((order) => ({
-        date: order.dateOrdered.split("T")[0],
-        "Total Price": order.totalPrice,
-      }))
+    const orders = Object.values(data?.restaurantOrders || {}).flatMap((res) =>
+      res.orders.map((order) => {
+        const originalDate = moment(order.dateOrdered);
+        const relativeDate = originalDate.fromNow();
+    
+        return {
+          date: relativeDate,
+          "Total Price": order.totalPrice,
+        };
+      })
     );
-
     return orders;
   };
 
