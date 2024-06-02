@@ -78,14 +78,14 @@ const addNewmeal = async (req, res) => {
       global.io.to(userId).emit("new-notification", {
         message: `Restaurant ${restaurant._id} has added a new meal: ${newMeal.MealName}`,
         time: Date.now().toString(),
-        link: "/tutorials"
+        link: `/restaurant/${restaurant._id}}/${restaurant.ResName}`
       });
     });
     
     global.io.to(restaurant.ownerId?.toString()).emit("new-notification", {
       message: `The meal has been successfully added`,
       time: Date.now().toString(),
-      link: "/tutorials"
+      link: `/restaurant/${restaurant._id}}/${restaurant.ResName}`
     });
 
 
@@ -150,7 +150,7 @@ const updateMeal = async (req, res) => {
     }
 
     const updatedMeal = await meal.findByIdAndUpdate(id, newMealData, { new: true });
-    global.io.to(restaurant.ownerId?.toString()).emit("new-notification", {message: `Meal updated`, time: Date.now().toString(), link: "/tutorials" });
+    global.io.to(restaurant.ownerId?.toString()).emit("new-notification", {message: `Meal updated`, time: Date.now().toString(), link: "/" });
 
     res.status(200).json(updatedMeal);
 
@@ -180,7 +180,7 @@ const deleteMeal = async (req, res) => {
     }
 
     await meal.findByIdAndDelete(id);
-    global.io.to(restaurant.ownerId?.toString()).emit("new-notification", {message: `Meal deleted`, time: Date.now().toString(), link: "/tutorials" });
+    global.io.to(restaurant.ownerId?.toString()).emit("new-notification", {message: `Meal deleted`, time: Date.now().toString(), link: "/" });
 
     res.status(200).json({ message: "Meal deleted successfully" });
 
@@ -251,8 +251,8 @@ const createOrder = async (req, res) => {   // {ResId:"",meals:[{id:"",quantity:
     console.log("order", order);
     order = await order.save();
 
-    global.io.to(restaurant.ownerId?.toString()).emit("new-notification", {message: `Someone created an order`, time: Date.now().toString(), link: "/tutorials" });
-    global.io.to(req.session?.user?._id).emit("new-notification", {message: `Your order has been successfully created`, time: Date.now().toString(), link: "/tutorials" });
+    global.io.to(restaurant.ownerId?.toString()).emit("new-notification", {message: `Someone created an order`, time: Date.now().toString(), link: "/" });
+    global.io.to(req.session?.user?._id).emit("new-notification", {message: `Your order has been successfully created`, time: Date.now().toString(), link: "/" });
 
     res.status(201).json({
       success: true,
