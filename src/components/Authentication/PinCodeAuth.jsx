@@ -4,9 +4,17 @@ import { Button, Form, FormGroup, Input } from "reactstrap";
 import { useMutation } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 import { useParams } from "react-router-dom";
+import { useSignal } from "@preact/signals-react";
+import { useRef } from "react";
+import { useEffect } from "react";
 const PinCodeAuth = () => {
+  const msg = useSignal();
   const { email, phoneNumber } = useParams();
+
+  const emailRef = useRef();
+  const phoneRef = useRef();
   console.log("email and phoneNumber", email, phoneNumber);
+
   const m = useMutation({
     mutationKey: ["reset-password-pinCode"],
     mutationFn: async (params) => {
@@ -47,11 +55,22 @@ const PinCodeAuth = () => {
       setMessage("Invalid PIN code.");
     }
   };
-  console.log("My Code", pins);
+
+  console.log("My Code", pins.join(""));
+  // To get phone and email
+  useEffect(() => {
+    console.log("emailRef", emailRef.current.value);
+    console.log("phoneRef", phoneRef.current.value);
+  }, []);
+
   return (
     <div className="pin-auth-container" style={{ marginTop: "25vh" }}>
       <h2 className="text-center">Enter PIN Code</h2>
+
       <Form onSubmit={handleSubmit} className="pin-form">
+        {/* style={{ display: "none" }} */}
+        <input type="text" value={email} ref={emailRef} />
+        <input type="text" value={phoneNumber} ref={phoneRef} />
         <FormGroup className="pin-inputs">
           {pins.map((pin, index) => (
             <Input

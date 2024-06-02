@@ -5,7 +5,7 @@ import { useMutation } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 
 const PinCodeAuth = () => {
-  // const msg = useSignal("");
+  const msg = useSignal("");
 
   const navigate = useNavigate();
   const {
