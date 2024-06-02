@@ -91,7 +91,7 @@ function MealDetailsModal({
                 maxWidth: "300px",
                 boxSizing: "border-box",
                 color: "white",
-                background:"#ff4500"
+                background: "#ff4500",
                 // fontWeight:"Bold"
               }}
             >
@@ -180,18 +180,6 @@ function MealDetailsModal({
             </div>
             <p className="item-description ">{mealDesc}</p>
             <div className="item-actions">
-              {/* <div className="reactions">
-                <button
-                  type="button"
-                  disabled="disabled"
-                  className="action-btn reaction-btn like-btn"
-                >
-                  <span className="icon">
-                    <AiOutlineLike />
-                  </span>
-                  <span className="count"> 323</span>
-                </button>
-              </div> */}
               <div className="item-sizes ">
                 <ul className="sizes-list custom-radio-group">
                   <li className="size">
