@@ -4,6 +4,7 @@ import { Dropdown, Badge } from "react-bootstrap";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { io } from "socket.io-client";
 import { useNavigate } from "react-router-dom";
+import moment from "moment";
 
 const NotificationDropdown = () => {
   const navigate = useNavigate();
@@ -14,7 +15,11 @@ const NotificationDropdown = () => {
 
   function onNotification(data) {
     console.log("Received new notification:", data);
-    notifications.value = [data, ...notifications.value];
+    const formattedTime = moment(data.time).fromNow(); // Format the time using moment
+    notifications.value = [
+      { ...data, time: formattedTime },
+      ...notifications.value,
+    ];
     newNotifications.value = newNotifications.value + 1;
     newNotifications.value > 0
       ? (displayNewNotifications.value = "")
