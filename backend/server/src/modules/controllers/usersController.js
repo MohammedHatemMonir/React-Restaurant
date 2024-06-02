@@ -282,20 +282,20 @@ const resetPassword = async (req, res) => {
 
     jwt.verify(token, "jwt_secret_key", async (err, decoded) => {
       if (err) {
-        return res.status(400).json({ msg: "Invalid or expired token" });
+        return res.status(400).json({ success: false,msg: "Invalid or expired token" });
       }
       const user = await myusers.findById(userId);
       if (!user) {
-        return res.status(404).json({ msg: "User not found" });
+        return res.status(404).json({ success: false,msg: "User not found" });
       }
       const hashedPassword = await bcrypt.hash(password, 8);
       user.password = hashedPassword;
       await user.save();
-      return res.json({ msg: "Password Reseated Successfully" });
+      return res.json({success: true, msg: "Password Reseted Successfully" });
     });
   } catch (error) {
     console.error("Error during password reset:", error);
-    return res.status(500).json({ error: "Internal server error" });
+    return res.status(500).json({success: false, error: "Internal server error" });
   }
 };
 
