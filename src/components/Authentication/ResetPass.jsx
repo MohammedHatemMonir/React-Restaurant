@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { apiClient } from "../../Data/apiclient";
 import { useSignal } from "@preact/signals-react";
+import { toast } from "react-toastify";
 
 export default function ResetPass() {
   const msg = useSignal("");
@@ -33,12 +34,12 @@ export default function ResetPass() {
     // console.log("result from resetpass", result);
     // alert(result.data.msg);
     msg.value = result.data.msg;
-    notify(msg.value);
+    notify(result.data?.success);
   };
 
   function notify(msg) {
-    if (msg === "Email Send Successfully") {
-      toast.success(msg, {
+    if (msg === true) {
+      toast.success("Updated Successfully", {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -48,7 +49,7 @@ export default function ResetPass() {
         progress: undefined,
       });
     } else {
-      toast.error(msg, {
+      toast.error("Error in updating password", {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
