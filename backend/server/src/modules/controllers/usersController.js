@@ -312,14 +312,21 @@ const editProfile = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
     
-    const { name, email, password, location, phoneNumber, userImg } = req.body;
-    
+    const { name, email, password, oldPass, location, phoneNumber, userImg } = req.body;
+
     if (name) user.name = name;
     if (email) user.email = email;
-    if (password) {
+
+
+    if (password && oldPass) {
+
+
+
+
       const hashedPassword = await bcrypt.hash(password, 8);
       user.password = hashedPassword;
     }
+
     if (location) user.location = location;
     if (phoneNumber) user.phoneNumber = phoneNumber;
     if (userImg) {
