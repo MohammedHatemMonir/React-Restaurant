@@ -49,14 +49,13 @@ const requestReset = async (req, res) => {
 
 // Endpoint to reset password using SMS verification code
 const resetPassSms = async (req, res) => {
-  const { email, phoneNumber, resetCode } = req.body;
+  const { email, phoneNumber, resetCode,newPassword } = req.body;
   const existUser = await User.findOne({ email, phoneNumber, resetCode });
 
   if (!existUser) return res.json({ success: false, message: "Invalid email, phone number, or reset code" });
   if (existUser.resetCodeExp < new Date()) return res.json({ success: false, message: "Reset code has expired" });
 
   try {
-    const {newPassword}=req.body
     const hashedPassword = await bcrypt.hash(newPassword, 10);
     existUser.password = hashedPassword;
     existUser.resetCode = null;

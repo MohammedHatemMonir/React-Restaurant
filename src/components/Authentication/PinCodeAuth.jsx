@@ -8,6 +8,8 @@ import { useSignal } from "@preact/signals-react";
 import { Link } from "react-router-dom";
 const PinCodeAuth = () => {
   const msg = useSignal();
+  const pass = useSignal();
+
   const navigate = useNavigate();
   const { email, phoneNumber } = useParams();
 
@@ -43,9 +45,12 @@ const PinCodeAuth = () => {
       resetCode: enteredPin,
       email: email,
       phoneNumber: phoneNumber,
+      newPassword: pass.value,
     });
-    pins.value = Array(6).fill("");
     console.log("reset-password-sms", result.data?.data);
+
+    pins.value = Array(6).fill("");
+    console.log("reset-password-sms", result.data);
     if (result.data?.success) {
       message.value = "PIN code is correct!";
       navigate("/resetAfterCode");
@@ -62,6 +67,26 @@ const PinCodeAuth = () => {
         <h2 className="text-center">Enter PIN Code</h2>
 
         <Form onSubmit={handleSubmit} className="pin-form">
+        <div className="form-group">
+              <input
+                className="form-control"
+                type="password"
+                id="pass"
+                required
+                placeholder="Password"
+                value={pass.value}
+                onChange={(e) => (pass.value = e.target.value)}
+              />
+            </div>
+            <div className="mt-3">
+              <Link
+                to="/"
+                className="text-decoration-none"
+                style={{ color: "#795d9a" }}
+              >
+                Back to Home
+              </Link>
+            </div>
           <FormGroup className="pin-inputs">
             {pins.value.map((pin, index) => (
               <Input
