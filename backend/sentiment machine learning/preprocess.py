@@ -81,9 +81,13 @@ stop_words = set(stopwords.words('english'))
 
 def preprocess(sentence):
     sentence = str(sentence)
-    words = [word for word in sentence.split() if word =='be' or  not (word.startswith(("@", "#", "http:", "/")) or word in stop_words)]
+    for word in sentence.split():
+       if word  in ('not', 'no',"NOT","NO","dont","DONT","don't","DON'T"):
+          return "negative"
+    words = [word for word in sentence.split() if word in('be',"dont","DONT","don't","DON'T") or  not (word.startswith(("@", "#", "http:", "/")) or word in stop_words)]
+    print(words)
     words = [re.sub(pattern="[^a-zA-Z\s]", repl="", string=word) for word in words]
-    words = ['-' if word in ['not', 'no','dont'] else ps.stem(word).lower() + ' ' for word in words]#[:29]
+    words = ['-' if word in ['not', 'no','dont',"DONT"] else ps.stem(word).lower() + ' ' for word in words]#[:29]
     words=['as' if words[i] in ("like ") and i>0 and words[i-1] in ("be ", "seem ", "feel ", "look ", "sound ") else words[i] for i in range(0,len(words))] 
     return "".join(words)
 # i like flower , i look like you, i feel like 
@@ -340,7 +344,10 @@ def tweets_analising (tweets,Tokenizer,analising_model):
     ttt=[]
     for sentence in tweets:
         test=try_it(sentence)
+        print(test)
         preprocess_sentence=preprocess(sentence)
+        if preprocess_sentence=="negative":
+           test=try_it("negative")
         tweets_2.append(preprocess_sentence)
         print(tweets_2)
         pred = emotion(sentence)
@@ -373,10 +380,10 @@ def tweets_analising (tweets,Tokenizer,analising_model):
             predictions+=0.1
           if test<0 and predictions>0.5:
              predictions=0.5-abs(test/2)
-            #  print("from_pretrained model")
+             print("from_pretrained model1")
           elif test>0 and predictions<0.5:
              predictions=0.5+abs(test/2)
-            #  print("from_pretrained model")
+             print("from_pretrained model")
           elif test==0:
              embty=True
              predictions=0.5
