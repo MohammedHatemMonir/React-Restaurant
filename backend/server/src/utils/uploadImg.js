@@ -1,9 +1,9 @@
 var cloudinary = require('cloudinary').v2;
 
 cloudinary.config({
-    cloud_name: 'drfu1lwek',
-    api_key: '297886628144434',
-    api_secret: 'LsVIAEJtioTizkRbp3lkr5wuK2A',
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.API_KEY,
+    api_secret: process.env.API_SECRET
 });
 
 const opts = {
@@ -53,7 +53,7 @@ module.exports.deleteImage = (image) => {
 //Delete here:
 
 
-/* 
+/*
 const url = '...'; // your image URL
 const publicId = url.split('/').pop().split('.')[0];
 
@@ -114,7 +114,7 @@ cloudinary.uploader.destroy(publicId, function(error, result) {
 //     fileFilter: function(req, file, cb) {
 //         checkFileType(file, cb);
 //     },
-// }).single('ResImg'); 
+// }).single('ResImg');
 
 // cloudinary.config({
 //     cloud_name: 'dk3muiuks',

@@ -1,19 +1,16 @@
 const mongoose = require("mongoose");
-
-
-
 // Define the connection function
 
-const connectToMongoDB = async () => {
+const connectToMongoDB = async (dbConn) => {
     try {
         // encryption this  mongoDB Link To DB
-        await mongoose.connect( "mongodb+srv://mahmoud:graduationproject@graduationproject.depfjap.mongodb.net/graduationproject"
-, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-            // Optionally, you can add more options here
+        await mongoose.connect(
+            dbConn, {
+            // This is a Deprecated Options
+            // useNewUrlParser: true,
+            // useUnifiedTopology: true,
         });
-        console.log("MongoDB Server Connected");
+        console.log("Connected To MongoDB");
     } catch (error) {
         console.error("Error connecting to MongoDB:", error.message);
                 // Log additional details for debugging

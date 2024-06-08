@@ -1,12 +1,13 @@
 //const mongoose = require("mongoose");
+require("dotenv").config({path: './.evn'});
 const bcrypt = require("bcrypt");
 const User = require("../../database/models/userModel.js");
 const {Vonage} = require('@vonage/server-sdk');
 
 // Vonage credentials
 const vonage = new Vonage({
-  apiKey: "90fec4b7",
-  apiSecret: "H1hxweVN3IWKJmdi"
+  apiKey: process.env.API_KEY,
+  apiSecret: process.env.API_SECRET
 });
 
 // Function to generate a random reset code
@@ -56,7 +57,7 @@ const resetPassSms = async (req, res) => {
   if (existUser.resetCodeExp < new Date()) return res.json({ success: false, message: "Reset code has expired" });
 
   try {
-    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    const hashedPassword = await bcrypt.hash(newPassword, Number(process.env.ROUND));
     existUser.password = hashedPassword;
     existUser.resetCode = null;
     existUser.resetCodeExp = null;

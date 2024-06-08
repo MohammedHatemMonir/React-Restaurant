@@ -1,8 +1,6 @@
 const express=require('express');
 const path = require("path");
-// const dotenv=require('dotenv');
-// require("dotenv").config({ path: `./.env` });
-// dotenv.config({ path: path.resolve('./.env')});
+require("dotenv").config({path: './.env'});
 const cors=require('cors');
 const app=express();
 const session = require('express-session');
@@ -40,9 +38,9 @@ const generateSecretKey = () => {
   return crypto.randomBytes(32).toString('hex'); // Generate a 32-byte random string and convert it to hexadecimal format
 };
 
-// Example usage
+// Should be hidden If ANYONE run the server will GET access to site
 const secretKey = generateSecretKey();
-console.log('Secret Key:', secretKey);
+// console.log('Secret Key:', secretKey);
 
 app.use(express.urlencoded({ limit: '50mb', extended: true}));
 
@@ -61,7 +59,7 @@ app.use(sessionMiddleware);
 app.use(passport.initialize());
 app.use(passport.session());
 
-connectToMongoDB();
+connectToMongoDB(process.env.DB_CONNECT);
 
 app.use(express.json({limit: '50mb'}));
 
