@@ -8,7 +8,7 @@ const axios = require('axios');
 const { json } = require("react-router-dom");
 
 // Replace with your Python server URL
-const serverUrl = process.env.SERVER_URL;
+const serverUrl = 'http://127.0.0.1:5000/analyze2';
 
 async function analyzeText(text) {
   try {

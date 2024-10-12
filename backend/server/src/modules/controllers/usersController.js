@@ -1,5 +1,4 @@
 const { validationResult } = require("express-validator");
-require("dotenv").config({path: './.env'});
 const myusers = require("../../database/models/userModel");
 // const myusers = new User();
 const bcrypt = require("bcrypt");
@@ -42,7 +41,7 @@ const signup = async (req, res) => {
       return res.json({ success: false, msg: "User already exists" });
     }
 
-    const hashedPassword = await bcrypt.hash(password, Number(process.env.ROUND));
+    const hashedPassword = await bcrypt.hash(password, 8);
     let UserImage = null;
     if (userImg) {
       UserImage = await uploadImg(userImg);
@@ -178,13 +177,16 @@ const session = async (req, res) => {
   }
 };
 
+const YOUR_GOOGLE_CLIENT_ID =
+  "614280533363-92i70mp5io63o35tlp56apahkvbmnv32.apps.googleusercontent.com";
+const YOUR_GOOGLE_CLIENT_SECRET = "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";
 
 passport.use(
   new GoogleStrategy(
     {
-      clientID: process.env.YOUR_GOOGLE_CLIENT_ID,
-      clientSecret: process.env.YOUR_GOOGLE_CLIENT_SECRET,
-      callbackURL: process.env.CALLBACK_URL
+      clientID: YOUR_GOOGLE_CLIENT_ID,
+      clientSecret: YOUR_GOOGLE_CLIENT_SECRET,
+      callbackURL: "http://localhost:5001/auth/google/callback",
     },
     async function (accessToken, refreshToken, profile, cb) {
       // Find or create a user in your database here
@@ -236,21 +238,21 @@ const forgetPassword = async (req, res) => {
     if (!user) {
       return res.json({ msg: "Email not found" });
     }
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET_KEY, {
-      expiresIn: process.env.EXPIRE_TOKEN,
+    const token = jwt.sign({ id: user._id }, "jwt_secret_key", {
+      expiresIn: "1d",
     });
 
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: process.env.USER,
-        pass: process.env.PASS_AUTH,
+        user: "dine.me155@gmail.com",
+        pass: "zcna yjlh kwhi cdbr",
       },
     });
 
     const resetLink = `http://localhost:3000/reset/${user._id}/${token}`;
     const mailOptions = {
-      from: process.env.USER,
+      from: "dine.me155@gmail.com",
       to: user.email,
       subject: "Reset your Password",
       text: `Click the following link to reset your password: ${resetLink}`,
@@ -278,7 +280,7 @@ const resetPassword = async (req, res) => {
 
 
 
-    jwt.verify(token, process.env.JWT_SECRET_KEY, async (err, decoded) => {
+    jwt.verify(token, "jwt_secret_key", async (err, decoded) => {
       if (err) {
         return res.status(400).json({ success: false,msg: "Invalid or expired token" });
       }
@@ -286,7 +288,7 @@ const resetPassword = async (req, res) => {
       if (!user) {
         return res.status(404).json({ success: false,msg: "User not found" });
       }
-      const hashedPassword = await bcrypt.hash(password, Number(process.env.ROUND));
+      const hashedPassword = await bcrypt.hash(password, 8);
       user.password = hashedPassword;
       await user.save();
       return res.json({success: true, msg: "Password Reseted Successfully" });
@@ -319,7 +321,7 @@ const editProfile = async (req, res) => {
     if (password && password.length >= 5 && oldPass) {
       const compare = await bcrypt.compare(oldPass, user.password);
       if (compare) {
-        const hashedPassword = await bcrypt.hash(password, Number(process.env.ROUND));
+        const hashedPassword = await bcrypt.hash(password, 8);
         user.password = hashedPassword;
         passwordUpdated = true;
       } else {
@@ -344,10 +346,10 @@ const editProfile = async (req, res) => {
     await user.save();
     req.session.user = user;
 
-    const responseMessage = passwordUpdated
-      ? 'User and password updated successfully'
+    const responseMessage = passwordUpdated 
+      ? 'User and password updated successfully' 
       : 'User updated successfully';
-
+    
     return res.status(200).json({success: true, message: responseMessage, user });
   } catch (error) {
     console.error("Error updating user:", error);
