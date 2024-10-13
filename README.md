@@ -1,8 +1,38 @@
-# React + Vite
+# React + Vite - NodeJS + Express
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the graduation project for Future Academy's bachelors degree (2024) of the students listed below:
 
-Currently, two official plugins are available:
+-Mohammed Hatem Monir Mansor Elsheikh (Team leader & Full stack)
+-Ibrahim ismail ibrahim hefzallah (Front end)
+-Mostafa Mahmoud Hamdy (Backend & Database)
+-Mostafa Shehata Ramadan (Backend & Database)
+-Mahmoud Elhamy Ibrahim (Machine learning & NLP)
+-Ziad Essam Mohamed (UI/UX)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This project is about a Food ordering website, Allows customers to add meals from their favorite
+restaurants in a cart then proceed to the checkout.
+
+Major Functionalities:
+
+-Automated reviews: When a user write in a review, Our Machine learning model automatically predicts the rating (1-5).
+
+-AI Chatbot: Our chatbot can Navigate and guide you through the website. It reads from the database directly & can naviage users to subpages, restaurants or meals.
+
+-Admin Dashboard: You can access admin dashboard as an Admin or restaurant dashboard as Restaurant owner. Where data about the website or a specific restaurant is displayed. (eg. Number of orders in the past week).
+
+Major Technologies used:
+
+Frontend: React.js + Vite, React-Query, Preact Signals, react-router, bootstrap, sass, Socket.io, and many others.
+
+Backend: Nodejs, Expresjs, Express session,MongoDB, Socket.io, passport-google, cloudinary, and many others.
+
+Machine learning: Implemented our own Preprocessing(eg. negation handling & stemming) and Feature Extraction,
+Tensor flow, Yelp dataset (7 million records, used only 1 million).
+
+Please note: While attempting to run the project, The NLP model will fail to start as it's too big (160mb) to be uploaded to Github.
+
+For more detailed information, please checkout the Presentation below:
+
+https://docs.google.com/presentation/d/1YI5LwKNCHx6qUo4RCPQP8pdnHa9jSSkKyiqFp9ld_bY/edit#slide=id.g2e20d0c6c2c_0_15
+
+Dataset Link: https://www.yelp.com/dataset/download
