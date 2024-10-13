@@ -37,4 +37,3 @@ For more detailed information, please checkout the Presentation below:
 https://docs.google.com/presentation/d/1YI5LwKNCHx6qUo4RCPQP8pdnHa9jSSkKyiqFp9ld_bY/edit#slide=id.g2e20d0c6c2c_0_15
 
 Dataset Link: https://www.yelp.com/dataset/download
-y
