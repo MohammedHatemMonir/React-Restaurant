@@ -9,8 +9,7 @@ This is the graduation project for Future Academy's bachelors degree (2024) of t
 -Mahmoud Elhamy Ibrahim (Machine learning & NLP)
 -Ziad Essam Mohamed (UI/UX)
 
-This project is about a Food ordering website, Allows customers to add meals from their favorite
-restaurants in a cart then proceed to the checkout.
+This project is about a Food ordering website, Allows customers to write comments (With automatic NLP rating), add meals from their favorite restaurants in a cart then proceed to the checkout.
 
 Major Functionalities:
 
@@ -36,3 +35,4 @@ For more detailed information, please checkout the Presentation below:
 https://docs.google.com/presentation/d/1YI5LwKNCHx6qUo4RCPQP8pdnHa9jSSkKyiqFp9ld_bY/edit#slide=id.g2e20d0c6c2c_0_15
 
 Dataset Link: https://www.yelp.com/dataset/download
+y
