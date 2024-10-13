@@ -29,6 +29,7 @@ Machine learning: Implemented our own Preprocessing(eg. negation handling & stem
 Tensor flow, Yelp dataset (7 million records, used only 1 million).
 
 Team Management: Github, Trello, Discord & Zoom (Meetings).
+[Final-GP.pptx](https://github.com/user-attachments/files/17355431/Final-GP.pptx)
 
 Please note: While attempting to run the project, The NLP model will fail to start as it's too big (160mb) to be uploaded to Github.
 
