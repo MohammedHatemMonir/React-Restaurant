@@ -33,11 +33,13 @@ Team Management: Github, Trello, Discord & Zoom (Meetings).
 
 Please note: While attempting to run the project, The NLP model will fail to start as it's too big (160mb) to be uploaded to Github.
 
-For more detailed information, please checkout the Presentation below:
+For more detailed information, please check the Links below:
 
-[Final-GP Presentation Link]([https://github.com/user-attachments/files/17355431/Final-GP.pptx](https://docs.google.com/presentation/d/1YI5LwKNCHx6qUo4RCPQP8pdnHa9jSSkKyiqFp9ld_bY/edit#slide=id.ge96fd93d6a_0_18749))
-Dataset Link: https://www.yelp.com/dataset/download
+[Presentation Link](https://docs.google.com/presentation/d/1YI5LwKNCHx6qUo4RCPQP8pdnHa9jSSkKyiqFp9ld_bY/edit#slide=id.ge96fd93d6a_0_18749)
 
+[Dataset Link](https://www.yelp.com/dataset/download)
+
+[Documentation Link](https://docs.google.com/document/d/1_vRJCiZeStUmX6mHDlLGXbEjW1nO_NrG-wmqS7CaRVY/edit?usp=sharing)
 
 https://github.com/user-attachments/assets/56796f72-a5fc-43c9-8069-db26d7e434be
 
