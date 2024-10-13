@@ -28,6 +28,8 @@ Backend: Nodejs, Expresjs, Express session,MongoDB, Socket.io, passport-google, 
 Machine learning: Implemented our own Preprocessing(eg. negation handling & stemming) and Feature Extraction,
 Tensor flow, Yelp dataset (7 million records, used only 1 million).
 
+Team Management: Github, Trello, Discord & Zoom (Meetings).
+
 Please note: While attempting to run the project, The NLP model will fail to start as it's too big (160mb) to be uploaded to Github.
 
 For more detailed information, please checkout the Presentation below:
