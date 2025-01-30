@@ -31,7 +31,7 @@ Tensor flow, Yelp dataset (7 million records, used only 1 million).
 Team Management: Github, Trello, Discord & Zoom (Meetings).
 
 
-Please note: While attempting to run the project, The NLP model will fail to start as it's too big (160mb) to be uploaded to Github.
+Please note: While attempting to run the project, The NLP model will fail to start as it's too big (160 Mb) to be uploaded to Github.
 
 For more detailed information, please check the Links below:
 
@@ -41,7 +41,10 @@ For more detailed information, please check the Links below:
 
 [Documentation Link](https://docs.google.com/document/d/1_vRJCiZeStUmX6mHDlLGXbEjW1nO_NrG-wmqS7CaRVY/edit?usp=sharing)
 
-https://github.com/user-attachments/assets/56796f72-a5fc-43c9-8069-db26d7e434be
+https://github.com/user-attachments/assets/63e98b2c-3d84-4dec-a688-ca78adcbdfa3
+
+
+
 
 
 
