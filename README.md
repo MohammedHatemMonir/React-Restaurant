@@ -1,4 +1,6 @@
-# React + Vite - NodeJS + Express
+# DineMe
+
+## React + Vite - NodeJS + Express
 
 This is the graduation project for Future Academy's bachelors degree (2024) of the students listed below:
 
